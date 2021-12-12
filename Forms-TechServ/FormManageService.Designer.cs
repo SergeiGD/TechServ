@@ -29,6 +29,7 @@ namespace Forms_TechServ
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -37,14 +38,15 @@ namespace Forms_TechServ
             this.numericAvgTime = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.tbInfo = new System.Windows.Forms.RichTextBox();
+            this.tbDescription = new System.Windows.Forms.RichTextBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAction = new System.Windows.Forms.Button();
             this.btnFindCat = new FontAwesome.Sharp.IconButton();
-            this.btnCleanCat = new FontAwesome.Sharp.IconButton();
             this.tbCat = new System.Windows.Forms.TextBox();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numeriсPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAvgTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -83,26 +85,66 @@ namespace Forms_TechServ
             // 
             // numeriсPrice
             // 
+            this.numeriсPrice.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
             this.numeriсPrice.Location = new System.Drawing.Point(134, 85);
+            this.numeriсPrice.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numeriсPrice.Minimum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
             this.numeriсPrice.Name = "numeriсPrice";
             this.numeriсPrice.Size = new System.Drawing.Size(112, 20);
             this.numeriсPrice.TabIndex = 7;
+            this.numeriсPrice.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
             // 
             // numericAvgTime
             // 
-            this.numericAvgTime.Location = new System.Drawing.Point(134, 122);
+            this.numericAvgTime.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericAvgTime.Location = new System.Drawing.Point(178, 122);
+            this.numericAvgTime.Maximum = new decimal(new int[] {
+            1440,
+            0,
+            0,
+            0});
+            this.numericAvgTime.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             this.numericAvgTime.Name = "numericAvgTime";
-            this.numericAvgTime.Size = new System.Drawing.Size(112, 20);
+            this.numericAvgTime.Size = new System.Drawing.Size(68, 20);
             this.numericAvgTime.TabIndex = 8;
+            this.numericAvgTime.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(25, 124);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 13);
+            this.label5.Size = new System.Drawing.Size(147, 13);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Примерное время";
+            this.label5.Text = "Примерное время (минуты)";
             // 
             // label2
             // 
@@ -113,13 +155,13 @@ namespace Forms_TechServ
             this.label2.TabIndex = 10;
             this.label2.Text = "Описание";
             // 
-            // tbInfo
+            // tbDescription
             // 
-            this.tbInfo.Location = new System.Drawing.Point(314, 31);
-            this.tbInfo.Name = "tbInfo";
-            this.tbInfo.Size = new System.Drawing.Size(179, 111);
-            this.tbInfo.TabIndex = 11;
-            this.tbInfo.Text = "";
+            this.tbDescription.Location = new System.Drawing.Point(295, 31);
+            this.tbDescription.Name = "tbDescription";
+            this.tbDescription.Size = new System.Drawing.Size(214, 111);
+            this.tbDescription.TabIndex = 11;
+            this.tbDescription.Text = "";
             // 
             // btnCancel
             // 
@@ -140,6 +182,7 @@ namespace Forms_TechServ
             this.btnAction.TabIndex = 40;
             this.btnAction.Text = "Action";
             this.btnAction.UseVisualStyleBackColor = true;
+            this.btnAction.Click += new System.EventHandler(this.btnAction_Click);
             // 
             // btnFindCat
             // 
@@ -150,27 +193,12 @@ namespace Forms_TechServ
             this.btnFindCat.IconColor = System.Drawing.SystemColors.ControlText;
             this.btnFindCat.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnFindCat.IconSize = 17;
-            this.btnFindCat.Location = new System.Drawing.Point(212, 48);
+            this.btnFindCat.Location = new System.Drawing.Point(228, 48);
             this.btnFindCat.Name = "btnFindCat";
             this.btnFindCat.Size = new System.Drawing.Size(18, 18);
             this.btnFindCat.TabIndex = 144;
             this.btnFindCat.UseVisualStyleBackColor = true;
             this.btnFindCat.Click += new System.EventHandler(this.btnFindCat_Click);
-            // 
-            // btnCleanCat
-            // 
-            this.btnCleanCat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.btnCleanCat.FlatAppearance.BorderSize = 0;
-            this.btnCleanCat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCleanCat.IconChar = FontAwesome.Sharp.IconChar.Times;
-            this.btnCleanCat.IconColor = System.Drawing.SystemColors.ControlText;
-            this.btnCleanCat.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnCleanCat.IconSize = 17;
-            this.btnCleanCat.Location = new System.Drawing.Point(228, 48);
-            this.btnCleanCat.Name = "btnCleanCat";
-            this.btnCleanCat.Size = new System.Drawing.Size(18, 18);
-            this.btnCleanCat.TabIndex = 143;
-            this.btnCleanCat.UseVisualStyleBackColor = true;
             // 
             // tbCat
             // 
@@ -179,8 +207,12 @@ namespace Forms_TechServ
             this.tbCat.Location = new System.Drawing.Point(99, 48);
             this.tbCat.Name = "tbCat";
             this.tbCat.ReadOnly = true;
-            this.tbCat.Size = new System.Drawing.Size(107, 20);
+            this.tbCat.Size = new System.Drawing.Size(123, 20);
             this.tbCat.TabIndex = 142;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // FormManageService
             // 
@@ -189,11 +221,10 @@ namespace Forms_TechServ
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
             this.ClientSize = new System.Drawing.Size(684, 167);
             this.Controls.Add(this.btnFindCat);
-            this.Controls.Add(this.btnCleanCat);
             this.Controls.Add(this.tbCat);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAction);
-            this.Controls.Add(this.tbInfo);
+            this.Controls.Add(this.tbDescription);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.numericAvgTime);
@@ -204,8 +235,10 @@ namespace Forms_TechServ
             this.Controls.Add(this.label1);
             this.Name = "FormManageService";
             this.Text = "FormAddService";
+            this.Load += new System.EventHandler(this.FormManageService_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numeriсPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAvgTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -221,11 +254,11 @@ namespace Forms_TechServ
         private System.Windows.Forms.NumericUpDown numericAvgTime;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RichTextBox tbInfo;
+        private System.Windows.Forms.RichTextBox tbDescription;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnAction;
         private FontAwesome.Sharp.IconButton btnFindCat;
-        private FontAwesome.Sharp.IconButton btnCleanCat;
         private System.Windows.Forms.TextBox tbCat;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

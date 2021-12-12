@@ -84,7 +84,7 @@ namespace Forms_TechServ
                 //this.Size = new Size(1078, 481);
                 this.Size = pickedSize;
 
-                FormServices formServices = new FormServices("asd", true);
+                FormServices formServices = new FormServices(true, category);
 
                 formServices.TopLevel = false;
                 formServices.FormBorderStyle = FormBorderStyle.None;

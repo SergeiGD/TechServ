@@ -14,6 +14,8 @@ namespace Forms_TechServ
         public DbSet<Client> Clients { get; set; }
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<Service> Services { get; set; }
+
         public DbSet<Category> Categories { get; set; }
         public DbSet<MastersCategories> MastersCategories { get; set; }
 
@@ -36,7 +38,7 @@ namespace Forms_TechServ
             modelBuilder.Entity<RolesPermissions>()
                 .HasKey(c => new { c.PermissionId, c.RoleId });
 
-            
+            modelBuilder.Configurations.Add(new Service.ServiceConfig());
         }
     }
 }

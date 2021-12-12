@@ -29,14 +29,14 @@ namespace Forms_TechServ
         /// </summary>
         private void InitializeComponent()
         {
-            this.tbDiscription = new System.Windows.Forms.RichTextBox();
+            this.tbDescription = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
-            this.linkPickedCat = new System.Windows.Forms.LinkLabel();
+            this.labelCat = new System.Windows.Forms.LinkLabel();
             this.labelPrice = new System.Windows.Forms.Label();
             this.labelAvgTime = new System.Windows.Forms.Label();
             this.panelEdit = new System.Windows.Forms.Panel();
@@ -48,13 +48,15 @@ namespace Forms_TechServ
             this.panelEdit.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tbDiscription
+            // tbDescription
             // 
-            this.tbDiscription.Location = new System.Drawing.Point(216, 40);
-            this.tbDiscription.Name = "tbDiscription";
-            this.tbDiscription.Size = new System.Drawing.Size(179, 141);
-            this.tbDiscription.TabIndex = 21;
-            this.tbDiscription.Text = "";
+            this.tbDescription.Enabled = false;
+            this.tbDescription.Location = new System.Drawing.Point(216, 40);
+            this.tbDescription.Name = "tbDescription";
+            this.tbDescription.ReadOnly = true;
+            this.tbDescription.Size = new System.Drawing.Size(179, 141);
+            this.tbDescription.TabIndex = 21;
+            this.tbDescription.Text = "";
             // 
             // label2
             // 
@@ -110,16 +112,16 @@ namespace Forms_TechServ
             this.labelName.TabIndex = 22;
             this.labelName.Text = "label6";
             // 
-            // linkPickedCat
+            // labelCat
             // 
-            this.linkPickedCat.AutoSize = true;
-            this.linkPickedCat.Location = new System.Drawing.Point(95, 91);
-            this.linkPickedCat.Name = "linkPickedCat";
-            this.linkPickedCat.Size = new System.Drawing.Size(55, 13);
-            this.linkPickedCat.TabIndex = 23;
-            this.linkPickedCat.TabStop = true;
-            this.linkPickedCat.Text = "linkLabel1";
-            this.linkPickedCat.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPickedCat_LinkClicked);
+            this.labelCat.AutoSize = true;
+            this.labelCat.Location = new System.Drawing.Point(95, 91);
+            this.labelCat.Name = "labelCat";
+            this.labelCat.Size = new System.Drawing.Size(55, 13);
+            this.labelCat.TabIndex = 23;
+            this.labelCat.TabStop = true;
+            this.labelCat.Text = "linkLabel1";
+            this.labelCat.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPickedCat_LinkClicked);
             // 
             // labelPrice
             // 
@@ -170,6 +172,7 @@ namespace Forms_TechServ
             this.deleteBtn.TabIndex = 60;
             this.deleteBtn.Text = "УДАЛИТЬ";
             this.deleteBtn.UseVisualStyleBackColor = true;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
             // cancelBtn
             // 
@@ -210,9 +213,9 @@ namespace Forms_TechServ
             this.Controls.Add(this.panelEdit);
             this.Controls.Add(this.labelAvgTime);
             this.Controls.Add(this.labelPrice);
-            this.Controls.Add(this.linkPickedCat);
+            this.Controls.Add(this.labelCat);
             this.Controls.Add(this.labelName);
-            this.Controls.Add(this.tbDiscription);
+            this.Controls.Add(this.tbDescription);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -230,14 +233,14 @@ namespace Forms_TechServ
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox tbDiscription;
+        private System.Windows.Forms.RichTextBox tbDescription;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelName;
-        private System.Windows.Forms.LinkLabel linkPickedCat;
+        private System.Windows.Forms.LinkLabel labelCat;
         private System.Windows.Forms.Label labelPrice;
         private System.Windows.Forms.Label labelAvgTime;
         private System.Windows.Forms.Panel panelEdit;

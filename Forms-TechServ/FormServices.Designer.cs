@@ -29,15 +29,20 @@ namespace Forms_TechServ
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tbName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.panelContent = new System.Windows.Forms.Panel();
             this.comboBoxShowRows = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.labelPagesCount = new System.Windows.Forms.Label();
+            this.labelPageCount = new System.Windows.Forms.Label();
             this.numericCurrentPage = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.panelFind = new System.Windows.Forms.Panel();
+            this.btnSalaryInfo = new FontAwesome.Sharp.IconButton();
+            this.btnAskOrDesk = new FontAwesome.Sharp.IconButton();
+            this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.tbID = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tbCat = new System.Windows.Forms.TextBox();
@@ -52,11 +57,10 @@ namespace Forms_TechServ
             this.btnPrev = new System.Windows.Forms.Button();
             this.dataServies = new System.Windows.Forms.DataGridView();
             this.panelControl = new System.Windows.Forms.Panel();
-            this.clearBtn = new Forms_TechServ.ManageButton();
+            this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipPriceInfo = new System.Windows.Forms.ToolTip(this.components);
+            this.btnClean = new Forms_TechServ.ManageButton();
             this.searchBtn = new Forms_TechServ.ManageButton();
-            this.btnAskOrDesk = new FontAwesome.Sharp.IconButton();
-            this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             this.panelFind.SuspendLayout();
@@ -93,7 +97,7 @@ namespace Forms_TechServ
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelContent.Controls.Add(this.comboBoxShowRows);
             this.panelContent.Controls.Add(this.label9);
-            this.panelContent.Controls.Add(this.labelPagesCount);
+            this.panelContent.Controls.Add(this.labelPageCount);
             this.panelContent.Controls.Add(this.numericCurrentPage);
             this.panelContent.Controls.Add(this.label8);
             this.panelContent.Controls.Add(this.panelFind);
@@ -108,11 +112,13 @@ namespace Forms_TechServ
             // comboBoxShowRows
             // 
             this.comboBoxShowRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.comboBoxShowRows.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxShowRows.FormattingEnabled = true;
             this.comboBoxShowRows.Location = new System.Drawing.Point(531, 596);
             this.comboBoxShowRows.Name = "comboBoxShowRows";
             this.comboBoxShowRows.Size = new System.Drawing.Size(62, 21);
             this.comboBoxShowRows.TabIndex = 18;
+            this.comboBoxShowRows.SelectedIndexChanged += new System.EventHandler(this.comboBoxShowRows_SelectedIndexChanged);
             // 
             // label9
             // 
@@ -125,24 +131,35 @@ namespace Forms_TechServ
             this.label9.TabIndex = 17;
             this.label9.Text = "Показывать по";
             // 
-            // labelPagesCount
+            // labelPageCount
             // 
-            this.labelPagesCount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.labelPagesCount.AutoSize = true;
-            this.labelPagesCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.labelPagesCount.Location = new System.Drawing.Point(322, 597);
-            this.labelPagesCount.Name = "labelPagesCount";
-            this.labelPagesCount.Size = new System.Drawing.Size(36, 17);
-            this.labelPagesCount.TabIndex = 13;
-            this.labelPagesCount.Text = "из S";
+            this.labelPageCount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.labelPageCount.AutoSize = true;
+            this.labelPageCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.labelPageCount.Location = new System.Drawing.Point(322, 597);
+            this.labelPageCount.Name = "labelPageCount";
+            this.labelPageCount.Size = new System.Drawing.Size(36, 17);
+            this.labelPageCount.TabIndex = 13;
+            this.labelPageCount.Text = "из S";
             // 
             // numericCurrentPage
             // 
             this.numericCurrentPage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.numericCurrentPage.Location = new System.Drawing.Point(271, 598);
+            this.numericCurrentPage.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericCurrentPage.Name = "numericCurrentPage";
             this.numericCurrentPage.Size = new System.Drawing.Size(45, 20);
             this.numericCurrentPage.TabIndex = 12;
+            this.numericCurrentPage.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericCurrentPage.ValueChanged += new System.EventHandler(this.numericCurrentPage_ValueChanged);
             // 
             // label8
             // 
@@ -159,6 +176,7 @@ namespace Forms_TechServ
             // 
             this.panelFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelFind.Controls.Add(this.btnSalaryInfo);
             this.panelFind.Controls.Add(this.btnAskOrDesk);
             this.panelFind.Controls.Add(this.comboBoxSortBy);
             this.panelFind.Controls.Add(this.label10);
@@ -178,6 +196,60 @@ namespace Forms_TechServ
             this.panelFind.Name = "panelFind";
             this.panelFind.Size = new System.Drawing.Size(778, 88);
             this.panelFind.TabIndex = 4;
+            // 
+            // btnSalaryInfo
+            // 
+            this.btnSalaryInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSalaryInfo.FlatAppearance.BorderSize = 0;
+            this.btnSalaryInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalaryInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
+            this.btnSalaryInfo.IconColor = System.Drawing.Color.Black;
+            this.btnSalaryInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnSalaryInfo.IconSize = 20;
+            this.btnSalaryInfo.Location = new System.Drawing.Point(748, 53);
+            this.btnSalaryInfo.Name = "btnSalaryInfo";
+            this.btnSalaryInfo.Size = new System.Drawing.Size(27, 21);
+            this.btnSalaryInfo.TabIndex = 154;
+            this.btnSalaryInfo.UseVisualStyleBackColor = true;
+            this.btnSalaryInfo.MouseHover += new System.EventHandler(this.btnSalaryInfo_MouseHover);
+            // 
+            // btnAskOrDesk
+            // 
+            this.btnAskOrDesk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btnAskOrDesk.FlatAppearance.BorderSize = 0;
+            this.btnAskOrDesk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAskOrDesk.IconChar = FontAwesome.Sharp.IconChar.SortAlphaDown;
+            this.btnAskOrDesk.IconColor = System.Drawing.Color.Black;
+            this.btnAskOrDesk.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnAskOrDesk.IconSize = 20;
+            this.btnAskOrDesk.Location = new System.Drawing.Point(487, 54);
+            this.btnAskOrDesk.Name = "btnAskOrDesk";
+            this.btnAskOrDesk.Size = new System.Drawing.Size(27, 21);
+            this.btnAskOrDesk.TabIndex = 153;
+            this.btnAskOrDesk.UseVisualStyleBackColor = true;
+            this.btnAskOrDesk.Click += new System.EventHandler(this.btnAskOrDesk_Click);
+            this.btnAskOrDesk.MouseHover += new System.EventHandler(this.btnAskOrDesk_MouseHover);
+            // 
+            // comboBoxSortBy
+            // 
+            this.comboBoxSortBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.comboBoxSortBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSortBy.FormattingEnabled = true;
+            this.comboBoxSortBy.Location = new System.Drawing.Point(352, 50);
+            this.comboBoxSortBy.Name = "comboBoxSortBy";
+            this.comboBoxSortBy.Size = new System.Drawing.Size(129, 21);
+            this.comboBoxSortBy.TabIndex = 152;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(276, 54);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(70, 13);
+            this.label10.TabIndex = 151;
+            this.label10.Text = "Сортировка:";
             // 
             // tbID
             // 
@@ -223,6 +295,7 @@ namespace Forms_TechServ
             this.btnCleanCat.Size = new System.Drawing.Size(18, 18);
             this.btnCleanCat.TabIndex = 117;
             this.btnCleanCat.UseVisualStyleBackColor = true;
+            this.btnCleanCat.Click += new System.EventHandler(this.btnCleanCat_Click);
             // 
             // btnFindCat
             // 
@@ -244,7 +317,17 @@ namespace Forms_TechServ
             // 
             this.numericPriceUntil.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericPriceUntil.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
             this.numericPriceUntil.Location = new System.Drawing.Point(639, 52);
+            this.numericPriceUntil.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.numericPriceUntil.Name = "numericPriceUntil";
             this.numericPriceUntil.Size = new System.Drawing.Size(105, 20);
             this.numericPriceUntil.TabIndex = 14;
@@ -253,7 +336,17 @@ namespace Forms_TechServ
             // 
             this.numericPriceFrom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericPriceFrom.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
             this.numericPriceFrom.Location = new System.Drawing.Point(640, 11);
+            this.numericPriceFrom.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.numericPriceFrom.Name = "numericPriceFrom";
             this.numericPriceFrom.Size = new System.Drawing.Size(105, 20);
             this.numericPriceFrom.TabIndex = 13;
@@ -303,6 +396,7 @@ namespace Forms_TechServ
             this.btnNext.TabIndex = 3;
             this.btnNext.Text = "Следующая →";
             this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPrev
             // 
@@ -317,15 +411,22 @@ namespace Forms_TechServ
             this.btnPrev.TabIndex = 2;
             this.btnPrev.Text = "← Предыдущая";
             this.btnPrev.UseVisualStyleBackColor = false;
+            this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
             // 
             // dataServies
             // 
+            this.dataServies.AllowUserToAddRows = false;
+            this.dataServies.AllowUserToDeleteRows = false;
             this.dataServies.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataServies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataServies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataServies.Location = new System.Drawing.Point(0, 88);
+            this.dataServies.MultiSelect = false;
             this.dataServies.Name = "dataServies";
+            this.dataServies.ReadOnly = true;
+            this.dataServies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataServies.Size = new System.Drawing.Size(778, 492);
             this.dataServies.TabIndex = 0;
             // 
@@ -333,26 +434,27 @@ namespace Forms_TechServ
             // 
             this.panelControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelControl.Controls.Add(this.clearBtn);
+            this.panelControl.Controls.Add(this.btnClean);
             this.panelControl.Controls.Add(this.searchBtn);
             this.panelControl.Location = new System.Drawing.Point(778, 0);
             this.panelControl.Name = "panelControl";
             this.panelControl.Size = new System.Drawing.Size(190, 632);
             this.panelControl.TabIndex = 5;
             // 
-            // clearBtn
+            // btnClean
             // 
-            this.clearBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.clearBtn.FlatAppearance.BorderSize = 0;
-            this.clearBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.clearBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.clearBtn.Location = new System.Drawing.Point(0, 40);
-            this.clearBtn.Name = "clearBtn";
-            this.clearBtn.Size = new System.Drawing.Size(190, 40);
-            this.clearBtn.TabIndex = 20;
-            this.clearBtn.Text = "Отчистить фильтры";
-            this.clearBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.clearBtn.UseVisualStyleBackColor = false;
+            this.btnClean.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnClean.FlatAppearance.BorderSize = 0;
+            this.btnClean.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClean.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnClean.Location = new System.Drawing.Point(0, 40);
+            this.btnClean.Name = "btnClean";
+            this.btnClean.Size = new System.Drawing.Size(190, 40);
+            this.btnClean.TabIndex = 20;
+            this.btnClean.Text = "Отчистить фильтры";
+            this.btnClean.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClean.UseVisualStyleBackColor = false;
+            this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
             // 
             // searchBtn
             // 
@@ -367,40 +469,7 @@ namespace Forms_TechServ
             this.searchBtn.Text = "Найти";
             this.searchBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.searchBtn.UseVisualStyleBackColor = false;
-            // 
-            // btnAskOrDesk
-            // 
-            this.btnAskOrDesk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.btnAskOrDesk.FlatAppearance.BorderSize = 0;
-            this.btnAskOrDesk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAskOrDesk.IconChar = FontAwesome.Sharp.IconChar.SortAlphaDown;
-            this.btnAskOrDesk.IconColor = System.Drawing.Color.Black;
-            this.btnAskOrDesk.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnAskOrDesk.IconSize = 20;
-            this.btnAskOrDesk.Location = new System.Drawing.Point(487, 54);
-            this.btnAskOrDesk.Name = "btnAskOrDesk";
-            this.btnAskOrDesk.Size = new System.Drawing.Size(27, 21);
-            this.btnAskOrDesk.TabIndex = 153;
-            this.btnAskOrDesk.UseVisualStyleBackColor = true;
-            // 
-            // comboBoxSortBy
-            // 
-            this.comboBoxSortBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.comboBoxSortBy.FormattingEnabled = true;
-            this.comboBoxSortBy.Location = new System.Drawing.Point(352, 50);
-            this.comboBoxSortBy.Name = "comboBoxSortBy";
-            this.comboBoxSortBy.Size = new System.Drawing.Size(129, 21);
-            this.comboBoxSortBy.TabIndex = 152;
-            // 
-            // label10
-            // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(276, 54);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(70, 13);
-            this.label10.TabIndex = 151;
-            this.label10.Text = "Сортировка:";
+            this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
             // 
             // FormServices
             // 
@@ -444,10 +513,10 @@ namespace Forms_TechServ
         private FontAwesome.Sharp.IconButton btnCleanCat;
         private FontAwesome.Sharp.IconButton btnFindCat;
         private ManageButton searchBtn;
-        private ManageButton clearBtn;
+        private ManageButton btnClean;
         private System.Windows.Forms.TextBox tbID;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label labelPagesCount;
+        private System.Windows.Forms.Label labelPageCount;
         private System.Windows.Forms.NumericUpDown numericCurrentPage;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox comboBoxShowRows;
@@ -455,5 +524,8 @@ namespace Forms_TechServ
         private FontAwesome.Sharp.IconButton btnAskOrDesk;
         private System.Windows.Forms.ComboBox comboBoxSortBy;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ToolTip toolTipCurrentSort;
+        private System.Windows.Forms.ToolTip toolTipPriceInfo;
+        private FontAwesome.Sharp.IconButton btnSalaryInfo;
     }
 }

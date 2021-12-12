@@ -324,7 +324,7 @@ namespace Forms_TechServ
         private void ServicesBtn_Click(object sender, EventArgs e)
         {
             CleanChilderBtns();
-            FormServices formServices = new FormServices();
+            FormServices formServices = new FormServices(false);
             OpenChildForm(formServices, (NavButton)sender);
         }
 

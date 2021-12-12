@@ -74,7 +74,7 @@ namespace Forms_TechServ
                     employees = employees.Where(m => m.Salary >= FilterA.Salary);
                 }
 
-                if (FilterB.Salary > 0)                                                                 // от любой до указанной
+                if (FilterA.Salary == 0 && FilterB.Salary > 0)                                                                 // от любой до указанной
                 {
                     employees = employees.Where(m => m.Salary <= FilterB.Salary);
                 }

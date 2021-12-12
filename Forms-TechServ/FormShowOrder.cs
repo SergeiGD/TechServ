@@ -69,7 +69,7 @@ namespace Forms_TechServ
 
         private void manageButton1_Click(object sender, EventArgs e)
         {
-            FormShowService formShowService = new FormShowService(true);
+            FormShowService formShowService = new FormShowService(true, null);
             formShowService.ShowDialog();
         }
 

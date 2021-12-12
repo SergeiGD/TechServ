@@ -19,7 +19,7 @@ namespace Forms_TechServ
         {
             InitializeComponent();
 
-            //categoriesTab.TabPages.Remove(servicesPage);
+            categoriesTab.TabPages.Remove(servicesPage);
 
             category = new Category();
             actionBtn.Text = "Добавить";
@@ -43,7 +43,7 @@ namespace Forms_TechServ
             {
                 this.Size = pickedSize;
 
-                FormServices formServices = new FormServices("asd", false);
+                FormServices formServices = new FormServices(false, category);
 
                 //formOrders.Controls.Remove(formOrders.Controls.OfType<Panel>().Where(p => p.Name == "panelControl").First());
                 //formOrders.Size = formOrders.Controls.OfType<Panel>().Where(p => p.Name == "panelContent").First().Size;
@@ -92,7 +92,14 @@ namespace Forms_TechServ
                 {
                     category.AddCategory();
 
-                    MessageBox.Show($"Новая категория успешно добавлена. ID - {category.Id}", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    DialogResult answer = MessageBox.Show($"Новая категория успешно добавлена. ID - {category.Id}. Желаете добавить сразу же добавить услуги?", "Успех", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    this.Hide();
+
+                    if (answer == DialogResult.Yes)
+                    {
+                        FormManageCategory formManageCategory = new FormManageCategory(CategoriesList.GetById(category.Id, true));
+                        formManageCategory.ShowDialog();
+                    }
 
                     this.Close();
                 }

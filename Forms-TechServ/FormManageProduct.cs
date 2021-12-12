@@ -98,7 +98,7 @@ namespace Forms_TechServ
             errorProvider.Clear();
             if (tbName.Text == "")
             {
-                errorProvider.SetError(tbName, "Введите имя");
+                errorProvider.SetError(tbName, "Введите наименование");
                 return false;
             }
             if(tbCat.Tag == null)

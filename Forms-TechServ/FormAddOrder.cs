@@ -62,13 +62,13 @@ namespace Forms_TechServ
 
         private void manageButton2_Click(object sender, EventArgs e)
         {
-            FormServices formServices = new FormServices(423, false);
+            FormServices formServices = new FormServices(true);
             formServices.ShowDialog();
         }
 
         private void manageButton1_Click(object sender, EventArgs e)
         {
-            FormShowService showService = new FormShowService(true);
+            FormShowService showService = new FormShowService(true, null);
             showService.ShowDialog();
         }
 
