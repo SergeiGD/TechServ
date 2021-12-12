@@ -1,0 +1,570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2DB651EE-D301-4158-A49F-70CEDA7D19D2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Forms_TechServ</RootNamespace>
+    <AssemblyName>Forms-TechServ</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FontAwesome.Sharp, Version=5.15.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\FontAwesome.Sharp.5.15.3\lib\net472\FontAwesome.Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.115.5, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.115.5, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>packages\System.Data.SQLite.EF6.1.0.115.5\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.115.5, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>packages\System.Data.SQLite.Linq.1.0.115.5\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Category.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="CustomControls.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomSorting.cs" />
+    <Compile Include="FormAddEmployeeTimetable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddEmployeeTimetable.Designer.cs">
+      <DependentUpon>FormAddEmployeeTimetable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAddWorkshopTimetable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddWorkshopTimetable.Designer.cs">
+      <DependentUpon>FormAddWorkshopTimetable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormChooseQuantity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormChooseQuantity.Designer.cs">
+      <DependentUpon>FormChooseQuantity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEditOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEditOrder.Designer.cs">
+      <DependentUpon>FormEditOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormFindEmpPosition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFindEmpPosition.Designer.cs">
+      <DependentUpon>FormFindEmpPosition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormInOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormInOrders.Designer.cs">
+      <DependentUpon>FormInOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormManageBatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormManageBatch.Designer.cs">
+      <DependentUpon>FormManageBatch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormManageCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormManageCategory.Designer.cs">
+      <DependentUpon>FormManageCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormManageClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormManageClient.Designer.cs">
+      <DependentUpon>FormManageClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormManageManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormManageManager.Designer.cs">
+      <DependentUpon>FormManageManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormManageMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormManageMaster.Designer.cs">
+      <DependentUpon>FormManageMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormManageProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormManageProduct.Designer.cs">
+      <DependentUpon>FormManageProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormManagers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormManagers.Designer.cs">
+      <DependentUpon>FormManagers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormManageService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormManageService.Designer.cs">
+      <DependentUpon>FormManageService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormBatches.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBatches.Designer.cs">
+      <DependentUpon>FormBatches.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormCategories.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCategories.Designer.cs">
+      <DependentUpon>FormCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormClients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormClients.Designer.cs">
+      <DependentUpon>FormClients.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMasters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMasters.Designer.cs">
+      <DependentUpon>FormMasters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormOrdersExtedFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOrdersExtedFilter.Designer.cs">
+      <DependentUpon>FormOrdersExtedFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormOrdersLogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOrdersLogs.Designer.cs">
+      <DependentUpon>FormOrdersLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormOutOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOutOrders.Designer.cs">
+      <DependentUpon>FormOutOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPickEmployeeType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPickEmployeeType.Designer.cs">
+      <DependentUpon>FormPickEmployeeType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPickOrderType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPickOrderType.Designer.cs">
+      <DependentUpon>FormPickOrderType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPickSparePartFormBatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPickSparePartFormBatch.Designer.cs">
+      <DependentUpon>FormPickSparePartFormBatch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShowBatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShowBatch.Designer.cs">
+      <DependentUpon>FormShowBatch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShowCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShowCategory.Designer.cs">
+      <DependentUpon>FormShowCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShowClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShowClient.Designer.cs">
+      <DependentUpon>FormShowClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShowManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShowManager.Designer.cs">
+      <DependentUpon>FormShowManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShowMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShowMaster.Designer.cs">
+      <DependentUpon>FormShowMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShowOrderLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShowOrderLog.Designer.cs">
+      <DependentUpon>FormShowOrderLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShowProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShowProduct.Designer.cs">
+      <DependentUpon>FormShowProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShowService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShowService.Designer.cs">
+      <DependentUpon>FormShowService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShowSparePart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShowSparePart.Designer.cs">
+      <DependentUpon>FormShowSparePart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShowVisit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShowVisit.Designer.cs">
+      <DependentUpon>FormShowVisit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShowOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShowOrder.Designer.cs">
+      <DependentUpon>FormShowOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmployees.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmployees.Designer.cs">
+      <DependentUpon>FormEmployees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogIn.Designer.cs">
+      <DependentUpon>FormLogIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAddOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAddOrder.Designer.cs">
+      <DependentUpon>FormAddOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormManageSparePart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormManageSparePart.Designer.cs">
+      <DependentUpon>FormManageSparePart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormManageVisit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormManageVisit.Designer.cs">
+      <DependentUpon>FormManageVisit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormManageWorkshop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormManageWorkshop.Designer.cs">
+      <DependentUpon>FormManageWorkshop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOrders.Designer.cs">
+      <DependentUpon>FormOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProducts.Designer.cs">
+      <DependentUpon>FormProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormServices.Designer.cs">
+      <DependentUpon>FormServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShowWorkshop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShowWorkshop.Designer.cs">
+      <DependentUpon>FormShowWorkshop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSpareParts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSpareParts.Designer.cs">
+      <DependentUpon>FormSpareParts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStatWorkshops.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStatWorkshops.Designer.cs">
+      <DependentUpon>FormStatWorkshops.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormVisits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormVisits.Designer.cs">
+      <DependentUpon>FormVisits.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormWorkshops.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormWorkshops.Designer.cs">
+      <DependentUpon>FormWorkshops.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs" />
+    <Compile Include="Person.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TechContext.cs" />
+    <Compile Include="UserSession.cs" />
+    <Compile Include="Workshop.cs" />
+    <EmbeddedResource Include="FormAddEmployeeTimetable.resx">
+      <DependentUpon>FormAddEmployeeTimetable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAddWorkshopTimetable.resx">
+      <DependentUpon>FormAddWorkshopTimetable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormChooseQuantity.resx">
+      <DependentUpon>FormChooseQuantity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEditOrder.resx">
+      <DependentUpon>FormEditOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFindEmpPosition.resx">
+      <DependentUpon>FormFindEmpPosition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormInOrders.resx">
+      <DependentUpon>FormInOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormManageBatch.resx">
+      <DependentUpon>FormManageBatch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormManageCategory.resx">
+      <DependentUpon>FormManageCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormManageClient.resx">
+      <DependentUpon>FormManageClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormManageManager.resx">
+      <DependentUpon>FormManageManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormManageMaster.resx">
+      <DependentUpon>FormManageMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormManageProduct.resx">
+      <DependentUpon>FormManageProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormManagers.resx">
+      <DependentUpon>FormManagers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormManageService.resx">
+      <DependentUpon>FormManageService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBatches.resx">
+      <DependentUpon>FormBatches.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCategories.resx">
+      <DependentUpon>FormCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormClients.resx">
+      <DependentUpon>FormClients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMasters.resx">
+      <DependentUpon>FormMasters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOrdersExtedFilter.resx">
+      <DependentUpon>FormOrdersExtedFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOrdersLogs.resx">
+      <DependentUpon>FormOrdersLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOutOrders.resx">
+      <DependentUpon>FormOutOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPickEmployeeType.resx">
+      <DependentUpon>FormPickEmployeeType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPickOrderType.resx">
+      <DependentUpon>FormPickOrderType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPickSparePartFormBatch.resx">
+      <DependentUpon>FormPickSparePartFormBatch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShowBatch.resx">
+      <DependentUpon>FormShowBatch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShowCategory.resx">
+      <DependentUpon>FormShowCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShowClient.resx">
+      <DependentUpon>FormShowClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShowManager.resx">
+      <DependentUpon>FormShowManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShowMaster.resx">
+      <DependentUpon>FormShowMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShowOrderLog.resx">
+      <DependentUpon>FormShowOrderLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShowProduct.resx">
+      <DependentUpon>FormShowProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShowService.resx">
+      <DependentUpon>FormShowService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShowSparePart.resx">
+      <DependentUpon>FormShowSparePart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShowVisit.resx">
+      <DependentUpon>FormShowVisit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShowOrder.resx">
+      <DependentUpon>FormShowOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmployees.resx">
+      <DependentUpon>FormEmployees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogIn.resx">
+      <DependentUpon>FormLogIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAddOrder.resx">
+      <DependentUpon>FormAddOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormManageSparePart.resx">
+      <DependentUpon>FormManageSparePart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormManageVisit.resx">
+      <DependentUpon>FormManageVisit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormManageWorkshop.resx">
+      <DependentUpon>FormManageWorkshop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOrders.resx">
+      <DependentUpon>FormOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProducts.resx">
+      <DependentUpon>FormProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormServices.resx">
+      <DependentUpon>FormServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShowWorkshop.resx">
+      <DependentUpon>FormShowWorkshop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSpareParts.resx">
+      <DependentUpon>FormSpareParts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStatWorkshops.resx">
+      <DependentUpon>FormStatWorkshops.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormVisits.resx">
+      <DependentUpon>FormVisits.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormWorkshops.resx">
+      <DependentUpon>FormWorkshops.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+  </Target>
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+</Project>

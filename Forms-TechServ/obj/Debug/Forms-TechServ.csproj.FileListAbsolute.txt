@@ -1,0 +1,199 @@
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\bin\Debug\Forms-TechServ.exe.config
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\bin\Debug\Forms-TechServ.exe
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\bin\Debug\Forms-TechServ.pdb
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms-TechServ.csproj.AssemblyReference.cache
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.Properties.Resources.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms-TechServ.csproj.GenerateResource.cache
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms-TechServ.csproj.CoreCompileInputs.cache
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms-TechServ.exe
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms-TechServ.pdb
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormLogIn.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormOrders.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\bin\Debug\FontAwesome.Sharp.dll
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms-TechServ.csproj.CopyComplete
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormVisits.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormClients.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormProducts.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormEmployees.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormServices.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormWorkshops.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormSpareParts.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormBatches.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormCategories.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageService.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageWorkshop.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageClient.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageMaster.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageProduct.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageVisit.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageBatch.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageSparePart.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageCategory.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormStatWorkshops.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowBatch.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowCategory.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowClient.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowMaster.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowProduct.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowService.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowVisit.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowWorkshop.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormMain.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormOrdersExtedFilter.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormEditOrder.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowOrder.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormInOrders.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormAddOrder.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormOutOrders.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormAddEmployeeTimetable.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManagers.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormMasters.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowManager.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageManager.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowSparePart.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormOrdersLogs.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowOrderLog.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormPickSparePartFormBatch.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormFindEmpPosition.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageWorkshopTimetable.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormPickOrderType.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormChooseQuantity.resources
+D:\Артамонов крута\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormPickEmployeeType.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\bin\Debug\Forms-TechServ.exe.config
+D:\Артамонов\Лабы\Формы\Forms-TechServ\bin\Debug\Forms-TechServ.exe
+D:\Артамонов\Лабы\Формы\Forms-TechServ\bin\Debug\Forms-TechServ.pdb
+D:\Артамонов\Лабы\Формы\Forms-TechServ\bin\Debug\EntityFramework.dll
+D:\Артамонов\Лабы\Формы\Forms-TechServ\bin\Debug\EntityFramework.SqlServer.dll
+D:\Артамонов\Лабы\Формы\Forms-TechServ\bin\Debug\FontAwesome.Sharp.dll
+D:\Артамонов\Лабы\Формы\Forms-TechServ\bin\Debug\System.Data.SQLite.dll
+D:\Артамонов\Лабы\Формы\Forms-TechServ\bin\Debug\System.Data.SQLite.EF6.dll
+D:\Артамонов\Лабы\Формы\Forms-TechServ\bin\Debug\System.Data.SQLite.Linq.dll
+D:\Артамонов\Лабы\Формы\Forms-TechServ\bin\Debug\EntityFramework.xml
+D:\Артамонов\Лабы\Формы\Forms-TechServ\bin\Debug\EntityFramework.SqlServer.xml
+D:\Артамонов\Лабы\Формы\Forms-TechServ\bin\Debug\System.Data.SQLite.xml
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms-TechServ.csproj.AssemblyReference.cache
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormAddEmployeeTimetable.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageWorkshopTimetable.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormChooseQuantity.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormEditOrder.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormFindEmpPosition.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormInOrders.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageBatch.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageCategory.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageClient.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageManager.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageMaster.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageProduct.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManagers.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageService.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormBatches.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormCategories.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormClients.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormMasters.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormOrdersExtedFilter.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormOrdersLogs.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormOutOrders.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormPickEmployeeType.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormPickOrderType.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormPickSparePartFormBatch.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowBatch.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowCategory.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowClient.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowManager.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowMaster.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowOrderLog.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowProduct.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowService.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowSparePart.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowVisit.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowOrder.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormEmployees.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormLogIn.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormMain.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormAddOrder.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageSparePart.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageVisit.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageWorkshop.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormOrders.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormProducts.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormServices.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowWorkshop.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormSpareParts.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormStatWorkshops.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormVisits.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.FormWorkshops.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms_TechServ.Properties.Resources.resources
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms-TechServ.csproj.GenerateResource.cache
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms-TechServ.csproj.CoreCompileInputs.cache
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms-TechServ.csproj.CopyComplete
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms-TechServ.exe
+D:\Артамонов\Лабы\Формы\Forms-TechServ\obj\Debug\Forms-TechServ.pdb
+D:\git_repos\TechServ\Forms-TechServ\bin\Debug\Forms-TechServ.exe.config
+D:\git_repos\TechServ\Forms-TechServ\bin\Debug\Forms-TechServ.exe
+D:\git_repos\TechServ\Forms-TechServ\bin\Debug\Forms-TechServ.pdb
+D:\git_repos\TechServ\Forms-TechServ\bin\Debug\EntityFramework.dll
+D:\git_repos\TechServ\Forms-TechServ\bin\Debug\EntityFramework.SqlServer.dll
+D:\git_repos\TechServ\Forms-TechServ\bin\Debug\FontAwesome.Sharp.dll
+D:\git_repos\TechServ\Forms-TechServ\bin\Debug\System.Data.SQLite.dll
+D:\git_repos\TechServ\Forms-TechServ\bin\Debug\System.Data.SQLite.EF6.dll
+D:\git_repos\TechServ\Forms-TechServ\bin\Debug\System.Data.SQLite.Linq.dll
+D:\git_repos\TechServ\Forms-TechServ\bin\Debug\EntityFramework.xml
+D:\git_repos\TechServ\Forms-TechServ\bin\Debug\EntityFramework.SqlServer.xml
+D:\git_repos\TechServ\Forms-TechServ\bin\Debug\System.Data.SQLite.xml
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms-TechServ.csproj.AssemblyReference.cache
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormAddEmployeeTimetable.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageWorkshopTimetable.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormChooseQuantity.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormEditOrder.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormFindEmpPosition.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormInOrders.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageBatch.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageCategory.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageClient.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageManager.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageMaster.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageProduct.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManagers.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageService.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormBatches.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormCategories.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormClients.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormMasters.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormOrdersExtedFilter.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormOrdersLogs.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormOutOrders.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormPickEmployeeType.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormPickOrderType.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormPickSparePartFormBatch.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowBatch.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowCategory.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowClient.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowManager.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowMaster.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowOrderLog.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowProduct.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowService.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowSparePart.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowVisit.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowOrder.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormEmployees.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormLogIn.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormMain.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormAddOrder.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageSparePart.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageVisit.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageWorkshop.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormOrders.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormProducts.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormServices.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowWorkshop.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormSpareParts.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormStatWorkshops.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormVisits.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormWorkshops.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.Properties.Resources.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms-TechServ.csproj.GenerateResource.cache
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms-TechServ.csproj.CoreCompileInputs.cache
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms-TechServ.csproj.CopyComplete
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms-TechServ.exe
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms-TechServ.pdb
