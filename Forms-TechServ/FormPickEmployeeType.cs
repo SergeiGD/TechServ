@@ -12,16 +12,33 @@ namespace Forms_TechServ
 {
     public partial class FormPickEmployeeType : Form
     {
-
-        public FormPickEmployeeType()
+        Workshop workshop;
+        public FormPickEmployeeType()                                          
         {
             InitializeComponent();
+
+
+        }
+
+        public FormPickEmployeeType(Workshop workshop)
+        {
+            InitializeComponent();
+
+            this.workshop = workshop;
         }
 
         private void btnMaster_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormManageMaster formManageMaster = new FormManageMaster();
+            FormManageMaster formManageMaster;
+            if (workshop == null)
+            {
+                formManageMaster = new FormManageMaster();
+            }
+            else
+            {
+                formManageMaster = new FormManageMaster(workshop);
+            }
             formManageMaster.FormClosed += (object s, FormClosedEventArgs args) => this.Close();
             formManageMaster.ShowDialog();
         }
@@ -29,9 +46,20 @@ namespace Forms_TechServ
         private void btnManager_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormManageManager formManageManager = new FormManageManager();
+            FormManageManager formManageManager;
+            if (workshop == null)
+            {
+                formManageManager = new FormManageManager();
+            }
+            else
+            {
+                formManageManager = new FormManageManager(workshop);
+            }
+            
             formManageManager.FormClosed += (object s, FormClosedEventArgs args) => this.Close();
             formManageManager.ShowDialog();
         }
+
+        
     }
 }

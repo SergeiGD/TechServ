@@ -39,6 +39,12 @@ namespace Forms_TechServ
             dataPosition.Columns.Add(idCol);
             dataPosition.Columns.Add(nameCol);
 
+            comboBoxShowRows.Items.Add(5);
+            comboBoxShowRows.Items.Add(20);
+            comboBoxShowRows.Items.Add(30);
+            comboBoxShowRows.Items.Add(40);
+            comboBoxShowRows.SelectedIndex = 2;
+
             FillGrid();
         }
 

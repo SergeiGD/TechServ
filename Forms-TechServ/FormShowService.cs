@@ -14,6 +14,7 @@ namespace Forms_TechServ
     {
         bool readOnly;
         Service service;
+
         public FormShowService(bool readOnly, Service service)
         {
             InitializeComponent();

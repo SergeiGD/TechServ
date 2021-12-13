@@ -13,6 +13,7 @@ namespace Forms_TechServ
 {
     public partial class FormManageMaster : Form
     {
+        //Workshop workshop;
         Master master;
         //List<Category> catsToBeAdded = new List<Category>();
         int currentPage = 1;
@@ -44,6 +45,23 @@ namespace Forms_TechServ
             btnAction.Text = "Сохранить";
 
             this.master = master;
+        }
+
+        public FormManageMaster(Workshop workshop)                  // добавление к конкретной мастерской
+        {
+            InitializeComponent();
+
+            //masterTabs.TabPages.Add(ordersPage);
+            //masterTabs.TabPages.Add(visitsPage);
+
+            //this.master = master;
+            master = new Master();
+            btnAction.Text = "Сохранить";
+
+            tbWorkshop.Text = workshop.Location;
+            tbWorkshop.Tag = workshop;
+
+            btnFindWorkshop.Enabled = false;
         }
 
 

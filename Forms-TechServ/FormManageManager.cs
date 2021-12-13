@@ -38,6 +38,23 @@ namespace Forms_TechServ
             //managerTabs.TabPages.Add(ordersPage);
         }
 
+        public FormManageManager(Workshop workshop)                  // добавление к конкретной мастерской
+        {
+            InitializeComponent();
+
+            //masterTabs.TabPages.Add(ordersPage);
+            //masterTabs.TabPages.Add(visitsPage);
+
+            //this.master = master;
+            manager = new Manager();
+            btnAction.Text = "Сохранить";
+
+            tbWorkshop.Text = workshop.Location;
+            tbWorkshop.Tag = workshop;
+
+            btnFindWorkshop.Enabled = false;
+        }
+
         private void managerTabs_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (managerTabs.SelectedTab.Equals(generalPage))

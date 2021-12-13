@@ -65,7 +65,7 @@ namespace Forms_TechServ
             {
                 this.Size = pickedSize;
 
-                FormEmployees formEmployees = new FormEmployees(true, "workshop");
+                FormEmployees formEmployees = new FormEmployees(true, workshop);
 
                 formEmployees.TopLevel = false;
                 formEmployees.FormBorderStyle = FormBorderStyle.None;

@@ -69,7 +69,7 @@ namespace Forms_TechServ
             {
                 this.Size = pickedSize;
 
-                FormEmployees formEmployees = new FormEmployees(false, "work");
+                FormEmployees formEmployees = new FormEmployees(false, workshop);
 
 
                 formEmployees.TopLevel = false;

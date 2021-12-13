@@ -15,6 +15,7 @@ namespace Forms_TechServ
         int currentPage = 1;
         int rowsCount;
         bool readOnly;
+        Workshop workshop;
 
         public FormEmployees()
         {
@@ -42,9 +43,11 @@ namespace Forms_TechServ
             {
                 mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
             }
+
+            btnClean.Click += btnCleanAll_Click;
         }
 
-        public FormEmployees(bool readOnly, string workshop)
+        public FormEmployees(bool readOnly, Workshop workshop)
         {
             InitializeComponent();
 
@@ -55,7 +58,7 @@ namespace Forms_TechServ
                 ManageButton btnAdd = new ManageButton();
                 btnAdd.Text = "Добавить";
                 panelControl.Controls.Add(btnAdd);
-                btnAdd.Click += BtnManage_Click;
+                btnAdd.Click += BtnAddFromWorkshop_Click;
             }
 
             ManageButton btnShow = new ManageButton();
@@ -69,6 +72,15 @@ namespace Forms_TechServ
             {
                 mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
             }
+
+            this.workshop = workshop;
+            tbWorkshop.Text = workshop.Location;
+            tbWorkshop.Tag = workshop;
+
+            btnFlindWorkshop.Enabled = false;
+            btnCleanWorkshop.Enabled = false;
+
+            btnClean.Click += btnCleanInWorkshop_Click;
         }
 
         private void FormEmployees_Load(object sender, EventArgs e)
@@ -185,22 +197,16 @@ namespace Forms_TechServ
             FormPickEmployeeType formPickEmployeeType = new FormPickEmployeeType();
             formPickEmployeeType.ShowDialog();
 
-            /*if (formPickEmployeeType.formManageMaster != null)
-            {
-                if(formPickEmployeeType.formManageMaster.master.Id != 0)
-                {
-                    MessageBox.Show($"Новый сотрудник успешно добавлен", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    FillGrid();
-                }
-            }
-            else if (formPickEmployeeType.formManageManager != null)
-            {
-                if (formPickEmployeeType.formManageManager.manager.Id != 0)
-                {
-                    MessageBox.Show($"Новый сотрудник успешно добавлен", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    FillGrid();
-                }
-            }*/
+            
+            FillGrid();
+        }
+
+        private void BtnAddFromWorkshop_Click(object sender, EventArgs e)
+        {
+            FormPickEmployeeType formPickEmployeeType = new FormPickEmployeeType(workshop);
+            formPickEmployeeType.ShowDialog();
+
+
             FillGrid();
         }
 
@@ -211,7 +217,7 @@ namespace Forms_TechServ
             if(employee.GetType() == typeof(Manager))                                                                           // ищем на какой тип ссылка
             {                                                                                                                   // и в зависимости от этого
                 FormShowManager formShowManager = new FormShowManager(readOnly, (Manager)employee);                             // отображаем соотвествующую форму
-                formShowManager.Show();
+                formShowManager.ShowDialog();
             }
             else if (employee.GetType() == typeof(Master))
             {
@@ -248,7 +254,7 @@ namespace Forms_TechServ
             FillGrid();
         }
 
-        private void clearBtn_Click(object sender, EventArgs e)
+        private void btnCleanInWorkshop_Click(object sender, EventArgs e)
         {
             tbID.Clear();
             tbName.Clear();
@@ -256,10 +262,25 @@ namespace Forms_TechServ
             tbPosition.Clear();
             numericSalaryFrom.Value = 0;
             numericSalaryUntil.Value = 0;
-            tbWorkshop.Clear();
-            tbWorkshop.Tag = null;
+            
             tbPosition.Clear();
             tbPosition.Tag = null;
+
+            FillGrid();
+        }
+
+        private void btnCleanAll_Click(object sender, EventArgs e)
+        {
+            tbID.Clear();
+            tbName.Clear();
+            tbPhoneNum.Clear();
+            tbPosition.Clear();
+            numericSalaryFrom.Value = 0;
+            numericSalaryUntil.Value = 0;
+            tbPosition.Clear();
+            tbPosition.Tag = null;
+            tbWorkshop.Clear();
+            tbWorkshop.Tag = null;
 
             FillGrid();
         }
