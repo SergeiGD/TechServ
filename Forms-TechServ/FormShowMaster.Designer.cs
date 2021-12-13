@@ -353,7 +353,7 @@ namespace Forms_TechServ
             this.panel3.Controls.Add(this.btnShowCat);
             this.panel3.Location = new System.Drawing.Point(644, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(151, 238);
+            this.panel3.Size = new System.Drawing.Size(151, 258);
             this.panel3.TabIndex = 2;
             // 
             // btnShowCat

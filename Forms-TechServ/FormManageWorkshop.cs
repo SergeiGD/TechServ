@@ -14,6 +14,8 @@ namespace Forms_TechServ
     public partial class FormManageWorkshop : Form
     {
         Workshop workshop;
+        int currentPage = 1;
+        int rowsCount;
 
         Size pickedSize = new Size(1078, 481);
         TabPage empsPage = new TabPage("Сотрудники");
@@ -24,6 +26,8 @@ namespace Forms_TechServ
             InitializeComponent();
 
             this.Size = new Size(494, 187);
+
+            workshopTabs.TabPages.Remove(timetablePage);
 
             workshop = new Workshop();                      // ЕСЛИ ДОБАВЛЯЕМ НОВЫЙ
 
@@ -102,10 +106,12 @@ namespace Forms_TechServ
                 pickedSize = this.Size;
         }
 
-        private void manageButton1_Click(object sender, EventArgs e)
+        private void btnAddTimetable_Click(object sender, EventArgs e)
         {
-            FormManageWorkshopTimetable formAddWorkshopTimetable = new FormManageWorkshopTimetable();
+            FormManageWorkshopTimetable formAddWorkshopTimetable = new FormManageWorkshopTimetable(workshop);
             formAddWorkshopTimetable.ShowDialog();
+
+            FillTimetales();
         }
 
         private void btnAction_Click(object sender, EventArgs e)
@@ -159,8 +165,95 @@ namespace Forms_TechServ
             {
                 tbAddress.Text = workshop.Location;
                 tbPhoneNum.Text = workshop.PhoneNum;
+
+                DataGridViewTextBoxColumn idCol = new DataGridViewTextBoxColumn();
+                idCol.Name = "id";
+                DataGridViewTextBoxColumn openCol = new DataGridViewTextBoxColumn();
+                openCol.Name = "Открывается";
+                DataGridViewTextBoxColumn closeCol = new DataGridViewTextBoxColumn();
+                closeCol.Name = "Закрывается";
+                DataGridViewTextBoxColumn fromCol = new DataGridViewTextBoxColumn();
+                fromCol.Name = "Действует с";
+                DataGridViewTextBoxColumn untilCol = new DataGridViewTextBoxColumn();
+                untilCol.Name = "Действует до";
+
+                dataTimetable.Columns.Add(idCol);
+                dataTimetable.Columns.Add(openCol);
+                dataTimetable.Columns.Add(closeCol);
+                dataTimetable.Columns.Add(fromCol);
+                dataTimetable.Columns.Add(untilCol);
+
+                comboBoxShowTimetableRows.Items.Add(5);
+                comboBoxShowTimetableRows.Items.Add(20);
+                comboBoxShowTimetableRows.Items.Add(30);
+                comboBoxShowTimetableRows.Items.Add(40);
+                comboBoxShowTimetableRows.SelectedIndex = 2;
+
+                FillTimetales();
             }
-            
+        }
+
+        private void FillTimetales()
+        {
+            dataTimetable.Rows.Clear();
+
+            /*List<WorkshopTimetable> timetables = WorkshopsTimetablesList.GetWorkshopsTimetables(
+                new WorkshopTimetable()
+                {
+                    Workshop = workshop
+                },
+                (int)comboBoxShowTimetableRows.SelectedItem,
+                currentPage,
+                out rowsCount);*/
+            List<WorkshopTimetable> timetables = workshop.GetTimetables(
+                (int)comboBoxShowTimetableRows.SelectedItem,
+                currentPage,
+                out rowsCount);
+
+            for (int i = 0; i < timetables.Count; i++)
+            {
+                dataTimetable.Rows.Add(new DataGridViewRow());
+
+                dataTimetable.Rows[i].Cells[0].Value = timetables[i].Id;
+                dataTimetable.Rows[i].Cells[1].Value = timetables[i].Opening;
+                dataTimetable.Rows[i].Cells[2].Value = timetables[i].Closing;
+                dataTimetable.Rows[i].Cells[3].Value = timetables[i].ValidFrom.ToShortDateString();
+                dataTimetable.Rows[i].Cells[4].Value = timetables[i].ValidUntil.ToShortDateString();
+            }
+
+            int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowTimetableRows.SelectedItem);
+            numericCurrentTImetablePage.Maximum = maxPage;
+            labelTimetablePageCount.Text = $"из {maxPage}";
+        }
+
+        private void dataTimetable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            FormManageWorkshopTimetable formAddWorkshopTimetable = new FormManageWorkshopTimetable(WorkshopsTimetablesList.GetById(Convert.ToInt32(dataTimetable.SelectedRows[0].Cells[0].Value)));
+            formAddWorkshopTimetable.ShowDialog();
+
+            FillTimetales();
+        }
+
+        private void btnDeleteTimetable_Click(object sender, EventArgs e)
+        {
+            DialogResult answer = MessageBox.Show("Вы действительно хотите удалить это расписание?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+            if(answer == DialogResult.Yes)
+            {
+                if(dataTimetable.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("Для начала выберите расписание", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    WorkshopsTimetablesList.GetById(Convert.ToInt32(dataTimetable.SelectedRows[0].Cells[0].Value)).DelWorkshopTimetalbe();
+                    MessageBox.Show("Расписание удалено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    FillTimetales();
+                }
+                
+            }
+
         }
     }
 }

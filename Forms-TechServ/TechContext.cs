@@ -24,6 +24,7 @@ namespace Forms_TechServ
         public DbSet<Manager> Managers { get; set; }
 
         public DbSet<Workshop> Workshops { get; set; }
+        public DbSet<WorkshopTimetable> WorkshopsTimetables { get; set; }
 
         // УПРАВЛЕНИЕ ПРАВАМИ
         public DbSet<Role> Roles { get; set; }
@@ -39,6 +40,8 @@ namespace Forms_TechServ
                 .HasKey(c => new { c.PermissionId, c.RoleId });
 
             modelBuilder.Configurations.Add(new Service.ServiceConfig());
+
+            modelBuilder.Configurations.Add(new WorkshopTimetable.TimetableConfig());
         }
     }
 }

@@ -29,20 +29,19 @@ namespace Forms_TechServ
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.datePickerFrom = new System.Windows.Forms.DateTimePicker();
             this.datePickerUntil = new System.Windows.Forms.DateTimePicker();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tbEndMinute = new System.Windows.Forms.TextBox();
-            this.tbEndHour = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tbStartMinute = new System.Windows.Forms.TextBox();
-            this.tbStartHour = new System.Windows.Forms.TextBox();
             this.cancelBtn = new System.Windows.Forms.Button();
             this.actionBtn = new System.Windows.Forms.Button();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.tbStart = new System.Windows.Forms.MaskedTextBox();
+            this.tbEnd = new System.Windows.Forms.MaskedTextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -99,54 +98,6 @@ namespace Forms_TechServ
             this.datePickerUntil.Size = new System.Drawing.Size(128, 20);
             this.datePickerUntil.TabIndex = 5;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(227, 62);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(15, 24);
-            this.label6.TabIndex = 11;
-            this.label6.Text = ":";
-            // 
-            // tbEndMinute
-            // 
-            this.tbEndMinute.Location = new System.Drawing.Point(245, 66);
-            this.tbEndMinute.Name = "tbEndMinute";
-            this.tbEndMinute.Size = new System.Drawing.Size(53, 20);
-            this.tbEndMinute.TabIndex = 10;
-            // 
-            // tbEndHour
-            // 
-            this.tbEndHour.Location = new System.Drawing.Point(170, 66);
-            this.tbEndHour.Name = "tbEndHour";
-            this.tbEndHour.Size = new System.Drawing.Size(53, 20);
-            this.tbEndHour.TabIndex = 9;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(227, 14);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(15, 24);
-            this.label5.TabIndex = 14;
-            this.label5.Text = ":";
-            // 
-            // tbStartMinute
-            // 
-            this.tbStartMinute.Location = new System.Drawing.Point(245, 18);
-            this.tbStartMinute.Name = "tbStartMinute";
-            this.tbStartMinute.Size = new System.Drawing.Size(53, 20);
-            this.tbStartMinute.TabIndex = 13;
-            // 
-            // tbStartHour
-            // 
-            this.tbStartHour.Location = new System.Drawing.Point(170, 18);
-            this.tbStartHour.Name = "tbStartHour";
-            this.tbStartHour.Size = new System.Drawing.Size(53, 20);
-            this.tbStartHour.TabIndex = 12;
-            // 
             // cancelBtn
             // 
             this.cancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -154,8 +105,9 @@ namespace Forms_TechServ
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(111, 40);
             this.cancelBtn.TabIndex = 20;
-            this.cancelBtn.Text = "ОТМЕНИТЬ";
+            this.cancelBtn.Text = "Отмена";
             this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // actionBtn
             // 
@@ -166,6 +118,33 @@ namespace Forms_TechServ
             this.actionBtn.TabIndex = 19;
             this.actionBtn.Text = "Action";
             this.actionBtn.UseVisualStyleBackColor = true;
+            this.actionBtn.Click += new System.EventHandler(this.actionBtn_Click);
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
+            // tbStart
+            // 
+            this.tbStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F);
+            this.tbStart.Location = new System.Drawing.Point(170, 13);
+            this.tbStart.Mask = "00:00";
+            this.tbStart.Name = "tbStart";
+            this.tbStart.Size = new System.Drawing.Size(59, 26);
+            this.tbStart.TabIndex = 21;
+            this.tbStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbStart.ValidatingType = typeof(System.DateTime);
+            // 
+            // tbEnd
+            // 
+            this.tbEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F);
+            this.tbEnd.Location = new System.Drawing.Point(170, 61);
+            this.tbEnd.Mask = "00:00";
+            this.tbEnd.Name = "tbEnd";
+            this.tbEnd.Size = new System.Drawing.Size(59, 26);
+            this.tbEnd.TabIndex = 22;
+            this.tbEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbEnd.ValidatingType = typeof(System.DateTime);
             // 
             // FormManageWorkshopTimetable
             // 
@@ -173,14 +152,10 @@ namespace Forms_TechServ
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
             this.ClientSize = new System.Drawing.Size(473, 193);
+            this.Controls.Add(this.tbEnd);
+            this.Controls.Add(this.tbStart);
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.actionBtn);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.tbStartMinute);
-            this.Controls.Add(this.tbStartHour);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.tbEndMinute);
-            this.Controls.Add(this.tbEndHour);
             this.Controls.Add(this.datePickerUntil);
             this.Controls.Add(this.datePickerFrom);
             this.Controls.Add(this.label4);
@@ -189,6 +164,8 @@ namespace Forms_TechServ
             this.Controls.Add(this.label1);
             this.Name = "FormManageWorkshopTimetable";
             this.Text = "FormAddWorkshopTimetable";
+            this.Load += new System.EventHandler(this.FormManageWorkshopTimetable_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,13 +179,10 @@ namespace Forms_TechServ
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker datePickerFrom;
         private System.Windows.Forms.DateTimePicker datePickerUntil;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox tbEndMinute;
-        private System.Windows.Forms.TextBox tbEndHour;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox tbStartMinute;
-        private System.Windows.Forms.TextBox tbStartHour;
         private System.Windows.Forms.Button cancelBtn;
         private System.Windows.Forms.Button actionBtn;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.MaskedTextBox tbEnd;
+        private System.Windows.Forms.MaskedTextBox tbStart;
     }
 }

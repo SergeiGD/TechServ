@@ -45,6 +45,9 @@
     <Reference Include="FontAwesome.Sharp, Version=5.15.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\FontAwesome.Sharp.5.15.3\lib\net472\FontAwesome.Sharp.dll</HintPath>
     </Reference>
+    <Reference Include="Itenso.TimePeriod, Version=2.1.1.0, Culture=neutral, PublicKeyToken=8cb6db75b4e81486, processorArchitecture=MSIL">
+      <HintPath>packages\TimePeriodLibrary.NET.2.1.1\lib\net46\Itenso.TimePeriod.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -384,6 +387,7 @@
     <Compile Include="TechContext.cs" />
     <Compile Include="UserSession.cs" />
     <Compile Include="Workshop.cs" />
+    <Compile Include="WorkshopTimetable.cs" />
     <EmbeddedResource Include="FormAddEmployeeTimetable.resx">
       <DependentUpon>FormAddEmployeeTimetable.cs</DependentUpon>
     </EmbeddedResource>

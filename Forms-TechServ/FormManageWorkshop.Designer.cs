@@ -43,25 +43,21 @@ namespace Forms_TechServ
             this.btnDeleteTimetable = new Forms_TechServ.ManageButton();
             this.btnAddTimetable = new Forms_TechServ.ManageButton();
             this.panelContent = new System.Windows.Forms.Panel();
-            this.comboBoxShowRows = new System.Windows.Forms.ComboBox();
+            this.comboBoxShowTimetableRows = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.labelPagesCount = new System.Windows.Forms.Label();
-            this.numericCurrentPage = new System.Windows.Forms.NumericUpDown();
+            this.labelTimetablePageCount = new System.Windows.Forms.Label();
+            this.numericCurrentTImetablePage = new System.Windows.Forms.NumericUpDown();
             this.label28 = new System.Windows.Forms.Label();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrev = new System.Windows.Forms.Button();
             this.dataTimetable = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.workshopTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.timetablePage.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panelContent.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericCurrentTImetablePage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTimetable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
@@ -190,6 +186,7 @@ namespace Forms_TechServ
             this.btnDeleteTimetable.Text = "Удалить";
             this.btnDeleteTimetable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDeleteTimetable.UseVisualStyleBackColor = false;
+            this.btnDeleteTimetable.Click += new System.EventHandler(this.btnDeleteTimetable_Click);
             // 
             // btnAddTimetable
             // 
@@ -206,16 +203,16 @@ namespace Forms_TechServ
             this.btnAddTimetable.Text = "Добавить";
             this.btnAddTimetable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddTimetable.UseVisualStyleBackColor = false;
-            this.btnAddTimetable.Click += new System.EventHandler(this.manageButton1_Click);
+            this.btnAddTimetable.Click += new System.EventHandler(this.btnAddTimetable_Click);
             // 
             // panelContent
             // 
             this.panelContent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.panelContent.Controls.Add(this.comboBoxShowRows);
+            this.panelContent.Controls.Add(this.comboBoxShowTimetableRows);
             this.panelContent.Controls.Add(this.label2);
-            this.panelContent.Controls.Add(this.labelPagesCount);
-            this.panelContent.Controls.Add(this.numericCurrentPage);
+            this.panelContent.Controls.Add(this.labelTimetablePageCount);
+            this.panelContent.Controls.Add(this.numericCurrentTImetablePage);
             this.panelContent.Controls.Add(this.label28);
             this.panelContent.Controls.Add(this.btnNext);
             this.panelContent.Controls.Add(this.btnPrev);
@@ -225,14 +222,15 @@ namespace Forms_TechServ
             this.panelContent.Size = new System.Drawing.Size(613, 332);
             this.panelContent.TabIndex = 1;
             // 
-            // comboBoxShowRows
+            // comboBoxShowTimetableRows
             // 
-            this.comboBoxShowRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.comboBoxShowRows.FormattingEnabled = true;
-            this.comboBoxShowRows.Location = new System.Drawing.Point(420, 303);
-            this.comboBoxShowRows.Name = "comboBoxShowRows";
-            this.comboBoxShowRows.Size = new System.Drawing.Size(62, 21);
-            this.comboBoxShowRows.TabIndex = 20;
+            this.comboBoxShowTimetableRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.comboBoxShowTimetableRows.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxShowTimetableRows.FormattingEnabled = true;
+            this.comboBoxShowTimetableRows.Location = new System.Drawing.Point(420, 303);
+            this.comboBoxShowTimetableRows.Name = "comboBoxShowTimetableRows";
+            this.comboBoxShowTimetableRows.Size = new System.Drawing.Size(62, 21);
+            this.comboBoxShowTimetableRows.TabIndex = 20;
             // 
             // label2
             // 
@@ -245,24 +243,34 @@ namespace Forms_TechServ
             this.label2.TabIndex = 19;
             this.label2.Text = "Показывать по";
             // 
-            // labelPagesCount
+            // labelTimetablePageCount
             // 
-            this.labelPagesCount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.labelPagesCount.AutoSize = true;
-            this.labelPagesCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.labelPagesCount.Location = new System.Drawing.Point(265, 304);
-            this.labelPagesCount.Name = "labelPagesCount";
-            this.labelPagesCount.Size = new System.Drawing.Size(36, 17);
-            this.labelPagesCount.TabIndex = 13;
-            this.labelPagesCount.Text = "из S";
+            this.labelTimetablePageCount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.labelTimetablePageCount.AutoSize = true;
+            this.labelTimetablePageCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.labelTimetablePageCount.Location = new System.Drawing.Point(265, 304);
+            this.labelTimetablePageCount.Name = "labelTimetablePageCount";
+            this.labelTimetablePageCount.Size = new System.Drawing.Size(36, 17);
+            this.labelTimetablePageCount.TabIndex = 13;
+            this.labelTimetablePageCount.Text = "из S";
             // 
-            // numericCurrentPage
+            // numericCurrentTImetablePage
             // 
-            this.numericCurrentPage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.numericCurrentPage.Location = new System.Drawing.Point(214, 305);
-            this.numericCurrentPage.Name = "numericCurrentPage";
-            this.numericCurrentPage.Size = new System.Drawing.Size(45, 20);
-            this.numericCurrentPage.TabIndex = 12;
+            this.numericCurrentTImetablePage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.numericCurrentTImetablePage.Location = new System.Drawing.Point(214, 305);
+            this.numericCurrentTImetablePage.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericCurrentTImetablePage.Name = "numericCurrentTImetablePage";
+            this.numericCurrentTImetablePage.Size = new System.Drawing.Size(45, 20);
+            this.numericCurrentTImetablePage.TabIndex = 12;
+            this.numericCurrentTImetablePage.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label28
             // 
@@ -305,40 +313,21 @@ namespace Forms_TechServ
             // 
             // dataTimetable
             // 
+            this.dataTimetable.AllowUserToAddRows = false;
+            this.dataTimetable.AllowUserToDeleteRows = false;
             this.dataTimetable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataTimetable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataTimetable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataTimetable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4});
             this.dataTimetable.Location = new System.Drawing.Point(0, 0);
+            this.dataTimetable.MultiSelect = false;
             this.dataTimetable.Name = "dataTimetable";
+            this.dataTimetable.ReadOnly = true;
+            this.dataTimetable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataTimetable.Size = new System.Drawing.Size(613, 292);
             this.dataTimetable.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Открытие";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Закрытие";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Дествительно с";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Дествительно до";
-            this.Column4.Name = "Column4";
+            this.dataTimetable.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTimetable_CellDoubleClick);
             // 
             // errorProvider
             // 
@@ -363,7 +352,7 @@ namespace Forms_TechServ
             this.panel1.ResumeLayout(false);
             this.panelContent.ResumeLayout(false);
             this.panelContent.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericCurrentTImetablePage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTimetable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
@@ -379,22 +368,18 @@ namespace Forms_TechServ
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbAddress;
         private System.Windows.Forms.Panel panelContent;
-        private System.Windows.Forms.Label labelPagesCount;
-        private System.Windows.Forms.NumericUpDown numericCurrentPage;
+        private System.Windows.Forms.Label labelTimetablePageCount;
+        private System.Windows.Forms.NumericUpDown numericCurrentTImetablePage;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPrev;
         private System.Windows.Forms.DataGridView dataTimetable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.Panel panel1;
         private ManageButton btnAddTimetable;
         private ManageButton btnDeleteTimetable;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnAction;
-        private System.Windows.Forms.ComboBox comboBoxShowRows;
+        private System.Windows.Forms.ComboBox comboBoxShowTimetableRows;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ErrorProvider errorProvider;
     }

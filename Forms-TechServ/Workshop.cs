@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Data.Entity;
 
+
 namespace Forms_TechServ
 {
     public class Workshop
@@ -61,6 +62,30 @@ namespace Forms_TechServ
                 db.Entry(this).State = EntityState.Modified;
                 db.SaveChanges();
                 return true;
+            }
+        }
+
+        public List<WorkshopTimetable> GetTimetables(int count, int page, out int rowsCount)
+        {
+            using (TechContext db = new TechContext())
+            {
+                IEnumerable<WorkshopTimetable> timetables = db.WorkshopsTimetables.Where(t => t.DelTime == null && t.WorkshopId == this.Id).Include(t => t.Workshop);
+
+                timetables.SortBy("ValidUntil", true);
+
+                rowsCount = timetables.Count();
+
+                timetables = timetables.Skip((page - 1) * count).Take(count);
+
+                return timetables.ToList();
+            }
+        }
+
+        public WorkshopTimetable GetValidTimetable()
+        {
+            using (TechContext db = new TechContext())
+            {
+                return db.WorkshopsTimetables.Where(t => t.WorkshopId == this.Id && t.ValidFrom <= DateTime.Now && t.ValidUntil >= DateTime.Now).FirstOrDefault();
             }
         }
 

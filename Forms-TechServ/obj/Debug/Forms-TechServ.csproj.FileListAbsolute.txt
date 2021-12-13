@@ -197,3 +197,4 @@ D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms-TechServ.csproj.CoreCompile
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms-TechServ.csproj.CopyComplete
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms-TechServ.exe
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms-TechServ.pdb
+D:\git_repos\TechServ\Forms-TechServ\bin\Debug\Itenso.TimePeriod.dll
