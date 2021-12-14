@@ -124,6 +124,15 @@ namespace Forms_TechServ
             {
                 this.Size = pickedSize;
 
+                FormEmpTimetalbe formTimetalbe = new FormEmpTimetalbe(master, true);
+
+                formTimetalbe.TopLevel = false;
+                formTimetalbe.FormBorderStyle = FormBorderStyle.None;
+                timetablePage.Controls.Add(formTimetalbe);
+                formTimetalbe.Dock = DockStyle.Fill;
+                formTimetalbe.BringToFront();
+                formTimetalbe.Show();
+
                 /*FormCategories formCategories = new FormCategories(3, true);
 
                 formCategories.TopLevel = false;

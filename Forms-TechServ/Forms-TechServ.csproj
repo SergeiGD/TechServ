@@ -78,6 +78,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CustomSorting.cs" />
+    <Compile Include="EmplyeeTimetable.cs" />
     <Compile Include="FormAddEmployeeTimetable.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +102,12 @@
     </Compile>
     <Compile Include="FormEditOrder.Designer.cs">
       <DependentUpon>FormEditOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmpTimetalbe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmpTimetalbe.Designer.cs">
+      <DependentUpon>FormEmpTimetalbe.cs</DependentUpon>
     </Compile>
     <Compile Include="FormFindEmpPosition.cs">
       <SubType>Form</SubType>
@@ -399,6 +406,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormEditOrder.resx">
       <DependentUpon>FormEditOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmpTimetalbe.resx">
+      <DependentUpon>FormEmpTimetalbe.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFindEmpPosition.resx">
       <DependentUpon>FormFindEmpPosition.cs</DependentUpon>

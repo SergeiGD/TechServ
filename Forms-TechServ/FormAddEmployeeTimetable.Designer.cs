@@ -29,24 +29,19 @@ namespace Forms_TechServ
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.datePickerBegin = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tbStartMinute = new System.Windows.Forms.TextBox();
-            this.tbStartHour = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tbEndMinute = new System.Windows.Forms.TextBox();
-            this.tbEndHour = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupDays = new System.Windows.Forms.GroupBox();
             this.checkBoxSun = new System.Windows.Forms.CheckBox();
-            this.checkBoxSut = new System.Windows.Forms.CheckBox();
-            this.checkBoxThi = new System.Windows.Forms.CheckBox();
+            this.checkBoxSat = new System.Windows.Forms.CheckBox();
+            this.checkBoxFri = new System.Windows.Forms.CheckBox();
             this.checkBoxWen = new System.Windows.Forms.CheckBox();
             this.checkBoxTue = new System.Windows.Forms.CheckBox();
             this.checkBoxMon = new System.Windows.Forms.CheckBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupEnd = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.numericRepeat = new System.Windows.Forms.NumericUpDown();
             this.radioBtnEndRepeat = new System.Windows.Forms.RadioButton();
@@ -55,9 +50,14 @@ namespace Forms_TechServ
             this.saveBtn = new System.Windows.Forms.Button();
             this.cancelBtn = new System.Windows.Forms.Button();
             this.checkBoxRepeat = new System.Windows.Forms.CheckBox();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.tbEnd = new System.Windows.Forms.MaskedTextBox();
+            this.tbStart = new System.Windows.Forms.MaskedTextBox();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.checkBoxThu = new System.Windows.Forms.CheckBox();
+            this.groupDays.SuspendLayout();
+            this.groupEnd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericRepeat)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -94,103 +94,56 @@ namespace Forms_TechServ
             this.label3.TabIndex = 3;
             this.label3.Text = "Конец смены:";
             // 
-            // label6
+            // groupDays
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(194, 60);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(15, 24);
-            this.label6.TabIndex = 14;
-            this.label6.Text = ":";
-            // 
-            // tbStartMinute
-            // 
-            this.tbStartMinute.Location = new System.Drawing.Point(212, 64);
-            this.tbStartMinute.Name = "tbStartMinute";
-            this.tbStartMinute.Size = new System.Drawing.Size(53, 20);
-            this.tbStartMinute.TabIndex = 13;
-            // 
-            // tbStartHour
-            // 
-            this.tbStartHour.Location = new System.Drawing.Point(137, 64);
-            this.tbStartHour.Name = "tbStartHour";
-            this.tbStartHour.Size = new System.Drawing.Size(53, 20);
-            this.tbStartHour.TabIndex = 12;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(194, 105);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(15, 24);
-            this.label4.TabIndex = 17;
-            this.label4.Text = ":";
-            // 
-            // tbEndMinute
-            // 
-            this.tbEndMinute.Location = new System.Drawing.Point(212, 109);
-            this.tbEndMinute.Name = "tbEndMinute";
-            this.tbEndMinute.Size = new System.Drawing.Size(53, 20);
-            this.tbEndMinute.TabIndex = 16;
-            // 
-            // tbEndHour
-            // 
-            this.tbEndHour.Location = new System.Drawing.Point(137, 109);
-            this.tbEndHour.Name = "tbEndHour";
-            this.tbEndHour.Size = new System.Drawing.Size(53, 20);
-            this.tbEndHour.TabIndex = 15;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.checkBoxSun);
-            this.groupBox1.Controls.Add(this.checkBoxSut);
-            this.groupBox1.Controls.Add(this.checkBoxThi);
-            this.groupBox1.Controls.Add(this.checkBoxWen);
-            this.groupBox1.Controls.Add(this.checkBoxTue);
-            this.groupBox1.Controls.Add(this.checkBoxMon);
-            this.groupBox1.Location = new System.Drawing.Point(12, 182);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(305, 72);
-            this.groupBox1.TabIndex = 18;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Дни повторения";
+            this.groupDays.Controls.Add(this.checkBoxThu);
+            this.groupDays.Controls.Add(this.checkBoxSun);
+            this.groupDays.Controls.Add(this.checkBoxSat);
+            this.groupDays.Controls.Add(this.checkBoxFri);
+            this.groupDays.Controls.Add(this.checkBoxWen);
+            this.groupDays.Controls.Add(this.checkBoxTue);
+            this.groupDays.Controls.Add(this.checkBoxMon);
+            this.groupDays.Location = new System.Drawing.Point(10, 183);
+            this.groupDays.Name = "groupDays";
+            this.groupDays.Size = new System.Drawing.Size(315, 72);
+            this.groupDays.TabIndex = 18;
+            this.groupDays.TabStop = false;
+            this.groupDays.Text = "Дни повторения";
             // 
             // checkBoxSun
             // 
             this.checkBoxSun.AutoSize = true;
-            this.checkBoxSun.Location = new System.Drawing.Point(255, 33);
+            this.checkBoxSun.Location = new System.Drawing.Point(276, 33);
             this.checkBoxSun.Name = "checkBoxSun";
             this.checkBoxSun.Size = new System.Drawing.Size(39, 17);
             this.checkBoxSun.TabIndex = 5;
             this.checkBoxSun.Text = "Вс";
             this.checkBoxSun.UseVisualStyleBackColor = true;
             // 
-            // checkBoxSut
+            // checkBoxSat
             // 
-            this.checkBoxSut.AutoSize = true;
-            this.checkBoxSut.Location = new System.Drawing.Point(210, 33);
-            this.checkBoxSut.Name = "checkBoxSut";
-            this.checkBoxSut.Size = new System.Drawing.Size(39, 17);
-            this.checkBoxSut.TabIndex = 4;
-            this.checkBoxSut.Text = "Сб";
-            this.checkBoxSut.UseVisualStyleBackColor = true;
+            this.checkBoxSat.AutoSize = true;
+            this.checkBoxSat.Location = new System.Drawing.Point(231, 33);
+            this.checkBoxSat.Name = "checkBoxSat";
+            this.checkBoxSat.Size = new System.Drawing.Size(39, 17);
+            this.checkBoxSat.TabIndex = 4;
+            this.checkBoxSat.Text = "Сб";
+            this.checkBoxSat.UseVisualStyleBackColor = true;
             // 
-            // checkBoxThi
+            // checkBoxFri
             // 
-            this.checkBoxThi.AutoSize = true;
-            this.checkBoxThi.Location = new System.Drawing.Point(162, 33);
-            this.checkBoxThi.Name = "checkBoxThi";
-            this.checkBoxThi.Size = new System.Drawing.Size(39, 17);
-            this.checkBoxThi.TabIndex = 3;
-            this.checkBoxThi.Text = "Пт";
-            this.checkBoxThi.UseVisualStyleBackColor = true;
+            this.checkBoxFri.AutoSize = true;
+            this.checkBoxFri.Location = new System.Drawing.Point(186, 33);
+            this.checkBoxFri.Name = "checkBoxFri";
+            this.checkBoxFri.Size = new System.Drawing.Size(39, 17);
+            this.checkBoxFri.TabIndex = 3;
+            this.checkBoxFri.Text = "Пт";
+            this.checkBoxFri.UseVisualStyleBackColor = true;
             // 
             // checkBoxWen
             // 
             this.checkBoxWen.AutoSize = true;
-            this.checkBoxWen.Location = new System.Drawing.Point(117, 33);
+            this.checkBoxWen.Location = new System.Drawing.Point(96, 33);
             this.checkBoxWen.Name = "checkBoxWen";
             this.checkBoxWen.Size = new System.Drawing.Size(39, 17);
             this.checkBoxWen.TabIndex = 2;
@@ -200,7 +153,7 @@ namespace Forms_TechServ
             // checkBoxTue
             // 
             this.checkBoxTue.AutoSize = true;
-            this.checkBoxTue.Location = new System.Drawing.Point(64, 33);
+            this.checkBoxTue.Location = new System.Drawing.Point(52, 33);
             this.checkBoxTue.Name = "checkBoxTue";
             this.checkBoxTue.Size = new System.Drawing.Size(38, 17);
             this.checkBoxTue.TabIndex = 1;
@@ -210,42 +163,57 @@ namespace Forms_TechServ
             // checkBoxMon
             // 
             this.checkBoxMon.AutoSize = true;
-            this.checkBoxMon.Location = new System.Drawing.Point(16, 33);
+            this.checkBoxMon.Location = new System.Drawing.Point(6, 33);
             this.checkBoxMon.Name = "checkBoxMon";
             this.checkBoxMon.Size = new System.Drawing.Size(40, 17);
             this.checkBoxMon.TabIndex = 0;
             this.checkBoxMon.Text = "Пн";
             this.checkBoxMon.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // groupEnd
             // 
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.numericRepeat);
-            this.groupBox2.Controls.Add(this.radioBtnEndRepeat);
-            this.groupBox2.Controls.Add(this.radioBtnEndDate);
-            this.groupBox2.Controls.Add(this.datePickerEnd);
-            this.groupBox2.Location = new System.Drawing.Point(12, 261);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(305, 104);
-            this.groupBox2.TabIndex = 19;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Окончание";
+            this.groupEnd.Controls.Add(this.label5);
+            this.groupEnd.Controls.Add(this.numericRepeat);
+            this.groupEnd.Controls.Add(this.radioBtnEndRepeat);
+            this.groupEnd.Controls.Add(this.radioBtnEndDate);
+            this.groupEnd.Controls.Add(this.datePickerEnd);
+            this.groupEnd.Location = new System.Drawing.Point(12, 261);
+            this.groupEnd.Name = "groupEnd";
+            this.groupEnd.Size = new System.Drawing.Size(305, 104);
+            this.groupEnd.TabIndex = 19;
+            this.groupEnd.TabStop = false;
+            this.groupEnd.Text = "Окончание";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(159, 70);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 13);
+            this.label5.Size = new System.Drawing.Size(99, 13);
             this.label5.TabIndex = 24;
-            this.label5.Text = "повторов";
+            this.label5.Text = "повторов (недель)";
             // 
             // numericRepeat
             // 
             this.numericRepeat.Location = new System.Drawing.Point(86, 68);
+            this.numericRepeat.Maximum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+            this.numericRepeat.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericRepeat.Name = "numericRepeat";
             this.numericRepeat.Size = new System.Drawing.Size(55, 20);
             this.numericRepeat.TabIndex = 23;
+            this.numericRepeat.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // radioBtnEndRepeat
             // 
@@ -285,6 +253,7 @@ namespace Forms_TechServ
             this.saveBtn.TabIndex = 22;
             this.saveBtn.Text = "Сохранить";
             this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
             // cancelBtn
             // 
@@ -295,6 +264,7 @@ namespace Forms_TechServ
             this.cancelBtn.TabIndex = 23;
             this.cancelBtn.Text = "Отмена";
             this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // checkBoxRepeat
             // 
@@ -305,6 +275,43 @@ namespace Forms_TechServ
             this.checkBoxRepeat.TabIndex = 24;
             this.checkBoxRepeat.Text = "Повторять";
             this.checkBoxRepeat.UseVisualStyleBackColor = true;
+            this.checkBoxRepeat.CheckedChanged += new System.EventHandler(this.checkBoxRepeat_CheckedChanged);
+            // 
+            // tbEnd
+            // 
+            this.tbEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F);
+            this.tbEnd.Location = new System.Drawing.Point(137, 101);
+            this.tbEnd.Mask = "00:00";
+            this.tbEnd.Name = "tbEnd";
+            this.tbEnd.Size = new System.Drawing.Size(59, 26);
+            this.tbEnd.TabIndex = 26;
+            this.tbEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbEnd.ValidatingType = typeof(System.DateTime);
+            // 
+            // tbStart
+            // 
+            this.tbStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F);
+            this.tbStart.Location = new System.Drawing.Point(137, 59);
+            this.tbStart.Mask = "00:00";
+            this.tbStart.Name = "tbStart";
+            this.tbStart.Size = new System.Drawing.Size(59, 26);
+            this.tbStart.TabIndex = 25;
+            this.tbStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbStart.ValidatingType = typeof(System.DateTime);
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
+            // checkBoxThu
+            // 
+            this.checkBoxThu.AutoSize = true;
+            this.checkBoxThu.Location = new System.Drawing.Point(141, 33);
+            this.checkBoxThu.Name = "checkBoxThu";
+            this.checkBoxThu.Size = new System.Drawing.Size(39, 17);
+            this.checkBoxThu.TabIndex = 6;
+            this.checkBoxThu.Text = "Чт";
+            this.checkBoxThu.UseVisualStyleBackColor = true;
             // 
             // FormAddEmployeeTimetable
             // 
@@ -312,28 +319,26 @@ namespace Forms_TechServ
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
             this.ClientSize = new System.Drawing.Size(337, 445);
+            this.Controls.Add(this.tbEnd);
+            this.Controls.Add(this.tbStart);
             this.Controls.Add(this.checkBoxRepeat);
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.saveBtn);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.tbEndMinute);
-            this.Controls.Add(this.tbEndHour);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.tbStartMinute);
-            this.Controls.Add(this.tbStartHour);
+            this.Controls.Add(this.groupEnd);
+            this.Controls.Add(this.groupDays);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.datePickerBegin);
             this.Controls.Add(this.label1);
             this.Name = "FormAddEmployeeTimetable";
             this.Text = "FormAddEmployeeTimetable";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.Load += new System.EventHandler(this.FormAddEmployeeTimetable_Load);
+            this.groupDays.ResumeLayout(false);
+            this.groupDays.PerformLayout();
+            this.groupEnd.ResumeLayout(false);
+            this.groupEnd.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericRepeat)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -345,20 +350,14 @@ namespace Forms_TechServ
         private System.Windows.Forms.DateTimePicker datePickerBegin;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox tbStartMinute;
-        private System.Windows.Forms.TextBox tbStartHour;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox tbEndMinute;
-        private System.Windows.Forms.TextBox tbEndHour;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupDays;
         private System.Windows.Forms.CheckBox checkBoxSun;
-        private System.Windows.Forms.CheckBox checkBoxSut;
-        private System.Windows.Forms.CheckBox checkBoxThi;
+        private System.Windows.Forms.CheckBox checkBoxSat;
+        private System.Windows.Forms.CheckBox checkBoxFri;
         private System.Windows.Forms.CheckBox checkBoxWen;
         private System.Windows.Forms.CheckBox checkBoxTue;
         private System.Windows.Forms.CheckBox checkBoxMon;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupEnd;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown numericRepeat;
         private System.Windows.Forms.RadioButton radioBtnEndRepeat;
@@ -367,5 +366,9 @@ namespace Forms_TechServ
         private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.Button cancelBtn;
         private System.Windows.Forms.CheckBox checkBoxRepeat;
+        private System.Windows.Forms.MaskedTextBox tbEnd;
+        private System.Windows.Forms.MaskedTextBox tbStart;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.CheckBox checkBoxThu;
     }
 }

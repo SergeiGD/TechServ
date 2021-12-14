@@ -92,6 +92,32 @@ namespace Forms_TechServ
                     }
                 }
 
+                // ПРОВЕРКА, НЕ ПРОПАДУТ ЛИ ПРИ ИЗМЕНЕНИЕ РАСПИСАНИЯ ФИЛИАЛА СМЕНЫ У РАБОТНИКОВ
+                // НАМ НУЖНО ПОЛУЧИТЬ ТЕКУЩЕЕ РАСПИСАНИЯ ДО ВНЕСЕНИЯ ИЗМЕНЕНИЙ
+                WorkshopTimetable oldTimtalbe = WorkshopsTimetablesList.GetById(this.Id);//db.WorkshopsTimetables.Find(this.Id);
+                TimeRange timeRangeOld = new TimeRange(oldTimtalbe.ValidFrom, oldTimtalbe.ValidUntil);
+
+                foreach (EmployeeTimetable timetable in db.EmployeesTimetables.Include(t => t.Employee).Where(t => t.Employee.WorkshopId == this.Id && t.DelTime == null && t.Employee.DelTime == null))
+                {
+                    // ЕСЛИ В СТАРОМ РАПИСАНИЕ БЫЛА СМЕНА РАБОТНИКА, А ПРИ НОВОМ ЕЕ НЕТУ, ТО ОТМЕНЯЕМ ИЗМЕНЕНИЯ
+                    if(timeRangeOld.HasInside(timetable.ShiftStart) && !timeRangeCurrent.HasInside(timetable.ShiftStart))
+                    {
+                        return false;
+                    }
+
+                    // ЕСЛИ ДАТЫ НЕ КОНФЛИКТУЮТ, ТО ПРОВЕРЯМ ВРЕМЯ
+                    if (timeRangeCurrent.HasInside(timetable.ShiftStart))
+                    {
+                        TimeSpan shitStart = new TimeSpan(timetable.ShiftStart.Hour, timetable.ShiftStart.Minute, 0);
+                        TimeSpan shitEnd = new TimeSpan(timetable.ShiftEnd.Hour, timetable.ShiftEnd.Minute, 0);
+
+                        if (this.Opening > shitStart || this.Closing < shitEnd)
+                        {
+                            return false;
+                        }
+                    }
+                }
+
                 db.Entry(this).State = EntityState.Modified;
                 db.SaveChanges();
                 return true;
@@ -102,6 +128,18 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
+
+                TimeRange timeRange = new TimeRange(this.ValidFrom, this.ValidUntil);
+                foreach (EmployeeTimetable timetable in db.EmployeesTimetables.Include(t => t.Employee).Where(t => t.Employee.WorkshopId == this.Id && t.DelTime == null && t.Employee.DelTime == null))
+                {
+                    // ЕСЛИ НА ЭТО ВРЕМЯ ЕСТЬ РАСПИСАНИЯ СОТРУДНИКОВ, ТО УДАЛИТЬ НЕЛЬЗЯ
+                    if (timeRange.HasInside(timetable.ShiftStart))
+                    {
+                        return false;
+                    }
+                }
+
+
                 this.DelTime = DateTime.Now;
                 db.Entry(this).State = EntityState.Modified;
                 db.SaveChanges();

@@ -88,6 +88,15 @@ namespace Forms_TechServ
             else if(masterTabs.SelectedTab.Equals(timetablePage))
             {
                 this.Size = pickedSize;
+
+                FormEmpTimetalbe formTimetalbe = new FormEmpTimetalbe(master, false);
+
+                formTimetalbe.TopLevel = false;
+                formTimetalbe.FormBorderStyle = FormBorderStyle.None;
+                timetablePage.Controls.Add(formTimetalbe);
+                formTimetalbe.Dock = DockStyle.Fill;
+                formTimetalbe.BringToFront();
+                formTimetalbe.Show();
             }
             /*else if (masterTabs.SelectedTab.Equals(ordersPage))
             {
@@ -164,8 +173,8 @@ namespace Forms_TechServ
 
         private void addTimetableBtn_Click(object sender, EventArgs e)
         {
-            FormAddEmployeeTimetable formAddEmployeeTimetable = new FormAddEmployeeTimetable();
-            formAddEmployeeTimetable.ShowDialog();
+            //FormAddEmployeeTimetable formAddEmployeeTimetable = new FormAddEmployeeTimetable(master);
+            //formAddEmployeeTimetable.ShowDialog();
         }
 
         private void btnFindPosition_Click(object sender, EventArgs e)

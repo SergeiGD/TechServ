@@ -246,10 +246,16 @@ namespace Forms_TechServ
                 }
                 else
                 {
-                    WorkshopsTimetablesList.GetById(Convert.ToInt32(dataTimetable.SelectedRows[0].Cells[0].Value)).DelWorkshopTimetalbe();
-                    MessageBox.Show("Расписание удалено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (WorkshopsTimetablesList.GetById(Convert.ToInt32(dataTimetable.SelectedRows[0].Cells[0].Value)).DelWorkshopTimetalbe())
+                    {
+                        MessageBox.Show("Расписание удалено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    FillTimetales();
+                        FillTimetales();
+                    }
+                    else
+                    {
+                        MessageBox.Show("На этом промежутке времени есть расписания сотрудников, сейчас его удалить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 
             }

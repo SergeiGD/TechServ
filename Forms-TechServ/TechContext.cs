@@ -22,6 +22,7 @@ namespace Forms_TechServ
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Master> Masters { get; set; }
         public DbSet<Manager> Managers { get; set; }
+        public DbSet<EmployeeTimetable> EmployeesTimetables { get; set; }
 
         public DbSet<Workshop> Workshops { get; set; }
         public DbSet<WorkshopTimetable> WorkshopsTimetables { get; set; }

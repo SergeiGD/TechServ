@@ -107,7 +107,7 @@ namespace Forms_TechServ
                     }
                     else
                     {
-                        MessageBox.Show($"На данные промежуток дат уже есть расписание или они частично пересекаются", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"На данные промежуток дат уже есть расписание или они частично пересекаются или же это изменение конфликтует с расписанием сотрудника/сотрудников", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

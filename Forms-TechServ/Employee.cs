@@ -26,7 +26,33 @@ namespace Forms_TechServ
         public Workshop Workshop { get; set; }
 
 
+        public List<EmployeeTimetable> GetTimetables(EmployeeTimetable FilterA, int count, int page, out int rowsCount)
+        {
+            using (TechContext db = new TechContext())
+            {
+                IEnumerable<EmployeeTimetable> timetables = db.EmployeesTimetables.Where(t => t.EmployeeId == this.Id && t.DelTime == null).Include(t => t.Employee);
 
+                if (FilterA.Id != 0)
+                {
+                    timetables = timetables.Where(t => t.Id == FilterA.Id);
+                    //timetables = timetables.Where(t => t.ShiftStart >= from);
+                }
+
+                timetables = timetables.Where(t => t.ShiftStart >= FilterA.ShiftStart && t.ShiftEnd <= FilterA.ShiftEnd);
+                /*if (until.HasValue)
+                {
+                    timetables = timetables.Where(t => t.ShiftEnd <= until);
+                }*/
+
+                timetables = timetables.SortBy("ShiftStart", true);
+
+                rowsCount = timetables.Count();
+
+                timetables = timetables.Skip((page - 1) * count).Take(count);
+
+                return timetables.ToList();
+            }
+        }
         // GETTIMETABLE
     }
 

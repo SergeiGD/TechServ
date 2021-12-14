@@ -522,7 +522,7 @@ namespace Forms_TechServ
             this.panel4.Controls.Add(this.btnFindTimetable);
             this.panel4.Location = new System.Drawing.Point(623, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(170, 234);
+            this.panel4.Size = new System.Drawing.Size(170, 258);
             this.panel4.TabIndex = 5;
             // 
             // btnCleanTimetable
@@ -576,14 +576,14 @@ namespace Forms_TechServ
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(620, 234);
+            this.panel1.Size = new System.Drawing.Size(620, 258);
             this.panel1.TabIndex = 1;
             // 
             // comboBoxShowTimetableRows
             // 
             this.comboBoxShowTimetableRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.comboBoxShowTimetableRows.FormattingEnabled = true;
-            this.comboBoxShowTimetableRows.Location = new System.Drawing.Point(425, 209);
+            this.comboBoxShowTimetableRows.Location = new System.Drawing.Point(425, 233);
             this.comboBoxShowTimetableRows.Name = "comboBoxShowTimetableRows";
             this.comboBoxShowTimetableRows.Size = new System.Drawing.Size(62, 21);
             this.comboBoxShowTimetableRows.TabIndex = 20;
@@ -593,7 +593,7 @@ namespace Forms_TechServ
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label18.Location = new System.Drawing.Point(312, 210);
+            this.label18.Location = new System.Drawing.Point(312, 234);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(107, 17);
             this.label18.TabIndex = 19;
@@ -629,7 +629,7 @@ namespace Forms_TechServ
             this.labelTimetablePagesCount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.labelTimetablePagesCount.AutoSize = true;
             this.labelTimetablePagesCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.labelTimetablePagesCount.Location = new System.Drawing.Point(262, 209);
+            this.labelTimetablePagesCount.Location = new System.Drawing.Point(262, 233);
             this.labelTimetablePagesCount.Name = "labelTimetablePagesCount";
             this.labelTimetablePagesCount.Size = new System.Drawing.Size(36, 17);
             this.labelTimetablePagesCount.TabIndex = 16;
@@ -647,7 +647,7 @@ namespace Forms_TechServ
             // numericCurrentTimetablePage
             // 
             this.numericCurrentTimetablePage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.numericCurrentTimetablePage.Location = new System.Drawing.Point(211, 210);
+            this.numericCurrentTimetablePage.Location = new System.Drawing.Point(211, 234);
             this.numericCurrentTimetablePage.Name = "numericCurrentTimetablePage";
             this.numericCurrentTimetablePage.Size = new System.Drawing.Size(45, 20);
             this.numericCurrentTimetablePage.TabIndex = 15;
@@ -657,7 +657,7 @@ namespace Forms_TechServ
             this.label28.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label28.Location = new System.Drawing.Point(133, 209);
+            this.label28.Location = new System.Drawing.Point(133, 233);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(72, 17);
             this.label28.TabIndex = 14;
@@ -670,7 +670,7 @@ namespace Forms_TechServ
             this.btnNextTimetable.FlatAppearance.BorderSize = 0;
             this.btnNextTimetable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNextTimetable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.btnNextTimetable.Location = new System.Drawing.Point(493, 197);
+            this.btnNextTimetable.Location = new System.Drawing.Point(493, 221);
             this.btnNextTimetable.Name = "btnNextTimetable";
             this.btnNextTimetable.Size = new System.Drawing.Size(130, 40);
             this.btnNextTimetable.TabIndex = 6;
@@ -684,7 +684,7 @@ namespace Forms_TechServ
             this.btnPrevTimetable.FlatAppearance.BorderSize = 0;
             this.btnPrevTimetable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrevTimetable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.btnPrevTimetable.Location = new System.Drawing.Point(-3, 197);
+            this.btnPrevTimetable.Location = new System.Drawing.Point(-3, 221);
             this.btnPrevTimetable.Name = "btnPrevTimetable";
             this.btnPrevTimetable.Size = new System.Drawing.Size(130, 40);
             this.btnPrevTimetable.TabIndex = 5;
@@ -705,7 +705,7 @@ namespace Forms_TechServ
             this.Column4});
             this.dataGridView1.Location = new System.Drawing.Point(0, 34);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(620, 163);
+            this.dataGridView1.Size = new System.Drawing.Size(620, 187);
             this.dataGridView1.TabIndex = 0;
             // 
             // Column1
