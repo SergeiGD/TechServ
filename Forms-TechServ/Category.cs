@@ -45,8 +45,8 @@ namespace Forms_TechServ
         {
             using(TechContext db = new TechContext())
             {
-                Category category = db.Categories.Where(c => c.ParentCategoryId == this.Id && c.DelTime == null).FirstOrDefault();
-                if(category == null)
+                //Category category = db.Categories.Where(c => c.ParentCategoryId == this.Id && c.DelTime == null).FirstOrDefault();
+                if(db.Categories.Where(c => c.ParentCategoryId == this.Id && c.DelTime == null).Count() == 0)   //category == null)
                 {
                     this.DelTime = DateTime.Now;
                     db.Entry(this).State = EntityState.Modified;

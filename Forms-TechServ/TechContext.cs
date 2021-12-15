@@ -16,6 +16,8 @@ namespace Forms_TechServ
 
         public DbSet<Service> Services { get; set; }
 
+        public DbSet<SparePart> SpareParts { get; set; }
+
         public DbSet<Category> Categories { get; set; }
         public DbSet<MastersCategories> MastersCategories { get; set; }
 

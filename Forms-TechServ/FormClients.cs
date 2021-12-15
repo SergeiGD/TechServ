@@ -95,6 +95,7 @@ namespace Forms_TechServ
             comboBoxShowRows.Items.Add(40);
             comboBoxShowRows.SelectedIndex = 2;
 
+            FillGrid();
         }
 
         private void FillGrid()

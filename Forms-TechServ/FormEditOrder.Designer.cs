@@ -104,6 +104,7 @@ namespace Forms_TechServ
             this.label9 = new System.Windows.Forms.Label();
             this.btnNextSparePart = new System.Windows.Forms.Button();
             this.btnPrevSparePart = new System.Windows.Forms.Button();
+            this.logsPage = new System.Windows.Forms.TabPage();
             this.dataSpareParts = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -111,7 +112,6 @@ namespace Forms_TechServ
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.logsPage = new System.Windows.Forms.TabPage();
             this.ordersTab.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.servicesPage.SuspendLayout();
@@ -592,7 +592,7 @@ namespace Forms_TechServ
             this.servicesPage.Location = new System.Drawing.Point(4, 22);
             this.servicesPage.Name = "servicesPage";
             this.servicesPage.Padding = new System.Windows.Forms.Padding(3);
-            this.servicesPage.Size = new System.Drawing.Size(967, 531);
+            this.servicesPage.Size = new System.Drawing.Size(967, 498);
             this.servicesPage.TabIndex = 1;
             this.servicesPage.Text = "Услуги";
             // 
@@ -811,7 +811,7 @@ namespace Forms_TechServ
             this.sparePartsPage.Location = new System.Drawing.Point(4, 22);
             this.sparePartsPage.Name = "sparePartsPage";
             this.sparePartsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.sparePartsPage.Size = new System.Drawing.Size(967, 531);
+            this.sparePartsPage.Size = new System.Drawing.Size(967, 498);
             this.sparePartsPage.TabIndex = 2;
             this.sparePartsPage.Text = "Детали";
             // 
@@ -824,7 +824,7 @@ namespace Forms_TechServ
             this.panel4.Controls.Add(this.btnShowSparePart);
             this.panel4.Location = new System.Drawing.Point(782, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(185, 566);
+            this.panel4.Size = new System.Drawing.Size(185, 498);
             this.panel4.TabIndex = 6;
             // 
             // manageButton4
@@ -878,6 +878,7 @@ namespace Forms_TechServ
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.dataSpareParts);
             this.panel3.Controls.Add(this.comboBoxShowSparePartsRows);
             this.panel3.Controls.Add(this.label5);
             this.panel3.Controls.Add(this.labelSparePartsPages);
@@ -885,10 +886,9 @@ namespace Forms_TechServ
             this.panel3.Controls.Add(this.label9);
             this.panel3.Controls.Add(this.btnNextSparePart);
             this.panel3.Controls.Add(this.btnPrevSparePart);
-            this.panel3.Controls.Add(this.dataSpareParts);
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(782, 566);
+            this.panel3.Size = new System.Drawing.Size(782, 498);
             this.panel3.TabIndex = 5;
             // 
             // comboBoxShowSparePartsRows
@@ -904,7 +904,7 @@ namespace Forms_TechServ
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label5.Location = new System.Drawing.Point(421, 538);
+            this.label5.Location = new System.Drawing.Point(421, 470);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(107, 17);
             this.label5.TabIndex = 15;
@@ -915,7 +915,7 @@ namespace Forms_TechServ
             this.labelSparePartsPages.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.labelSparePartsPages.AutoSize = true;
             this.labelSparePartsPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.labelSparePartsPages.Location = new System.Drawing.Point(308, 538);
+            this.labelSparePartsPages.Location = new System.Drawing.Point(308, 470);
             this.labelSparePartsPages.Name = "labelSparePartsPages";
             this.labelSparePartsPages.Size = new System.Drawing.Size(36, 17);
             this.labelSparePartsPages.TabIndex = 10;
@@ -924,7 +924,7 @@ namespace Forms_TechServ
             // numericCurrentSparePart
             // 
             this.numericCurrentSparePart.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.numericCurrentSparePart.Location = new System.Drawing.Point(257, 539);
+            this.numericCurrentSparePart.Location = new System.Drawing.Point(257, 471);
             this.numericCurrentSparePart.Name = "numericCurrentSparePart";
             this.numericCurrentSparePart.Size = new System.Drawing.Size(45, 20);
             this.numericCurrentSparePart.TabIndex = 9;
@@ -934,7 +934,7 @@ namespace Forms_TechServ
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label9.Location = new System.Drawing.Point(179, 538);
+            this.label9.Location = new System.Drawing.Point(179, 470);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(72, 17);
             this.label9.TabIndex = 8;
@@ -947,7 +947,7 @@ namespace Forms_TechServ
             this.btnNextSparePart.FlatAppearance.BorderSize = 0;
             this.btnNextSparePart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNextSparePart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.btnNextSparePart.Location = new System.Drawing.Point(652, 526);
+            this.btnNextSparePart.Location = new System.Drawing.Point(652, 458);
             this.btnNextSparePart.Name = "btnNextSparePart";
             this.btnNextSparePart.Size = new System.Drawing.Size(130, 40);
             this.btnNextSparePart.TabIndex = 4;
@@ -961,12 +961,22 @@ namespace Forms_TechServ
             this.btnPrevSparePart.FlatAppearance.BorderSize = 0;
             this.btnPrevSparePart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrevSparePart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.btnPrevSparePart.Location = new System.Drawing.Point(0, 526);
+            this.btnPrevSparePart.Location = new System.Drawing.Point(0, 458);
             this.btnPrevSparePart.Name = "btnPrevSparePart";
             this.btnPrevSparePart.Size = new System.Drawing.Size(130, 40);
             this.btnPrevSparePart.TabIndex = 3;
             this.btnPrevSparePart.Text = "← Предыдущая";
             this.btnPrevSparePart.UseVisualStyleBackColor = false;
+            // 
+            // logsPage
+            // 
+            this.logsPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.logsPage.Location = new System.Drawing.Point(4, 22);
+            this.logsPage.Name = "logsPage";
+            this.logsPage.Padding = new System.Windows.Forms.Padding(3);
+            this.logsPage.Size = new System.Drawing.Size(967, 498);
+            this.logsPage.TabIndex = 3;
+            this.logsPage.Text = "История";
             // 
             // dataSpareParts
             // 
@@ -982,10 +992,10 @@ namespace Forms_TechServ
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5,
             this.Column6});
-            this.dataSpareParts.Location = new System.Drawing.Point(0, 0);
+            this.dataSpareParts.Location = new System.Drawing.Point(3, 6);
             this.dataSpareParts.Name = "dataSpareParts";
-            this.dataSpareParts.Size = new System.Drawing.Size(782, 526);
-            this.dataSpareParts.TabIndex = 1;
+            this.dataSpareParts.Size = new System.Drawing.Size(782, 446);
+            this.dataSpareParts.TabIndex = 17;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -1020,16 +1030,6 @@ namespace Forms_TechServ
             // 
             this.Column6.HeaderText = "В наличии";
             this.Column6.Name = "Column6";
-            // 
-            // logsPage
-            // 
-            this.logsPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.logsPage.Location = new System.Drawing.Point(4, 22);
-            this.logsPage.Name = "logsPage";
-            this.logsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.logsPage.Size = new System.Drawing.Size(967, 531);
-            this.logsPage.TabIndex = 3;
-            this.logsPage.Text = "История";
             // 
             // FormEditOrder
             // 
@@ -1111,13 +1111,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnNextSparePart;
         private System.Windows.Forms.Button btnPrevSparePart;
-        private System.Windows.Forms.DataGridView dataSpareParts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.Label labelSale;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.Label labelSparePartsPrice;
@@ -1146,5 +1139,12 @@ namespace Forms_TechServ
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn column_sale;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridView dataSpareParts;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
     }
 }

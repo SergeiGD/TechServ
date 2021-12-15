@@ -44,13 +44,13 @@ namespace Forms_TechServ
 
         private void btnShowSparePart_Click(object sender, EventArgs e)
         {
-            FormShowSparePart formShowSparePart = new FormShowSparePart(true);
+            FormShowSparePart formShowSparePart = new FormShowSparePart(true, null);
             formShowSparePart.ShowDialog();
         }
 
         private void btnAddSparePart_Click(object sender, EventArgs e)
         {
-            FormSpareParts formSpareParts = new FormSpareParts(423, false);
+            FormSpareParts formSpareParts = new FormSpareParts(false, 423);
             formSpareParts.ShowDialog();
         }
 

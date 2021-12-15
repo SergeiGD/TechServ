@@ -75,7 +75,7 @@ namespace Forms_TechServ
 
         private void manageButton2_Click(object sender, EventArgs e)
         {
-            FormShowSparePart formShowSparePart = new FormShowSparePart(true);
+            FormShowSparePart formShowSparePart = new FormShowSparePart(true, null);
             formShowSparePart.ShowDialog();
         }
 

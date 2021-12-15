@@ -29,13 +29,17 @@ namespace Forms_TechServ
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelContent = new System.Windows.Forms.Panel();
             this.comboBoxShowRows = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.labelPagesCount = new System.Windows.Forms.Label();
+            this.labelPageCount = new System.Windows.Forms.Label();
             this.numericCurrentPage = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.panelFind = new System.Windows.Forms.Panel();
+            this.btnAskOrDesk = new FontAwesome.Sharp.IconButton();
+            this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupStock = new System.Windows.Forms.GroupBox();
             this.tbWorkshop = new System.Windows.Forms.TextBox();
             this.btnCleanWorkshop = new FontAwesome.Sharp.IconButton();
@@ -45,12 +49,9 @@ namespace Forms_TechServ
             this.label9 = new System.Windows.Forms.Label();
             this.numericStockFrom = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
-            this.radioBtnInStock = new System.Windows.Forms.RadioButton();
-            this.radioBtnAnyQuanity = new System.Windows.Forms.RadioButton();
             this.groupPrepayment = new System.Windows.Forms.GroupBox();
             this.radioBtnRequied = new System.Windows.Forms.RadioButton();
             this.radioBtnWithout = new System.Windows.Forms.RadioButton();
-            this.radioBtnAnyPrice = new System.Windows.Forms.RadioButton();
             this.numericPrepaymentUntil = new System.Windows.Forms.NumericUpDown();
             this.numericPrepaymentFrom = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
@@ -65,9 +66,9 @@ namespace Forms_TechServ
             this.panelControl = new System.Windows.Forms.Panel();
             this.clearBtn = new Forms_TechServ.ManageButton();
             this.searchBtn = new Forms_TechServ.ManageButton();
-            this.btnAskOrDesk = new FontAwesome.Sharp.IconButton();
-            this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.toolTipPrepaymentInfo = new System.Windows.Forms.ToolTip(this.components);
+            this.btnPrepaymentInfo = new FontAwesome.Sharp.IconButton();
+            this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             this.panelFind.SuspendLayout();
@@ -88,7 +89,7 @@ namespace Forms_TechServ
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelContent.Controls.Add(this.comboBoxShowRows);
             this.panelContent.Controls.Add(this.label5);
-            this.panelContent.Controls.Add(this.labelPagesCount);
+            this.panelContent.Controls.Add(this.labelPageCount);
             this.panelContent.Controls.Add(this.numericCurrentPage);
             this.panelContent.Controls.Add(this.label4);
             this.panelContent.Controls.Add(this.panelFind);
@@ -103,11 +104,13 @@ namespace Forms_TechServ
             // comboBoxShowRows
             // 
             this.comboBoxShowRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.comboBoxShowRows.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxShowRows.FormattingEnabled = true;
             this.comboBoxShowRows.Location = new System.Drawing.Point(531, 596);
             this.comboBoxShowRows.Name = "comboBoxShowRows";
             this.comboBoxShowRows.Size = new System.Drawing.Size(62, 21);
             this.comboBoxShowRows.TabIndex = 18;
+            this.comboBoxShowRows.SelectedIndexChanged += new System.EventHandler(this.comboBoxShowRows_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -120,24 +123,35 @@ namespace Forms_TechServ
             this.label5.TabIndex = 17;
             this.label5.Text = "Показывать по";
             // 
-            // labelPagesCount
+            // labelPageCount
             // 
-            this.labelPagesCount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.labelPagesCount.AutoSize = true;
-            this.labelPagesCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.labelPagesCount.Location = new System.Drawing.Point(324, 597);
-            this.labelPagesCount.Name = "labelPagesCount";
-            this.labelPagesCount.Size = new System.Drawing.Size(36, 17);
-            this.labelPagesCount.TabIndex = 13;
-            this.labelPagesCount.Text = "из S";
+            this.labelPageCount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.labelPageCount.AutoSize = true;
+            this.labelPageCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.labelPageCount.Location = new System.Drawing.Point(324, 597);
+            this.labelPageCount.Name = "labelPageCount";
+            this.labelPageCount.Size = new System.Drawing.Size(36, 17);
+            this.labelPageCount.TabIndex = 13;
+            this.labelPageCount.Text = "из S";
             // 
             // numericCurrentPage
             // 
             this.numericCurrentPage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.numericCurrentPage.Location = new System.Drawing.Point(273, 598);
+            this.numericCurrentPage.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericCurrentPage.Name = "numericCurrentPage";
             this.numericCurrentPage.Size = new System.Drawing.Size(45, 20);
             this.numericCurrentPage.TabIndex = 12;
+            this.numericCurrentPage.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericCurrentPage.ValueChanged += new System.EventHandler(this.numericCurrentPage_ValueChanged);
             // 
             // label4
             // 
@@ -168,6 +182,46 @@ namespace Forms_TechServ
             this.panelFind.Size = new System.Drawing.Size(778, 148);
             this.panelFind.TabIndex = 4;
             // 
+            // btnAskOrDesk
+            // 
+            this.btnAskOrDesk.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAskOrDesk.FlatAppearance.BorderSize = 0;
+            this.btnAskOrDesk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAskOrDesk.IconChar = FontAwesome.Sharp.IconChar.SortAlphaDown;
+            this.btnAskOrDesk.IconColor = System.Drawing.Color.Black;
+            this.btnAskOrDesk.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnAskOrDesk.IconSize = 20;
+            this.btnAskOrDesk.Location = new System.Drawing.Point(227, 113);
+            this.btnAskOrDesk.Name = "btnAskOrDesk";
+            this.btnAskOrDesk.Size = new System.Drawing.Size(27, 21);
+            this.btnAskOrDesk.TabIndex = 156;
+            this.btnAskOrDesk.UseVisualStyleBackColor = true;
+            this.btnAskOrDesk.Click += new System.EventHandler(this.btnAskOrDesk_Click);
+            this.btnAskOrDesk.MouseHover += new System.EventHandler(this.btnAskOrDesk_MouseHover);
+            // 
+            // comboBoxSortBy
+            // 
+            this.comboBoxSortBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.comboBoxSortBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSortBy.FormattingEnabled = true;
+            this.comboBoxSortBy.Location = new System.Drawing.Point(101, 110);
+            this.comboBoxSortBy.Name = "comboBoxSortBy";
+            this.comboBoxSortBy.Size = new System.Drawing.Size(125, 21);
+            this.comboBoxSortBy.TabIndex = 155;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(12, 113);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(70, 13);
+            this.label10.TabIndex = 154;
+            this.label10.Text = "Сортировка:";
+            // 
             // groupStock
             // 
             this.groupStock.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -180,11 +234,9 @@ namespace Forms_TechServ
             this.groupStock.Controls.Add(this.label9);
             this.groupStock.Controls.Add(this.numericStockFrom);
             this.groupStock.Controls.Add(this.label8);
-            this.groupStock.Controls.Add(this.radioBtnInStock);
-            this.groupStock.Controls.Add(this.radioBtnAnyQuanity);
-            this.groupStock.Location = new System.Drawing.Point(531, 15);
+            this.groupStock.Location = new System.Drawing.Point(551, 15);
             this.groupStock.Name = "groupStock";
-            this.groupStock.Size = new System.Drawing.Size(232, 125);
+            this.groupStock.Size = new System.Drawing.Size(212, 125);
             this.groupStock.TabIndex = 125;
             this.groupStock.TabStop = false;
             this.groupStock.Text = "Наличие";
@@ -192,7 +244,7 @@ namespace Forms_TechServ
             // tbWorkshop
             // 
             this.tbWorkshop.Enabled = false;
-            this.tbWorkshop.Location = new System.Drawing.Point(92, 100);
+            this.tbWorkshop.Location = new System.Drawing.Point(92, 73);
             this.tbWorkshop.Name = "tbWorkshop";
             this.tbWorkshop.ReadOnly = true;
             this.tbWorkshop.Size = new System.Drawing.Size(90, 20);
@@ -206,7 +258,7 @@ namespace Forms_TechServ
             this.btnCleanWorkshop.IconColor = System.Drawing.SystemColors.ControlText;
             this.btnCleanWorkshop.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnCleanWorkshop.IconSize = 17;
-            this.btnCleanWorkshop.Location = new System.Drawing.Point(212, 103);
+            this.btnCleanWorkshop.Location = new System.Drawing.Point(212, 76);
             this.btnCleanWorkshop.Name = "btnCleanWorkshop";
             this.btnCleanWorkshop.Size = new System.Drawing.Size(18, 18);
             this.btnCleanWorkshop.TabIndex = 136;
@@ -220,7 +272,7 @@ namespace Forms_TechServ
             this.btnFIndWorkshop.IconColor = System.Drawing.SystemColors.ControlText;
             this.btnFIndWorkshop.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnFIndWorkshop.IconSize = 17;
-            this.btnFIndWorkshop.Location = new System.Drawing.Point(188, 103);
+            this.btnFIndWorkshop.Location = new System.Drawing.Point(188, 76);
             this.btnFIndWorkshop.Name = "btnFIndWorkshop";
             this.btnFIndWorkshop.Size = new System.Drawing.Size(18, 18);
             this.btnFIndWorkshop.TabIndex = 137;
@@ -230,7 +282,7 @@ namespace Forms_TechServ
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 103);
+            this.label1.Location = new System.Drawing.Point(14, 76);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 135;
@@ -238,7 +290,17 @@ namespace Forms_TechServ
             // 
             // numericStockUntil
             // 
-            this.numericStockUntil.Location = new System.Drawing.Point(119, 74);
+            this.numericStockUntil.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericStockUntil.Location = new System.Drawing.Point(119, 35);
+            this.numericStockUntil.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
             this.numericStockUntil.Name = "numericStockUntil";
             this.numericStockUntil.Size = new System.Drawing.Size(54, 20);
             this.numericStockUntil.TabIndex = 134;
@@ -246,7 +308,7 @@ namespace Forms_TechServ
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(98, 76);
+            this.label9.Location = new System.Drawing.Point(98, 37);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(22, 13);
             this.label9.TabIndex = 133;
@@ -254,65 +316,43 @@ namespace Forms_TechServ
             // 
             // numericStockFrom
             // 
-            this.numericStockFrom.Location = new System.Drawing.Point(43, 74);
-            this.numericStockFrom.Minimum = new decimal(new int[] {
-            1,
+            this.numericStockFrom.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericStockFrom.Location = new System.Drawing.Point(43, 35);
+            this.numericStockFrom.Maximum = new decimal(new int[] {
+            200,
             0,
             0,
             0});
             this.numericStockFrom.Name = "numericStockFrom";
             this.numericStockFrom.Size = new System.Drawing.Size(54, 20);
             this.numericStockFrom.TabIndex = 132;
-            this.numericStockFrom.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(14, 78);
+            this.label8.Location = new System.Drawing.Point(14, 39);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(23, 13);
             this.label8.TabIndex = 131;
             this.label8.Text = "От:";
             // 
-            // radioBtnInStock
-            // 
-            this.radioBtnInStock.AutoSize = true;
-            this.radioBtnInStock.Location = new System.Drawing.Point(17, 51);
-            this.radioBtnInStock.Name = "radioBtnInStock";
-            this.radioBtnInStock.Size = new System.Drawing.Size(78, 17);
-            this.radioBtnInStock.TabIndex = 130;
-            this.radioBtnInStock.TabStop = true;
-            this.radioBtnInStock.Text = "в наличие:";
-            this.radioBtnInStock.UseVisualStyleBackColor = true;
-            // 
-            // radioBtnAnyQuanity
-            // 
-            this.radioBtnAnyQuanity.AutoSize = true;
-            this.radioBtnAnyQuanity.Location = new System.Drawing.Point(17, 25);
-            this.radioBtnAnyQuanity.Name = "radioBtnAnyQuanity";
-            this.radioBtnAnyQuanity.Size = new System.Drawing.Size(92, 17);
-            this.radioBtnAnyQuanity.TabIndex = 129;
-            this.radioBtnAnyQuanity.TabStop = true;
-            this.radioBtnAnyQuanity.Text = "не учитывать";
-            this.radioBtnAnyQuanity.UseVisualStyleBackColor = true;
-            // 
             // groupPrepayment
             // 
             this.groupPrepayment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.groupPrepayment.Controls.Add(this.btnPrepaymentInfo);
             this.groupPrepayment.Controls.Add(this.radioBtnRequied);
             this.groupPrepayment.Controls.Add(this.radioBtnWithout);
-            this.groupPrepayment.Controls.Add(this.radioBtnAnyPrice);
             this.groupPrepayment.Controls.Add(this.numericPrepaymentUntil);
             this.groupPrepayment.Controls.Add(this.numericPrepaymentFrom);
             this.groupPrepayment.Controls.Add(this.label7);
             this.groupPrepayment.Controls.Add(this.label3);
             this.groupPrepayment.Location = new System.Drawing.Point(254, 15);
             this.groupPrepayment.Name = "groupPrepayment";
-            this.groupPrepayment.Size = new System.Drawing.Size(257, 125);
+            this.groupPrepayment.Size = new System.Drawing.Size(280, 125);
             this.groupPrepayment.TabIndex = 124;
             this.groupPrepayment.TabStop = false;
             this.groupPrepayment.Text = "Предполата";
@@ -320,7 +360,7 @@ namespace Forms_TechServ
             // radioBtnRequied
             // 
             this.radioBtnRequied.AutoSize = true;
-            this.radioBtnRequied.Location = new System.Drawing.Point(9, 74);
+            this.radioBtnRequied.Location = new System.Drawing.Point(9, 72);
             this.radioBtnRequied.Name = "radioBtnRequied";
             this.radioBtnRequied.Size = new System.Drawing.Size(85, 17);
             this.radioBtnRequied.TabIndex = 130;
@@ -331,7 +371,7 @@ namespace Forms_TechServ
             // radioBtnWithout
             // 
             this.radioBtnWithout.AutoSize = true;
-            this.radioBtnWithout.Location = new System.Drawing.Point(9, 51);
+            this.radioBtnWithout.Location = new System.Drawing.Point(6, 37);
             this.radioBtnWithout.Name = "radioBtnWithout";
             this.radioBtnWithout.Size = new System.Drawing.Size(161, 17);
             this.radioBtnWithout.TabIndex = 129;
@@ -339,27 +379,36 @@ namespace Forms_TechServ
             this.radioBtnWithout.Text = "не требующие предоплаты";
             this.radioBtnWithout.UseVisualStyleBackColor = true;
             // 
-            // radioBtnAnyPrice
-            // 
-            this.radioBtnAnyPrice.AutoSize = true;
-            this.radioBtnAnyPrice.Location = new System.Drawing.Point(9, 25);
-            this.radioBtnAnyPrice.Name = "radioBtnAnyPrice";
-            this.radioBtnAnyPrice.Size = new System.Drawing.Size(92, 17);
-            this.radioBtnAnyPrice.TabIndex = 128;
-            this.radioBtnAnyPrice.TabStop = true;
-            this.radioBtnAnyPrice.Text = "не учитывать";
-            this.radioBtnAnyPrice.UseVisualStyleBackColor = true;
-            // 
             // numericPrepaymentUntil
             // 
+            this.numericPrepaymentUntil.Increment = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
             this.numericPrepaymentUntil.Location = new System.Drawing.Point(156, 96);
+            this.numericPrepaymentUntil.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.numericPrepaymentUntil.Name = "numericPrepaymentUntil";
             this.numericPrepaymentUntil.Size = new System.Drawing.Size(87, 20);
             this.numericPrepaymentUntil.TabIndex = 127;
             // 
             // numericPrepaymentFrom
             // 
+            this.numericPrepaymentFrom.Increment = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
             this.numericPrepaymentFrom.Location = new System.Drawing.Point(35, 96);
+            this.numericPrepaymentFrom.Maximum = new decimal(new int[] {
+            50000,
+            0,
+            0,
+            0});
             this.numericPrepaymentFrom.Name = "numericPrepaymentFrom";
             this.numericPrepaymentFrom.Size = new System.Drawing.Size(87, 20);
             this.numericPrepaymentFrom.TabIndex = 125;
@@ -435,6 +484,7 @@ namespace Forms_TechServ
             this.btnNext.TabIndex = 3;
             this.btnNext.Text = "Следующая →";
             this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPrev
             // 
@@ -449,15 +499,22 @@ namespace Forms_TechServ
             this.btnPrev.TabIndex = 2;
             this.btnPrev.Text = "← Предыдущая";
             this.btnPrev.UseVisualStyleBackColor = false;
+            this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
             // 
             // dataSpareParts
             // 
+            this.dataSpareParts.AllowUserToAddRows = false;
+            this.dataSpareParts.AllowUserToDeleteRows = false;
             this.dataSpareParts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataSpareParts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataSpareParts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataSpareParts.Location = new System.Drawing.Point(0, 148);
+            this.dataSpareParts.MultiSelect = false;
             this.dataSpareParts.Name = "dataSpareParts";
+            this.dataSpareParts.ReadOnly = true;
+            this.dataSpareParts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataSpareParts.Size = new System.Drawing.Size(778, 432);
             this.dataSpareParts.TabIndex = 0;
             // 
@@ -499,43 +556,24 @@ namespace Forms_TechServ
             this.searchBtn.Text = "Найти";
             this.searchBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.searchBtn.UseVisualStyleBackColor = false;
+            this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
             // 
-            // btnAskOrDesk
+            // btnPrepaymentInfo
             // 
-            this.btnAskOrDesk.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAskOrDesk.FlatAppearance.BorderSize = 0;
-            this.btnAskOrDesk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAskOrDesk.IconChar = FontAwesome.Sharp.IconChar.SortAlphaDown;
-            this.btnAskOrDesk.IconColor = System.Drawing.Color.Black;
-            this.btnAskOrDesk.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnAskOrDesk.IconSize = 20;
-            this.btnAskOrDesk.Location = new System.Drawing.Point(227, 113);
-            this.btnAskOrDesk.Name = "btnAskOrDesk";
-            this.btnAskOrDesk.Size = new System.Drawing.Size(27, 21);
-            this.btnAskOrDesk.TabIndex = 156;
-            this.btnAskOrDesk.UseVisualStyleBackColor = true;
-            // 
-            // comboBoxSortBy
-            // 
-            this.comboBoxSortBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.comboBoxSortBy.FormattingEnabled = true;
-            this.comboBoxSortBy.Location = new System.Drawing.Point(101, 110);
-            this.comboBoxSortBy.Name = "comboBoxSortBy";
-            this.comboBoxSortBy.Size = new System.Drawing.Size(125, 21);
-            this.comboBoxSortBy.TabIndex = 155;
-            // 
-            // label10
-            // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 113);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(70, 13);
-            this.label10.TabIndex = 154;
-            this.label10.Text = "Сортировка:";
+            this.btnPrepaymentInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrepaymentInfo.FlatAppearance.BorderSize = 0;
+            this.btnPrepaymentInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrepaymentInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
+            this.btnPrepaymentInfo.IconColor = System.Drawing.Color.Black;
+            this.btnPrepaymentInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnPrepaymentInfo.IconSize = 20;
+            this.btnPrepaymentInfo.Location = new System.Drawing.Point(253, 95);
+            this.btnPrepaymentInfo.Name = "btnPrepaymentInfo";
+            this.btnPrepaymentInfo.Size = new System.Drawing.Size(27, 21);
+            this.btnPrepaymentInfo.TabIndex = 146;
+            this.btnPrepaymentInfo.UseVisualStyleBackColor = true;
+            this.btnPrepaymentInfo.MouseHover += new System.EventHandler(this.btnPrepaymentInfo_MouseHover);
             // 
             // FormSpareParts
             // 
@@ -583,7 +621,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.GroupBox groupPrepayment;
         private System.Windows.Forms.RadioButton radioBtnRequied;
         private System.Windows.Forms.RadioButton radioBtnWithout;
-        private System.Windows.Forms.RadioButton radioBtnAnyPrice;
         private System.Windows.Forms.NumericUpDown numericPrepaymentUntil;
         private System.Windows.Forms.NumericUpDown numericPrepaymentFrom;
         private System.Windows.Forms.Label label7;
@@ -593,13 +630,11 @@ namespace Forms_TechServ
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown numericStockFrom;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.RadioButton radioBtnInStock;
-        private System.Windows.Forms.RadioButton radioBtnAnyQuanity;
         private System.Windows.Forms.TextBox tbWorkshop;
         private FontAwesome.Sharp.IconButton btnCleanWorkshop;
         private FontAwesome.Sharp.IconButton btnFIndWorkshop;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label labelPagesCount;
+        private System.Windows.Forms.Label labelPageCount;
         private System.Windows.Forms.NumericUpDown numericCurrentPage;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBoxShowRows;
@@ -607,5 +642,8 @@ namespace Forms_TechServ
         private FontAwesome.Sharp.IconButton btnAskOrDesk;
         private System.Windows.Forms.ComboBox comboBoxSortBy;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ToolTip toolTipPrepaymentInfo;
+        private FontAwesome.Sharp.IconButton btnPrepaymentInfo;
+        private System.Windows.Forms.ToolTip toolTipCurrentSort;
     }
 }

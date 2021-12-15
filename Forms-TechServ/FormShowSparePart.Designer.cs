@@ -124,6 +124,7 @@ namespace Forms_TechServ
             this.deleteBtn.TabIndex = 60;
             this.deleteBtn.Text = "УДАЛИТЬ";
             this.deleteBtn.UseVisualStyleBackColor = true;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
             // cancelBtn
             // 
@@ -134,6 +135,7 @@ namespace Forms_TechServ
             this.cancelBtn.TabIndex = 59;
             this.cancelBtn.Text = "ЗАКРЫТЬ";
             this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // labelPrepayment
             // 

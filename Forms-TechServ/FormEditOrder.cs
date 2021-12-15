@@ -36,6 +36,15 @@ namespace Forms_TechServ
             else if (ordersTab.SelectedTab.Equals(sparePartsPage))
             {
                 this.Size = pickedSize;
+
+                FormSpareParts formSpareParts = new FormSpareParts(false, "asd");
+                formSpareParts.TopLevel = false;
+                formSpareParts.FormBorderStyle = FormBorderStyle.None;
+                sparePartsPage.Controls.Add(formSpareParts);
+                //panelContent.Controls.Add(childForm);
+                formSpareParts.Dock = DockStyle.Fill;
+                formSpareParts.BringToFront();
+                formSpareParts.Show();
             }
             else if (ordersTab.SelectedTab.Equals(logsPage))
             {
@@ -85,7 +94,7 @@ namespace Forms_TechServ
 
         private void btnShowBatch_Click(object sender, EventArgs e)
         {
-            FormShowSparePart formShowSparePart = new FormShowSparePart(true);
+            FormShowSparePart formShowSparePart = new FormShowSparePart(true, null);
             formShowSparePart.ShowDialog();
         }
 

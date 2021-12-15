@@ -29,9 +29,9 @@ namespace Forms_TechServ
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label3 = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
-            this.checkPrepayment = new System.Windows.Forms.CheckBox();
             this.numericPrepayment = new System.Windows.Forms.NumericUpDown();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAction = new System.Windows.Forms.Button();
@@ -39,8 +39,9 @@ namespace Forms_TechServ
             this.generalPage = new System.Windows.Forms.TabPage();
             this.stockPage = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnNewBatch = new Forms_TechServ.ManageButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBoxShowRows = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrev = new System.Windows.Forms.Button();
             this.labelPageCount = new System.Windows.Forms.Label();
@@ -51,8 +52,11 @@ namespace Forms_TechServ
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comboBoxShowRows = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnPrepaymentInfo = new FontAwesome.Sharp.IconButton();
+            this.toolTipPrepayment = new System.Windows.Forms.ToolTip(this.components);
+            this.btnNewBatch = new Forms_TechServ.ManageButton();
             ((System.ComponentModel.ISupportInitialize)(this.numericPrepayment)).BeginInit();
             this.sparePartTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
@@ -61,6 +65,7 @@ namespace Forms_TechServ
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataStock)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label3
@@ -76,25 +81,24 @@ namespace Forms_TechServ
             // 
             this.tbName.Location = new System.Drawing.Point(110, 23);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(110, 20);
+            this.tbName.Size = new System.Drawing.Size(133, 20);
             this.tbName.TabIndex = 9;
-            // 
-            // checkPrepayment
-            // 
-            this.checkPrepayment.AutoSize = true;
-            this.checkPrepayment.Location = new System.Drawing.Point(21, 70);
-            this.checkPrepayment.Name = "checkPrepayment";
-            this.checkPrepayment.Size = new System.Drawing.Size(87, 17);
-            this.checkPrepayment.TabIndex = 10;
-            this.checkPrepayment.Text = "Предоплата";
-            this.checkPrepayment.UseVisualStyleBackColor = true;
-            this.checkPrepayment.CheckedChanged += new System.EventHandler(this.checkPrepayment_CheckedChanged);
             // 
             // numericPrepayment
             // 
+            this.numericPrepayment.Increment = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
             this.numericPrepayment.Location = new System.Drawing.Point(110, 69);
+            this.numericPrepayment.Maximum = new decimal(new int[] {
+            50000,
+            0,
+            0,
+            0});
             this.numericPrepayment.Name = "numericPrepayment";
-            this.numericPrepayment.Size = new System.Drawing.Size(110, 20);
+            this.numericPrepayment.Size = new System.Drawing.Size(100, 20);
             this.numericPrepayment.TabIndex = 11;
             // 
             // btnCancel
@@ -104,8 +108,9 @@ namespace Forms_TechServ
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(96, 35);
             this.btnCancel.TabIndex = 43;
-            this.btnCancel.Text = "ОТМЕНИТЬ";
+            this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnAction
             // 
@@ -116,6 +121,7 @@ namespace Forms_TechServ
             this.btnAction.TabIndex = 42;
             this.btnAction.Text = "Action";
             this.btnAction.UseVisualStyleBackColor = true;
+            this.btnAction.Click += new System.EventHandler(this.btnAction_Click);
             // 
             // sparePartTabs
             // 
@@ -132,11 +138,12 @@ namespace Forms_TechServ
             // generalPage
             // 
             this.generalPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.generalPage.Controls.Add(this.btnPrepaymentInfo);
+            this.generalPage.Controls.Add(this.label2);
             this.generalPage.Controls.Add(this.label3);
             this.generalPage.Controls.Add(this.btnCancel);
             this.generalPage.Controls.Add(this.tbName);
             this.generalPage.Controls.Add(this.btnAction);
-            this.generalPage.Controls.Add(this.checkPrepayment);
             this.generalPage.Controls.Add(this.numericPrepayment);
             this.generalPage.Location = new System.Drawing.Point(4, 22);
             this.generalPage.Name = "generalPage";
@@ -168,21 +175,6 @@ namespace Forms_TechServ
             this.panel2.Size = new System.Drawing.Size(143, 347);
             this.panel2.TabIndex = 1;
             // 
-            // btnNewBatch
-            // 
-            this.btnNewBatch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnNewBatch.FlatAppearance.BorderSize = 0;
-            this.btnNewBatch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNewBatch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnNewBatch.Location = new System.Drawing.Point(0, 0);
-            this.btnNewBatch.Name = "btnNewBatch";
-            this.btnNewBatch.Size = new System.Drawing.Size(143, 33);
-            this.btnNewBatch.TabIndex = 2;
-            this.btnNewBatch.Text = "Заказать";
-            this.btnNewBatch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNewBatch.UseVisualStyleBackColor = false;
-            this.btnNewBatch.Click += new System.EventHandler(this.btnAddToBatch_Click);
-            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -200,6 +192,26 @@ namespace Forms_TechServ
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(822, 337);
             this.panel1.TabIndex = 0;
+            // 
+            // comboBoxShowRows
+            // 
+            this.comboBoxShowRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.comboBoxShowRows.FormattingEnabled = true;
+            this.comboBoxShowRows.Location = new System.Drawing.Point(550, 314);
+            this.comboBoxShowRows.Name = "comboBoxShowRows";
+            this.comboBoxShowRows.Size = new System.Drawing.Size(62, 21);
+            this.comboBoxShowRows.TabIndex = 20;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label1.Location = new System.Drawing.Point(437, 315);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(107, 17);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Показывать по";
             // 
             // btnNext
             // 
@@ -296,25 +308,48 @@ namespace Forms_TechServ
             this.Column4.HeaderText = "кол-во деталей";
             this.Column4.Name = "Column4";
             // 
-            // comboBoxShowRows
+            // errorProvider
             // 
-            this.comboBoxShowRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.comboBoxShowRows.FormattingEnabled = true;
-            this.comboBoxShowRows.Location = new System.Drawing.Point(550, 314);
-            this.comboBoxShowRows.Name = "comboBoxShowRows";
-            this.comboBoxShowRows.Size = new System.Drawing.Size(62, 21);
-            this.comboBoxShowRows.TabIndex = 20;
+            this.errorProvider.ContainerControl = this;
             // 
-            // label1
+            // label2
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label1.Location = new System.Drawing.Point(437, 315);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 17);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Показывать по";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(18, 71);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 13);
+            this.label2.TabIndex = 44;
+            this.label2.Text = "Предоплата";
+            // 
+            // btnPrepaymentInfo
+            // 
+            this.btnPrepaymentInfo.FlatAppearance.BorderSize = 0;
+            this.btnPrepaymentInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrepaymentInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
+            this.btnPrepaymentInfo.IconColor = System.Drawing.Color.Black;
+            this.btnPrepaymentInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnPrepaymentInfo.IconSize = 20;
+            this.btnPrepaymentInfo.Location = new System.Drawing.Point(216, 71);
+            this.btnPrepaymentInfo.Name = "btnPrepaymentInfo";
+            this.btnPrepaymentInfo.Size = new System.Drawing.Size(27, 21);
+            this.btnPrepaymentInfo.TabIndex = 155;
+            this.btnPrepaymentInfo.UseVisualStyleBackColor = true;
+            this.btnPrepaymentInfo.MouseHover += new System.EventHandler(this.btnPrepaymentInfo_MouseHover);
+            // 
+            // btnNewBatch
+            // 
+            this.btnNewBatch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnNewBatch.FlatAppearance.BorderSize = 0;
+            this.btnNewBatch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNewBatch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnNewBatch.Location = new System.Drawing.Point(0, 0);
+            this.btnNewBatch.Name = "btnNewBatch";
+            this.btnNewBatch.Size = new System.Drawing.Size(143, 33);
+            this.btnNewBatch.TabIndex = 2;
+            this.btnNewBatch.Text = "Заказать";
+            this.btnNewBatch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNewBatch.UseVisualStyleBackColor = false;
+            this.btnNewBatch.Click += new System.EventHandler(this.btnAddToBatch_Click);
             // 
             // FormManageSparePart
             // 
@@ -338,6 +373,7 @@ namespace Forms_TechServ
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataStock)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -346,7 +382,6 @@ namespace Forms_TechServ
 
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbName;
-        private System.Windows.Forms.CheckBox checkPrepayment;
         private System.Windows.Forms.NumericUpDown numericPrepayment;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnAction;
@@ -368,5 +403,9 @@ namespace Forms_TechServ
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.ComboBox comboBoxShowRows;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.Label label2;
+        private FontAwesome.Sharp.IconButton btnPrepaymentInfo;
+        private System.Windows.Forms.ToolTip toolTipPrepayment;
     }
 }
