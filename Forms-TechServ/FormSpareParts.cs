@@ -14,6 +14,8 @@ namespace Forms_TechServ
     {
         bool readOnly;
         public SparePart sparePart;
+        public BatchSparePart batchSparePart;
+        public Batch batch;
         int rowsCount;
         int currentPage = 1;
         // Order order;
@@ -56,13 +58,7 @@ namespace Forms_TechServ
 
                 readOnly = false;
 
-                if (UserSession.Can("add_del_batch"))
-                {
-                    ManageButton btnNewBatch = new ManageButton();
-                    btnNewBatch.Text = "Заказать";
-                    panelControl.Controls.Add(btnNewBatch);
-                    btnNewBatch.Click += BtnNewBatch_Click;
-                }
+                
 
                 clearBtn.Click += clearBtnAll_Click;
 
@@ -83,11 +79,12 @@ namespace Forms_TechServ
             }
         }
 
-        public FormSpareParts(bool readOnly, int batch)
+        public FormSpareParts(bool readOnly, Batch batch)
         {
             InitializeComponent();
 
             this.readOnly = readOnly;
+            this.batch = batch;
 
             if (!readOnly)
             {
@@ -116,13 +113,7 @@ namespace Forms_TechServ
 
             this.readOnly = readOnly;
 
-            if (!readOnly && UserSession.Can("add_del_batch"))
-            {
-                ManageButton btnNewBatch = new ManageButton();
-                btnNewBatch.Text = "Заказать";
-                panelControl.Controls.Add(btnNewBatch);
-                btnNewBatch.Click += BtnNewBatch_Click;
-            }
+            
 
             ManageButton btnShow = new ManageButton();
             btnShow.Text = "Просмотреть";
@@ -182,17 +173,36 @@ namespace Forms_TechServ
 
         private void BtnAddToBatch_Click(object sender, EventArgs e)                    // ДОБАВИТЬ К ПОСТАВКИ (ИЗ ДОБАВЛЕНИЯ НОВОЙ ПОСТАВКИ)
         {
-            FormChooseQuantity formChooseQuantity = new FormChooseQuantity();
-            formChooseQuantity.ShowDialog();
+            int pickedSparePartId = SparePartsList.GetById(Convert.ToInt32(dataSpareParts.SelectedRows[0].Cells[0].Value)).Id;
 
-            // ВОТ ТУТ БУДЕТ ФОРМИРОВАТЬ BATCHSPAREPART
-            // В НЕЕ СУЕТСЯ ДЕТАЛИТЬ(ВЫБРАННАЯ СТРОКА)
-            // И КОЛ-ВО ВЫБРАННОЕ В formChooseQuantity
-            // ЭТО ВСЯ ХУЙНЯ ПАБЛИК И ВЫЗЫВАЮЩАЯ ФОРМА ХАВАЕТ ЭТО!!!
+            if (BatchesSparePartsList.GetById(batch.Id, pickedSparePartId) != null)
+            {
+                MessageBox.Show("Деталь этого типа уже есть в поставке", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                FormChooseQuantity formChooseQuantity = new FormChooseQuantity();
+                formChooseQuantity.ShowDialog();
 
-            //sparePart = SparePartsList.GetById(Convert.ToInt32(dataSpareParts.SelectedRows[0].Cells[0].Value));
 
-            this.Close();
+                if (formChooseQuantity.pickedQuantity > 0)
+                {
+                    batchSparePart = new BatchSparePart()
+                    {
+                        Quantity = formChooseQuantity.pickedQuantity,
+                        UnitPrice = formChooseQuantity.pickedPrice,
+                        SparePartId = pickedSparePartId,
+                    };
+                }
+                else
+                {
+                    batchSparePart = null;
+                }
+
+
+                this.Close();
+            }
+            
         }
 
         private void BtnNewBatch_Click(object sender, EventArgs e)                  // СОЗДАТЬ НОВУЮ ПОСТАВКУ (ИЗ ДЕТАЛЕЙ)
@@ -325,8 +335,8 @@ namespace Forms_TechServ
             //  ДЛЯ ОРДЕРА ЗАПОЛНЕНИЕ ТУТ НАДО БУДЕТ! order != null ?
             //
 
-            
 
+            //MessageBox.Show(numericStockFrom.Value.ToString());
             List<SparePart> spareParts = SparePartsList.GetSpareParts(
                 new SparePart() 
                 {
@@ -338,6 +348,9 @@ namespace Forms_TechServ
                 {
                     ClientPrepayment = numericPrepaymentUntil.Value
                 },
+                (Workshop)tbWorkshop.Tag,
+                (int)numericStockFrom.Value,
+                (int)numericStockUntil.Value,
                 (bool)btnAskOrDesk.Tag,
                 sortBy,
                 (int)comboBoxShowRows.SelectedItem,
@@ -353,7 +366,7 @@ namespace Forms_TechServ
                 dataSpareParts.Rows[i].Cells[0].Value = spareParts[i].Id;
                 dataSpareParts.Rows[i].Cells[1].Value = spareParts[i].Name;
                 dataSpareParts.Rows[i].Cells[2].Value = spareParts[i].ClientPrepayment;
-                dataSpareParts.Rows[i].Cells[3].Value = 0;                         // вот сюда кол-во в наличие
+                dataSpareParts.Rows[i].Cells[3].Value = spareParts[i].GetCountInStock((Workshop)tbWorkshop.Tag);                         // вот сюда кол-во в наличие
 
             }
 
@@ -485,5 +498,13 @@ namespace Forms_TechServ
                 toolTipCurrentSort.SetToolTip(btnAskOrDesk, "По убыванию");
             }
         }
+
+        private void btnCleanWorkshop_Click(object sender, EventArgs e)
+        {
+            tbWorkshop.Clear();
+            tbWorkshop.Tag = null;
+        }
+
+        
     }
 }

@@ -45,6 +45,55 @@ namespace Forms_TechServ
                 return true;
             }
         }
+
+        /*public int GetCountInStock()
+        {
+            using (TechContext db = new TechContext())
+            {
+                int count = 0;
+                //foreach (BatchSparePart sparePart in spareParts)
+                //{
+                //   count += sparePart.Quantity;
+                //}
+                foreach (BatchSparePart sparePart in db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.DelTime == null))
+                {
+                    count += sparePart.Quantity;
+                    // ПОТОМ ВТОРОЙ ЦИКЛ ПО OrderSpareParts, который будет отнимать
+                }
+
+                return count;
+            }
+        }*/
+
+        public int GetCountInStock(Workshop workshop)
+        {
+            using (TechContext db = new TechContext())
+            {
+                int count = 0;
+
+                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.DelTime == null);
+
+                if(workshop != null)
+                {
+                    spareParts = spareParts.Where(s => s.Batch.WorkshopId == workshop.Id);
+                }
+
+                
+
+                foreach (BatchSparePart sparePart in spareParts)
+                {
+                    count += sparePart.Quantity;
+                }
+
+                /*foreach (BatchSparePart sparePart in db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.WorkshopId == workshop.Id))
+                {
+                    count += sparePart.Quantity;
+                    // ПОТОМ ВТОРОЙ ЦИКЛ ПО OrderSpareParts, который будет отнимать
+                }*/
+
+                return count;
+            }
+        }
     }
 
 
@@ -58,7 +107,7 @@ namespace Forms_TechServ
             }
         }
 
-        public static List<SparePart> GetSpareParts(SparePart FilterA, SparePart FilterB, bool desk, string sortBy, int count, int page, out int rowsCount)
+        public static List<SparePart> GetSpareParts(SparePart FilterA, SparePart FilterB, Workshop workshop, int quantityFrom, int quantityUntil, bool desk, string sortBy, int count, int page, out int rowsCount)
         {
             using(TechContext db = new TechContext())
             {
@@ -98,6 +147,23 @@ namespace Forms_TechServ
                 // НАЛИИЕ 
                 // РЕАЛИЗОВАТЬ
                 // !!
+                //int countSpareParts = 0;
+
+                if (quantityFrom > 0 && quantityUntil == 0)
+                {
+                    spareParts = spareParts.Where(s => s.GetCountInStock(workshop) >= quantityFrom);
+                }
+                if (quantityFrom == 0 && quantityUntil > 0)
+                {
+                    spareParts = spareParts.Where(s => s.GetCountInStock(workshop) <= quantityUntil);
+                }
+                if (quantityFrom > 0 && quantityUntil > 0)
+                {
+                    spareParts = spareParts.Where(s => s.GetCountInStock(workshop) >= quantityFrom && s.GetCountInStock(workshop) <= quantityUntil);
+                }
+
+
+
 
                 spareParts = spareParts.SortBy(sortBy, desk);
 

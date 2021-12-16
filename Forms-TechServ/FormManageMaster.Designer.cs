@@ -52,6 +52,9 @@ namespace Forms_TechServ
             this.label6 = new System.Windows.Forms.Label();
             this.categoriesPage = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.showCategoryBtn = new Forms_TechServ.ManageButton();
+            this.deleteCategoryBtn = new Forms_TechServ.ManageButton();
+            this.addCategoryBtn = new Forms_TechServ.ManageButton();
             this.panel3 = new System.Windows.Forms.Panel();
             this.comboBoxShowCatRows = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -80,14 +83,11 @@ namespace Forms_TechServ
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.showCategoryBtn = new Forms_TechServ.ManageButton();
-            this.deleteCategoryBtn = new Forms_TechServ.ManageButton();
-            this.addCategoryBtn = new Forms_TechServ.ManageButton();
             this.cleanTimetableBtn = new Forms_TechServ.ManageButton();
             this.findTimetableBtn = new Forms_TechServ.ManageButton();
             this.deleteTimetableBtn = new Forms_TechServ.ManageButton();
             this.addTimetableBtn = new Forms_TechServ.ManageButton();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.masterTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSalary)).BeginInit();
@@ -357,6 +357,57 @@ namespace Forms_TechServ
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(148, 260);
             this.panel4.TabIndex = 4;
+            // 
+            // showCategoryBtn
+            // 
+            this.showCategoryBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.showCategoryBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.showCategoryBtn.FlatAppearance.BorderSize = 0;
+            this.showCategoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.showCategoryBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.showCategoryBtn.Location = new System.Drawing.Point(0, 80);
+            this.showCategoryBtn.Name = "showCategoryBtn";
+            this.showCategoryBtn.Size = new System.Drawing.Size(148, 40);
+            this.showCategoryBtn.TabIndex = 3;
+            this.showCategoryBtn.Text = "Просмотреть";
+            this.showCategoryBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.showCategoryBtn.UseVisualStyleBackColor = false;
+            this.showCategoryBtn.Click += new System.EventHandler(this.showCategoryBtn_Click);
+            // 
+            // deleteCategoryBtn
+            // 
+            this.deleteCategoryBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.deleteCategoryBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.deleteCategoryBtn.FlatAppearance.BorderSize = 0;
+            this.deleteCategoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteCategoryBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.deleteCategoryBtn.Location = new System.Drawing.Point(0, 40);
+            this.deleteCategoryBtn.Name = "deleteCategoryBtn";
+            this.deleteCategoryBtn.Size = new System.Drawing.Size(148, 40);
+            this.deleteCategoryBtn.TabIndex = 2;
+            this.deleteCategoryBtn.Text = "Удалить";
+            this.deleteCategoryBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.deleteCategoryBtn.UseVisualStyleBackColor = false;
+            this.deleteCategoryBtn.Click += new System.EventHandler(this.deleteCategoryBtn_Click);
+            // 
+            // addCategoryBtn
+            // 
+            this.addCategoryBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.addCategoryBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.addCategoryBtn.FlatAppearance.BorderSize = 0;
+            this.addCategoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addCategoryBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.addCategoryBtn.Location = new System.Drawing.Point(0, 0);
+            this.addCategoryBtn.Name = "addCategoryBtn";
+            this.addCategoryBtn.Size = new System.Drawing.Size(148, 40);
+            this.addCategoryBtn.TabIndex = 1;
+            this.addCategoryBtn.Text = "Добавить";
+            this.addCategoryBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.addCategoryBtn.UseVisualStyleBackColor = false;
+            this.addCategoryBtn.Click += new System.EventHandler(this.addCategoryBtn_Click);
             // 
             // panel3
             // 
@@ -683,61 +734,6 @@ namespace Forms_TechServ
             this.panel2.Size = new System.Drawing.Size(142, 260);
             this.panel2.TabIndex = 4;
             // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            // 
-            // showCategoryBtn
-            // 
-            this.showCategoryBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.showCategoryBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.showCategoryBtn.FlatAppearance.BorderSize = 0;
-            this.showCategoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.showCategoryBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.showCategoryBtn.Location = new System.Drawing.Point(0, 80);
-            this.showCategoryBtn.Name = "showCategoryBtn";
-            this.showCategoryBtn.Size = new System.Drawing.Size(148, 40);
-            this.showCategoryBtn.TabIndex = 3;
-            this.showCategoryBtn.Text = "Просмотреть";
-            this.showCategoryBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.showCategoryBtn.UseVisualStyleBackColor = false;
-            this.showCategoryBtn.Click += new System.EventHandler(this.showCategoryBtn_Click);
-            // 
-            // deleteCategoryBtn
-            // 
-            this.deleteCategoryBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.deleteCategoryBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.deleteCategoryBtn.FlatAppearance.BorderSize = 0;
-            this.deleteCategoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.deleteCategoryBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.deleteCategoryBtn.Location = new System.Drawing.Point(0, 40);
-            this.deleteCategoryBtn.Name = "deleteCategoryBtn";
-            this.deleteCategoryBtn.Size = new System.Drawing.Size(148, 40);
-            this.deleteCategoryBtn.TabIndex = 2;
-            this.deleteCategoryBtn.Text = "Удалить";
-            this.deleteCategoryBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.deleteCategoryBtn.UseVisualStyleBackColor = false;
-            this.deleteCategoryBtn.Click += new System.EventHandler(this.deleteCategoryBtn_Click);
-            // 
-            // addCategoryBtn
-            // 
-            this.addCategoryBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.addCategoryBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.addCategoryBtn.FlatAppearance.BorderSize = 0;
-            this.addCategoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addCategoryBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.addCategoryBtn.Location = new System.Drawing.Point(0, 0);
-            this.addCategoryBtn.Name = "addCategoryBtn";
-            this.addCategoryBtn.Size = new System.Drawing.Size(148, 40);
-            this.addCategoryBtn.TabIndex = 1;
-            this.addCategoryBtn.Text = "Добавить";
-            this.addCategoryBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.addCategoryBtn.UseVisualStyleBackColor = false;
-            this.addCategoryBtn.Click += new System.EventHandler(this.addCategoryBtn_Click);
-            // 
             // cleanTimetableBtn
             // 
             this.cleanTimetableBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -785,6 +781,7 @@ namespace Forms_TechServ
             this.deleteTimetableBtn.Text = "Удалить";
             this.deleteTimetableBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.deleteTimetableBtn.UseVisualStyleBackColor = false;
+            this.deleteTimetableBtn.Click += new System.EventHandler(this.deleteTimetableBtn_Click);
             // 
             // addTimetableBtn
             // 
@@ -802,6 +799,10 @@ namespace Forms_TechServ
             this.addTimetableBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.addTimetableBtn.UseVisualStyleBackColor = false;
             this.addTimetableBtn.Click += new System.EventHandler(this.addTimetableBtn_Click);
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // FormManageMaster
             // 

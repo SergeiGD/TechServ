@@ -147,7 +147,7 @@ namespace Forms_TechServ
             {
                 this.Size = pickedSize;
 
-                FormBatches formBatches = new FormBatches("asd", true);
+                FormBatches formBatches = new FormBatches(workshop, true);
                 formBatches.TopLevel = false;
                 formBatches.FormBorderStyle = FormBorderStyle.None;
                 batchesPage.Controls.Add(formBatches);

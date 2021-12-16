@@ -47,7 +47,7 @@ namespace Forms_TechServ
             this.label7 = new System.Windows.Forms.Label();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrev = new System.Windows.Forms.Button();
-            this.labelPagesCount = new System.Windows.Forms.Label();
+            this.labelPageCount = new System.Windows.Forms.Label();
             this.numericCurrentPage = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.dataInStock = new System.Windows.Forms.DataGridView();
@@ -209,7 +209,7 @@ namespace Forms_TechServ
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.btnNext);
             this.panel1.Controls.Add(this.btnPrev);
-            this.panel1.Controls.Add(this.labelPagesCount);
+            this.panel1.Controls.Add(this.labelPageCount);
             this.panel1.Controls.Add(this.numericCurrentPage);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.dataInStock);
@@ -222,6 +222,7 @@ namespace Forms_TechServ
             // comboBoxShowRows
             // 
             this.comboBoxShowRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.comboBoxShowRows.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxShowRows.FormattingEnabled = true;
             this.comboBoxShowRows.Location = new System.Drawing.Point(497, 298);
             this.comboBoxShowRows.Name = "comboBoxShowRows";
@@ -267,24 +268,34 @@ namespace Forms_TechServ
             this.btnPrev.Text = "← Предыдущая";
             this.btnPrev.UseVisualStyleBackColor = false;
             // 
-            // labelPagesCount
+            // labelPageCount
             // 
-            this.labelPagesCount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.labelPagesCount.AutoSize = true;
-            this.labelPagesCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.labelPagesCount.Location = new System.Drawing.Point(317, 299);
-            this.labelPagesCount.Name = "labelPagesCount";
-            this.labelPagesCount.Size = new System.Drawing.Size(36, 17);
-            this.labelPagesCount.TabIndex = 13;
-            this.labelPagesCount.Text = "из S";
+            this.labelPageCount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.labelPageCount.AutoSize = true;
+            this.labelPageCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.labelPageCount.Location = new System.Drawing.Point(317, 299);
+            this.labelPageCount.Name = "labelPageCount";
+            this.labelPageCount.Size = new System.Drawing.Size(36, 17);
+            this.labelPageCount.TabIndex = 13;
+            this.labelPageCount.Text = "из S";
             // 
             // numericCurrentPage
             // 
             this.numericCurrentPage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.numericCurrentPage.Location = new System.Drawing.Point(266, 300);
+            this.numericCurrentPage.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericCurrentPage.Name = "numericCurrentPage";
             this.numericCurrentPage.Size = new System.Drawing.Size(45, 20);
             this.numericCurrentPage.TabIndex = 12;
+            this.numericCurrentPage.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label8
             // 
@@ -299,6 +310,8 @@ namespace Forms_TechServ
             // 
             // dataInStock
             // 
+            this.dataInStock.AllowUserToAddRows = false;
+            this.dataInStock.AllowUserToDeleteRows = false;
             this.dataInStock.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -310,7 +323,9 @@ namespace Forms_TechServ
             this.Column3,
             this.Column4});
             this.dataInStock.Location = new System.Drawing.Point(0, 0);
+            this.dataInStock.MultiSelect = false;
             this.dataInStock.Name = "dataInStock";
+            this.dataInStock.ReadOnly = true;
             this.dataInStock.Size = new System.Drawing.Size(742, 287);
             this.dataInStock.TabIndex = 0;
             // 
@@ -318,21 +333,25 @@ namespace Forms_TechServ
             // 
             this.Column1.HeaderText = "id мастерской";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // Column2
             // 
             this.Column2.HeaderText = "адрес мастерской";
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             // 
             // Column3
             // 
             this.Column3.HeaderText = "телефон мастерской";
             this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // Column4
             // 
             this.Column4.HeaderText = "кол-во деталей";
             this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             // 
             // FormShowSparePart
             // 
@@ -375,7 +394,7 @@ namespace Forms_TechServ
         private System.Windows.Forms.Button cancelBtn;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dataInStock;
-        private System.Windows.Forms.Label labelPagesCount;
+        private System.Windows.Forms.Label labelPageCount;
         private System.Windows.Forms.NumericUpDown numericCurrentPage;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;

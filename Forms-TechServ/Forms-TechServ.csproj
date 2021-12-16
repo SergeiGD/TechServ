@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Batch.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="CustomControls.cs">

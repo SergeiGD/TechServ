@@ -18,6 +18,9 @@ namespace Forms_TechServ
 
         public DbSet<SparePart> SpareParts { get; set; }
 
+        public DbSet<Batch> Batches { get; set; }
+        public DbSet<BatchSparePart> BatchesSpareParts { get; set; }
+
         public DbSet<Category> Categories { get; set; }
         public DbSet<MastersCategories> MastersCategories { get; set; }
 
@@ -42,9 +45,14 @@ namespace Forms_TechServ
             modelBuilder.Entity<RolesPermissions>()
                 .HasKey(c => new { c.PermissionId, c.RoleId });
 
+            modelBuilder.Entity<BatchSparePart>()
+                .HasKey(c => new { c.BatchId, c.SparePartId });
+
             modelBuilder.Configurations.Add(new Service.ServiceConfig());
 
             modelBuilder.Configurations.Add(new WorkshopTimetable.TimetableConfig());
+
+            //modelBuilder.Configurations.Add(new Batch.BatchConfig());
         }
     }
 }

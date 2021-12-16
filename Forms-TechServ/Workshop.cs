@@ -89,6 +89,25 @@ namespace Forms_TechServ
             }
         }
 
+        public Dictionary<SparePart, int> GetInStockSpareParts()
+        {
+            using (TechContext db = new TechContext())
+            {
+                Dictionary<SparePart, int> sparePartsInStock = new Dictionary<SparePart, int>();
+
+                foreach (SparePart sparePart in db.SpareParts)
+                {
+                    int quantity = sparePart.GetCountInStock(this);
+                    if (quantity > 0)
+                    {
+                        sparePartsInStock.Add(sparePart, quantity);
+                    }
+                }
+
+                return sparePartsInStock;
+            }
+        }
+
     }
 
     public static class WorkshopsList

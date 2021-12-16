@@ -14,6 +14,8 @@ namespace Forms_TechServ
     {
         SparePart sparePart;
         bool readOnly;
+        int rowsCount;
+        int currentPage = 1;
         Size pickedSize = new Size(772, 392);
 
         public FormShowSparePart(bool readOnly, SparePart sparePart)
@@ -37,6 +39,12 @@ namespace Forms_TechServ
                 deleteBtn.Enabled = UserSession.Can("add_del_sparePart");
             }
 
+            comboBoxShowRows.Items.Add(5);
+            comboBoxShowRows.Items.Add(20);
+            comboBoxShowRows.Items.Add(30);
+            comboBoxShowRows.Items.Add(40);
+            comboBoxShowRows.SelectedIndex = 2;
+
             FillForm();
             this.Size = new Size(550, 217);
         }
@@ -46,6 +54,30 @@ namespace Forms_TechServ
             labelID.Text = sparePart.Id.ToString();
             labelName.Text = sparePart.Name;
             labelPrepayment.Text = sparePart.ClientPrepayment.ToString();
+
+            FillInStock();
+        }
+
+        private void FillInStock()
+        {
+            List<Workshop> workshops = WorkshopsList.GetWorkshops(new Workshop(), true, "Id", (int)comboBoxShowRows.SelectedItem, currentPage, out rowsCount);
+
+            dataInStock.Rows.Clear();
+
+            for(int i = 0; i < workshops.Count; i++)
+            {
+                dataInStock.Rows.Add(new DataGridViewRow());
+
+                dataInStock.Rows[i].Cells[0].Value = workshops[i].Id;
+                dataInStock.Rows[i].Cells[1].Value = workshops[i].Location;
+                dataInStock.Rows[i].Cells[2].Value = workshops[i].PhoneNum;
+                //dataInStock.Rows[i].Cells[3].Value = workshops[i].GetCountInStock((Workshop)tbWorkshop.Tag);                         // вот сюда кол-во в наличие
+                dataInStock.Rows[i].Cells[3].Value = sparePart.GetCountInStock(workshops[i]);
+            }
+
+            int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);
+            numericCurrentPage.Maximum = maxPage;
+            labelPageCount.Text = $"из {maxPage}";
         }
 
         private void sparePartTabs_SelectedIndexChanged(object sender, EventArgs e)

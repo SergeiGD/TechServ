@@ -87,7 +87,7 @@ namespace Forms_TechServ
             {
                 this.Size = pickedSize;
 
-                FormBatches formBatches = new FormBatches("asd", false);
+                FormBatches formBatches = new FormBatches(workshop, false);
 
                
 

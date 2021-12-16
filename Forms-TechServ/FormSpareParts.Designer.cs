@@ -50,6 +50,7 @@ namespace Forms_TechServ
             this.numericStockFrom = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.groupPrepayment = new System.Windows.Forms.GroupBox();
+            this.btnPrepaymentInfo = new FontAwesome.Sharp.IconButton();
             this.radioBtnRequied = new System.Windows.Forms.RadioButton();
             this.radioBtnWithout = new System.Windows.Forms.RadioButton();
             this.numericPrepaymentUntil = new System.Windows.Forms.NumericUpDown();
@@ -67,7 +68,6 @@ namespace Forms_TechServ
             this.clearBtn = new Forms_TechServ.ManageButton();
             this.searchBtn = new Forms_TechServ.ManageButton();
             this.toolTipPrepaymentInfo = new System.Windows.Forms.ToolTip(this.components);
-            this.btnPrepaymentInfo = new FontAwesome.Sharp.IconButton();
             this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
@@ -234,9 +234,9 @@ namespace Forms_TechServ
             this.groupStock.Controls.Add(this.label9);
             this.groupStock.Controls.Add(this.numericStockFrom);
             this.groupStock.Controls.Add(this.label8);
-            this.groupStock.Location = new System.Drawing.Point(551, 15);
+            this.groupStock.Location = new System.Drawing.Point(538, 15);
             this.groupStock.Name = "groupStock";
-            this.groupStock.Size = new System.Drawing.Size(212, 125);
+            this.groupStock.Size = new System.Drawing.Size(234, 125);
             this.groupStock.TabIndex = 125;
             this.groupStock.TabStop = false;
             this.groupStock.Text = "Наличие";
@@ -263,6 +263,7 @@ namespace Forms_TechServ
             this.btnCleanWorkshop.Size = new System.Drawing.Size(18, 18);
             this.btnCleanWorkshop.TabIndex = 136;
             this.btnCleanWorkshop.UseVisualStyleBackColor = true;
+            this.btnCleanWorkshop.Click += new System.EventHandler(this.btnCleanWorkshop_Click);
             // 
             // btnFIndWorkshop
             // 
@@ -352,10 +353,27 @@ namespace Forms_TechServ
             this.groupPrepayment.Controls.Add(this.label3);
             this.groupPrepayment.Location = new System.Drawing.Point(254, 15);
             this.groupPrepayment.Name = "groupPrepayment";
-            this.groupPrepayment.Size = new System.Drawing.Size(280, 125);
+            this.groupPrepayment.Size = new System.Drawing.Size(278, 125);
             this.groupPrepayment.TabIndex = 124;
             this.groupPrepayment.TabStop = false;
             this.groupPrepayment.Text = "Предполата";
+            // 
+            // btnPrepaymentInfo
+            // 
+            this.btnPrepaymentInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrepaymentInfo.FlatAppearance.BorderSize = 0;
+            this.btnPrepaymentInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrepaymentInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
+            this.btnPrepaymentInfo.IconColor = System.Drawing.Color.Black;
+            this.btnPrepaymentInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnPrepaymentInfo.IconSize = 20;
+            this.btnPrepaymentInfo.Location = new System.Drawing.Point(247, 95);
+            this.btnPrepaymentInfo.Name = "btnPrepaymentInfo";
+            this.btnPrepaymentInfo.Size = new System.Drawing.Size(27, 21);
+            this.btnPrepaymentInfo.TabIndex = 146;
+            this.btnPrepaymentInfo.UseVisualStyleBackColor = true;
+            this.btnPrepaymentInfo.MouseHover += new System.EventHandler(this.btnPrepaymentInfo_MouseHover);
             // 
             // radioBtnRequied
             // 
@@ -542,6 +560,7 @@ namespace Forms_TechServ
             this.clearBtn.Text = "Отчистить фильтры";
             this.clearBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.clearBtn.UseVisualStyleBackColor = false;
+            //this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
             // 
             // searchBtn
             // 
@@ -557,23 +576,6 @@ namespace Forms_TechServ
             this.searchBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.searchBtn.UseVisualStyleBackColor = false;
             this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
-            // 
-            // btnPrepaymentInfo
-            // 
-            this.btnPrepaymentInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrepaymentInfo.FlatAppearance.BorderSize = 0;
-            this.btnPrepaymentInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrepaymentInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
-            this.btnPrepaymentInfo.IconColor = System.Drawing.Color.Black;
-            this.btnPrepaymentInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnPrepaymentInfo.IconSize = 20;
-            this.btnPrepaymentInfo.Location = new System.Drawing.Point(253, 95);
-            this.btnPrepaymentInfo.Name = "btnPrepaymentInfo";
-            this.btnPrepaymentInfo.Size = new System.Drawing.Size(27, 21);
-            this.btnPrepaymentInfo.TabIndex = 146;
-            this.btnPrepaymentInfo.UseVisualStyleBackColor = true;
-            this.btnPrepaymentInfo.MouseHover += new System.EventHandler(this.btnPrepaymentInfo_MouseHover);
             // 
             // FormSpareParts
             // 

@@ -29,22 +29,22 @@ namespace Forms_TechServ
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.batchTabs = new System.Windows.Forms.TabControl();
             this.generalPage = new System.Windows.Forms.TabPage();
-            this.cancelBtn = new System.Windows.Forms.Button();
-            this.actionBtn = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnAction = new System.Windows.Forms.Button();
             this.checkDelivered = new System.Windows.Forms.CheckBox();
             this.tbWorkshop = new System.Windows.Forms.TextBox();
-            this.btnCleanWorkshop = new FontAwesome.Sharp.IconButton();
             this.btnFindWorkshop = new FontAwesome.Sharp.IconButton();
             this.tbTrackNum = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.sparePartsPage = new System.Windows.Forms.TabPage();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnShowSparePart = new Forms_TechServ.ManageButton();
-            this.btnDeleteSparePart = new Forms_TechServ.ManageButton();
-            this.btnAddSparePart = new Forms_TechServ.ManageButton();
+            this.panelControl = new System.Windows.Forms.Panel();
+            this.btnShow = new Forms_TechServ.ManageButton();
+            this.btnDel = new Forms_TechServ.ManageButton();
+            this.btnAdd = new Forms_TechServ.ManageButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBoxShowSparePartsRows = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -59,13 +59,15 @@ namespace Forms_TechServ
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.batchTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.sparePartsPage.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.panelControl.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSpareParts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // batchTabs
@@ -83,11 +85,10 @@ namespace Forms_TechServ
             // generalPage
             // 
             this.generalPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.generalPage.Controls.Add(this.cancelBtn);
-            this.generalPage.Controls.Add(this.actionBtn);
+            this.generalPage.Controls.Add(this.btnCancel);
+            this.generalPage.Controls.Add(this.btnAction);
             this.generalPage.Controls.Add(this.checkDelivered);
             this.generalPage.Controls.Add(this.tbWorkshop);
-            this.generalPage.Controls.Add(this.btnCleanWorkshop);
             this.generalPage.Controls.Add(this.btnFindWorkshop);
             this.generalPage.Controls.Add(this.tbTrackNum);
             this.generalPage.Controls.Add(this.label1);
@@ -99,25 +100,26 @@ namespace Forms_TechServ
             this.generalPage.TabIndex = 0;
             this.generalPage.Text = "Общая информация";
             // 
-            // cancelBtn
+            // btnCancel
             // 
-            this.cancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancelBtn.Location = new System.Drawing.Point(302, 91);
-            this.cancelBtn.Name = "cancelBtn";
-            this.cancelBtn.Size = new System.Drawing.Size(97, 37);
-            this.cancelBtn.TabIndex = 134;
-            this.cancelBtn.Text = "ОТМЕНИТЬ";
-            this.cancelBtn.UseVisualStyleBackColor = true;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Location = new System.Drawing.Point(302, 83);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(116, 45);
+            this.btnCancel.TabIndex = 134;
+            this.btnCancel.Text = "Отмена";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // actionBtn
+            // btnAction
             // 
-            this.actionBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.actionBtn.Location = new System.Drawing.Point(302, 21);
-            this.actionBtn.Name = "actionBtn";
-            this.actionBtn.Size = new System.Drawing.Size(97, 37);
-            this.actionBtn.TabIndex = 133;
-            this.actionBtn.Text = "Action";
-            this.actionBtn.UseVisualStyleBackColor = true;
+            this.btnAction.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAction.Location = new System.Drawing.Point(302, 21);
+            this.btnAction.Name = "btnAction";
+            this.btnAction.Size = new System.Drawing.Size(116, 45);
+            this.btnAction.TabIndex = 133;
+            this.btnAction.Text = "Action";
+            this.btnAction.UseVisualStyleBackColor = true;
+            this.btnAction.Click += new System.EventHandler(this.btnAction_Click);
             // 
             // checkDelivered
             // 
@@ -137,20 +139,6 @@ namespace Forms_TechServ
             this.tbWorkshop.ReadOnly = true;
             this.tbWorkshop.Size = new System.Drawing.Size(117, 20);
             this.tbWorkshop.TabIndex = 131;
-            // 
-            // btnCleanWorkshop
-            // 
-            this.btnCleanWorkshop.FlatAppearance.BorderSize = 0;
-            this.btnCleanWorkshop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCleanWorkshop.IconChar = FontAwesome.Sharp.IconChar.Times;
-            this.btnCleanWorkshop.IconColor = System.Drawing.SystemColors.ControlText;
-            this.btnCleanWorkshop.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnCleanWorkshop.IconSize = 17;
-            this.btnCleanWorkshop.Location = new System.Drawing.Point(261, 72);
-            this.btnCleanWorkshop.Name = "btnCleanWorkshop";
-            this.btnCleanWorkshop.Size = new System.Drawing.Size(18, 18);
-            this.btnCleanWorkshop.TabIndex = 129;
-            this.btnCleanWorkshop.UseVisualStyleBackColor = true;
             // 
             // btnFindWorkshop
             // 
@@ -197,7 +185,7 @@ namespace Forms_TechServ
             // sparePartsPage
             // 
             this.sparePartsPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.sparePartsPage.Controls.Add(this.panel2);
+            this.sparePartsPage.Controls.Add(this.panelControl);
             this.sparePartsPage.Controls.Add(this.panel1);
             this.sparePartsPage.Location = new System.Drawing.Point(4, 22);
             this.sparePartsPage.Name = "sparePartsPage";
@@ -206,61 +194,62 @@ namespace Forms_TechServ
             this.sparePartsPage.TabIndex = 1;
             this.sparePartsPage.Text = "Детали";
             // 
-            // panel2
+            // panelControl
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panelControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.Controls.Add(this.btnShowSparePart);
-            this.panel2.Controls.Add(this.btnDeleteSparePart);
-            this.panel2.Controls.Add(this.btnAddSparePart);
-            this.panel2.Location = new System.Drawing.Point(631, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(153, 331);
-            this.panel2.TabIndex = 2;
+            this.panelControl.Controls.Add(this.btnShow);
+            this.panelControl.Controls.Add(this.btnDel);
+            this.panelControl.Controls.Add(this.btnAdd);
+            this.panelControl.Location = new System.Drawing.Point(631, 0);
+            this.panelControl.Name = "panelControl";
+            this.panelControl.Size = new System.Drawing.Size(153, 331);
+            this.panelControl.TabIndex = 2;
             // 
-            // btnShowSparePart
+            // btnShow
             // 
-            this.btnShowSparePart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnShowSparePart.FlatAppearance.BorderSize = 0;
-            this.btnShowSparePart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowSparePart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnShowSparePart.Location = new System.Drawing.Point(0, 79);
-            this.btnShowSparePart.Name = "btnShowSparePart";
-            this.btnShowSparePart.Size = new System.Drawing.Size(153, 33);
-            this.btnShowSparePart.TabIndex = 4;
-            this.btnShowSparePart.Text = "Просмотреть";
-            this.btnShowSparePart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnShowSparePart.UseVisualStyleBackColor = false;
-            this.btnShowSparePart.Click += new System.EventHandler(this.btnShowSparePart_Click);
+            this.btnShow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnShow.FlatAppearance.BorderSize = 0;
+            this.btnShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShow.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnShow.Location = new System.Drawing.Point(0, 92);
+            this.btnShow.Name = "btnShow";
+            this.btnShow.Size = new System.Drawing.Size(153, 40);
+            this.btnShow.TabIndex = 2;
+            this.btnShow.Text = "Просмотреть";
+            this.btnShow.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnShow.UseVisualStyleBackColor = false;
+            this.btnShow.Click += new System.EventHandler(this.btnShowSparePart_Click);
             // 
-            // btnDeleteSparePart
+            // btnDel
             // 
-            this.btnDeleteSparePart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnDeleteSparePart.FlatAppearance.BorderSize = 0;
-            this.btnDeleteSparePart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteSparePart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnDeleteSparePart.Location = new System.Drawing.Point(0, 40);
-            this.btnDeleteSparePart.Name = "btnDeleteSparePart";
-            this.btnDeleteSparePart.Size = new System.Drawing.Size(153, 33);
-            this.btnDeleteSparePart.TabIndex = 3;
-            this.btnDeleteSparePart.Text = "Удалить";
-            this.btnDeleteSparePart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDeleteSparePart.UseVisualStyleBackColor = false;
+            this.btnDel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnDel.FlatAppearance.BorderSize = 0;
+            this.btnDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnDel.Location = new System.Drawing.Point(0, 46);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(153, 40);
+            this.btnDel.TabIndex = 1;
+            this.btnDel.Text = "Удалить";
+            this.btnDel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDel.UseVisualStyleBackColor = false;
+            this.btnDel.Click += new System.EventHandler(this.btnDeleteSparePart_Click);
             // 
-            // btnAddSparePart
+            // btnAdd
             // 
-            this.btnAddSparePart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnAddSparePart.FlatAppearance.BorderSize = 0;
-            this.btnAddSparePart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddSparePart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnAddSparePart.Location = new System.Drawing.Point(0, 0);
-            this.btnAddSparePart.Name = "btnAddSparePart";
-            this.btnAddSparePart.Size = new System.Drawing.Size(153, 33);
-            this.btnAddSparePart.TabIndex = 2;
-            this.btnAddSparePart.Text = "Добавить";
-            this.btnAddSparePart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddSparePart.UseVisualStyleBackColor = false;
-            this.btnAddSparePart.Click += new System.EventHandler(this.btnAddSparePart_Click);
+            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnAdd.Location = new System.Drawing.Point(0, 0);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(153, 40);
+            this.btnAdd.TabIndex = 0;
+            this.btnAdd.Text = "Добавить";
+            this.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAddSparePart_Click);
             // 
             // panel1
             // 
@@ -283,6 +272,7 @@ namespace Forms_TechServ
             // comboBoxShowSparePartsRows
             // 
             this.comboBoxShowSparePartsRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.comboBoxShowSparePartsRows.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxShowSparePartsRows.FormattingEnabled = true;
             this.comboBoxShowSparePartsRows.Location = new System.Drawing.Point(433, 302);
             this.comboBoxShowSparePartsRows.Name = "comboBoxShowSparePartsRows";
@@ -343,9 +333,19 @@ namespace Forms_TechServ
             // 
             this.numericCurrentPage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.numericCurrentPage.Location = new System.Drawing.Point(214, 303);
+            this.numericCurrentPage.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericCurrentPage.Name = "numericCurrentPage";
             this.numericCurrentPage.Size = new System.Drawing.Size(45, 20);
             this.numericCurrentPage.TabIndex = 12;
+            this.numericCurrentPage.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label8
             // 
@@ -360,6 +360,8 @@ namespace Forms_TechServ
             // 
             // dataSpareParts
             // 
+            this.dataSpareParts.AllowUserToAddRows = false;
+            this.dataSpareParts.AllowUserToDeleteRows = false;
             this.dataSpareParts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -372,34 +374,47 @@ namespace Forms_TechServ
             this.Column4,
             this.Column5});
             this.dataSpareParts.Location = new System.Drawing.Point(0, 0);
+            this.dataSpareParts.MultiSelect = false;
             this.dataSpareParts.Name = "dataSpareParts";
+            this.dataSpareParts.ReadOnly = true;
+            this.dataSpareParts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataSpareParts.Size = new System.Drawing.Size(631, 290);
             this.dataSpareParts.TabIndex = 0;
+            this.dataSpareParts.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataSpareParts_CellMouseDoubleClick);
             // 
             // Column1
             // 
             this.Column1.HeaderText = "id детали";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // Column2
             // 
             this.Column2.HeaderText = "название детали";
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             // 
             // Column3
             // 
             this.Column3.HeaderText = "цена за на 1 ед.";
             this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // Column4
             // 
             this.Column4.HeaderText = "кол-во деталей";
             this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             // 
             // Column5
             // 
             this.Column5.HeaderText = "Общая цена";
             this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // FormManageBatch
             // 
@@ -417,11 +432,12 @@ namespace Forms_TechServ
             this.generalPage.ResumeLayout(false);
             this.generalPage.PerformLayout();
             this.sparePartsPage.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            this.panelControl.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSpareParts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -434,10 +450,7 @@ namespace Forms_TechServ
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TabPage sparePartsPage;
-        private System.Windows.Forms.Panel panel2;
-        private ManageButton btnShowSparePart;
-        private ManageButton btnDeleteSparePart;
-        private ManageButton btnAddSparePart;
+        private System.Windows.Forms.Panel panelControl;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPrev;
@@ -451,12 +464,15 @@ namespace Forms_TechServ
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.TextBox tbWorkshop;
-        private FontAwesome.Sharp.IconButton btnCleanWorkshop;
         private FontAwesome.Sharp.IconButton btnFindWorkshop;
         private System.Windows.Forms.CheckBox checkDelivered;
-        private System.Windows.Forms.Button cancelBtn;
-        private System.Windows.Forms.Button actionBtn;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnAction;
         private System.Windows.Forms.ComboBox comboBoxShowSparePartsRows;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private ManageButton btnShow;
+        private ManageButton btnDel;
+        private ManageButton btnAdd;
     }
 }

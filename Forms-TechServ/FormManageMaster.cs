@@ -367,5 +367,10 @@ namespace Forms_TechServ
         {
             numericCurrentCatPage.Value = numericCurrentCatPage.Value + 1 > numericCurrentCatPage.Maximum ? numericCurrentCatPage.Value : numericCurrentCatPage.Value + 1;
         }
+
+        private void deleteTimetableBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
