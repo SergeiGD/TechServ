@@ -137,6 +137,10 @@ namespace Forms_TechServ
 
             int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);
             numericCurrentPage.Maximum = maxPage;
+
+            if (numericCurrentPage.Maximum > 0)
+                numericCurrentPage.Value = numericCurrentPage.Value == 0 ? 1 : numericCurrentPage.Value;
+
             labelPageCount.Text = $"из {maxPage}";
         }
 

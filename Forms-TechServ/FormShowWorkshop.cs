@@ -117,6 +117,10 @@ namespace Forms_TechServ
 
             int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowTimetableRows.SelectedItem);
             numericCurrentTImetablePage.Maximum = maxPage;
+
+            if (numericCurrentTImetablePage.Maximum > 0)
+                numericCurrentTImetablePage.Value = numericCurrentTImetablePage.Value == 0 ? 1 : numericCurrentTImetablePage.Value;
+
             labelTimetablePageCount.Text = $"из {maxPage}";
         }
 
