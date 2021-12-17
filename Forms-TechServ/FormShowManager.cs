@@ -30,7 +30,7 @@ namespace Forms_TechServ
 
         private void FormShowManager_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(695, 330);
+            this.Size = new Size(695, 357);
 
             if (readOnly || (!UserSession.Can("edit_employee") && !UserSession.Can("add_del_employee")))      // если просто просмотр или нету прав на изменения
             {
@@ -56,6 +56,7 @@ namespace Forms_TechServ
             labelID.Text = manager.Id.ToString();
             labelName.Text = manager.Name;
             labelPhoneNum.Text = manager.PhoneNum;
+            labelRemotely.Text = manager.Remotely ? "Да" : "Нет";
             labelSalary.Text = manager.Salary.ToString();
             if (UserSession.Can("edit_employee"))                       // скрываем пароль, если нету прав на редактирование сотрудника
             {
@@ -74,7 +75,7 @@ namespace Forms_TechServ
         {
             if (managerTabs.SelectedTab.Equals(generalPage))
             {
-                this.Size = new Size(695, 330);
+                this.Size = new Size(695, 357);
             }
             else if (managerTabs.SelectedTab.Equals(timetablePage))
             {

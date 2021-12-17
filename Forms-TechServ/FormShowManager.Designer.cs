@@ -53,6 +53,8 @@ namespace Forms_TechServ
             this.label6 = new System.Windows.Forms.Label();
             this.timetablePage = new System.Windows.Forms.TabPage();
             this.ordersPage = new System.Windows.Forms.TabPage();
+            this.labelRemotely = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.managerTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.panelEdit.SuspendLayout();
@@ -67,13 +69,15 @@ namespace Forms_TechServ
             this.managerTabs.Location = new System.Drawing.Point(0, 0);
             this.managerTabs.Name = "managerTabs";
             this.managerTabs.SelectedIndex = 0;
-            this.managerTabs.Size = new System.Drawing.Size(803, 291);
+            this.managerTabs.Size = new System.Drawing.Size(803, 318);
             this.managerTabs.TabIndex = 47;
             this.managerTabs.SelectedIndexChanged += new System.EventHandler(this.managerTabs_SelectedIndexChanged);
             // 
             // generalPage
             // 
             this.generalPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.generalPage.Controls.Add(this.labelRemotely);
+            this.generalPage.Controls.Add(this.label8);
             this.generalPage.Controls.Add(this.labelPassword);
             this.generalPage.Controls.Add(this.label9);
             this.generalPage.Controls.Add(this.labelPosition);
@@ -94,7 +98,7 @@ namespace Forms_TechServ
             this.generalPage.Location = new System.Drawing.Point(4, 22);
             this.generalPage.Name = "generalPage";
             this.generalPage.Padding = new System.Windows.Forms.Padding(3);
-            this.generalPage.Size = new System.Drawing.Size(795, 265);
+            this.generalPage.Size = new System.Drawing.Size(795, 292);
             this.generalPage.TabIndex = 0;
             this.generalPage.Text = "Общая информация";
             // 
@@ -171,7 +175,7 @@ namespace Forms_TechServ
             this.panelEdit.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelEdit.Location = new System.Drawing.Point(632, 3);
             this.panelEdit.Name = "panelEdit";
-            this.panelEdit.Size = new System.Drawing.Size(160, 259);
+            this.panelEdit.Size = new System.Drawing.Size(160, 286);
             this.panelEdit.TabIndex = 46;
             // 
             // editBtn
@@ -309,12 +313,30 @@ namespace Forms_TechServ
             this.ordersPage.TabIndex = 3;
             this.ordersPage.Text = "Заказы";
             // 
+            // labelRemotely
+            // 
+            this.labelRemotely.AutoSize = true;
+            this.labelRemotely.Location = new System.Drawing.Point(120, 262);
+            this.labelRemotely.Name = "labelRemotely";
+            this.labelRemotely.Size = new System.Drawing.Size(35, 13);
+            this.labelRemotely.TabIndex = 58;
+            this.labelRemotely.Text = "label4";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(18, 262);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(96, 13);
+            this.label8.TabIndex = 57;
+            this.label8.Text = "Работа удаленно:";
+            // 
             // FormShowManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.ClientSize = new System.Drawing.Size(803, 291);
+            this.ClientSize = new System.Drawing.Size(803, 318);
             this.Controls.Add(this.managerTabs);
             this.Name = "FormShowManager";
             this.Text = "FormShowManager";
@@ -354,5 +376,7 @@ namespace Forms_TechServ
         private System.Windows.Forms.Label labelPosition;
         private System.Windows.Forms.Label labelPassword;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label labelRemotely;
+        private System.Windows.Forms.Label label8;
     }
 }

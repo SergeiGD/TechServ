@@ -37,6 +37,7 @@ namespace Forms_TechServ
             this.numericCurrentPage = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.panelFind = new System.Windows.Forms.Panel();
+            this.btnSalaryInfo = new FontAwesome.Sharp.IconButton();
             this.btnAskOrDesk = new FontAwesome.Sharp.IconButton();
             this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -62,11 +63,11 @@ namespace Forms_TechServ
             this.btnPrev = new System.Windows.Forms.Button();
             this.dataManagers = new System.Windows.Forms.DataGridView();
             this.panelControl = new System.Windows.Forms.Panel();
-            this.clearBtn = new Forms_TechServ.ManageButton();
-            this.searchBtn = new Forms_TechServ.ManageButton();
-            this.btnSalaryInfo = new FontAwesome.Sharp.IconButton();
             this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipSlalaryInfo = new System.Windows.Forms.ToolTip(this.components);
+            this.checkBoxRemotely = new System.Windows.Forms.CheckBox();
+            this.clearBtn = new Forms_TechServ.ManageButton();
+            this.searchBtn = new Forms_TechServ.ManageButton();
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             this.panelFind.SuspendLayout();
@@ -162,6 +163,7 @@ namespace Forms_TechServ
             // 
             this.panelFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelFind.Controls.Add(this.checkBoxRemotely);
             this.panelFind.Controls.Add(this.btnSalaryInfo);
             this.panelFind.Controls.Add(this.btnAskOrDesk);
             this.panelFind.Controls.Add(this.comboBoxSortBy);
@@ -188,6 +190,23 @@ namespace Forms_TechServ
             this.panelFind.Name = "panelFind";
             this.panelFind.Size = new System.Drawing.Size(778, 120);
             this.panelFind.TabIndex = 4;
+            // 
+            // btnSalaryInfo
+            // 
+            this.btnSalaryInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSalaryInfo.FlatAppearance.BorderSize = 0;
+            this.btnSalaryInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalaryInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
+            this.btnSalaryInfo.IconColor = System.Drawing.Color.Black;
+            this.btnSalaryInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnSalaryInfo.IconSize = 20;
+            this.btnSalaryInfo.Location = new System.Drawing.Point(741, 53);
+            this.btnSalaryInfo.Name = "btnSalaryInfo";
+            this.btnSalaryInfo.Size = new System.Drawing.Size(27, 21);
+            this.btnSalaryInfo.TabIndex = 145;
+            this.btnSalaryInfo.UseVisualStyleBackColor = true;
+            this.btnSalaryInfo.MouseHover += new System.EventHandler(this.btnSalaryInfo_MouseHover);
             // 
             // btnAskOrDesk
             // 
@@ -498,7 +517,6 @@ namespace Forms_TechServ
             this.dataManagers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataManagers.Size = new System.Drawing.Size(778, 460);
             this.dataManagers.TabIndex = 0;
-            //this.dataManagers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataManagers_CellClick);
             // 
             // panelControl
             // 
@@ -510,6 +528,17 @@ namespace Forms_TechServ
             this.panelControl.Name = "panelControl";
             this.panelControl.Size = new System.Drawing.Size(190, 632);
             this.panelControl.TabIndex = 4;
+            // 
+            // checkBoxRemotely
+            // 
+            this.checkBoxRemotely.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.checkBoxRemotely.AutoSize = true;
+            this.checkBoxRemotely.Location = new System.Drawing.Point(266, 90);
+            this.checkBoxRemotely.Name = "checkBoxRemotely";
+            this.checkBoxRemotely.Size = new System.Drawing.Size(123, 17);
+            this.checkBoxRemotely.TabIndex = 146;
+            this.checkBoxRemotely.Text = "Работает удаленно";
+            this.checkBoxRemotely.UseVisualStyleBackColor = true;
             // 
             // clearBtn
             // 
@@ -540,23 +569,6 @@ namespace Forms_TechServ
             this.searchBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.searchBtn.UseVisualStyleBackColor = false;
             this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
-            // 
-            // btnSalaryInfo
-            // 
-            this.btnSalaryInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSalaryInfo.FlatAppearance.BorderSize = 0;
-            this.btnSalaryInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalaryInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
-            this.btnSalaryInfo.IconColor = System.Drawing.Color.Black;
-            this.btnSalaryInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnSalaryInfo.IconSize = 20;
-            this.btnSalaryInfo.Location = new System.Drawing.Point(741, 53);
-            this.btnSalaryInfo.Name = "btnSalaryInfo";
-            this.btnSalaryInfo.Size = new System.Drawing.Size(27, 21);
-            this.btnSalaryInfo.TabIndex = 145;
-            this.btnSalaryInfo.UseVisualStyleBackColor = true;
-            this.btnSalaryInfo.MouseHover += new System.EventHandler(this.btnSalaryInfo_MouseHover);
             // 
             // FormManagers
             // 
@@ -621,5 +633,6 @@ namespace Forms_TechServ
         private FontAwesome.Sharp.IconButton btnSalaryInfo;
         private System.Windows.Forms.ToolTip toolTipCurrentSort;
         private System.Windows.Forms.ToolTip toolTipSlalaryInfo;
+        private System.Windows.Forms.CheckBox checkBoxRemotely;
     }
 }

@@ -52,6 +52,7 @@ namespace Forms_TechServ
             this.label6 = new System.Windows.Forms.Label();
             this.timetablePage = new System.Windows.Forms.TabPage();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.checkBoxRemotely = new System.Windows.Forms.CheckBox();
             this.managerTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSalary)).BeginInit();
@@ -66,13 +67,14 @@ namespace Forms_TechServ
             this.managerTabs.Location = new System.Drawing.Point(0, 0);
             this.managerTabs.Name = "managerTabs";
             this.managerTabs.SelectedIndex = 0;
-            this.managerTabs.Size = new System.Drawing.Size(760, 283);
+            this.managerTabs.Size = new System.Drawing.Size(760, 303);
             this.managerTabs.TabIndex = 48;
             this.managerTabs.SelectedIndexChanged += new System.EventHandler(this.managerTabs_SelectedIndexChanged);
             // 
             // generalPage
             // 
             this.generalPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.generalPage.Controls.Add(this.checkBoxRemotely);
             this.generalPage.Controls.Add(this.tbPassword);
             this.generalPage.Controls.Add(this.label9);
             this.generalPage.Controls.Add(this.btnAction);
@@ -94,7 +96,7 @@ namespace Forms_TechServ
             this.generalPage.Location = new System.Drawing.Point(4, 22);
             this.generalPage.Name = "generalPage";
             this.generalPage.Padding = new System.Windows.Forms.Padding(3);
-            this.generalPage.Size = new System.Drawing.Size(752, 257);
+            this.generalPage.Size = new System.Drawing.Size(752, 277);
             this.generalPage.TabIndex = 0;
             this.generalPage.Text = "Общая информация";
             // 
@@ -300,12 +302,22 @@ namespace Forms_TechServ
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // checkBoxRemotely
+            // 
+            this.checkBoxRemotely.AutoSize = true;
+            this.checkBoxRemotely.Location = new System.Drawing.Point(22, 254);
+            this.checkBoxRemotely.Name = "checkBoxRemotely";
+            this.checkBoxRemotely.Size = new System.Drawing.Size(123, 17);
+            this.checkBoxRemotely.TabIndex = 156;
+            this.checkBoxRemotely.Text = "Работает удаленно";
+            this.checkBoxRemotely.UseVisualStyleBackColor = true;
+            // 
             // FormManageManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.ClientSize = new System.Drawing.Size(760, 283);
+            this.ClientSize = new System.Drawing.Size(760, 303);
             this.Controls.Add(this.managerTabs);
             this.Name = "FormManageManager";
             this.Text = "FormManageManager";
@@ -344,5 +356,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox checkBoxRemotely;
     }
 }

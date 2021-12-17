@@ -250,6 +250,10 @@ namespace Forms_TechServ
 
             int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowCatRows.SelectedItem);
             numericCurrentCatPage.Maximum = maxPage;
+
+            if (numericCurrentCatPage.Maximum > 0)
+                numericCurrentCatPage.Value = numericCurrentCatPage.Value == 0 ? 1 : numericCurrentCatPage.Value;
+
             labelCatPagesCount.Text = $"из {maxPage}";
         }
 

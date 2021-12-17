@@ -413,6 +413,8 @@ namespace Forms_TechServ
 
     public class Manager : Employee
     {
+        public bool Remotely { get; set; }
+
         public bool AddManager()
         {
             using (TechContext db = new TechContext())
@@ -538,6 +540,11 @@ namespace Forms_TechServ
                 if (FilterA.Workshop != null)
                 {
                     managers = managers.Where(m => m.WorkshopId == FilterA.Workshop.Id);
+                }
+
+                if (FilterA.Remotely)
+                {
+                    managers = managers.Where(m => m.Remotely);
                 }
 
                 if (FilterA.Role != null)

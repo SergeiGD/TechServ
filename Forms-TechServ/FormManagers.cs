@@ -109,6 +109,8 @@ namespace Forms_TechServ
             salaryCol.Name = "Зарплата";
             DataGridViewTextBoxColumn branchCol = new DataGridViewTextBoxColumn();
             branchCol.Name = "Филиал";
+            DataGridViewTextBoxColumn remotelyCol = new DataGridViewTextBoxColumn();
+            remotelyCol.Name = "Работает удалнно";
             DataGridViewTextBoxColumn roleCol = new DataGridViewTextBoxColumn();
             roleCol.Name = "Позиция";
 
@@ -117,6 +119,7 @@ namespace Forms_TechServ
             dataManagers.Columns.Add(phoneCol);
             dataManagers.Columns.Add(salaryCol);
             dataManagers.Columns.Add(branchCol);
+            dataManagers.Columns.Add(remotelyCol);
             dataManagers.Columns.Add(roleCol);
 
             btnAskOrDesk.Tag = true;
@@ -168,6 +171,7 @@ namespace Forms_TechServ
                     PhoneNum = tbPhoneNum.Text,
                     Salary = numericSalaryFrom.Value,
                     Workshop = (Workshop)tbWorkshop.Tag,
+                    Remotely = checkBoxRemotely.Checked,
                     Role = (Role)tbPosition.Tag,
                 },
                 new Manager()
@@ -192,7 +196,8 @@ namespace Forms_TechServ
                 dataManagers.Rows[i].Cells[2].Value = managers[i].PhoneNum;
                 dataManagers.Rows[i].Cells[3].Value = managers[i].Salary;
                 dataManagers.Rows[i].Cells[4].Value = managers[i].Workshop.Location;
-                dataManagers.Rows[i].Cells[5].Value = managers[i].Role.Name;
+                dataManagers.Rows[i].Cells[5].Value = managers[i].Remotely ? "Да" : "Нет";
+                dataManagers.Rows[i].Cells[6].Value = managers[i].Role.Name;
             }
 
             int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);

@@ -61,7 +61,7 @@ namespace Forms_TechServ
         {
             if (managerTabs.SelectedTab.Equals(generalPage))
             {
-                this.Size = new Size(776, 303);
+                this.Size = new Size(776, 342); 
             }
             else if (managerTabs.SelectedTab.Equals(timetablePage))
             {
@@ -111,6 +111,7 @@ namespace Forms_TechServ
                 manager.PhoneNum = tbPhoneNum.Text;
                 manager.Password = tbPassword.Text;
                 manager.Salary = numericSalary.Value;
+                manager.Remotely = checkBoxRemotely.Checked;
 
                 //manager.Role = null;                                    // чтоб не было конфликта свойств при изменение, сбрасываем свойство Role и ставим выбранное id
 
@@ -223,6 +224,7 @@ namespace Forms_TechServ
                 tbWorkshop.Text = manager.Workshop.Location;
                 tbWorkshop.Tag = manager.Workshop;
                 tbInfo.Text = manager.AdditionalInfo;
+                checkBoxRemotely.Checked = manager.Remotely;
             }
         }
     }
