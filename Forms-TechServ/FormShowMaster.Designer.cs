@@ -64,26 +64,6 @@ namespace Forms_TechServ
             this.btnPrevCat = new System.Windows.Forms.Button();
             this.dataCategories = new System.Windows.Forms.DataGridView();
             this.timetablePage = new System.Windows.Forms.TabPage();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.btnCleanTimetable = new Forms_TechServ.ManageButton();
-            this.btnFindTimetable = new Forms_TechServ.ManageButton();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.comboBoxShowTimetableRows = new System.Windows.Forms.ComboBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.datePickerFrom = new System.Windows.Forms.DateTimePicker();
-            this.label14 = new System.Windows.Forms.Label();
-            this.datePickerUntil = new System.Windows.Forms.DateTimePicker();
-            this.labelTimetablePagesCount = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.numericCurrentTimetablePage = new System.Windows.Forms.NumericUpDown();
-            this.label28 = new System.Windows.Forms.Label();
-            this.btnNextTimetable = new System.Windows.Forms.Button();
-            this.btnPrevTimetable = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ordersPage = new System.Windows.Forms.TabPage();
             this.visitsPage = new System.Windows.Forms.TabPage();
             this.masterTabs.SuspendLayout();
@@ -94,11 +74,6 @@ namespace Forms_TechServ
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentCatPage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataCategories)).BeginInit();
-            this.timetablePage.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericCurrentTimetablePage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label6
@@ -500,233 +475,17 @@ namespace Forms_TechServ
             this.dataCategories.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataCategories.Size = new System.Drawing.Size(643, 218);
             this.dataCategories.TabIndex = 0;
+            this.dataCategories.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataCategories_CellMouseDoubleClick);
             // 
             // timetablePage
             // 
             this.timetablePage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.timetablePage.Controls.Add(this.panel4);
-            this.timetablePage.Controls.Add(this.panel1);
             this.timetablePage.Location = new System.Drawing.Point(4, 22);
             this.timetablePage.Name = "timetablePage";
             this.timetablePage.Padding = new System.Windows.Forms.Padding(3);
             this.timetablePage.Size = new System.Drawing.Size(795, 258);
             this.timetablePage.TabIndex = 2;
             this.timetablePage.Text = "Расписание";
-            // 
-            // panel4
-            // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.panel4.Controls.Add(this.btnCleanTimetable);
-            this.panel4.Controls.Add(this.btnFindTimetable);
-            this.panel4.Location = new System.Drawing.Point(623, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(170, 258);
-            this.panel4.TabIndex = 5;
-            // 
-            // btnCleanTimetable
-            // 
-            this.btnCleanTimetable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCleanTimetable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnCleanTimetable.FlatAppearance.BorderSize = 0;
-            this.btnCleanTimetable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCleanTimetable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnCleanTimetable.Location = new System.Drawing.Point(0, 40);
-            this.btnCleanTimetable.Name = "btnCleanTimetable";
-            this.btnCleanTimetable.Size = new System.Drawing.Size(170, 40);
-            this.btnCleanTimetable.TabIndex = 2;
-            this.btnCleanTimetable.Text = "Отчистить фильры";
-            this.btnCleanTimetable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCleanTimetable.UseVisualStyleBackColor = false;
-            // 
-            // btnFindTimetable
-            // 
-            this.btnFindTimetable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFindTimetable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnFindTimetable.FlatAppearance.BorderSize = 0;
-            this.btnFindTimetable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFindTimetable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnFindTimetable.Location = new System.Drawing.Point(0, 0);
-            this.btnFindTimetable.Name = "btnFindTimetable";
-            this.btnFindTimetable.Size = new System.Drawing.Size(170, 40);
-            this.btnFindTimetable.TabIndex = 1;
-            this.btnFindTimetable.Text = "Найти";
-            this.btnFindTimetable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFindTimetable.UseVisualStyleBackColor = false;
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.comboBoxShowTimetableRows);
-            this.panel1.Controls.Add(this.label18);
-            this.panel1.Controls.Add(this.datePickerFrom);
-            this.panel1.Controls.Add(this.label14);
-            this.panel1.Controls.Add(this.datePickerUntil);
-            this.panel1.Controls.Add(this.labelTimetablePagesCount);
-            this.panel1.Controls.Add(this.label15);
-            this.panel1.Controls.Add(this.numericCurrentTimetablePage);
-            this.panel1.Controls.Add(this.label28);
-            this.panel1.Controls.Add(this.btnNextTimetable);
-            this.panel1.Controls.Add(this.btnPrevTimetable);
-            this.panel1.Controls.Add(this.dataGridView1);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(620, 258);
-            this.panel1.TabIndex = 1;
-            // 
-            // comboBoxShowTimetableRows
-            // 
-            this.comboBoxShowTimetableRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.comboBoxShowTimetableRows.FormattingEnabled = true;
-            this.comboBoxShowTimetableRows.Location = new System.Drawing.Point(425, 233);
-            this.comboBoxShowTimetableRows.Name = "comboBoxShowTimetableRows";
-            this.comboBoxShowTimetableRows.Size = new System.Drawing.Size(62, 21);
-            this.comboBoxShowTimetableRows.TabIndex = 20;
-            // 
-            // label18
-            // 
-            this.label18.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label18.Location = new System.Drawing.Point(312, 234);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(107, 17);
-            this.label18.TabIndex = 19;
-            this.label18.Text = "Показывать по";
-            // 
-            // datePickerFrom
-            // 
-            this.datePickerFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.datePickerFrom.Location = new System.Drawing.Point(464, 8);
-            this.datePickerFrom.Name = "datePickerFrom";
-            this.datePickerFrom.Size = new System.Drawing.Size(130, 20);
-            this.datePickerFrom.TabIndex = 18;
-            // 
-            // label14
-            // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(414, 14);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(48, 13);
-            this.label14.TabIndex = 17;
-            this.label14.Text = "дата до:";
-            // 
-            // datePickerUntil
-            // 
-            this.datePickerUntil.Location = new System.Drawing.Point(75, 8);
-            this.datePickerUntil.Name = "datePickerUntil";
-            this.datePickerUntil.Size = new System.Drawing.Size(130, 20);
-            this.datePickerUntil.TabIndex = 4;
-            // 
-            // labelTimetablePagesCount
-            // 
-            this.labelTimetablePagesCount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.labelTimetablePagesCount.AutoSize = true;
-            this.labelTimetablePagesCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.labelTimetablePagesCount.Location = new System.Drawing.Point(262, 233);
-            this.labelTimetablePagesCount.Name = "labelTimetablePagesCount";
-            this.labelTimetablePagesCount.Size = new System.Drawing.Size(36, 17);
-            this.labelTimetablePagesCount.TabIndex = 16;
-            this.labelTimetablePagesCount.Text = "из S";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(25, 14);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(47, 13);
-            this.label15.TabIndex = 3;
-            this.label15.Text = "дата от:";
-            // 
-            // numericCurrentTimetablePage
-            // 
-            this.numericCurrentTimetablePage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.numericCurrentTimetablePage.Location = new System.Drawing.Point(211, 234);
-            this.numericCurrentTimetablePage.Name = "numericCurrentTimetablePage";
-            this.numericCurrentTimetablePage.Size = new System.Drawing.Size(45, 20);
-            this.numericCurrentTimetablePage.TabIndex = 15;
-            // 
-            // label28
-            // 
-            this.label28.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label28.Location = new System.Drawing.Point(133, 233);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(72, 17);
-            this.label28.TabIndex = 14;
-            this.label28.Text = "Страница";
-            // 
-            // btnNextTimetable
-            // 
-            this.btnNextTimetable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNextTimetable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnNextTimetable.FlatAppearance.BorderSize = 0;
-            this.btnNextTimetable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNextTimetable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.btnNextTimetable.Location = new System.Drawing.Point(493, 221);
-            this.btnNextTimetable.Name = "btnNextTimetable";
-            this.btnNextTimetable.Size = new System.Drawing.Size(130, 40);
-            this.btnNextTimetable.TabIndex = 6;
-            this.btnNextTimetable.Text = "Следующая →";
-            this.btnNextTimetable.UseVisualStyleBackColor = false;
-            // 
-            // btnPrevTimetable
-            // 
-            this.btnPrevTimetable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnPrevTimetable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnPrevTimetable.FlatAppearance.BorderSize = 0;
-            this.btnPrevTimetable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrevTimetable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.btnPrevTimetable.Location = new System.Drawing.Point(-3, 221);
-            this.btnPrevTimetable.Name = "btnPrevTimetable";
-            this.btnPrevTimetable.Size = new System.Drawing.Size(130, 40);
-            this.btnPrevTimetable.TabIndex = 5;
-            this.btnPrevTimetable.Text = "← Предыдущая";
-            this.btnPrevTimetable.UseVisualStyleBackColor = false;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column5,
-            this.Column3,
-            this.Column4});
-            this.dataGridView1.Location = new System.Drawing.Point(0, 34);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(620, 187);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Дата";
-            this.Column1.Name = "Column1";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "День недели";
-            this.Column5.Name = "Column5";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Начало смены";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Конец смены";
-            this.Column4.Name = "Column4";
             // 
             // ordersPage
             // 
@@ -770,12 +529,6 @@ namespace Forms_TechServ
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentCatPage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataCategories)).EndInit();
-            this.timetablePage.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericCurrentTimetablePage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -813,29 +566,9 @@ namespace Forms_TechServ
         private System.Windows.Forms.DataGridView dataCategories;
         private System.Windows.Forms.Panel panel3;
         private ManageButton btnShowCat;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DateTimePicker datePickerFrom;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.DateTimePicker datePickerUntil;
-        private System.Windows.Forms.Label labelTimetablePagesCount;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.NumericUpDown numericCurrentTimetablePage;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Button btnNextTimetable;
-        private System.Windows.Forms.Button btnPrevTimetable;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.Panel panel4;
-        private ManageButton btnCleanTimetable;
-        private ManageButton btnFindTimetable;
         private System.Windows.Forms.Label labelPosition;
         private System.Windows.Forms.ComboBox comboBoxShowCatRows;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ComboBox comboBoxShowTimetableRows;
-        private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label labelPassword;
     }

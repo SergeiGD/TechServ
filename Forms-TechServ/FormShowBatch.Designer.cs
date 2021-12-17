@@ -387,6 +387,7 @@ namespace Forms_TechServ
             this.dataSpareParts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataSpareParts.Size = new System.Drawing.Size(631, 288);
             this.dataSpareParts.TabIndex = 0;
+            this.dataSpareParts.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataSpareParts_CellMouseDoubleClick);
             // 
             // Column1
             // 

@@ -30,6 +30,8 @@ namespace Forms_TechServ
                 panelControl.Controls.Add(btnPick);
                 btnPick.Click += BtnPick_Click;
 
+                dataWorkshops.CellMouseDoubleClick += BtnPick_Click;
+
                 readOnly = true;
             }
             else
@@ -44,7 +46,7 @@ namespace Forms_TechServ
 
                 readOnly = false;
 
-                
+                dataWorkshops.CellMouseDoubleClick += BtnShow_Click;
             }
 
             ManageButton btnShow = new ManageButton();
@@ -160,10 +162,10 @@ namespace Forms_TechServ
             FillGrid();
         }
 
-        private void dataWorkshops_CellClick(object sender, DataGridViewCellEventArgs e)
+        /*private void dataWorkshops_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //pickedRowIndex = e.RowIndex;
-        }
+        }*/
 
         private void searchBtn_Click(object sender, EventArgs e)
         {

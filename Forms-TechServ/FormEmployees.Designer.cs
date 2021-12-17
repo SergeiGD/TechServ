@@ -106,6 +106,7 @@ namespace Forms_TechServ
             this.dataEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataEmployees.Size = new System.Drawing.Size(778, 462);
             this.dataEmployees.TabIndex = 0;
+            this.dataEmployees.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataEmployees_CellMouseDoubleClick);
             // 
             // label2
             // 
@@ -540,7 +541,6 @@ namespace Forms_TechServ
             this.btnClean.Text = "Отчистить фильтры";
             this.btnClean.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnClean.UseVisualStyleBackColor = false;
-            //this.btnClean.Click += new System.EventHandler(this.clearBtn_Click);
             // 
             // searchBtn
             // 

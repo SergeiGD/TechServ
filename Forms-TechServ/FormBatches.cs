@@ -31,6 +31,8 @@ namespace Forms_TechServ
                 panelControl.Controls.Add(btnPick);
                 btnPick.Click += BtnPick_Click;
 
+                dataBatches.CellMouseDoubleClick += BtnPick_Click;
+
                 readOnly = true;
             }
             else
@@ -51,8 +53,9 @@ namespace Forms_TechServ
                     panelControl.Controls.Add(btnDelivered);
                     btnDelivered.Click += btnDelivered_Click;
                 }
-                
+
                 //btnDelivered.Click += BtnManage_Click;
+                dataBatches.CellMouseDoubleClick += BtnShow_Click;
             }
 
             ManageButton btnShow = new ManageButton();
@@ -104,6 +107,7 @@ namespace Forms_TechServ
 
             }
 
+            dataBatches.CellMouseDoubleClick += BtnShow_Click;
 
             ManageButton btnShow = new ManageButton();
             btnShow.Text = "Просмотреть";
@@ -435,5 +439,13 @@ namespace Forms_TechServ
         {
             datePickerUntil.Format = DateTimePickerFormat.Short;
         }
+
+        /*private void dataBatches_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            FormShowBatch showBatch = new FormShowBatch(readOnly, BatchesList.GetById(Convert.ToInt32(dataBatches.SelectedRows[0].Cells[0].Value)));
+            showBatch.ShowDialog();
+
+            FillGrid();
+        }*/
     }
 }

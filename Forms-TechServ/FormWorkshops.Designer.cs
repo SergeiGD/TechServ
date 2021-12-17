@@ -223,7 +223,7 @@ namespace Forms_TechServ
             this.dataWorkshops.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataWorkshops.Size = new System.Drawing.Size(778, 500);
             this.dataWorkshops.TabIndex = 0;
-            this.dataWorkshops.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataWorkshops_CellClick);
+            //this.dataWorkshops.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataWorkshops_CellClick);
             // 
             // panelContent
             // 

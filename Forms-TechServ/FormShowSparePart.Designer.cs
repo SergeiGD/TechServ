@@ -328,6 +328,7 @@ namespace Forms_TechServ
             this.dataInStock.ReadOnly = true;
             this.dataInStock.Size = new System.Drawing.Size(742, 287);
             this.dataInStock.TabIndex = 0;
+            this.dataInStock.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataInStock_CellMouseDoubleClick);
             // 
             // Column1
             // 

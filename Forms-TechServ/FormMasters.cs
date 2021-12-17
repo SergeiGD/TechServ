@@ -31,6 +31,8 @@ namespace Forms_TechServ
                 panelControl.Controls.Add(btnPick);
                 btnPick.Click += BtnPick_Click;
 
+                dataMasters.CellMouseDoubleClick += BtnPick_Click;
+
                 readOnly = true;
             }
             else
@@ -42,6 +44,8 @@ namespace Forms_TechServ
                     panelControl.Controls.Add(btnAdd);
                     btnAdd.Click += BtnManage_Click;
                 }
+
+                dataMasters.CellMouseDoubleClick += BtnShow_Click;
 
                 readOnly = false;
 
@@ -321,10 +325,10 @@ namespace Forms_TechServ
             numericCurrentPage.Value = numericCurrentPage.Value + 1 > numericCurrentPage.Maximum ? numericCurrentPage.Value : numericCurrentPage.Value + 1;
         }
 
-        private void dataMasters_CellClick(object sender, DataGridViewCellEventArgs e)
+        /*private void dataMasters_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //pickedRowIndex = e.RowIndex;
-        }
+        }*/
 
         private void btnCleanCat_Click(object sender, EventArgs e)
         {

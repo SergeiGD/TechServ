@@ -138,5 +138,11 @@ namespace Forms_TechServ
                 }
             }
         }
+
+        private void dataInStock_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            FormShowWorkshop formShowWorkshop = new FormShowWorkshop(true, WorkshopsList.GetById(Convert.ToInt32(dataInStock.SelectedRows[0].Cells[0].Value)));
+            formShowWorkshop.ShowDialog();
+        }
     }
 }

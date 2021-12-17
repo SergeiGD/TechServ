@@ -498,7 +498,7 @@ namespace Forms_TechServ
             this.dataManagers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataManagers.Size = new System.Drawing.Size(778, 460);
             this.dataManagers.TabIndex = 0;
-            this.dataManagers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataManagers_CellClick);
+            //this.dataManagers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataManagers_CellClick);
             // 
             // panelControl
             // 

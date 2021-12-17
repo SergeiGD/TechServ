@@ -30,6 +30,7 @@ namespace Forms_TechServ
                 btnPick.Text = "Выбрать";
                 panelControl.Controls.Add(btnPick);
                 btnPick.Click += BtnPick_Click;
+                dataCategories.CellMouseDoubleClick += BtnPick_Click;
 
                 readOnly = true;
             }
@@ -41,11 +42,13 @@ namespace Forms_TechServ
                     btnAdd.Text = "Добавить";
                     panelControl.Controls.Add(btnAdd);
                     btnAdd.Click += BtnAddNewCat_Click;
+
+                    
                 }
 
                 readOnly = false;
+                dataCategories.CellMouseDoubleClick += BtnShow_Click;
 
-                
             }
 
             ManageButton btnShow = new ManageButton();
@@ -74,6 +77,7 @@ namespace Forms_TechServ
                 btnPick.Text = "Выбрать";
                 panelControl.Controls.Add(btnPick);
                 btnPick.Click += BtnPick_Click;
+                dataCategories.CellMouseDoubleClick += BtnPick_Click;
 
                 readOnly = true;
             }
@@ -85,6 +89,8 @@ namespace Forms_TechServ
                     btnAdd.Text = "Добавить";
                     panelControl.Controls.Add(btnAdd);
                     btnAdd.Click += BtnAddNewCat_Click;
+
+                    dataCategories.CellMouseDoubleClick += BtnShow_Click;
                 }
 
                 readOnly = false;
@@ -249,16 +255,30 @@ namespace Forms_TechServ
 
         private void BtnShow_Click(object sender, EventArgs e)
         {
-            FormShowCategory showCategory = new FormShowCategory(readOnly, CategoriesList.GetById(Convert.ToInt32(dataCategories.SelectedRows[0].Cells[0].Value), true));
-            showCategory.ShowDialog();
+            if (dataCategories.SelectedRows.Count > 0)
+            {
+                FormShowCategory showCategory = new FormShowCategory(readOnly, CategoriesList.GetById(Convert.ToInt32(dataCategories.SelectedRows[0].Cells[0].Value), true));
+                showCategory.ShowDialog();
 
-            FillGrid();
+                FillGrid();
+            }
+            else
+            {
+                MessageBox.Show("Сначала выберите категорию");
+            }
         }
 
         private void BtnShowInMaster_Click(object sender, EventArgs e)      // НУЖНО ЧТОБ БЫ ИЗ МАСТЕРА НЕ МОГЛИ ИЗМЕНИТЬ КАТЕГОРИЮ ПРИ ПРОСМОТРЕ ВСЕХ КАТЕГОРИЙ
         {
-            FormShowCategory showCategory = new FormShowCategory(true, CategoriesList.GetById(Convert.ToInt32(dataCategories.SelectedRows[0].Cells[0].Value), true));
-            showCategory.ShowDialog();
+            if(dataCategories.SelectedRows.Count > 0)
+            {
+                FormShowCategory showCategory = new FormShowCategory(true, CategoriesList.GetById(Convert.ToInt32(dataCategories.SelectedRows[0].Cells[0].Value), true));
+                showCategory.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Сначала выберите категорию");
+            }
         }
 
         private void bntFindParentCat_Click(object sender, EventArgs e)
@@ -336,5 +356,13 @@ namespace Forms_TechServ
                 toolTipCurrentSort.SetToolTip(btnAskOrDesk, "По убыванию");
             }
         }
+
+        /*private void dataCategories_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            FormShowCategory showCategory = new FormShowCategory(readOnly, CategoriesList.GetById(Convert.ToInt32(dataCategories.SelectedRows[0].Cells[0].Value), true));
+            showCategory.ShowDialog();
+
+            FillGrid();
+        }*/
     }
 }

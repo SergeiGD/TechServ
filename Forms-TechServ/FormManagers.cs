@@ -30,6 +30,7 @@ namespace Forms_TechServ
                 btnPick.Text = "Выбрать";
                 panelControl.Controls.Add(btnPick);
                 btnPick.Click += BtnPick_Click;
+                dataManagers.CellMouseDoubleClick += BtnPick_Click;
 
                 readOnly = true;
             }
@@ -41,10 +42,14 @@ namespace Forms_TechServ
                     btnAdd.Text = "Добавить";
                     panelControl.Controls.Add(btnAdd);
                     btnAdd.Click += BtnManage_Click;
+
+                    
                 }
 
                 readOnly = false;
-                
+
+                dataManagers.CellMouseDoubleClick += BtnShow_Click;
+
             }
 
             ManageButton btnShow = new ManageButton();
@@ -60,7 +65,7 @@ namespace Forms_TechServ
             }
         }
 
-        public FormManagers(bool readOnly, string workshop)
+        /*public FormManagers(bool readOnly, string workshop)
         {
             this.readOnly = readOnly;
 
@@ -75,7 +80,9 @@ namespace Forms_TechServ
             ManageButton btnShow = new ManageButton();
             btnShow.Text = "Просмотреть";
             panelControl.Controls.Add(btnShow);
-            btnShow.Click += BtnShow_Click/*BtnShowInClient_Click*/;
+            btnShow.Click += BtnShow_Click; //BtnShowInClient_Click;
+
+            dataManagers.CellMouseDoubleClick += BtnShow_Click;
 
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
             mainBtn[0].Location = new Point(0, 0);
@@ -83,7 +90,7 @@ namespace Forms_TechServ
             {
                 mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
             }
-        }
+        }*/
 
         private void BtnPick_Click(object sender, EventArgs e)
         {
@@ -303,10 +310,10 @@ namespace Forms_TechServ
             numericCurrentPage.Value = numericCurrentPage.Value + 1 > numericCurrentPage.Maximum ? numericCurrentPage.Value : numericCurrentPage.Value + 1;
         }
 
-        private void dataManagers_CellClick(object sender, DataGridViewCellEventArgs e)
+        /*private void dataManagers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //pickedRowIndex = e.RowIndex;
-        }
+        }*/
 
         private void btnAskOrDesk_MouseHover(object sender, EventArgs e)
         {

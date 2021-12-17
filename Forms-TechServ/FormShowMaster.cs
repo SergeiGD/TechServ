@@ -269,5 +269,11 @@ namespace Forms_TechServ
         {
             numericCurrentCatPage.Value = numericCurrentCatPage.Value + 1 > numericCurrentCatPage.Maximum ? numericCurrentCatPage.Value : numericCurrentCatPage.Value + 1;
         }
+
+        private void dataCategories_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            FormShowCategory formShowCategory = new FormShowCategory(true, CategoriesList.GetById(Convert.ToInt32(dataCategories.SelectedRows[0].Cells[0].Value), true));                       // вот тут просмотр
+            formShowCategory.ShowDialog();
+        }
     }
 }

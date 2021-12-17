@@ -40,8 +40,8 @@ namespace Forms_TechServ
 
             this.Size = new Size(494, 187);
 
-            workshopTabs.TabPages.Add(empsPage);
-            workshopTabs.TabPages.Add(batchesPage);
+            //workshopTabs.TabPages.Add(empsPage);
+            //workshopTabs.TabPages.Add(batchesPage);
 
             this.workshop = workshop;
 

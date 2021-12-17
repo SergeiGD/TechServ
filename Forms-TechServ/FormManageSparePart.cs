@@ -55,11 +55,11 @@ namespace Forms_TechServ
                 comboBoxShowRows.Items.Add(40);
                 comboBoxShowRows.SelectedIndex = 2;
 
-                FillInStock();
+                //FillInStock();
             }
         }
 
-        private void FillInStock()
+        /*private void FillInStock()
         {
             List<Workshop> workshops = WorkshopsList.GetWorkshops(new Workshop(), true, "Id", (int)comboBoxShowRows.SelectedItem, currentPage, out rowsCount);
 
@@ -79,7 +79,7 @@ namespace Forms_TechServ
             int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);
             numericCurrentPage.Maximum = maxPage;
             labelPageCount.Text = $"из {maxPage}";
-        }
+        }*/
 
         private void FormManageSparePart_ResizeEnd(object sender, EventArgs e)
         {

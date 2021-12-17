@@ -32,6 +32,8 @@ namespace Forms_TechServ
             this.components = new System.ComponentModel.Container();
             this.managerTabs = new System.Windows.Forms.TabControl();
             this.generalPage = new System.Windows.Forms.TabPage();
+            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.btnAction = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnFindWorkshop = new FontAwesome.Sharp.IconButton();
@@ -49,39 +51,10 @@ namespace Forms_TechServ
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.timetablePage = new System.Windows.Forms.TabPage();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnCleanTimetable = new Forms_TechServ.ManageButton();
-            this.btnFindTimetable = new Forms_TechServ.ManageButton();
-            this.btnDeleteTimetable = new Forms_TechServ.ManageButton();
-            this.btnAddTimetable = new Forms_TechServ.ManageButton();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.comboBoxShowTimetableRows = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.datePickerUntil = new System.Windows.Forms.DateTimePicker();
-            this.label12 = new System.Windows.Forms.Label();
-            this.datePickerFrom = new System.Windows.Forms.DateTimePicker();
-            this.label7 = new System.Windows.Forms.Label();
-            this.labelPagesCount = new System.Windows.Forms.Label();
-            this.numericCurrentPage = new System.Windows.Forms.NumericUpDown();
-            this.label28 = new System.Windows.Forms.Label();
-            this.btnNextTb = new System.Windows.Forms.Button();
-            this.btnPrevTb = new System.Windows.Forms.Button();
-            this.dataTimetable = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.tbPassword = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.managerTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSalary)).BeginInit();
-            this.timetablePage.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTimetable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -124,6 +97,22 @@ namespace Forms_TechServ
             this.generalPage.Size = new System.Drawing.Size(752, 257);
             this.generalPage.TabIndex = 0;
             this.generalPage.Text = "Общая информация";
+            // 
+            // tbPassword
+            // 
+            this.tbPassword.Location = new System.Drawing.Point(121, 100);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.Size = new System.Drawing.Size(113, 20);
+            this.tbPassword.TabIndex = 155;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(19, 103);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(48, 13);
+            this.label9.TabIndex = 154;
+            this.label9.Text = "Пароль:";
             // 
             // btnAction
             // 
@@ -300,284 +289,16 @@ namespace Forms_TechServ
             // timetablePage
             // 
             this.timetablePage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.timetablePage.Controls.Add(this.panel2);
-            this.timetablePage.Controls.Add(this.panel1);
             this.timetablePage.Location = new System.Drawing.Point(4, 22);
             this.timetablePage.Name = "timetablePage";
             this.timetablePage.Padding = new System.Windows.Forms.Padding(3);
-            this.timetablePage.Size = new System.Drawing.Size(752, 238);
+            this.timetablePage.Size = new System.Drawing.Size(752, 257);
             this.timetablePage.TabIndex = 2;
             this.timetablePage.Text = "Расписание";
-            // 
-            // panel2
-            // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.panel2.Controls.Add(this.btnCleanTimetable);
-            this.panel2.Controls.Add(this.btnFindTimetable);
-            this.panel2.Controls.Add(this.btnDeleteTimetable);
-            this.panel2.Controls.Add(this.btnAddTimetable);
-            this.panel2.Location = new System.Drawing.Point(608, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(142, 234);
-            this.panel2.TabIndex = 3;
-            // 
-            // btnCleanTimetable
-            // 
-            this.btnCleanTimetable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCleanTimetable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnCleanTimetable.FlatAppearance.BorderSize = 0;
-            this.btnCleanTimetable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCleanTimetable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnCleanTimetable.Location = new System.Drawing.Point(0, 40);
-            this.btnCleanTimetable.Name = "btnCleanTimetable";
-            this.btnCleanTimetable.Size = new System.Drawing.Size(142, 40);
-            this.btnCleanTimetable.TabIndex = 4;
-            this.btnCleanTimetable.Text = "Отчистить фильры";
-            this.btnCleanTimetable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCleanTimetable.UseVisualStyleBackColor = false;
-            // 
-            // btnFindTimetable
-            // 
-            this.btnFindTimetable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFindTimetable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnFindTimetable.FlatAppearance.BorderSize = 0;
-            this.btnFindTimetable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFindTimetable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnFindTimetable.Location = new System.Drawing.Point(0, 0);
-            this.btnFindTimetable.Name = "btnFindTimetable";
-            this.btnFindTimetable.Size = new System.Drawing.Size(142, 40);
-            this.btnFindTimetable.TabIndex = 3;
-            this.btnFindTimetable.Text = "Найти";
-            this.btnFindTimetable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFindTimetable.UseVisualStyleBackColor = false;
-            // 
-            // btnDeleteTimetable
-            // 
-            this.btnDeleteTimetable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteTimetable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnDeleteTimetable.FlatAppearance.BorderSize = 0;
-            this.btnDeleteTimetable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteTimetable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnDeleteTimetable.Location = new System.Drawing.Point(0, 120);
-            this.btnDeleteTimetable.Name = "btnDeleteTimetable";
-            this.btnDeleteTimetable.Size = new System.Drawing.Size(142, 40);
-            this.btnDeleteTimetable.TabIndex = 2;
-            this.btnDeleteTimetable.Text = "Удалить";
-            this.btnDeleteTimetable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDeleteTimetable.UseVisualStyleBackColor = false;
-            // 
-            // btnAddTimetable
-            // 
-            this.btnAddTimetable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddTimetable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnAddTimetable.FlatAppearance.BorderSize = 0;
-            this.btnAddTimetable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddTimetable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnAddTimetable.Location = new System.Drawing.Point(0, 80);
-            this.btnAddTimetable.Name = "btnAddTimetable";
-            this.btnAddTimetable.Size = new System.Drawing.Size(142, 40);
-            this.btnAddTimetable.TabIndex = 1;
-            this.btnAddTimetable.Text = "Сформировать";
-            this.btnAddTimetable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddTimetable.UseVisualStyleBackColor = false;
-            this.btnAddTimetable.Click += new System.EventHandler(this.addTimetableBtn_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.comboBoxShowTimetableRows);
-            this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.datePickerUntil);
-            this.panel1.Controls.Add(this.label12);
-            this.panel1.Controls.Add(this.datePickerFrom);
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.labelPagesCount);
-            this.panel1.Controls.Add(this.numericCurrentPage);
-            this.panel1.Controls.Add(this.label28);
-            this.panel1.Controls.Add(this.btnNextTb);
-            this.panel1.Controls.Add(this.btnPrevTb);
-            this.panel1.Controls.Add(this.dataTimetable);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(608, 234);
-            this.panel1.TabIndex = 0;
-            // 
-            // comboBoxShowTimetableRows
-            // 
-            this.comboBoxShowTimetableRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.comboBoxShowTimetableRows.FormattingEnabled = true;
-            this.comboBoxShowTimetableRows.Location = new System.Drawing.Point(422, 209);
-            this.comboBoxShowTimetableRows.Name = "comboBoxShowTimetableRows";
-            this.comboBoxShowTimetableRows.Size = new System.Drawing.Size(62, 21);
-            this.comboBoxShowTimetableRows.TabIndex = 24;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label8.Location = new System.Drawing.Point(309, 210);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(107, 17);
-            this.label8.TabIndex = 23;
-            this.label8.Text = "Показывать по";
-            // 
-            // datePickerUntil
-            // 
-            this.datePickerUntil.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.datePickerUntil.Location = new System.Drawing.Point(446, 8);
-            this.datePickerUntil.Name = "datePickerUntil";
-            this.datePickerUntil.Size = new System.Drawing.Size(130, 20);
-            this.datePickerUntil.TabIndex = 22;
-            // 
-            // label12
-            // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(396, 14);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(48, 13);
-            this.label12.TabIndex = 21;
-            this.label12.Text = "дата до:";
-            // 
-            // datePickerFrom
-            // 
-            this.datePickerFrom.Location = new System.Drawing.Point(75, 8);
-            this.datePickerFrom.Name = "datePickerFrom";
-            this.datePickerFrom.Size = new System.Drawing.Size(130, 20);
-            this.datePickerFrom.TabIndex = 20;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(25, 14);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(47, 13);
-            this.label7.TabIndex = 19;
-            this.label7.Text = "дата от:";
-            // 
-            // labelPagesCount
-            // 
-            this.labelPagesCount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.labelPagesCount.AutoSize = true;
-            this.labelPagesCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.labelPagesCount.Location = new System.Drawing.Point(262, 209);
-            this.labelPagesCount.Name = "labelPagesCount";
-            this.labelPagesCount.Size = new System.Drawing.Size(36, 17);
-            this.labelPagesCount.TabIndex = 16;
-            this.labelPagesCount.Text = "из S";
-            // 
-            // numericCurrentPage
-            // 
-            this.numericCurrentPage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.numericCurrentPage.Location = new System.Drawing.Point(211, 210);
-            this.numericCurrentPage.Name = "numericCurrentPage";
-            this.numericCurrentPage.Size = new System.Drawing.Size(45, 20);
-            this.numericCurrentPage.TabIndex = 15;
-            // 
-            // label28
-            // 
-            this.label28.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label28.Location = new System.Drawing.Point(133, 209);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(72, 17);
-            this.label28.TabIndex = 14;
-            this.label28.Text = "Страница";
-            // 
-            // btnNextTb
-            // 
-            this.btnNextTb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNextTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnNextTb.FlatAppearance.BorderSize = 0;
-            this.btnNextTb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNextTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.btnNextTb.Location = new System.Drawing.Point(481, 197);
-            this.btnNextTb.Name = "btnNextTb";
-            this.btnNextTb.Size = new System.Drawing.Size(130, 40);
-            this.btnNextTb.TabIndex = 6;
-            this.btnNextTb.Text = "Следующая →";
-            this.btnNextTb.UseVisualStyleBackColor = false;
-            // 
-            // btnPrevTb
-            // 
-            this.btnPrevTb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnPrevTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnPrevTb.FlatAppearance.BorderSize = 0;
-            this.btnPrevTb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrevTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.btnPrevTb.Location = new System.Drawing.Point(-3, 197);
-            this.btnPrevTb.Name = "btnPrevTb";
-            this.btnPrevTb.Size = new System.Drawing.Size(130, 40);
-            this.btnPrevTb.TabIndex = 5;
-            this.btnPrevTb.Text = "← Предыдущая";
-            this.btnPrevTb.UseVisualStyleBackColor = false;
-            // 
-            // dataTimetable
-            // 
-            this.dataTimetable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataTimetable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataTimetable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataTimetable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column5,
-            this.Column3,
-            this.Column4});
-            this.dataTimetable.Location = new System.Drawing.Point(0, 34);
-            this.dataTimetable.Name = "dataTimetable";
-            this.dataTimetable.Size = new System.Drawing.Size(608, 163);
-            this.dataTimetable.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Дата";
-            this.Column1.Name = "Column1";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "День недели";
-            this.Column5.Name = "Column5";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Начало смены";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Конец смены";
-            this.Column4.Name = "Column4";
             // 
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
-            // 
-            // tbPassword
-            // 
-            this.tbPassword.Location = new System.Drawing.Point(121, 100);
-            this.tbPassword.Name = "tbPassword";
-            this.tbPassword.Size = new System.Drawing.Size(113, 20);
-            this.tbPassword.TabIndex = 155;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(19, 103);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(48, 13);
-            this.label9.TabIndex = 154;
-            this.label9.Text = "Пароль:";
             // 
             // FormManageManager
             // 
@@ -594,12 +315,6 @@ namespace Forms_TechServ
             this.generalPage.ResumeLayout(false);
             this.generalPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSalary)).EndInit();
-            this.timetablePage.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataTimetable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
@@ -626,28 +341,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TabPage timetablePage;
-        private System.Windows.Forms.Panel panel2;
-        private ManageButton btnDeleteTimetable;
-        private ManageButton btnAddTimetable;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label labelPagesCount;
-        private System.Windows.Forms.NumericUpDown numericCurrentPage;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Button btnNextTb;
-        private System.Windows.Forms.Button btnPrevTb;
-        private System.Windows.Forms.DataGridView dataTimetable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DateTimePicker datePickerUntil;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.DateTimePicker datePickerFrom;
-        private System.Windows.Forms.Label label7;
-        private ManageButton btnCleanTimetable;
-        private ManageButton btnFindTimetable;
-        private System.Windows.Forms.ComboBox comboBoxShowTimetableRows;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Label label9;

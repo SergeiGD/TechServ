@@ -162,7 +162,7 @@ namespace Forms_TechServ
                 FormSpareParts formSpareParts = new FormSpareParts(true, workshop);
                 formSpareParts.TopLevel = false;
                 formSpareParts.FormBorderStyle = FormBorderStyle.None;
-                batchesPage.Controls.Add(formSpareParts);
+                sparePartsPage.Controls.Add(formSpareParts);
                 formSpareParts.Dock = DockStyle.Fill;
                 formSpareParts.BringToFront();
                 formSpareParts.Show();

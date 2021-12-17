@@ -30,6 +30,8 @@ namespace Forms_TechServ
                 panelControl.Controls.Add(btnPick);
                 btnPick.Click += BtnPick_Click;
 
+                dataServies.CellMouseDoubleClick += BtnPick_Click; 
+
                 readOnly = true;
             }
             else
@@ -41,6 +43,8 @@ namespace Forms_TechServ
                     panelControl.Controls.Add(btnAdd);
                     btnAdd.Click += BtnAddNewService_Click;
                 }
+
+                dataServies.CellMouseDoubleClick += BtnShow_Click;
 
                 readOnly = false;
             }
@@ -77,6 +81,8 @@ namespace Forms_TechServ
             btnShow.Text = "Просмотреть";
             panelControl.Controls.Add(btnShow);
             btnShow.Click += BtnShow_Click;
+
+            dataServies.CellMouseDoubleClick += BtnShow_Click;
 
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
             mainBtn[0].Location = new Point(0, 0);

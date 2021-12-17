@@ -212,20 +212,27 @@ namespace Forms_TechServ
 
         private void BtnShow_Click(object sender, EventArgs e)
         {
-            Employee employee = EmployeesList.GetById(Convert.ToInt32(dataEmployees.SelectedRows[0].Cells[0].Value), true);     // получаем выбранного сотрудника
-
-            if(employee.GetType() == typeof(Manager))                                                                           // ищем на какой тип ссылка
-            {                                                                                                                   // и в зависимости от этого
-                FormShowManager formShowManager = new FormShowManager(readOnly, (Manager)employee);                             // отображаем соотвествующую форму
-                formShowManager.ShowDialog();
-            }
-            else if (employee.GetType() == typeof(Master))
+            if(dataEmployees.SelectedRows.Count > 0)
             {
-                FormShowMaster showMaster = new FormShowMaster(readOnly, (Master)employee);
-                showMaster.ShowDialog();
-            }
+                Employee employee = EmployeesList.GetById(Convert.ToInt32(dataEmployees.SelectedRows[0].Cells[0].Value), true);     // получаем выбранного сотрудника
 
-            FillGrid();
+                if (employee.GetType() == typeof(Manager))                                                                           // ищем на какой тип ссылка
+                {                                                                                                                   // и в зависимости от этого
+                    FormShowManager formShowManager = new FormShowManager(readOnly, (Manager)employee);                             // отображаем соотвествующую форму
+                    formShowManager.ShowDialog();
+                }
+                else if (employee.GetType() == typeof(Master))
+                {
+                    FormShowMaster showMaster = new FormShowMaster(readOnly, (Master)employee);
+                    showMaster.ShowDialog();
+                }
+
+                FillGrid();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите сотрудника");
+            }   
         }
 
         private void btnFlindWorkshop_Click(object sender, EventArgs e)
@@ -344,6 +351,24 @@ namespace Forms_TechServ
         private void btnSalaryInfo_MouseHover(object sender, EventArgs e)
         {
             toolTipSlalaryInfo.SetToolTip(btnSalaryInfo, "Ноль - до скольки угодно");
+        }
+
+        private void dataEmployees_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            Employee employee = EmployeesList.GetById(Convert.ToInt32(dataEmployees.SelectedRows[0].Cells[0].Value), true);     // получаем выбранного сотрудника
+
+            if (employee.GetType() == typeof(Manager))                                                                           // ищем на какой тип ссылка
+            {                                                                                                                   // и в зависимости от этого
+                FormShowManager formShowManager = new FormShowManager(readOnly, (Manager)employee);                             // отображаем соотвествующую форму
+                formShowManager.ShowDialog();
+            }
+            else if (employee.GetType() == typeof(Master))
+            {
+                FormShowMaster showMaster = new FormShowMaster(readOnly, (Master)employee);
+                showMaster.ShowDialog();
+            }
+
+            FillGrid();
         }
     }
 }

@@ -33,6 +33,8 @@ namespace Forms_TechServ
                 panelControl.Controls.Add(btnPick);
                 btnPick.Click += BtnPickToOrder_Click;
 
+                dataSpareParts.CellMouseDoubleClick += BtnPickToOrder_Click; 
+
                 readOnly = true;
 
                 /*radioButton5.Checked = true;
@@ -58,7 +60,7 @@ namespace Forms_TechServ
 
                 readOnly = false;
 
-                
+                dataSpareParts.CellMouseDoubleClick += BtnShow_Click;
 
                 clearBtn.Click += clearBtnAll_Click;
 
@@ -99,6 +101,8 @@ namespace Forms_TechServ
             panelControl.Controls.Add(btnShow);
             btnShow.Click += BtnShowInOther_Click;
 
+            dataSpareParts.CellMouseDoubleClick += BtnShowInOther_Click;
+
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
             mainBtn[0].Location = new Point(0, 0);
             for (int i = 1; i < mainBtn.Count(); i++)
@@ -119,6 +123,8 @@ namespace Forms_TechServ
             btnShow.Text = "Просмотреть";
             panelControl.Controls.Add(btnShow);
             btnShow.Click += BtnShowInOther_Click;
+
+            dataSpareParts.CellMouseDoubleClick += BtnShowInOther_Click;
 
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
             mainBtn[0].Location = new Point(0, 0);

@@ -15,14 +15,16 @@ namespace Forms_TechServ
         int rowsCount;
         int currentPage = 1;
         Employee employee;
+        bool readOnly;
 
         public FormEmpTimetalbe(Employee employee, bool readOnly)
         {
             InitializeComponent();
 
             this.employee = employee;
+            this.readOnly = readOnly;
 
-            if (!readOnly)
+            if (!readOnly && UserSession.Can("edit_employee"))
             {
                 ManageButton btnAdd = new ManageButton();
                 btnAdd.Text = "Добавить";
@@ -189,10 +191,14 @@ namespace Forms_TechServ
         private void dataTimetable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             //if(read)
-            FormAddEmployeeTimetable formAddEmployeeTimetable = new FormAddEmployeeTimetable(EmployeesTimetablesList.GetById(Convert.ToInt32(dataTimetable.SelectedRows[0].Cells[0].Value)));
-            formAddEmployeeTimetable.ShowDialog();
+            if (!readOnly && UserSession.Can("edit_employee"))
+            {
+                FormAddEmployeeTimetable formAddEmployeeTimetable = new FormAddEmployeeTimetable(EmployeesTimetablesList.GetById(Convert.ToInt32(dataTimetable.SelectedRows[0].Cells[0].Value)));
+                formAddEmployeeTimetable.ShowDialog();
 
-            FillGrid();
+                FillGrid();
+            }
+            
         }
     }
 }

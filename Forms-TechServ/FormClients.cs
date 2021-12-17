@@ -29,6 +29,7 @@ namespace Forms_TechServ
                 btnPick.Text = "Выбрать";
                 panelControl.Controls.Add(btnPick);
                 btnPick.Click += BtnPick_Click;
+                dataClients.CellMouseDoubleClick += BtnPick_Click;
 
                 readOnly = true;
             }
@@ -40,8 +41,11 @@ namespace Forms_TechServ
                     btnAdd.Text = "Добавить";
                     panelControl.Controls.Add(btnAdd);
                     btnAdd.Click += BtnManage_Click;
+
+                    
                 }
- 
+
+                dataClients.CellMouseDoubleClick += BtnShow_Click;
 
                 readOnly = false;
             }
@@ -168,10 +172,17 @@ namespace Forms_TechServ
 
         private void BtnShow_Click(object sender, EventArgs e)
         {
-            FormShowClient showClient = new FormShowClient(readOnly, ClientsList.GetById(Convert.ToInt32(dataClients.SelectedRows[0].Cells[0].Value)));
-            showClient.ShowDialog();
+            if(dataClients.SelectedRows.Count > 0)
+            {
+                FormShowClient showClient = new FormShowClient(readOnly, ClientsList.GetById(Convert.ToInt32(dataClients.SelectedRows[0].Cells[0].Value)));
+                showClient.ShowDialog();
 
-            FillGrid();
+                FillGrid();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите клиента");
+            }
         }
 
         private void btnFind_Click(object sender, EventArgs e)
@@ -235,6 +246,14 @@ namespace Forms_TechServ
             {
                 toolTipCurrentSort.SetToolTip(btnAskOrDesk, "По убыванию");
             }
+        }
+
+        private void dataClients_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            FormShowClient showClient = new FormShowClient(readOnly, ClientsList.GetById(Convert.ToInt32(dataClients.SelectedRows[0].Cells[0].Value)));
+            showClient.ShowDialog();
+
+            FillGrid();
         }
     }
 }

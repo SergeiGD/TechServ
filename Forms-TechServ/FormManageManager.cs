@@ -25,6 +25,8 @@ namespace Forms_TechServ
             manager = new Manager();
 
             btnAction.Text = "Добавить";
+
+            managerTabs.TabPages.Remove(timetablePage);
         }
 
         public FormManageManager(Manager manager)
@@ -128,8 +130,13 @@ namespace Forms_TechServ
                 {
                     manager.AddManager();
 
-                    MessageBox.Show($"Новый сотрудник успешно добавлен", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    DialogResult answer = MessageBox.Show($"Новый сотрудник успешно добавлен. ID - {manager.Id}. Желаете добавить расписание?", "Успех", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    this.Hide();
+                    if (answer == DialogResult.Yes)
+                    {
+                        FormManageManager formManageManager = new FormManageManager(ManagersList.GetById(manager.Id, true));
+                        formManageManager.ShowDialog();
+                    }
                     this.Close();
                 }
                 else

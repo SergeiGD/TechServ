@@ -30,17 +30,24 @@ namespace Forms_TechServ
                 panelControl.Controls.Add(btnPick);
                 btnPick.Click += BtnPick_Click;
 
+                dataProducts.CellMouseDoubleClick += BtnPick_Click;
+
                 readOnly = true;
             }
             else
             {
-                ManageButton btnAdd = new ManageButton();
-                btnAdd.Text = "Добавить";
-                panelControl.Controls.Add(btnAdd);
-                btnAdd.Click += BtnManage_Click;
+                if (UserSession.Can("add_del_product"))
+                {
+                    ManageButton btnAdd = new ManageButton();
+                    btnAdd.Text = "Добавить";
+                    panelControl.Controls.Add(btnAdd);
+                    btnAdd.Click += BtnManage_Click;
+                }
+                
 
+
+                dataProducts.CellMouseDoubleClick += BtnShow_Click;
                 readOnly = false;
-
                 
             }
 
@@ -105,6 +112,8 @@ namespace Forms_TechServ
             btnShow.Text = "Просмотреть";
             panelControl.Controls.Add(btnShow);
             btnShow.Click += BtnShow_Click/*BtnShowInClient_Click*/;
+
+            dataProducts.CellMouseDoubleClick += BtnShow_Click;
 
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
             mainBtn[0].Location = new Point(0, 0);

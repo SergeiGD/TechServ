@@ -14,7 +14,7 @@ namespace Forms_TechServ
     public partial class FormFindEmpPosition : Form
     {
         public Role pickedRole;
-        int pickedRowIndex;
+        //int pickedRowIndex;
         int currentPage = 1;
         int rowsCount;
 
@@ -26,9 +26,16 @@ namespace Forms_TechServ
         private void btnPick_Click(object sender, EventArgs e)
         {
             //var row = dataPosition.SelectedRows;
+            if(dataPosition.SelectedRows.Count > 0)
+            {
+                pickedRole = RolesList.GetById(Convert.ToInt32(dataPosition.SelectedRows[0].Cells[0].Value));
+                this.Close();
 
-            pickedRole = RolesList.GetById(Convert.ToInt32(dataPosition.Rows[pickedRowIndex].Cells[0].Value));
-            this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите роль");
+            }
         }
 
         private void FormFindEmpPosition_Load(object sender, EventArgs e)
@@ -80,10 +87,10 @@ namespace Forms_TechServ
         }
 
 
-        private void dataPosition_CellClick(object sender, DataGridViewCellEventArgs e)
+        /*private void dataPosition_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             pickedRowIndex = e.RowIndex;
-        }
+        }*/
 
         private void btnFind_Click(object sender, EventArgs e)
         {
@@ -121,6 +128,12 @@ namespace Forms_TechServ
         private void btnPrev_Click(object sender, EventArgs e)
         {
             numericCurrentPage.Value = numericCurrentPage.Value - 1 < numericCurrentPage.Minimum ? numericCurrentPage.Value : numericCurrentPage.Value - 1;
+        }
+
+        private void dataPosition_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            pickedRole = RolesList.GetById(Convert.ToInt32(dataPosition.SelectedRows[0].Cells[0].Value));
+            this.Close();
         }
     }
 }

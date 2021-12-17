@@ -171,5 +171,11 @@ namespace Forms_TechServ
         {
             this.Close();
         }
+
+        private void dataSpareParts_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            FormShowSparePart formShowSparePart = new FormShowSparePart(true, SparePartsList.GetById(Convert.ToInt32(dataSpareParts.SelectedRows[0].Cells[0].Value)));
+            formShowSparePart.ShowDialog();
+        }
     }
 }
