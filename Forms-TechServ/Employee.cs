@@ -204,16 +204,7 @@ namespace Forms_TechServ
 
 
                 return true;
-                /*if (db.Masters.Contains(this))
-                {
-                    db.Entry(this).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }*/
+                
             }
         }
 
@@ -221,11 +212,46 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                db.MastersCategories.Add(new MastersCategories()
+
+                if (!CheckMasterCategory(category))
                 {
-                    MasterId = this.Id,
-                    CategoryId = category.Id
-                });
+
+                    MastersCategories masterCat = new MastersCategories()
+                    {
+                        MasterId = this.Id,
+                        CategoryId = category.Id
+                    };
+
+
+
+                    CleanChildern(category);
+
+                    db.MastersCategories.Add(new MastersCategories()
+                    {
+                        MasterId = this.Id,
+                        CategoryId = category.Id
+                    });
+
+                    db.SaveChanges();
+
+
+                    // рекурсивная локальная функция, которая удалят дочерние элементы, когда добавляется категория более выского уровня (узла)
+                    void CleanChildern(Category currentCat)
+                    {
+                        foreach (Category cat in db.Categories.Where(c => c.ParentCategoryId == currentCat.Id && c.DelTime == null))
+                        {
+                            CleanChildern(cat);
+                            db.MastersCategories.RemoveRange(db.MastersCategories.Where(c => c.CategoryId == cat.Id && c.MasterId == this.Id));
+                        }
+                    }
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
                 //db.Database.Connection
                 //transact = db.Database.BeginTransaction();
                 //transact = new DbContextTransaction(db.Database.BeginTransaction());
@@ -237,11 +263,7 @@ namespace Forms_TechServ
                 // ЕСЛИ ТРАНЗАЦИИ, ТО НЕ ЗАКЗЫВАТЬ СОЕДИНЕНИЕ => ПЛОХО!!
                 // ХРАНИТЬ ЛОКАЛЬНЫЙ МАССИВ И СИНХРОНИЗИРОВАТЬ ПРИ EditMaster()?
 
-                db.SaveChanges();
-
                 
-
-                return true;
 
                 /*if (db.MastersCategories.Contains(db.MastersCategories.Where(c => c.Category.Equals(category) && c.Master.Equals(this)).FirstOrDefault()))
                 {
@@ -265,7 +287,7 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                MastersCategories catToDelete = db.MastersCategories.Where(mc => mc.CategoryId == category.Id && mc.MasterId == this.Id).FirstOrDefault();
+                MastersCategories catToDelete = db.MastersCategories.Find(this.Id, category.Id);//db.MastersCategories.Where(mc => mc.CategoryId == category.Id && mc.MasterId == this.Id).FirstOrDefault();
                 if(catToDelete != null)
                 {
                     db.MastersCategories.Remove(catToDelete);
@@ -310,9 +332,22 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                MastersCategories cat = db.MastersCategories.Find(this.Id, category.Id);
-                //MastersCategories cat = db.MastersCategories.Where(mc => mc.MasterId == this.Id && mc.CategoryId == category.Id).FirstOrDefault();
-                if (cat != null)
+                MastersCategories masterCat = null;// = db.MastersCategories.Find(this.Id, category.Id);
+                Category pickedCat = category;//new Category() { Id = category.Id, ParentCategoryId = category.ParentCategoryId};
+
+                /*do
+                {
+                    masterCat = db.MastersCategories.Find(this.Id, pickedCat.ParentCategoryId);
+                    pickedCat = db.Categories.Where(c => c.Id == pickedCat.ParentCategoryId && c.DelTime == null).FirstOrDefault();
+                }*/
+                while (pickedCat != null && masterCat == null)
+                {
+                    masterCat = db.MastersCategories.Find(this.Id, pickedCat.Id);
+                    pickedCat = db.Categories.Where(c => c.Id == pickedCat.ParentCategoryId && c.DelTime == null).FirstOrDefault();
+                }
+                
+
+                if (masterCat != null)
                 {
                     return true;
                 }

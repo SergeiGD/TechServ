@@ -141,7 +141,7 @@ namespace Forms_TechServ
 
         private void btnFindCat_Click(object sender, EventArgs e)
         {
-            FormCategories formCategories = new FormCategories(true, false);
+            FormCategories formCategories = new FormCategories(true);
             formCategories.ShowDialog();
 
             tbCat.Text = formCategories?.category?.Name;

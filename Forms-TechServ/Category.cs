@@ -97,7 +97,7 @@ namespace Forms_TechServ
                 return category;
             }
         }
-        public static List<Category> GetCategories(Category FilterA, bool onlyEndPoint, bool desk, string sortBy, int count, int page, out int rowsCount)
+        public static List<Category> GetCategories(Category FilterA,/* bool onlyEndPoint, */bool desk, string sortBy, int count, int page, out int rowsCount)
         {
             using(TechContext db = new TechContext())
             {
@@ -126,7 +126,7 @@ namespace Forms_TechServ
 
                 
 
-                if (onlyEndPoint)
+                /*if (onlyEndPoint)
                 {
                     List<Category> endCats = new List<Category>();
 
@@ -147,7 +147,7 @@ namespace Forms_TechServ
 
                     return endCats;
 
-                }
+                }*/
 
                 rowsCount = categories.Count();
 

@@ -13,16 +13,16 @@ namespace Forms_TechServ
     public partial class FormCategories : Form
     {
         bool readOnly;
-        bool onlyEndPoints;
+        //bool onlyEndPoints;
         public Category category;
         int rowsCount;
         int currentPage = 1;
 
-        public FormCategories(bool forSearching, bool onlyEndPoints)
+        public FormCategories(bool forSearching/*, bool onlyEndPoints*/)
         {
             InitializeComponent();
 
-            this.onlyEndPoints = onlyEndPoints;
+            //this.onlyEndPoints = onlyEndPoints;
 
             if (forSearching)
             {
@@ -65,7 +65,7 @@ namespace Forms_TechServ
             }
         }
 
-        public FormCategories(bool forSearching)
+        /*public FormCategories(bool forSearching)
         {
             InitializeComponent();
 
@@ -110,7 +110,7 @@ namespace Forms_TechServ
             {
                 mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
             }
-        }
+        }*/
 
         /*public FormCategories(Master master, bool readOnly)
         {
@@ -222,7 +222,6 @@ namespace Forms_TechServ
                     Name = tbName.Text,
                     ParentCategory = (Category)tbParentCat.Tag
                 },
-                onlyEndPoints,
                 (bool)btnAskOrDesk.Tag,
                 sortBy,
                 (int)comboBoxShowRows.SelectedItem,
@@ -287,7 +286,7 @@ namespace Forms_TechServ
 
         private void bntFindParentCat_Click(object sender, EventArgs e)
         {
-            FormCategories formCategories = new FormCategories(true, false);
+            FormCategories formCategories = new FormCategories(true);
             formCategories.ShowDialog();
 
             tbParentCat.Text = formCategories?.category?.Name;

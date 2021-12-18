@@ -135,7 +135,7 @@ namespace Forms_TechServ
 
         private void addCategoryBtn_Click(object sender, EventArgs e)
         {
-            FormCategories formCategories = new FormCategories(true, true);
+            FormCategories formCategories = new FormCategories(true);
             formCategories.ShowDialog();
 
             //Category cat = formCategories.category;
@@ -145,13 +145,14 @@ namespace Forms_TechServ
                 
                 if (master.CheckMasterCategory(formCategories.category))
                 {
-                    MessageBox.Show("У мастера уже есть эта категория");
+                    MessageBox.Show("У мастера уже есть эта категория", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
+
                     master.AddMasterCategory(formCategories.category);
                     FillCategories();
-                    MessageBox.Show("Новая категория успешно сохранена");
+                    MessageBox.Show("Новая категория успешно сохранена", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 
             }
@@ -336,15 +337,23 @@ namespace Forms_TechServ
             DialogResult answer = MessageBox.Show("Вы уверены что хотите убрать эту категорию у мастера?", "Подтвердите действие", MessageBoxButtons.YesNo);
             if(answer == DialogResult.Yes)
             {
-                if (master.DelMasterCategory(CategoriesList.GetById(Convert.ToInt32(dataCategories.SelectedRows[0].Cells[0].Value), true)))
+                if (dataCategories.SelectedRows.Count > 0)
                 {
-                    FillCategories();
-                    MessageBox.Show("Категория успешно удалена");
+                    if (master.DelMasterCategory(CategoriesList.GetById(Convert.ToInt32(dataCategories.SelectedRows[0].Cells[0].Value), true)))
+                    {
+                        FillCategories();
+                        MessageBox.Show("Категория успешно удалена");
+                    }
+                    else
+                    {
+                        MessageBox.Show("У мастера нету такой категории", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("У мастера нету такой категории", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Для начала выберите категорию");
                 }
+                
             }
             
             
