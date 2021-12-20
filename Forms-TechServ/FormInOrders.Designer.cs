@@ -32,7 +32,7 @@ namespace Forms_TechServ
             this.panelContent = new System.Windows.Forms.Panel();
             this.comboBoxShowRows = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.labelPagesCount = new System.Windows.Forms.Label();
+            this.labelPageCount = new System.Windows.Forms.Label();
             this.numericCurrentPage = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.panelFind = new System.Windows.Forms.Panel();
@@ -44,7 +44,6 @@ namespace Forms_TechServ
             this.btnFindClient = new FontAwesome.Sharp.IconButton();
             this.tbID = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.checkHideCanceled = new System.Windows.Forms.CheckBox();
             this.datePickerStartUntil = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.numericPriceUntil = new System.Windows.Forms.NumericUpDown();
@@ -54,14 +53,11 @@ namespace Forms_TechServ
             this.datePickerStartForm = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkMyWorkshop = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupPriority = new System.Windows.Forms.GroupBox();
             this.radioBtnDefPriority = new System.Windows.Forms.RadioButton();
             this.radioBtnHighPriority = new System.Windows.Forms.RadioButton();
             this.radioBtnAnyPriority = new System.Windows.Forms.RadioButton();
-            this.checkMine = new System.Windows.Forms.CheckBox();
-            this.checkActive = new System.Windows.Forms.CheckBox();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrev = new System.Windows.Forms.Button();
             this.dataOrders = new System.Windows.Forms.DataGridView();
@@ -69,17 +65,10 @@ namespace Forms_TechServ
             this.extendFilterBtn = new Forms_TechServ.ManageButton();
             this.clearBtn = new Forms_TechServ.ManageButton();
             this.searchBtn = new Forms_TechServ.ManageButton();
-            this.column_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_dateStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_dateFinish = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_dateCanceled = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_product = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_client = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_master = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_workshop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_sale = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnAskOrDesk = new FontAwesome.Sharp.IconButton();
+            this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.listViewStatuses = new System.Windows.Forms.ListView();
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             this.panelFind.SuspendLayout();
@@ -97,7 +86,7 @@ namespace Forms_TechServ
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelContent.Controls.Add(this.comboBoxShowRows);
             this.panelContent.Controls.Add(this.label9);
-            this.panelContent.Controls.Add(this.labelPagesCount);
+            this.panelContent.Controls.Add(this.labelPageCount);
             this.panelContent.Controls.Add(this.numericCurrentPage);
             this.panelContent.Controls.Add(this.label8);
             this.panelContent.Controls.Add(this.panelFind);
@@ -112,6 +101,7 @@ namespace Forms_TechServ
             // comboBoxShowRows
             // 
             this.comboBoxShowRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.comboBoxShowRows.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxShowRows.FormattingEnabled = true;
             this.comboBoxShowRows.Location = new System.Drawing.Point(605, 746);
             this.comboBoxShowRows.Name = "comboBoxShowRows";
@@ -129,24 +119,34 @@ namespace Forms_TechServ
             this.label9.TabIndex = 15;
             this.label9.Text = "Показывать по";
             // 
-            // labelPagesCount
+            // labelPageCount
             // 
-            this.labelPagesCount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.labelPagesCount.AutoSize = true;
-            this.labelPagesCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.labelPagesCount.Location = new System.Drawing.Point(360, 747);
-            this.labelPagesCount.Name = "labelPagesCount";
-            this.labelPagesCount.Size = new System.Drawing.Size(36, 17);
-            this.labelPagesCount.TabIndex = 10;
-            this.labelPagesCount.Text = "из S";
+            this.labelPageCount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.labelPageCount.AutoSize = true;
+            this.labelPageCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.labelPageCount.Location = new System.Drawing.Point(360, 747);
+            this.labelPageCount.Name = "labelPageCount";
+            this.labelPageCount.Size = new System.Drawing.Size(36, 17);
+            this.labelPageCount.TabIndex = 10;
+            this.labelPageCount.Text = "из S";
             // 
             // numericCurrentPage
             // 
             this.numericCurrentPage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.numericCurrentPage.Location = new System.Drawing.Point(309, 748);
+            this.numericCurrentPage.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericCurrentPage.Name = "numericCurrentPage";
             this.numericCurrentPage.Size = new System.Drawing.Size(45, 20);
             this.numericCurrentPage.TabIndex = 9;
+            this.numericCurrentPage.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label8
             // 
@@ -163,29 +163,29 @@ namespace Forms_TechServ
             // 
             this.panelFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelFind.Controls.Add(this.listViewStatuses);
+            this.panelFind.Controls.Add(this.btnAskOrDesk);
             this.panelFind.Controls.Add(this.tbWorkshop);
             this.panelFind.Controls.Add(this.tbClient);
+            this.panelFind.Controls.Add(this.comboBoxSortBy);
+            this.panelFind.Controls.Add(this.label11);
             this.panelFind.Controls.Add(this.btnCleanWorkshop);
             this.panelFind.Controls.Add(this.btnFindWorkshop);
             this.panelFind.Controls.Add(this.btnCleanClient);
+            this.panelFind.Controls.Add(this.label3);
+            this.panelFind.Controls.Add(this.datePickerStartForm);
             this.panelFind.Controls.Add(this.btnFindClient);
-            this.panelFind.Controls.Add(this.tbID);
-            this.panelFind.Controls.Add(this.label7);
-            this.panelFind.Controls.Add(this.checkHideCanceled);
-            this.panelFind.Controls.Add(this.datePickerStartUntil);
             this.panelFind.Controls.Add(this.label6);
+            this.panelFind.Controls.Add(this.tbID);
+            this.panelFind.Controls.Add(this.datePickerStartUntil);
+            this.panelFind.Controls.Add(this.label7);
             this.panelFind.Controls.Add(this.numericPriceUntil);
             this.panelFind.Controls.Add(this.numericPriceFrom);
             this.panelFind.Controls.Add(this.label5);
             this.panelFind.Controls.Add(this.label4);
-            this.panelFind.Controls.Add(this.datePickerStartForm);
-            this.panelFind.Controls.Add(this.label3);
             this.panelFind.Controls.Add(this.label2);
-            this.panelFind.Controls.Add(this.checkMyWorkshop);
             this.panelFind.Controls.Add(this.label1);
             this.panelFind.Controls.Add(this.groupPriority);
-            this.panelFind.Controls.Add(this.checkMine);
-            this.panelFind.Controls.Add(this.checkActive);
             this.panelFind.Location = new System.Drawing.Point(0, 0);
             this.panelFind.Name = "panelFind";
             this.panelFind.Size = new System.Drawing.Size(875, 120);
@@ -194,9 +194,9 @@ namespace Forms_TechServ
             // tbWorkshop
             // 
             this.tbWorkshop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.tbWorkshop.Enabled = false;
-            this.tbWorkshop.Location = new System.Drawing.Point(729, 51);
+            this.tbWorkshop.Location = new System.Drawing.Point(102, 54);
             this.tbWorkshop.Name = "tbWorkshop";
             this.tbWorkshop.ReadOnly = true;
             this.tbWorkshop.Size = new System.Drawing.Size(90, 20);
@@ -207,23 +207,23 @@ namespace Forms_TechServ
             this.tbClient.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.tbClient.Enabled = false;
-            this.tbClient.Location = new System.Drawing.Point(76, 90);
+            this.tbClient.Location = new System.Drawing.Point(102, 89);
             this.tbClient.Name = "tbClient";
             this.tbClient.ReadOnly = true;
-            this.tbClient.Size = new System.Drawing.Size(104, 20);
+            this.tbClient.Size = new System.Drawing.Size(90, 20);
             this.tbClient.TabIndex = 115;
             // 
             // btnCleanWorkshop
             // 
             this.btnCleanWorkshop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCleanWorkshop.FlatAppearance.BorderSize = 0;
             this.btnCleanWorkshop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCleanWorkshop.IconChar = FontAwesome.Sharp.IconChar.Times;
             this.btnCleanWorkshop.IconColor = System.Drawing.SystemColors.ControlText;
             this.btnCleanWorkshop.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnCleanWorkshop.IconSize = 17;
-            this.btnCleanWorkshop.Location = new System.Drawing.Point(849, 54);
+            this.btnCleanWorkshop.Location = new System.Drawing.Point(222, 57);
             this.btnCleanWorkshop.Name = "btnCleanWorkshop";
             this.btnCleanWorkshop.Size = new System.Drawing.Size(18, 18);
             this.btnCleanWorkshop.TabIndex = 93;
@@ -232,14 +232,14 @@ namespace Forms_TechServ
             // btnFindWorkshop
             // 
             this.btnFindWorkshop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.btnFindWorkshop.FlatAppearance.BorderSize = 0;
             this.btnFindWorkshop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFindWorkshop.IconChar = FontAwesome.Sharp.IconChar.Search;
             this.btnFindWorkshop.IconColor = System.Drawing.SystemColors.ControlText;
             this.btnFindWorkshop.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnFindWorkshop.IconSize = 17;
-            this.btnFindWorkshop.Location = new System.Drawing.Point(825, 54);
+            this.btnFindWorkshop.Location = new System.Drawing.Point(198, 57);
             this.btnFindWorkshop.Name = "btnFindWorkshop";
             this.btnFindWorkshop.Size = new System.Drawing.Size(18, 18);
             this.btnFindWorkshop.TabIndex = 94;
@@ -256,7 +256,7 @@ namespace Forms_TechServ
             this.btnCleanClient.IconColor = System.Drawing.SystemColors.ControlText;
             this.btnCleanClient.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnCleanClient.IconSize = 17;
-            this.btnCleanClient.Location = new System.Drawing.Point(210, 92);
+            this.btnCleanClient.Location = new System.Drawing.Point(222, 91);
             this.btnCleanClient.Name = "btnCleanClient";
             this.btnCleanClient.Size = new System.Drawing.Size(18, 18);
             this.btnCleanClient.TabIndex = 15;
@@ -272,7 +272,7 @@ namespace Forms_TechServ
             this.btnFindClient.IconColor = System.Drawing.SystemColors.ControlText;
             this.btnFindClient.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnFindClient.IconSize = 17;
-            this.btnFindClient.Location = new System.Drawing.Point(186, 92);
+            this.btnFindClient.Location = new System.Drawing.Point(198, 91);
             this.btnFindClient.Name = "btnFindClient";
             this.btnFindClient.Size = new System.Drawing.Size(18, 18);
             this.btnFindClient.TabIndex = 16;
@@ -283,9 +283,9 @@ namespace Forms_TechServ
             // 
             this.tbID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbID.Location = new System.Drawing.Point(76, 12);
+            this.tbID.Location = new System.Drawing.Point(102, 12);
             this.tbID.Name = "tbID";
-            this.tbID.Size = new System.Drawing.Size(104, 20);
+            this.tbID.Size = new System.Drawing.Size(65, 20);
             this.tbID.TabIndex = 90;
             // 
             // label7
@@ -295,28 +295,16 @@ namespace Forms_TechServ
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(24, 14);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(18, 13);
+            this.label7.Size = new System.Drawing.Size(60, 13);
             this.label7.TabIndex = 89;
-            this.label7.Text = "ID";
-            // 
-            // checkHideCanceled
-            // 
-            this.checkHideCanceled.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkHideCanceled.AutoSize = true;
-            this.checkHideCanceled.Location = new System.Drawing.Point(654, 91);
-            this.checkHideCanceled.Name = "checkHideCanceled";
-            this.checkHideCanceled.Size = new System.Drawing.Size(130, 17);
-            this.checkHideCanceled.TabIndex = 88;
-            this.checkHideCanceled.Text = "Скрыть отмененные";
-            this.checkHideCanceled.UseVisualStyleBackColor = true;
+            this.label7.Text = "ID заказа:";
             // 
             // datePickerStartUntil
             // 
             this.datePickerStartUntil.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.datePickerStartUntil.CustomFormat = "dd.MM.yyyy  HH:mm";
             this.datePickerStartUntil.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datePickerStartUntil.Location = new System.Drawing.Point(486, 41);
+            this.datePickerStartUntil.Location = new System.Drawing.Point(485, 39);
             this.datePickerStartUntil.Name = "datePickerStartUntil";
             this.datePickerStartUntil.Size = new System.Drawing.Size(128, 20);
             this.datePickerStartUntil.TabIndex = 18;
@@ -325,7 +313,7 @@ namespace Forms_TechServ
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(401, 41);
+            this.label6.Location = new System.Drawing.Point(400, 39);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(59, 13);
             this.label6.TabIndex = 17;
@@ -334,7 +322,7 @@ namespace Forms_TechServ
             // numericPriceUntil
             // 
             this.numericPriceUntil.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.numericPriceUntil.Location = new System.Drawing.Point(486, 94);
+            this.numericPriceUntil.Location = new System.Drawing.Point(485, 94);
             this.numericPriceUntil.Name = "numericPriceUntil";
             this.numericPriceUntil.Size = new System.Drawing.Size(128, 20);
             this.numericPriceUntil.TabIndex = 14;
@@ -342,7 +330,7 @@ namespace Forms_TechServ
             // numericPriceFrom
             // 
             this.numericPriceFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.numericPriceFrom.Location = new System.Drawing.Point(486, 68);
+            this.numericPriceFrom.Location = new System.Drawing.Point(485, 65);
             this.numericPriceFrom.Name = "numericPriceFrom";
             this.numericPriceFrom.Size = new System.Drawing.Size(128, 20);
             this.numericPriceFrom.TabIndex = 13;
@@ -351,7 +339,7 @@ namespace Forms_TechServ
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(401, 96);
+            this.label5.Location = new System.Drawing.Point(400, 96);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 13);
             this.label5.TabIndex = 12;
@@ -361,7 +349,7 @@ namespace Forms_TechServ
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(401, 70);
+            this.label4.Location = new System.Drawing.Point(400, 67);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 11;
@@ -372,7 +360,7 @@ namespace Forms_TechServ
             this.datePickerStartForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.datePickerStartForm.CustomFormat = "dd.MM.yyyy  HH:mm";
             this.datePickerStartForm.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datePickerStartForm.Location = new System.Drawing.Point(486, 14);
+            this.datePickerStartForm.Location = new System.Drawing.Point(485, 12);
             this.datePickerStartForm.Name = "datePickerStartForm";
             this.datePickerStartForm.Size = new System.Drawing.Size(128, 20);
             this.datePickerStartForm.TabIndex = 10;
@@ -381,7 +369,7 @@ namespace Forms_TechServ
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(401, 14);
+            this.label3.Location = new System.Drawing.Point(400, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 9;
@@ -390,25 +378,13 @@ namespace Forms_TechServ
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(651, 54);
+            this.label2.Location = new System.Drawing.Point(24, 57);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "Мастерская:";
-            // 
-            // checkMyWorkshop
-            // 
-            this.checkMyWorkshop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkMyWorkshop.AutoSize = true;
-            this.checkMyWorkshop.Location = new System.Drawing.Point(654, 15);
-            this.checkMyWorkshop.Name = "checkMyWorkshop";
-            this.checkMyWorkshop.Size = new System.Drawing.Size(165, 17);
-            this.checkMyWorkshop.TabIndex = 6;
-            this.checkMyWorkshop.Text = "Только в моей мастреской";
-            this.checkMyWorkshop.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -467,30 +443,6 @@ namespace Forms_TechServ
             this.radioBtnAnyPriority.Text = "Любой";
             this.radioBtnAnyPriority.UseVisualStyleBackColor = true;
             // 
-            // checkMine
-            // 
-            this.checkMine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkMine.AutoSize = true;
-            this.checkMine.Location = new System.Drawing.Point(27, 37);
-            this.checkMine.Name = "checkMine";
-            this.checkMine.Size = new System.Drawing.Size(86, 17);
-            this.checkMine.TabIndex = 2;
-            this.checkMine.Text = "Только мои";
-            this.checkMine.UseVisualStyleBackColor = true;
-            // 
-            // checkActive
-            // 
-            this.checkActive.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkActive.AutoSize = true;
-            this.checkActive.Location = new System.Drawing.Point(27, 66);
-            this.checkActive.Name = "checkActive";
-            this.checkActive.Size = new System.Drawing.Size(115, 17);
-            this.checkActive.TabIndex = 1;
-            this.checkActive.Text = "Только активные";
-            this.checkActive.UseVisualStyleBackColor = true;
-            // 
             // btnNext
             // 
             this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -521,25 +473,18 @@ namespace Forms_TechServ
             // 
             // dataOrders
             // 
+            this.dataOrders.AllowUserToAddRows = false;
+            this.dataOrders.AllowUserToDeleteRows = false;
             this.dataOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.column_id,
-            this.column_status,
-            this.column_dateStart,
-            this.column_dateFinish,
-            this.column_dateCanceled,
-            this.column_product,
-            this.column_client,
-            this.column_master,
-            this.column_workshop,
-            this.column_price,
-            this.column_sale});
             this.dataOrders.Location = new System.Drawing.Point(0, 120);
+            this.dataOrders.MultiSelect = false;
             this.dataOrders.Name = "dataOrders";
+            this.dataOrders.ReadOnly = true;
+            this.dataOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataOrders.Size = new System.Drawing.Size(875, 610);
             this.dataOrders.TabIndex = 0;
             // 
@@ -598,60 +543,55 @@ namespace Forms_TechServ
             this.searchBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.searchBtn.UseVisualStyleBackColor = false;
             // 
-            // column_id
+            // btnAskOrDesk
             // 
-            this.column_id.HeaderText = "id";
-            this.column_id.Name = "column_id";
+            this.btnAskOrDesk.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAskOrDesk.FlatAppearance.BorderSize = 0;
+            this.btnAskOrDesk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAskOrDesk.IconChar = FontAwesome.Sharp.IconChar.SortAlphaDown;
+            this.btnAskOrDesk.IconColor = System.Drawing.Color.Black;
+            this.btnAskOrDesk.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnAskOrDesk.IconSize = 20;
+            this.btnAskOrDesk.Location = new System.Drawing.Point(844, 93);
+            this.btnAskOrDesk.Name = "btnAskOrDesk";
+            this.btnAskOrDesk.Size = new System.Drawing.Size(27, 21);
+            this.btnAskOrDesk.TabIndex = 153;
+            this.btnAskOrDesk.UseVisualStyleBackColor = true;
             // 
-            // column_status
+            // comboBoxSortBy
             // 
-            this.column_status.HeaderText = "Статус";
-            this.column_status.Name = "column_status";
+            this.comboBoxSortBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxSortBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSortBy.FormattingEnabled = true;
+            this.comboBoxSortBy.Location = new System.Drawing.Point(720, 89);
+            this.comboBoxSortBy.Name = "comboBoxSortBy";
+            this.comboBoxSortBy.Size = new System.Drawing.Size(124, 21);
+            this.comboBoxSortBy.TabIndex = 152;
             // 
-            // column_dateStart
+            // label11
             // 
-            this.column_dateStart.HeaderText = "Дата начала";
-            this.column_dateStart.Name = "column_dateStart";
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(642, 93);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(70, 13);
+            this.label11.TabIndex = 151;
+            this.label11.Text = "Сортировка:";
             // 
-            // column_dateFinish
+            // listViewStatuses
             // 
-            this.column_dateFinish.HeaderText = "Дата завершения";
-            this.column_dateFinish.Name = "column_dateFinish";
-            // 
-            // column_dateCanceled
-            // 
-            this.column_dateCanceled.HeaderText = "Дата отмены";
-            this.column_dateCanceled.Name = "column_dateCanceled";
-            // 
-            // column_product
-            // 
-            this.column_product.HeaderText = "Техника";
-            this.column_product.Name = "column_product";
-            // 
-            // column_client
-            // 
-            this.column_client.HeaderText = "Клиент";
-            this.column_client.Name = "column_client";
-            // 
-            // column_master
-            // 
-            this.column_master.HeaderText = "Мастер";
-            this.column_master.Name = "column_master";
-            // 
-            // column_workshop
-            // 
-            this.column_workshop.HeaderText = "Мастерская";
-            this.column_workshop.Name = "column_workshop";
-            // 
-            // column_price
-            // 
-            this.column_price.HeaderText = "Цена";
-            this.column_price.Name = "column_price";
-            // 
-            // column_sale
-            // 
-            this.column_sale.HeaderText = "Общая скидка";
-            this.column_sale.Name = "column_sale";
+            this.listViewStatuses.CheckBoxes = true;
+            this.listViewStatuses.HideSelection = false;
+            this.listViewStatuses.Location = new System.Drawing.Point(720, 7);
+            this.listViewStatuses.Name = "listViewStatuses";
+            this.listViewStatuses.Scrollable = false;
+            this.listViewStatuses.Size = new System.Drawing.Size(100, 42);
+            this.listViewStatuses.TabIndex = 154;
+            this.listViewStatuses.UseCompatibleStateImageBehavior = false;
+            this.listViewStatuses.View = System.Windows.Forms.View.List;
             // 
             // FormInOrders
             // 
@@ -691,7 +631,6 @@ namespace Forms_TechServ
         private FontAwesome.Sharp.IconButton btnFindClient;
         private System.Windows.Forms.TextBox tbID;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.CheckBox checkHideCanceled;
         private System.Windows.Forms.DateTimePicker datePickerStartUntil;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numericPriceUntil;
@@ -701,14 +640,11 @@ namespace Forms_TechServ
         private System.Windows.Forms.DateTimePicker datePickerStartForm;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox checkMyWorkshop;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupPriority;
         private System.Windows.Forms.RadioButton radioBtnDefPriority;
         private System.Windows.Forms.RadioButton radioBtnHighPriority;
         private System.Windows.Forms.RadioButton radioBtnAnyPriority;
-        private System.Windows.Forms.CheckBox checkMine;
-        private System.Windows.Forms.CheckBox checkActive;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPrev;
         private System.Windows.Forms.DataGridView dataOrders;
@@ -716,21 +652,14 @@ namespace Forms_TechServ
         private ManageButton extendFilterBtn;
         private ManageButton clearBtn;
         private ManageButton searchBtn;
-        private System.Windows.Forms.Label labelPagesCount;
+        private System.Windows.Forms.Label labelPageCount;
         private System.Windows.Forms.NumericUpDown numericCurrentPage;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox comboBoxShowRows;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_status;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_dateStart;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_dateFinish;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_dateCanceled;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_product;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_client;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_master;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_workshop;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_sale;
+        private FontAwesome.Sharp.IconButton btnAskOrDesk;
+        private System.Windows.Forms.ComboBox comboBoxSortBy;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ListView listViewStatuses;
     }
 }

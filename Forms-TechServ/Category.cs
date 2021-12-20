@@ -23,7 +23,7 @@ namespace Forms_TechServ
 
         public bool AddCategory()
         {
-            using(TechContext db = new TechContext())
+            using (TechContext db = new TechContext())
             {
                 db.Categories.Add(this);
                 db.SaveChanges();
@@ -43,10 +43,10 @@ namespace Forms_TechServ
 
         public bool DelCategory()
         {
-            using(TechContext db = new TechContext())
+            using (TechContext db = new TechContext())
             {
                 //Category category = db.Categories.Where(c => c.ParentCategoryId == this.Id && c.DelTime == null).FirstOrDefault();
-                if(db.Categories.Where(c => c.ParentCategoryId == this.Id && c.DelTime == null).Count() == 0)   //category == null)
+                if (db.Categories.Where(c => c.ParentCategoryId == this.Id && c.DelTime == null).Count() == 0)   //category == null)
                 {
                     this.DelTime = DateTime.Now;
                     db.Entry(this).State = EntityState.Modified;
@@ -57,11 +57,11 @@ namespace Forms_TechServ
                 {
                     return false;
                 }
-                
+
             }
         }
 
-        public bool LoadAllParents()
+        /*public bool LoadAllParents()
         {
             using (TechContext db = new TechContext())
             {
@@ -74,11 +74,112 @@ namespace Forms_TechServ
                     cat = cat.ParentCategory;
                     db.Entry(cat).Reference(c => c.ParentCategory).Load();
                 }
-                
+
             }
 
             return true;
+        }*/
+
+        /*public LinkedList<Category> GetWholeBranch()
+        {
+            using (TechContext db = new TechContext())
+            {
+                Category cat = db.Categories.Find(this.Id);
+
+                LinkedList<Category> branch = new LinkedList<Category>();
+
+                branch.AddFirst(cat);
+
+                while (cat.ParentCategoryId != 0)
+                {
+                    cat = db.Categories.Find(cat.ParentCategoryId);
+                    branch.AddBefore(branch.First, cat);
+                }
+
+                return branch;
+            }
+        }*/
+
+        // МЕТОД ДЛЯ ПОЛУЧЕНИЯ ПОЛНОЙ ВЕТКИ ВЫБРАННОЙ КАТЕГОРИИ
+        public LinkedList<Category> GetWholeBranch()
+        {
+            using (TechContext db = new TechContext())
+            {
+
+
+                Category currentCat = db.Categories.Find(this.Id);
+                LinkedList<Category> branch = new LinkedList<Category>();
+
+
+                branch.AddFirst(currentCat);
+
+                // Для начала идем вверх
+                while (currentCat != null)
+                {
+                    if(currentCat.Id != this.Id)
+                        branch.AddBefore(branch.First, currentCat);
+                    currentCat = db.Categories.Find(currentCat.ParentCategoryId);
+                }
+
+                currentCat = db.Categories.Find(this.Id);
+
+
+                // Затем добавляем дочерние узлы
+                if(currentCat != null)
+                {
+                    Gethildern(currentCat);
+                    void Gethildern(Category childCat)
+                    {
+                        foreach (Category cat in db.Categories.Where(c => c.ParentCategoryId == childCat.Id && c.DelTime == null))
+                        {
+                            branch.AddAfter(branch.Last, cat);
+                            Gethildern(cat);
+                            
+                        }
+                    }
+                }
+                
+
+                return branch;
+            }
         }
+
+        /*public LinkedList<Category> GetWholeBranch2()
+        {
+            using (TechContext db = new TechContext())
+            {
+
+
+                Category currentCat = db.Categories.Find(this.Id);
+                List<Category> flatList = new List<Category>();
+
+
+
+                // Для начала идем вверх
+                while (currentCat != null)
+                {
+                    flatList.Add(currentCat);
+                    currentCat = db.Categories.Find(currentCat.ParentCategoryId);
+                }
+
+                currentCat = db.Categories.Find(this.Id);
+
+                Gethildern(currentCat);
+
+                void Gethildern(Category childCat)
+                {
+                    foreach (Category cat in db.Categories.Where(c => c.ParentCategoryId == childCat.Id && c.DelTime == null))
+                    {
+                        Gethildern(cat);
+                        flatList.Add(cat);
+                    }
+                }
+
+
+                //List<Dictionary<Category, List<Category>>> branch = new List<Dictionary<Category, List<Category>>>();
+            }
+        }*/
+
     }
 
     public static class CategoriesList

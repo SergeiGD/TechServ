@@ -31,9 +31,9 @@ namespace Forms_TechServ
                 ManageButton btnPick = new ManageButton();              // ИЩЕМ МЫ ТОЛЬКО ИЗ ЗАКАЗА
                 btnPick.Text = "Выбрать";
                 panelControl.Controls.Add(btnPick);
-                btnPick.Click += BtnPickToOrder_Click;
+                btnPick.Click += BtnPick_Click;//BtnPickToOrder_Click;
 
-                dataSpareParts.CellMouseDoubleClick += BtnPickToOrder_Click; 
+                dataSpareParts.CellMouseDoubleClick += BtnPick_Click;//BtnPickToOrder_Click; 
 
                 readOnly = true;
 
@@ -81,11 +81,11 @@ namespace Forms_TechServ
             }
         }
 
-        public FormSpareParts(bool readOnly, Batch batch)
+        /*public FormSpareParts(//bool readOnly, Batch batch)
         {
             InitializeComponent();
 
-            this.readOnly = readOnly;
+            //this.readOnly = readOnly;
             this.batch = batch;
 
             if (!readOnly)
@@ -94,14 +94,19 @@ namespace Forms_TechServ
                 btnAdd.Text = "Выбрать";
                 panelControl.Controls.Add(btnAdd);
                 btnAdd.Click += BtnAddToBatch_Click;
-            }
 
+                dataSpareParts.CellMouseDoubleClick += BtnAddToBatch_Click;
+            }
+            else
+            {
+                dataSpareParts.CellMouseDoubleClick += BtnShowInOther_Click;
+            }
             ManageButton btnShow = new ManageButton();
             btnShow.Text = "Просмотреть";
             panelControl.Controls.Add(btnShow);
             btnShow.Click += BtnShowInOther_Click;
 
-            dataSpareParts.CellMouseDoubleClick += BtnShowInOther_Click;
+            
 
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
             mainBtn[0].Location = new Point(0, 0);
@@ -109,7 +114,7 @@ namespace Forms_TechServ
             {
                 mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
             }
-        }
+        }*/
 
         public FormSpareParts(bool readOnly, Workshop workshop)
         {
@@ -177,8 +182,19 @@ namespace Forms_TechServ
             clearBtn.Click += clearBtnWithoutWorkshop_Click;
         }
 
-        private void BtnAddToBatch_Click(object sender, EventArgs e)                    // ДОБАВИТЬ К ПОСТАВКИ (ИЗ ДОБАВЛЕНИЯ НОВОЙ ПОСТАВКИ)
+        private void BtnPick_Click(object sender, EventArgs e)                    // ДОБАВИТЬ К ПОСТАВКИ (ИЗ ДОБАВЛЕНИЯ НОВОЙ ПОСТАВКИ)
         {
+            if(dataSpareParts.SelectedRows.Count > 0)
+            {
+                sparePart = SparePartsList.GetById(Convert.ToInt32(dataSpareParts.SelectedRows[0].Cells[0].Value));
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Сначала выберите деталь");
+                
+            }
+            /*sparePart = SparePartsList.GetById(Convert.ToInt32(dataSpareParts.SelectedRows[0].Cells[0].Value));
             int pickedSparePartId = SparePartsList.GetById(Convert.ToInt32(dataSpareParts.SelectedRows[0].Cells[0].Value)).Id;
 
             if (BatchesSparePartsList.GetById(batch.Id, pickedSparePartId) != null)
@@ -206,8 +222,8 @@ namespace Forms_TechServ
                 }
 
 
-                this.Close();
-            }
+                this.Close();*/
+            //}
             
         }
 
@@ -223,7 +239,7 @@ namespace Forms_TechServ
             formSpareParts.ShowDialog();
         }
 
-        private void BtnPickToOrder_Click(object sender, EventArgs e)
+        /*private void BtnPickToOrder_Click(object sender, EventArgs e)
         {
             //this.Close();
             DialogResult dialogResult = MessageBox.Show(
@@ -246,7 +262,7 @@ namespace Forms_TechServ
 
                 this.Close();
             }
-        }
+        }*/
 
         /*public FormSpareParts(string sparePart)         // ЧТОБ ПРИ ПРОСМОТРЕ КОЛ-ВА КОНКРЕТНОЙ ДЕТАЛИ (FormShowSparePart, Наличие) ЗАФИКСИРОВАТЬ ПОЛЯ СОРТИРОВКИ НА НЕЙ
         {

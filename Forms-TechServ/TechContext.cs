@@ -11,6 +11,9 @@ namespace Forms_TechServ
     {
         public TechContext() : base("DBConnection") { }
 
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderService> OrdersServices { get; set; }
+
         public DbSet<Client> Clients { get; set; }
         public DbSet<Product> Products { get; set; }
 
@@ -47,6 +50,9 @@ namespace Forms_TechServ
 
             modelBuilder.Entity<BatchSparePart>()
                 .HasKey(c => new { c.BatchId, c.SparePartId });
+
+            modelBuilder.Entity<OrderService>()
+                .HasKey(c => new { c.OrderId, c.ServiceId });
 
             modelBuilder.Configurations.Add(new Service.ServiceConfig());
 

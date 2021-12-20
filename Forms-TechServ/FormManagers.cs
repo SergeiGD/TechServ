@@ -311,7 +311,7 @@ namespace Forms_TechServ
 
         private void btnPrev_Click(object sender, EventArgs e)
         {
-            numericCurrentPage.Value = numericCurrentPage.Value + 1 > numericCurrentPage.Maximum ? numericCurrentPage.Value : numericCurrentPage.Value + 1;
+            numericCurrentPage.Value = numericCurrentPage.Value - 1 < numericCurrentPage.Minimum ? numericCurrentPage.Value : numericCurrentPage.Value - 1;
         }
 
         private void btnNext_Click(object sender, EventArgs e)

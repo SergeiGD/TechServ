@@ -92,11 +92,11 @@
     <Compile Include="FormAddWorkshopTimetable.Designer.cs">
       <DependentUpon>FormAddWorkshopTimetable.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormChooseQuantity.cs">
+    <Compile Include="FormManageBatchSparePart.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormChooseQuantity.Designer.cs">
-      <DependentUpon>FormChooseQuantity.cs</DependentUpon>
+    <Compile Include="FormManageBatchSparePart.Designer.cs">
+      <DependentUpon>FormManageBatchSparePart.cs</DependentUpon>
     </Compile>
     <Compile Include="FormEditOrder.cs">
       <SubType>Form</SubType>
@@ -157,6 +157,12 @@
     </Compile>
     <Compile Include="FormManageProduct.Designer.cs">
       <DependentUpon>FormManageProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormManageOrderService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormManageOrderService.Designer.cs">
+      <DependentUpon>FormManageOrderService.cs</DependentUpon>
     </Compile>
     <Compile Include="FormManagers.cs">
       <SubType>Form</SubType>
@@ -387,6 +393,9 @@
       <DependentUpon>FormWorkshops.cs</DependentUpon>
     </Compile>
     <Compile Include="Employee.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="OrderAtHome.cs" />
+    <Compile Include="OrderService.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
@@ -403,8 +412,8 @@
     <EmbeddedResource Include="FormAddWorkshopTimetable.resx">
       <DependentUpon>FormAddWorkshopTimetable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormChooseQuantity.resx">
-      <DependentUpon>FormChooseQuantity.cs</DependentUpon>
+    <EmbeddedResource Include="FormManageBatchSparePart.resx">
+      <DependentUpon>FormManageBatchSparePart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormEditOrder.resx">
       <DependentUpon>FormEditOrder.cs</DependentUpon>
@@ -435,6 +444,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormManageProduct.resx">
       <DependentUpon>FormManageProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormManageOrderService.resx">
+      <DependentUpon>FormManageOrderService.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormManagers.resx">
       <DependentUpon>FormManagers.cs</DependentUpon>

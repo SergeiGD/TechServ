@@ -125,6 +125,14 @@ namespace Forms_TechServ
 
         }
 
+        public int CalcSparePartsCount()
+        {
+            using (TechContext db = new TechContext())
+            {
+                return db.BatchesSpareParts.Where(b => b.BatchId == this.Id).Count();
+            }
+        }
+
         public bool AddSparePart(BatchSparePart sparePart)
         {
             using (TechContext db = new TechContext())
@@ -206,15 +214,30 @@ namespace Forms_TechServ
             }
         }
 
-
-        
-        /*public class BatchConfig : EntityTypeConfiguration<Batch>    // Настрока свойства price, чтоб оно взаимодействовало с моделью, не смотря на то, что private
+        public BatchSparePart GetSparePart(int id)
         {
-            public BatchConfig()
+            using (TechContext db = new TechContext())
             {
-                Property(p => p.price);
+                return db.BatchesSpareParts.Find(this.Id, id);
             }
-        }*/
+        }
+        
+        public bool CheckSparePart(SparePart sparePart)
+        {
+            using (TechContext db = new TechContext())
+            {
+                BatchSparePart batchSparePart = db.BatchesSpareParts.Find(this.Id, sparePart.Id);
+
+                if (batchSparePart != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
 
 
     }
@@ -382,7 +405,7 @@ namespace Forms_TechServ
         }*/
     }
 
-    public static class BatchesSparePartsList
+    /*public static class BatchesSparePartsList
     {
         public static BatchSparePart GetById(int idBatch, int idSparePart)
         {
@@ -397,5 +420,5 @@ namespace Forms_TechServ
                 return sparePart;
             }
         }
-    }
+    }*/
 }

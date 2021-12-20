@@ -20,7 +20,7 @@ namespace Forms_TechServ
             {
                 label1.Visible = false;
                 tbAddress.Visible = false;
-                checkHideCanceled.Location = new Point(checkHideCanceled.Location.X, checkHideCanceled.Location.Y + 17);        
+                //checkHideCanceled.Location = new Point(checkHideCanceled.Location.X, checkHideCanceled.Location.Y + 17);        
             }
         }
 

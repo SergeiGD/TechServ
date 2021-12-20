@@ -40,6 +40,31 @@ namespace Forms_TechServ
                 return true;
             }
         }
+
+        public decimal CalcSale()
+        {
+            using (TechContext db = new TechContext())
+            {
+                /*decimal sale = 0;
+                foreach(Order order in db.Orders.Include(o => o.Product).Where(o => o.Product.ClientId == this.Id && o.Status != OrderStatus.Canceled))
+                {
+                    sale++;
+                }*/
+                int sale = db.Orders.Include(o => o.Product).Where(o => o.Product.ClientId == this.Id/* && ((byte)o.Status) == 1*/).Count();
+                if(sale > 10)
+                {
+                    return 10;
+                }
+                else
+                {
+                    return sale;
+                }
+                //return db.Orders.Include(o => o.Product).Where(o => o.Product.ClientId == this.Id/* && ((byte)o.Status) == 1*/).Count();
+
+                //return sale;
+            }
+
+        }
     }
 
     public static class ClientsList

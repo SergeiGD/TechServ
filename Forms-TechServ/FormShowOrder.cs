@@ -86,7 +86,7 @@ namespace Forms_TechServ
 
         private void editBtn_Click(object sender, EventArgs e)
         {
-            FormEditOrder editOrder = new FormEditOrder(inOrder);
+            FormEditOrder editOrder = new FormEditOrder(null);
             editOrder.ShowDialog();
         }
 

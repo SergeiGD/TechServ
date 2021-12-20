@@ -16,6 +16,7 @@ namespace Forms_TechServ
         //List<Master> masters;
         int rowsCount;
         int currentPage = 1;
+        public Master master;
         //int pickedRowIndex;
 
         public FormMasters(bool forSearching)
@@ -63,7 +64,58 @@ namespace Forms_TechServ
                 mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
             }
 
-            
+            clearBtn.Click += clearBtnAll_Click;
+        }
+
+        public FormMasters(bool forSearching, Workshop workshop)
+        {
+            InitializeComponent();
+
+            if (forSearching)
+            {
+                ManageButton btnPick = new ManageButton();
+                btnPick.Text = "Выбрать";
+                panelControl.Controls.Add(btnPick);
+                btnPick.Click += BtnPick_Click;
+
+                dataMasters.CellMouseDoubleClick += BtnPick_Click;
+
+                readOnly = true;
+            }
+            else
+            {
+                if (UserSession.Can("add_del_employee"))
+                {
+                    ManageButton btnAdd = new ManageButton();
+                    btnAdd.Text = "Добавить";
+                    panelControl.Controls.Add(btnAdd);
+                    btnAdd.Click += BtnManage_Click;
+                }
+
+                dataMasters.CellMouseDoubleClick += BtnShow_Click;
+
+                readOnly = false;
+
+            }
+
+            ManageButton btnShow = new ManageButton();
+            btnShow.Text = "Просмотреть";
+            panelControl.Controls.Add(btnShow);
+            btnShow.Click += BtnShow_Click;
+
+            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
+            mainBtn[0].Location = new Point(0, 0);
+            for (int i = 1; i < mainBtn.Count(); i++)
+            {
+                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
+            }
+
+            tbWorkshop.Text = workshop.Location;
+            tbWorkshop.Tag = workshop;
+            btnFindWorkshop.Enabled = false;
+            btnCleanWorkshop.Enabled = false;
+
+            clearBtn.Click += clearBtnWithoutWorkshop_Click;
         }
 
         /*public FormMasters(bool readOnly, string workshop)
@@ -108,7 +160,15 @@ namespace Forms_TechServ
 
         private void BtnPick_Click(object sender, EventArgs e)
         {
-            this.Close();                                               // и тут ретерн
+            if(dataMasters.SelectedRows.Count > 0)
+            {
+                master = MastersList.GetById(Convert.ToInt32(dataMasters.SelectedRows[0].Cells[0].Value), false);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите мастера");
+            }
         }
 
         private void BtnShow_Click(object sender, EventArgs e)
@@ -285,7 +345,7 @@ namespace Forms_TechServ
             tbPosition.Tag = null;
         }
 
-        private void clearBtn_Click(object sender, EventArgs e)
+        private void clearBtnAll_Click(object sender, EventArgs e)
         {
             tbID.Clear();
             tbName.Clear();
@@ -295,6 +355,22 @@ namespace Forms_TechServ
             numericSalaryUntil.Value = 0;
             tbWorkshop.Clear();
             tbWorkshop.Tag = null;
+            tbPosition.Clear();
+            tbPosition.Tag = null;
+            tbCat.Clear();
+            tbCat.Tag = null;
+
+            FillGrid();
+        }
+
+        private void clearBtnWithoutWorkshop_Click(object sender, EventArgs e)
+        {
+            tbID.Clear();
+            tbName.Clear();
+            tbPhoneNum.Clear();
+            tbPosition.Clear();
+            numericSalaryFrom.Value = 0;
+            numericSalaryUntil.Value = 0;
             tbPosition.Clear();
             tbPosition.Tag = null;
             tbCat.Clear();

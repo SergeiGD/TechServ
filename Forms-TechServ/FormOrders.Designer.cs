@@ -36,6 +36,9 @@ namespace Forms_TechServ
             this.numericCurrentPage = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.panelFind = new System.Windows.Forms.Panel();
+            this.btnAskOrDesk = new FontAwesome.Sharp.IconButton();
+            this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.tbWorkshop = new System.Windows.Forms.TextBox();
             this.tbClient = new System.Windows.Forms.TextBox();
             this.btnCleanWorkshop = new FontAwesome.Sharp.IconButton();
@@ -44,7 +47,6 @@ namespace Forms_TechServ
             this.btnFindClient = new FontAwesome.Sharp.IconButton();
             this.tbID = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.checkHideCanceled = new System.Windows.Forms.CheckBox();
             this.datePickerEndUntil = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.numericPriceUntil = new System.Windows.Forms.NumericUpDown();
@@ -79,9 +81,6 @@ namespace Forms_TechServ
             this.extendFilterBtn = new Forms_TechServ.ManageButton();
             this.clearBtn = new Forms_TechServ.ManageButton();
             this.searchBtn = new Forms_TechServ.ManageButton();
-            this.btnAskOrDesk = new FontAwesome.Sharp.IconButton();
-            this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             this.panelFind.SuspendLayout();
@@ -176,7 +175,6 @@ namespace Forms_TechServ
             this.panelFind.Controls.Add(this.btnFindClient);
             this.panelFind.Controls.Add(this.tbID);
             this.panelFind.Controls.Add(this.label7);
-            this.panelFind.Controls.Add(this.checkHideCanceled);
             this.panelFind.Controls.Add(this.datePickerEndUntil);
             this.panelFind.Controls.Add(this.label6);
             this.panelFind.Controls.Add(this.numericPriceUntil);
@@ -194,6 +192,43 @@ namespace Forms_TechServ
             this.panelFind.Name = "panelFind";
             this.panelFind.Size = new System.Drawing.Size(875, 120);
             this.panelFind.TabIndex = 4;
+            // 
+            // btnAskOrDesk
+            // 
+            this.btnAskOrDesk.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAskOrDesk.FlatAppearance.BorderSize = 0;
+            this.btnAskOrDesk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAskOrDesk.IconChar = FontAwesome.Sharp.IconChar.SortAlphaDown;
+            this.btnAskOrDesk.IconColor = System.Drawing.Color.Black;
+            this.btnAskOrDesk.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnAskOrDesk.IconSize = 20;
+            this.btnAskOrDesk.Location = new System.Drawing.Point(845, 94);
+            this.btnAskOrDesk.Name = "btnAskOrDesk";
+            this.btnAskOrDesk.Size = new System.Drawing.Size(27, 21);
+            this.btnAskOrDesk.TabIndex = 147;
+            this.btnAskOrDesk.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxSortBy
+            // 
+            this.comboBoxSortBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxSortBy.FormattingEnabled = true;
+            this.comboBoxSortBy.Location = new System.Drawing.Point(721, 90);
+            this.comboBoxSortBy.Name = "comboBoxSortBy";
+            this.comboBoxSortBy.Size = new System.Drawing.Size(124, 21);
+            this.comboBoxSortBy.TabIndex = 146;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(643, 94);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(70, 13);
+            this.label10.TabIndex = 145;
+            this.label10.Text = "Сортировка:";
             // 
             // tbWorkshop
             // 
@@ -302,18 +337,6 @@ namespace Forms_TechServ
             this.label7.Size = new System.Drawing.Size(18, 13);
             this.label7.TabIndex = 134;
             this.label7.Text = "ID";
-            // 
-            // checkHideCanceled
-            // 
-            this.checkHideCanceled.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkHideCanceled.AutoSize = true;
-            this.checkHideCanceled.Location = new System.Drawing.Point(646, 53);
-            this.checkHideCanceled.Name = "checkHideCanceled";
-            this.checkHideCanceled.Size = new System.Drawing.Size(130, 17);
-            this.checkHideCanceled.TabIndex = 133;
-            this.checkHideCanceled.Text = "Скрыть отмененные";
-            this.checkHideCanceled.UseVisualStyleBackColor = true;
             // 
             // datePickerEndUntil
             // 
@@ -513,6 +536,8 @@ namespace Forms_TechServ
             // 
             // dataOrders
             // 
+            this.dataOrders.AllowUserToAddRows = false;
+            this.dataOrders.AllowUserToDeleteRows = false;
             this.dataOrders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -531,7 +556,10 @@ namespace Forms_TechServ
             this.column_price,
             this.column_sale});
             this.dataOrders.Location = new System.Drawing.Point(0, 120);
+            this.dataOrders.MultiSelect = false;
             this.dataOrders.Name = "dataOrders";
+            this.dataOrders.ReadOnly = true;
+            this.dataOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataOrders.Size = new System.Drawing.Size(875, 610);
             this.dataOrders.TabIndex = 0;
             // 
@@ -645,43 +673,6 @@ namespace Forms_TechServ
             this.searchBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.searchBtn.UseVisualStyleBackColor = false;
             // 
-            // btnAskOrDesk
-            // 
-            this.btnAskOrDesk.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAskOrDesk.FlatAppearance.BorderSize = 0;
-            this.btnAskOrDesk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAskOrDesk.IconChar = FontAwesome.Sharp.IconChar.SortAlphaDown;
-            this.btnAskOrDesk.IconColor = System.Drawing.Color.Black;
-            this.btnAskOrDesk.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnAskOrDesk.IconSize = 20;
-            this.btnAskOrDesk.Location = new System.Drawing.Point(845, 94);
-            this.btnAskOrDesk.Name = "btnAskOrDesk";
-            this.btnAskOrDesk.Size = new System.Drawing.Size(27, 21);
-            this.btnAskOrDesk.TabIndex = 147;
-            this.btnAskOrDesk.UseVisualStyleBackColor = true;
-            // 
-            // comboBoxSortBy
-            // 
-            this.comboBoxSortBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxSortBy.FormattingEnabled = true;
-            this.comboBoxSortBy.Location = new System.Drawing.Point(721, 90);
-            this.comboBoxSortBy.Name = "comboBoxSortBy";
-            this.comboBoxSortBy.Size = new System.Drawing.Size(124, 21);
-            this.comboBoxSortBy.TabIndex = 146;
-            // 
-            // label10
-            // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(643, 94);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(70, 13);
-            this.label10.TabIndex = 145;
-            this.label10.Text = "Сортировка:";
-            // 
             // FormOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -730,7 +721,6 @@ namespace Forms_TechServ
         private FontAwesome.Sharp.IconButton btnFindClient;
         private System.Windows.Forms.TextBox tbID;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.CheckBox checkHideCanceled;
         private System.Windows.Forms.DateTimePicker datePickerEndUntil;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numericPriceUntil;

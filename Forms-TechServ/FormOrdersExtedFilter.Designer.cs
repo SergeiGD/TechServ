@@ -72,7 +72,6 @@ namespace Forms_TechServ
             this.datePickerCanceledFrom = new System.Windows.Forms.DateTimePicker();
             this.datePickerEndUntil = new System.Windows.Forms.DateTimePicker();
             this.datePickerEndFrom = new System.Windows.Forms.DateTimePicker();
-            this.checkHideCanceled = new System.Windows.Forms.CheckBox();
             this.tbID = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.btnCleanClient = new FontAwesome.Sharp.IconButton();
@@ -555,18 +554,6 @@ namespace Forms_TechServ
             this.datePickerEndFrom.Size = new System.Drawing.Size(135, 20);
             this.datePickerEndFrom.TabIndex = 79;
             // 
-            // checkHideCanceled
-            // 
-            this.checkHideCanceled.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkHideCanceled.AutoSize = true;
-            this.checkHideCanceled.Location = new System.Drawing.Point(600, 36);
-            this.checkHideCanceled.Name = "checkHideCanceled";
-            this.checkHideCanceled.Size = new System.Drawing.Size(130, 17);
-            this.checkHideCanceled.TabIndex = 87;
-            this.checkHideCanceled.Text = "Скрыть отмененные";
-            this.checkHideCanceled.UseVisualStyleBackColor = true;
-            // 
             // tbID
             // 
             this.tbID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -829,7 +816,7 @@ namespace Forms_TechServ
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(597, 64);
+            this.label1.Location = new System.Drawing.Point(597, 54);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 13);
             this.label1.TabIndex = 115;
@@ -839,7 +826,7 @@ namespace Forms_TechServ
             // 
             this.tbAddress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbAddress.Location = new System.Drawing.Point(687, 60);
+            this.tbAddress.Location = new System.Drawing.Point(687, 50);
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(135, 20);
             this.tbAddress.TabIndex = 116;
@@ -911,7 +898,6 @@ namespace Forms_TechServ
             this.Controls.Add(this.label24);
             this.Controls.Add(this.tbID);
             this.Controls.Add(this.label23);
-            this.Controls.Add(this.checkHideCanceled);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.label21);
@@ -1008,7 +994,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.DateTimePicker datePickerCanceledFrom;
         private System.Windows.Forms.DateTimePicker datePickerEndUntil;
         private System.Windows.Forms.DateTimePicker datePickerEndFrom;
-        private System.Windows.Forms.CheckBox checkHideCanceled;
         private System.Windows.Forms.TextBox tbID;
         private System.Windows.Forms.Label label23;
         private FontAwesome.Sharp.IconButton btnCleanClient;

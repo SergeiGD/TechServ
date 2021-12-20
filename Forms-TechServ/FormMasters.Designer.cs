@@ -584,7 +584,7 @@ namespace Forms_TechServ
             this.clearBtn.Text = "Отчистить фильтры";
             this.clearBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.clearBtn.UseVisualStyleBackColor = false;
-            this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
+            //this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
             // 
             // searchBtn
             // 

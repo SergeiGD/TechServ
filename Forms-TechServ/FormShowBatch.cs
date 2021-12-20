@@ -119,7 +119,15 @@ namespace Forms_TechServ
             FormManageBatch formManageBatch = new FormManageBatch(batch);
             formManageBatch.ShowDialog();
 
-            FillForm();
+            if (batch.DelTime.HasValue)
+            {
+                this.Close();
+            }
+            else
+            {
+                FillForm();
+            }
+            
         }
 
         private void FormShowBatch_ResizeEnd(object sender, EventArgs e)

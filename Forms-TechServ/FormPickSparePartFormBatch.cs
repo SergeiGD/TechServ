@@ -19,7 +19,7 @@ namespace Forms_TechServ
 
         private void pickBtn_Click(object sender, EventArgs e)
         {
-            FormChooseQuantity formChoosePartsQuantity = new FormChooseQuantity();
+            FormManageBatchSparePart formChoosePartsQuantity = new FormManageBatchSparePart(new SparePart());
             formChoosePartsQuantity.ShowDialog();
 
             this.Close();

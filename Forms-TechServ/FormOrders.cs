@@ -12,6 +12,8 @@ namespace Forms_TechServ
 {
     public partial class FormOrders : Form
     {
+        //Order order;
+
         FormOrdersExtedFilter ordersExtedFilter = new FormOrdersExtedFilter(true);
         bool filterDeployed = false;
         Size filterBaseSize;

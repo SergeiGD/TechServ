@@ -143,7 +143,6 @@ D:\git_repos\TechServ\Forms-TechServ\bin\Debug\System.Data.SQLite.xml
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms-TechServ.csproj.AssemblyReference.cache
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormAddEmployeeTimetable.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageWorkshopTimetable.resources
-D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormChooseQuantity.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormEditOrder.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormFindEmpPosition.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormInOrders.resources
@@ -199,3 +198,5 @@ D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms-TechServ.exe
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms-TechServ.pdb
 D:\git_repos\TechServ\Forms-TechServ\bin\Debug\Itenso.TimePeriod.dll
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormEmpTimetalbe.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageOrderService.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageBatchSparePart.resources

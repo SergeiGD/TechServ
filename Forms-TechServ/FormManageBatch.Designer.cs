@@ -278,6 +278,7 @@ namespace Forms_TechServ
             this.comboBoxShowSparePartsRows.Name = "comboBoxShowSparePartsRows";
             this.comboBoxShowSparePartsRows.Size = new System.Drawing.Size(62, 21);
             this.comboBoxShowSparePartsRows.TabIndex = 17;
+            this.comboBoxShowSparePartsRows.SelectedIndexChanged += new System.EventHandler(this.comboBoxShowSparePartsRows_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -303,6 +304,7 @@ namespace Forms_TechServ
             this.btnNext.TabIndex = 15;
             this.btnNext.Text = "Следующая →";
             this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPrev
             // 
@@ -317,6 +319,7 @@ namespace Forms_TechServ
             this.btnPrev.TabIndex = 14;
             this.btnPrev.Text = "← Предыдущая";
             this.btnPrev.UseVisualStyleBackColor = false;
+            this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
             // 
             // labelPageCount
             // 
@@ -346,6 +349,7 @@ namespace Forms_TechServ
             0,
             0,
             0});
+            this.numericCurrentPage.ValueChanged += new System.EventHandler(this.numericCurrentPage_ValueChanged);
             // 
             // label8
             // 

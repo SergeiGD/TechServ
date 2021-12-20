@@ -16,6 +16,7 @@ namespace Forms_TechServ
         int rowsCount;
         int currentPage = 1;
         Client client;                                                  // при работа с техникой из клиента
+        public Product product;
 
         public FormProducts(bool forSearching)
         {
@@ -241,7 +242,15 @@ namespace Forms_TechServ
 
         private void BtnPick_Click(object sender, EventArgs e)              // вот тут ретернить
         {
-            this.Close();
+            if(dataProducts.SelectedRows.Count > 0)
+            {
+                product = ProductsList.GetById(Convert.ToInt32(dataProducts.SelectedRows[0].Cells[0].Value), true);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите технику");
+            }
         }
 
         /*private void BtnEdit_Click(object sender, EventArgs e)

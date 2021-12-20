@@ -12,6 +12,9 @@ namespace Forms_TechServ
 {
     public partial class FormInOrders : Form
     {
+        //Order order;
+        int rowsCount;
+        int currentPage = 1;
 
         FormOrdersExtedFilter ordersExtedFilter = new FormOrdersExtedFilter(true);
         bool filterDeployed = false;
@@ -28,28 +31,34 @@ namespace Forms_TechServ
                 btnPick.Text = "Выбрать";
                 panelControl.Controls.Add(btnPick);
                 btnPick.Click += BtnPick_Click;
+
+                dataOrders.CellMouseDoubleClick += BtnPick_Click;
+                readOnly = true;
             }
             else
             {
-                ManageButton btnAdd = new ManageButton();
-                //btnAdd.Location = new Point(0, 120);
-                btnAdd.Text = "Добавить";
-                panelControl.Controls.Add(btnAdd);
-                btnAdd.Click += BtnManage_Click;
-
+                if (UserSession.Can("add_order"))
+                {
+                    ManageButton btnAdd = new ManageButton();
+                    //btnAdd.Location = new Point(0, 120);
+                    btnAdd.Text = "Добавить";
+                    panelControl.Controls.Add(btnAdd);
+                    btnAdd.Click += BtnManage_Click;
+                }
+                
 
                 ManageButton btnShow = new ManageButton();
-                //btnShow.Location = new Point(0, 160);
                 btnShow.Text = "Просмотреть";
                 panelControl.Controls.Add(btnShow);
                 btnShow.Click += BtnShow_Click;
+
+                readOnly = false;
+                dataOrders.CellMouseDoubleClick += BtnShow_Click;
             }
             
 
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
             mainBtn[0].Location = new Point(0, 0);
-
-            //MessageBox.Show(mainBtn[0].Name);
 
             for (int i = 1; i < mainBtn.Count(); i++)
             {
@@ -136,6 +145,8 @@ namespace Forms_TechServ
         {
             FormAddOrder addOrder = new FormAddOrder(true);
             addOrder.ShowDialog();
+
+            FillGrid();
         }
 
         private void BtnPick_Click(object sender, EventArgs e)          // вот тут ретернить выбранного клиента
@@ -189,6 +200,126 @@ namespace Forms_TechServ
         private void FormInOrders_Load(object sender, EventArgs e)
         {
             filterBaseSize = panelFind.Size;
+
+            DataGridViewTextBoxColumn idCol = new DataGridViewTextBoxColumn();
+            idCol.Name = "id";
+            DataGridViewTextBoxColumn clientCol = new DataGridViewTextBoxColumn();
+            clientCol.Name = "Клиент";
+            DataGridViewTextBoxColumn statusCol = new DataGridViewTextBoxColumn();
+            statusCol.Name = "Статус";
+            DataGridViewTextBoxColumn productCol = new DataGridViewTextBoxColumn();
+            productCol.Name = "Техника";
+            DataGridViewTextBoxColumn masterCol = new DataGridViewTextBoxColumn();
+            masterCol.Name = "Мастер";
+            DataGridViewTextBoxColumn managerCol = new DataGridViewTextBoxColumn();
+            managerCol.Name = "Менеджер";
+            DataGridViewTextBoxColumn workshopCol = new DataGridViewTextBoxColumn();
+            workshopCol.Name = "Филиал";
+            DataGridViewTextBoxColumn priceCol = new DataGridViewTextBoxColumn();
+            priceCol.Name = "Стоимость";
+
+
+            dataOrders.Columns.Add(idCol);
+            dataOrders.Columns.Add(clientCol);
+            dataOrders.Columns.Add(statusCol);
+            dataOrders.Columns.Add(productCol);
+            dataOrders.Columns.Add(masterCol);
+            dataOrders.Columns.Add(managerCol);
+            dataOrders.Columns.Add(workshopCol);
+            dataOrders.Columns.Add(priceCol);
+
+
+            btnAskOrDesk.Tag = true;
+
+            listViewStatuses.Items.Add(new ListViewItem() { Text = OrderStatus.Canceled.GetStatusString(), Tag = OrderStatus.Canceled });
+            listViewStatuses.Items.Add(new ListViewItem() { Text = OrderStatus.Finished.GetStatusString(), Tag = OrderStatus.Finished });
+            listViewStatuses.Items.Add(new ListViewItem() { Text = OrderStatus.WaitingForAnswer.GetStatusString(), Tag = OrderStatus.WaitingForAnswer });
+            listViewStatuses.Items.Add(new ListViewItem() { Text = OrderStatus.WaitingForDiagnostic.GetStatusString(), Tag = OrderStatus.WaitingForDiagnostic });
+            listViewStatuses.Items.Add(new ListViewItem() { Text = OrderStatus.WaitingForPrepayment.GetStatusString(), Tag = OrderStatus.WaitingForPrepayment });
+            listViewStatuses.Items.Add(new ListViewItem() { Text = OrderStatus.WaitingForRefund.GetStatusString(), Tag = OrderStatus.WaitingForRefund });
+            listViewStatuses.Items.Add(new ListViewItem() { Text = OrderStatus.WaitingForRepairing.GetStatusString(), Tag = OrderStatus.WaitingForRepairing });
+            listViewStatuses.Items.Add(new ListViewItem() { Text = OrderStatus.WaitingForSpareParts.GetStatusString(), Tag = OrderStatus.WaitingForSpareParts });
+
+            comboBoxSortBy.Items.Add("id");
+            comboBoxSortBy.Items.Add("Статусу заказа");
+            comboBoxSortBy.Items.Add("Цене");
+            //comboBoxSortBy.Items.Add("Номер телефона");
+            comboBoxSortBy.SelectedIndex = 0;
+
+            comboBoxShowRows.Items.Add(5);
+            comboBoxShowRows.Items.Add(20);
+            comboBoxShowRows.Items.Add(30);
+            comboBoxShowRows.Items.Add(40);
+            comboBoxShowRows.SelectedIndex = 2;
+
+            FillGrid();
+        }
+
+        private void FillGrid()
+        {
+            // ЕСЛИ ФИЛЬТРЫ ПУСТЫЕ, ТО ПОЛУЧАЕМ ВСЕ ЗНАЧЕНИЯ
+            int id;
+            int.TryParse(tbID.Text, out id);                                // получаем введенное для сортировки id
+
+            string sortBy = "Id";
+
+            if (comboBoxSortBy.SelectedItem.ToString() == "id")
+            {
+                sortBy = "Id";
+            }
+            else if (comboBoxSortBy.SelectedItem.ToString() == "Статусу заказа")
+            {
+                sortBy = "Status";
+            }
+            else if (comboBoxSortBy.SelectedItem.ToString() == "Цене")
+            {
+                sortBy = "FinalPrice";
+            }
+
+            List<Order> orders= OrdersList.GetOrders(
+                new Order() 
+                {
+                    Id = id,
+                    Workshop = (Workshop)tbWorkshop.Tag,
+                    FinalPrice = numericPriceFrom.Value
+                },
+                new Order() 
+                {
+                    FinalPrice = numericPriceUntil.Value
+                },
+                //(Client)tbClient.Tag
+                (bool)btnAskOrDesk.Tag,
+                sortBy,
+                (int)comboBoxShowRows.SelectedItem,
+                currentPage,
+                out rowsCount
+                );
+
+            dataOrders.Rows.Clear();
+            for (int i = 0; i < orders.Count; i++)
+            {
+                dataOrders.Rows.Add(new DataGridViewRow());
+
+                dataOrders.Rows[i].Cells[0].Value = orders[i].Id;
+                dataOrders.Rows[i].Cells[1].Value = orders[i].Product.Client.Name; 
+                dataOrders.Rows[i].Cells[2].Value = orders[i].Status.GetStatusString();
+                dataOrders.Rows[i].Cells[3].Value = orders[i].Product.Name;                         // вот сюда кол-во заказов через GetOrder().Count наверное
+                dataOrders.Rows[i].Cells[4].Value = orders[i].Master.Name;
+                dataOrders.Rows[i].Cells[5].Value = orders[i].Manager.Name;
+                dataOrders.Rows[i].Cells[6].Value = orders[i].Workshop.Location;
+                dataOrders.Rows[i].Cells[7].Value = orders[i].FinalPrice;
+
+            }
+
+            //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
+            int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);
+            numericCurrentPage.Maximum = maxPage;
+
+            if (numericCurrentPage.Maximum > 0)
+                numericCurrentPage.Value = numericCurrentPage.Value == 0 ? 1 : numericCurrentPage.Value;
+
+            labelPageCount.Text = $"из {maxPage}";
+
         }
 
         private void btnFindClient_Click(object sender, EventArgs e)

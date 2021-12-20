@@ -63,6 +63,41 @@ namespace Forms_TechServ
             }
         }
 
+        public FormServices(Category category)
+        {
+            InitializeComponent();
+
+            ManageButton btnPick = new ManageButton();
+            btnPick.Text = "Выбрать";
+            panelControl.Controls.Add(btnPick);
+            btnPick.Click += BtnPick_Click;
+
+            dataServies.CellMouseDoubleClick += BtnPick_Click;
+
+            readOnly = true;
+
+
+            ManageButton btnShow = new ManageButton();
+            btnShow.Text = "Просмотреть";
+            panelControl.Controls.Add(btnShow);
+            btnShow.Click += BtnShow_Click;
+
+            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
+            mainBtn[0].Location = new Point(0, 0);
+            for (int i = 1; i < mainBtn.Count(); i++)
+            {
+                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
+            }
+
+            tbCat.Text = category.Name;
+            tbCat.Tag = category;
+
+            btnFindCat.Enabled = false;
+            btnCleanCat.Enabled = false;
+
+            btnClean.Click += btnCleanInCat_Click;
+        }
+
         public FormServices(bool readOnly, Category category)
         {
             InitializeComponent();
@@ -280,9 +315,17 @@ namespace Forms_TechServ
 
         private void BtnPick_Click(object sender, EventArgs e)
         {
-            service = ServicesList.GetById(Convert.ToInt32(dataServies.SelectedRows[0].Cells[0].Value), true);
+            if(dataServies.SelectedRows.Count > 0)
+            {
+                service = ServicesList.GetById(Convert.ToInt32(dataServies.SelectedRows[0].Cells[0].Value), true);
 
-            this.Close();                                               // и тут ретерн
+                this.Close();
+
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите услугу");
+            }                                              
         }
 
         private void BtnAddNewService_Click(object sender, EventArgs e)     // СОЗДАТЬ НОВУЮ УСЛУГУ
@@ -295,7 +338,7 @@ namespace Forms_TechServ
 
         private void BtnAddToOrder_Click(object sender, EventArgs e)        // ВОТ ТУТ К ЗАКАЗУ ДОБАВИТЬ УСЛУГУ
         {
-            FormChooseQuantity formChooseQuantity = new FormChooseQuantity();
+            FormManageBatchSparePart formChooseQuantity = new FormManageBatchSparePart(new SparePart());
             formChooseQuantity.ShowDialog();
             this.Close();
         }

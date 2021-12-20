@@ -14,8 +14,8 @@ namespace Forms_TechServ
     {
         Size pickedSize = new Size(989, 408);
         SparePart sparePart;
-        int rowsCount;
-        int currentPage = 1;
+        /*int rowsCount;
+        int currentPage = 1;*/
 
         public FormManageSparePart()                                                // ЕСЛИ ДОБАВИЛИ НОВУЮ ДЕТАЛИ, ТО ПОСЛЕ ДОБАВЛЕНИЯ ПРЕДЛАГАТЬ ЗАКАЗАТЬ СРАЗУ
         {
@@ -49,11 +49,11 @@ namespace Forms_TechServ
                 tbName.Text = sparePart.Name;
                 numericPrepayment.Value = sparePart.ClientPrepayment;
 
-                comboBoxShowRows.Items.Add(5);
+                /*comboBoxShowRows.Items.Add(5);
                 comboBoxShowRows.Items.Add(20);
                 comboBoxShowRows.Items.Add(30);
                 comboBoxShowRows.Items.Add(40);
-                comboBoxShowRows.SelectedIndex = 2;
+                comboBoxShowRows.SelectedIndex = 2;*/
 
                 //FillInStock();
             }

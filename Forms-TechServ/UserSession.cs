@@ -21,6 +21,10 @@ namespace Forms_TechServ
             }
         }
 
+        public static Employee GetLoggedInUser()
+        {
+            return employee;
+        }
 
         public static bool Can(string code)
         {
