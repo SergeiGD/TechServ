@@ -163,7 +163,7 @@ namespace Forms_TechServ
             {
                 this.Size = pickedSize;
 
-                FormSpareParts formSpareParts = new FormSpareParts(true, workshop);
+                FormSpareParts formSpareParts = new FormSpareParts(false, workshop);
                 formSpareParts.TopLevel = false;
                 formSpareParts.FormBorderStyle = FormBorderStyle.None;
                 sparePartsPage.Controls.Add(formSpareParts);

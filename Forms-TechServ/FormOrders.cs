@@ -141,7 +141,7 @@ namespace Forms_TechServ
 
         private void BtnShow_Click(object sender, EventArgs e)          // !!!!ВОТ ТУТ АДРЕС БУДЕТ ИЛИ НЕТ!!!!
         {
-            FormShowOrder showOrder = new FormShowOrder(true, readOnly);
+            FormShowOrder showOrder = new FormShowOrder(readOnly, null);
             showOrder.ShowDialog();
         }
 

@@ -116,20 +116,44 @@ namespace Forms_TechServ
             }
         }*/
 
-        public FormSpareParts(bool readOnly, Workshop workshop)
+        public FormSpareParts(bool forSearching, Workshop workshop)
         {
             InitializeComponent();
 
-            this.readOnly = readOnly;
+            if (forSearching)
+            {
+                ManageButton btnPick = new ManageButton();              // ИЩЕМ МЫ ТОЛЬКО ИЗ ЗАКАЗА
+                btnPick.Text = "Выбрать";
+                panelControl.Controls.Add(btnPick);
+                btnPick.Click += BtnPick_Click;//BtnPickToOrder_Click;
 
-            
+                dataSpareParts.CellMouseDoubleClick += BtnPick_Click;//BtnPickToOrder_Click; 
+
+                //readOnly = true;
+
+                /*radioButton5.Checked = true;
+                radioButton4.Enabled = false;
+                numericUpDown5.Value = 1;
+                numericUpDown5.Enabled = false;
+                numericUpDown6.Value = 0;
+                numericUpDown6.Enabled = false;*/
+
+                groupStock.Enabled = false;
+
+                //clearBtn.Click += clearBtnWithoutWorkshop_Click;
+            }
+            else
+            {
+                dataSpareParts.CellMouseDoubleClick += BtnShowInOther_Click;
+            }
+
 
             ManageButton btnShow = new ManageButton();
             btnShow.Text = "Просмотреть";
             panelControl.Controls.Add(btnShow);
             btnShow.Click += BtnShowInOther_Click;
 
-            dataSpareParts.CellMouseDoubleClick += BtnShowInOther_Click;
+            
 
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
             mainBtn[0].Location = new Point(0, 0);

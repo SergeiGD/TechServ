@@ -17,46 +17,65 @@ namespace Forms_TechServ
         int currentPage = 1;
         public Batch batch;
         Workshop workshop;
+        SparePart sparePart;
 
-        public FormBatches(bool forSearching)
+        public FormBatches()
         {
             InitializeComponent();
 
-            
 
-            if (forSearching)
+
+            if (UserSession.Can("add_del_batch"))
             {
-                ManageButton btnPick = new ManageButton();
-                btnPick.Text = "Выбрать";
-                panelControl.Controls.Add(btnPick);
-                btnPick.Click += BtnPick_Click;
-
-                dataBatches.CellMouseDoubleClick += BtnPick_Click;
-
-                readOnly = true;
+                ManageButton btnAdd = new ManageButton();
+                btnAdd.Text = "Добавить";
+                panelControl.Controls.Add(btnAdd);
+                btnAdd.Click += BtnManage_Click;
             }
-            else
+
+            if (UserSession.Can("edit_batch"))
             {
-                if (UserSession.Can("add_del_batch"))
-                {
-                    ManageButton btnAdd = new ManageButton();
-                    btnAdd.Text = "Добавить";
-                    panelControl.Controls.Add(btnAdd);
-                    btnAdd.Click += BtnManage_Click;
-                }
-
-                if (UserSession.Can("edit_batch"))
-                {
-                    readOnly = false;
-                    ManageButton btnDelivered = new ManageButton();
-                    btnDelivered.Text = "Отменить как 'доставлен'";
-                    panelControl.Controls.Add(btnDelivered);
-                    btnDelivered.Click += btnDelivered_Click;
-                }
-
-                //btnDelivered.Click += BtnManage_Click;
-                dataBatches.CellMouseDoubleClick += BtnShow_Click;
+                readOnly = false;
+                ManageButton btnDelivered = new ManageButton();
+                btnDelivered.Text = "Отменить как 'доставлен'";
+                panelControl.Controls.Add(btnDelivered);
+                btnDelivered.Click += btnDelivered_Click;
             }
+
+            //btnDelivered.Click += BtnManage_Click;
+            dataBatches.CellMouseDoubleClick += BtnShow_Click;
+
+            ManageButton btnShow = new ManageButton();
+            btnShow.Text = "Просмотреть";
+            panelControl.Controls.Add(btnShow);
+            btnShow.Click += BtnShow_Click;
+
+            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
+            mainBtn[0].Location = new Point(0, 0);
+
+
+            for (int i = 1; i < mainBtn.Count(); i++)
+            {
+                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
+            }
+
+            btnClean.Click += btnCleanAll_Click;
+        }
+
+        public FormBatches(SparePart sparePart)
+        {
+            InitializeComponent();
+
+            this.sparePart = sparePart;
+
+            ManageButton btnPick = new ManageButton();
+            btnPick.Text = "Выбрать";
+            panelControl.Controls.Add(btnPick);
+            btnPick.Click += BtnPick_Click;
+
+            dataBatches.CellMouseDoubleClick += BtnPick_Click;
+
+            readOnly = true;
 
             ManageButton btnShow = new ManageButton();
             btnShow.Text = "Просмотреть";
@@ -216,26 +235,55 @@ namespace Forms_TechServ
                 dateUntil = datePickerUntil.Value;
             }
 
-            List<Batch> batches = BatchesList.GetBatches(
-                new Batch() 
-                {
-                    Id = id,
-                    TrackNumber = tbTrackNum.Text,
-                    DateDelivered = dateFrom,
-                    Price = numericPriceFrom.Value,
-                    Workshop = (Workshop)tbWorkshop.Tag
-                },
-                new Batch()
-                {
-                    DateDelivered = dateUntil,
-                    Price = numericPriceUntil.Value
-                },
-                (bool)btnAskOrDesk.Tag,
-                sortBy,
-                (int)comboBoxShowRows.SelectedItem,
-                currentPage,
-                out rowsCount
-                );
+            List<Batch> batches;
+            if (sparePart != null) 
+            {
+                batches = BatchesList.GetBatchesWithSparePart(
+                    new Batch()
+                    {
+                        Id = id,
+                        TrackNumber = tbTrackNum.Text,
+                        DateDelivered = dateFrom,
+                        Price = numericPriceFrom.Value,
+                        Workshop = (Workshop)tbWorkshop.Tag
+                    },
+                    new Batch()
+                    {
+                        DateDelivered = dateUntil,
+                        Price = numericPriceUntil.Value
+                    },
+                    sparePart,
+                    (bool)btnAskOrDesk.Tag,
+                    sortBy,
+                    (int)comboBoxShowRows.SelectedItem,
+                    currentPage,
+                    out rowsCount
+                    );
+            }
+            else
+            {
+                batches = BatchesList.GetBatches(
+                    new Batch()
+                    {
+                        Id = id,
+                        TrackNumber = tbTrackNum.Text,
+                        DateDelivered = dateFrom,
+                        Price = numericPriceFrom.Value,
+                        Workshop = (Workshop)tbWorkshop.Tag
+                    },
+                    new Batch()
+                    {
+                        DateDelivered = dateUntil,
+                        Price = numericPriceUntil.Value
+                    },
+                    (bool)btnAskOrDesk.Tag,
+                    sortBy,
+                    (int)comboBoxShowRows.SelectedItem,
+                    currentPage,
+                    out rowsCount
+                    );
+            }
+            
 
             dataBatches.Rows.Clear();
             for (int i = 0; i < batches.Count; i++)
@@ -245,7 +293,15 @@ namespace Forms_TechServ
                 dataBatches.Rows[i].Cells[0].Value = batches[i].Id;
                 dataBatches.Rows[i].Cells[1].Value = batches[i].TrackNumber;
                 dataBatches.Rows[i].Cells[2].Value = batches[i].Workshop.Location;
-                dataBatches.Rows[i].Cells[3].Value = batches[i].Price;
+                if(sparePart != null)
+                {
+                    dataBatches.Rows[i].Cells[3].Value = batches[i].GetCountLeft(sparePart);
+                }
+                else
+                {
+                    dataBatches.Rows[i].Cells[3].Value = batches[i].Price;
+                }
+                
                 dataBatches.Rows[i].Cells[4].Value = batches[i].DateDelivered;
 
             }
@@ -263,7 +319,15 @@ namespace Forms_TechServ
 
         private void BtnPick_Click(object sender, EventArgs e)          // вот тут ретернить выбранного клиента
         {
-            this.Close();
+            if(dataBatches.SelectedRows.Count > 0)
+            {
+                batch = BatchesList.GetById((int)dataBatches.SelectedRows[0].Cells[0].Value);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите поставку");
+            }
         }
 
         private void BtnManage_Click(object sender, EventArgs e)

@@ -37,7 +37,7 @@ namespace Forms_TechServ
 
         private void linkPickedOrder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FormShowOrder formShowOrder = new FormShowOrder(true, true);
+            FormShowOrder formShowOrder = new FormShowOrder(true, null);
             formShowOrder.ShowDialog();
         }
 

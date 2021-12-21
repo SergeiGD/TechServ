@@ -56,6 +56,7 @@ namespace Forms_TechServ
 
             TreeNode newNode = null;
 
+
             Gethildern(firstCat);
             // РЕКУРСИЕЙ ИЩЕМ ВСЕ ДОЧЕРИНИЕ ЭЛЕМЕНТЫ
             void Gethildern(Category childCat)
@@ -66,12 +67,15 @@ namespace Forms_TechServ
                 {
                     
                     Gethildern(subItem);
+
+
                     // НАЧИНАЕТСЯ ФОРМИРОВАНИЕ С САМОГО КОНЦА
                     // ЕСЛИ У ТЕКУЩЕГО ЭЛЕМЕНТА УЖЕ ЕСТЬ ДОЧЕРНИЕ ЭЛЕМЕНТЫ В ДЕРЕВЕ, ТО ДОБАВЛЯЕМ ИХ К НЕМУ
                     if (newNode != null && newNode.Tag != null && (int)newNode.Tag == subItem.Id)
                     {
                         newNode = new TreeNode(subItem.Name) { Name = subItem.Name, Tag = subItem.ParentCategoryId };
                         
+
                         List<TreeNode> tempNodes = new List<TreeNode>();
                         foreach(TreeNode item in treeCats.Nodes)
                         {
@@ -92,6 +96,7 @@ namespace Forms_TechServ
                     else
                     {
                         newNode = new TreeNode(subItem.Name) { Name = subItem.Name, Tag = subItem.ParentCategoryId };
+                        
                         treeCats.Nodes.Add(newNode);
                     }  
 
@@ -108,6 +113,8 @@ namespace Forms_TechServ
             treeCats.Nodes.Clear();
             treeCats.Nodes.Add(mainParent);
             
+
+
             // ЕСЛИ ТЕКУЩАЯ КАТЕГОРИЯ НЕ ЯВЛЯЕТСЯ ВЕРХНЕЙ В ВЕТКЕ, ТО ИЩЕМ И ВЫДЕЛЯЕМ, А ТАКЖЕ СВОРЧАЕМ ЕЕ ДОЧЕРНИЕ УЗЛЫ
             if (category.Name != firstCat.Name)
             {

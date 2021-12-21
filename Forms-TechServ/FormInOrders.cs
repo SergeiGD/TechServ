@@ -156,8 +156,15 @@ namespace Forms_TechServ
 
         private void BtnShow_Click(object sender, EventArgs e)          
         {
-            FormShowOrder showOrder = new FormShowOrder(true, readOnly);
-            showOrder.ShowDialog();
+            if(dataOrders.SelectedRows.Count > 0)
+            {
+                FormShowOrder showOrder = new FormShowOrder(readOnly, OrdersList.GetById((int)dataOrders.SelectedRows[0].Cells[0].Value));
+                showOrder.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите заказ");
+            }
         }
 
         private void ExtendFilterBtn_Click(object sender, EventArgs e)

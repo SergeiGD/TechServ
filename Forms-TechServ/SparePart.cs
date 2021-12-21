@@ -71,7 +71,7 @@ namespace Forms_TechServ
             {
                 int count = 0;
 
-                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.DelTime == null);
+                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.DelTime == null).Include(s => s.SparePart);
 
                 if(workshop != null)
                 {
@@ -82,7 +82,9 @@ namespace Forms_TechServ
 
                 foreach (BatchSparePart sparePart in spareParts)
                 {
-                    count += sparePart.Quantity;
+                    //count += sparePart.Quantity;
+
+                    count = sparePart.Batch.GetCountLeft(sparePart.SparePart);
                 }
 
                 /*foreach (BatchSparePart sparePart in db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.WorkshopId == workshop.Id))

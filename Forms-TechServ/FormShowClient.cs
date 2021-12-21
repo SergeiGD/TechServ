@@ -12,6 +12,7 @@ namespace Forms_TechServ
 {
     public partial class FormShowClient : Form
     {
+
         Client client;
         Size pickedSize = new Size(1078, 600);
         bool readOnly;

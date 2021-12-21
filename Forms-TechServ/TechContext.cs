@@ -21,6 +21,13 @@ namespace Forms_TechServ
 
         public DbSet<SparePart> SpareParts { get; set; }
 
+
+
+
+        public DbSet<SparePartFromBatch> OrdersSpareParts { get; set; }
+
+
+
         public DbSet<Batch> Batches { get; set; }
         public DbSet<BatchSparePart> BatchesSpareParts { get; set; }
 
@@ -53,6 +60,9 @@ namespace Forms_TechServ
 
             modelBuilder.Entity<OrderService>()
                 .HasKey(c => new { c.OrderId, c.ServiceId });
+
+            modelBuilder.Entity<SparePartFromBatch>()
+                .HasKey(c => new { c.OrderId, c.SparePartId, c.BatchId });
 
             modelBuilder.Configurations.Add(new Service.ServiceConfig());
 

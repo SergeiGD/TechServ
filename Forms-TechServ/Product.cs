@@ -59,6 +59,14 @@ namespace Forms_TechServ
                 return true;
             }
         }
+
+        /*public Client GetOwner()
+        {
+            using (TechContext db = new TechContext())
+            {
+                return db.Clients.Find(ClientId);
+            }
+        }*/
     }
 
     public static class ProductsList

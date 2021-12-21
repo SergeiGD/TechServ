@@ -27,8 +27,8 @@ namespace Forms_TechServ
 
         private void btnFindBatch_Click(object sender, EventArgs e)
         {
-            FormBatches formBatches = new FormBatches(true);
-            formBatches.ShowDialog();
+            //FormBatches formBatches = new FormBatches(true);
+            //formBatches.ShowDialog();
         }
 
         private void btnFindWorkshop_Click(object sender, EventArgs e)

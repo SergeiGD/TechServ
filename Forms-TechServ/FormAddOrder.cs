@@ -230,6 +230,7 @@ namespace Forms_TechServ
                 order.ClientComment = tbComment.Text;
                 order.ManagerId = UserSession.GetLoggedInUser().Id;
                 order.ClientSale = ((Product)tbProduct.Tag).Client.CalcSale();
+                order.DateStart = DateTime.Now;
 
                 if (radioManually.Checked)
                 {

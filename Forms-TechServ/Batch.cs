@@ -100,7 +100,14 @@ namespace Forms_TechServ
             using (TechContext db = new TechContext())
             {
                 BatchSparePart batchSparePart = db.BatchesSpareParts.Where(s => s.BatchId == this.Id && s.SparePartId == sparePart.Id).FirstOrDefault();
-                return batchSparePart.Quantity; // минус OrderSparePart....
+                int quantity = batchSparePart.Quantity;
+
+                foreach (SparePartFromBatch orderSparePart in db.OrdersSpareParts.Where(b => b.BatchId == this.Id && b.SparePartId == sparePart.Id))
+                {
+                    quantity -= orderSparePart.Quantity;
+                }
+
+                return quantity;//batchSparePart.Quantity; // минус OrderSparePart....
             }
         }
 
@@ -304,6 +311,79 @@ namespace Forms_TechServ
                 {
                     batches = batches.Where(b => b.WorkshopId == FilterA.Workshop.Id);
                 }
+
+                batches = batches.SortBy(sortBy, desk);
+
+                rowsCount = batches.Count();                                  // общее кол-во строк для постраничного вывода
+
+                batches = batches.Skip((page - 1) * count).Take(count);
+
+                return batches.ToList();
+            }
+        }
+
+        // ПОИСК ПОСТАВОК С ОПРЕДЕЛЕННОЙ ДЕТАЛЬЮ (ДЛЯ ЗАКАЗОВ)
+        public static List<Batch> GetBatchesWithSparePart(Batch FilterA, Batch FilterB, SparePart sparePart, bool desk, string sortBy, int count, int page, out int rowsCount)
+        {
+            using (TechContext db = new TechContext())
+            {
+                IEnumerable<Batch> batches = db.Batches.Where(b => b.DelTime == null).Include(b => b.Workshop);
+
+                
+
+                if (FilterA.Id != 0)
+                {
+                    batches = batches.Where(b => b.Id == FilterA.Id);
+                }
+
+                if (FilterA.TrackNumber != null && FilterA.TrackNumber != string.Empty)
+                {
+                    batches = batches.Where(b => b.TrackNumber.IndexOf(FilterA.TrackNumber, StringComparison.OrdinalIgnoreCase) > -1);
+                }
+
+                if (FilterA.Workshop != null)
+                {
+                    batches = batches.Where(b => b.WorkshopId == FilterA.Workshop.Id);
+                }
+
+
+
+                
+
+
+
+                if (FilterA.DateDelivered.HasValue && !FilterB.DateDelivered.HasValue)
+                {
+                    batches = batches.Where(b => b.DateDelivered >= FilterA.DateDelivered);
+                }
+
+                if (!FilterA.DateDelivered.HasValue && FilterB.DateDelivered.HasValue)
+                {
+                    batches = batches.Where(b => b.DateDelivered <= FilterB.DateDelivered);
+                }
+
+                if (FilterA.DateDelivered.HasValue && FilterB.DateDelivered.HasValue)
+                {
+                    batches = batches.Where(b => b.DateDelivered >= FilterA.DateDelivered && b.DateDelivered <= FilterB.DateDelivered);
+                }
+
+                if (FilterA.Price > 0 && FilterB.Price == 0)
+                {
+                    batches = batches.Where(b => b.Price >= FilterA.Price);
+                }
+
+                if (FilterA.Price == 0 && FilterB.Price > 0)
+                {
+                    batches = batches.Where(b => b.Price <= FilterB.Price);
+                }
+
+                if (FilterA.Price > 0 && FilterB.Price > 0)
+                {
+                    batches = batches.Where(b => b.Price >= FilterA.Price && b.Price <= FilterB.Price);
+                }
+
+                batches = batches.Where(b => b.CheckSparePart(sparePart));
+                batches = batches.Where(b => b.GetCountLeft(sparePart) > 0);
 
                 batches = batches.SortBy(sortBy, desk);
 

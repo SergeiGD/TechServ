@@ -19,7 +19,7 @@ namespace Forms_TechServ
 
         private void linkPickedOrder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FormShowOrder formShowOrder = new FormShowOrder(false, true);                       // ВОТ ТУТ ТЭГ ПРИВЯЗАН ДОЛЖЕН БЫТЬ 
+            FormShowOrder formShowOrder = new FormShowOrder(true, null);                       // ВОТ ТУТ ТЭГ ПРИВЯЗАН ДОЛЖЕН БЫТЬ 
             formShowOrder.ShowDialog();
         }
     }

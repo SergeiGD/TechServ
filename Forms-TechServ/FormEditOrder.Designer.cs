@@ -90,26 +90,25 @@ namespace Forms_TechServ
             this.panel3 = new System.Windows.Forms.Panel();
             this.comboBoxShowSparePartsRows = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.labelSparePartsPages = new System.Windows.Forms.Label();
-            this.numericCurrentSparePart = new System.Windows.Forms.NumericUpDown();
+            this.labelSparePartsPageCount = new System.Windows.Forms.Label();
+            this.numericCurrentSparePartPage = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.btnNextSparePart = new System.Windows.Forms.Button();
             this.btnPrevSparePart = new System.Windows.Forms.Button();
             this.dataSpareParts = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.logsPage = new System.Windows.Forms.TabPage();
             this.visitsPage = new System.Windows.Forms.TabPage();
             this.toolTipFindAuto = new System.Windows.Forms.ToolTip(this.components);
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnDeleteService = new Forms_TechServ.ManageButton();
             this.btnAddService = new Forms_TechServ.ManageButton();
             this.btnShowService = new Forms_TechServ.ManageButton();
-            this.manageButton4 = new Forms_TechServ.ManageButton();
+            this.btnDelSparePart = new Forms_TechServ.ManageButton();
             this.btnAddSparePart = new Forms_TechServ.ManageButton();
             this.btnShowSparePart = new Forms_TechServ.ManageButton();
             this.ordersTab.SuspendLayout();
@@ -121,7 +120,7 @@ namespace Forms_TechServ
             this.panel2.SuspendLayout();
             this.sparePartsPage.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericCurrentSparePart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericCurrentSparePartPage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSpareParts)).BeginInit();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
@@ -205,6 +204,7 @@ namespace Forms_TechServ
             // 
             // tbWorkshop
             // 
+            this.tbWorkshop.Enabled = false;
             this.tbWorkshop.Location = new System.Drawing.Point(95, 123);
             this.tbWorkshop.Name = "tbWorkshop";
             this.tbWorkshop.ReadOnly = true;
@@ -464,8 +464,9 @@ namespace Forms_TechServ
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(111, 40);
             this.btnCancel.TabIndex = 150;
-            this.btnCancel.Text = "ОТМЕНИТЬ";
+            this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -474,7 +475,7 @@ namespace Forms_TechServ
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(111, 40);
             this.btnSave.TabIndex = 149;
-            this.btnSave.Text = "СОХРАНИТЬ";
+            this.btnSave.Text = "Сохранить общую информацию";
             this.btnSave.UseVisualStyleBackColor = true;
             // 
             // comboBoxStatus
@@ -488,6 +489,7 @@ namespace Forms_TechServ
             // 
             // tbMaster
             // 
+            this.tbMaster.Enabled = false;
             this.tbMaster.Location = new System.Drawing.Point(95, 87);
             this.tbMaster.Name = "tbMaster";
             this.tbMaster.ReadOnly = true;
@@ -496,6 +498,7 @@ namespace Forms_TechServ
             // 
             // tbProduct
             // 
+            this.tbProduct.Enabled = false;
             this.tbProduct.Location = new System.Drawing.Point(95, 51);
             this.tbProduct.Name = "tbProduct";
             this.tbProduct.ReadOnly = true;
@@ -761,8 +764,8 @@ namespace Forms_TechServ
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.Controls.Add(this.comboBoxShowSparePartsRows);
             this.panel3.Controls.Add(this.label4);
-            this.panel3.Controls.Add(this.labelSparePartsPages);
-            this.panel3.Controls.Add(this.numericCurrentSparePart);
+            this.panel3.Controls.Add(this.labelSparePartsPageCount);
+            this.panel3.Controls.Add(this.numericCurrentSparePartPage);
             this.panel3.Controls.Add(this.label5);
             this.panel3.Controls.Add(this.btnNextSparePart);
             this.panel3.Controls.Add(this.btnPrevSparePart);
@@ -781,6 +784,7 @@ namespace Forms_TechServ
             this.comboBoxShowSparePartsRows.Name = "comboBoxShowSparePartsRows";
             this.comboBoxShowSparePartsRows.Size = new System.Drawing.Size(62, 21);
             this.comboBoxShowSparePartsRows.TabIndex = 14;
+            this.comboBoxShowSparePartsRows.SelectedIndexChanged += new System.EventHandler(this.comboBoxShowSparePartsRows_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -793,34 +797,35 @@ namespace Forms_TechServ
             this.label4.TabIndex = 13;
             this.label4.Text = "Показывать по";
             // 
-            // labelSparePartsPages
+            // labelSparePartsPageCount
             // 
-            this.labelSparePartsPages.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.labelSparePartsPages.AutoSize = true;
-            this.labelSparePartsPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.labelSparePartsPages.Location = new System.Drawing.Point(309, 424);
-            this.labelSparePartsPages.Name = "labelSparePartsPages";
-            this.labelSparePartsPages.Size = new System.Drawing.Size(36, 17);
-            this.labelSparePartsPages.TabIndex = 10;
-            this.labelSparePartsPages.Text = "из S";
+            this.labelSparePartsPageCount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.labelSparePartsPageCount.AutoSize = true;
+            this.labelSparePartsPageCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.labelSparePartsPageCount.Location = new System.Drawing.Point(309, 424);
+            this.labelSparePartsPageCount.Name = "labelSparePartsPageCount";
+            this.labelSparePartsPageCount.Size = new System.Drawing.Size(36, 17);
+            this.labelSparePartsPageCount.TabIndex = 10;
+            this.labelSparePartsPageCount.Text = "из S";
             // 
-            // numericCurrentSparePart
+            // numericCurrentSparePartPage
             // 
-            this.numericCurrentSparePart.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.numericCurrentSparePart.Location = new System.Drawing.Point(258, 425);
-            this.numericCurrentSparePart.Minimum = new decimal(new int[] {
+            this.numericCurrentSparePartPage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.numericCurrentSparePartPage.Location = new System.Drawing.Point(258, 425);
+            this.numericCurrentSparePartPage.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericCurrentSparePart.Name = "numericCurrentSparePart";
-            this.numericCurrentSparePart.Size = new System.Drawing.Size(45, 20);
-            this.numericCurrentSparePart.TabIndex = 9;
-            this.numericCurrentSparePart.Value = new decimal(new int[] {
+            this.numericCurrentSparePartPage.Name = "numericCurrentSparePartPage";
+            this.numericCurrentSparePartPage.Size = new System.Drawing.Size(45, 20);
+            this.numericCurrentSparePartPage.TabIndex = 9;
+            this.numericCurrentSparePartPage.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            this.numericCurrentSparePartPage.ValueChanged += new System.EventHandler(this.numericCurrentSparePartPage_ValueChanged);
             // 
             // label5
             // 
@@ -846,6 +851,7 @@ namespace Forms_TechServ
             this.btnNextSparePart.TabIndex = 4;
             this.btnNextSparePart.Text = "Следующая →";
             this.btnNextSparePart.UseVisualStyleBackColor = false;
+            this.btnNextSparePart.Click += new System.EventHandler(this.btnNextSparePart_Click);
             // 
             // btnPrevSparePart
             // 
@@ -860,9 +866,12 @@ namespace Forms_TechServ
             this.btnPrevSparePart.TabIndex = 3;
             this.btnPrevSparePart.Text = "← Предыдущая";
             this.btnPrevSparePart.UseVisualStyleBackColor = false;
+            this.btnPrevSparePart.Click += new System.EventHandler(this.btnPrevSparePart_Click);
             // 
             // dataSpareParts
             // 
+            this.dataSpareParts.AllowUserToAddRows = false;
+            this.dataSpareParts.AllowUserToDeleteRows = false;
             this.dataSpareParts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -871,54 +880,23 @@ namespace Forms_TechServ
             this.dataSpareParts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5,
             this.Column6});
             this.dataSpareParts.Location = new System.Drawing.Point(0, 0);
+            this.dataSpareParts.MultiSelect = false;
             this.dataSpareParts.Name = "dataSpareParts";
+            this.dataSpareParts.ReadOnly = true;
+            this.dataSpareParts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataSpareParts.Size = new System.Drawing.Size(782, 412);
             this.dataSpareParts.TabIndex = 1;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "id";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Наименование";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "id поставки";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Количество";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Общая цена";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "В наличии";
-            this.Column6.Name = "Column6";
+            this.dataSpareParts.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataSpareParts_CellMouseDoubleClick);
             // 
             // panel4
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel4.Controls.Add(this.manageButton4);
+            this.panel4.Controls.Add(this.btnDelSparePart);
             this.panel4.Controls.Add(this.btnAddSparePart);
             this.panel4.Controls.Add(this.btnShowSparePart);
             this.panel4.Location = new System.Drawing.Point(782, 0);
@@ -945,6 +923,36 @@ namespace Forms_TechServ
             this.visitsPage.Size = new System.Drawing.Size(967, 452);
             this.visitsPage.TabIndex = 4;
             this.visitsPage.Text = "Выезды";
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "id";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Наименование";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Количество";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Общая цена";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Прибыли";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
             // 
             // btnDeleteService
             // 
@@ -993,19 +1001,20 @@ namespace Forms_TechServ
             this.btnShowService.UseVisualStyleBackColor = false;
             this.btnShowService.Click += new System.EventHandler(this.btnShowService_Click);
             // 
-            // manageButton4
+            // btnDelSparePart
             // 
-            this.manageButton4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.manageButton4.FlatAppearance.BorderSize = 0;
-            this.manageButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.manageButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.manageButton4.Location = new System.Drawing.Point(0, 40);
-            this.manageButton4.Name = "manageButton4";
-            this.manageButton4.Size = new System.Drawing.Size(185, 40);
-            this.manageButton4.TabIndex = 2;
-            this.manageButton4.Text = "Удалить";
-            this.manageButton4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.manageButton4.UseVisualStyleBackColor = false;
+            this.btnDelSparePart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnDelSparePart.FlatAppearance.BorderSize = 0;
+            this.btnDelSparePart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelSparePart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnDelSparePart.Location = new System.Drawing.Point(0, 40);
+            this.btnDelSparePart.Name = "btnDelSparePart";
+            this.btnDelSparePart.Size = new System.Drawing.Size(185, 40);
+            this.btnDelSparePart.TabIndex = 2;
+            this.btnDelSparePart.Text = "Удалить";
+            this.btnDelSparePart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDelSparePart.UseVisualStyleBackColor = false;
+            this.btnDelSparePart.Click += new System.EventHandler(this.btnDelSparePart_Click);
             // 
             // btnAddSparePart
             // 
@@ -1062,7 +1071,7 @@ namespace Forms_TechServ
             this.sparePartsPage.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericCurrentSparePart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericCurrentSparePartPage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSpareParts)).EndInit();
             this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1101,7 +1110,7 @@ namespace Forms_TechServ
         private ManageButton btnAddService;
         private ManageButton btnShowService;
         private System.Windows.Forms.Panel panel4;
-        private ManageButton manageButton4;
+        private ManageButton btnDelSparePart;
         private ManageButton btnAddSparePart;
         private ManageButton btnShowSparePart;
         private System.Windows.Forms.Label labelSale;
@@ -1139,19 +1148,18 @@ namespace Forms_TechServ
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ComboBox comboBoxShowSparePartsRows;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label labelSparePartsPages;
-        private System.Windows.Forms.NumericUpDown numericCurrentSparePart;
+        private System.Windows.Forms.Label labelSparePartsPageCount;
+        private System.Windows.Forms.NumericUpDown numericCurrentSparePartPage;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnNextSparePart;
         private System.Windows.Forms.Button btnPrevSparePart;
         private System.Windows.Forms.DataGridView dataSpareParts;
+        private System.Windows.Forms.ToolTip toolTipFindAuto;
+        private System.Windows.Forms.TabPage visitsPage;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.ToolTip toolTipFindAuto;
-        private System.Windows.Forms.TabPage visitsPage;
     }
 }

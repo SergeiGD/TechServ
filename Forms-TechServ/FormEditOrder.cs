@@ -17,6 +17,8 @@ namespace Forms_TechServ
         bool inOrder;
         int servicesRowsCount;
         int servicesCurrentPage = 1;
+        int sparePartsRowsCount;
+        int sparePartsCurrentPage = 1;
 
         public FormEditOrder(Order order)
         {
@@ -46,14 +48,14 @@ namespace Forms_TechServ
             {
                 this.Size = pickedSize;
 
-                FormSpareParts formSpareParts = new FormSpareParts(false, "asd");
+                /*FormSpareParts formSpareParts = new FormSpareParts(false, "asd");
                 formSpareParts.TopLevel = false;
                 formSpareParts.FormBorderStyle = FormBorderStyle.None;
                 sparePartsPage.Controls.Add(formSpareParts);
                 //panelContent.Controls.Add(childForm);
                 formSpareParts.Dock = DockStyle.Fill;
                 formSpareParts.BringToFront();
-                formSpareParts.Show();
+                formSpareParts.Show();*/
             }
             else if (ordersTab.SelectedTab.Equals(logsPage))
             {
@@ -128,11 +130,66 @@ namespace Forms_TechServ
             }
         }
 
+        private void btnAddSparePart_Click(object sender, EventArgs e)
+        {
+            FormSpareParts formSpareParts = new FormSpareParts(true, order.Workshop);
+            formSpareParts.ShowDialog();
+
+            if(formSpareParts.sparePart == null)
+            {
+                return;
+            }
+
+            if (order.CheckSparePart(formSpareParts.sparePart))
+            {
+                MessageBox.Show("Эта деталь уже есть в заказе", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                OrderSparePart sparePart = new OrderSparePart()
+                {
+                    Order = order,
+                    SparePart = formSpareParts.sparePart
+                };
+
+                DialogResult dialogResult = MessageBox.Show("Желаете подобрать поставки автоматически (только из Вашей мастерской)?", "Выберите способ добавления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if(dialogResult == DialogResult.Yes)
+                {
+                    FormManageOrderSparePart formManageOrderSparePart = new FormManageOrderSparePart();
+                    formManageOrderSparePart.ShowDialog();
+
+                    if(!formManageOrderSparePart.changed)
+                    {
+                        return;
+                    }
+
+                    if (sparePart.FindBatchesAuto(formManageOrderSparePart.quantity))
+                    {
+                        MessageBox.Show("Деталь успешно добавлена", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FillSpareParts();
+                    }
+                    else
+                    {
+                        MessageBox.Show("В Вашей мастеркой нету выбранного количества этой детали", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    FormOrderBatches formOrderBatches = new FormOrderBatches(sparePart);
+                    formOrderBatches.ShowDialog();
+
+                    FillSpareParts();
+                }
+
+            }
+
+        }
+
         private void btnShowService_Click(object sender, EventArgs e)
         {
             if(dataServies.SelectedRows.Count > 0)
             {
-                FormShowService formShowService = new FormShowService(true, ServicesList.GetById(Convert.ToInt32(dataServies.SelectedRows[0].Cells[0].Value), false));
+                FormShowService formShowService = new FormShowService(true, ServicesList.GetById(Convert.ToInt32(dataServies.SelectedRows[0].Cells[0].Value), true));
                 formShowService.ShowDialog();
             }
             else
@@ -141,16 +198,19 @@ namespace Forms_TechServ
             }
         }
 
-        private void btnAddSparePart_Click(object sender, EventArgs e)
-        {
-            FormSpareParts formSpareParts = new FormSpareParts(true);
-            formSpareParts.ShowDialog();
-        }
+        
 
         private void btnShowBatch_Click(object sender, EventArgs e)
         {
-            FormShowSparePart formShowSparePart = new FormShowSparePart(true, null);
-            formShowSparePart.ShowDialog();
+            if(dataSpareParts.SelectedRows.Count > 0)
+            {
+                FormShowSparePart formShowSparePart = new FormShowSparePart(true, SparePartsList.GetById((int)dataSpareParts.SelectedRows[0].Cells[0].Value));
+                formShowSparePart.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите деталь");
+            }
         }
 
         private void FormEditOrder_Load(object sender, EventArgs e)
@@ -168,6 +228,12 @@ namespace Forms_TechServ
             comboBoxShowServicesRows.Items.Add(30);
             comboBoxShowServicesRows.Items.Add(40);
             comboBoxShowServicesRows.SelectedIndex = 2;
+
+            comboBoxShowSparePartsRows.Items.Add(5);
+            comboBoxShowSparePartsRows.Items.Add(20);
+            comboBoxShowSparePartsRows.Items.Add(30);
+            comboBoxShowSparePartsRows.Items.Add(40);
+            comboBoxShowSparePartsRows.SelectedIndex = 2;
 
             if (inOrder)
             {
@@ -279,6 +345,43 @@ namespace Forms_TechServ
             labelServicesPageCout.Text = $"из {maxPage}";
         }
 
+        private void FillSpareParts()
+        {
+            List<OrderSparePart> spareParts = order.GetSpareParts(
+                (int)comboBoxShowSparePartsRows.SelectedItem,
+                sparePartsCurrentPage,
+                out sparePartsRowsCount);
+
+            dataSpareParts.Rows.Clear();
+            for (int i = 0; i < spareParts.Count; i++)
+            {
+                
+
+                dataSpareParts.Rows.Add(new DataGridViewRow());
+
+                dataSpareParts.Rows[i].Cells[0].Value = spareParts[i].SparePart.Id;
+                dataSpareParts.Rows[i].Cells[1].Value = spareParts[i].SparePart.Name;
+                //dataSpareParts.Rows[i].Cells[2].Value = item.Key.Id;
+                dataSpareParts.Rows[i].Cells[2].Value = spareParts[i].CalcSparePartsQuanity();
+                dataSpareParts.Rows[i].Cells[3].Value = spareParts[i].CalcPrice();
+                dataSpareParts.Rows[i].Cells[4].Value = spareParts[i].CheckBatchesDelivered() ? "Да" : "Нет";
+
+                
+
+
+            }
+
+            //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
+            int maxPage = (int)Math.Ceiling((double)sparePartsRowsCount / (int)comboBoxShowSparePartsRows.SelectedItem);
+            numericCurrentSparePartPage.Maximum = maxPage;
+
+            if (numericCurrentSparePartPage.Maximum > 0)
+                numericCurrentSparePartPage.Value = numericCurrentSparePartPage.Value == 0 ? 1 : numericCurrentSparePartPage.Value;
+
+            labelSparePartsPageCount.Text = $"из {maxPage}";
+        }
+
+
         private void btnDeleteService_Click(object sender, EventArgs e)
         {
             if(dataServies.SelectedRows.Count > 0)
@@ -349,6 +452,67 @@ namespace Forms_TechServ
             labelServicesPrice.Text = order.CalcServicesPrice().ToString();
             labelFinalPrice.Text = order.CalcFinalPrice().ToString();
             //labelSale.Text = order.ClientSale.ToString();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void comboBoxShowSparePartsRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillSpareParts();
+        }
+
+        private void numericCurrentSparePartPage_ValueChanged(object sender, EventArgs e)
+        {
+            numericCurrentSparePartPage.Value = (int)numericCurrentSparePartPage.Value;           // если ввели дробное число, оно автоматически округлится
+            sparePartsCurrentPage = (int)numericCurrentSparePartPage.Value;
+            FillSpareParts();
+        }
+
+        private void dataSpareParts_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if(dataSpareParts.SelectedRows.Count > 0)
+            {
+                FormOrderBatches formOrderBatches = new FormOrderBatches(order.GetSparePart((int)dataSpareParts.SelectedRows[0].Cells[0].Value));
+                formOrderBatches.ShowDialog();
+
+                FillSpareParts();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите деталь");
+            }
+        }
+
+        private void btnNextSparePart_Click(object sender, EventArgs e)
+        {
+            numericCurrentSparePartPage.Value = numericCurrentSparePartPage.Value + 1 > numericCurrentSparePartPage.Maximum ? numericCurrentSparePartPage.Value : numericCurrentSparePartPage.Value + 1;
+        }
+
+        private void btnPrevSparePart_Click(object sender, EventArgs e)
+        {
+            numericCurrentSparePartPage.Value = numericCurrentSparePartPage.Value - 1 < numericCurrentSparePartPage.Minimum ? numericCurrentSparePartPage.Value : numericCurrentSparePartPage.Value - 1;
+        }
+
+        private void btnDelSparePart_Click(object sender, EventArgs e)
+        {
+            if(dataSpareParts.SelectedRows.Count > 0)
+            {
+                DialogResult answer = MessageBox.Show("Вы уверен что хотите удалить эту деталь из заказа?", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if(answer == DialogResult.Yes)
+                {
+                    OrderSparePart sparePart = order.GetSparePart((int)dataSpareParts.SelectedRows[0].Cells[0].Value);
+                    sparePart.DelSparePart();
+                    MessageBox.Show("Деталь успешно удалена", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    FillSpareParts();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите деталь");
+            }
         }
     }
 }

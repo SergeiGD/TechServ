@@ -367,7 +367,7 @@ namespace Forms_TechServ
         }
         private void BatchesBtn_Click(object sender, EventArgs e)
         {
-            FormBatches formBatches = new FormBatches(false);
+            FormBatches formBatches = new FormBatches();
             OpenChildForm(formBatches, (NavButton)sender);
         }
 
