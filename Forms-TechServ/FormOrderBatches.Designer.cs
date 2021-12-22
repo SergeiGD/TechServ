@@ -80,6 +80,7 @@ namespace Forms_TechServ
             this.dataBatches.Size = new System.Drawing.Size(782, 439);
             this.dataBatches.TabIndex = 1;
             this.dataBatches.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataBatches_CellContentDoubleClick);
+            this.dataBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataBatches_CellDoubleClick);
             // 
             // dataGridViewTextBoxColumn2
             // 

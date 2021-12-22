@@ -56,7 +56,7 @@ namespace Forms_TechServ
 
         private void btnAddBatch_Click(object sender, EventArgs e)
         {
-            FormBatches formBatches = new FormBatches(orderSparePart.SparePart);
+            FormBatches formBatches = new FormBatches(orderSparePart.SparePart, orderSparePart.Order.Workshop);
             formBatches.ShowDialog();
 
             if(formBatches.batch == null)
@@ -93,7 +93,7 @@ namespace Forms_TechServ
         private void btnDelBatch_Click(object sender, EventArgs e)
         {
             DialogResult answer = MessageBox.Show("Вы действительно хотите удалить эту поставку с деталями выбранного типа из заказа?", "Подтвердите удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if(answer = DialogResult.Yes)
+            if(answer == DialogResult.Yes)
             {
                 if (dataBatches.SelectedRows.Count > 0)
                 {
@@ -128,6 +128,12 @@ namespace Forms_TechServ
                 MessageBox.Show("В выбранной поставке недостаточно деталей", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             //orderSparePart.EditQuantity(BatchesList.GetById((int)dataBatches.SelectedRows[0].Cells[1].Value), formManageOrderSparePart.quantity);
+        }
+
+        private void dataBatches_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            FormShowBatch formShowBatch = new FormShowBatch(true, BatchesList.GetById((int)dataBatches.SelectedRows[0].Cells[1].Value));
+            formShowBatch.Show();
         }
     }
 }

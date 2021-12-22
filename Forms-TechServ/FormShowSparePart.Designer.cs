@@ -326,6 +326,7 @@ namespace Forms_TechServ
             this.dataInStock.MultiSelect = false;
             this.dataInStock.Name = "dataInStock";
             this.dataInStock.ReadOnly = true;
+            this.dataInStock.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataInStock.Size = new System.Drawing.Size(742, 287);
             this.dataInStock.TabIndex = 0;
             this.dataInStock.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataInStock_CellMouseDoubleClick);

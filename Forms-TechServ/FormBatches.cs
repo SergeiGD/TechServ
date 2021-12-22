@@ -62,7 +62,7 @@ namespace Forms_TechServ
             btnClean.Click += btnCleanAll_Click;
         }
 
-        public FormBatches(SparePart sparePart)
+        public FormBatches(SparePart sparePart, Workshop workshop)
         {
             InitializeComponent();
 
@@ -92,6 +92,9 @@ namespace Forms_TechServ
             }
 
             btnClean.Click += btnCleanAll_Click;
+
+            tbWorkshop.Text = workshop.Location;
+            tbWorkshop.Tag = workshop;
         }
 
         public FormBatches(Workshop workshop, bool readOnly)
@@ -160,15 +163,27 @@ namespace Forms_TechServ
             trackNumCol.Name = "Трэкномер";
             DataGridViewTextBoxColumn workshopCol = new DataGridViewTextBoxColumn();
             workshopCol.Name = "Мастерская";
-            DataGridViewTextBoxColumn priceCol = new DataGridViewTextBoxColumn();
-            priceCol.Name = "Цена";
+
+            DataGridViewTextBoxColumn infoCol = new DataGridViewTextBoxColumn();
+            
+
+            if (sparePart != null)
+            {
+                infoCol.Name = "Кол-во деталей";
+            }
+            else
+            {
+                infoCol.Name = "Цена";
+            }
+
+            
             DataGridViewTextBoxColumn deliveredCol = new DataGridViewTextBoxColumn();
             deliveredCol.Name = "Дата прибытия";
 
             dataBatches.Columns.Add(idCol);
             dataBatches.Columns.Add(trackNumCol);
             dataBatches.Columns.Add(workshopCol);
-            dataBatches.Columns.Add(priceCol);
+            dataBatches.Columns.Add(infoCol);
             dataBatches.Columns.Add(deliveredCol);
 
 
@@ -346,7 +361,7 @@ namespace Forms_TechServ
             {
                 foreach (DataGridViewRow row in dataBatches.SelectedRows)
                 {
-                    Batch anotherBatch = BatchesList.GetById(Convert.ToInt32(dataBatches.SelectedRows[row.Index].Cells[0].Value));
+                    Batch anotherBatch = BatchesList.GetById(Convert.ToInt32(dataBatches.Rows[row.Index].Cells[0].Value));
                     if (!anotherBatch.DateDelivered.HasValue)
                     {
                         anotherBatch.DateDelivered = DateTime.Now;

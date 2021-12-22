@@ -146,7 +146,6 @@ namespace Forms_TechServ
             this.dataBatches.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataBatches.Size = new System.Drawing.Size(778, 473);
             this.dataBatches.TabIndex = 0;
-            //this.dataBatches.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataBatches_CellMouseDoubleClick);
             // 
             // btnNext
             // 
@@ -332,6 +331,7 @@ namespace Forms_TechServ
             // 
             this.tbWorkshop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbWorkshop.Enabled = false;
             this.tbWorkshop.Location = new System.Drawing.Point(94, 74);
             this.tbWorkshop.Name = "tbWorkshop";
             this.tbWorkshop.ReadOnly = true;

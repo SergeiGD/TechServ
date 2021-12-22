@@ -60,7 +60,11 @@ namespace Forms_TechServ
 
 
                     db.OrdersSpareParts.Add(sparePartFromBatch);
+                    db.SaveChanges();
 
+                    this.Order.FinalPrice = this.Order.CalcFinalPrice();
+                    this.Order.Prepayment = this.Order.CalcClientPrepayment();
+                    db.Entry(this.Order).State = EntityState.Modified;
                     db.SaveChanges();
 
                     return true;
@@ -80,7 +84,11 @@ namespace Forms_TechServ
                 
 
                 db.OrdersSpareParts.Remove(sparePartFromBatch);
+                db.SaveChanges();
 
+                this.Order.FinalPrice = this.Order.CalcFinalPrice();
+                this.Order.Prepayment = this.Order.CalcClientPrepayment();
+                db.Entry(this.Order).State = EntityState.Modified;
                 db.SaveChanges();
 
                 return true;
@@ -99,6 +107,11 @@ namespace Forms_TechServ
                 {
                     SparePartFromBatch sparePartFromBatch = db.OrdersSpareParts.Find(this.Order.Id, this.SparePart.Id, batch.Id);
                     sparePartFromBatch.Quantity = quantity;
+                    db.SaveChanges();
+
+                    this.Order.FinalPrice = this.Order.CalcFinalPrice();
+                    this.Order.Prepayment = this.Order.CalcClientPrepayment();
+                    db.Entry(this.Order).State = EntityState.Modified;
                     db.SaveChanges();
                     return true;
                 }
@@ -182,6 +195,11 @@ namespace Forms_TechServ
                     
                 }
                 db.SaveChanges();
+
+                this.Order.FinalPrice = this.Order.CalcFinalPrice();
+                this.Order.Prepayment = this.Order.CalcClientPrepayment();
+                db.Entry(this.Order).State = EntityState.Modified;
+                db.SaveChanges();
                 return true;
             }
                 
@@ -236,6 +254,10 @@ namespace Forms_TechServ
                     if (quantity == 0)
                     {
                         transaction.Commit();
+                        this.Order.FinalPrice = this.Order.CalcFinalPrice();
+                        this.Order.Prepayment = this.Order.CalcClientPrepayment();
+                        db.Entry(this.Order).State = EntityState.Modified;
+                        db.SaveChanges();
                         return true;
                     }
                     else

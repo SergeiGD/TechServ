@@ -219,7 +219,7 @@ namespace Forms_TechServ
             DataGridViewTextBoxColumn masterCol = new DataGridViewTextBoxColumn();
             masterCol.Name = "Мастер";
             DataGridViewTextBoxColumn managerCol = new DataGridViewTextBoxColumn();
-            managerCol.Name = "Менеджер";
+            managerCol.Name = "Составитель";
             DataGridViewTextBoxColumn workshopCol = new DataGridViewTextBoxColumn();
             workshopCol.Name = "Филиал";
             DataGridViewTextBoxColumn priceCol = new DataGridViewTextBoxColumn();

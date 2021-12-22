@@ -61,6 +61,8 @@ namespace Forms_TechServ
             this.editBtn = new System.Windows.Forms.Button();
             this.ordersTab = new System.Windows.Forms.TabControl();
             this.generalPage = new System.Windows.Forms.TabPage();
+            this.labelWorkshop = new System.Windows.Forms.LinkLabel();
+            this.label33 = new System.Windows.Forms.Label();
             this.labelClientSale = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
             this.labelSparePartsPrice = new System.Windows.Forms.Label();
@@ -102,22 +104,19 @@ namespace Forms_TechServ
             this.panel3 = new System.Windows.Forms.Panel();
             this.comboBoxShowSparePartsRows = new System.Windows.Forms.ComboBox();
             this.label48 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.numericCurrentSparePartsPage = new System.Windows.Forms.NumericUpDown();
+            this.labelSparePartsPageCount = new System.Windows.Forms.Label();
+            this.numericCurrentSparePartPage = new System.Windows.Forms.NumericUpDown();
             this.label30 = new System.Windows.Forms.Label();
             this.btnNextSparePart = new System.Windows.Forms.Button();
             this.btnPrevSparePart = new System.Windows.Forms.Button();
             this.dataSpareParts = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.logsPage = new System.Windows.Forms.TabPage();
             this.visitsPage = new System.Windows.Forms.TabPage();
-            this.labelWorkshop = new System.Windows.Forms.LinkLabel();
-            this.label33 = new System.Windows.Forms.Label();
             this.ordersTab.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.panelEdit.SuspendLayout();
@@ -129,7 +128,7 @@ namespace Forms_TechServ
             this.tabPage3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericCurrentSparePartsPage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericCurrentSparePartPage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSpareParts)).BeginInit();
             this.SuspendLayout();
             // 
@@ -154,7 +153,7 @@ namespace Forms_TechServ
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 495);
+            this.label4.Location = new System.Drawing.Point(26, 489);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(85, 13);
             this.label4.TabIndex = 16;
@@ -163,7 +162,7 @@ namespace Forms_TechServ
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(28, 227);
+            this.label7.Location = new System.Drawing.Point(28, 221);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(44, 13);
             this.label7.TabIndex = 23;
@@ -340,7 +339,7 @@ namespace Forms_TechServ
             // labelStatus
             // 
             this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(119, 227);
+            this.labelStatus.Location = new System.Drawing.Point(119, 221);
             this.labelStatus.Name = "labelStatus";
             this.labelStatus.Size = new System.Drawing.Size(57, 13);
             this.labelStatus.TabIndex = 51;
@@ -349,7 +348,7 @@ namespace Forms_TechServ
             // labelFinalPrice
             // 
             this.labelFinalPrice.AutoSize = true;
-            this.labelFinalPrice.Location = new System.Drawing.Point(119, 495);
+            this.labelFinalPrice.Location = new System.Drawing.Point(119, 489);
             this.labelFinalPrice.Name = "labelFinalPrice";
             this.labelFinalPrice.Size = new System.Drawing.Size(37, 13);
             this.labelFinalPrice.TabIndex = 52;
@@ -395,7 +394,7 @@ namespace Forms_TechServ
             // cancelBtn
             // 
             this.cancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancelBtn.Location = new System.Drawing.Point(42, 260);
+            this.cancelBtn.Location = new System.Drawing.Point(42, 298);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(119, 40);
             this.cancelBtn.TabIndex = 59;
@@ -406,7 +405,7 @@ namespace Forms_TechServ
             // editBtn
             // 
             this.editBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.editBtn.Location = new System.Drawing.Point(42, 137);
+            this.editBtn.Location = new System.Drawing.Point(42, 153);
             this.editBtn.Name = "editBtn";
             this.editBtn.Size = new System.Drawing.Size(119, 40);
             this.editBtn.TabIndex = 57;
@@ -425,7 +424,7 @@ namespace Forms_TechServ
             this.ordersTab.Location = new System.Drawing.Point(0, 0);
             this.ordersTab.Name = "ordersTab";
             this.ordersTab.SelectedIndex = 0;
-            this.ordersTab.Size = new System.Drawing.Size(975, 575);
+            this.ordersTab.Size = new System.Drawing.Size(975, 577);
             this.ordersTab.TabIndex = 60;
             this.ordersTab.SelectedIndexChanged += new System.EventHandler(this.ordersTab_SelectedIndexChanged);
             // 
@@ -482,14 +481,34 @@ namespace Forms_TechServ
             this.generalPage.Location = new System.Drawing.Point(4, 22);
             this.generalPage.Name = "generalPage";
             this.generalPage.Padding = new System.Windows.Forms.Padding(3);
-            this.generalPage.Size = new System.Drawing.Size(967, 549);
+            this.generalPage.Size = new System.Drawing.Size(967, 551);
             this.generalPage.TabIndex = 0;
             this.generalPage.Text = "Общая информация";
+            // 
+            // labelWorkshop
+            // 
+            this.labelWorkshop.AutoSize = true;
+            this.labelWorkshop.Location = new System.Drawing.Point(120, 183);
+            this.labelWorkshop.Name = "labelWorkshop";
+            this.labelWorkshop.Size = new System.Drawing.Size(55, 13);
+            this.labelWorkshop.TabIndex = 78;
+            this.labelWorkshop.TabStop = true;
+            this.labelWorkshop.Text = "linkLabel3";
+            this.labelWorkshop.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.labelWorkshop_LinkClicked);
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(28, 183);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(69, 13);
+            this.label33.TabIndex = 77;
+            this.label33.Text = "Мастерская";
             // 
             // labelClientSale
             // 
             this.labelClientSale.AutoSize = true;
-            this.labelClientSale.Location = new System.Drawing.Point(119, 461);
+            this.labelClientSale.Location = new System.Drawing.Point(119, 455);
             this.labelClientSale.Name = "labelClientSale";
             this.labelClientSale.Size = new System.Drawing.Size(41, 13);
             this.labelClientSale.TabIndex = 76;
@@ -498,7 +517,7 @@ namespace Forms_TechServ
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(26, 461);
+            this.label45.Location = new System.Drawing.Point(26, 455);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(91, 13);
             this.label45.TabIndex = 75;
@@ -507,7 +526,7 @@ namespace Forms_TechServ
             // labelSparePartsPrice
             // 
             this.labelSparePartsPrice.AutoSize = true;
-            this.labelSparePartsPrice.Location = new System.Drawing.Point(119, 424);
+            this.labelSparePartsPrice.Location = new System.Drawing.Point(119, 418);
             this.labelSparePartsPrice.Name = "labelSparePartsPrice";
             this.labelSparePartsPrice.Size = new System.Drawing.Size(41, 13);
             this.labelSparePartsPrice.TabIndex = 74;
@@ -516,7 +535,7 @@ namespace Forms_TechServ
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(26, 424);
+            this.label43.Location = new System.Drawing.Point(26, 418);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(89, 13);
             this.label43.TabIndex = 73;
@@ -525,7 +544,7 @@ namespace Forms_TechServ
             // labelSparePartsCount
             // 
             this.labelSparePartsCount.AutoSize = true;
-            this.labelSparePartsCount.Location = new System.Drawing.Point(120, 387);
+            this.labelSparePartsCount.Location = new System.Drawing.Point(120, 381);
             this.labelSparePartsCount.Name = "labelSparePartsCount";
             this.labelSparePartsCount.Size = new System.Drawing.Size(41, 13);
             this.labelSparePartsCount.TabIndex = 72;
@@ -534,7 +553,7 @@ namespace Forms_TechServ
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(27, 387);
+            this.label41.Location = new System.Drawing.Point(27, 381);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(88, 13);
             this.label41.TabIndex = 71;
@@ -543,7 +562,7 @@ namespace Forms_TechServ
             // labelServicecPrice
             // 
             this.labelServicecPrice.AutoSize = true;
-            this.labelServicecPrice.Location = new System.Drawing.Point(119, 347);
+            this.labelServicecPrice.Location = new System.Drawing.Point(119, 341);
             this.labelServicecPrice.Name = "labelServicecPrice";
             this.labelServicecPrice.Size = new System.Drawing.Size(41, 13);
             this.labelServicecPrice.TabIndex = 70;
@@ -552,7 +571,7 @@ namespace Forms_TechServ
             // label39
             // 
             this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(26, 347);
+            this.label39.Location = new System.Drawing.Point(26, 341);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(87, 13);
             this.label39.TabIndex = 69;
@@ -561,7 +580,7 @@ namespace Forms_TechServ
             // labelServicesCount
             // 
             this.labelServicesCount.AutoSize = true;
-            this.labelServicesCount.Location = new System.Drawing.Point(120, 307);
+            this.labelServicesCount.Location = new System.Drawing.Point(120, 301);
             this.labelServicesCount.Name = "labelServicesCount";
             this.labelServicesCount.Size = new System.Drawing.Size(41, 13);
             this.labelServicesCount.TabIndex = 68;
@@ -570,7 +589,7 @@ namespace Forms_TechServ
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(27, 307);
+            this.label31.Location = new System.Drawing.Point(27, 301);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(74, 13);
             this.label31.TabIndex = 67;
@@ -597,7 +616,7 @@ namespace Forms_TechServ
             // labelPrepayment
             // 
             this.labelPrepayment.AutoSize = true;
-            this.labelPrepayment.Location = new System.Drawing.Point(119, 266);
+            this.labelPrepayment.Location = new System.Drawing.Point(119, 260);
             this.labelPrepayment.Name = "labelPrepayment";
             this.labelPrepayment.Size = new System.Drawing.Size(13, 13);
             this.labelPrepayment.TabIndex = 64;
@@ -606,7 +625,7 @@ namespace Forms_TechServ
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(27, 266);
+            this.label35.Location = new System.Drawing.Point(27, 260);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(71, 13);
             this.label35.TabIndex = 63;
@@ -619,13 +638,13 @@ namespace Forms_TechServ
             this.panelEdit.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelEdit.Location = new System.Drawing.Point(768, 3);
             this.panelEdit.Name = "panelEdit";
-            this.panelEdit.Size = new System.Drawing.Size(196, 543);
+            this.panelEdit.Size = new System.Drawing.Size(196, 545);
             this.panelEdit.TabIndex = 62;
             // 
             // labelAddress
             // 
             this.labelAddress.AutoSize = true;
-            this.labelAddress.Location = new System.Drawing.Point(99, 528);
+            this.labelAddress.Location = new System.Drawing.Point(99, 522);
             this.labelAddress.Name = "labelAddress";
             this.labelAddress.Size = new System.Drawing.Size(29, 13);
             this.labelAddress.TabIndex = 61;
@@ -634,7 +653,7 @@ namespace Forms_TechServ
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(26, 528);
+            this.label34.Location = new System.Drawing.Point(26, 522);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(41, 13);
             this.label34.TabIndex = 60;
@@ -648,7 +667,7 @@ namespace Forms_TechServ
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(967, 520);
+            this.tabPage2.Size = new System.Drawing.Size(967, 551);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Услуги";
             // 
@@ -659,7 +678,7 @@ namespace Forms_TechServ
             this.panel2.Controls.Add(this.btnShowService);
             this.panel2.Location = new System.Drawing.Point(782, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(185, 520);
+            this.panel2.Size = new System.Drawing.Size(185, 551);
             this.panel2.TabIndex = 1;
             // 
             // btnShowService
@@ -677,7 +696,7 @@ namespace Forms_TechServ
             this.btnShowService.Text = "Просмотреть";
             this.btnShowService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnShowService.UseVisualStyleBackColor = false;
-            this.btnShowService.Click += new System.EventHandler(this.manageButton1_Click);
+            this.btnShowService.Click += new System.EventHandler(this.btnShowSerivce_Click);
             // 
             // panel1
             // 
@@ -694,7 +713,7 @@ namespace Forms_TechServ
             this.panel1.Controls.Add(this.dataServies);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(782, 520);
+            this.panel1.Size = new System.Drawing.Size(782, 551);
             this.panel1.TabIndex = 0;
             // 
             // comboBoxShowServicesRows
@@ -702,7 +721,7 @@ namespace Forms_TechServ
             this.comboBoxShowServicesRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.comboBoxShowServicesRows.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxShowServicesRows.FormattingEnabled = true;
-            this.comboBoxShowServicesRows.Location = new System.Drawing.Point(520, 491);
+            this.comboBoxShowServicesRows.Location = new System.Drawing.Point(520, 522);
             this.comboBoxShowServicesRows.Name = "comboBoxShowServicesRows";
             this.comboBoxShowServicesRows.Size = new System.Drawing.Size(62, 21);
             this.comboBoxShowServicesRows.TabIndex = 18;
@@ -713,7 +732,7 @@ namespace Forms_TechServ
             this.label47.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label47.AutoSize = true;
             this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label47.Location = new System.Drawing.Point(407, 492);
+            this.label47.Location = new System.Drawing.Point(407, 523);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(107, 17);
             this.label47.TabIndex = 17;
@@ -724,7 +743,7 @@ namespace Forms_TechServ
             this.labelServicesPageCout.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.labelServicesPageCout.AutoSize = true;
             this.labelServicesPageCout.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.labelServicesPageCout.Location = new System.Drawing.Point(324, 492);
+            this.labelServicesPageCout.Location = new System.Drawing.Point(324, 523);
             this.labelServicesPageCout.Name = "labelServicesPageCout";
             this.labelServicesPageCout.Size = new System.Drawing.Size(36, 17);
             this.labelServicesPageCout.TabIndex = 10;
@@ -733,7 +752,7 @@ namespace Forms_TechServ
             // numericCurrentServicePage
             // 
             this.numericCurrentServicePage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.numericCurrentServicePage.Location = new System.Drawing.Point(273, 493);
+            this.numericCurrentServicePage.Location = new System.Drawing.Point(273, 524);
             this.numericCurrentServicePage.Minimum = new decimal(new int[] {
             1,
             0,
@@ -754,7 +773,7 @@ namespace Forms_TechServ
             this.label28.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label28.Location = new System.Drawing.Point(195, 492);
+            this.label28.Location = new System.Drawing.Point(195, 523);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(72, 17);
             this.label28.TabIndex = 8;
@@ -767,7 +786,7 @@ namespace Forms_TechServ
             this.btnNextService.FlatAppearance.BorderSize = 0;
             this.btnNextService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNextService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.btnNextService.Location = new System.Drawing.Point(652, 480);
+            this.btnNextService.Location = new System.Drawing.Point(652, 511);
             this.btnNextService.Name = "btnNextService";
             this.btnNextService.Size = new System.Drawing.Size(130, 40);
             this.btnNextService.TabIndex = 4;
@@ -782,7 +801,7 @@ namespace Forms_TechServ
             this.btnPrevService.FlatAppearance.BorderSize = 0;
             this.btnPrevService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrevService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.btnPrevService.Location = new System.Drawing.Point(0, 480);
+            this.btnPrevService.Location = new System.Drawing.Point(0, 511);
             this.btnPrevService.Name = "btnPrevService";
             this.btnPrevService.Size = new System.Drawing.Size(130, 40);
             this.btnPrevService.TabIndex = 3;
@@ -811,8 +830,9 @@ namespace Forms_TechServ
             this.dataServies.Name = "dataServies";
             this.dataServies.ReadOnly = true;
             this.dataServies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataServies.Size = new System.Drawing.Size(782, 480);
+            this.dataServies.Size = new System.Drawing.Size(782, 511);
             this.dataServies.TabIndex = 1;
+            this.dataServies.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataServies_CellMouseDoubleClick);
             // 
             // Column1
             // 
@@ -858,7 +878,7 @@ namespace Forms_TechServ
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(967, 520);
+            this.tabPage3.Size = new System.Drawing.Size(967, 551);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Детали";
             // 
@@ -869,7 +889,7 @@ namespace Forms_TechServ
             this.panel4.Controls.Add(this.btnShowSparePart);
             this.panel4.Location = new System.Drawing.Point(782, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(185, 520);
+            this.panel4.Size = new System.Drawing.Size(185, 551);
             this.panel4.TabIndex = 2;
             // 
             // btnShowSparePart
@@ -887,7 +907,7 @@ namespace Forms_TechServ
             this.btnShowSparePart.Text = "Просмотреть";
             this.btnShowSparePart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnShowSparePart.UseVisualStyleBackColor = false;
-            this.btnShowSparePart.Click += new System.EventHandler(this.manageButton2_Click);
+            this.btnShowSparePart.Click += new System.EventHandler(this.btnShowSparePart_Click);
             // 
             // panel3
             // 
@@ -896,62 +916,75 @@ namespace Forms_TechServ
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.Controls.Add(this.comboBoxShowSparePartsRows);
             this.panel3.Controls.Add(this.label48);
-            this.panel3.Controls.Add(this.label29);
-            this.panel3.Controls.Add(this.numericCurrentSparePartsPage);
+            this.panel3.Controls.Add(this.labelSparePartsPageCount);
+            this.panel3.Controls.Add(this.numericCurrentSparePartPage);
             this.panel3.Controls.Add(this.label30);
             this.panel3.Controls.Add(this.btnNextSparePart);
             this.panel3.Controls.Add(this.btnPrevSparePart);
             this.panel3.Controls.Add(this.dataSpareParts);
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(782, 520);
+            this.panel3.Size = new System.Drawing.Size(782, 551);
             this.panel3.TabIndex = 1;
             // 
             // comboBoxShowSparePartsRows
             // 
             this.comboBoxShowSparePartsRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.comboBoxShowSparePartsRows.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxShowSparePartsRows.FormattingEnabled = true;
-            this.comboBoxShowSparePartsRows.Location = new System.Drawing.Point(536, 491);
+            this.comboBoxShowSparePartsRows.Location = new System.Drawing.Point(536, 522);
             this.comboBoxShowSparePartsRows.Name = "comboBoxShowSparePartsRows";
             this.comboBoxShowSparePartsRows.Size = new System.Drawing.Size(62, 21);
             this.comboBoxShowSparePartsRows.TabIndex = 18;
+            this.comboBoxShowSparePartsRows.Click += new System.EventHandler(this.comboBoxShowSparePartsRows_Click);
             // 
             // label48
             // 
             this.label48.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label48.AutoSize = true;
             this.label48.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label48.Location = new System.Drawing.Point(423, 492);
+            this.label48.Location = new System.Drawing.Point(423, 523);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(107, 17);
             this.label48.TabIndex = 17;
             this.label48.Text = "Показывать по";
             // 
-            // label29
+            // labelSparePartsPageCount
             // 
-            this.label29.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label29.Location = new System.Drawing.Point(328, 492);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(36, 17);
-            this.label29.TabIndex = 10;
-            this.label29.Text = "из S";
+            this.labelSparePartsPageCount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.labelSparePartsPageCount.AutoSize = true;
+            this.labelSparePartsPageCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.labelSparePartsPageCount.Location = new System.Drawing.Point(328, 523);
+            this.labelSparePartsPageCount.Name = "labelSparePartsPageCount";
+            this.labelSparePartsPageCount.Size = new System.Drawing.Size(36, 17);
+            this.labelSparePartsPageCount.TabIndex = 10;
+            this.labelSparePartsPageCount.Text = "из S";
             // 
-            // numericCurrentSparePartsPage
+            // numericCurrentSparePartPage
             // 
-            this.numericCurrentSparePartsPage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.numericCurrentSparePartsPage.Location = new System.Drawing.Point(277, 493);
-            this.numericCurrentSparePartsPage.Name = "numericCurrentSparePartsPage";
-            this.numericCurrentSparePartsPage.Size = new System.Drawing.Size(45, 20);
-            this.numericCurrentSparePartsPage.TabIndex = 9;
+            this.numericCurrentSparePartPage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.numericCurrentSparePartPage.Location = new System.Drawing.Point(277, 524);
+            this.numericCurrentSparePartPage.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericCurrentSparePartPage.Name = "numericCurrentSparePartPage";
+            this.numericCurrentSparePartPage.Size = new System.Drawing.Size(45, 20);
+            this.numericCurrentSparePartPage.TabIndex = 9;
+            this.numericCurrentSparePartPage.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericCurrentSparePartPage.ValueChanged += new System.EventHandler(this.numericCurrentSparePartPage_ValueChanged);
             // 
             // label30
             // 
             this.label30.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label30.Location = new System.Drawing.Point(199, 492);
+            this.label30.Location = new System.Drawing.Point(199, 523);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(72, 17);
             this.label30.TabIndex = 8;
@@ -964,12 +997,13 @@ namespace Forms_TechServ
             this.btnNextSparePart.FlatAppearance.BorderSize = 0;
             this.btnNextSparePart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNextSparePart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.btnNextSparePart.Location = new System.Drawing.Point(652, 480);
+            this.btnNextSparePart.Location = new System.Drawing.Point(652, 511);
             this.btnNextSparePart.Name = "btnNextSparePart";
             this.btnNextSparePart.Size = new System.Drawing.Size(130, 40);
             this.btnNextSparePart.TabIndex = 4;
             this.btnNextSparePart.Text = "Следующая →";
             this.btnNextSparePart.UseVisualStyleBackColor = false;
+            this.btnNextSparePart.Click += new System.EventHandler(this.btnNextSparePart_Click);
             // 
             // btnPrevSparePart
             // 
@@ -978,15 +1012,18 @@ namespace Forms_TechServ
             this.btnPrevSparePart.FlatAppearance.BorderSize = 0;
             this.btnPrevSparePart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrevSparePart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.btnPrevSparePart.Location = new System.Drawing.Point(0, 480);
+            this.btnPrevSparePart.Location = new System.Drawing.Point(0, 511);
             this.btnPrevSparePart.Name = "btnPrevSparePart";
             this.btnPrevSparePart.Size = new System.Drawing.Size(130, 40);
             this.btnPrevSparePart.TabIndex = 3;
             this.btnPrevSparePart.Text = "← Предыдущая";
             this.btnPrevSparePart.UseVisualStyleBackColor = false;
+            this.btnPrevSparePart.Click += new System.EventHandler(this.btnPrevSparePart_Click);
             // 
             // dataSpareParts
             // 
+            this.dataSpareParts.AllowUserToAddRows = false;
+            this.dataSpareParts.AllowUserToDeleteRows = false;
             this.dataSpareParts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -995,14 +1032,17 @@ namespace Forms_TechServ
             this.dataSpareParts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5,
             this.Column6});
             this.dataSpareParts.Location = new System.Drawing.Point(0, 0);
+            this.dataSpareParts.MultiSelect = false;
             this.dataSpareParts.Name = "dataSpareParts";
-            this.dataSpareParts.Size = new System.Drawing.Size(782, 480);
+            this.dataSpareParts.ReadOnly = true;
+            this.dataSpareParts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataSpareParts.Size = new System.Drawing.Size(782, 511);
             this.dataSpareParts.TabIndex = 1;
+            this.dataSpareParts.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataSpareParts_CellMouseDoubleClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -1016,16 +1056,11 @@ namespace Forms_TechServ
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "id поставки";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
             // dataGridViewTextBoxColumn4
             // 
             this.dataGridViewTextBoxColumn4.HeaderText = "Количество";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn5
             // 
@@ -1035,8 +1070,9 @@ namespace Forms_TechServ
             // 
             // Column6
             // 
-            this.Column6.HeaderText = "В наличии";
+            this.Column6.HeaderText = "Прибыли";
             this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
             // 
             // logsPage
             // 
@@ -1044,7 +1080,7 @@ namespace Forms_TechServ
             this.logsPage.Location = new System.Drawing.Point(4, 22);
             this.logsPage.Name = "logsPage";
             this.logsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.logsPage.Size = new System.Drawing.Size(967, 520);
+            this.logsPage.Size = new System.Drawing.Size(967, 551);
             this.logsPage.TabIndex = 3;
             this.logsPage.Text = "История";
             // 
@@ -1054,36 +1090,16 @@ namespace Forms_TechServ
             this.visitsPage.Location = new System.Drawing.Point(4, 22);
             this.visitsPage.Name = "visitsPage";
             this.visitsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.visitsPage.Size = new System.Drawing.Size(967, 520);
+            this.visitsPage.Size = new System.Drawing.Size(967, 551);
             this.visitsPage.TabIndex = 4;
             this.visitsPage.Text = "Выезды";
-            // 
-            // labelWorkshop
-            // 
-            this.labelWorkshop.AutoSize = true;
-            this.labelWorkshop.Location = new System.Drawing.Point(120, 183);
-            this.labelWorkshop.Name = "labelWorkshop";
-            this.labelWorkshop.Size = new System.Drawing.Size(55, 13);
-            this.labelWorkshop.TabIndex = 78;
-            this.labelWorkshop.TabStop = true;
-            this.labelWorkshop.Text = "linkLabel3";
-            this.labelWorkshop.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.labelWorkshop_LinkClicked);
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(28, 183);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(69, 13);
-            this.label33.TabIndex = 77;
-            this.label33.Text = "Мастерская";
             // 
             // FormShowOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.ClientSize = new System.Drawing.Size(975, 575);
+            this.ClientSize = new System.Drawing.Size(975, 577);
             this.Controls.Add(this.ordersTab);
             this.MaximizeBox = false;
             this.Name = "FormShowOrder";
@@ -1103,7 +1119,7 @@ namespace Forms_TechServ
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericCurrentSparePartsPage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericCurrentSparePartPage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSpareParts)).EndInit();
             this.ResumeLayout(false);
 
@@ -1156,8 +1172,8 @@ namespace Forms_TechServ
         private System.Windows.Forms.Panel panel4;
         private ManageButton btnShowSparePart;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.NumericUpDown numericCurrentSparePartsPage;
+        private System.Windows.Forms.Label labelSparePartsPageCount;
+        private System.Windows.Forms.NumericUpDown numericCurrentSparePartPage;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Button btnNextSparePart;
         private System.Windows.Forms.Button btnPrevSparePart;
@@ -1170,12 +1186,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.Label labelDatePrepayment;
         private System.Windows.Forms.Label labelPrepayment;
         private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.Label labelClientSale;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.Label labelSparePartsPrice;
@@ -1199,5 +1209,10 @@ namespace Forms_TechServ
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.LinkLabel labelWorkshop;
         private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
     }
 }

@@ -79,7 +79,11 @@ namespace Forms_TechServ
                     price += service.Service.Price * service.Quantity - (service.Service.Price * service.Quantity * (service.Sale / 100));
                 }
 
-                // ПОТОМ ДЕТАЛИ
+                foreach (OrderSparePart sparePart in this.GetSpareParts())
+                {
+                    price += sparePart.CalcPrice();
+                }
+                
 
                 return price - (price * (this.ClientSale / 100));
             }
@@ -99,6 +103,7 @@ namespace Forms_TechServ
             }
         }
 
+        // ПОЛЕЧЕНИЕ ЗАПЧАСТЕЙ ДЛЯ ПОСТРАНИЧНОГО ВЫВОДА
         public List<OrderSparePart> GetSpareParts(int count, int page, out int rowsCount)
         {
             using (TechContext db = new TechContext())
@@ -117,11 +122,6 @@ namespace Forms_TechServ
                         orderSpareParts.Add(sparePart);
                         
                     }
-
-                    
-
-                    
-
                     
                 }
 
@@ -131,17 +131,36 @@ namespace Forms_TechServ
                 
 
                 return orderSpareParts;
-                /*IEnumerable<OrderService> orderServices = db.OrdersServices.Where(s => s.OrderId == this.Id).Include(s => s.Service);
-
-                rowsCount = orderServices.Count();                                  // общее кол-во строк для постраничного вывода
-
-                orderServices = orderServices.Skip((page - 1) * count).Take(count);
-
-                return orderServices.ToList();*/
+                
             }
         }
 
-        
+        // ПРОСТО ПОЛУЧЕНИЕ ВСЕХ ЗАПЧАТЕЙ В ЗАКАЗЕ
+        public List<OrderSparePart> GetSpareParts()
+        {
+            using (TechContext db = new TechContext())
+            {
+                List<OrderSparePart> orderSpareParts = new List<OrderSparePart>();
+                foreach (SparePartFromBatch sparePartFromBatch in db.OrdersSpareParts.Where(s => s.OrderId == this.Id).Include(s => s.SparePart))
+                {
+
+                    if (!orderSpareParts.Any(s => s.SparePart.Id == sparePartFromBatch.SparePartId))
+                    {
+                        OrderSparePart sparePart = new OrderSparePart()
+                        {
+                            Order = this,
+                            SparePart = sparePartFromBatch.SparePart
+                        };
+                        orderSpareParts.Add(sparePart);
+
+                    }
+
+                }
+
+                return orderSpareParts;
+
+            }
+        }
 
         public OrderSparePart GetSparePart(int sparePartId)
         {
@@ -212,17 +231,10 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                /*foreach (MastersCategories master in db.MastersCategories.Include(m => m.Master).Where(m => m.Master.WorkshopId == this.WorkshopId))
-                {
-
-                }*/
-                //Master master = in db.MastersCategories.Include(m => m.Master).Where(m => m.Master.WorkshopId == this.WorkshopId).Include(m => m.Category).Where(m => m.CategoryId == this);
-                //Product product = ProductsList.GetById(this.ProductId, true).CategoryId
+                
                 Category category = ProductsList.GetById(this.ProductId, true).Category;
 
-                /*Master master = (from m in db.MastersCategories.Include(m => m.Master)//.Include(m => m.Category)
-                                where m.Master.WorkshopId == this.WorkshopId// && m.ch == product.CategoryId//this.Product.CategoryId
-                                 select m.Master).FirstOrDefault();*/
+                
 
                 foreach(Master master in from m in db.MastersCategories.Include(m => m.Master)//.Include(m => m.Category)
                                          where m.Master.WorkshopId == this.WorkshopId// && m.ch == product.CategoryId//this.Product.CategoryId
@@ -237,29 +249,7 @@ namespace Forms_TechServ
                 }
 
                 return false;
-                /*int b = 0;
-                foreach (MastersCategories ms in from m in db.MastersCategories.Include(m => m.Master)//.Include(m => m.Category)
-                                      where m.Master.WorkshopId == this.WorkshopId //&& m.CategoryId == product.CategoryId//this.Product.CategoryId
-                                      select m)
-                {
-                    b++;
-                }*/
-
-                /*int b = 0;
-                foreach(MastersCategories ms in db.MastersCategories.Include(m => m.Master).Where(m => m.Master.WorkshopId == this.WorkshopId && m.CategoryId == product.CategoryId))
-                {
-                    b++;
-                }*/
-
-                /*if(master != null)
-                {
-                    this.MasterId = master.Id;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }*/
+                
             }
         }
 
@@ -329,7 +319,46 @@ namespace Forms_TechServ
                 }
             }
         }
-        
+
+        public int CalcSparePartsCount()
+        {
+
+                return this.GetSpareParts().Count();
+            
+        }
+
+        public decimal CalcSparePartsPrice()
+        {
+            using (TechContext db = new TechContext())
+            {
+                decimal price = 0;
+
+                foreach (OrderSparePart sparePart in this.GetSpareParts())
+                {
+                    price += sparePart.CalcPrice();
+                }
+
+                
+
+                return price;
+            }
+        }
+
+        public decimal CalcClientPrepayment()
+        {
+            using(TechContext db = new TechContext())
+            {
+                decimal prepayment = 0;
+                foreach (var sparePart in db.OrdersSpareParts.Where(s => s.OrderId == this.Id).Include(s => s.SparePart))
+                {
+                    prepayment += sparePart.SparePart.ClientPrepayment * sparePart.Quantity;
+                }
+
+                return prepayment;
+            }
+            
+        }
+
     }
 
     public static class OrdersList

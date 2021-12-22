@@ -167,6 +167,7 @@ namespace Forms_TechServ
                     {
                         MessageBox.Show("Деталь успешно добавлена", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         FillSpareParts();
+                        RecalcFields();
                     }
                     else
                     {
@@ -252,7 +253,7 @@ namespace Forms_TechServ
             tbWorkshop.Text = order.Workshop.Location;
             tbWorkshop.Tag = order.Workshop;
             tbComment.Text = order.ClientComment;
-            labelSale.Text = order.ClientSale.ToString();
+            labelSale.Text = order.ClientSale.ToString() + "%";
             //labelPrepayment.Text = order.Prepayment.ToString();
             //labelServicesCount.Text = order.CalcServicesCount().ToString(); 
 
@@ -273,6 +274,7 @@ namespace Forms_TechServ
                 checkPaid.Checked = true;
             }
 
+            RecalcFields();
         }
 
         private void btnFindClient_Click(object sender, EventArgs e)
@@ -366,9 +368,6 @@ namespace Forms_TechServ
                 dataSpareParts.Rows[i].Cells[3].Value = spareParts[i].CalcPrice();
                 dataSpareParts.Rows[i].Cells[4].Value = spareParts[i].CheckBatchesDelivered() ? "Да" : "Нет";
 
-                
-
-
             }
 
             //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
@@ -448,9 +447,16 @@ namespace Forms_TechServ
 
         private void RecalcFields()
         {
+            labelPrepayment.Text = order.Prepayment.ToString();
             labelServicesCount.Text = order.CalcServicesCount().ToString();
+
             labelServicesPrice.Text = order.CalcServicesPrice().ToString();
-            labelFinalPrice.Text = order.CalcFinalPrice().ToString();
+
+            labelSparePartsCount.Text = order.CalcSparePartsCount().ToString();
+
+            labelSparePartsPrice.Text = order.CalcSparePartsPrice().ToString();
+
+            labelFinalPrice.Text = order.FinalPrice.ToString();
             //labelSale.Text = order.ClientSale.ToString();
         }
 
@@ -479,6 +485,7 @@ namespace Forms_TechServ
                 formOrderBatches.ShowDialog();
 
                 FillSpareParts();
+                RecalcFields();
             }
             else
             {
@@ -507,6 +514,7 @@ namespace Forms_TechServ
                     sparePart.DelSparePart();
                     MessageBox.Show("Деталь успешно удалена", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     FillSpareParts();
+                    RecalcFields();
                 }
             }
             else

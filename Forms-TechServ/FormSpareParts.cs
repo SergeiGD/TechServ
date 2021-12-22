@@ -325,7 +325,7 @@ namespace Forms_TechServ
             DataGridViewTextBoxColumn prepaymentCol = new DataGridViewTextBoxColumn();
             prepaymentCol.Name = "Предоплата клиента";
             DataGridViewTextBoxColumn inStockCountCol = new DataGridViewTextBoxColumn();
-            inStockCountCol.Name = "Кол-во в наличии";
+            inStockCountCol.Name = "Кол-во в наличии (прибывших)";
 
 
             dataSpareParts.Columns.Add(idCol);
