@@ -160,6 +160,7 @@ namespace Forms_TechServ
             {
                 FormShowOrder showOrder = new FormShowOrder(readOnly, OrdersList.GetById((int)dataOrders.SelectedRows[0].Cells[0].Value));
                 showOrder.ShowDialog();
+                FillGrid();
             }
             else
             {
@@ -340,5 +341,7 @@ namespace Forms_TechServ
             FormWorkshops formWorkshops = new FormWorkshops(true);
             formWorkshops.ShowDialog();
         }
+
+       
     }
 }

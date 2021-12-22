@@ -231,6 +231,7 @@ namespace Forms_TechServ
                 order.ManagerId = UserSession.GetLoggedInUser().Id;
                 order.ClientSale = ((Product)tbProduct.Tag).Client.CalcSale();
                 order.DateStart = DateTime.Now;
+                order.Status = OrderStatus.WaitingForSpareParts;
 
                 if (radioManually.Checked)
                 {

@@ -63,7 +63,7 @@ namespace Forms_TechServ
                     db.SaveChanges();
 
                     this.Order.FinalPrice = this.Order.CalcFinalPrice();
-                    this.Order.Prepayment = this.Order.CalcClientPrepayment();
+                    this.Order.PrepaymentRequired = this.Order.CalcClientPrepayment();
                     db.Entry(this.Order).State = EntityState.Modified;
                     db.SaveChanges();
 
@@ -87,7 +87,7 @@ namespace Forms_TechServ
                 db.SaveChanges();
 
                 this.Order.FinalPrice = this.Order.CalcFinalPrice();
-                this.Order.Prepayment = this.Order.CalcClientPrepayment();
+                this.Order.PrepaymentRequired = this.Order.CalcClientPrepayment();
                 db.Entry(this.Order).State = EntityState.Modified;
                 db.SaveChanges();
 
@@ -110,7 +110,7 @@ namespace Forms_TechServ
                     db.SaveChanges();
 
                     this.Order.FinalPrice = this.Order.CalcFinalPrice();
-                    this.Order.Prepayment = this.Order.CalcClientPrepayment();
+                    this.Order.PrepaymentRequired = this.Order.CalcClientPrepayment();
                     db.Entry(this.Order).State = EntityState.Modified;
                     db.SaveChanges();
                     return true;
@@ -197,7 +197,7 @@ namespace Forms_TechServ
                 db.SaveChanges();
 
                 this.Order.FinalPrice = this.Order.CalcFinalPrice();
-                this.Order.Prepayment = this.Order.CalcClientPrepayment();
+                this.Order.PrepaymentRequired = this.Order.CalcClientPrepayment();
                 db.Entry(this.Order).State = EntityState.Modified;
                 db.SaveChanges();
                 return true;
@@ -255,7 +255,7 @@ namespace Forms_TechServ
                     {
                         transaction.Commit();
                         this.Order.FinalPrice = this.Order.CalcFinalPrice();
-                        this.Order.Prepayment = this.Order.CalcClientPrepayment();
+                        this.Order.PrepaymentRequired = this.Order.CalcClientPrepayment();
                         db.Entry(this.Order).State = EntityState.Modified;
                         db.SaveChanges();
                         return true;

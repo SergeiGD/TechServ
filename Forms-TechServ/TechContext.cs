@@ -64,6 +64,8 @@ namespace Forms_TechServ
             modelBuilder.Entity<SparePartFromBatch>()
                 .HasKey(c => new { c.OrderId, c.SparePartId, c.BatchId });
 
+            //modelBuilder.Entity<Order>().Property(e => e.Status).conf
+
             modelBuilder.Configurations.Add(new Service.ServiceConfig());
 
             modelBuilder.Configurations.Add(new WorkshopTimetable.TimetableConfig());

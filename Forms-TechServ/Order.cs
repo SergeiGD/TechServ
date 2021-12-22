@@ -13,9 +13,10 @@ namespace Forms_TechServ
         public int Id { get; set; }
         public string ClientComment { get; set; }
         //public string MasterComment { get; set; }
-        public OrderStatus Status;
+        public OrderStatus Status { get; set; }
         public decimal ClientSale { get; set; }
-        public decimal Prepayment { get; set; }
+        public decimal PrepaymentRequired { get; set; }
+        public decimal PrepaymentMade { get; set; }
         public decimal FinalPrice { get; set; }
         //public bool HighPriority { get; set; }
 
@@ -237,7 +238,7 @@ namespace Forms_TechServ
                 
 
                 foreach(Master master in from m in db.MastersCategories.Include(m => m.Master)//.Include(m => m.Category)
-                                         where m.Master.WorkshopId == this.WorkshopId// && m.ch == product.CategoryId//this.Product.CategoryId
+                                         where m.Master.WorkshopId == this.WorkshopId && m.Master.DelTime == null// && m.ch == product.CategoryId//this.Product.CategoryId
                                          select m.Master)
                 {
                     if (master.CheckMasterCategory(category))
@@ -459,7 +460,9 @@ namespace Forms_TechServ
         WaitingForPrepayment,
         WaitingForRefund,
         WaitingForRepairing,
-        WaitingForSpareParts
+        WaitingForSpareParts,
+        WaitingForPayment,
+        Unknown
     }
 
     public static class StatusStringExtensions
@@ -472,20 +475,52 @@ namespace Forms_TechServ
                     return "Отменен";
                 case OrderStatus.Finished:
                     return "Завершен";
-                case OrderStatus.WaitingForAnswer:
-                    return "Ожидает ответа клиента";
                 case OrderStatus.WaitingForDiagnostic:
                     return "Ожидает диагностики";
+                case OrderStatus.WaitingForAnswer:
+                    return "Ожидает ответа клиента";
                 case OrderStatus.WaitingForPrepayment:
                     return "Ожидает предоплаты";
-                case OrderStatus.WaitingForRefund:
-                    return "Ожидает возврарата средств";
                 case OrderStatus.WaitingForRepairing:
                     return "Ожидает ремонта";
+                case OrderStatus.WaitingForRefund:
+                    return "Ожидает возврарата средств";
                 case OrderStatus.WaitingForSpareParts:
                     return "Ожидает прибытия запчастей";
+                case OrderStatus.WaitingForPayment:
+                    return "Ожидает оплаты";
+
                 default:
                     return "Неопределенный статус";
+            }
+        }
+
+        public static OrderStatus GetStatusEnum(string status)
+        {
+            switch (status)
+            {
+                
+                case "Отменен":
+                    return OrderStatus.Canceled;
+                case "Завершен":
+                    return OrderStatus.Finished;
+                case "Ожидает диагностики":
+                    return OrderStatus.WaitingForDiagnostic;
+                case "Ожидает ответа клиента":
+                    return OrderStatus.WaitingForAnswer;
+                case "Ожидает предоплаты":
+                    return OrderStatus.WaitingForPrepayment;
+                case "Ожидает ремонта":
+                    return OrderStatus.WaitingForRepairing;
+                case "Ожидает возврарата средств":
+                    return OrderStatus.WaitingForRefund;
+                case "Ожидает прибытия запчастей":
+                    return OrderStatus.WaitingForSpareParts;
+                case "Ожидает оплаты":
+                    return OrderStatus.WaitingForPayment;
+
+                default:
+                    return OrderStatus.Unknown;
             }
         }
     }

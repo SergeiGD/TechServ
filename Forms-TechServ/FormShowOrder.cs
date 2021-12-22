@@ -78,13 +78,16 @@ namespace Forms_TechServ
             labelMaster.Text = order.Master.Name;
             labelWorkshop.Text = order.Workshop.Location;
             labelStatus.Text = order.Status.GetStatusString();
-            labelPrepayment.Text = order.Prepayment.ToString();
+            labelPrepaymentRequired.Text = order.PrepaymentRequired.ToString();
+            labelPrepaymentMade.Text = order.PrepaymentMade.ToString();
             labelServicesCount.Text = order.CalcServicesCount().ToString();
             labelServicecPrice.Text = order.CalcServicesPrice().ToString();
             labelSparePartsCount.Text = order.CalcSparePartsCount().ToString();
             labelSparePartsPrice.Text = order.CalcSparePartsPrice().ToString();
             labelClientSale.Text = order.ClientSale.ToString() + "%";
             labelFinalPrice.Text = order.FinalPrice.ToString();
+            labelLeftToPay.Text = (order.FinalPrice - order.PrepaymentMade).ToString();
+            
 
             labelDateStart.Text = order.DateStart.Value.ToString();
             if (order.DatePrepayment.HasValue)

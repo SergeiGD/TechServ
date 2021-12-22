@@ -75,8 +75,7 @@ namespace Forms_TechServ
             this.label31 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.labelDatePrepayment = new System.Windows.Forms.Label();
-            this.labelPrepayment = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
+            this.labelPrepaymentRequired = new System.Windows.Forms.Label();
             this.panelEdit = new System.Windows.Forms.Panel();
             this.labelAddress = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
@@ -117,6 +116,12 @@ namespace Forms_TechServ
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.logsPage = new System.Windows.Forms.TabPage();
             this.visitsPage = new System.Windows.Forms.TabPage();
+            this.groupPrepayment = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
+            this.labelPrepaymentMade = new System.Windows.Forms.Label();
+            this.labelLeftToPay = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.ordersTab.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.panelEdit.SuspendLayout();
@@ -130,6 +135,7 @@ namespace Forms_TechServ
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentSparePartPage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSpareParts)).BeginInit();
+            this.groupPrepayment.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -153,7 +159,7 @@ namespace Forms_TechServ
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 489);
+            this.label4.Location = new System.Drawing.Point(27, 453);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(85, 13);
             this.label4.TabIndex = 16;
@@ -171,7 +177,7 @@ namespace Forms_TechServ
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(260, 22);
+            this.label8.Location = new System.Drawing.Point(291, 22);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(71, 13);
             this.label8.TabIndex = 25;
@@ -180,7 +186,7 @@ namespace Forms_TechServ
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(260, 227);
+            this.label9.Location = new System.Drawing.Point(291, 227);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(100, 13);
             this.label9.TabIndex = 27;
@@ -189,7 +195,7 @@ namespace Forms_TechServ
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(260, 265);
+            this.label10.Location = new System.Drawing.Point(291, 265);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(114, 13);
             this.label10.TabIndex = 29;
@@ -198,7 +204,7 @@ namespace Forms_TechServ
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(260, 305);
+            this.label11.Location = new System.Drawing.Point(291, 305);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(77, 13);
             this.label11.TabIndex = 31;
@@ -207,7 +213,7 @@ namespace Forms_TechServ
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(260, 100);
+            this.label12.Location = new System.Drawing.Point(291, 100);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(73, 13);
             this.label12.TabIndex = 33;
@@ -216,7 +222,7 @@ namespace Forms_TechServ
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(260, 140);
+            this.label13.Location = new System.Drawing.Point(291, 140);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(98, 13);
             this.label13.TabIndex = 35;
@@ -225,7 +231,7 @@ namespace Forms_TechServ
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(260, 183);
+            this.label14.Location = new System.Drawing.Point(291, 183);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(75, 13);
             this.label14.TabIndex = 37;
@@ -234,7 +240,7 @@ namespace Forms_TechServ
             // labelDateFinished
             // 
             this.labelDateFinished.AutoSize = true;
-            this.labelDateFinished.Location = new System.Drawing.Point(380, 140);
+            this.labelDateFinished.Location = new System.Drawing.Point(411, 140);
             this.labelDateFinished.Name = "labelDateFinished";
             this.labelDateFinished.Size = new System.Drawing.Size(91, 13);
             this.labelDateFinished.TabIndex = 38;
@@ -243,7 +249,7 @@ namespace Forms_TechServ
             // labelDateCanceled
             // 
             this.labelDateCanceled.AutoSize = true;
-            this.labelDateCanceled.Location = new System.Drawing.Point(380, 183);
+            this.labelDateCanceled.Location = new System.Drawing.Point(411, 183);
             this.labelDateCanceled.Name = "labelDateCanceled";
             this.labelDateCanceled.Size = new System.Drawing.Size(91, 13);
             this.labelDateCanceled.TabIndex = 39;
@@ -252,7 +258,7 @@ namespace Forms_TechServ
             // labelDatePaid
             // 
             this.labelDatePaid.AutoSize = true;
-            this.labelDatePaid.Location = new System.Drawing.Point(380, 100);
+            this.labelDatePaid.Location = new System.Drawing.Point(411, 100);
             this.labelDatePaid.Name = "labelDatePaid";
             this.labelDatePaid.Size = new System.Drawing.Size(91, 13);
             this.labelDatePaid.TabIndex = 40;
@@ -261,7 +267,7 @@ namespace Forms_TechServ
             // labelDateStart
             // 
             this.labelDateStart.AutoSize = true;
-            this.labelDateStart.Location = new System.Drawing.Point(380, 22);
+            this.labelDateStart.Location = new System.Drawing.Point(411, 22);
             this.labelDateStart.Name = "labelDateStart";
             this.labelDateStart.Size = new System.Drawing.Size(91, 13);
             this.labelDateStart.TabIndex = 41;
@@ -270,7 +276,7 @@ namespace Forms_TechServ
             // labelDateAnswer
             // 
             this.labelDateAnswer.AutoSize = true;
-            this.labelDateAnswer.Location = new System.Drawing.Point(380, 264);
+            this.labelDateAnswer.Location = new System.Drawing.Point(411, 264);
             this.labelDateAnswer.Name = "labelDateAnswer";
             this.labelDateAnswer.Size = new System.Drawing.Size(91, 13);
             this.labelDateAnswer.TabIndex = 42;
@@ -279,7 +285,7 @@ namespace Forms_TechServ
             // labelDateRepaired
             // 
             this.labelDateRepaired.AutoSize = true;
-            this.labelDateRepaired.Location = new System.Drawing.Point(380, 305);
+            this.labelDateRepaired.Location = new System.Drawing.Point(411, 305);
             this.labelDateRepaired.Name = "labelDateRepaired";
             this.labelDateRepaired.Size = new System.Drawing.Size(91, 13);
             this.labelDateRepaired.TabIndex = 43;
@@ -288,7 +294,7 @@ namespace Forms_TechServ
             // labelDateDiagnostic
             // 
             this.labelDateDiagnostic.AutoSize = true;
-            this.labelDateDiagnostic.Location = new System.Drawing.Point(380, 228);
+            this.labelDateDiagnostic.Location = new System.Drawing.Point(411, 228);
             this.labelDateDiagnostic.Name = "labelDateDiagnostic";
             this.labelDateDiagnostic.Size = new System.Drawing.Size(91, 13);
             this.labelDateDiagnostic.TabIndex = 44;
@@ -348,7 +354,7 @@ namespace Forms_TechServ
             // labelFinalPrice
             // 
             this.labelFinalPrice.AutoSize = true;
-            this.labelFinalPrice.Location = new System.Drawing.Point(119, 489);
+            this.labelFinalPrice.Location = new System.Drawing.Point(120, 453);
             this.labelFinalPrice.Name = "labelFinalPrice";
             this.labelFinalPrice.Size = new System.Drawing.Size(37, 13);
             this.labelFinalPrice.TabIndex = 52;
@@ -375,7 +381,7 @@ namespace Forms_TechServ
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(575, 100);
+            this.label26.Location = new System.Drawing.Point(585, 100);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(121, 13);
             this.label26.TabIndex = 55;
@@ -384,7 +390,7 @@ namespace Forms_TechServ
             // tbComment
             // 
             this.tbComment.Enabled = false;
-            this.tbComment.Location = new System.Drawing.Point(535, 116);
+            this.tbComment.Location = new System.Drawing.Point(545, 116);
             this.tbComment.Name = "tbComment";
             this.tbComment.ReadOnly = true;
             this.tbComment.Size = new System.Drawing.Size(197, 280);
@@ -424,13 +430,16 @@ namespace Forms_TechServ
             this.ordersTab.Location = new System.Drawing.Point(0, 0);
             this.ordersTab.Name = "ordersTab";
             this.ordersTab.SelectedIndex = 0;
-            this.ordersTab.Size = new System.Drawing.Size(975, 577);
+            this.ordersTab.Size = new System.Drawing.Size(975, 540);
             this.ordersTab.TabIndex = 60;
             this.ordersTab.SelectedIndexChanged += new System.EventHandler(this.ordersTab_SelectedIndexChanged);
             // 
             // generalPage
             // 
             this.generalPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.generalPage.Controls.Add(this.labelLeftToPay);
+            this.generalPage.Controls.Add(this.label3);
+            this.generalPage.Controls.Add(this.groupPrepayment);
             this.generalPage.Controls.Add(this.labelWorkshop);
             this.generalPage.Controls.Add(this.label33);
             this.generalPage.Controls.Add(this.labelClientSale);
@@ -445,8 +454,6 @@ namespace Forms_TechServ
             this.generalPage.Controls.Add(this.label31);
             this.generalPage.Controls.Add(this.label37);
             this.generalPage.Controls.Add(this.labelDatePrepayment);
-            this.generalPage.Controls.Add(this.labelPrepayment);
-            this.generalPage.Controls.Add(this.label35);
             this.generalPage.Controls.Add(this.panelEdit);
             this.generalPage.Controls.Add(this.labelAddress);
             this.generalPage.Controls.Add(this.label34);
@@ -481,7 +488,7 @@ namespace Forms_TechServ
             this.generalPage.Location = new System.Drawing.Point(4, 22);
             this.generalPage.Name = "generalPage";
             this.generalPage.Padding = new System.Windows.Forms.Padding(3);
-            this.generalPage.Size = new System.Drawing.Size(967, 551);
+            this.generalPage.Size = new System.Drawing.Size(967, 514);
             this.generalPage.TabIndex = 0;
             this.generalPage.Text = "Общая информация";
             // 
@@ -508,7 +515,7 @@ namespace Forms_TechServ
             // labelClientSale
             // 
             this.labelClientSale.AutoSize = true;
-            this.labelClientSale.Location = new System.Drawing.Point(119, 455);
+            this.labelClientSale.Location = new System.Drawing.Point(120, 419);
             this.labelClientSale.Name = "labelClientSale";
             this.labelClientSale.Size = new System.Drawing.Size(41, 13);
             this.labelClientSale.TabIndex = 76;
@@ -517,7 +524,7 @@ namespace Forms_TechServ
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(26, 455);
+            this.label45.Location = new System.Drawing.Point(27, 419);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(91, 13);
             this.label45.TabIndex = 75;
@@ -526,7 +533,7 @@ namespace Forms_TechServ
             // labelSparePartsPrice
             // 
             this.labelSparePartsPrice.AutoSize = true;
-            this.labelSparePartsPrice.Location = new System.Drawing.Point(119, 418);
+            this.labelSparePartsPrice.Location = new System.Drawing.Point(120, 382);
             this.labelSparePartsPrice.Name = "labelSparePartsPrice";
             this.labelSparePartsPrice.Size = new System.Drawing.Size(41, 13);
             this.labelSparePartsPrice.TabIndex = 74;
@@ -535,7 +542,7 @@ namespace Forms_TechServ
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(26, 418);
+            this.label43.Location = new System.Drawing.Point(27, 382);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(89, 13);
             this.label43.TabIndex = 73;
@@ -544,7 +551,7 @@ namespace Forms_TechServ
             // labelSparePartsCount
             // 
             this.labelSparePartsCount.AutoSize = true;
-            this.labelSparePartsCount.Location = new System.Drawing.Point(120, 381);
+            this.labelSparePartsCount.Location = new System.Drawing.Point(122, 345);
             this.labelSparePartsCount.Name = "labelSparePartsCount";
             this.labelSparePartsCount.Size = new System.Drawing.Size(41, 13);
             this.labelSparePartsCount.TabIndex = 72;
@@ -553,7 +560,7 @@ namespace Forms_TechServ
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(27, 381);
+            this.label41.Location = new System.Drawing.Point(28, 345);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(88, 13);
             this.label41.TabIndex = 71;
@@ -562,7 +569,7 @@ namespace Forms_TechServ
             // labelServicecPrice
             // 
             this.labelServicecPrice.AutoSize = true;
-            this.labelServicecPrice.Location = new System.Drawing.Point(119, 341);
+            this.labelServicecPrice.Location = new System.Drawing.Point(120, 305);
             this.labelServicecPrice.Name = "labelServicecPrice";
             this.labelServicecPrice.Size = new System.Drawing.Size(41, 13);
             this.labelServicecPrice.TabIndex = 70;
@@ -571,7 +578,7 @@ namespace Forms_TechServ
             // label39
             // 
             this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(26, 341);
+            this.label39.Location = new System.Drawing.Point(27, 305);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(87, 13);
             this.label39.TabIndex = 69;
@@ -580,7 +587,7 @@ namespace Forms_TechServ
             // labelServicesCount
             // 
             this.labelServicesCount.AutoSize = true;
-            this.labelServicesCount.Location = new System.Drawing.Point(120, 301);
+            this.labelServicesCount.Location = new System.Drawing.Point(121, 265);
             this.labelServicesCount.Name = "labelServicesCount";
             this.labelServicesCount.Size = new System.Drawing.Size(41, 13);
             this.labelServicesCount.TabIndex = 68;
@@ -589,7 +596,7 @@ namespace Forms_TechServ
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(27, 301);
+            this.label31.Location = new System.Drawing.Point(28, 265);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(74, 13);
             this.label31.TabIndex = 67;
@@ -598,7 +605,7 @@ namespace Forms_TechServ
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(260, 60);
+            this.label37.Location = new System.Drawing.Point(291, 60);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(97, 13);
             this.label37.TabIndex = 65;
@@ -607,29 +614,20 @@ namespace Forms_TechServ
             // labelDatePrepayment
             // 
             this.labelDatePrepayment.AutoSize = true;
-            this.labelDatePrepayment.Location = new System.Drawing.Point(380, 60);
+            this.labelDatePrepayment.Location = new System.Drawing.Point(411, 60);
             this.labelDatePrepayment.Name = "labelDatePrepayment";
             this.labelDatePrepayment.Size = new System.Drawing.Size(91, 13);
             this.labelDatePrepayment.TabIndex = 66;
             this.labelDatePrepayment.Text = "22.10.2021 15:30";
             // 
-            // labelPrepayment
+            // labelPrepaymentRequired
             // 
-            this.labelPrepayment.AutoSize = true;
-            this.labelPrepayment.Location = new System.Drawing.Point(119, 260);
-            this.labelPrepayment.Name = "labelPrepayment";
-            this.labelPrepayment.Size = new System.Drawing.Size(13, 13);
-            this.labelPrepayment.TabIndex = 64;
-            this.labelPrepayment.Text = "0";
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(27, 260);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(71, 13);
-            this.label35.TabIndex = 63;
-            this.label35.Text = "Предоплата:";
+            this.labelPrepaymentRequired.AutoSize = true;
+            this.labelPrepaymentRequired.Location = new System.Drawing.Point(81, 36);
+            this.labelPrepaymentRequired.Name = "labelPrepaymentRequired";
+            this.labelPrepaymentRequired.Size = new System.Drawing.Size(13, 13);
+            this.labelPrepaymentRequired.TabIndex = 64;
+            this.labelPrepaymentRequired.Text = "0";
             // 
             // panelEdit
             // 
@@ -638,13 +636,13 @@ namespace Forms_TechServ
             this.panelEdit.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelEdit.Location = new System.Drawing.Point(768, 3);
             this.panelEdit.Name = "panelEdit";
-            this.panelEdit.Size = new System.Drawing.Size(196, 545);
+            this.panelEdit.Size = new System.Drawing.Size(196, 508);
             this.panelEdit.TabIndex = 62;
             // 
             // labelAddress
             // 
             this.labelAddress.AutoSize = true;
-            this.labelAddress.Location = new System.Drawing.Point(99, 522);
+            this.labelAddress.Location = new System.Drawing.Point(364, 486);
             this.labelAddress.Name = "labelAddress";
             this.labelAddress.Size = new System.Drawing.Size(29, 13);
             this.labelAddress.TabIndex = 61;
@@ -653,7 +651,7 @@ namespace Forms_TechServ
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(26, 522);
+            this.label34.Location = new System.Drawing.Point(291, 486);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(41, 13);
             this.label34.TabIndex = 60;
@@ -1094,12 +1092,70 @@ namespace Forms_TechServ
             this.visitsPage.TabIndex = 4;
             this.visitsPage.Text = "Выезды";
             // 
+            // groupPrepayment
+            // 
+            this.groupPrepayment.Controls.Add(this.labelPrepaymentMade);
+            this.groupPrepayment.Controls.Add(this.label55);
+            this.groupPrepayment.Controls.Add(this.label5);
+            this.groupPrepayment.Controls.Add(this.labelPrepaymentRequired);
+            this.groupPrepayment.Location = new System.Drawing.Point(294, 345);
+            this.groupPrepayment.Name = "groupPrepayment";
+            this.groupPrepayment.Size = new System.Drawing.Size(208, 100);
+            this.groupPrepayment.TabIndex = 80;
+            this.groupPrepayment.TabStop = false;
+            this.groupPrepayment.Text = "Предоплата";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 37);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(63, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Требуется:";
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(9, 74);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(53, 13);
+            this.label55.TabIndex = 1;
+            this.label55.Text = "Внесено:";
+            // 
+            // labelPrepaymentMade
+            // 
+            this.labelPrepaymentMade.AutoSize = true;
+            this.labelPrepaymentMade.Location = new System.Drawing.Point(81, 74);
+            this.labelPrepaymentMade.Name = "labelPrepaymentMade";
+            this.labelPrepaymentMade.Size = new System.Drawing.Size(13, 13);
+            this.labelPrepaymentMade.TabIndex = 81;
+            this.labelPrepaymentMade.Text = "0";
+            // 
+            // labelLeftToPay
+            // 
+            this.labelLeftToPay.AutoSize = true;
+            this.labelLeftToPay.Location = new System.Drawing.Point(118, 487);
+            this.labelLeftToPay.Name = "labelLeftToPay";
+            this.labelLeftToPay.Size = new System.Drawing.Size(41, 13);
+            this.labelLeftToPay.TabIndex = 190;
+            this.labelLeftToPay.Text = "label11";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(28, 486);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 13);
+            this.label3.TabIndex = 189;
+            this.label3.Text = "К оплате:";
+            // 
             // FormShowOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.ClientSize = new System.Drawing.Size(975, 577);
+            this.ClientSize = new System.Drawing.Size(975, 540);
             this.Controls.Add(this.ordersTab);
             this.MaximizeBox = false;
             this.Name = "FormShowOrder";
@@ -1121,6 +1177,8 @@ namespace Forms_TechServ
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentSparePartPage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSpareParts)).EndInit();
+            this.groupPrepayment.ResumeLayout(false);
+            this.groupPrepayment.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1184,8 +1242,7 @@ namespace Forms_TechServ
         private System.Windows.Forms.Panel panelEdit;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label labelDatePrepayment;
-        private System.Windows.Forms.Label labelPrepayment;
-        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label labelPrepaymentRequired;
         private System.Windows.Forms.Label labelClientSale;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.Label labelSparePartsPrice;
@@ -1214,5 +1271,11 @@ namespace Forms_TechServ
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.GroupBox groupPrepayment;
+        private System.Windows.Forms.Label labelPrepaymentMade;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelLeftToPay;
+        private System.Windows.Forms.Label label3;
     }
 }

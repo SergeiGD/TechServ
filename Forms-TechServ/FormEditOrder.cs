@@ -19,6 +19,7 @@ namespace Forms_TechServ
         int servicesCurrentPage = 1;
         int sparePartsRowsCount;
         int sparePartsCurrentPage = 1;
+        bool lockedState;
 
         public FormEditOrder(Order order)
         {
@@ -30,15 +31,16 @@ namespace Forms_TechServ
                 this.inOrder = true;
                 ordersTab.TabPages.Remove(visitsPage);
             }
-                
+
             
+
         }
 
         private void OrdersTab_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(ordersTab.SelectedTab.Equals(generalPage))
             {
-                this.Size = new Size(700, 520);
+                this.Size = new Size(700, 565);
             }
             else if(ordersTab.SelectedTab.Equals(servicesPage))
             {
@@ -48,14 +50,7 @@ namespace Forms_TechServ
             {
                 this.Size = pickedSize;
 
-                /*FormSpareParts formSpareParts = new FormSpareParts(false, "asd");
-                formSpareParts.TopLevel = false;
-                formSpareParts.FormBorderStyle = FormBorderStyle.None;
-                sparePartsPage.Controls.Add(formSpareParts);
-                //panelContent.Controls.Add(childForm);
-                formSpareParts.Dock = DockStyle.Fill;
-                formSpareParts.BringToFront();
-                formSpareParts.Show();*/
+               
             }
             else if (ordersTab.SelectedTab.Equals(logsPage))
             {
@@ -216,13 +211,10 @@ namespace Forms_TechServ
 
         private void FormEditOrder_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(700, 520);
+            this.Size = new Size(700, 565);
 
             //comboBoxStatus.DataSource = Enum.GetValues(typeof(OrderStatus));
-            foreach(OrderStatus status in Enum.GetValues(typeof(OrderStatus)))
-            {
-                comboBoxStatus.Items.Add(status.GetStatusString());
-            }
+            
 
             comboBoxShowServicesRows.Items.Add(5);
             comboBoxShowServicesRows.Items.Add(20);
@@ -246,17 +238,21 @@ namespace Forms_TechServ
                 tbAddress.Text = ((OrderAtHome)order).Address;
             }
 
-            tbProduct.Text = order.Product.Name;
-            tbProduct.Tag = order.Product;
+            //tbProduct.Text = order.Product.Name;
+            //tbProduct.Tag = order.Product;
             tbMaster.Text = order.Master.Name;
             tbMaster.Tag = order.Master;
-            tbWorkshop.Text = order.Workshop.Location;
-            tbWorkshop.Tag = order.Workshop;
+            //tbWorkshop.Text = order.Workshop.Location;
+            //tbWorkshop.Tag = order.Workshop;
             tbComment.Text = order.ClientComment;
             labelSale.Text = order.ClientSale.ToString() + "%";
             //labelPrepayment.Text = order.Prepayment.ToString();
             //labelServicesCount.Text = order.CalcServicesCount().ToString(); 
+            labelLeftToPay.Text = (order.FinalPrice - order.PrepaymentMade).ToString();
+            numericPaid.Value = order.PrepaymentMade;
+            labelProduct.Text = order.Product.Name;
 
+            //comboBoxStatus.Items.Add(OrderStatus.WaitingForAnswer.GetStatusString());
             if (order.DateDiagnostic.HasValue)
             {
                 checkDiagnosted.Checked = true;
@@ -265,17 +261,84 @@ namespace Forms_TechServ
             {
                 checkPrepaid.Checked = true;
             }
+            if (order.DateClientAnswer.HasValue)
+            {
+                checkAnswer.Checked = true;
+            }
             if (order.DateRepaired.HasValue)
             {
-                checkReadpied.Checked = true;
+                checkRepaired.Checked = true;
             }
             if (order.DatePaid.HasValue)
             {
                 checkPaid.Checked = true;
             }
 
+            // БИНЬДИМ СОБЫТИЯ ВРУЧНУЮ, ЧТО ОНИ НЕ СРАБОТАЛИ ПРИ НАЧАЛЬНОЙ ЗАГРУЗКЕ ДАННЫХ В ФОРМУ
+            checkDiagnosted.CheckedChanged += checkDiagnosted_CheckedChanged;
+            checkPrepaid.CheckedChanged += checkPrepaid_CheckedChanged;
+            checkRepaired.CheckedChanged += checkRepaired_CheckedChanged;
+            checkPaid.CheckedChanged += checkPaid_CheckedChanged;
+
+            comboBoxStatus.Items.Add(OrderStatus.WaitingForDiagnostic.GetStatusString());
+            if (checkDiagnosted.Checked)
+            {
+                comboBoxStatus.Items.Add(OrderStatus.WaitingForAnswer.GetStatusString());
+            }
+            if(order.PrepaymentRequired > order.PrepaymentMade)
+            {
+                comboBoxStatus.Items.Add(OrderStatus.WaitingForPrepayment.GetStatusString());
+            }
+            comboBoxStatus.Items.Add(OrderStatus.WaitingForSpareParts.GetStatusString());
+            if (order.PrepaymentRequired == 0 || checkPrepaid.Checked)
+            {
+                comboBoxStatus.Items.Add(OrderStatus.WaitingForRepairing.GetStatusString());
+            }
+            if (numericPaid.Value > 0)
+            {
+                comboBoxStatus.Items.Add(OrderStatus.WaitingForRefund.GetStatusString());
+            }
+            if (checkPaid.Checked && checkRepaired.Checked)
+            {
+                comboBoxStatus.Items.Add(OrderStatus.Finished.GetStatusString());
+            }
+            comboBoxStatus.Items.Add(OrderStatus.WaitingForPayment.GetStatusString());
+            comboBoxStatus.Items.Add(OrderStatus.Canceled.GetStatusString());
+
+            comboBoxStatus.SelectedItem = order.Status.GetStatusString();
+
             RecalcFields();
         }
+
+        
+
+        /*private void ControlStatus()
+        {
+            
+            comboBoxStatus.Items.Add(OrderStatus.WaitingForDiagnostic.GetStatusString());
+            if (checkDiagnosted.Checked)
+            {
+                comboBoxStatus.Items.Add(OrderStatus.WaitingForAnswer.GetStatusString());
+            }
+            if (order.PrepaymentRequired > order.PrepaymentMade)
+            {
+                comboBoxStatus.Items.Add(OrderStatus.WaitingForPrepayment.GetStatusString());
+            }
+            comboBoxStatus.Items.Add(OrderStatus.WaitingForSpareParts.GetStatusString());
+            if (order.PrepaymentRequired == 0 || checkPrepaid.Checked)
+            {
+                comboBoxStatus.Items.Add(OrderStatus.WaitingForRepairing.GetStatusString());
+            }
+            if (order.PrepaymentMade > 0)
+            {
+                comboBoxStatus.Items.Add(OrderStatus.WaitingForRefund.GetStatusString());
+            }
+            if (checkPaid.Checked && checkRepaired.Checked)
+            {
+                comboBoxStatus.Items.Add(OrderStatus.Finished.GetStatusString());
+            }
+            comboBoxStatus.Items.Add(OrderStatus.Canceled.GetStatusString());
+        }*/
 
         private void btnFindClient_Click(object sender, EventArgs e)
         {
@@ -283,14 +346,14 @@ namespace Forms_TechServ
             formClients.ShowDialog();
         }
 
-        private void btnFindProduct_Click(object sender, EventArgs e)
+        /*private void btnFindProduct_Click(object sender, EventArgs e)
         {
             FormProducts formProducts = new FormProducts(true);
             formProducts.ShowDialog();
 
             tbProduct.Text = formProducts?.product?.Name;
             tbProduct.Tag = formProducts?.product;
-        }
+        }*/
 
         private void btnFindMaster_Click(object sender, EventArgs e)
         {
@@ -301,14 +364,14 @@ namespace Forms_TechServ
             tbMaster.Tag = formMasters?.master;
         }
 
-        private void btnFindWorkshop_Click(object sender, EventArgs e)
+        /*private void btnFindWorkshop_Click(object sender, EventArgs e)
         {
             FormWorkshops formWorkshops = new FormWorkshops(true);
             formWorkshops.ShowDialog();
 
             tbWorkshop.Text = formWorkshops?.workshop?.Location;
             tbWorkshop.Tag = formWorkshops?.workshop;
-        }
+        }*/
 
         private void btnAutoMaster_MouseHover(object sender, EventArgs e)
         {
@@ -405,6 +468,10 @@ namespace Forms_TechServ
 
         private void dataServies_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (lockedState)
+            {
+                return;
+            }
             OrderService orderService = order.GetService(Convert.ToInt32(dataServies.SelectedRows[0].Cells[0].Value));
             FormManageOrderService formManageOrderService = new FormManageOrderService(orderService);//batchSparePart.Quantity, batchSparePart.UnitPrice);
             formManageOrderService.ShowDialog();
@@ -447,7 +514,7 @@ namespace Forms_TechServ
 
         private void RecalcFields()
         {
-            labelPrepayment.Text = order.Prepayment.ToString();
+            labelPrepaymentRequired.Text = order.PrepaymentRequired.ToString();
             labelServicesCount.Text = order.CalcServicesCount().ToString();
 
             labelServicesPrice.Text = order.CalcServicesPrice().ToString();
@@ -457,6 +524,7 @@ namespace Forms_TechServ
             labelSparePartsPrice.Text = order.CalcSparePartsPrice().ToString();
 
             labelFinalPrice.Text = order.FinalPrice.ToString();
+            labelLeftToPay.Text = (order.FinalPrice - numericPaid.Value).ToString();
             //labelSale.Text = order.ClientSale.ToString();
         }
 
@@ -479,7 +547,11 @@ namespace Forms_TechServ
 
         private void dataSpareParts_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if(dataSpareParts.SelectedRows.Count > 0)
+            if (lockedState)
+            {
+                return;
+            }
+            if (dataSpareParts.SelectedRows.Count > 0)
             {
                 FormOrderBatches formOrderBatches = new FormOrderBatches(order.GetSparePart((int)dataSpareParts.SelectedRows[0].Cells[0].Value));
                 formOrderBatches.ShowDialog();
@@ -522,5 +594,244 @@ namespace Forms_TechServ
                 MessageBox.Show("Для начала выберите деталь");
             }
         }
+
+
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            order.MasterId = ((Master)tbMaster.Tag).Id;
+            order.Master = (Master)tbMaster.Tag;
+            order.ClientComment = tbComment.Text;
+            order.PrepaymentMade = numericPaid.Value;
+
+            if (!order.DateDiagnostic.HasValue && checkDiagnosted.Checked)
+            {
+                order.DateDiagnostic = DateTime.Now;
+            }
+            else if (order.DateDiagnostic.HasValue && !checkDiagnosted.Checked)
+            {
+                order.DateDiagnostic = null;
+            }
+
+            if (!order.DateClientAnswer.HasValue && checkAnswer.Checked)
+            {
+                order.DateClientAnswer = DateTime.Now;
+            }
+            else if (order.DateClientAnswer.HasValue && !checkAnswer.Checked)
+            {
+                order.DateClientAnswer = null;
+            }
+
+            if (!order.DatePrepayment.HasValue && checkPrepaid.Checked)
+            {
+                order.DatePrepayment = DateTime.Now;
+            }
+            else if (order.DatePrepayment.HasValue && !checkPrepaid.Checked)
+            {
+                order.DatePrepayment = null;
+            }
+
+            if (!order.DatePaid.HasValue && checkPaid.Checked)
+            {
+                order.DatePaid = DateTime.Now;
+            }
+            else if (order.DatePaid.HasValue && !checkPaid.Checked)
+            {
+                order.DatePaid = null;
+            }
+
+            if (!order.DateRepaired.HasValue && checkRepaired.Checked)
+            {
+                order.DateRepaired = DateTime.Now;
+            }
+            else if (order.DateRepaired.HasValue && !checkRepaired.Checked)
+            {
+                order.DateRepaired = null;
+            }
+
+            if (!order.DateFinish.HasValue && comboBoxStatus.SelectedItem.ToString() == OrderStatus.Finished.GetStatusString()) 
+            {
+                order.DateFinish = DateTime.Now;
+            }
+            else if (order.DateFinish.HasValue && comboBoxStatus.SelectedItem.ToString() != OrderStatus.Finished.GetStatusString())
+            {
+                order.DateFinish = null;
+            }
+
+            if (!order.DateCancel.HasValue && comboBoxStatus.SelectedItem.ToString() == OrderStatus.Canceled.GetStatusString())
+            {
+                order.DateCancel = DateTime.Now;
+            }
+            else if (order.DateCancel.HasValue && comboBoxStatus.SelectedItem.ToString() != OrderStatus.Canceled.GetStatusString())
+            {
+                order.DateCancel = null;
+            }
+
+            order.Status = StatusStringExtensions.GetStatusEnum(comboBoxStatus.SelectedItem.ToString());
+
+            if (order.EditOrder())
+            {
+                MessageBox.Show("Информация о заказе успешно изменена", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка сохранения данных", "Что-то пошло не так ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnAutoMaster_Click(object sender, EventArgs e)
+        {
+            DialogResult answer = MessageBox.Show("Подобрать мастера автоматически?", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if(answer == DialogResult.Yes)
+            {
+                if (!order.FindMaster())
+                {
+                    MessageBox.Show("Не удается найти мастера с требуемой категорией", "Что-то пошло не так", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    tbMaster.Text = order.Master.Name;
+                    tbMaster.Tag = order.Master;
+                }
+            }
+        }
+
+        private void checkPrepaid_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkPrepaid.Checked && numericPaid.Value < order.PrepaymentRequired)
+            {
+                DialogResult answer = MessageBox.Show("Указанная сумма внесенной предоплаты меньше расчитываемой суммы необходимой предоплаты, Вы уверены, что хотите продолжить?", "подтвердите дейтсвие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if(answer != DialogResult.Yes)
+                {
+                    checkPrepaid.Checked = false;
+                }
+            }
+
+            if (order.PrepaymentRequired == 0 || checkPrepaid.Checked && !comboBoxStatus.Items.Contains(OrderStatus.WaitingForRepairing.GetStatusString()))
+            {
+                comboBoxStatus.Items.Add(OrderStatus.WaitingForRepairing.GetStatusString());
+            }
+            else if (comboBoxStatus.Items.Contains(OrderStatus.WaitingForRepairing.GetStatusString()))
+            {
+                comboBoxStatus.Items.Remove(OrderStatus.WaitingForRepairing.GetStatusString());
+            }
+        }
+
+        private void numericPaid_ValueChanged(object sender, EventArgs e)
+        {
+            labelLeftToPay.Text = (order.FinalPrice - numericPaid.Value).ToString();
+            if(numericPaid.Value > 0 && !comboBoxStatus.Items.Contains(OrderStatus.WaitingForRefund.GetStatusString()))
+            {
+                comboBoxStatus.Items.Add(OrderStatus.WaitingForRefund.GetStatusString());
+            }
+            else if (comboBoxStatus.Items.Contains(OrderStatus.WaitingForRefund.GetStatusString()))
+            {
+                comboBoxStatus.Items.Remove(OrderStatus.WaitingForRefund.GetStatusString());
+            }
+        }
+
+        private void checkDiagnosted_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkDiagnosted.Checked && !comboBoxStatus.Items.Contains(OrderStatus.WaitingForAnswer.GetStatusString()))
+            {
+                comboBoxStatus.Items.Add(OrderStatus.WaitingForAnswer.GetStatusString());
+            }
+            else if (comboBoxStatus.Items.Contains(OrderStatus.WaitingForAnswer.GetStatusString()))
+            {
+                comboBoxStatus.Items.Remove(OrderStatus.WaitingForAnswer.GetStatusString());
+            }
+        }
+
+        private void checkRepaired_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkRepaired.Checked)
+            {
+                foreach(OrderSparePart sparePart in order.GetSpareParts())
+                {
+                    if (!sparePart.CheckBatchesDelivered())
+                    {
+                        DialogResult answer = MessageBox.Show("Еще не все указанные для ремонта детали прибыли, Вы уверены, что все верно и хотите продолжить?", "Подтвердите операцию", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                        if(answer != DialogResult.Yes)
+                        {
+                            checkRepaired.Checked = false;
+                            
+                        }
+                        break;
+                    }
+                }
+            }
+
+            if (checkPaid.Checked && checkRepaired.Checked && !comboBoxStatus.Items.Contains(OrderStatus.Finished.GetStatusString()))
+            {
+                comboBoxStatus.Items.Add(OrderStatus.Finished.GetStatusString());
+            }
+            else if (comboBoxStatus.Items.Contains(OrderStatus.Finished.GetStatusString()))
+            {
+                comboBoxStatus.Items.Remove(OrderStatus.Finished.GetStatusString());
+            }
+        }
+
+        private void checkPaid_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkPaid.Checked && checkRepaired.Checked && !comboBoxStatus.Items.Contains(OrderStatus.Finished.GetStatusString()))
+            {
+                comboBoxStatus.Items.Add(OrderStatus.Finished.GetStatusString());
+            }
+            else if (comboBoxStatus.Items.Contains(OrderStatus.Finished.GetStatusString()))
+            {
+                comboBoxStatus.Items.Remove(OrderStatus.Finished.GetStatusString());
+            }
+        }
+
+        private void labelProduct_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FormShowProduct formShowProduct = new FormShowProduct(true, order.Product);
+            formShowProduct.ShowDialog();
+        }
+
+        private void comboBoxStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(comboBoxStatus.SelectedItem.ToString() == OrderStatus.Finished.GetStatusString() || comboBoxStatus.SelectedItem.ToString() == OrderStatus.Canceled.GetStatusString())
+            {
+                LockUnlockFields(false);
+            }
+            else
+            {
+                LockUnlockFields(true);
+            }
+        }
+
+        private void LockUnlockFields(bool unlock)
+        {
+            
+            tbAddress.Enabled = unlock;
+            btnFindMaster.Enabled = unlock;
+            btnAutoMaster.Enabled = unlock;
+            numericPaid.Enabled = unlock;
+            checkAnswer.Enabled = unlock;
+            checkDiagnosted.Enabled = unlock;
+            checkPrepaid.Enabled = unlock;
+            checkRepaired.Enabled = unlock;
+            checkPaid.Enabled = unlock;
+            tbComment.Enabled = unlock;
+            btnAddService.Enabled = unlock;
+            btnDeleteService.Enabled = unlock;
+            btnAddSparePart.Enabled = unlock;
+            btnDelSparePart.Enabled = unlock;
+
+            if (unlock)
+            {
+                lockedState = false;
+            }
+            else
+            {
+                lockedState = true;
+            }
+            //if(unlock && dataServies.CellContentDoubleClick)
+        }
+
+        
     }
 }
