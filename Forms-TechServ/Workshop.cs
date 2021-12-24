@@ -89,7 +89,7 @@ namespace Forms_TechServ
             }
         }
 
-        public Dictionary<SparePart, int> GetInStockSpareParts()
+        /*public Dictionary<SparePart, int> GetInStockSpareParts()
         {
             using (TechContext db = new TechContext())
             {
@@ -106,7 +106,7 @@ namespace Forms_TechServ
 
                 return sparePartsInStock;
             }
-        }
+        }*/
 
     }
 

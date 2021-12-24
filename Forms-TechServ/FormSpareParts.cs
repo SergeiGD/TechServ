@@ -325,13 +325,15 @@ namespace Forms_TechServ
             DataGridViewTextBoxColumn prepaymentCol = new DataGridViewTextBoxColumn();
             prepaymentCol.Name = "Предоплата клиента";
             DataGridViewTextBoxColumn inStockCountCol = new DataGridViewTextBoxColumn();
-            inStockCountCol.Name = "Кол-во в наличии (прибывших)";
-
+            inStockCountCol.Name = "Кол-во в наличии";
+            DataGridViewTextBoxColumn inTransitCountCol = new DataGridViewTextBoxColumn();
+            inTransitCountCol.Name = "Кол-во в заказанных";
 
             dataSpareParts.Columns.Add(idCol);
             dataSpareParts.Columns.Add(nameCol);
             dataSpareParts.Columns.Add(prepaymentCol);
             dataSpareParts.Columns.Add(inStockCountCol);
+            dataSpareParts.Columns.Add(inTransitCountCol);
 
 
             btnAskOrDesk.Tag = true;
@@ -413,6 +415,7 @@ namespace Forms_TechServ
                 dataSpareParts.Rows[i].Cells[1].Value = spareParts[i].Name;
                 dataSpareParts.Rows[i].Cells[2].Value = spareParts[i].ClientPrepayment;
                 dataSpareParts.Rows[i].Cells[3].Value = spareParts[i].GetCountInStock((Workshop)tbWorkshop.Tag);                         // вот сюда кол-во в наличие
+                dataSpareParts.Rows[i].Cells[4].Value = spareParts[i].GetCountInTransit((Workshop)tbWorkshop.Tag);                         // вот сюда кол-во в пути
 
             }
 

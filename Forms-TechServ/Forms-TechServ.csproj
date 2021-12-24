@@ -407,6 +407,7 @@
     <Compile Include="Employee.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderAtHome.cs" />
+    <Compile Include="OrderLog.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="OrderSparePart.cs" />
     <Compile Include="Person.cs" />

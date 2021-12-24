@@ -207,6 +207,7 @@ namespace Forms_TechServ
             this.checkPaid.TabIndex = 190;
             this.checkPaid.Text = "Оплата получена";
             this.checkPaid.UseVisualStyleBackColor = true;
+            this.checkPaid.CheckedChanged += new System.EventHandler(this.checkPaid_CheckedChanged);
             // 
             // checkAnswer
             // 
@@ -431,6 +432,7 @@ namespace Forms_TechServ
             this.checkDiagnosted.TabIndex = 159;
             this.checkDiagnosted.Text = "Диагностика проведена";
             this.checkDiagnosted.UseVisualStyleBackColor = true;
+            //this.checkDiagnosted.CheckedChanged += new System.EventHandler(this.checkDiagnosted_CheckedChanged);
             // 
             // btnAutoMaster
             // 

@@ -56,7 +56,7 @@ namespace Forms_TechServ
             {
                 this.Size = pickedSize;
 
-                FormOrdersLogs formOrdersLogs = new FormOrdersLogs(43, false);
+                FormOrdersLogs formOrdersLogs = new FormOrdersLogs(false, order);
                 formOrdersLogs.TopLevel = false;
                 formOrdersLogs.FormBorderStyle = FormBorderStyle.None;
                 logsPage.Controls.Add(formOrdersLogs);
@@ -257,10 +257,18 @@ namespace Forms_TechServ
             {
                 checkDiagnosted.Checked = true;
             }
+            else
+            {
+                checkAnswer.Checked = false;
+                checkAnswer.Enabled = false;
+            }
+
             if (order.DatePrepayment.HasValue)
             {
                 checkPrepaid.Checked = true;
             }
+            
+
             if (order.DateClientAnswer.HasValue)
             {
                 checkAnswer.Checked = true;
@@ -274,11 +282,13 @@ namespace Forms_TechServ
                 checkPaid.Checked = true;
             }
 
+            
+
             // БИНЬДИМ СОБЫТИЯ ВРУЧНУЮ, ЧТО ОНИ НЕ СРАБОТАЛИ ПРИ НАЧАЛЬНОЙ ЗАГРУЗКЕ ДАННЫХ В ФОРМУ
             checkDiagnosted.CheckedChanged += checkDiagnosted_CheckedChanged;
             checkPrepaid.CheckedChanged += checkPrepaid_CheckedChanged;
             checkRepaired.CheckedChanged += checkRepaired_CheckedChanged;
-            checkPaid.CheckedChanged += checkPaid_CheckedChanged;
+            //checkPaid.CheckedChanged += checkPaid_CheckedChanged;
 
             comboBoxStatus.Items.Add(OrderStatus.WaitingForDiagnostic.GetStatusString());
             if (checkDiagnosted.Checked)
@@ -357,7 +367,7 @@ namespace Forms_TechServ
 
         private void btnFindMaster_Click(object sender, EventArgs e)
         {
-            FormMasters formMasters = new FormMasters(true);
+            FormMasters formMasters = new FormMasters(true, order.Workshop);
             formMasters.ShowDialog();
 
             tbMaster.Text = formMasters?.master.Name;
@@ -734,6 +744,15 @@ namespace Forms_TechServ
 
         private void checkDiagnosted_CheckedChanged(object sender, EventArgs e)
         {
+            if (checkDiagnosted.Checked)
+            {
+                checkAnswer.Enabled = true;
+            }
+            else
+            {
+                checkAnswer.Checked = false;
+                checkAnswer.Enabled = false;
+            }
             if (checkDiagnosted.Checked && !comboBoxStatus.Items.Contains(OrderStatus.WaitingForAnswer.GetStatusString()))
             {
                 comboBoxStatus.Items.Add(OrderStatus.WaitingForAnswer.GetStatusString());
@@ -810,7 +829,16 @@ namespace Forms_TechServ
             btnFindMaster.Enabled = unlock;
             btnAutoMaster.Enabled = unlock;
             numericPaid.Enabled = unlock;
-            checkAnswer.Enabled = unlock;
+
+            if (!checkDiagnosted.Checked)
+            {
+                checkAnswer.Enabled = false;
+            }
+            else
+            {
+                checkAnswer.Enabled = unlock;
+            }
+            
             checkDiagnosted.Enabled = unlock;
             checkPrepaid.Enabled = unlock;
             checkRepaired.Enabled = unlock;

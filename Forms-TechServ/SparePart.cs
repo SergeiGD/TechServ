@@ -71,7 +71,7 @@ namespace Forms_TechServ
             {
                 int count = 0;
 
-                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.DelTime == null).Include(s => s.SparePart);
+                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.DelTime == null && s.Batch.DateDelivered.HasValue).Include(s => s.SparePart);
 
                 if(workshop != null)
                 {
@@ -84,7 +84,39 @@ namespace Forms_TechServ
                 {
                     //count += sparePart.Quantity;
 
-                    count = sparePart.Batch.GetCountLeft(sparePart.SparePart);
+                    count += sparePart.Batch.GetCountLeft(sparePart.SparePart);
+                }
+
+                /*foreach (BatchSparePart sparePart in db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.WorkshopId == workshop.Id))
+                {
+                    count += sparePart.Quantity;
+                    // ПОТОМ ВТОРОЙ ЦИКЛ ПО OrderSpareParts, который будет отнимать
+                }*/
+
+                return count;
+            }
+        }
+
+        public int GetCountInTransit(Workshop workshop)
+        {
+            using (TechContext db = new TechContext())
+            {
+                int count = 0;
+
+                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.DelTime == null && !s.Batch.DateDelivered.HasValue).Include(s => s.SparePart);
+
+                if (workshop != null)
+                {
+                    spareParts = spareParts.Where(s => s.Batch.WorkshopId == workshop.Id);
+                }
+
+
+
+                foreach (BatchSparePart sparePart in spareParts)
+                {
+                    //count += sparePart.Quantity;
+
+                    count += sparePart.Batch.GetCountLeft(sparePart.SparePart);
                 }
 
                 /*foreach (BatchSparePart sparePart in db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.WorkshopId == workshop.Id))

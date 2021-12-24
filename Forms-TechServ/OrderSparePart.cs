@@ -60,12 +60,25 @@ namespace Forms_TechServ
 
 
                     db.OrdersSpareParts.Add(sparePartFromBatch);
+
+                    OrderLog orderLog = new OrderLog()
+                    {
+                        OrderId = this.Order.Id,
+                        EventDate = DateTime.Now,
+                        EventDescription = $"Деталь №{this.SparePart.Id} из поставки {batch.Id} в количестве {quantity} добавлена к заказу"
+                    };
+                    db.OrderLogs.Add(orderLog);
+
                     db.SaveChanges();
 
                     this.Order.FinalPrice = this.Order.CalcFinalPrice();
                     this.Order.PrepaymentRequired = this.Order.CalcClientPrepayment();
+
+                    this.Order.EditOrder();
+                    /*this.FinalPrice = CalcFinalPrice();
+                    this.EditOrder();
                     db.Entry(this.Order).State = EntityState.Modified;
-                    db.SaveChanges();
+                    db.SaveChanges();*/
 
                     return true;
                 }
@@ -84,12 +97,24 @@ namespace Forms_TechServ
                 
 
                 db.OrdersSpareParts.Remove(sparePartFromBatch);
+
+                OrderLog orderLog = new OrderLog()
+                {
+                    OrderId = this.Order.Id,
+                    EventDate = DateTime.Now,
+                    EventDescription = $"Деталь №{this.SparePart.Id} из поставки {batch.Id} в количестве {sparePartFromBatch.Quantity} удалена из заказа"
+                };
+                db.OrderLogs.Add(orderLog);
+
                 db.SaveChanges();
 
                 this.Order.FinalPrice = this.Order.CalcFinalPrice();
                 this.Order.PrepaymentRequired = this.Order.CalcClientPrepayment();
-                db.Entry(this.Order).State = EntityState.Modified;
-                db.SaveChanges();
+
+                this.Order.EditOrder();
+
+                /*db.Entry(this.Order).State = EntityState.Modified;
+                db.SaveChanges();*/
 
                 return true;
             }
@@ -106,13 +131,26 @@ namespace Forms_TechServ
                 else
                 {
                     SparePartFromBatch sparePartFromBatch = db.OrdersSpareParts.Find(this.Order.Id, this.SparePart.Id, batch.Id);
+
+                    OrderLog orderLog = new OrderLog()
+                    {
+                        OrderId = this.Order.Id,
+                        EventDate = DateTime.Now,
+                        EventDescription = $"Количества детали №{this.SparePart.Id} из поставки {batch.Id} изменено с {sparePartFromBatch.Quantity} на {quantity}"
+                    };
+                    db.OrderLogs.Add(orderLog);
+
                     sparePartFromBatch.Quantity = quantity;
+
+                    
+
                     db.SaveChanges();
 
                     this.Order.FinalPrice = this.Order.CalcFinalPrice();
                     this.Order.PrepaymentRequired = this.Order.CalcClientPrepayment();
-                    db.Entry(this.Order).State = EntityState.Modified;
-                    db.SaveChanges();
+                    this.Order.EditOrder();
+                    /*db.Entry(this.Order).State = EntityState.Modified;
+                    db.SaveChanges();*/
                     return true;
                 }
                 
@@ -194,12 +232,25 @@ namespace Forms_TechServ
                     db.OrdersSpareParts.Remove(sparePartFromBatch);
                     
                 }
+
+                OrderLog orderLog = new OrderLog()
+                {
+                    OrderId = this.Order.Id,
+                    EventDate = DateTime.Now,
+                    EventDescription = $"Деталь №{this.SparePart.Id} удалена из заказа"
+                };
+                db.OrderLogs.Add(orderLog);
+
                 db.SaveChanges();
+
+
 
                 this.Order.FinalPrice = this.Order.CalcFinalPrice();
                 this.Order.PrepaymentRequired = this.Order.CalcClientPrepayment();
-                db.Entry(this.Order).State = EntityState.Modified;
-                db.SaveChanges();
+
+                this.Order.EditOrder();
+                /*db.Entry(this.Order).State = EntityState.Modified;
+                db.SaveChanges();*/
                 return true;
             }
                 
@@ -214,8 +265,8 @@ namespace Forms_TechServ
                 using (var transaction = db.Database.BeginTransaction())
                 {
 
-
-                    foreach (Batch batch in db.Batches.Where(b => b.WorkshopId == Order.WorkshopId).ToList().Where(b => b.CheckSparePart(this.SparePart) && b.GetCountLeft(this.SparePart) > 0))//.OrderBy(b => b.DateDelivered))
+                    // ДЛЯ НАЧАЛА ПЫТАЕМСЯ НАЙТИ В УЖЕ ПРИБЫВШИХ ПОСТАВКАХ
+                    foreach (Batch batch in db.Batches.Where(b => b.WorkshopId == Order.WorkshopId && b.DateDelivered.HasValue).ToList().Where(b => b.CheckSparePart(this.SparePart) && b.GetCountLeft(this.SparePart) > 0))//.OrderBy(b => b.DateDelivered))
                     {
 
                         if (batch.GetCountLeft(this.SparePart) >= quantity)
@@ -227,6 +278,14 @@ namespace Forms_TechServ
                                 SparePartId = SparePart.Id,
                                 Quantity = quantity
                             });
+
+                            OrderLog orderLog = new OrderLog()
+                            {
+                                OrderId = this.Order.Id,
+                                EventDate = DateTime.Now,
+                                EventDescription = $"Деталь №{this.SparePart.Id} из поставки {batch.Id} в количестве {quantity} добавлена к заказу"
+                            };
+                            db.OrderLogs.Add(orderLog);
 
                             quantity = 0;
                             db.SaveChanges();
@@ -245,19 +304,83 @@ namespace Forms_TechServ
                                 Quantity = batch.GetCountLeft(SparePart)
                             });
 
+                            OrderLog orderLog = new OrderLog()
+                            {
+                                OrderId = this.Order.Id,
+                                EventDate = DateTime.Now,
+                                EventDescription = $"Деталь №{this.SparePart.Id} из поставки {batch.Id} в количестве {batch.GetCountLeft(SparePart)} добавлена к заказу"
+                            };
+                            db.OrderLogs.Add(orderLog);
 
                             db.SaveChanges();
 
                         }
                     }
 
+                    // ЕСЛИ НЕ НАШЛИ/НАШЛИ НЕ ДОСТАТОЧНО, ТО В ПОСТАВКАХ В ПУТИ
+                    if(quantity > 0)
+                    {
+                        foreach (Batch batch in db.Batches.Where(b => b.WorkshopId == Order.WorkshopId && !b.DateDelivered.HasValue).ToList().Where(b => b.CheckSparePart(this.SparePart) && b.GetCountLeft(this.SparePart) > 0))//.OrderBy(b => b.DateDelivered))
+                        {
+
+                            if (batch.GetCountLeft(this.SparePart) >= quantity)
+                            {
+                                db.OrdersSpareParts.Add(new SparePartFromBatch()
+                                {
+                                    OrderId = Order.Id,
+                                    BatchId = batch.Id,
+                                    SparePartId = SparePart.Id,
+                                    Quantity = quantity
+                                });
+
+                                OrderLog orderLog = new OrderLog()
+                                {
+                                    OrderId = this.Order.Id,
+                                    EventDate = DateTime.Now,
+                                    EventDescription = $"Деталь №{this.SparePart.Id} из поставки {batch.Id} в количестве {quantity} добавлена к заказу"
+                                };
+                                db.OrderLogs.Add(orderLog);
+
+                                quantity = 0;
+                                db.SaveChanges();
+                                break;
+                            }
+
+                            if (batch.GetCountLeft(this.SparePart) < quantity)
+                            {
+                                quantity -= batch.GetCountLeft(SparePart);
+
+                                db.OrdersSpareParts.Add(new SparePartFromBatch()
+                                {
+                                    OrderId = Order.Id,
+                                    BatchId = batch.Id,
+                                    SparePartId = SparePart.Id,
+                                    Quantity = batch.GetCountLeft(SparePart)
+                                });
+
+                                OrderLog orderLog = new OrderLog()
+                                {
+                                    OrderId = this.Order.Id,
+                                    EventDate = DateTime.Now,
+                                    EventDescription = $"Деталь №{this.SparePart.Id} из поставки {batch.Id} в количестве {batch.GetCountLeft(SparePart)} добавлена к заказу"
+                                };
+                                db.OrderLogs.Add(orderLog);
+
+                                db.SaveChanges();
+
+                            }
+                        }
+                    }
+
+                    // ЕСЛИ ЖЕ НЕ СОБРАЛИ НУЖНОЕ КОЛИЧЕСТВО, ТО СОХРАНЯЕМ ИЗМЕНЕНИЯ, ИНАЧЕ ОТКАТЫВАЕМ
                     if (quantity == 0)
                     {
                         transaction.Commit();
                         this.Order.FinalPrice = this.Order.CalcFinalPrice();
                         this.Order.PrepaymentRequired = this.Order.CalcClientPrepayment();
-                        db.Entry(this.Order).State = EntityState.Modified;
-                        db.SaveChanges();
+                        this.Order.EditOrder();
+                        /*db.Entry(this.Order).State = EntityState.Modified;
+                        db.SaveChanges();*/
                         return true;
                     }
                     else

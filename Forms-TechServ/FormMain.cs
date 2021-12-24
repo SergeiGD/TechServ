@@ -219,11 +219,11 @@ namespace Forms_TechServ
             ordersInBtn.Click += OrdersInBtn_Click;
             childernTotalHeight += ordersInBtn.Size.Height;
 
-            NavButton ordersLogsBtn = new NavButton((NavButton)sender);
+            /*NavButton ordersLogsBtn = new NavButton((NavButton)sender);
             ordersLogsBtn.Text = "логи заказов";
             panelMenu.Controls.Add(ordersLogsBtn);
             ordersLogsBtn.Click += OrdersLogsBtn_Click;
-            childernTotalHeight += ordersLogsBtn.Size.Height;
+            childernTotalHeight += ordersLogsBtn.Size.Height;*/
 
             /*NavButton ordersVisitsBtn = new NavButton((NavButton)sender);
             ordersVisitsBtn.Text = "ВЫЕЗДЫ";
@@ -265,11 +265,11 @@ namespace Forms_TechServ
             FormInOrders formInOrders = new FormInOrders(false);
             OpenChildForm(formInOrders, (NavButton)sender);
         }
-        private void OrdersLogsBtn_Click(object sender, EventArgs e)
+        /*private void OrdersLogsBtn_Click(object sender, EventArgs e)
         {
             FormOrdersLogs formOrdersLogs = new FormOrdersLogs();
             OpenChildForm(formOrdersLogs, (NavButton)sender);
-        }
+        }*/
         private void VisitsBtn_Click(object sender, EventArgs e)
         {
             CleanChilderBtns();

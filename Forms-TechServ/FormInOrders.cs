@@ -45,7 +45,7 @@ namespace Forms_TechServ
                     panelControl.Controls.Add(btnAdd);
                     btnAdd.Click += BtnManage_Click;
                 }
-                
+
 
                 ManageButton btnShow = new ManageButton();
                 btnShow.Text = "Просмотреть";
@@ -55,7 +55,7 @@ namespace Forms_TechServ
                 readOnly = false;
                 dataOrders.CellMouseDoubleClick += BtnShow_Click;
             }
-            
+
 
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
             mainBtn[0].Location = new Point(0, 0);
@@ -79,17 +79,7 @@ namespace Forms_TechServ
                 panelControl.Controls.Add(btnAdd);
                 btnAdd.Click += BtnManage_Click;
             }
-            /*ManageButton btnAdd = new ManageButton();
-            btnAdd.Location = new Point(0, 120);
-            btnAdd.Text = "Добавить";
-            panelControl.Controls.Add(btnAdd);
-            btnAdd.Click += BtnManage_Click;*/
-
-            /*ManageButton btnEdit = new ManageButton();
-            btnEdit.Location = new Point(0, 160);
-            btnEdit.BackColor = Color.FromArgb(51, 225, 231);
-            btnEdit.Text = "Изменить";
-            btnEdit.Click += BtnManage_Click;*/
+            
 
             ManageButton btnShow = new ManageButton();
             btnShow.Text = "Просмотреть";
@@ -115,17 +105,7 @@ namespace Forms_TechServ
                 panelControl.Controls.Add(btnAdd);
                 btnAdd.Click += BtnManage_Click;
             }
-            /*ManageButton btnAdd = new ManageButton();
-            btnAdd.Location = new Point(0, 120);
-            btnAdd.Text = "Добавить";
-            panelControl.Controls.Add(btnAdd);
-            btnAdd.Click += BtnManage_Click;*/
-
-            /*ManageButton btnEdit = new ManageButton();
-            btnEdit.Location = new Point(0, 160);
-            btnEdit.BackColor = Color.FromArgb(51, 225, 231);
-            btnEdit.Text = "Изменить";
-            btnEdit.Click += BtnManage_Click;*/
+            
 
             ManageButton btnShow = new ManageButton();
             btnShow.Location = new Point(0, 160);
@@ -141,7 +121,7 @@ namespace Forms_TechServ
             }
         }
 
-        private void BtnManage_Click(object sender, EventArgs e)        
+        private void BtnManage_Click(object sender, EventArgs e)
         {
             FormAddOrder addOrder = new FormAddOrder(true);
             addOrder.ShowDialog();
@@ -154,9 +134,9 @@ namespace Forms_TechServ
             this.Close();
         }
 
-        private void BtnShow_Click(object sender, EventArgs e)          
+        private void BtnShow_Click(object sender, EventArgs e)
         {
-            if(dataOrders.SelectedRows.Count > 0)
+            if (dataOrders.SelectedRows.Count > 0)
             {
                 FormShowOrder showOrder = new FormShowOrder(readOnly, OrdersList.GetById((int)dataOrders.SelectedRows[0].Cells[0].Value));
                 showOrder.ShowDialog();
@@ -239,19 +219,25 @@ namespace Forms_TechServ
 
             btnAskOrDesk.Tag = true;
 
-            listViewStatuses.Items.Add(new ListViewItem() { Text = OrderStatus.Canceled.GetStatusString(), Tag = OrderStatus.Canceled });
-            listViewStatuses.Items.Add(new ListViewItem() { Text = OrderStatus.Finished.GetStatusString(), Tag = OrderStatus.Finished });
-            listViewStatuses.Items.Add(new ListViewItem() { Text = OrderStatus.WaitingForAnswer.GetStatusString(), Tag = OrderStatus.WaitingForAnswer });
-            listViewStatuses.Items.Add(new ListViewItem() { Text = OrderStatus.WaitingForDiagnostic.GetStatusString(), Tag = OrderStatus.WaitingForDiagnostic });
-            listViewStatuses.Items.Add(new ListViewItem() { Text = OrderStatus.WaitingForPrepayment.GetStatusString(), Tag = OrderStatus.WaitingForPrepayment });
-            listViewStatuses.Items.Add(new ListViewItem() { Text = OrderStatus.WaitingForRefund.GetStatusString(), Tag = OrderStatus.WaitingForRefund });
-            listViewStatuses.Items.Add(new ListViewItem() { Text = OrderStatus.WaitingForRepairing.GetStatusString(), Tag = OrderStatus.WaitingForRepairing });
-            listViewStatuses.Items.Add(new ListViewItem() { Text = OrderStatus.WaitingForSpareParts.GetStatusString(), Tag = OrderStatus.WaitingForSpareParts });
+            foreach (OrderStatus status in Enum.GetValues(typeof(OrderStatus)))
+            {
+                if (status == OrderStatus.Unknown)
+                {
+                    continue;
+                }
+                comboBoxStatus.Items.Add(status.GetStatusString());
+            }
+            comboBoxStatus.SelectedItem = null;
+
+            datePickerStartFrom.Format = DateTimePickerFormat.Custom;
+            datePickerStartFrom.CustomFormat = " ";
+            datePickerStartUntil.Format = DateTimePickerFormat.Custom;
+            datePickerStartUntil.CustomFormat = " ";
 
             comboBoxSortBy.Items.Add("id");
             comboBoxSortBy.Items.Add("Статусу заказа");
             comboBoxSortBy.Items.Add("Цене");
-            //comboBoxSortBy.Items.Add("Номер телефона");
+            comboBoxSortBy.Items.Add("Дате начала");
             comboBoxSortBy.SelectedIndex = 0;
 
             comboBoxShowRows.Items.Add(5);
@@ -259,6 +245,9 @@ namespace Forms_TechServ
             comboBoxShowRows.Items.Add(30);
             comboBoxShowRows.Items.Add(40);
             comboBoxShowRows.SelectedIndex = 2;
+
+            datePickerStartFrom.ValueChanged += dateTimePicker_ValueChanged;
+            datePickerStartUntil.ValueChanged += dateTimePicker_ValueChanged;
 
             FillGrid();
         }
@@ -283,19 +272,44 @@ namespace Forms_TechServ
             {
                 sortBy = "FinalPrice";
             }
+            else if (comboBoxSortBy.SelectedItem.ToString() == "Дате начала")
+            {
+                sortBy = "DateStart";
+            }
 
-            List<Order> orders= OrdersList.GetOrders(
-                new Order() 
+            OrderStatus pickedStatus = OrderStatus.Unknown;
+            if (comboBoxStatus.SelectedItem != null)
+            {
+                pickedStatus = StatusStringExtensions.GetStatusEnum(comboBoxStatus.SelectedItem.ToString());
+            }
+
+            DateTime? dateStartFrom = null;
+            if (datePickerStartFrom.Format != DateTimePickerFormat.Custom)
+                dateStartFrom = datePickerStartFrom.Value;
+
+            DateTime? dateStartUntil = null;
+            if (datePickerStartUntil.Format != DateTimePickerFormat.Custom)
+                dateStartUntil = datePickerStartUntil.Value;
+
+            List<Order> orders = OrdersList.GetOrders(
+                new Order()
                 {
                     Id = id,
                     Workshop = (Workshop)tbWorkshop.Tag,
-                    FinalPrice = numericPriceFrom.Value
+                    Product = (Product)tbProduct.Tag,
+                    FinalPrice = numericPriceFrom.Value,
+                    Status = pickedStatus,
+                    DateStart = dateStartFrom
+                    
                 },
-                new Order() 
+                new Order()
                 {
-                    FinalPrice = numericPriceUntil.Value
+                    FinalPrice = numericPriceUntil.Value,
+                    DateStart = dateStartUntil
+
                 },
-                //(Client)tbClient.Tag
+                (Client)tbClient.Tag,
+                checkBoxActive.Checked,
                 (bool)btnAskOrDesk.Tag,
                 sortBy,
                 (int)comboBoxShowRows.SelectedItem,
@@ -309,7 +323,7 @@ namespace Forms_TechServ
                 dataOrders.Rows.Add(new DataGridViewRow());
 
                 dataOrders.Rows[i].Cells[0].Value = orders[i].Id;
-                dataOrders.Rows[i].Cells[1].Value = orders[i].Product.Client.Name; 
+                dataOrders.Rows[i].Cells[1].Value = orders[i].Product.Client.Name;
                 dataOrders.Rows[i].Cells[2].Value = orders[i].Status.GetStatusString();
                 dataOrders.Rows[i].Cells[3].Value = orders[i].Product.Name;                         // вот сюда кол-во заказов через GetOrder().Count наверное
                 dataOrders.Rows[i].Cells[4].Value = orders[i].Master.Name;
@@ -334,14 +348,136 @@ namespace Forms_TechServ
         {
             FormClients formClients = new FormClients(true);
             formClients.ShowDialog();
+
+            tbClient.Text = formClients?.client?.Name;
+            tbClient.Tag = formClients?.client;
         }
 
         private void btnFindWorkshop_Click(object sender, EventArgs e)
         {
             FormWorkshops formWorkshops = new FormWorkshops(true);
             formWorkshops.ShowDialog();
+
+            tbWorkshop.Text = formWorkshops?.workshop?.Location;
+            tbWorkshop.Tag = formWorkshops?.workshop;
         }
 
-       
+        private void btnCleanStatus_Click(object sender, EventArgs e)
+        {
+            comboBoxStatus.SelectedItem = null;
+        }
+
+        private void btnCleanStartFrom_Click(object sender, EventArgs e)
+        {
+            datePickerStartFrom.Format = DateTimePickerFormat.Custom;
+            datePickerStartFrom.CustomFormat = " ";
+        }
+
+        private void btnCleanStartUntil_Click(object sender, EventArgs e)
+        {
+            datePickerStartUntil.Format = DateTimePickerFormat.Custom;
+            datePickerStartUntil.CustomFormat = " ";
+        }
+
+        private void dateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            DateTimePicker dateTimePicker = (DateTimePicker)sender;
+            dateTimePicker.Value = new DateTime(dateTimePicker.Value.Year, dateTimePicker.Value.Month, dateTimePicker.Value.Day, 0, 0, 0);
+            dateTimePicker.Format = DateTimePickerFormat.Short;
+        }
+
+        private void searchBtn_Click(object sender, EventArgs e)
+        {
+            FillGrid();
+        }
+
+        private void clearBtn_Click(object sender, EventArgs e)
+        {
+            tbID.Clear();
+            tbWorkshop.Clear();
+            tbWorkshop.Tag = null;
+            tbClient.Clear();
+            tbClient.Tag = null;
+            tbProduct.Clear();
+            tbProduct.Tag = null;
+            datePickerStartFrom.Format = DateTimePickerFormat.Custom;
+            datePickerStartFrom.CustomFormat = " ";
+            datePickerStartUntil.Format = DateTimePickerFormat.Custom;
+            datePickerStartUntil.CustomFormat = " ";
+            numericPriceFrom.Value = 0;
+            numericPriceUntil.Value = 0;
+            comboBoxStatus.SelectedItem = numericPriceUntil;
+
+            FillGrid();
+        }
+
+        private void btnCleanWorkshop_Click(object sender, EventArgs e)
+        {
+            tbWorkshop.Clear();
+            tbWorkshop.Tag = null;
+        }
+
+        private void btnCleanClient_Click(object sender, EventArgs e)
+        {
+            tbClient.Clear();
+            tbClient.Tag = null;
+        }
+
+        private void btnAskOrDesk_Click(object sender, EventArgs e)
+        {
+            if ((bool)btnAskOrDesk.Tag)
+            {
+                btnAskOrDesk.Tag = false;
+            }
+            else
+            {
+                btnAskOrDesk.Tag = true;
+            }
+        }
+
+        private void btnPriceInfo_MouseHover(object sender, EventArgs e)
+        {
+            toolTipPriceInfo.SetToolTip(btnPriceInfo, "Ноль - до скольки угодно");
+        }
+
+        private void btnAskOrDesk_MouseHover(object sender, EventArgs e)
+        {
+            
+            if ((bool)btnAskOrDesk.Tag)
+            {
+                toolTipCurrentSort.SetToolTip(btnAskOrDesk, "По возрастанию");
+            }
+            else
+            {
+                toolTipCurrentSort.SetToolTip(btnAskOrDesk, "По убыванию");
+            }
+        }
+
+        private void checkBoxActive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxActive.Checked)
+            {
+                comboBoxStatus.SelectedItem = null;
+            }
+            /*if(checkBoxActive.Checked && comboBoxStatus.SelectedItem != null && (StatusStringExtensions.GetStatusEnum(comboBoxStatus.SelectedItem.ToString()) == OrderStatus.Finished || StatusStringExtensions.GetStatusEnum(comboBoxStatus.SelectedItem.ToString()) == OrderStatus.Canceled))
+            {
+                comboBoxStatus.SelectedItem = null;
+            }*/
+        }
+
+        private void btnFindProduct_Click(object sender, EventArgs e)
+        {
+            FormProducts formProducts = new FormProducts(true);
+            formProducts.ShowDialog();
+
+            tbProduct.Text = formProducts?.product?.Name;
+            tbProduct.Tag = formProducts?.product;
+        }
+
+        private void btnCleanProduct_Click(object sender, EventArgs e)
+        {
+            tbProduct.Clear();
+            tbProduct.Tag = null;
+        }
     }
 }

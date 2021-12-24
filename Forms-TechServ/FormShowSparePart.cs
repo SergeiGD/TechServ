@@ -73,6 +73,7 @@ namespace Forms_TechServ
                 dataInStock.Rows[i].Cells[2].Value = workshops[i].PhoneNum;
                 //dataInStock.Rows[i].Cells[3].Value = workshops[i].GetCountInStock((Workshop)tbWorkshop.Tag);                         // вот сюда кол-во в наличие
                 dataInStock.Rows[i].Cells[3].Value = sparePart.GetCountInStock(workshops[i]);
+                dataInStock.Rows[i].Cells[4].Value = sparePart.GetCountInTransit(workshops[i]);                         // вот сюда кол-во в пути
             }
 
             int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);

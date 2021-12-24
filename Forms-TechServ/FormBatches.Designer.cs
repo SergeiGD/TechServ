@@ -31,8 +31,6 @@ namespace Forms_TechServ
         {
             this.components = new System.ComponentModel.Container();
             this.panelControl = new System.Windows.Forms.Panel();
-            this.btnClean = new Forms_TechServ.ManageButton();
-            this.btnFind = new Forms_TechServ.ManageButton();
             this.btnPrev = new System.Windows.Forms.Button();
             this.dataBatches = new System.Windows.Forms.DataGridView();
             this.btnNext = new System.Windows.Forms.Button();
@@ -67,6 +65,8 @@ namespace Forms_TechServ
             this.label9 = new System.Windows.Forms.Label();
             this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipPriceInfo = new System.Windows.Forms.ToolTip(this.components);
+            this.btnClean = new Forms_TechServ.ManageButton();
+            this.btnFind = new Forms_TechServ.ManageButton();
             this.panelControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataBatches)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericPriceUntil)).BeginInit();
@@ -86,35 +86,6 @@ namespace Forms_TechServ
             this.panelControl.Name = "panelControl";
             this.panelControl.Size = new System.Drawing.Size(190, 632);
             this.panelControl.TabIndex = 7;
-            // 
-            // btnClean
-            // 
-            this.btnClean.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnClean.FlatAppearance.BorderSize = 0;
-            this.btnClean.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClean.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnClean.Location = new System.Drawing.Point(0, 40);
-            this.btnClean.Name = "btnClean";
-            this.btnClean.Size = new System.Drawing.Size(190, 40);
-            this.btnClean.TabIndex = 5;
-            this.btnClean.Text = "Отчистить фильтры";
-            this.btnClean.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClean.UseVisualStyleBackColor = false;
-            // 
-            // btnFind
-            // 
-            this.btnFind.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnFind.FlatAppearance.BorderSize = 0;
-            this.btnFind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFind.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnFind.Location = new System.Drawing.Point(0, 0);
-            this.btnFind.Name = "btnFind";
-            this.btnFind.Size = new System.Drawing.Size(190, 40);
-            this.btnFind.TabIndex = 4;
-            this.btnFind.Text = "Найти";
-            this.btnFind.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFind.UseVisualStyleBackColor = false;
-            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
             // btnPrev
             // 
@@ -554,6 +525,36 @@ namespace Forms_TechServ
             this.label9.Size = new System.Drawing.Size(72, 17);
             this.label9.TabIndex = 11;
             this.label9.Text = "Страница";
+            // 
+            // btnClean
+            // 
+            this.btnClean.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnClean.FlatAppearance.BorderSize = 0;
+            this.btnClean.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClean.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnClean.Location = new System.Drawing.Point(0, 40);
+            this.btnClean.Name = "btnClean";
+            this.btnClean.Size = new System.Drawing.Size(190, 40);
+            this.btnClean.TabIndex = 5;
+            this.btnClean.Text = "Отчистить фильтры";
+            this.btnClean.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClean.UseVisualStyleBackColor = false;
+            //this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
+            // 
+            // btnFind
+            // 
+            this.btnFind.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnFind.FlatAppearance.BorderSize = 0;
+            this.btnFind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFind.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnFind.Location = new System.Drawing.Point(0, 0);
+            this.btnFind.Name = "btnFind";
+            this.btnFind.Size = new System.Drawing.Size(190, 40);
+            this.btnFind.TabIndex = 4;
+            this.btnFind.Text = "Найти";
+            this.btnFind.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFind.UseVisualStyleBackColor = false;
+            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
             // FormBatches
             // 

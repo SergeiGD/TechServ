@@ -233,7 +233,7 @@ namespace Forms_TechServ
             if (ordersTab.SelectedTab.Equals(logsPage))
             {
 
-                FormOrdersLogs formOrdersLogs = new FormOrdersLogs(43, true);
+                FormOrdersLogs formOrdersLogs = new FormOrdersLogs(true, order);
                 formOrdersLogs.TopLevel = false;
                 formOrdersLogs.FormBorderStyle = FormBorderStyle.None;
                 logsPage.Controls.Add(formOrdersLogs);

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection;
 
 namespace Forms_TechServ
 {
@@ -13,13 +14,12 @@ namespace Forms_TechServ
         public int Id { get; set; }
         public string ClientComment { get; set; }
         //public string MasterComment { get; set; }
-        public OrderStatus Status { get; set; }
+        
         public decimal ClientSale { get; set; }
         public decimal PrepaymentRequired { get; set; }
         public decimal PrepaymentMade { get; set; }
         public decimal FinalPrice { get; set; }
         //public bool HighPriority { get; set; }
-
         public DateTime? DateStart { get; set; }
         public DateTime? DateDiagnostic { get; set; }
         public DateTime? DateClientAnswer { get; set; }
@@ -49,11 +49,22 @@ namespace Forms_TechServ
         [Column("Id_Workshop")]
         public Workshop Workshop { get; set; }
 
+        public OrderStatus Status { get; set; }
+
         public virtual bool AddOrder()
         {
             using (TechContext db = new TechContext())
             {
                 db.Orders.Add(this);
+
+                OrderLog orderLog = new OrderLog()
+                {
+                    OrderId = this.Id,
+                    EventDate = DateTime.Now,
+                    EventDescription = "Заказ создан"
+                };
+                db.OrderLogs.Add(orderLog);
+
                 db.SaveChanges();
                 return true;
             }
@@ -63,7 +74,48 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                db.Entry(this).State = EntityState.Modified;
+                Order order = db.Orders.Find(this.Id);
+                /*db.Entry(order).Reference(o => o.Product).Load();
+                db.Entry(order).Reference(o => o.Manager).Load();
+                db.Entry(order).Reference(o => o.Master).Load();
+                db.Entry(order).Reference(o => o.Workshop).Load();*/
+
+                foreach (PropertyInfo property in typeof(Order).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+                {
+                    //if(!property.GetValue(this).Equals(property.GetValue(order)))
+                    if (property.PropertyType.IsValueType && !object.Equals(property.GetValue(this), property.GetValue(order)))
+                    {
+                        string stateCurrent;
+                        if (property.GetValue(this) == null)
+                        {
+                            stateCurrent = "не определен(а)";
+                        }
+                        else
+                        {
+                            stateCurrent = property.GetValue(this).ToString();
+                        }
+                        string stateBefore;
+                        if (property.GetValue(order) == null)
+                        {
+                            stateBefore = "не определен(а)";
+                        }
+                        else
+                        {
+                            stateBefore = property.GetValue(order).ToString();
+                        }
+                        OrderLog orderLog = new OrderLog() 
+                        {
+                            OrderId = this.Id,
+                            EventDate = DateTime.Now,
+                            EventDescription = $"{property.Name} изменен(а) с {stateBefore} на {stateCurrent}"
+                        };
+                        db.OrderLogs.Add(orderLog);
+                    }
+                    
+                }
+
+                db.Entry(order).CurrentValues.SetValues(this);
+                //db.Entry(this).State = EntityState.Modified;
                 db.SaveChanges();
                 return true;
             }
@@ -163,6 +215,8 @@ namespace Forms_TechServ
             }
         }
 
+        
+
         public OrderSparePart GetSparePart(int sparePartId)
         {
             using (TechContext db = new TechContext())
@@ -177,6 +231,8 @@ namespace Forms_TechServ
                 
         }
 
+        
+
         public bool AddService(OrderService service)
         {
             using(TechContext db = new TechContext())
@@ -185,12 +241,24 @@ namespace Forms_TechServ
 
                 db.OrdersServices.Add(service);
 
+                OrderLog orderLog = new OrderLog()
+                {
+                    OrderId = this.Id,
+                    EventDate = DateTime.Now,
+                    EventDescription = $"Услуга №{service.ServiceId} в количестве {service.Quantity} добавлена к заказу. Доп. скидка на услугу {service.Sale}%"
+                };
+                db.OrderLogs.Add(orderLog);
                 db.SaveChanges();
 
-                Order orderToUpdate = db.Orders.Find(this.Id);
+                
+
+
+                //Order orderToUpdate = db.Orders.Find(this.Id);
+
                 this.FinalPrice = CalcFinalPrice();
-                db.Entry(orderToUpdate).CurrentValues.SetValues(this);
-                db.SaveChanges();
+                this.EditOrder();
+                //db.Entry(orderToUpdate).CurrentValues.SetValues(this);
+                //db.SaveChanges();
 
                 return true;
             }
@@ -201,12 +269,19 @@ namespace Forms_TechServ
             using(TechContext db = new TechContext())
             {
                 db.Entry(service).State = EntityState.Deleted;
+
+                OrderLog orderLog = new OrderLog()
+                {
+                    OrderId = this.Id,
+                    EventDate = DateTime.Now,
+                    EventDescription = $"Услуга №{service.ServiceId} удалена из заказа"
+                };
+                db.OrderLogs.Add(orderLog);
+
                 db.SaveChanges();
 
-                Order orderToUpdate = db.Orders.Find(this.Id);
                 this.FinalPrice = CalcFinalPrice();
-                db.Entry(orderToUpdate).CurrentValues.SetValues(this);
-                db.SaveChanges();
+                this.EditOrder();
 
                 return true;
             }
@@ -217,12 +292,19 @@ namespace Forms_TechServ
             using (TechContext db = new TechContext())
             {
                 db.Entry(service).State = EntityState.Modified;
+
+                OrderLog orderLog = new OrderLog()
+                {
+                    OrderId = this.Id,
+                    EventDate = DateTime.Now,
+                    EventDescription = $"Услуга №{service.ServiceId} изменена в заказе. Текущее количества {service.Quantity}, доп. скидка на услугу {service.Sale}%"
+                };
+                db.OrderLogs.Add(orderLog);
+
                 db.SaveChanges();
 
-                Order orderToUpdate = db.Orders.Find(this.Id);
                 this.FinalPrice = CalcFinalPrice();
-                db.Entry(orderToUpdate).CurrentValues.SetValues(this);
-                db.SaveChanges();
+                this.EditOrder();
 
                 return true;
             }
@@ -360,6 +442,35 @@ namespace Forms_TechServ
             
         }
 
+        public List<OrderLog> GetOrderLogs(OrderLog FilterA, OrderLog FilterB, int count, int page, out int rowsCount)
+        {
+            using (TechContext db = new TechContext())
+            {
+                IEnumerable<OrderLog> orderLogs = db.OrderLogs.Where(o => o.OrderId == this.Id);
+
+                if(FilterA.Id != 0)
+                {
+                    orderLogs = orderLogs.Where(o => o.Id == FilterA.Id);
+                }
+
+                orderLogs = orderLogs.Where(o => o.EventDate >= FilterA.EventDate && o.EventDate <= FilterB.EventDate);
+
+                rowsCount = orderLogs.Count();                                  // общее кол-во строк для постраничного вывода
+
+                orderLogs = orderLogs.Skip((page - 1) * count).Take(count);
+
+                return orderLogs.ToList();
+            }
+        }
+
+        public OrderLog GetOrderLog(int id)
+        {
+            using(TechContext db = new TechContext())
+            {
+                return db.OrderLogs.Where(o => o.OrderId == this.Id && o.Id == id).FirstOrDefault();
+            }
+        }
+
     }
 
     public static class OrdersList
@@ -383,7 +494,7 @@ namespace Forms_TechServ
             }
         }
 
-        public static List<Order> GetOrders(Order FilterA, Order FilterB/*, Client client, List<OrderStatus> pickedStatuses*/, bool desk, string sortBy, int count, int page, out int rowsCount)
+        public static List<Order> GetOrders(Order FilterA, Order FilterB, Client client, bool activeOnly,/*List<OrderStatus> pickedStatuses,*/ bool desk, string sortBy, int count, int page, out int rowsCount)
         {
             using (TechContext db = new TechContext())
             {
@@ -394,22 +505,32 @@ namespace Forms_TechServ
                     orders = orders.Where(o => o.Id == FilterA.Id);
                 }
 
-                /*if(client != null)
+                if(client != null)
                 {
-                    //orders = orders.Where(o => o.Id == FilterA.Id);
+                    orders = orders.Where(o => o.Product.ClientId == client.Id);
                 }
-
-                if(pickedStatuses.Count > 0)
-                {
-                    orders = orders.Where(o => pickedStatuses.Contains(o.Status));
-                }*/
 
                 if(FilterA.Workshop != null)
                 {
                     orders = orders.Where(o => o.WorkshopId == FilterA.Workshop.Id);
                 }
 
-                if(FilterA.FinalPrice > 0 && FilterB.FinalPrice == 0)
+                if (FilterA.Product != null)
+                {
+                    orders = orders.Where(o => o.ProductId == FilterA.Product.Id);
+                }
+
+                if (FilterA.Status != OrderStatus.Unknown)
+                {
+                    orders = orders.Where(o => o.Status == FilterA.Status);
+                }
+
+                if (activeOnly)
+                {
+                    orders = orders.Where(o => o.Status != OrderStatus.Finished && o.Status != OrderStatus.Canceled);
+                }
+
+                if (FilterA.FinalPrice > 0 && FilterB.FinalPrice == 0)
                 {
                     orders = orders.Where(o => o.FinalPrice >= FilterA.FinalPrice);
                 }
@@ -424,7 +545,7 @@ namespace Forms_TechServ
                     orders = orders.Where(o => o.FinalPrice >= FilterA.FinalPrice && o.FinalPrice <= FilterB.FinalPrice);
                 }
 
-                /*if (FilterA.DateStart.HasValue && !FilterB.DateStart.HasValue)
+                if (FilterA.DateStart.HasValue && !FilterB.DateStart.HasValue)
                 {
                     orders = orders.Where(o => o.DateStart >= FilterA.DateStart);
                 }
@@ -437,7 +558,9 @@ namespace Forms_TechServ
                 if (FilterA.DateStart.HasValue && FilterB.DateStart.HasValue)
                 {
                     orders = orders.Where(o => o.DateStart >= FilterA.DateStart && o.DateStart <= FilterB.DateStart);
-                }*/
+                }
+
+                
 
                 orders = orders.SortBy(sortBy, desk);
 
@@ -446,7 +569,7 @@ namespace Forms_TechServ
                 orders = orders.Skip((page - 1) * count).Take(count);
 
                 return orders.ToList();
-                //if(FilterA)
+                
             }
         }
     }

@@ -31,7 +31,7 @@ namespace Forms_TechServ
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.linkPickedOrder = new System.Windows.Forms.LinkLabel();
+            this.labelOrder = new System.Windows.Forms.LinkLabel();
             this.labelID = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.labelDate = new System.Windows.Forms.Label();
@@ -58,16 +58,16 @@ namespace Forms_TechServ
             this.label2.TabIndex = 1;
             this.label2.Text = "Заказ:";
             // 
-            // linkPickedOrder
+            // labelOrder
             // 
-            this.linkPickedOrder.AutoSize = true;
-            this.linkPickedOrder.Location = new System.Drawing.Point(57, 68);
-            this.linkPickedOrder.Name = "linkPickedOrder";
-            this.linkPickedOrder.Size = new System.Drawing.Size(55, 13);
-            this.linkPickedOrder.TabIndex = 2;
-            this.linkPickedOrder.TabStop = true;
-            this.linkPickedOrder.Text = "linkLabel1";
-            this.linkPickedOrder.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPickedOrder_LinkClicked);
+            this.labelOrder.AutoSize = true;
+            this.labelOrder.Location = new System.Drawing.Point(57, 68);
+            this.labelOrder.Name = "labelOrder";
+            this.labelOrder.Size = new System.Drawing.Size(55, 13);
+            this.labelOrder.TabIndex = 2;
+            this.labelOrder.TabStop = true;
+            this.labelOrder.Text = "linkLabel1";
+            this.labelOrder.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkPickedOrder_LinkClicked);
             // 
             // labelID
             // 
@@ -107,8 +107,10 @@ namespace Forms_TechServ
             // 
             // tbLogText
             // 
+            this.tbLogText.Enabled = false;
             this.tbLogText.Location = new System.Drawing.Point(192, 36);
             this.tbLogText.Name = "tbLogText";
+            this.tbLogText.ReadOnly = true;
             this.tbLogText.Size = new System.Drawing.Size(206, 115);
             this.tbLogText.TabIndex = 7;
             this.tbLogText.Text = "";
@@ -122,6 +124,7 @@ namespace Forms_TechServ
             this.cancelBtn.TabIndex = 41;
             this.cancelBtn.Text = "ЗАКРЫТЬ";
             this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // FormShowOrderLog
             // 
@@ -135,11 +138,12 @@ namespace Forms_TechServ
             this.Controls.Add(this.labelDate);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.labelID);
-            this.Controls.Add(this.linkPickedOrder);
+            this.Controls.Add(this.labelOrder);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormShowOrderLog";
             this.Text = "FormShowOrderLog";
+            this.Load += new System.EventHandler(this.FormShowOrderLog_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -149,7 +153,7 @@ namespace Forms_TechServ
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.LinkLabel linkPickedOrder;
+        private System.Windows.Forms.LinkLabel labelOrder;
         private System.Windows.Forms.Label labelID;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelDate;

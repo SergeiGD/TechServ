@@ -65,6 +65,8 @@ namespace Forms_TechServ
             }
 
         }
+
+        
     }
 
     public static class ClientsList
@@ -77,7 +79,7 @@ namespace Forms_TechServ
             }
         }
 
-        public static List<Client> GetClients(Client FilterA, Client FilterB, bool desk, string sortBy, int count, int page, out int rowsCount)
+        public static List<Client> GetClients(Client FilterA, Client FilterB/*, int orderFrom, int orderUntil*/, bool desk, string sortBy, int count, int page, out int rowsCount)
         {
             using (TechContext db = new TechContext())
             {
@@ -98,7 +100,10 @@ namespace Forms_TechServ
                     clients = clients.Where(w => w.PhoneNum.Contains(FilterA.PhoneNum));                
                 }
 
-                // КОЛ-ВО ЗАКАЗОВ СДЕЛАТЬ
+                //if(orderFrom > 0 && orderUntil == 0)
+                //{
+                    //clients = clients.Where(c => c.order);
+                //}
 
                 clients = clients.SortBy(sortBy, desk);
 

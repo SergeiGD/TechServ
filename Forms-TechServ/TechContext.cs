@@ -13,6 +13,8 @@ namespace Forms_TechServ
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderService> OrdersServices { get; set; }
+        public DbSet<OrderLog> OrderLogs { get; set; }
+        public DbSet<SparePartFromBatch> OrdersSpareParts { get; set; }
 
         public DbSet<Client> Clients { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -24,7 +26,7 @@ namespace Forms_TechServ
 
 
 
-        public DbSet<SparePartFromBatch> OrdersSpareParts { get; set; }
+        
 
 
 

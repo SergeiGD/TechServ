@@ -308,7 +308,7 @@ namespace Forms_TechServ
                 dataBatches.Rows[i].Cells[0].Value = batches[i].Id;
                 dataBatches.Rows[i].Cells[1].Value = batches[i].TrackNumber;
                 dataBatches.Rows[i].Cells[2].Value = batches[i].Workshop.Location;
-                if(sparePart != null)
+                if (sparePart != null)
                 {
                     dataBatches.Rows[i].Cells[3].Value = batches[i].GetCountLeft(sparePart);
                 }
@@ -316,8 +316,15 @@ namespace Forms_TechServ
                 {
                     dataBatches.Rows[i].Cells[3].Value = batches[i].Price;
                 }
-                
-                dataBatches.Rows[i].Cells[4].Value = batches[i].DateDelivered;
+
+                if (batches[i].DateDelivered.HasValue)
+                {
+                    dataBatches.Rows[i].Cells[4].Value = batches[i].DateDelivered;
+                }
+                else
+                {
+                    dataBatches.Rows[i].Cells[4].Value = "В пути";
+                }
 
             }
 
@@ -507,7 +514,7 @@ namespace Forms_TechServ
 
         private void btnAskOrDesk_MouseHover(object sender, EventArgs e)
         {
-            toolTipPriceInfo.SetToolTip(btnPriceInfo, "Ноль - до скольки угодно");
+            
             if ((bool)btnAskOrDesk.Tag)
             {
                 toolTipCurrentSort.SetToolTip(btnAskOrDesk, "По возрастанию");
@@ -522,6 +529,8 @@ namespace Forms_TechServ
         {
             datePickerUntil.Format = DateTimePickerFormat.Short;
         }
+
+        
 
         /*private void dataBatches_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
