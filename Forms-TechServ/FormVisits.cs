@@ -13,54 +13,45 @@ namespace Forms_TechServ
     public partial class FormVisits : Form
     {
         bool readOnly;
+        int rowsCount;
+        int currentPage = 1;
+        OrderAtHome order;
+        Master master;
 
         public FormVisits()
         {
             InitializeComponent();
 
-            readOnly = false;
+            readOnly = true;
 
-            ManageButton btnAdd = new ManageButton();
-            btnAdd.Text = "Добавить";
-            panelControl.Controls.Add(btnAdd);
-            btnAdd.Click += BtnAdd_Click;
-
-            ManageButton btnDone = new ManageButton();
-            btnDone.Text = "Отментить как 'выполнен'";
-            panelControl.Controls.Add(btnDone);
-
-            ManageButton btnShow = new ManageButton();
-            btnShow.Text = "Просмотреть";
-            panelControl.Controls.Add(btnShow);
-            btnShow.Click += BtnShow_Click;
-
-            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
-            mainBtn[0].Location = new Point(0, 0);
-            for (int i = 1; i < mainBtn.Count(); i++)
-            {
-                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
-            }
-
-        }
-
-        public FormVisits(string master, bool readOnly)
-        {
-            InitializeComponent();
-
-            this.readOnly = readOnly;
-
-            if (!readOnly)
+            if (UserSession.Can("add_del_visit"))
             {
                 ManageButton btnAdd = new ManageButton();
                 btnAdd.Text = "Добавить";
                 panelControl.Controls.Add(btnAdd);
                 btnAdd.Click += BtnAdd_Click;
             }
+            if (UserSession.Can("edit_visit"))
+            {
+                ManageButton btnDone = new ManageButton();
+                btnDone.Text = "Отментить как 'выполнен'";
+                btnDone.Click += BtnDone_Click;
+                panelControl.Controls.Add(btnDone);
+
+                readOnly = false;
+            }
+            
+
+            
 
             ManageButton btnShow = new ManageButton();
             btnShow.Text = "Просмотреть";
             panelControl.Controls.Add(btnShow);
             btnShow.Click += BtnShow_Click;
+
+            dataVisits.CellMouseDoubleClick += BtnShow_Click;
+
+            btnClean.Click += cleanAll_Click;
 
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
             mainBtn[0].Location = new Point(0, 0);
@@ -68,26 +59,50 @@ namespace Forms_TechServ
             {
                 mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
             }
+
         }
 
-        public FormVisits(int order, bool readOnly)
+        public FormVisits(bool readOnly, OrderAtHome order)
         {
             InitializeComponent();
 
+            
             this.readOnly = readOnly;
 
-            if (!readOnly)
+            if (!readOnly && UserSession.Can("add_del_visit"))
             {
                 ManageButton btnAdd = new ManageButton();
                 btnAdd.Text = "Добавить";
                 panelControl.Controls.Add(btnAdd);
-                btnAdd.Click += BtnAdd_Click;
+                btnAdd.Click += BtnAddFromOrder_Click;
+            }
+            if (!readOnly && UserSession.Can("edit_visit1"))
+            {
+                ManageButton btnDone = new ManageButton();
+                btnDone.Text = "Отментить как 'выполнен'";
+                btnDone.Click += BtnDone_Click;
+                panelControl.Controls.Add(btnDone);
+
+                readOnly = false;
             }
 
             ManageButton btnShow = new ManageButton();
             btnShow.Text = "Просмотреть";
             panelControl.Controls.Add(btnShow);
             btnShow.Click += BtnShow_Click;
+
+            dataVisits.CellMouseDoubleClick += BtnShow_Click;
+
+            btnClean.Click += cleanInOrder_Click;
+
+            this.order = order;
+            tbOrder.Text = order.Id.ToString();
+            tbOrder.Tag = order;
+            btnCleanOrder.Enabled = false;
+            btnFindOrder.Enabled = false;
+            
+            btnCleanMaster.Enabled = false;
+            btnFindMaster.Enabled = false;
 
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
             mainBtn[0].Location = new Point(0, 0);
@@ -97,11 +112,131 @@ namespace Forms_TechServ
             }
         }
 
-        
+        public FormVisits(Master master)
+        {
+            InitializeComponent();
+
+
+            this.readOnly = true;
+
+            ManageButton btnShow = new ManageButton();
+            btnShow.Text = "Просмотреть";
+            panelControl.Controls.Add(btnShow);
+            btnShow.Click += BtnShow_Click;
+
+            dataVisits.CellMouseDoubleClick += BtnShow_Click;
+
+            btnClean.Click += cleanInMaster_Click;
+
+            this.master = master;
+            tbMaster.Text = master.Name;
+            tbMaster.Tag = master;
+            btnCleanMaster.Enabled = false;
+            btnFindMaster.Enabled = false;
+
+
+            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
+            mainBtn[0].Location = new Point(0, 0);
+            for (int i = 1; i < mainBtn.Count(); i++)
+            {
+                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
+            }
+        }
+
+
 
         private void FormVisits_Load(object sender, EventArgs e)
         {
-            
+            DataGridViewTextBoxColumn idCol = new DataGridViewTextBoxColumn();
+            idCol.Name = "id";
+            DataGridViewTextBoxColumn orderCol = new DataGridViewTextBoxColumn();
+            orderCol.Name = "Заказ";
+            DataGridViewTextBoxColumn doneCol = new DataGridViewTextBoxColumn();
+            doneCol.Name = "Выполнен";
+            DataGridViewTextBoxColumn dateCol = new DataGridViewTextBoxColumn();
+            dateCol.Name = "Дата";
+            DataGridViewTextBoxColumn timeCol = new DataGridViewTextBoxColumn();
+            timeCol.Name = "Расчетное время";
+
+            dataVisits.Columns.Add(idCol);
+            dataVisits.Columns.Add(orderCol);
+            dataVisits.Columns.Add(doneCol);
+            dataVisits.Columns.Add(dateCol);
+            dataVisits.Columns.Add(timeCol);
+
+            btnAskOrDesk.Tag = true;
+
+            comboBoxSortBy.Items.Add("id");
+            comboBoxSortBy.Items.Add("Дате");
+            comboBoxSortBy.SelectedIndex = 0;
+
+            comboBoxShowRows.Items.Add(5);
+            comboBoxShowRows.Items.Add(20);
+            comboBoxShowRows.Items.Add(30);
+            comboBoxShowRows.Items.Add(40);
+            comboBoxShowRows.SelectedIndex = 2;
+
+            datePickerFrom.Value = DateTime.Now.AddDays(-7);
+            datePickerUntil.Value = DateTime.Now.AddDays(14);
+
+            FillGrid();
+        }
+
+        private void FillGrid()
+        {
+            int id;
+            int.TryParse(tbID.Text, out id);                                // получаем введенное для сортировки id
+
+            string sortBy = "Id";
+
+            if (comboBoxSortBy.SelectedItem.ToString() == "id")
+            {
+                sortBy = "Id";
+            }
+            else if (comboBoxSortBy.SelectedItem.ToString() == "Дате")
+            {
+                sortBy = "DateVisit";
+            }
+
+            List<Visit> visits = VisitsList.GetVisits(
+                new Visit() 
+                {
+                    Id = id,
+                    Order = (OrderAtHome)tbOrder.Tag,
+                    Done = !checkNotFinished.Checked,
+                    DateVisit = datePickerFrom.Value
+                },
+                new Visit() 
+                {
+                    DateVisit = datePickerUntil.Value
+                },
+                (Master)tbMaster.Tag,
+                tbAddress.Text,
+                (bool)btnAskOrDesk.Tag,
+                sortBy,
+                (int)comboBoxShowRows.SelectedItem,
+                currentPage,
+                out rowsCount
+                );
+
+            dataVisits.Rows.Clear();
+            for (int i = 0; i < visits.Count; i++)
+            {
+                dataVisits.Rows.Add(new DataGridViewRow());
+
+                dataVisits.Rows[i].Cells[0].Value = visits[i].Id;
+                dataVisits.Rows[i].Cells[1].Value = visits[i].OrderId;
+                if (visits[i].Done)
+                {
+                    dataVisits.Rows[i].Cells[2].Value = "Да";
+                }
+                else
+                {
+                    dataVisits.Rows[i].Cells[2].Value = "Нет";
+                }
+                dataVisits.Rows[i].Cells[3].Value = visits[i].DateVisit;
+                dataVisits.Rows[i].Cells[4].Value = visits[i].CalcEstimatedTime();
+            }
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)       
@@ -109,6 +244,54 @@ namespace Forms_TechServ
 
             FormManageVisit addVisit = new FormManageVisit();
             addVisit.ShowDialog();
+
+            FillGrid();
+        }
+
+        private void BtnDone_Click(object sender, EventArgs e)
+        {
+
+            if(dataVisits.SelectedRows.Count > 0)
+            {
+                DialogResult answer = MessageBox.Show("Вы уверены, что хотите пометить как выполненные ВСЕ выбранные выезды?", "Подтверидите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if(answer == DialogResult.Yes)
+                {
+                    bool changeState = false;
+                    DialogResult changeStateAnswer = MessageBox.Show("Желаете также отметить услуги этих выездов как 'выполненные'??", "Подтверидите действие", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if(changeStateAnswer == DialogResult.Yes)
+                    {
+                        changeState = true;
+                    }
+                    foreach (DataGridViewRow row in dataVisits.SelectedRows)
+                    {
+                        Visit anotherVisit = VisitsList.GetById(Convert.ToInt32(dataVisits.Rows[row.Index].Cells[0].Value));
+                        if (!anotherVisit.Done)
+                        {
+                            anotherVisit.Done = true;
+                            anotherVisit.EditVisit();
+                            if (changeState)
+                            {
+                                foreach (OrderService service in anotherVisit.GetVisitOrderServices())
+                                {
+                                    service.Done = true;
+                                    anotherVisit.Order.EditService(service);
+                                }
+                            }
+                        }
+                    }
+
+                    FillGrid();
+                }
+            }
+        }
+
+        private void BtnAddFromOrder_Click(object sender, EventArgs e)
+        {
+
+            FormManageVisit addVisit = new FormManageVisit(order);
+            addVisit.ShowDialog();
+
+            FillGrid();
         }
 
         /*private void BtnManage_Click(object sender, EventArgs e)
@@ -124,8 +307,17 @@ namespace Forms_TechServ
         }*/
         private void BtnShow_Click(object sender, EventArgs e)
         {
-            FormShowVisit showVisit = new FormShowVisit(readOnly);
-            showVisit.ShowDialog();
+            if(dataVisits.SelectedRows.Count > 0)
+            {
+                FormShowVisit showVisit = new FormShowVisit(readOnly, VisitsList.GetById((int)dataVisits.SelectedRows[0].Cells[0].Value));
+                showVisit.ShowDialog();
+
+                FillGrid();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите выезд");
+            }
         }
 
         private void btnFindClient_Click(object sender, EventArgs e)
@@ -144,6 +336,52 @@ namespace Forms_TechServ
         {
             FormOrders formOrders = new FormOrders(true);
             formOrders.ShowDialog();
+        }
+
+        private void searchBtn_Click(object sender, EventArgs e)
+        {
+            FillGrid();
+        }
+
+        private void cleanAll_Click(object sender, EventArgs e)
+        {
+            tbID.Clear();
+            tbAddress.Clear();
+            checkNotFinished.Checked = false;
+            tbMaster.Clear();
+            tbMaster.Tag = null;
+            tbOrder.Clear();
+            tbOrder.Tag = null;
+            datePickerFrom.Value = DateTime.Now.AddDays(-7);
+            datePickerUntil.Value = DateTime.Now.AddDays(14);
+
+            FillGrid();
+        }
+
+        private void cleanInOrder_Click(object sender, EventArgs e)
+        {
+            tbID.Clear();
+            tbAddress.Clear();
+            checkNotFinished.Checked = false;
+            tbMaster.Clear();
+            tbMaster.Tag = null;
+            datePickerFrom.Value = DateTime.Now.AddDays(-7);
+            datePickerUntil.Value = DateTime.Now.AddDays(14);
+
+            FillGrid();
+        }
+
+        private void cleanInMaster_Click(object sender, EventArgs e)
+        {
+            tbID.Clear();
+            tbAddress.Clear();
+            checkNotFinished.Checked = false;
+            tbOrder.Clear();
+            tbOrder.Tag = null;
+            datePickerFrom.Value = DateTime.Now.AddDays(-7);
+            datePickerUntil.Value = DateTime.Now.AddDays(14);
+
+            FillGrid();
         }
 
         /*private void BtnShowInOrder_Click(object sender, EventArgs e)

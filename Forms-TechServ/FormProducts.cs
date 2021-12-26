@@ -101,7 +101,7 @@ namespace Forms_TechServ
 
             this.readOnly = readOnly;
 
-            if (!readOnly)
+            if (!readOnly && UserSession.Can("add_del_product"))
             {
                 ManageButton btnAdd = new ManageButton();
                 btnAdd.Text = "Добавить";
@@ -183,10 +183,7 @@ namespace Forms_TechServ
             {
                 sortBy = "Name";
             }
-            /*else if (comboBoxSortBy.SelectedItem.ToString() == "Владельцу")
-            {
-                sortBy = "Client";
-            }*/
+
 
             List<Product> products = ProductsList.GetProducts(
                 new Product() 

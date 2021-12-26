@@ -212,6 +212,12 @@
     <Compile Include="FormOrderBatches.Designer.cs">
       <DependentUpon>FormOrderBatches.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormOrderServices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOrderServices.Designer.cs">
+      <DependentUpon>FormOrderServices.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormOrdersExtedFilter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -419,6 +425,8 @@
     <Compile Include="SparePartFromBatch.cs" />
     <Compile Include="TechContext.cs" />
     <Compile Include="UserSession.cs" />
+    <Compile Include="Visit.cs" />
+    <Compile Include="VisitService.cs" />
     <Compile Include="Workshop.cs" />
     <Compile Include="WorkshopTimetable.cs" />
     <EmbeddedResource Include="FormAddEmployeeTimetable.resx">
@@ -486,6 +494,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormOrderBatches.resx">
       <DependentUpon>FormOrderBatches.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOrderServices.resx">
+      <DependentUpon>FormOrderServices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormOrdersExtedFilter.resx">
       <DependentUpon>FormOrdersExtedFilter.cs</DependentUpon>

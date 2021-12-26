@@ -37,6 +37,11 @@ namespace Forms_TechServ
             this.numericCurrentPage = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.panelFind = new System.Windows.Forms.Panel();
+            this.tbProduct = new System.Windows.Forms.TextBox();
+            this.btnCleanProduct = new FontAwesome.Sharp.IconButton();
+            this.btnFindProduct = new FontAwesome.Sharp.IconButton();
+            this.label12 = new System.Windows.Forms.Label();
+            this.checkBoxActive = new System.Windows.Forms.CheckBox();
             this.btnPriceInfo = new FontAwesome.Sharp.IconButton();
             this.btnCleanStartUntil = new FontAwesome.Sharp.IconButton();
             this.btnCleanStartFrom = new FontAwesome.Sharp.IconButton();
@@ -68,16 +73,11 @@ namespace Forms_TechServ
             this.btnPrev = new System.Windows.Forms.Button();
             this.dataOrders = new System.Windows.Forms.DataGridView();
             this.panelControl = new System.Windows.Forms.Panel();
-            this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTipPriceInfo = new System.Windows.Forms.ToolTip(this.components);
-            this.checkBoxActive = new System.Windows.Forms.CheckBox();
-            this.tbProduct = new System.Windows.Forms.TextBox();
-            this.btnCleanProduct = new FontAwesome.Sharp.IconButton();
-            this.btnFindProduct = new FontAwesome.Sharp.IconButton();
-            this.label12 = new System.Windows.Forms.Label();
             this.extendFilterBtn = new Forms_TechServ.ManageButton();
             this.clearBtn = new Forms_TechServ.ManageButton();
             this.searchBtn = new Forms_TechServ.ManageButton();
+            this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipPriceInfo = new System.Windows.Forms.ToolTip(this.components);
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             this.panelFind.SuspendLayout();
@@ -115,6 +115,7 @@ namespace Forms_TechServ
             this.comboBoxShowRows.Name = "comboBoxShowRows";
             this.comboBoxShowRows.Size = new System.Drawing.Size(62, 21);
             this.comboBoxShowRows.TabIndex = 16;
+            this.comboBoxShowRows.SelectedIndexChanged += new System.EventHandler(this.comboBoxShowRows_SelectedIndexChanged);
             // 
             // label9
             // 
@@ -155,6 +156,7 @@ namespace Forms_TechServ
             0,
             0,
             0});
+            this.numericCurrentPage.ValueChanged += new System.EventHandler(this.numericCurrentPage_ValueChanged);
             // 
             // label8
             // 
@@ -207,6 +209,73 @@ namespace Forms_TechServ
             this.panelFind.Name = "panelFind";
             this.panelFind.Size = new System.Drawing.Size(875, 120);
             this.panelFind.TabIndex = 4;
+            // 
+            // tbProduct
+            // 
+            this.tbProduct.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbProduct.Enabled = false;
+            this.tbProduct.Location = new System.Drawing.Point(102, 92);
+            this.tbProduct.Name = "tbProduct";
+            this.tbProduct.ReadOnly = true;
+            this.tbProduct.Size = new System.Drawing.Size(113, 20);
+            this.tbProduct.TabIndex = 165;
+            // 
+            // btnCleanProduct
+            // 
+            this.btnCleanProduct.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCleanProduct.FlatAppearance.BorderSize = 0;
+            this.btnCleanProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCleanProduct.IconChar = FontAwesome.Sharp.IconChar.Times;
+            this.btnCleanProduct.IconColor = System.Drawing.SystemColors.ControlText;
+            this.btnCleanProduct.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnCleanProduct.IconSize = 17;
+            this.btnCleanProduct.Location = new System.Drawing.Point(245, 93);
+            this.btnCleanProduct.Name = "btnCleanProduct";
+            this.btnCleanProduct.Size = new System.Drawing.Size(18, 18);
+            this.btnCleanProduct.TabIndex = 163;
+            this.btnCleanProduct.UseVisualStyleBackColor = true;
+            this.btnCleanProduct.Click += new System.EventHandler(this.btnCleanProduct_Click);
+            // 
+            // btnFindProduct
+            // 
+            this.btnFindProduct.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnFindProduct.FlatAppearance.BorderSize = 0;
+            this.btnFindProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFindProduct.IconChar = FontAwesome.Sharp.IconChar.Search;
+            this.btnFindProduct.IconColor = System.Drawing.SystemColors.ControlText;
+            this.btnFindProduct.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnFindProduct.IconSize = 17;
+            this.btnFindProduct.Location = new System.Drawing.Point(221, 93);
+            this.btnFindProduct.Name = "btnFindProduct";
+            this.btnFindProduct.Size = new System.Drawing.Size(18, 18);
+            this.btnFindProduct.TabIndex = 164;
+            this.btnFindProduct.UseVisualStyleBackColor = true;
+            this.btnFindProduct.Click += new System.EventHandler(this.btnFindProduct_Click);
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(24, 95);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(52, 13);
+            this.label12.TabIndex = 162;
+            this.label12.Text = "Техника:";
+            // 
+            // checkBoxActive
+            // 
+            this.checkBoxActive.AutoSize = true;
+            this.checkBoxActive.Location = new System.Drawing.Point(563, 56);
+            this.checkBoxActive.Name = "checkBoxActive";
+            this.checkBoxActive.Size = new System.Drawing.Size(115, 17);
+            this.checkBoxActive.TabIndex = 161;
+            this.checkBoxActive.Text = "Только активные";
+            this.checkBoxActive.UseVisualStyleBackColor = true;
+            this.checkBoxActive.CheckedChanged += new System.EventHandler(this.checkBoxActive_CheckedChanged);
             // 
             // btnPriceInfo
             // 
@@ -579,6 +648,7 @@ namespace Forms_TechServ
             this.btnNext.TabIndex = 3;
             this.btnNext.Text = "Следующая →";
             this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPrev
             // 
@@ -593,6 +663,7 @@ namespace Forms_TechServ
             this.btnPrev.TabIndex = 2;
             this.btnPrev.Text = "← Предыдущая";
             this.btnPrev.UseVisualStyleBackColor = false;
+            this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
             // 
             // dataOrders
             // 
@@ -622,73 +693,6 @@ namespace Forms_TechServ
             this.panelControl.Name = "panelControl";
             this.panelControl.Size = new System.Drawing.Size(190, 782);
             this.panelControl.TabIndex = 2;
-            // 
-            // checkBoxActive
-            // 
-            this.checkBoxActive.AutoSize = true;
-            this.checkBoxActive.Location = new System.Drawing.Point(563, 56);
-            this.checkBoxActive.Name = "checkBoxActive";
-            this.checkBoxActive.Size = new System.Drawing.Size(115, 17);
-            this.checkBoxActive.TabIndex = 161;
-            this.checkBoxActive.Text = "Только активные";
-            this.checkBoxActive.UseVisualStyleBackColor = true;
-            this.checkBoxActive.CheckedChanged += new System.EventHandler(this.checkBoxActive_CheckedChanged);
-            // 
-            // tbProduct
-            // 
-            this.tbProduct.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbProduct.Enabled = false;
-            this.tbProduct.Location = new System.Drawing.Point(102, 92);
-            this.tbProduct.Name = "tbProduct";
-            this.tbProduct.ReadOnly = true;
-            this.tbProduct.Size = new System.Drawing.Size(113, 20);
-            this.tbProduct.TabIndex = 165;
-            // 
-            // btnCleanProduct
-            // 
-            this.btnCleanProduct.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCleanProduct.FlatAppearance.BorderSize = 0;
-            this.btnCleanProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCleanProduct.IconChar = FontAwesome.Sharp.IconChar.Times;
-            this.btnCleanProduct.IconColor = System.Drawing.SystemColors.ControlText;
-            this.btnCleanProduct.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnCleanProduct.IconSize = 17;
-            this.btnCleanProduct.Location = new System.Drawing.Point(245, 93);
-            this.btnCleanProduct.Name = "btnCleanProduct";
-            this.btnCleanProduct.Size = new System.Drawing.Size(18, 18);
-            this.btnCleanProduct.TabIndex = 163;
-            this.btnCleanProduct.UseVisualStyleBackColor = true;
-            this.btnCleanProduct.Click += new System.EventHandler(this.btnCleanProduct_Click);
-            // 
-            // btnFindProduct
-            // 
-            this.btnFindProduct.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnFindProduct.FlatAppearance.BorderSize = 0;
-            this.btnFindProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFindProduct.IconChar = FontAwesome.Sharp.IconChar.Search;
-            this.btnFindProduct.IconColor = System.Drawing.SystemColors.ControlText;
-            this.btnFindProduct.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnFindProduct.IconSize = 17;
-            this.btnFindProduct.Location = new System.Drawing.Point(221, 93);
-            this.btnFindProduct.Name = "btnFindProduct";
-            this.btnFindProduct.Size = new System.Drawing.Size(18, 18);
-            this.btnFindProduct.TabIndex = 164;
-            this.btnFindProduct.UseVisualStyleBackColor = true;
-            this.btnFindProduct.Click += new System.EventHandler(this.btnFindProduct_Click);
-            // 
-            // label12
-            // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(24, 95);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(52, 13);
-            this.label12.TabIndex = 162;
-            this.label12.Text = "Техника:";
             // 
             // extendFilterBtn
             // 

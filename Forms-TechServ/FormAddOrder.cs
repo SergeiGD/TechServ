@@ -251,6 +251,8 @@ namespace Forms_TechServ
                 this.Hide();
                 FormEditOrder formEditOrder = new FormEditOrder(OrdersList.GetById(order.Id));
                 formEditOrder.ShowDialog();
+
+                this.Close();
             }
         }
     }

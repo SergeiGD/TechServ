@@ -23,5 +23,8 @@ namespace Forms_TechServ
         public int Quantity { get; set; }
         public decimal Sale { get; set; }
         public string MasterComment { get; set; }
+
+        // ОКАЗАЛИ УЖЕ УСЛУГУ ИЛИ НЕТ ДЛЯ УДОБНОГО ПЛАНИРОВАНИЯ ВИЗИТОВ И ТАСКОВ МАСТЕРОВ
+        public bool Done { get; set; }
     }
 }

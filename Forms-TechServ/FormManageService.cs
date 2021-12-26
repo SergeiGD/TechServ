@@ -103,7 +103,7 @@ namespace Forms_TechServ
                 tbCat.Text = service.Category.Name;
                 tbCat.Tag = service.Category;
                 numeriсPrice.Value = service.Price;
-                numericAvgTime.Value = (decimal)service.AvgServiceTime.Value.TotalMinutes;
+                numericAvgTime.Value = (decimal)service.AvgServiceTime.TotalMinutes;
                 tbDescription.Text = service.Description;
             }
         }

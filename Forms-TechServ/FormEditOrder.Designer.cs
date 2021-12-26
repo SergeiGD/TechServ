@@ -80,12 +80,6 @@ namespace Forms_TechServ
             this.btnNextServ = new System.Windows.Forms.Button();
             this.btnPrevServ = new System.Windows.Forms.Button();
             this.dataServies = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_sale = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnDeleteService = new Forms_TechServ.ManageButton();
             this.btnAddService = new Forms_TechServ.ManageButton();
@@ -112,6 +106,15 @@ namespace Forms_TechServ
             this.logsPage = new System.Windows.Forms.TabPage();
             this.visitsPage = new System.Windows.Forms.TabPage();
             this.toolTipFindAuto = new System.Windows.Forms.ToolTip(this.components);
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_sale = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnDoneService = new Forms_TechServ.ManageButton();
+            this.manageButton1 = new Forms_TechServ.ManageButton();
             this.ordersTab.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.groupPrepayment.SuspendLayout();
@@ -432,7 +435,6 @@ namespace Forms_TechServ
             this.checkDiagnosted.TabIndex = 159;
             this.checkDiagnosted.Text = "Диагностика проведена";
             this.checkDiagnosted.UseVisualStyleBackColor = true;
-            //this.checkDiagnosted.CheckedChanged += new System.EventHandler(this.checkDiagnosted_CheckedChanged);
             // 
             // btnAutoMaster
             // 
@@ -704,9 +706,9 @@ namespace Forms_TechServ
             this.Column3,
             this.Column4,
             this.column_sale,
-            this.Column5});
+            this.Column5,
+            this.Column7});
             this.dataServies.Location = new System.Drawing.Point(0, 0);
-            this.dataServies.MultiSelect = false;
             this.dataServies.Name = "dataServies";
             this.dataServies.ReadOnly = true;
             this.dataServies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -714,46 +716,12 @@ namespace Forms_TechServ
             this.dataServies.TabIndex = 1;
             this.dataServies.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataServies_CellMouseDoubleClick);
             // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "id";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Наименование";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Цена за одну";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Количество";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // column_sale
-            // 
-            this.column_sale.HeaderText = "Скидка";
-            this.column_sale.Name = "column_sale";
-            this.column_sale.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Общая цена";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.manageButton1);
+            this.panel2.Controls.Add(this.btnDoneService);
             this.panel2.Controls.Add(this.btnDeleteService);
             this.panel2.Controls.Add(this.btnAddService);
             this.panel2.Controls.Add(this.btnShowService);
@@ -1065,6 +1033,82 @@ namespace Forms_TechServ
             this.visitsPage.TabIndex = 4;
             this.visitsPage.Text = "Выезды";
             // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "id";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Наименование";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Цена за одну";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Количество";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // column_sale
+            // 
+            this.column_sale.HeaderText = "Скидка";
+            this.column_sale.Name = "column_sale";
+            this.column_sale.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Общая цена";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "Сделано";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            // 
+            // btnDoneService
+            // 
+            this.btnDoneService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDoneService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnDoneService.FlatAppearance.BorderSize = 0;
+            this.btnDoneService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDoneService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnDoneService.Location = new System.Drawing.Point(0, 120);
+            this.btnDoneService.Name = "btnDoneService";
+            this.btnDoneService.Size = new System.Drawing.Size(185, 40);
+            this.btnDoneService.TabIndex = 3;
+            this.btnDoneService.Text = "Отметить как \'сделано\'";
+            this.btnDoneService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDoneService.UseVisualStyleBackColor = false;
+            this.btnDoneService.Click += new System.EventHandler(this.btnDoneService_Click);
+            // 
+            // manageButton1
+            // 
+            this.manageButton1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.manageButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.manageButton1.FlatAppearance.BorderSize = 0;
+            this.manageButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.manageButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.manageButton1.Location = new System.Drawing.Point(0, 160);
+            this.manageButton1.Name = "manageButton1";
+            this.manageButton1.Size = new System.Drawing.Size(185, 45);
+            this.manageButton1.TabIndex = 4;
+            this.manageButton1.Text = "Отметить как \'не сделано\'";
+            this.manageButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.manageButton1.UseVisualStyleBackColor = false;
+            this.manageButton1.Click += new System.EventHandler(this.manageButton1_Click);
+            // 
             // FormEditOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1151,12 +1195,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.Button btnNextServ;
         private System.Windows.Forms.Button btnPrevServ;
         private System.Windows.Forms.DataGridView dataServies;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column_sale;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ComboBox comboBoxShowSparePartsRows;
         private System.Windows.Forms.Label label4;
@@ -1182,5 +1220,14 @@ namespace Forms_TechServ
         private System.Windows.Forms.CheckBox checkPaid;
         private System.Windows.Forms.CheckBox checkAnswer;
         private System.Windows.Forms.LinkLabel labelProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column_sale;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private ManageButton btnDoneService;
+        private ManageButton manageButton1;
     }
 }

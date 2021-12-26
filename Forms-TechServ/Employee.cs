@@ -208,6 +208,14 @@ namespace Forms_TechServ
             }
         }
 
+        public List<Visit> GetMasterVisits()
+        {
+            using (TechContext db = new TechContext())
+            {
+                return db.Visits.Include(v => v.Order).Where(v => v.Order.MasterId == this.Id && v.DelTime == null).ToList();
+            }
+        }
+
         public bool AddMasterCategory(Category category)
         {
             using (TechContext db = new TechContext())

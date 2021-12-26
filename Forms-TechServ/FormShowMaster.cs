@@ -159,7 +159,7 @@ namespace Forms_TechServ
             {
                 this.Size = pickedSize;
 
-                FormVisits formVisits = new FormVisits("asd", true);
+                FormVisits formVisits = new FormVisits(master);
 
                 formVisits.TopLevel = false;
                 formVisits.FormBorderStyle = FormBorderStyle.None;

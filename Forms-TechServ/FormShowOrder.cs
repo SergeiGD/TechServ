@@ -128,6 +128,7 @@ namespace Forms_TechServ
         private void FillServices()
         {
             List<OrderService> services = order.GetServices(
+                false,
                 (int)comboBoxShowServicesRows.SelectedItem,
                 servicesCurrentPage,
                 out servicesRowsCount);
@@ -143,7 +144,7 @@ namespace Forms_TechServ
                 dataServies.Rows[i].Cells[3].Value = services[i].Quantity;
                 dataServies.Rows[i].Cells[4].Value = services[i].Sale;
                 dataServies.Rows[i].Cells[5].Value = services[i].Service.Price * services[i].Quantity - (services[i].Service.Price * services[i].Quantity * (services[i].Sale / 100));
-
+                dataServies.Rows[i].Cells[6].Value = services[i].Done ? "Да" : "Нет";
 
             }
 
@@ -245,7 +246,7 @@ namespace Forms_TechServ
             else if (ordersTab.SelectedTab.Equals(visitsPage))
             {
 
-                FormVisits formVisits = new FormVisits(34, true);
+                FormVisits formVisits = new FormVisits(true, (OrderAtHome)order);
                 formVisits.TopLevel = false;
                 formVisits.FormBorderStyle = FormBorderStyle.None;
                 visitsPage.Controls.Add(formVisits);

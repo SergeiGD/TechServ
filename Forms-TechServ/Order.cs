@@ -142,11 +142,16 @@ namespace Forms_TechServ
             }
         }
 
-        public List<OrderService> GetServices(int count, int page, out int rowsCount)
+        public List<OrderService> GetServices(bool onlyUnfinished, int count, int page, out int rowsCount)
         {
             using (TechContext db = new TechContext())
             {
                 IEnumerable<OrderService> orderServices = db.OrdersServices.Where(s => s.OrderId == this.Id).Include(s => s.Service);
+
+                if (onlyUnfinished)
+                {
+                    orderServices = orderServices.Where(s => s.Done == false);
+                }
 
                 rowsCount = orderServices.Count();                                  // общее кол-во строк для постраничного вывода
 
@@ -570,6 +575,86 @@ namespace Forms_TechServ
 
                 return orders.ToList();
                 
+            }
+        }
+
+        // ТОЛЬКО ЗАКАЗЫ В МАСТЕРСКОЙ
+        public static List<Order> GetInOrders(Order FilterA, Order FilterB, Client client, bool activeOnly, bool desk, string sortBy, int count, int page, out int rowsCount)
+        {
+            using (TechContext db = new TechContext())
+            {
+                IEnumerable<Order> orders = db.Orders.Include(o => o.Workshop).Include(o => o.Product).Include(o => o.Product.Client).Include(o => o.Master).Include(o => o.Manager).Where(o => !(o is OrderAtHome));
+
+                if (FilterA.Id != 0)
+                {
+                    orders = orders.Where(o => o.Id == FilterA.Id);
+                }
+
+                if (client != null)
+                {
+                    orders = orders.Where(o => o.Product.ClientId == client.Id);
+                }
+
+                if (FilterA.Workshop != null)
+                {
+                    orders = orders.Where(o => o.WorkshopId == FilterA.Workshop.Id);
+                }
+
+                if (FilterA.Product != null)
+                {
+                    orders = orders.Where(o => o.ProductId == FilterA.Product.Id);
+                }
+
+                if (FilterA.Status != OrderStatus.Unknown)
+                {
+                    orders = orders.Where(o => o.Status == FilterA.Status);
+                }
+
+                if (activeOnly)
+                {
+                    orders = orders.Where(o => o.Status != OrderStatus.Finished && o.Status != OrderStatus.Canceled);
+                }
+
+                if (FilterA.FinalPrice > 0 && FilterB.FinalPrice == 0)
+                {
+                    orders = orders.Where(o => o.FinalPrice >= FilterA.FinalPrice);
+                }
+
+                if (FilterA.FinalPrice == 0 && FilterB.FinalPrice > 0)
+                {
+                    orders = orders.Where(o => o.FinalPrice <= FilterB.FinalPrice);
+                }
+
+                if (FilterA.FinalPrice > 0 && FilterB.FinalPrice > 0)
+                {
+                    orders = orders.Where(o => o.FinalPrice >= FilterA.FinalPrice && o.FinalPrice <= FilterB.FinalPrice);
+                }
+
+                if (FilterA.DateStart.HasValue && !FilterB.DateStart.HasValue)
+                {
+                    orders = orders.Where(o => o.DateStart >= FilterA.DateStart);
+                }
+
+                if (!FilterA.DateStart.HasValue && FilterB.DateStart.HasValue)
+                {
+                    orders = orders.Where(o => o.DateStart <= FilterB.DateStart);
+                }
+
+                if (FilterA.DateStart.HasValue && FilterB.DateStart.HasValue)
+                {
+                    orders = orders.Where(o => o.DateStart >= FilterA.DateStart && o.DateStart <= FilterB.DateStart);
+                }
+
+
+
+                orders = orders.SortBy(sortBy, desk);
+
+                rowsCount = orders.Count();                                  // общее кол-во строк для постраничного вывода
+
+                orders = orders.Skip((page - 1) * count).Take(count);
+
+                return orders.ToList();
+
             }
         }
     }

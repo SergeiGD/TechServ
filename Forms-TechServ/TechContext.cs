@@ -12,9 +12,12 @@ namespace Forms_TechServ
         public TechContext() : base("DBConnection") { }
 
         public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderAtHome> OrdersAtHome { get; set; }
         public DbSet<OrderService> OrdersServices { get; set; }
         public DbSet<OrderLog> OrderLogs { get; set; }
         public DbSet<SparePartFromBatch> OrdersSpareParts { get; set; }
+        public DbSet<Visit> Visits { get; set; }
+        public DbSet<VisitService> VisitsServices { get; set; }
 
         public DbSet<Client> Clients { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -66,6 +69,8 @@ namespace Forms_TechServ
             modelBuilder.Entity<SparePartFromBatch>()
                 .HasKey(c => new { c.OrderId, c.SparePartId, c.BatchId });
 
+            modelBuilder.Entity<VisitService>()
+                .HasKey(c => new { c.VisitId, c.ServiceId });
             //modelBuilder.Entity<Order>().Property(e => e.Status).conf
 
             modelBuilder.Configurations.Add(new Service.ServiceConfig());

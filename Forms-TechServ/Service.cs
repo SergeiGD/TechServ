@@ -16,24 +16,25 @@ namespace Forms_TechServ
         public string Description { get; set; }
         public decimal Price { get; set; }
         [Column("AvgServiceTime")]
-        private double? TimeSpanTicks { get; set; }                                 // SQLite не поддерживает TimeSpan, так что сделаем обертку в виде числа (кол-во минут)
+        public double TimeSpanTicks { get; set; }                                 // SQLite не поддерживает TimeSpan, так что сделаем обертку в виде числа (кол-во минут)
         [NotMapped]                                                                 // и трансформации его в TimeSpan
-        public TimeSpan? AvgServiceTime                                             // благодаря этому работаем как с обычным TimeSpan и оно автоматически будет трансформировать в тип БД
+        public TimeSpan AvgServiceTime                                             // благодаря этому работаем как с обычным TimeSpan и оно автоматически будет трансформировать в тип БД
         {
             get
             {
-                if (TimeSpanTicks.HasValue)
+                /*if (TimeSpanTicks.HasValue)
                 {
                     return TimeSpan.FromMinutes(TimeSpanTicks.Value);
                 }
                 else
                 {
                     return null;
-                }
+                }*/
+                return TimeSpan.FromMinutes(TimeSpanTicks);
             }
             set
             {
-                TimeSpanTicks = value.Value.TotalMinutes;
+                TimeSpanTicks = value.TotalMinutes;
             }
         }
 

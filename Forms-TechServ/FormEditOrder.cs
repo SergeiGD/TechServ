@@ -45,12 +45,14 @@ namespace Forms_TechServ
             else if(ordersTab.SelectedTab.Equals(servicesPage))
             {
                 this.Size = pickedSize;
+
+                FillServices();
             }
             else if (ordersTab.SelectedTab.Equals(sparePartsPage))
             {
                 this.Size = pickedSize;
 
-               
+                FillSpareParts();
             }
             else if (ordersTab.SelectedTab.Equals(logsPage))
             {
@@ -69,7 +71,7 @@ namespace Forms_TechServ
             {
                 this.Size = pickedSize;
 
-                FormVisits formVisits = new FormVisits(34, false);
+                FormVisits formVisits = new FormVisits(false, (OrderAtHome)order);
                 formVisits.TopLevel = false;
                 formVisits.FormBorderStyle = FormBorderStyle.None;
                 visitsPage.Controls.Add(formVisits);
@@ -367,11 +369,16 @@ namespace Forms_TechServ
 
         private void btnFindMaster_Click(object sender, EventArgs e)
         {
-            FormMasters formMasters = new FormMasters(true, order.Workshop);
-            formMasters.ShowDialog();
+            DialogResult answer = MessageBox.Show("Смена мастера в заказе приведет с удалению ВСЕХ выездов и задач, связанных с этим закаом, хотите продолжить?", "ВНИМАНИЕ!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            if(answer == DialogResult.Yes)
+            {
+                FormMasters formMasters = new FormMasters(true, order.Workshop);
+                formMasters.ShowDialog();
 
-            tbMaster.Text = formMasters?.master.Name;
-            tbMaster.Tag = formMasters?.master;
+                tbMaster.Text = formMasters?.master.Name;
+                tbMaster.Tag = formMasters?.master;
+            }
+            
         }
 
         /*private void btnFindWorkshop_Click(object sender, EventArgs e)
@@ -391,6 +398,7 @@ namespace Forms_TechServ
         private void FillServices()
         {
             List<OrderService> services = order.GetServices(
+                false,
                 (int)comboBoxShowServicesRows.SelectedItem,
                 servicesCurrentPage,
                 out servicesRowsCount);
@@ -406,7 +414,7 @@ namespace Forms_TechServ
                 dataServies.Rows[i].Cells[3].Value = services[i].Quantity;
                 dataServies.Rows[i].Cells[4].Value = services[i].Sale;
                 dataServies.Rows[i].Cells[5].Value = services[i].Service.Price * services[i].Quantity - (services[i].Service.Price * services[i].Quantity * (services[i].Sale / 100));
-
+                dataServies.Rows[i].Cells[6].Value = services[i].Done ? "Да" : "Нет";
 
             }
 
@@ -458,7 +466,7 @@ namespace Forms_TechServ
         {
             if(dataServies.SelectedRows.Count > 0)
             {
-                DialogResult answer = MessageBox.Show("Вы уверены что хотите убрать эту услугу из заказа?", "Подтвердите действие", MessageBoxButtons.YesNo);
+                DialogResult answer = MessageBox.Show($"Вы уверены что хотите убрать услугу с id {dataServies.SelectedRows[0].Cells[0].Value} из заказа?", "Подтвердите действие", MessageBoxButtons.YesNo);
                 if (answer == DialogResult.Yes)
                 {
                     if (order.DelService(order.GetService(Convert.ToInt32(dataServies.SelectedRows[0].Cells[0].Value)))/*BatchesSparePartsList.GetById(batch.Id, Convert.ToInt32(dataSpareParts.SelectedRows[0].Cells[0].Value)).DelBatchSparePart()*/)
@@ -609,6 +617,26 @@ namespace Forms_TechServ
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if(!inOrder && (tbAddress.Text == null || tbAddress.Text == string.Empty))
+            {
+                MessageBox.Show("Адрес не может быть не указанным");
+            }
+            else if(!inOrder)
+            {
+                ((OrderAtHome)order).Address = tbAddress.Text;
+            }
+
+            if(order.MasterId != ((Master)tbMaster.Tag).Id)
+            {
+                if (!inOrder)
+                {
+                    foreach(Visit visit in ((OrderAtHome)order).GetVisits())
+                    {
+                        visit.DelVisit();
+                    }
+                }
+            }
+
             order.MasterId = ((Master)tbMaster.Tag).Id;
             order.Master = (Master)tbMaster.Tag;
             order.ClientComment = tbComment.Text;
@@ -692,8 +720,8 @@ namespace Forms_TechServ
 
         private void btnAutoMaster_Click(object sender, EventArgs e)
         {
-            DialogResult answer = MessageBox.Show("Подобрать мастера автоматически?", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            if(answer == DialogResult.Yes)
+            DialogResult answer = MessageBox.Show("Смена мастера в заказе приведет с удалению ВСЕХ выездов и задач, связанных с этим закаом, хотите продолжить?", "ВНИМАНИЕ!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            if (answer == DialogResult.Yes)
             {
                 if (!order.FindMaster())
                 {
@@ -706,6 +734,21 @@ namespace Forms_TechServ
                     tbMaster.Tag = order.Master;
                 }
             }
+                /*DialogResult answer = MessageBox.Show("Подобрать мастера автоматически?", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if(answer == DialogResult.Yes)
+            {
+
+                if (!order.FindMaster())
+                {
+                    MessageBox.Show("Не удается найти мастера с требуемой категорией", "Что-то пошло не так", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    tbMaster.Text = order.Master.Name;
+                    tbMaster.Tag = order.Master;
+                }
+            }*/
         }
 
         private void checkPrepaid_CheckedChanged(object sender, EventArgs e)
@@ -860,6 +903,48 @@ namespace Forms_TechServ
             //if(unlock && dataServies.CellContentDoubleClick)
         }
 
-        
+        private void btnDoneService_Click(object sender, EventArgs e)
+        {
+            if(dataServies.SelectedRows.Count > 0)
+            {
+                DialogResult answer = MessageBox.Show("Вы уверены, что хотите отметить ВСЕ выбранные услуги, как оказанные?", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if(answer == DialogResult.Yes)
+                {
+                    foreach (DataGridViewRow row in dataServies.SelectedRows)
+                    {
+                        OrderService anotherService = order.GetService(Convert.ToInt32(dataServies.Rows[row.Index].Cells[0].Value));
+                        if (!anotherService.Done)
+                        {
+                            anotherService.Done = true;
+                            order.EditService(anotherService);
+                        }
+                    }
+
+                    FillServices();
+                }
+            }
+        }
+
+        private void manageButton1_Click(object sender, EventArgs e)
+        {
+            if (dataServies.SelectedRows.Count > 0)
+            {
+                DialogResult answer = MessageBox.Show("Вы уверены, что хотите отметить ВСЕ выбранные услуги, как не оказанные?", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
+                {
+                    foreach (DataGridViewRow row in dataServies.SelectedRows)
+                    {
+                        OrderService anotherService = order.GetService(Convert.ToInt32(dataServies.Rows[row.Index].Cells[0].Value));
+                        if (anotherService.Done)
+                        {
+                            anotherService.Done = false;
+                            order.EditService(anotherService);
+                        }
+                    }
+
+                    FillServices();
+                }
+            }
+        }
     }
 }

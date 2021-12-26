@@ -291,7 +291,7 @@ namespace Forms_TechServ
             if (datePickerStartUntil.Format != DateTimePickerFormat.Custom)
                 dateStartUntil = datePickerStartUntil.Value;
 
-            List<Order> orders = OrdersList.GetOrders(
+            List<Order> orders = OrdersList.GetInOrders(
                 new Order()
                 {
                     Id = id,
@@ -325,7 +325,7 @@ namespace Forms_TechServ
                 dataOrders.Rows[i].Cells[0].Value = orders[i].Id;
                 dataOrders.Rows[i].Cells[1].Value = orders[i].Product.Client.Name;
                 dataOrders.Rows[i].Cells[2].Value = orders[i].Status.GetStatusString();
-                dataOrders.Rows[i].Cells[3].Value = orders[i].Product.Name;                         // вот сюда кол-во заказов через GetOrder().Count наверное
+                dataOrders.Rows[i].Cells[3].Value = orders[i].Product.Name;                         
                 dataOrders.Rows[i].Cells[4].Value = orders[i].Master.Name;
                 dataOrders.Rows[i].Cells[5].Value = orders[i].Manager.Name;
                 dataOrders.Rows[i].Cells[6].Value = orders[i].Workshop.Location;
@@ -333,7 +333,6 @@ namespace Forms_TechServ
 
             }
 
-            //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
             int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);
             numericCurrentPage.Maximum = maxPage;
 
@@ -478,6 +477,28 @@ namespace Forms_TechServ
         {
             tbProduct.Clear();
             tbProduct.Tag = null;
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            numericCurrentPage.Value = numericCurrentPage.Value + 1 > numericCurrentPage.Maximum ? numericCurrentPage.Value : numericCurrentPage.Value + 1;
+        }
+
+        private void btnPrev_Click(object sender, EventArgs e)
+        {
+            numericCurrentPage.Value = numericCurrentPage.Value - 1 < numericCurrentPage.Minimum ? numericCurrentPage.Value : numericCurrentPage.Value - 1;
+        }
+
+        private void comboBoxShowRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillGrid();
+        }
+
+        private void numericCurrentPage_ValueChanged(object sender, EventArgs e)
+        {
+            numericCurrentPage.Value = (int)numericCurrentPage.Value;           // если ввели дробное число, оно автоматически округлится
+            currentPage = (int)numericCurrentPage.Value;
+            FillGrid();
         }
     }
 }

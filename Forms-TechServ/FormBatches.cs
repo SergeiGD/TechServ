@@ -23,7 +23,7 @@ namespace Forms_TechServ
         {
             InitializeComponent();
 
-
+            readOnly = true;
 
             if (UserSession.Can("add_del_batch"))
             {
@@ -31,6 +31,8 @@ namespace Forms_TechServ
                 btnAdd.Text = "Добавить";
                 panelControl.Controls.Add(btnAdd);
                 btnAdd.Click += BtnManage_Click;
+
+                
             }
 
             if (UserSession.Can("edit_batch"))
