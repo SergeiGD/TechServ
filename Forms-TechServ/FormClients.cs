@@ -77,7 +77,7 @@ namespace Forms_TechServ
             DataGridViewTextBoxColumn phoneCol = new DataGridViewTextBoxColumn();
             phoneCol.Name = "Номер телефона";
             DataGridViewTextBoxColumn ordersCountCol = new DataGridViewTextBoxColumn();
-            ordersCountCol.Name = "Кол-во заказов";
+            ordersCountCol.Name = "Кол-во заказов (завершенных)";
 
 
             dataClients.Columns.Add(idCol);
@@ -90,6 +90,7 @@ namespace Forms_TechServ
 
             comboBoxSortBy.Items.Add("id");
             comboBoxSortBy.Items.Add("Имени");
+            comboBoxSortBy.Items.Add("Кол-ву заказов");
             //comboBoxSortBy.Items.Add("Номер телефона");
             comboBoxSortBy.SelectedIndex = 0;
 
@@ -118,6 +119,10 @@ namespace Forms_TechServ
             {
                 sortBy = "Name";
             }
+            else if (comboBoxSortBy.SelectedItem.ToString() == "Кол-ву заказов")
+            {
+                sortBy = ".CountClientOrders()";
+            }
 
             List<Client> clients = ClientsList.GetClients(
                 new Client() 
@@ -126,10 +131,8 @@ namespace Forms_TechServ
                     Name = tbName.Text,
                     PhoneNum = tbPhoneNum.Text
                 },
-                new Client() 
-                {
-                    // сюда кол-во заказов суем или вообще тупо два параметра int буду хз пока
-                },
+                (int)numericOrdersFrom.Value,
+                (int)numericOrdersUntil.Value,
                 (bool)btnAskOrDesk.Tag,
                 sortBy,
                 (int)comboBoxShowRows.SelectedItem,
@@ -145,7 +148,7 @@ namespace Forms_TechServ
                 dataClients.Rows[i].Cells[0].Value = clients[i].Id;
                 dataClients.Rows[i].Cells[1].Value = clients[i].Name;
                 dataClients.Rows[i].Cells[2].Value = clients[i].PhoneNum;
-                dataClients.Rows[i].Cells[3].Value = 0;                         // вот сюда кол-во заказов через GetOrder().Count наверное
+                dataClients.Rows[i].Cells[3].Value = clients[i].CountClientOrders();                         // вот сюда кол-во заказов через GetOrder().Count наверное
                 
             }
 

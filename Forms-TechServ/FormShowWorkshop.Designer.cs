@@ -58,6 +58,7 @@ namespace Forms_TechServ
             this.employeesPage = new System.Windows.Forms.TabPage();
             this.batchesPage = new System.Windows.Forms.TabPage();
             this.sparePartsPage = new System.Windows.Forms.TabPage();
+            this.ordersPage = new System.Windows.Forms.TabPage();
             this.workshopTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.panelEdit.SuspendLayout();
@@ -94,6 +95,7 @@ namespace Forms_TechServ
             this.workshopTabs.Controls.Add(this.employeesPage);
             this.workshopTabs.Controls.Add(this.batchesPage);
             this.workshopTabs.Controls.Add(this.sparePartsPage);
+            this.workshopTabs.Controls.Add(this.ordersPage);
             this.workshopTabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.workshopTabs.Location = new System.Drawing.Point(0, 0);
             this.workshopTabs.Name = "workshopTabs";
@@ -410,6 +412,16 @@ namespace Forms_TechServ
             this.sparePartsPage.TabIndex = 4;
             this.sparePartsPage.Text = "Детали в наличии";
             // 
+            // ordersPage
+            // 
+            this.ordersPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.ordersPage.Location = new System.Drawing.Point(4, 22);
+            this.ordersPage.Name = "ordersPage";
+            this.ordersPage.Padding = new System.Windows.Forms.Padding(3);
+            this.ordersPage.Size = new System.Drawing.Size(614, 332);
+            this.ordersPage.TabIndex = 5;
+            this.ordersPage.Text = "Заказы";
+            // 
             // FormShowWorkshop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -465,5 +477,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.Button btnPrevTimetable;
         private System.Windows.Forms.DataGridView dataTimetable;
         private System.Windows.Forms.TabPage sparePartsPage;
+        private System.Windows.Forms.TabPage ordersPage;
     }
 }

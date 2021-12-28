@@ -15,7 +15,7 @@ namespace Forms_TechServ
         bool readOnly;
         int currentPage = 1;
         int rowsCount;
-        public Manager pickedManager;
+        public Manager manager;
         //int pickedRowIndex;
 
         public FormManagers(bool forSearching)

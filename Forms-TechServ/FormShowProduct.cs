@@ -67,7 +67,7 @@ namespace Forms_TechServ
                 //this.Size = new Size(1078, 481);
                 this.Size = pickedSize;
 
-                FormOrders formOrders = new FormOrders(3, true);
+                FormOrders formOrders = new FormOrders(product);
 
                 formOrders.TopLevel = false;
                 formOrders.FormBorderStyle = FormBorderStyle.None;

@@ -171,6 +171,18 @@ namespace Forms_TechServ
                 formSpareParts.BringToFront();
                 formSpareParts.Show();
             }
+            else if (workshopTabs.SelectedTab.Equals(ordersPage))
+            {
+                this.Size = pickedSize;
+
+                FormOrders formOrders = new FormOrders(workshop);
+                formOrders.TopLevel = false;
+                formOrders.FormBorderStyle = FormBorderStyle.None;
+                ordersPage.Controls.Add(formOrders);
+                formOrders.Dock = DockStyle.Fill;
+                formOrders.BringToFront();
+                formOrders.Show();
+            }
         }
 
         private void FormShowWorkshop_ResizeEnd(object sender, EventArgs e)

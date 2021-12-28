@@ -68,6 +68,16 @@ namespace Forms_TechServ
                 if (CheckTimeAvailable())
                 {
                     db.Visits.Add(this);
+
+                    OrderLog orderLog = new OrderLog()
+                    {
+                        OrderId = this.OrderId,
+                        EventDate = DateTime.Now,
+                        EventDescription = $"Выезд №{this.Id} на время {this.DateVisit} добавлен к заказу"
+                    };
+                    db.OrderLogs.Add(orderLog);
+
+
                     db.SaveChanges();
                     return true;
                 }
@@ -124,6 +134,16 @@ namespace Forms_TechServ
                 if (CheckTimeAvailable())
                 {
                     db.Entry(this).State = EntityState.Modified;
+
+                    OrderLog orderLog = new OrderLog()
+                    {
+                        OrderId = this.OrderId,
+                        EventDate = DateTime.Now,
+                        EventDescription = $"Выезд №{this.Id} изменен. Запланированное время - {this.DateVisit}, выполнен - {this.Done}"
+                    };
+                    db.OrderLogs.Add(orderLog);
+
+
                     db.SaveChanges();
                     return true;
                 }
@@ -187,6 +207,15 @@ namespace Forms_TechServ
             {
                 this.DelTime = DateTime.Now;
                 db.Entry(this).State = EntityState.Modified;
+
+                OrderLog orderLog = new OrderLog()
+                {
+                    OrderId = this.OrderId,
+                    EventDate = DateTime.Now,
+                    EventDescription = $"Выезд №{this.Id} был удален"
+                };
+                db.OrderLogs.Add(orderLog);
+
                 db.SaveChanges();
                 return true;
             }
@@ -259,6 +288,16 @@ namespace Forms_TechServ
                         ServiceId = service.Id,
                         VisitId = this.Id
                     });
+
+                    OrderLog orderLog = new OrderLog()
+                    {
+                        OrderId = this.OrderId,
+                        EventDate = DateTime.Now,
+                        EventDescription = $"Выезд №{this.Id} был изменен. Добавлена запланированная услуга №{service.Id}"
+                    };
+                    db.OrderLogs.Add(orderLog);
+
+
                     db.SaveChanges();
 
                     if (CheckTimeAvailable())
@@ -284,6 +323,15 @@ namespace Forms_TechServ
             using (TechContext db = new TechContext())
             {
                 db.VisitsServices.Remove(db.VisitsServices.Find(this.Id, service.Id));
+
+                OrderLog orderLog = new OrderLog()
+                {
+                    OrderId = this.OrderId,
+                    EventDate = DateTime.Now,
+                    EventDescription = $"Выезд №{this.Id} был изменен. Удалена запланированная услуга №{service.Id}"
+                };
+                db.OrderLogs.Add(orderLog);
+
                 db.SaveChanges();
                 return true;
             }

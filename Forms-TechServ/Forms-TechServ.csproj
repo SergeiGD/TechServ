@@ -425,6 +425,7 @@
     <Compile Include="SparePartFromBatch.cs" />
     <Compile Include="TechContext.cs" />
     <Compile Include="UserSession.cs" />
+    <Compile Include="ValueWrapper.cs" />
     <Compile Include="Visit.cs" />
     <Compile Include="VisitService.cs" />
     <Compile Include="Workshop.cs" />

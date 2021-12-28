@@ -14,6 +14,7 @@ namespace Forms_TechServ
         {
             ParameterExpression param = ParameterExpression.Parameter(typeof(T), "p");              // параметр лямбды
             Expression getProp = Expression.Property(param, propName);                              // получить свойство
+            
             var experRes = Expression.Lambda(getProp, param);
 
             string askdesk = desk ? "OrderByDescending" : "OrderBy";                                // как сортировать

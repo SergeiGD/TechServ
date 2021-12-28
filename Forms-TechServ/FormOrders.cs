@@ -12,7 +12,17 @@ namespace Forms_TechServ
 {
     public partial class FormOrders : Form
     {
-        //Order order;
+        Order FilterA = new Order();
+        Order FilterB = new Order();
+        ValueWrapper<bool> FilterActive = new ValueWrapper<bool>(false);
+        ValueWrapper<string> FilterSortBy = new ValueWrapper<string>("Id");
+        ValueWrapper<bool> FilterAksOrDesk = new ValueWrapper<bool>(true);
+        Client FilterClient;
+        Product product;
+        Master master;
+        Manager manager;
+        Workshop workshop;
+
         int rowsCount;
         int currentPage = 1;
 
@@ -56,6 +66,7 @@ namespace Forms_TechServ
                 dataOrders.CellMouseDoubleClick += BtnShow_Click;
             }
 
+            clearBtn.Click += clearAllBtn_Click;
 
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
             mainBtn[0].Location = new Point(0, 0);
@@ -70,26 +81,27 @@ namespace Forms_TechServ
 
 
 
-        public FormOrders(string clinet, bool readOnly)
+        public FormOrders(Client client)
         {
             InitializeComponent();
 
-            this.readOnly = readOnly;
+            readOnly = true;
 
-            if (!readOnly)
-            {
-                ManageButton btnAdd = new ManageButton();
-                btnAdd.Text = "Добавить";
-                panelControl.Controls.Add(btnAdd);
-                btnAdd.Click += BtnManage_Click;
-            }
-            
+            tbClient.Text = client.Name;
+            tbClient.Tag = client;
+            btnFindClient.Enabled = false;
+            btnCleanClient.Enabled = false;
+            ordersExtedFilter.btnFindClient.Enabled = false;
+            ordersExtedFilter.btnCleanClient.Enabled = false;
+            FilterClient = client;
 
             ManageButton btnShow = new ManageButton();
             btnShow.Text = "Просмотреть";
             panelControl.Controls.Add(btnShow);
             btnShow.Click += BtnShow_Click;
 
+            clearBtn.Click += clearInClientBtn_Click;
+
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
             mainBtn[0].Location = new Point(0, 0);
             for (int i = 1; i < mainBtn.Count(); i++)
@@ -98,20 +110,20 @@ namespace Forms_TechServ
             }
         }
 
-        public FormOrders(int product, bool readOnly)
+        public FormOrders(Product product)
         {
             InitializeComponent();
 
-            this.readOnly = readOnly;
+            readOnly = true;
 
-            if (!readOnly)
-            {
-                ManageButton btnAdd = new ManageButton();
-                btnAdd.Text = "Добавить";
-                panelControl.Controls.Add(btnAdd);
-                btnAdd.Click += BtnManage_Click;
-            }
-            
+            tbProduct.Text = product.Name;
+            tbProduct.Tag = product;
+            btnFindProduct.Enabled = false;
+            btnCleanProduct.Enabled = false;
+            ordersExtedFilter.btnFindProduct.Enabled = false;
+            ordersExtedFilter.btnCleanProduct.Enabled = false;
+            FilterA.Product = product;
+            this.product = product;
 
             ManageButton btnShow = new ManageButton();
             btnShow.Location = new Point(0, 160);
@@ -119,6 +131,8 @@ namespace Forms_TechServ
             panelControl.Controls.Add(btnShow);
             btnShow.Click += BtnShow_Click;
 
+            clearBtn.Click += clearInProductBtn_Click;
+
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
             mainBtn[0].Location = new Point(0, 0);
             for (int i = 1; i < mainBtn.Count(); i++)
@@ -126,6 +140,93 @@ namespace Forms_TechServ
                 mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
             }
         }
+
+        public FormOrders(Workshop workshop)
+        {
+            InitializeComponent();
+
+            readOnly = true;
+
+            tbWorkshop.Text = workshop.Location;
+            tbWorkshop.Tag = workshop;
+            btnFindWorkshop.Enabled = false;
+            btnCleanWorkshop.Enabled = false;
+            ordersExtedFilter.btnFindWorkshop.Enabled = false;
+            ordersExtedFilter.btnCleanWorkshop.Enabled = false;
+            FilterA.Workshop = workshop;
+            this.workshop = workshop;
+
+            ManageButton btnShow = new ManageButton();
+            btnShow.Location = new Point(0, 160);
+            btnShow.Text = "Просмотреть";
+            panelControl.Controls.Add(btnShow);
+            btnShow.Click += BtnShow_Click;
+
+            clearBtn.Click += clearInWorkshopBtn_Click;
+
+            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
+            mainBtn[0].Location = new Point(0, 0);
+            for (int i = 1; i < mainBtn.Count(); i++)
+            {
+                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
+            }
+        }
+
+        public FormOrders(Master master)
+        {
+            InitializeComponent();
+
+            readOnly = true;
+
+            ordersExtedFilter.btnFindMaster.Enabled = false;
+            ordersExtedFilter.btnCleanMaster.Enabled = false;
+            FilterA.Master = master;
+            this.master = master;
+
+            ManageButton btnShow = new ManageButton();
+            btnShow.Location = new Point(0, 160);
+            btnShow.Text = "Просмотреть";
+            panelControl.Controls.Add(btnShow);
+            btnShow.Click += BtnShow_Click;
+
+            clearBtn.Click += clearInMasterBtn_Click;
+
+            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
+            mainBtn[0].Location = new Point(0, 0);
+            for (int i = 1; i < mainBtn.Count(); i++)
+            {
+                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
+            }
+        }
+
+        public FormOrders(Manager manager)
+        {
+            InitializeComponent();
+
+            readOnly = true;
+
+            ordersExtedFilter.btnFindManager.Enabled = false;
+            ordersExtedFilter.btnCleanManager.Enabled = false;
+            FilterA.Manager = manager;
+            this.manager = manager;
+
+            ManageButton btnShow = new ManageButton();
+            btnShow.Location = new Point(0, 160);
+            btnShow.Text = "Просмотреть";
+            panelControl.Controls.Add(btnShow);
+            btnShow.Click += BtnShow_Click;
+
+            clearBtn.Click += clearInManagerBtn_Click;
+
+            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
+            mainBtn[0].Location = new Point(0, 0);
+            for (int i = 1; i < mainBtn.Count(); i++)
+            {
+                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
+            }
+        }
+
+        
 
         private void BtnPick_Click(object sender, EventArgs e)          // вот тут ретернить выбранного клиента
         {
@@ -177,15 +278,16 @@ namespace Forms_TechServ
             }
             comboBoxStatus.SelectedItem = null;
 
+            FilterA.Status = OrderStatus.Unknown;
+
             datePickerStartFrom.Format = DateTimePickerFormat.Custom;
             datePickerStartFrom.CustomFormat = " ";
             datePickerStartUntil.Format = DateTimePickerFormat.Custom;
             datePickerStartUntil.CustomFormat = " ";
 
-            comboBoxSortBy.Items.Add("id");
-            comboBoxSortBy.Items.Add("Статусу заказа");
-            comboBoxSortBy.Items.Add("Цене");
             comboBoxSortBy.Items.Add("Дате начала");
+            comboBoxSortBy.Items.Add("Требуемой предоплате");
+            comboBoxSortBy.Items.Add("Внесенной предоплате");
             comboBoxSortBy.SelectedIndex = 0;
 
             comboBoxShowRows.Items.Add(5);
@@ -208,57 +310,26 @@ namespace Forms_TechServ
 
             string sortBy = "Id";
 
-            if (comboBoxSortBy.SelectedItem.ToString() == "id")
-            {
-                sortBy = "Id";
-            }
-            else if (comboBoxSortBy.SelectedItem.ToString() == "Статусу заказа")
-            {
-                sortBy = "Status";
-            }
-            else if (comboBoxSortBy.SelectedItem.ToString() == "Цене")
-            {
-                sortBy = "FinalPrice";
-            }
-            else if (comboBoxSortBy.SelectedItem.ToString() == "Дате начала")
+
+            if (FilterSortBy.Value == "Дате начала")
             {
                 sortBy = "DateStart";
             }
-
-            OrderStatus pickedStatus = OrderStatus.Unknown;
-            if (comboBoxStatus.SelectedItem != null)
+            if (FilterSortBy.Value == "Требуемой предоплате")
             {
-                pickedStatus = StatusStringExtensions.GetStatusEnum(comboBoxStatus.SelectedItem.ToString());
+                sortBy = "PrepaymentRequired";
+            }
+            if (FilterSortBy.Value == "Внесенной предоплате")
+            {
+                sortBy = "PrepaymentMade";
             }
 
-            DateTime? dateStartFrom = null;
-            if (datePickerStartFrom.Format != DateTimePickerFormat.Custom)
-                dateStartFrom = datePickerStartFrom.Value;
-
-            DateTime? dateStartUntil = null;
-            if (datePickerStartUntil.Format != DateTimePickerFormat.Custom)
-                dateStartUntil = datePickerStartUntil.Value;
-
             List<Order> orders = OrdersList.GetOrders(
-                new Order()
-                {
-                    Id = id,
-                    Workshop = (Workshop)tbWorkshop.Tag,
-                    Product = (Product)tbProduct.Tag,
-                    FinalPrice = numericPriceFrom.Value,
-                    Status = pickedStatus,
-                    DateStart = dateStartFrom
-
-                },
-                new Order()
-                {
-                    FinalPrice = numericPriceUntil.Value,
-                    DateStart = dateStartUntil
-
-                },
-                (Client)tbClient.Tag,
-                checkBoxActive.Checked,
-                (bool)btnAskOrDesk.Tag,
+                FilterA,
+                FilterB,
+                FilterClient,
+                FilterActive.Value,
+                FilterAksOrDesk.Value,
                 sortBy,
                 (int)comboBoxShowRows.SelectedItem,
                 currentPage,
@@ -327,9 +398,60 @@ namespace Forms_TechServ
                 dataOrders.Location = new Point(dataOrders.Location.X, panelFind.Height);                       // ВОЗВРАЩАЕМ РАЗМЕР ГРИДУ
                 dataOrders.Height = dataOrders.Height + (ordersExtedFilter.Height - filterBaseSize.Height);
                 filterDeployed = false;
+
+                // ОБНОВЛЯЕМ ФИЛЬТРЫ НА ТЕ, КОТОРЫЕ БЫЛИ ВВЕДЕНЫ НА ФОРМЕ РАСШИРЕШШНОЙ СОРТИРОВКИ
+                if (FilterA.Id != 0)
+                {
+                    tbID.Text = FilterA.Id.ToString();
+                }
+
+                tbWorkshop.Tag = FilterA?.Workshop;
+                tbWorkshop.Text = FilterA?.Workshop?.Location;
+
+                tbClient.Tag = FilterClient;
+                tbClient.Text = FilterClient?.Name;
+
+                tbProduct.Tag = FilterA?.Product;
+                tbProduct.Text = FilterA?.Product?.Name;
+
+                if (FilterA.DateStart.HasValue)
+                {
+                    datePickerStartFrom.Format = DateTimePickerFormat.Short;
+                    datePickerStartFrom.Value = FilterA.DateStart.Value;
+                }
+                else
+                {
+                    datePickerStartFrom.Format = DateTimePickerFormat.Custom;
+                    datePickerStartFrom.CustomFormat = " ";
+                }
+                if (FilterB.DateStart.HasValue)
+                {
+                    datePickerStartUntil.Format = DateTimePickerFormat.Short;
+                    datePickerStartUntil.Value = FilterB.DateStart.Value;
+                }
+                else
+                {
+                    datePickerStartUntil.Format = DateTimePickerFormat.Custom;
+                    datePickerStartUntil.CustomFormat = " ";
+                }
+                numericPriceFrom.Value = FilterA.FinalPrice;
+                numericPriceUntil.Value = FilterB.FinalPrice;
+                if (FilterA.Status != OrderStatus.Unknown)
+                {
+                    comboBoxStatus.SelectedIndex = comboBoxStatus.FindString(StatusStringExtensions.GetStatusString(FilterA.Status));
+                }
+                else
+                {
+                    comboBoxStatus.SelectedItem = null;
+                }
+                checkBoxActive.Checked = FilterActive.Value;
+
+                btnAskOrDesk.Tag = FilterAksOrDesk.Value;
+                comboBoxSortBy.SelectedIndex = comboBoxSortBy.FindString(FilterSortBy.Value);
             }
             else
             {
+                ordersExtedFilter.LoadData(FilterA, FilterB, FilterClient, FilterActive, FilterSortBy, FilterAksOrDesk);
 
                 ordersExtedFilter.TopLevel = false;
                 ordersExtedFilter.FormBorderStyle = FormBorderStyle.None;
@@ -376,8 +498,9 @@ namespace Forms_TechServ
             FormClients formClients = new FormClients(true);
             formClients.ShowDialog();
 
-            tbClient.Text = formClients?.client?.Name;
             tbClient.Tag = formClients?.client;
+            tbClient.Text = formClients?.client?.Name;
+            
         }
 
         private void btnFindWorkshop_Click_1(object sender, EventArgs e)
@@ -385,8 +508,9 @@ namespace Forms_TechServ
             FormWorkshops formWorkshops = new FormWorkshops(true);
             formWorkshops.ShowDialog();
 
-            tbWorkshop.Text = formWorkshops?.workshop?.Location;
             tbWorkshop.Tag = formWorkshops?.workshop;
+            tbWorkshop.Text = formWorkshops?.workshop?.Location;
+            
         }
 
         private void btnFindProduct_Click(object sender, EventArgs e)
@@ -394,26 +518,30 @@ namespace Forms_TechServ
             FormProducts formProducts = new FormProducts(true);
             formProducts.ShowDialog();
 
-            tbProduct.Text = formProducts?.product?.Name;
             tbProduct.Tag = formProducts?.product;
+            tbProduct.Text = formProducts?.product?.Name;
+            
         }
 
         private void btnCleanWorkshop_Click(object sender, EventArgs e)
         {
-            tbWorkshop.Clear();
             tbWorkshop.Tag = null;
+            tbWorkshop.Clear();
+            
         }
 
         private void btnCleanClient_Click(object sender, EventArgs e)
         {
-            tbClient.Clear();
             tbClient.Tag = null;
+            tbClient.Clear();
+            
         }
 
         private void btnCleanProduct_Click(object sender, EventArgs e)
         {
-            tbProduct.Clear();
             tbProduct.Tag = null;
+            tbProduct.Clear();
+            
         }
 
         private void btnCleanStatus_Click(object sender, EventArgs e)
@@ -437,6 +565,12 @@ namespace Forms_TechServ
         {
             DateTimePicker dateTimePicker = (DateTimePicker)sender;
             dateTimePicker.Value = new DateTime(dateTimePicker.Value.Year, dateTimePicker.Value.Month, dateTimePicker.Value.Day, 0, 0, 0);
+
+            if (dateTimePicker.Format == DateTimePickerFormat.Short)
+            {
+                // сменим формат, чтоб вызвать событие FormatChanged и поменять данные
+                dateTimePicker.Format = DateTimePickerFormat.Custom;
+            }
             dateTimePicker.Format = DateTimePickerFormat.Short;
         }
 
@@ -445,22 +579,213 @@ namespace Forms_TechServ
             FillGrid();
         }
 
-        private void clearBtn_Click(object sender, EventArgs e)
+        private void clearAllBtn_Click(object sender, EventArgs e)
         {
             tbID.Clear();
-            tbWorkshop.Clear();
             tbWorkshop.Tag = null;
-            tbClient.Clear();
+            tbWorkshop.Clear();
+
             tbClient.Tag = null;
-            tbProduct.Clear();
+            tbClient.Clear();
+
             tbProduct.Tag = null;
+            tbProduct.Clear();
+
             datePickerStartFrom.Format = DateTimePickerFormat.Custom;
             datePickerStartFrom.CustomFormat = " ";
             datePickerStartUntil.Format = DateTimePickerFormat.Custom;
             datePickerStartUntil.CustomFormat = " ";
             numericPriceFrom.Value = 0;
             numericPriceUntil.Value = 0;
-            comboBoxStatus.SelectedItem = numericPriceUntil;
+            //comboBoxStatus.SelectedItem = numericPriceUntil;
+            checkBoxActive.Checked = false;
+
+            FilterA = new Order();
+            FilterB = new Order();
+            FilterClient = null;
+            FilterActive.Value = false;
+
+            //comboBoxStatus.SelectedItem = null;
+            comboBoxStatus.SelectedItem = null;
+            FilterA.Status = OrderStatus.Unknown;
+
+            ordersExtedFilter.LoadData(FilterA, FilterB, FilterClient, FilterActive, FilterSortBy, FilterAksOrDesk);
+
+            FillGrid();
+        }
+
+        private void clearInClientBtn_Click(object sender, EventArgs e)
+        {
+            tbID.Clear();
+            tbWorkshop.Tag = null;
+            tbWorkshop.Clear();
+
+            tbProduct.Tag = null;
+            tbProduct.Clear();
+
+            datePickerStartFrom.Format = DateTimePickerFormat.Custom;
+            datePickerStartFrom.CustomFormat = " ";
+            datePickerStartUntil.Format = DateTimePickerFormat.Custom;
+            datePickerStartUntil.CustomFormat = " ";
+            numericPriceFrom.Value = 0;
+            numericPriceUntil.Value = 0;
+            //comboBoxStatus.SelectedItem = numericPriceUntil;
+            checkBoxActive.Checked = false;
+
+            FilterA = new Order();
+
+            FilterB = new Order();
+
+            FilterActive.Value = false;
+
+            //comboBoxStatus.SelectedItem = null;
+            comboBoxStatus.SelectedItem = null;
+            FilterA.Status = OrderStatus.Unknown;
+
+            ordersExtedFilter.LoadData(FilterA, FilterB, FilterClient, FilterActive, FilterSortBy, FilterAksOrDesk);
+
+            FillGrid();
+        }
+
+        private void clearInProductBtn_Click(object sender, EventArgs e)
+        {
+            tbID.Clear();
+            tbWorkshop.Tag = null;
+            tbWorkshop.Clear();
+
+            tbClient.Tag = null;
+            tbClient.Clear();
+
+            datePickerStartFrom.Format = DateTimePickerFormat.Custom;
+            datePickerStartFrom.CustomFormat = " ";
+            datePickerStartUntil.Format = DateTimePickerFormat.Custom;
+            datePickerStartUntil.CustomFormat = " ";
+            numericPriceFrom.Value = 0;
+            numericPriceUntil.Value = 0;
+            //comboBoxStatus.SelectedItem = numericPriceUntil;
+            checkBoxActive.Checked = false;
+
+            FilterA = new Order();
+            FilterA.Product = product;
+
+            FilterB = new Order();
+            FilterClient = null;
+            FilterActive.Value = false;
+
+            //comboBoxStatus.SelectedItem = null;
+            comboBoxStatus.SelectedItem = null;
+            FilterA.Status = OrderStatus.Unknown;
+
+            ordersExtedFilter.LoadData(FilterA, FilterB, FilterClient, FilterActive, FilterSortBy, FilterAksOrDesk);
+
+            FillGrid();
+        }
+
+        private void clearInWorkshopBtn_Click(object sender, EventArgs e)
+        {
+            tbID.Clear();
+
+            tbProduct.Tag = null;
+            tbProduct.Clear();
+
+            tbClient.Tag = null;
+            tbClient.Clear();
+
+            datePickerStartFrom.Format = DateTimePickerFormat.Custom;
+            datePickerStartFrom.CustomFormat = " ";
+            datePickerStartUntil.Format = DateTimePickerFormat.Custom;
+            datePickerStartUntil.CustomFormat = " ";
+            numericPriceFrom.Value = 0;
+            numericPriceUntil.Value = 0;
+            //comboBoxStatus.SelectedItem = numericPriceUntil;
+            checkBoxActive.Checked = false;
+
+            FilterA = new Order();
+            FilterA.Workshop = workshop;
+
+            FilterB = new Order();
+            FilterClient = null;
+            FilterActive.Value = false;
+
+            //comboBoxStatus.SelectedItem = null;
+            comboBoxStatus.SelectedItem = null;
+            FilterA.Status = OrderStatus.Unknown;
+
+            ordersExtedFilter.LoadData(FilterA, FilterB, FilterClient, FilterActive, FilterSortBy, FilterAksOrDesk);
+
+            FillGrid();
+        }
+
+        private void clearInMasterBtn_Click(object sender, EventArgs e)
+        {
+            tbID.Clear();
+            tbWorkshop.Tag = null;
+            tbWorkshop.Clear();
+
+            tbProduct.Tag = null;
+            tbProduct.Clear();
+
+            tbClient.Tag = null;
+            tbClient.Clear();
+
+            datePickerStartFrom.Format = DateTimePickerFormat.Custom;
+            datePickerStartFrom.CustomFormat = " ";
+            datePickerStartUntil.Format = DateTimePickerFormat.Custom;
+            datePickerStartUntil.CustomFormat = " ";
+            numericPriceFrom.Value = 0;
+            numericPriceUntil.Value = 0;
+            //comboBoxStatus.SelectedItem = numericPriceUntil;
+            checkBoxActive.Checked = false;
+
+            FilterA = new Order();
+            FilterA.Master = master;
+
+            FilterB = new Order();
+            FilterClient = null;
+            FilterActive.Value = false;
+
+            //comboBoxStatus.SelectedItem = null;
+            comboBoxStatus.SelectedItem = null;
+            FilterA.Status = OrderStatus.Unknown;
+
+            ordersExtedFilter.LoadData(FilterA, FilterB, FilterClient, FilterActive, FilterSortBy, FilterAksOrDesk);
+
+            FillGrid();
+        }
+
+        private void clearInManagerBtn_Click(object sender, EventArgs e)
+        {
+            tbID.Clear();
+            tbWorkshop.Tag = null;
+            tbWorkshop.Clear();
+
+            tbProduct.Tag = null;
+            tbProduct.Clear();
+
+            tbClient.Tag = null;
+            tbClient.Clear();
+
+            datePickerStartFrom.Format = DateTimePickerFormat.Custom;
+            datePickerStartFrom.CustomFormat = " ";
+            datePickerStartUntil.Format = DateTimePickerFormat.Custom;
+            datePickerStartUntil.CustomFormat = " ";
+            numericPriceFrom.Value = 0;
+            numericPriceUntil.Value = 0;
+            //comboBoxStatus.SelectedItem = numericPriceUntil;
+            checkBoxActive.Checked = false;
+
+            FilterA = new Order();
+            FilterA.Manager = manager;
+
+            FilterB = new Order();
+            FilterClient = null;
+            FilterActive.Value = false;
+
+            //comboBoxStatus.SelectedItem = null;
+            comboBoxStatus.SelectedItem = null;
+            FilterA.Status = OrderStatus.Unknown;
+
+            ordersExtedFilter.LoadData(FilterA, FilterB, FilterClient, FilterActive, FilterSortBy, FilterAksOrDesk);
 
             FillGrid();
         }
@@ -475,6 +800,8 @@ namespace Forms_TechServ
             {
                 btnAskOrDesk.Tag = true;
             }
+
+            FilterAksOrDesk.Value = (bool)btnAskOrDesk.Tag;
         }
 
         private void btnPriceInfo_MouseHover(object sender, EventArgs e)
@@ -500,6 +827,7 @@ namespace Forms_TechServ
             {
                 comboBoxStatus.SelectedItem = null;
             }
+            FilterActive.Value = checkBoxActive.Checked;
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -523,6 +851,72 @@ namespace Forms_TechServ
             currentPage = (int)numericCurrentPage.Value;
             FillGrid();
         }
+
+        private void comboBoxStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            OrderStatus pickedStatus = OrderStatus.Unknown;
+            if (comboBoxStatus.SelectedItem != null)
+            {
+                pickedStatus = StatusStringExtensions.GetStatusEnum(comboBoxStatus.SelectedItem.ToString());
+            }
+            FilterA.Status = pickedStatus;
+        }
+
+        private void comboBoxSortBy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FilterSortBy.Value = comboBoxSortBy.SelectedItem.ToString();
+        }
+
+        private void tbID_TextChanged(object sender, EventArgs e)
+        {
+            int id;
+            int.TryParse(tbID.Text, out id);
+
+            FilterA.Id = id;
+        }
+
+        private void tbWorkshop_TextChanged(object sender, EventArgs e)
+        {
+            FilterA.Workshop = (Workshop)tbWorkshop.Tag;
+        }
+
+        private void tbClient_TextChanged(object sender, EventArgs e)
+        {
+            FilterClient = (Client)tbClient.Tag;
+        }
+
+        private void tbProduct_TextChanged(object sender, EventArgs e)
+        {
+            FilterA.Product = (Product)tbProduct.Tag;
+        }
+
+        private void datePickerStartFrom_FormatChanged(object sender, EventArgs e)
+        {
+            DateTime? dateStartFrom = null;
+            if (datePickerStartFrom.Format != DateTimePickerFormat.Custom)
+                dateStartFrom = datePickerStartFrom.Value;
+            FilterA.DateStart = dateStartFrom;
+        }
+
+        private void datePickerStartUntil_FormatChanged(object sender, EventArgs e)
+        {
+            DateTime? dateStartUntil = null;
+            if (datePickerStartUntil.Format != DateTimePickerFormat.Custom)
+                dateStartUntil = datePickerStartUntil.Value;
+            FilterB.DateStart = dateStartUntil;
+        }
+
+        private void numericPriceFrom_ValueChanged(object sender, EventArgs e)
+        {
+            FilterA.FinalPrice = numericPriceFrom.Value;
+        }
+
+        private void numericPriceUntil_ValueChanged(object sender, EventArgs e)
+        {
+            FilterB.FinalPrice = numericPriceUntil.Value;
+        }
+
+        
     }
     
 }

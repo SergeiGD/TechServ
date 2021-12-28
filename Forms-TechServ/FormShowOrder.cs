@@ -64,7 +64,7 @@ namespace Forms_TechServ
             if (readOnly || !UserSession.Can("edit_order"))
             {
                 panelEdit.Parent.Controls.Remove(panelEdit);
-                this.Width = this.Width - panelEdit.Width;
+                //this.Width = this.Width - panelEdit.Width;
             }
 
             FillForm();

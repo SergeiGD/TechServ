@@ -146,7 +146,7 @@ namespace Forms_TechServ
             {
                 this.Size = pickedSize;
 
-                FormOrders formOrders = new FormOrders("ad", true);
+                FormOrders formOrders = new FormOrders(master);
 
                 formOrders.TopLevel = false;
                 formOrders.FormBorderStyle = FormBorderStyle.None;

@@ -75,11 +75,11 @@ namespace Forms_TechServ
             this.btnPrev = new System.Windows.Forms.Button();
             this.dataOrders = new System.Windows.Forms.DataGridView();
             this.panelControl = new System.Windows.Forms.Panel();
-            this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTipPriceInfo = new System.Windows.Forms.ToolTip(this.components);
             this.extendFilterBtn = new Forms_TechServ.ManageButton();
             this.clearBtn = new Forms_TechServ.ManageButton();
             this.searchBtn = new Forms_TechServ.ManageButton();
+            this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipPriceInfo = new System.Windows.Forms.ToolTip(this.components);
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             this.panelFind.SuspendLayout();
@@ -254,6 +254,7 @@ namespace Forms_TechServ
             this.comboBoxStatus.Name = "comboBoxStatus";
             this.comboBoxStatus.Size = new System.Drawing.Size(175, 21);
             this.comboBoxStatus.TabIndex = 193;
+            this.comboBoxStatus.SelectedIndexChanged += new System.EventHandler(this.comboBoxStatus_SelectedIndexChanged);
             // 
             // tbAddress
             // 
@@ -263,6 +264,7 @@ namespace Forms_TechServ
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(132, 20);
             this.tbAddress.TabIndex = 141;
+            this.tbAddress.TextChanged += new System.EventHandler(this.tbAddress_TextChanged);
             // 
             // btnAskOrDesk
             // 
@@ -314,6 +316,7 @@ namespace Forms_TechServ
             this.comboBoxSortBy.Name = "comboBoxSortBy";
             this.comboBoxSortBy.Size = new System.Drawing.Size(99, 21);
             this.comboBoxSortBy.TabIndex = 190;
+            this.comboBoxSortBy.SelectedIndexChanged += new System.EventHandler(this.comboBoxSortBy_SelectedIndexChanged);
             // 
             // label11
             // 
@@ -396,6 +399,7 @@ namespace Forms_TechServ
             this.datePickerStartFrom.Name = "datePickerStartFrom";
             this.datePickerStartFrom.Size = new System.Drawing.Size(128, 20);
             this.datePickerStartFrom.TabIndex = 179;
+            this.datePickerStartFrom.FormatChanged += new System.EventHandler(this.datePickerStartFrom_FormatChanged);
             // 
             // label6
             // 
@@ -416,6 +420,7 @@ namespace Forms_TechServ
             this.datePickerStartUntil.Name = "datePickerStartUntil";
             this.datePickerStartUntil.Size = new System.Drawing.Size(128, 20);
             this.datePickerStartUntil.TabIndex = 185;
+            this.datePickerStartUntil.FormatChanged += new System.EventHandler(this.datePickerStartUntil_FormatChanged);
             // 
             // numericPriceUntil
             // 
@@ -434,6 +439,7 @@ namespace Forms_TechServ
             this.numericPriceUntil.Name = "numericPriceUntil";
             this.numericPriceUntil.Size = new System.Drawing.Size(128, 20);
             this.numericPriceUntil.TabIndex = 183;
+            this.numericPriceUntil.ValueChanged += new System.EventHandler(this.numericPriceUntil_ValueChanged);
             // 
             // numericPriceFrom
             // 
@@ -452,6 +458,7 @@ namespace Forms_TechServ
             this.numericPriceFrom.Name = "numericPriceFrom";
             this.numericPriceFrom.Size = new System.Drawing.Size(128, 20);
             this.numericPriceFrom.TabIndex = 182;
+            this.numericPriceFrom.ValueChanged += new System.EventHandler(this.numericPriceFrom_ValueChanged);
             // 
             // label5
             // 
@@ -483,6 +490,7 @@ namespace Forms_TechServ
             this.tbProduct.ReadOnly = true;
             this.tbProduct.Size = new System.Drawing.Size(113, 20);
             this.tbProduct.TabIndex = 177;
+            this.tbProduct.TextChanged += new System.EventHandler(this.tbProduct_TextChanged);
             // 
             // btnCleanProduct
             // 
@@ -539,6 +547,7 @@ namespace Forms_TechServ
             this.tbWorkshop.ReadOnly = true;
             this.tbWorkshop.Size = new System.Drawing.Size(113, 20);
             this.tbWorkshop.TabIndex = 173;
+            this.tbWorkshop.TextChanged += new System.EventHandler(this.tbWorkshop_TextChanged);
             // 
             // tbClient
             // 
@@ -550,6 +559,7 @@ namespace Forms_TechServ
             this.tbClient.ReadOnly = true;
             this.tbClient.Size = new System.Drawing.Size(113, 20);
             this.tbClient.TabIndex = 172;
+            this.tbClient.TextChanged += new System.EventHandler(this.tbClient_TextChanged);
             // 
             // btnCleanWorkshop
             // 
@@ -649,6 +659,7 @@ namespace Forms_TechServ
             this.tbID.Name = "tbID";
             this.tbID.Size = new System.Drawing.Size(71, 20);
             this.tbID.TabIndex = 135;
+            this.tbID.TextChanged += new System.EventHandler(this.tbID_TextChanged);
             // 
             // label7
             // 

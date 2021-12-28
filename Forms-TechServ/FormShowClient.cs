@@ -53,7 +53,7 @@ namespace Forms_TechServ
             {
                 
 
-                FormOrders formOrders = new FormOrders("asd", true);
+                FormOrders formOrders = new FormOrders(client);
                 this.Size = pickedSize;
                 formOrders.TopLevel = false;
                 formOrders.FormBorderStyle = FormBorderStyle.None;

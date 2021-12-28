@@ -45,29 +45,32 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                /*decimal sale = 0;
-                foreach(Order order in db.Orders.Include(o => o.Product).Where(o => o.Product.ClientId == this.Id && o.Status != OrderStatus.Canceled))
-                {
-                    sale++;
-                }*/
-                int sale = db.Orders.Include(o => o.Product).Where(o => o.Product.ClientId == this.Id/* && ((byte)o.Status) == 1*/).Count();
-                if(sale > 10)
+                int ordersCount = this.CountClientOrders();
+                //int sale = db.Orders.Include(o => o.Product).Where(o => o.Product.ClientId == this.Id && o.Status != OrderStatus.Canceled).Count();
+                if(ordersCount > 10)
                 {
                     return 10;
                 }
                 else
                 {
-                    return sale;
+                    return ordersCount;
                 }
-                //return db.Orders.Include(o => o.Product).Where(o => o.Product.ClientId == this.Id/* && ((byte)o.Status) == 1*/).Count();
 
-                //return sale;
             }
 
         }
-
         
+        public int CountClientOrders()
+        {
+            using (TechContext db = new TechContext())
+            {
+                return db.Orders.Include(o => o.Product).Where(o => o.Product.ClientId == this.Id && o.Status == OrderStatus.Finished).Count();
+            }
+                
+        }
     }
+
+    
 
     public static class ClientsList
     {
@@ -79,7 +82,7 @@ namespace Forms_TechServ
             }
         }
 
-        public static List<Client> GetClients(Client FilterA, Client FilterB/*, int orderFrom, int orderUntil*/, bool desk, string sortBy, int count, int page, out int rowsCount)
+        public static List<Client> GetClients(Client FilterA, int ordersFrom, int ordersUntil, bool desk, string sortBy, int count, int page, out int rowsCount)
         {
             using (TechContext db = new TechContext())
             {
@@ -100,11 +103,22 @@ namespace Forms_TechServ
                     clients = clients.Where(w => w.PhoneNum.Contains(FilterA.PhoneNum));                
                 }
 
-                //if(orderFrom > 0 && orderUntil == 0)
-                //{
-                    //clients = clients.Where(c => c.order);
-                //}
+                if(ordersFrom > 0 && ordersUntil == 0)
+                {
+                    clients = clients.Where(c => c.CountClientOrders() >= ordersFrom);
+                }
 
+                if (ordersFrom == 0 && ordersUntil > 0)
+                {
+                    clients = clients.Where(c => c.CountClientOrders() <= ordersUntil);
+                }
+
+                if (ordersFrom > 0 && ordersUntil > 0)
+                {
+                    clients = clients.Where(c => c.CountClientOrders() >= ordersFrom && c.CountClientOrders() <= ordersUntil);
+                }
+
+                
                 clients = clients.SortBy(sortBy, desk);
 
                 rowsCount = clients.Count();

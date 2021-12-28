@@ -153,12 +153,14 @@ namespace Forms_TechServ
             {
                 IEnumerable<OrderAtHome> orders = db.OrdersAtHome.Include(o => o.Workshop).Include(o => o.Product).Include(o => o.Product.Client).Include(o => o.Master).Include(o => o.Manager);
 
+
+
                 if (FilterA.Id != 0)
                 {
                     orders = orders.Where(o => o.Id == FilterA.Id);
                 }
 
-                if(FilterA.Address != null && FilterA.Address != string.Empty)
+                if (FilterA.Address != null && FilterA.Address != string.Empty)
                 {
                     orders = orders.Where(o => o.Address.IndexOf(FilterA.Address, StringComparison.OrdinalIgnoreCase) > -1);
                 }
@@ -176,6 +178,16 @@ namespace Forms_TechServ
                 if (FilterA.Product != null)
                 {
                     orders = orders.Where(o => o.ProductId == FilterA.Product.Id);
+                }
+
+                if (FilterA.Master != null)
+                {
+                    orders = orders.Where(o => o.MasterId == FilterA.Master.Id);
+                }
+
+                if (FilterA.Manager != null)
+                {
+                    orders = orders.Where(o => o.ManagerId == FilterA.Manager.Id);
                 }
 
                 if (FilterA.Status != OrderStatus.Unknown)
@@ -203,6 +215,36 @@ namespace Forms_TechServ
                     orders = orders.Where(o => o.FinalPrice >= FilterA.FinalPrice && o.FinalPrice <= FilterB.FinalPrice);
                 }
 
+                if (FilterA.PrepaymentRequired > 0 && FilterB.PrepaymentRequired == 0)
+                {
+                    orders = orders.Where(o => o.PrepaymentRequired >= FilterA.PrepaymentRequired);
+                }
+
+                if (FilterA.PrepaymentRequired == 0 && FilterB.PrepaymentRequired > 0)
+                {
+                    orders = orders.Where(o => o.PrepaymentRequired <= FilterB.PrepaymentRequired);
+                }
+
+                if (FilterA.PrepaymentRequired > 0 && FilterB.PrepaymentRequired > 0)
+                {
+                    orders = orders.Where(o => o.PrepaymentRequired >= FilterA.PrepaymentRequired && o.PrepaymentRequired <= FilterB.PrepaymentRequired);
+                }
+
+                if (FilterA.PrepaymentMade > 0 && FilterB.PrepaymentMade == 0)
+                {
+                    orders = orders.Where(o => o.PrepaymentMade >= FilterA.PrepaymentMade);
+                }
+
+                if (FilterA.PrepaymentMade == 0 && FilterB.PrepaymentMade > 0)
+                {
+                    orders = orders.Where(o => o.PrepaymentMade <= FilterB.PrepaymentMade);
+                }
+
+                if (FilterA.PrepaymentMade > 0 && FilterB.PrepaymentMade > 0)
+                {
+                    orders = orders.Where(o => o.PrepaymentMade >= FilterA.PrepaymentMade && o.PrepaymentMade <= FilterB.PrepaymentMade);
+                }
+
                 if (FilterA.DateStart.HasValue && !FilterB.DateStart.HasValue)
                 {
                     orders = orders.Where(o => o.DateStart >= FilterA.DateStart);
@@ -218,7 +260,95 @@ namespace Forms_TechServ
                     orders = orders.Where(o => o.DateStart >= FilterA.DateStart && o.DateStart <= FilterB.DateStart);
                 }
 
+                if (FilterA.DateDiagnostic.HasValue && !FilterB.DateDiagnostic.HasValue)
+                {
+                    orders = orders.Where(o => o.DateDiagnostic >= FilterA.DateDiagnostic);
+                }
 
+                if (!FilterA.DateDiagnostic.HasValue && FilterB.DateDiagnostic.HasValue)
+                {
+                    orders = orders.Where(o => o.DateDiagnostic <= FilterB.DateDiagnostic);
+                }
+
+                if (FilterA.DateDiagnostic.HasValue && FilterB.DateDiagnostic.HasValue)
+                {
+                    orders = orders.Where(o => o.DateDiagnostic >= FilterA.DateDiagnostic && o.DateDiagnostic <= FilterB.DateDiagnostic);
+                }
+
+                if (FilterA.DateClientAnswer.HasValue && !FilterB.DateClientAnswer.HasValue)
+                {
+                    orders = orders.Where(o => o.DateClientAnswer >= FilterA.DateClientAnswer);
+                }
+
+                if (!FilterA.DateClientAnswer.HasValue && FilterB.DateClientAnswer.HasValue)
+                {
+                    orders = orders.Where(o => o.DateClientAnswer <= FilterB.DateClientAnswer);
+                }
+
+                if (FilterA.DateClientAnswer.HasValue && FilterB.DateClientAnswer.HasValue)
+                {
+                    orders = orders.Where(o => o.DateClientAnswer >= FilterA.DateClientAnswer && o.DateClientAnswer <= FilterB.DateClientAnswer);
+                }
+
+                if (FilterA.DateCancel.HasValue && !FilterB.DateCancel.HasValue)
+                {
+                    orders = orders.Where(o => o.DateCancel >= FilterA.DateCancel);
+                }
+
+                if (!FilterA.DateCancel.HasValue && FilterB.DateCancel.HasValue)
+                {
+                    orders = orders.Where(o => o.DateCancel <= FilterB.DateCancel);
+                }
+
+                if (FilterA.DateCancel.HasValue && FilterB.DateCancel.HasValue)
+                {
+                    orders = orders.Where(o => o.DateCancel >= FilterA.DateCancel && o.DateCancel <= FilterB.DateCancel);
+                }
+
+                if (FilterA.DateRepaired.HasValue && !FilterB.DateRepaired.HasValue)
+                {
+                    orders = orders.Where(o => o.DateRepaired >= FilterA.DateRepaired);
+                }
+
+                if (!FilterA.DateRepaired.HasValue && FilterB.DateRepaired.HasValue)
+                {
+                    orders = orders.Where(o => o.DateRepaired <= FilterB.DateRepaired);
+                }
+
+                if (FilterA.DateRepaired.HasValue && FilterB.DateRepaired.HasValue)
+                {
+                    orders = orders.Where(o => o.DateRepaired >= FilterA.DateRepaired && o.DateRepaired <= FilterB.DateRepaired);
+                }
+
+                if (FilterA.DatePaid.HasValue && !FilterB.DatePaid.HasValue)
+                {
+                    orders = orders.Where(o => o.DatePaid >= FilterA.DatePaid);
+                }
+
+                if (!FilterA.DatePaid.HasValue && FilterB.DatePaid.HasValue)
+                {
+                    orders = orders.Where(o => o.DatePaid <= FilterB.DatePaid);
+                }
+
+                if (FilterA.DatePaid.HasValue && FilterB.DatePaid.HasValue)
+                {
+                    orders = orders.Where(o => o.DatePaid >= FilterA.DatePaid && o.DatePaid <= FilterB.DatePaid);
+                }
+
+                if (FilterA.DateFinish.HasValue && !FilterB.DateFinish.HasValue)
+                {
+                    orders = orders.Where(o => o.DateFinish >= FilterA.DateFinish);
+                }
+
+                if (!FilterA.DateFinish.HasValue && FilterB.DateFinish.HasValue)
+                {
+                    orders = orders.Where(o => o.DateFinish <= FilterB.DateFinish);
+                }
+
+                if (FilterA.DateFinish.HasValue && FilterB.DateFinish.HasValue)
+                {
+                    orders = orders.Where(o => o.DateFinish >= FilterA.DateFinish && o.DateFinish <= FilterB.DateFinish);
+                }
 
                 orders = orders.SortBy(sortBy, desk);
 
