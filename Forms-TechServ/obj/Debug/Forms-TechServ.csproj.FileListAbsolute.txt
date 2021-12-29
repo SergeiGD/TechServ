@@ -187,7 +187,6 @@ D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormProducts.resou
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormServices.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowWorkshop.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormSpareParts.resources
-D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormStatWorkshops.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormVisits.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormWorkshops.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.Properties.Resources.resources
@@ -203,3 +202,6 @@ D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageBatchSpa
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormOrderBatches.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageOrderSparePart.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormOrderServices.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormStatWorkshopProfit.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormStatWorkshopsLoad.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormStatServices.resources

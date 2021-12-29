@@ -89,6 +89,38 @@ namespace Forms_TechServ
             }
         }
 
+        public double CalcLoad(DateTime from, DateTime until)
+        {
+            using(TechContext db = new TechContext())
+            {
+                int masters = db.Masters.Where(m => m.WorkshopId == this.Id && m.DelTime == null).Count();
+                int orders = db.Orders.Where(o => o.WorkshopId == this.Id && o.Status != OrderStatus.Canceled && o.DateStart >= from && o.DateStart <= until).Count();
+                if(masters == 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return orders / masters;
+                }
+
+            }
+        }
+
+        public decimal CalcProfit(DateTime from, DateTime until)
+        {
+            using (TechContext db = new TechContext())
+            {
+                //int masters = db.Masters.Where(m => m.WorkshopId == this.Id && m.DelTime == null).Count();
+                List<Order> orders = db.Orders.Where(o => o.WorkshopId == this.Id && o.Status == OrderStatus.Finished && o.DateStart >= from && o.DateStart <= until).ToList();
+                decimal profit = 0;
+                foreach(Order order in orders)
+                {
+                    profit += order.FinalPrice;
+                }
+                return profit;
+            }
+        }
         /*public Dictionary<SparePart, int> GetInStockSpareParts()
         {
             using (TechContext db = new TechContext())
@@ -155,6 +187,17 @@ namespace Forms_TechServ
                 workshops = workshops.Skip((page - 1) * count).Take(count);
 
                 return workshops.ToList();
+
+            }
+        }
+
+        public static List<Workshop> GetWorkshops()
+        {
+            using (TechContext db = new TechContext())
+            {
+
+
+                return db.Workshops.Where(m => m.DelTime == null).OrderBy(w => w.Id).ToList();
 
             }
         }

@@ -83,6 +83,15 @@ namespace Forms_TechServ
                 return true;
             }
         }
+
+        public int CountInOrders(DateTime from, DateTime until)
+        {
+            //int count = 0;
+            using (TechContext db = new TechContext())
+            {
+                return db.OrdersServices.Include(s => s.Order).Where(s => s.ServiceId == this.Id && s.Order.Status != OrderStatus.Canceled).Count();
+            }
+        }
     }
 
     public static class ServicesList
@@ -145,6 +154,16 @@ namespace Forms_TechServ
                 services = services.Skip((page - 1) * count).Take(count);
 
                 return services.ToList();
+            }
+        }
+
+        public static List<Service> GetService()
+        {
+            using (TechContext db = new TechContext())
+            {
+                return db.Services.Where(s => s.DelTime == null).ToList();
+
+                
             }
         }
     }

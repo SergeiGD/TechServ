@@ -392,11 +392,23 @@
     <Compile Include="FormSpareParts.Designer.cs">
       <DependentUpon>FormSpareParts.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormStatWorkshops.cs">
+    <Compile Include="FormStatServices.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormStatWorkshops.Designer.cs">
-      <DependentUpon>FormStatWorkshops.cs</DependentUpon>
+    <Compile Include="FormStatServices.Designer.cs">
+      <DependentUpon>FormStatServices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStatWorkshopProfit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStatWorkshopProfit.Designer.cs">
+      <DependentUpon>FormStatWorkshopProfit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStatWorkshopsLoad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStatWorkshopsLoad.Designer.cs">
+      <DependentUpon>FormStatWorkshopsLoad.cs</DependentUpon>
     </Compile>
     <Compile Include="FormVisits.cs">
       <SubType>Form</SubType>
@@ -586,8 +598,14 @@
     <EmbeddedResource Include="FormSpareParts.resx">
       <DependentUpon>FormSpareParts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormStatWorkshops.resx">
-      <DependentUpon>FormStatWorkshops.cs</DependentUpon>
+    <EmbeddedResource Include="FormStatServices.resx">
+      <DependentUpon>FormStatServices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStatWorkshopProfit.resx">
+      <DependentUpon>FormStatWorkshopProfit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStatWorkshopsLoad.resx">
+      <DependentUpon>FormStatWorkshopsLoad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormVisits.resx">
       <DependentUpon>FormVisits.cs</DependentUpon>

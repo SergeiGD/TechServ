@@ -137,7 +137,7 @@ namespace Forms_TechServ
 
             NavButton statisticBtn = new NavButton();
             statisticBtn.Text = "СТАТИСТИКА";
-            //panelMenu.Controls.Add(statisticBtn);                         // СТАТИСТИКА ПОКА НЕ РЕАЛИЗОВАНА, ПОТОМ ВЕРНУТЬ
+            panelMenu.Controls.Add(statisticBtn);                         // СТАТИСТИКА ПОКА НЕ РЕАЛИЗОВАНА, ПОТОМ ВЕРНУТЬ
             statisticBtn.Click += StatisticBtn_Click;
 
             
@@ -394,23 +394,23 @@ namespace Forms_TechServ
             ColorBtn((NavButton)sender);
 
 
-            NavButton workshopsStatBtn = new NavButton((NavButton)sender);
-            workshopsStatBtn.Text = "мастерские";
-            panelMenu.Controls.Add(workshopsStatBtn);
-            workshopsStatBtn.Click += WorkshopsStatBtn_Click;
-            childernTotalHeight += workshopsStatBtn.Size.Height;
+            NavButton workshopsLoadStatBtn = new NavButton((NavButton)sender);
+            workshopsLoadStatBtn.Text = "Нагрузка";
+            panelMenu.Controls.Add(workshopsLoadStatBtn);
+            workshopsLoadStatBtn.Click += WorkshopsLoadStatBtn_Click;
+            childernTotalHeight += workshopsLoadStatBtn.Size.Height;
+
+            NavButton workshopsProfitStatBtn = new NavButton((NavButton)sender);
+            workshopsProfitStatBtn.Text = "Выручка";
+            panelMenu.Controls.Add(workshopsProfitStatBtn);
+            workshopsProfitStatBtn.Click += WorkshopsProfitStatBtn_Click;
+            childernTotalHeight += workshopsProfitStatBtn.Height;
 
             NavButton servicesStatBtn = new NavButton((NavButton)sender);
-            servicesStatBtn.Text = "услуги";
+            servicesStatBtn.Text = "Услуги";
             panelMenu.Controls.Add(servicesStatBtn);
             servicesStatBtn.Click += ServicesStatBtn_Click;
             childernTotalHeight += servicesStatBtn.Height;
-
-            NavButton categoriesStatBtn = new NavButton((NavButton)sender);
-            categoriesStatBtn.Text = "категории";
-            panelMenu.Controls.Add(categoriesStatBtn);
-            categoriesStatBtn.Click += CategoriesStatBtn_Click;
-            childernTotalHeight += categoriesStatBtn.Height;
 
 
             NavButton[] childBtns = panelMenu.Controls.OfType<NavButton>().Where(b => b.ParentButton != null && b.ParentButton.Equals((NavButton)sender)).ToArray();
@@ -422,28 +422,26 @@ namespace Forms_TechServ
 
 
             MoveBtns((Button)sender);
-            WorkshopsStatBtn_Click(workshopsStatBtn, new EventArgs());
+            WorkshopsLoadStatBtn_Click(workshopsLoadStatBtn, new EventArgs());
 
         }
 
-        private void WorkshopsStatBtn_Click(object sender, EventArgs e)
+        private void WorkshopsLoadStatBtn_Click(object sender, EventArgs e)
         {
-            FormStatWorkshops statWorkshops = new FormStatWorkshops();
-            OpenChildForm(statWorkshops, (NavButton)sender);
+            FormStatWorkshopsLoad statWorkshopsLoad = new FormStatWorkshopsLoad();
+            OpenChildForm(statWorkshopsLoad, (NavButton)sender);
+        }
+
+        private void WorkshopsProfitStatBtn_Click(object sender, EventArgs e)
+        {
+            FormStatWorkshopProfit statWorkshopProfit = new FormStatWorkshopProfit();
+            OpenChildForm(statWorkshopProfit, (NavButton)sender);
         }
 
         private void ServicesStatBtn_Click(object sender, EventArgs e)
         {
-            Form fm = new Form();
-            fm.BackColor = Color.Yellow;
-            OpenChildForm(fm, (NavButton)sender);
-        }
-
-        private void CategoriesStatBtn_Click(object sender, EventArgs e)
-        {
-            Form fm = new Form();
-            fm.BackColor = Color.Red;
-            OpenChildForm(fm, (NavButton)sender);
+            FormStatServices formStatServices = new FormStatServices();
+            OpenChildForm(formStatServices, (NavButton)sender);
         }
 
 
