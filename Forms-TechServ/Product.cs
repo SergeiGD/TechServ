@@ -52,7 +52,13 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                // ПрОВЕРКУ ВЕСИТ ЛИ ЗАКАЗ АКТИВНЫЙ!!
+                Order order = db.Orders.Where(o => o.ProductId == this.Id && o.Status != OrderStatus.Canceled && o.Status != OrderStatus.Finished).FirstOrDefault();
+
+                if (order != null)
+                {
+                    return false;
+                }
+
                 this.DelTime = DateTime.Now;
                 db.Entry(this).State = EntityState.Modified;
                 db.SaveChanges();

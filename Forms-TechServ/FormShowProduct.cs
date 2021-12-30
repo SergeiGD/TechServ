@@ -115,11 +115,17 @@ namespace Forms_TechServ
             DialogResult answer = MessageBox.Show("Вы действительно хотите удалить эту технику?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (answer == DialogResult.Yes)
             {
-                product.DelProduct();
+                if (product.DelProduct())
+                {
+                    MessageBox.Show("Техника успешно удалена", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                MessageBox.Show("Техника успешно удалена", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                this.Close();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("В данный момент техника ремонтируется, ее пока удалить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
             }
             else
             {

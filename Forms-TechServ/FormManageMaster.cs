@@ -249,9 +249,9 @@ namespace Forms_TechServ
                 errorProvider.SetError(tbName, "Введите имя");
                 return false;
             }
-            if (!Regex.IsMatch(tbPhoneNum.Text, @"\d+"))
+            if (tbPhoneNum.Text.Length < 14)
             {
-                errorProvider.SetError(tbPhoneNum, "Введите номер числом");
+                errorProvider.SetError(tbPhoneNum, "Введите номер полностью");
                 return false;
             }
 

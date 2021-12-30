@@ -32,6 +32,7 @@ namespace Forms_TechServ
             this.components = new System.ComponentModel.Container();
             this.managerTabs = new System.Windows.Forms.TabControl();
             this.generalPage = new System.Windows.Forms.TabPage();
+            this.checkBoxRemotely = new System.Windows.Forms.CheckBox();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.btnAction = new System.Windows.Forms.Button();
@@ -42,7 +43,6 @@ namespace Forms_TechServ
             this.tbPosition = new System.Windows.Forms.TextBox();
             this.numericSalary = new System.Windows.Forms.NumericUpDown();
             this.tbName = new System.Windows.Forms.TextBox();
-            this.tbPhoneNum = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -52,7 +52,7 @@ namespace Forms_TechServ
             this.label6 = new System.Windows.Forms.Label();
             this.timetablePage = new System.Windows.Forms.TabPage();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.checkBoxRemotely = new System.Windows.Forms.CheckBox();
+            this.tbPhoneNum = new System.Windows.Forms.MaskedTextBox();
             this.managerTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSalary)).BeginInit();
@@ -74,6 +74,7 @@ namespace Forms_TechServ
             // generalPage
             // 
             this.generalPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.generalPage.Controls.Add(this.tbPhoneNum);
             this.generalPage.Controls.Add(this.checkBoxRemotely);
             this.generalPage.Controls.Add(this.tbPassword);
             this.generalPage.Controls.Add(this.label9);
@@ -85,7 +86,6 @@ namespace Forms_TechServ
             this.generalPage.Controls.Add(this.tbPosition);
             this.generalPage.Controls.Add(this.numericSalary);
             this.generalPage.Controls.Add(this.tbName);
-            this.generalPage.Controls.Add(this.tbPhoneNum);
             this.generalPage.Controls.Add(this.label4);
             this.generalPage.Controls.Add(this.label1);
             this.generalPage.Controls.Add(this.label2);
@@ -99,6 +99,16 @@ namespace Forms_TechServ
             this.generalPage.Size = new System.Drawing.Size(752, 277);
             this.generalPage.TabIndex = 0;
             this.generalPage.Text = "Общая информация";
+            // 
+            // checkBoxRemotely
+            // 
+            this.checkBoxRemotely.AutoSize = true;
+            this.checkBoxRemotely.Location = new System.Drawing.Point(22, 254);
+            this.checkBoxRemotely.Name = "checkBoxRemotely";
+            this.checkBoxRemotely.Size = new System.Drawing.Size(123, 17);
+            this.checkBoxRemotely.TabIndex = 156;
+            this.checkBoxRemotely.Text = "Работает удаленно";
+            this.checkBoxRemotely.UseVisualStyleBackColor = true;
             // 
             // tbPassword
             // 
@@ -219,13 +229,6 @@ namespace Forms_TechServ
             this.tbName.Size = new System.Drawing.Size(113, 20);
             this.tbName.TabIndex = 50;
             // 
-            // tbPhoneNum
-            // 
-            this.tbPhoneNum.Location = new System.Drawing.Point(121, 64);
-            this.tbPhoneNum.Name = "tbPhoneNum";
-            this.tbPhoneNum.Size = new System.Drawing.Size(113, 20);
-            this.tbPhoneNum.TabIndex = 49;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -294,7 +297,7 @@ namespace Forms_TechServ
             this.timetablePage.Location = new System.Drawing.Point(4, 22);
             this.timetablePage.Name = "timetablePage";
             this.timetablePage.Padding = new System.Windows.Forms.Padding(3);
-            this.timetablePage.Size = new System.Drawing.Size(752, 257);
+            this.timetablePage.Size = new System.Drawing.Size(752, 277);
             this.timetablePage.TabIndex = 2;
             this.timetablePage.Text = "Расписание";
             // 
@@ -302,15 +305,13 @@ namespace Forms_TechServ
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // checkBoxRemotely
+            // tbPhoneNum
             // 
-            this.checkBoxRemotely.AutoSize = true;
-            this.checkBoxRemotely.Location = new System.Drawing.Point(22, 254);
-            this.checkBoxRemotely.Name = "checkBoxRemotely";
-            this.checkBoxRemotely.Size = new System.Drawing.Size(123, 17);
-            this.checkBoxRemotely.TabIndex = 156;
-            this.checkBoxRemotely.Text = "Работает удаленно";
-            this.checkBoxRemotely.UseVisualStyleBackColor = true;
+            this.tbPhoneNum.Location = new System.Drawing.Point(121, 64);
+            this.tbPhoneNum.Mask = "(+70)000000000";
+            this.tbPhoneNum.Name = "tbPhoneNum";
+            this.tbPhoneNum.Size = new System.Drawing.Size(113, 20);
+            this.tbPhoneNum.TabIndex = 157;
             // 
             // FormManageManager
             // 
@@ -344,7 +345,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.TextBox tbPosition;
         private System.Windows.Forms.NumericUpDown numericSalary;
         private System.Windows.Forms.TextBox tbName;
-        private System.Windows.Forms.TextBox tbPhoneNum;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -357,5 +357,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox checkBoxRemotely;
+        private System.Windows.Forms.MaskedTextBox tbPhoneNum;
     }
 }

@@ -165,6 +165,14 @@ namespace Forms_TechServ
             using (TechContext db = new TechContext())
             {
                 // ПРОВЕРЯТЬ ЕСТЬ ЛИ АКТИВНЫЕ ЗАКАЗЫ
+
+                Order order = db.Orders.Where(o => o.MasterId == this.Id && o.Status != OrderStatus.Canceled && o.Status != OrderStatus.Finished).FirstOrDefault();
+
+                if(order != null)
+                {
+                    return false;
+                }
+
                 this.DelTime = DateTime.Now;
                 db.Entry(this).State = EntityState.Modified;
                 db.SaveChanges();
@@ -482,7 +490,13 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                //db.Managers.Remove(this);
+                Order order = db.Orders.Where(o => o.ManagerId == this.Id && o.Status != OrderStatus.Canceled && o.Status != OrderStatus.Finished).FirstOrDefault();
+
+                if (order != null)
+                {
+                    return false;
+                }
+
                 this.DelTime = DateTime.Now;
                 db.Entry(this).State = EntityState.Modified;
                 db.SaveChanges();

@@ -33,7 +33,19 @@ namespace Forms_TechServ
         {
             using(TechContext db = new TechContext())
             {
-                // ПРОВЕРЯТЬ ЕСТЬ ЛИ АКТИВНЫЕ ЗАКАЗЫ
+                Order order = db.Orders.Include(o => o.Product).Where(o => o.Product.ClientId == this.Id && o.Status != OrderStatus.Canceled && o.Status != OrderStatus.Finished).FirstOrDefault();
+
+                if (order != null)
+                {
+                    return false;
+                }
+
+                foreach (Product product in db.Products.Where(p => p.ClientId == this.Id))
+                {
+                    product.DelTime = DateTime.Now;
+                    db.Entry(product).State = EntityState.Modified;
+                }
+
                 this.DelTime = DateTime.Now;
                 db.Entry(this).State = EntityState.Modified;
                 db.SaveChanges();

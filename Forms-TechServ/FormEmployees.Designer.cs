@@ -51,7 +51,6 @@ namespace Forms_TechServ
             this.btnCleanWorkshop = new FontAwesome.Sharp.IconButton();
             this.tbID = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.tbPhoneNum = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -67,6 +66,7 @@ namespace Forms_TechServ
             this.searchBtn = new Forms_TechServ.ManageButton();
             this.toolTipSlalaryInfo = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
+            this.tbPhoneNum = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataEmployees)).BeginInit();
             this.panelFind.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSalaryUntil)).BeginInit();
@@ -385,15 +385,6 @@ namespace Forms_TechServ
             this.label8.TabIndex = 136;
             this.label8.Text = "ID";
             // 
-            // tbPhoneNum
-            // 
-            this.tbPhoneNum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbPhoneNum.Location = new System.Drawing.Point(89, 87);
-            this.tbPhoneNum.Name = "tbPhoneNum";
-            this.tbPhoneNum.Size = new System.Drawing.Size(131, 20);
-            this.tbPhoneNum.TabIndex = 135;
-            // 
             // label7
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -557,6 +548,15 @@ namespace Forms_TechServ
             this.searchBtn.UseVisualStyleBackColor = false;
             this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
             // 
+            // tbPhoneNum
+            // 
+            this.tbPhoneNum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbPhoneNum.Location = new System.Drawing.Point(89, 87);
+            this.tbPhoneNum.Name = "tbPhoneNum";
+            this.tbPhoneNum.Size = new System.Drawing.Size(131, 20);
+            this.tbPhoneNum.TabIndex = 135;
+            // 
             // FormEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -597,7 +597,6 @@ namespace Forms_TechServ
         private FontAwesome.Sharp.IconButton btnCleanWorkshop;
         private System.Windows.Forms.TextBox tbID;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox tbPhoneNum;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.Label label6;
@@ -620,5 +619,6 @@ namespace Forms_TechServ
         private FontAwesome.Sharp.IconButton btnSalaryInfo;
         private System.Windows.Forms.ToolTip toolTipSlalaryInfo;
         private System.Windows.Forms.ToolTip toolTipCurrentSort;
+        private System.Windows.Forms.TextBox tbPhoneNum;
     }
 }

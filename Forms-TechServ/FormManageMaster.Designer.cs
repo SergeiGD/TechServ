@@ -42,7 +42,6 @@ namespace Forms_TechServ
             this.tbPosition = new System.Windows.Forms.TextBox();
             this.numericSalary = new System.Windows.Forms.NumericUpDown();
             this.tbName = new System.Windows.Forms.TextBox();
-            this.tbPhoneNum = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -66,6 +65,7 @@ namespace Forms_TechServ
             this.dataCategories = new System.Windows.Forms.DataGridView();
             this.timetablePage = new System.Windows.Forms.TabPage();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.tbPhoneNum = new System.Windows.Forms.MaskedTextBox();
             this.masterTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSalary)).BeginInit();
@@ -93,6 +93,7 @@ namespace Forms_TechServ
             // generalPage
             // 
             this.generalPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.generalPage.Controls.Add(this.tbPhoneNum);
             this.generalPage.Controls.Add(this.tbPassword);
             this.generalPage.Controls.Add(this.label11);
             this.generalPage.Controls.Add(this.btnAction);
@@ -103,7 +104,6 @@ namespace Forms_TechServ
             this.generalPage.Controls.Add(this.tbPosition);
             this.generalPage.Controls.Add(this.numericSalary);
             this.generalPage.Controls.Add(this.tbName);
-            this.generalPage.Controls.Add(this.tbPhoneNum);
             this.generalPage.Controls.Add(this.label4);
             this.generalPage.Controls.Add(this.label1);
             this.generalPage.Controls.Add(this.label2);
@@ -236,13 +236,6 @@ namespace Forms_TechServ
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(113, 20);
             this.tbName.TabIndex = 162;
-            // 
-            // tbPhoneNum
-            // 
-            this.tbPhoneNum.Location = new System.Drawing.Point(123, 64);
-            this.tbPhoneNum.Name = "tbPhoneNum";
-            this.tbPhoneNum.Size = new System.Drawing.Size(113, 20);
-            this.tbPhoneNum.TabIndex = 161;
             // 
             // label4
             // 
@@ -525,6 +518,14 @@ namespace Forms_TechServ
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // tbPhoneNum
+            // 
+            this.tbPhoneNum.Location = new System.Drawing.Point(123, 64);
+            this.tbPhoneNum.Mask = "(+70)000000000";
+            this.tbPhoneNum.Name = "tbPhoneNum";
+            this.tbPhoneNum.Size = new System.Drawing.Size(113, 20);
+            this.tbPhoneNum.TabIndex = 174;
+            // 
             // FormManageMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -577,7 +578,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.TextBox tbPosition;
         private System.Windows.Forms.NumericUpDown numericSalary;
         private System.Windows.Forms.TextBox tbName;
-        private System.Windows.Forms.TextBox tbPhoneNum;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -590,5 +590,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.MaskedTextBox tbPhoneNum;
     }
 }

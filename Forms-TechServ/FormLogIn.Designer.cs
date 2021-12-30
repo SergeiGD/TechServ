@@ -30,10 +30,10 @@ namespace Forms_TechServ
         private void InitializeComponent()
         {
             this.labelLogin = new System.Windows.Forms.Label();
-            this.tbLogin = new System.Windows.Forms.TextBox();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.labelPassword = new System.Windows.Forms.Label();
             this.btnLogIn = new System.Windows.Forms.Button();
+            this.tbLogin = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // labelLogin
@@ -46,17 +46,6 @@ namespace Forms_TechServ
             this.labelLogin.Size = new System.Drawing.Size(85, 20);
             this.labelLogin.TabIndex = 0;
             this.labelLogin.Text = "Телефон";
-            // 
-            // tbLogin
-            // 
-            this.tbLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(99)))), ((int)(((byte)(123)))));
-            this.tbLogin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.tbLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(250)))), ((int)(((byte)(255)))));
-            this.tbLogin.Location = new System.Drawing.Point(174, 55);
-            this.tbLogin.Name = "tbLogin";
-            this.tbLogin.Size = new System.Drawing.Size(143, 23);
-            this.tbLogin.TabIndex = 1;
             // 
             // tbPassword
             // 
@@ -97,16 +86,28 @@ namespace Forms_TechServ
             this.btnLogIn.UseVisualStyleBackColor = false;
             this.btnLogIn.Click += new System.EventHandler(this.btnLogIn_Click);
             // 
+            // tbLogin
+            // 
+            this.tbLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(99)))), ((int)(((byte)(123)))));
+            this.tbLogin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.tbLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(250)))), ((int)(((byte)(255)))));
+            this.tbLogin.Location = new System.Drawing.Point(174, 59);
+            this.tbLogin.Mask = "(+70)000000000";
+            this.tbLogin.Name = "tbLogin";
+            this.tbLogin.Size = new System.Drawing.Size(143, 23);
+            this.tbLogin.TabIndex = 1;
+            // 
             // FormLogIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(52)))), ((int)(((byte)(77)))));
             this.ClientSize = new System.Drawing.Size(414, 281);
+            this.Controls.Add(this.tbLogin);
             this.Controls.Add(this.btnLogIn);
             this.Controls.Add(this.tbPassword);
             this.Controls.Add(this.labelPassword);
-            this.Controls.Add(this.tbLogin);
             this.Controls.Add(this.labelLogin);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(430, 320);
@@ -122,9 +123,9 @@ namespace Forms_TechServ
         #endregion
 
         private System.Windows.Forms.Label labelLogin;
-        private System.Windows.Forms.TextBox tbLogin;
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Label labelPassword;
         private System.Windows.Forms.Button btnLogIn;
+        private System.Windows.Forms.MaskedTextBox tbLogin;
     }
 }

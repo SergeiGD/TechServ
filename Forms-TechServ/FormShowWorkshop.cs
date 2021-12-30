@@ -216,7 +216,7 @@ namespace Forms_TechServ
                 }
                 else
                 {
-                    MessageBox.Show("В данном филиале еще числятся сотрудник, пока его нельзя удалить", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("В данном филиале еще числятся сотрудники/неизрасходованные детали/незавершенные заказы, пока его нельзя удалить", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
    
             }

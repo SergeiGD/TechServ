@@ -97,7 +97,7 @@ namespace Forms_TechServ
 
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-            DialogResult answer = MessageBox.Show("Вы действительно хотите удалить этого клиента?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult answer = MessageBox.Show("Вы действительно хотите удалить этого клиента? Это также приведет к удалдению всей его техники", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (answer == DialogResult.Yes)
             {
 

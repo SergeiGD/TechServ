@@ -136,11 +136,17 @@ namespace Forms_TechServ
             DialogResult answer = MessageBox.Show("Вы действительно хотите удалить этого сотрудника?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if(answer == DialogResult.Yes)
             {
-                manager.DelManager();
+                if (manager.DelManager())
+                {
+                    MessageBox.Show("Сотрудник успешно удалено", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                MessageBox.Show("Сотрудник успешно удалено", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                this.Close();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("У сотрудника есть незавершенный заказ, пока его удалить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
             }
             else
             {

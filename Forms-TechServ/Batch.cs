@@ -68,8 +68,13 @@ namespace Forms_TechServ
             using (TechContext db = new TechContext())
             {
                 this.DelTime = DateTime.Now;
+
                 if (DateDelivered == null)                           // нельзя удалить уже прибывшую поставку
                 {
+                    
+                    // УДАЛЯЕМ ДЕТАЛИ ИЗ ЗАКАЗОВ
+                    db.OrdersSpareParts.RemoveRange(db.OrdersSpareParts.Where(s => s.BatchId == this.Id));
+
                     db.Entry(this).State = EntityState.Modified;
                     db.SaveChanges();
                     return true;
@@ -109,6 +114,32 @@ namespace Forms_TechServ
 
                 return quantity;//batchSparePart.Quantity; // минус OrderSparePart....
             }
+        }
+
+        public bool IsSpent()
+        {
+            using(TechContext db = new TechContext())
+            {
+
+                foreach (BatchSparePart sparePart in db.BatchesSpareParts.Where(b => b.BatchId == this.Id))
+                {
+                    int quantity = sparePart.Quantity;
+
+                    foreach (SparePartFromBatch orderSparePart in db.OrdersSpareParts.Where(b => b.BatchId == this.Id && b.SparePartId == sparePart.SparePartId))
+                    {
+                        quantity -= orderSparePart.Quantity;
+                    }
+
+                    if(quantity > 0)
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+
+            }
+
         }
 
         public decimal CalcFinalPrice()
@@ -176,6 +207,8 @@ namespace Forms_TechServ
             {
                 if(this.DateDelivered == null)
                 {
+                    db.OrdersSpareParts.RemoveRange(db.OrdersSpareParts.Where(s => s.BatchId == this.Id && s.SparePartId == sparePart.SparePartId));
+
                     db.Entry(sparePart).State = EntityState.Deleted;
 
                     db.SaveChanges();

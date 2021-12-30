@@ -39,8 +39,20 @@ namespace Forms_TechServ
             using (TechContext db = new TechContext())
             {
                 Employee employee = db.Employees.Where(emp => emp.WorkshopId == this.Id && emp.DelTime == null).FirstOrDefault();      // если есть хоть один сотрудник в филиале, то удалить нельзя
+                Order order = db.Orders.Where(o => o.WorkshopId == this.Id && (o.Status != OrderStatus.Finished || o.Status != OrderStatus.Canceled)).FirstOrDefault();
+                foreach (Batch batch in db.Batches.Where(b => b.WorkshopId == this.Id && b.DelTime == null))
+                {
+                    if (!batch.IsSpent())
+                    {
+                        return false;
+                    }
+                }
+                /*foreach (Order order in db.Orders.Where(o => o.WorkshopId == this.Id && (o.Status != OrderStatus.Finished || o.Status != OrderStatus.Canceled)))
+                {
 
-                if(employee == null)
+                }*/
+
+                if(employee == null && order == null)
                 {
                     this.DelTime = DateTime.Now;
                     db.Entry(this).State = EntityState.Modified;
