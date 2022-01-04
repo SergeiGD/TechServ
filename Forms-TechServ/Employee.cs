@@ -39,10 +39,7 @@ namespace Forms_TechServ
                 }
 
                 timetables = timetables.Where(t => t.ShiftStart >= FilterA.ShiftStart && t.ShiftEnd <= FilterA.ShiftEnd);
-                /*if (until.HasValue)
-                {
-                    timetables = timetables.Where(t => t.ShiftEnd <= until);
-                }*/
+
 
                 timetables = timetables.SortBy("ShiftStart", true);
 
@@ -144,16 +141,7 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                /*if (db.Masters.Contains(this))
-                {
-                    return false;
-                }
-                else
-                {
-                    db.Masters.Add(this);
-                    db.SaveChanges();
-                    return true;
-                }*/
+                
                 db.Masters.Add(this);
                 db.SaveChanges();
                 return true;
@@ -177,16 +165,7 @@ namespace Forms_TechServ
                 db.Entry(this).State = EntityState.Modified;
                 db.SaveChanges();
                 return true;
-                /*if (db.Masters.Contains(this))
-                {
-                    db.Masters.Remove(this);
-                    db.SaveChanges();
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }*/
+               
             }
         }
 
@@ -197,18 +176,9 @@ namespace Forms_TechServ
             using (TechContext db = new TechContext())
             {
                 db.Entry(this).State = EntityState.Modified;
-                /*db.MastersCategories.Load();
-                foreach (MastersCategories mc in db.MastersCategories.Where(mc => mc.MasterId == this.Id))
-                {
-                    db.Entry(mc).State = EntityState.Added;
-                }*/
                 
-
-                //transact = db.Database.BeginTransaction();
                 db.SaveChanges();
-                //transact.Commit();
                 
-                //db.MastersCategories.
 
 
                 return true;
@@ -268,34 +238,7 @@ namespace Forms_TechServ
                     return false;
                 }
                 
-                //db.Database.Connection
-                //transact = db.Database.BeginTransaction();
-                //transact = new DbContextTransaction(db.Database.BeginTransaction());
-                //db.MastersCategories.Create();
-                //db.MastersCategories.Local = this;
-
-
-
-                // ЕСЛИ ТРАНЗАЦИИ, ТО НЕ ЗАКЗЫВАТЬ СОЕДИНЕНИЕ => ПЛОХО!!
-                // ХРАНИТЬ ЛОКАЛЬНЫЙ МАССИВ И СИНХРОНИЗИРОВАТЬ ПРИ EditMaster()?
-
                 
-
-                /*if (db.MastersCategories.Contains(db.MastersCategories.Where(c => c.Category.Equals(category) && c.Master.Equals(this)).FirstOrDefault()))
-                {
-                    return false;
-                }
-                else
-                {
-                    db.MastersCategories.Add(new MastersCategories()
-                    {
-                        Master = this,
-                        Category = category
-                    });
-
-                    db.SaveChanges();
-                    return true;
-                }*/
             }
         }
 
@@ -315,16 +258,7 @@ namespace Forms_TechServ
                     return false;
                 }
                 
-                /*if (db.MastersCategories.Contains(db.MastersCategories.Where(c => c.Category.Equals(category) && c.Master.Equals(this)).FirstOrDefault()))
-                {
-                    db.MastersCategories.Remove(db.MastersCategories.Where(c => c.Category.Equals(category)).FirstOrDefault());
-                    db.SaveChanges();
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }*/
+               
             }
         }
 
@@ -351,11 +285,7 @@ namespace Forms_TechServ
                 MastersCategories masterCat = null;// = db.MastersCategories.Find(this.Id, category.Id);
                 Category pickedCat = category;//new Category() { Id = category.Id, ParentCategoryId = category.ParentCategoryId};
 
-                /*do
-                {
-                    masterCat = db.MastersCategories.Find(this.Id, pickedCat.ParentCategoryId);
-                    pickedCat = db.Categories.Where(c => c.Id == pickedCat.ParentCategoryId && c.DelTime == null).FirstOrDefault();
-                }*/
+                
                 while (pickedCat != null && masterCat == null)
                 {
                     masterCat = db.MastersCategories.Find(this.Id, pickedCat.Id);
@@ -473,16 +403,7 @@ namespace Forms_TechServ
                 db.Managers.Add(this);
                 db.SaveChanges();
                 return true;
-                /*if (db.Managers.Contains(this))
-                {
-                    return false;
-                }
-                else
-                {
-                    db.Managers.Add(this);
-                    db.SaveChanges();
-                    return true;
-                }*/
+                
             }
         }
 
@@ -502,16 +423,7 @@ namespace Forms_TechServ
                 db.SaveChanges();
                 return true;
 
-                /*if (db.Managers.Contains(this))
-                {
-                    db.Managers.Remove(this);
-                    db.SaveChanges();
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }*/
+                
             }
         }
 
@@ -524,20 +436,11 @@ namespace Forms_TechServ
                 db.SaveChanges();
                 return true;
 
-                /*if (db.Managers.Contains(this))
-                {
-                    db.Entry(this).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }*/
+                
             }
         }
 
-        // ORDERS
+       
     }
 
     public static class ManagersList
@@ -632,7 +535,7 @@ namespace Forms_TechServ
         //[Column("id")]
         public int Id { get; set; }
         public string Name { get; set; }
-        //public DateTime? DelTime { get; set; }
+        
 
         public List<Permission> GetPermissions()
         {

@@ -15,9 +15,6 @@ namespace Forms_TechServ
         public string PhoneNum { get; set; }
         public DateTime? DelTime { get; set; }
 
-        /*public int CompareTo(Person p)                      // сложные объекты сортируем просто по имени
-        {
-            return this.Name.CompareTo(p.Name);
-        }*/
+        
     }
 }

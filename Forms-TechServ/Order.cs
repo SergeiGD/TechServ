@@ -13,13 +13,13 @@ namespace Forms_TechServ
     {
         public int Id { get; set; }
         public string ClientComment { get; set; }
-        //public string MasterComment { get; set; }
+
         
         public decimal ClientSale { get; set; }
         public decimal PrepaymentRequired { get; set; }
         public decimal PrepaymentMade { get; set; }
         public decimal FinalPrice { get; set; }
-        //public bool HighPriority { get; set; }
+
         public DateTime? DateStart { get; set; }
         public DateTime? DateDiagnostic { get; set; }
         public DateTime? DateClientAnswer { get; set; }
@@ -75,14 +75,11 @@ namespace Forms_TechServ
             using (TechContext db = new TechContext())
             {
                 Order order = db.Orders.Find(this.Id);
-                /*db.Entry(order).Reference(o => o.Product).Load();
-                db.Entry(order).Reference(o => o.Manager).Load();
-                db.Entry(order).Reference(o => o.Master).Load();
-                db.Entry(order).Reference(o => o.Workshop).Load();*/
+
 
                 foreach (PropertyInfo property in typeof(Order).GetProperties(BindingFlags.Public | BindingFlags.Instance))
                 {
-                    //if(!property.GetValue(this).Equals(property.GetValue(order)))
+
                     if (property.PropertyType.IsValueType && !object.Equals(property.GetValue(this), property.GetValue(order)))
                     {
                         string stateCurrent;

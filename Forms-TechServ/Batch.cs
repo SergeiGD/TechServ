@@ -17,24 +17,7 @@ namespace Forms_TechServ
 
         //private decimal price;
 
-        public decimal Price 
-        {
-            get;set;
-            /*get 
-            {
-                return price;
-            }
-            private set
-            {
-                //price = CalcFinalPrice();
-                using (TechContext db = new TechContext())
-                {
-                    price = value;
-                    db.Entry(this).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
-            } */
-        }
+        public decimal Price { get; set; }
 
         [Column("Id_Workshop")]
         public int WorkshopId { get; set; }
@@ -152,10 +135,6 @@ namespace Forms_TechServ
                     currentPrice += batchSparePart.Quantity * batchSparePart.UnitPrice;
                 }
 
-                //this.Price = currentPrice;
-                //this.Price = currentPrice;
-                //db.Entry(this).State = EntityState.Modified;
-                //db.SaveChanges();
 
 
                 return currentPrice;

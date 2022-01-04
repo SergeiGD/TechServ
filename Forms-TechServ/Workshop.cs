@@ -17,10 +17,7 @@ namespace Forms_TechServ
         public string Location { get; set; }
         public string PhoneNum { get; set; }
 
-        /*[Column("id_Head")]
-        public int HeadId { get; set; }
-        [Column("id_Head")]
-        public Employee Head { get; set; }*/
+       
 
         public DateTime? DelTime { get; set; }
 
@@ -47,10 +44,7 @@ namespace Forms_TechServ
                         return false;
                     }
                 }
-                /*foreach (Order order in db.Orders.Where(o => o.WorkshopId == this.Id && (o.Status != OrderStatus.Finished || o.Status != OrderStatus.Canceled)))
-                {
-
-                }*/
+                
 
                 if(employee == null && order == null)
                 {
@@ -133,24 +127,7 @@ namespace Forms_TechServ
                 return profit;
             }
         }
-        /*public Dictionary<SparePart, int> GetInStockSpareParts()
-        {
-            using (TechContext db = new TechContext())
-            {
-                Dictionary<SparePart, int> sparePartsInStock = new Dictionary<SparePart, int>();
-
-                foreach (SparePart sparePart in db.SpareParts)
-                {
-                    int quantity = sparePart.GetCountInStock(this);
-                    if (quantity > 0)
-                    {
-                        sparePartsInStock.Add(sparePart, quantity);
-                    }
-                }
-
-                return sparePartsInStock;
-            }
-        }*/
+       
 
     }
 
@@ -160,13 +137,7 @@ namespace Forms_TechServ
         {
             using(TechContext db = new TechContext())
             {
-                /*Workshop workshop = db.Workshops.Find(id);
-
-                if (withNavProps)
-                {
-                    //db.Entry(workshop.)
-                }*/
-                //return db.Workshops.Find(id);
+                
                 return db.Workshops.Find(id);
             }
         }

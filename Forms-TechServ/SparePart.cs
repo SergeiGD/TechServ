@@ -46,24 +46,7 @@ namespace Forms_TechServ
             }
         }
 
-        /*public int GetCountInStock()
-        {
-            using (TechContext db = new TechContext())
-            {
-                int count = 0;
-                //foreach (BatchSparePart sparePart in spareParts)
-                //{
-                //   count += sparePart.Quantity;
-                //}
-                foreach (BatchSparePart sparePart in db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.DelTime == null))
-                {
-                    count += sparePart.Quantity;
-                    // ПОТОМ ВТОРОЙ ЦИКЛ ПО OrderSpareParts, который будет отнимать
-                }
-
-                return count;
-            }
-        }*/
+       
 
         public int GetCountInStock(Workshop workshop)
         {
@@ -87,11 +70,7 @@ namespace Forms_TechServ
                     count += sparePart.Batch.GetCountLeft(sparePart.SparePart);
                 }
 
-                /*foreach (BatchSparePart sparePart in db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.WorkshopId == workshop.Id))
-                {
-                    count += sparePart.Quantity;
-                    // ПОТОМ ВТОРОЙ ЦИКЛ ПО OrderSpareParts, который будет отнимать
-                }*/
+                
 
                 return count;
             }
@@ -119,11 +98,7 @@ namespace Forms_TechServ
                     count += sparePart.Batch.GetCountLeft(sparePart.SparePart);
                 }
 
-                /*foreach (BatchSparePart sparePart in db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.WorkshopId == workshop.Id))
-                {
-                    count += sparePart.Quantity;
-                    // ПОТОМ ВТОРОЙ ЦИКЛ ПО OrderSpareParts, который будет отнимать
-                }*/
+                
 
                 return count;
             }
@@ -178,10 +153,7 @@ namespace Forms_TechServ
                     spareParts = spareParts.Where(s => s.ClientPrepayment == 0);
                 }
 
-                // НАЛИИЕ 
-                // РЕАЛИЗОВАТЬ
-                // !!
-                //int countSpareParts = 0;
+                
 
                 if (quantityFrom > 0 && quantityUntil == 0)
                 {

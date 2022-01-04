@@ -209,7 +209,7 @@ namespace Forms_TechServ
 
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-            DialogResult answer = MessageBox.Show("Вы действительно хотите удалить эту категорию?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult answer = MessageBox.Show("Вы действительно хотите удалить эту категорию? Это также удалит все услуги, относящиейся к этой категории", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (answer == DialogResult.Yes)
             {
                 if (category.DelCategory())

@@ -22,14 +22,7 @@ namespace Forms_TechServ
         {
             get
             {
-                /*if (TimeSpanTicks.HasValue)
-                {
-                    return TimeSpan.FromMinutes(TimeSpanTicks.Value);
-                }
-                else
-                {
-                    return null;
-                }*/
+               
                 return TimeSpan.FromMinutes(TimeSpanTicks);
             }
             set

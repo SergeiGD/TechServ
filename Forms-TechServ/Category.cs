@@ -50,6 +50,13 @@ namespace Forms_TechServ
                 {
                     this.DelTime = DateTime.Now;
                     db.Entry(this).State = EntityState.Modified;
+
+                    foreach(Service service in db.Services.Where(s => s.CategoryId == this.Id))
+                    {
+                        service.DelTime = DateTime.Now;
+                        db.Entry(service).State = EntityState.Modified;
+                    }
+
                     db.SaveChanges();
                     return true;
                 }
@@ -61,44 +68,7 @@ namespace Forms_TechServ
             }
         }
 
-        /*public bool LoadAllParents()
-        {
-            using (TechContext db = new TechContext())
-            {
-                Category cat = db.Categories.Find(this.Id);
-
-                db.Entry(cat).Reference(c => c.ParentCategory).Load();
-
-                while (cat.ParentCategory != null)
-                {
-                    cat = cat.ParentCategory;
-                    db.Entry(cat).Reference(c => c.ParentCategory).Load();
-                }
-
-            }
-
-            return true;
-        }*/
-
-        /*public LinkedList<Category> GetWholeBranch()
-        {
-            using (TechContext db = new TechContext())
-            {
-                Category cat = db.Categories.Find(this.Id);
-
-                LinkedList<Category> branch = new LinkedList<Category>();
-
-                branch.AddFirst(cat);
-
-                while (cat.ParentCategoryId != 0)
-                {
-                    cat = db.Categories.Find(cat.ParentCategoryId);
-                    branch.AddBefore(branch.First, cat);
-                }
-
-                return branch;
-            }
-        }*/
+       
 
         // МЕТОД ДЛЯ ПОЛУЧЕНИЯ ПОЛНОЙ ВЕТКИ ВЫБРАННОЙ КАТЕГОРИИ
         public LinkedList<Category> GetWholeBranch()
@@ -144,41 +114,7 @@ namespace Forms_TechServ
             }
         }
 
-        /*public LinkedList<Category> GetWholeBranch2()
-        {
-            using (TechContext db = new TechContext())
-            {
-
-
-                Category currentCat = db.Categories.Find(this.Id);
-                List<Category> flatList = new List<Category>();
-
-
-
-                // Для начала идем вверх
-                while (currentCat != null)
-                {
-                    flatList.Add(currentCat);
-                    currentCat = db.Categories.Find(currentCat.ParentCategoryId);
-                }
-
-                currentCat = db.Categories.Find(this.Id);
-
-                Gethildern(currentCat);
-
-                void Gethildern(Category childCat)
-                {
-                    foreach (Category cat in db.Categories.Where(c => c.ParentCategoryId == childCat.Id && c.DelTime == null))
-                    {
-                        Gethildern(cat);
-                        flatList.Add(cat);
-                    }
-                }
-
-
-                //List<Dictionary<Category, List<Category>>> branch = new List<Dictionary<Category, List<Category>>>();
-            }
-        }*/
+       
 
     }
 
@@ -223,32 +159,7 @@ namespace Forms_TechServ
 
                 categories = categories.SortBy(sortBy, desk);
 
-                //categories = (List<Category>)categories;
-
                 
-
-                /*if (onlyEndPoint)
-                {
-                    List<Category> endCats = new List<Category>();
-
-                    foreach (Category cat in categories.ToList())
-                    {
-                        Category child = db.Categories.Where(c => c.ParentCategoryId == cat.Id && c.DelTime == null).FirstOrDefault();
-
-                        if (child == null)
-                        {
-                            endCats.Add(cat);
-                        }
-                    }
-
-
-                    rowsCount = endCats.Count();
-
-                    endCats = endCats.Skip((page - 1) * count).Take(count).ToList();
-
-                    return endCats;
-
-                }*/
 
                 rowsCount = categories.Count();
 

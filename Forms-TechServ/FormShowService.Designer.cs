@@ -51,7 +51,7 @@ namespace Forms_TechServ
             // tbDescription
             // 
             this.tbDescription.Enabled = false;
-            this.tbDescription.Location = new System.Drawing.Point(216, 40);
+            this.tbDescription.Location = new System.Drawing.Point(290, 44);
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.ReadOnly = true;
             this.tbDescription.Size = new System.Drawing.Size(179, 141);
@@ -61,7 +61,7 @@ namespace Forms_TechServ
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(276, 22);
+            this.label2.Location = new System.Drawing.Point(350, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 13);
             this.label2.TabIndex = 20;
@@ -147,7 +147,7 @@ namespace Forms_TechServ
             this.panelEdit.Controls.Add(this.deleteBtn);
             this.panelEdit.Controls.Add(this.cancelBtn);
             this.panelEdit.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelEdit.Location = new System.Drawing.Point(430, 0);
+            this.panelEdit.Location = new System.Drawing.Point(494, 0);
             this.panelEdit.Name = "panelEdit";
             this.panelEdit.Size = new System.Drawing.Size(151, 193);
             this.panelEdit.TabIndex = 26;
@@ -207,7 +207,7 @@ namespace Forms_TechServ
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.ClientSize = new System.Drawing.Size(581, 193);
+            this.ClientSize = new System.Drawing.Size(645, 193);
             this.Controls.Add(this.labelID);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.panelEdit);

@@ -16,8 +16,6 @@ namespace Forms_TechServ
 
         public Order Order { get; set; }
 
-
-        //public int SparePartId { get; set; }
       
         public SparePart SparePart{ get; set; }
 

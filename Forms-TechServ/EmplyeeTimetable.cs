@@ -53,28 +53,7 @@ namespace Forms_TechServ
                 }
 
                 return false;
-                /*if (db.EmployeesTimetables.Where(t => t.ShiftStart.ToShortDateString()new DateTime(t.ShiftStart.Year, t.ShiftStart.Month, t.ShiftStart.Day) == new DateTime(this.ShiftStart.Year, this.ShiftStart.Month, this.ShiftStart.Day) && t.EmployeeId == this.EmployeeId).Count() == 0)
-                {
-
-                    // ПОТОМ С ПОМОЩЬЮ БИБЛИОТЕКИ TimePeriod ПРОВЕРЯЕМ, ЧТОБ УКАЗАННОЕ РАСПИСАНИЕ НЕ КОНФЛИКТОВАЛО С ФИЛИАЛОМ РАБОТНИКА
-                    TimeRange shitRange = new TimeRange(this.ShiftStart, this.ShiftEnd);
-
-                    foreach (WorkshopTimetable workshopTimetable in db.WorkshopsTimetables.Where(t => t.WorkshopId == this.Employee.WorkshopId && DelTime == null))
-                    {
-                        if (new TimeRange(workshopTimetable.ValidFrom, workshopTimetable.ValidUntil).HasInside(shitRange) && workshopTimetable.Opening <= new TimeSpan(this.ShiftStart.Hour, this.ShiftStart.Minute, 0) && workshopTimetable.Closing >= new TimeSpan(this.ShiftEnd.Hour, this.ShiftEnd.Minute, 0))
-                        {
-                            db.EmployeesTimetables.Add(this);
-                            db.SaveChanges();
-                            return true;
-                        }
-                    }
-
-                    return false;
-                }
-                else
-                {
-                    return false;
-                }*/
+                
             }
         }
 

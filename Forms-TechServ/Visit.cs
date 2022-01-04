@@ -27,43 +27,7 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                /*// ДЛЯ НАЧАЛА СМОТРИМ РАБОТАЕТ ЛИ МАСТЕР ВООБЩЕ В ЭТОТ ДЕНЬ
-                OrderAtHome order = OrderAtHomeList.GetById(OrderId);
-                DateTime dayOfVisit = new DateTime(this.DateVisit.Year, this.DateVisit.Month, this.DateVisit.Day, 0, 0, 0);
-                TimeRange currentVisitRange = new TimeRange(this.DateVisit, this.DateVisit.Add(this.CalcEstimatedTime()));
-
-                EmployeeTimetable timetable = db.EmployeesTimetables.Where(t => t.EmployeeId == order.MasterId).ToList().Where(t => new DateTime(t.ShiftStart.Year, t.ShiftStart.Month, t.ShiftStart.Day, 0, 0, 0) == dayOfVisit).FirstOrDefault();
-                if(timetable == null)
-                {
-                    return false;
-                }
-
-                // ПОТОМ СМОТРИМ НЕ ЗАКОНЧИЛАСЬ ЛИ ЕГО СМЕНА К ВЫБРАННОМУ ВРЕМЕНИ
-                TimeRange shiftRange = new TimeRange(timetable.ShiftStart, timetable.ShiftEnd);
-                if (!shiftRange.HasInside(currentVisitRange))
-                {
-                    return false;
-                }
-
-                // ПОТОМ СМОТРИМ НЕ КОНфЛИКТУЕТ ЛИ С ДРУГИМИ ВИЗИТАМИ
-                List<TimeRange> visitsRanges = new List<TimeRange>();
-                foreach (Visit visit in order.Master.GetMasterVisits().Where(v => new DateTime(v.DateVisit.Year, v.DateVisit.Month, v.DateVisit.Day, 0, 0, 0) == dayOfVisit))
-                {
-                    
-                    TimeSpan timeTaken = visit.CalcEstimatedTime();
-
-
-
-                    visitsRanges.Add(new TimeRange(visit.DateVisit, visit.DateVisit.Add(timeTaken)));
-                }
-
-                foreach (TimeRange visit in visitsRanges)
-                {
-                    if (visit.OverlapsWith(currentVisitRange))
-                    {
-                        return false;
-                    }
-                }*/
+                
 
                 if (CheckTimeAvailable())
                 {
@@ -93,43 +57,7 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                /*// ДЛЯ НАЧАЛА СМОТРИМ РАБОТАЕТ ЛИ МАСТЕР ВООБЩЕ В ЭТОТ ДЕНЬ
-                OrderAtHome order = OrderAtHomeList.GetById(OrderId);
-                DateTime dayOfVisit = new DateTime(this.DateVisit.Year, this.DateVisit.Month, this.DateVisit.Day, 0, 0, 0);
-                TimeRange currentVisitRange = new TimeRange(this.DateVisit, this.DateVisit.Add(this.CalcEstimatedTime()));
-
-                EmployeeTimetable timetable = db.EmployeesTimetables.Where(t => t.EmployeeId == order.MasterId).ToList().Where(t => new DateTime(t.ShiftStart.Year, t.ShiftStart.Month, t.ShiftStart.Day, 0, 0, 0) == dayOfVisit).FirstOrDefault();
-                if (timetable == null)
-                {
-                    return false;
-                }
-
-                // ПОТОМ СМОТРИМ НЕ ЗАКОНЧИЛАСЬ ЛИ ЕГО СМЕНА К ВЫБРАННОМУ ВРЕМЕНИ
-                TimeRange shiftRange = new TimeRange(timetable.ShiftStart, timetable.ShiftEnd);
-                if (!shiftRange.HasInside(currentVisitRange))
-                {
-                    return false;
-                }
-
-                // ПОТОМ СМОТРИМ НЕ КОНфЛИКТУЕТ ЛИ С ДРУГИМИ ВИЗИТАМИ
-                List<TimeRange> visitsRanges = new List<TimeRange>();
-                foreach (Visit visit in order.Master.GetMasterVisits().Where(v => v.Id != this.Id && new DateTime(v.DateVisit.Year, v.DateVisit.Month, v.DateVisit.Day, 0, 0, 0) == dayOfVisit))
-                {
-
-                    TimeSpan timeTaken = visit.CalcEstimatedTime();
-
-
-
-                    visitsRanges.Add(new TimeRange(visit.DateVisit, visit.DateVisit.Add(timeTaken)));
-                }
-
-                foreach (TimeRange visit in visitsRanges)
-                {
-                    if (visit.OverlapsWith(currentVisitRange))
-                    {
-                        return false;
-                    }
-                }*/
+                
 
                 if (CheckTimeAvailable())
                 {

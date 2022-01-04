@@ -138,8 +138,7 @@ namespace Forms_TechServ
                     db.Entry(order).Reference(o => o.Product).Load();
                     //db.Entry(order).Reference(o => o.Product.Client).Load();
                     db.Entry(order).Reference(o => o.Workshop).Load();
-                    //db.Entry(order).Reference(o => o.Master).Load();
-                    //db.Entry(order).Reference(o => o.Master.Role).Load();
+  
                     db.Entry(order).Reference(o => o.Manager).Load();
                 }
 

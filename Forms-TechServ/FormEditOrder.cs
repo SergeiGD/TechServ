@@ -849,7 +849,7 @@ namespace Forms_TechServ
 
         private void labelProduct_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FormShowProduct formShowProduct = new FormShowProduct(true, order.Product);
+            FormShowProduct formShowProduct = new FormShowProduct(true, ProductsList.GetById(order.ProductId, true));
             formShowProduct.ShowDialog();
         }
 
