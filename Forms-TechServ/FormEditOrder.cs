@@ -92,7 +92,7 @@ namespace Forms_TechServ
 
         private void btnAddService_Click(object sender, EventArgs e)
         {
-            FormServices formServices = new FormServices(/*CategoriesList.GetById(order.Product.CategoryId, true)*/ true);
+            FormServices formServices = new FormServices(CategoriesList.GetById(order.Product.CategoryId, false));
             formServices.ShowDialog();
 
             if(formServices.service == null)

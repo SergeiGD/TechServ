@@ -57,10 +57,11 @@ namespace Forms_TechServ
             this.btnPrev = new System.Windows.Forms.Button();
             this.dataServies = new System.Windows.Forms.DataGridView();
             this.panelControl = new System.Windows.Forms.Panel();
-            this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTipPriceInfo = new System.Windows.Forms.ToolTip(this.components);
             this.btnClean = new Forms_TechServ.ManageButton();
             this.searchBtn = new Forms_TechServ.ManageButton();
+            this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipPriceInfo = new System.Windows.Forms.ToolTip(this.components);
+            this.checkBoxWithParents = new System.Windows.Forms.CheckBox();
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             this.panelFind.SuspendLayout();
@@ -74,7 +75,7 @@ namespace Forms_TechServ
             // 
             this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbName.Location = new System.Drawing.Point(88, 54);
+            this.tbName.Location = new System.Drawing.Point(101, 54);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(129, 20);
             this.tbName.TabIndex = 16;
@@ -176,6 +177,7 @@ namespace Forms_TechServ
             // 
             this.panelFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelFind.Controls.Add(this.checkBoxWithParents);
             this.panelFind.Controls.Add(this.btnSalaryInfo);
             this.panelFind.Controls.Add(this.btnAskOrDesk);
             this.panelFind.Controls.Add(this.comboBoxSortBy);
@@ -194,7 +196,7 @@ namespace Forms_TechServ
             this.panelFind.Controls.Add(this.label2);
             this.panelFind.Location = new System.Drawing.Point(0, 0);
             this.panelFind.Name = "panelFind";
-            this.panelFind.Size = new System.Drawing.Size(778, 88);
+            this.panelFind.Size = new System.Drawing.Size(778, 127);
             this.panelFind.TabIndex = 4;
             // 
             // btnSalaryInfo
@@ -216,14 +218,15 @@ namespace Forms_TechServ
             // 
             // btnAskOrDesk
             // 
-            this.btnAskOrDesk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btnAskOrDesk.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAskOrDesk.FlatAppearance.BorderSize = 0;
             this.btnAskOrDesk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAskOrDesk.IconChar = FontAwesome.Sharp.IconChar.SortAlphaDown;
             this.btnAskOrDesk.IconColor = System.Drawing.Color.Black;
             this.btnAskOrDesk.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnAskOrDesk.IconSize = 20;
-            this.btnAskOrDesk.Location = new System.Drawing.Point(487, 54);
+            this.btnAskOrDesk.Location = new System.Drawing.Point(236, 96);
             this.btnAskOrDesk.Name = "btnAskOrDesk";
             this.btnAskOrDesk.Size = new System.Drawing.Size(27, 21);
             this.btnAskOrDesk.TabIndex = 153;
@@ -233,19 +236,21 @@ namespace Forms_TechServ
             // 
             // comboBoxSortBy
             // 
-            this.comboBoxSortBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.comboBoxSortBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.comboBoxSortBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSortBy.FormattingEnabled = true;
-            this.comboBoxSortBy.Location = new System.Drawing.Point(352, 50);
+            this.comboBoxSortBy.Location = new System.Drawing.Point(101, 92);
             this.comboBoxSortBy.Name = "comboBoxSortBy";
             this.comboBoxSortBy.Size = new System.Drawing.Size(129, 21);
             this.comboBoxSortBy.TabIndex = 152;
             // 
             // label10
             // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(276, 54);
+            this.label10.Location = new System.Drawing.Point(25, 96);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(70, 13);
             this.label10.TabIndex = 151;
@@ -255,7 +260,7 @@ namespace Forms_TechServ
             // 
             this.tbID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbID.Location = new System.Drawing.Point(88, 11);
+            this.tbID.Location = new System.Drawing.Point(101, 11);
             this.tbID.Name = "tbID";
             this.tbID.Size = new System.Drawing.Size(129, 20);
             this.tbID.TabIndex = 125;
@@ -275,11 +280,12 @@ namespace Forms_TechServ
             // 
             this.tbCat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.tbCat.Enabled = false;
-            this.tbCat.Location = new System.Drawing.Point(352, 11);
+            this.tbCat.Location = new System.Drawing.Point(361, 11);
             this.tbCat.Name = "tbCat";
             this.tbCat.ReadOnly = true;
             this.tbCat.Size = new System.Drawing.Size(129, 20);
             this.tbCat.TabIndex = 119;
+            //this.tbCat.TextChanged += new System.EventHandler(this.tbCat_TextChanged);
             // 
             // btnCleanCat
             // 
@@ -290,7 +296,7 @@ namespace Forms_TechServ
             this.btnCleanCat.IconColor = System.Drawing.SystemColors.ControlText;
             this.btnCleanCat.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnCleanCat.IconSize = 17;
-            this.btnCleanCat.Location = new System.Drawing.Point(511, 11);
+            this.btnCleanCat.Location = new System.Drawing.Point(520, 11);
             this.btnCleanCat.Name = "btnCleanCat";
             this.btnCleanCat.Size = new System.Drawing.Size(18, 18);
             this.btnCleanCat.TabIndex = 117;
@@ -306,7 +312,7 @@ namespace Forms_TechServ
             this.btnFindCat.IconColor = System.Drawing.SystemColors.ControlText;
             this.btnFindCat.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnFindCat.IconSize = 17;
-            this.btnFindCat.Location = new System.Drawing.Point(487, 11);
+            this.btnFindCat.Location = new System.Drawing.Point(496, 11);
             this.btnFindCat.Name = "btnFindCat";
             this.btnFindCat.Size = new System.Drawing.Size(18, 18);
             this.btnFindCat.TabIndex = 118;
@@ -377,7 +383,7 @@ namespace Forms_TechServ
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(276, 14);
+            this.label2.Location = new System.Drawing.Point(285, 14);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 7;
@@ -422,12 +428,12 @@ namespace Forms_TechServ
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataServies.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataServies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataServies.Location = new System.Drawing.Point(0, 88);
+            this.dataServies.Location = new System.Drawing.Point(0, 133);
             this.dataServies.MultiSelect = false;
             this.dataServies.Name = "dataServies";
             this.dataServies.ReadOnly = true;
             this.dataServies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataServies.Size = new System.Drawing.Size(778, 492);
+            this.dataServies.Size = new System.Drawing.Size(778, 447);
             this.dataServies.TabIndex = 0;
             // 
             // panelControl
@@ -454,7 +460,6 @@ namespace Forms_TechServ
             this.btnClean.Text = "Отчистить фильтры";
             this.btnClean.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnClean.UseVisualStyleBackColor = false;
-            this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
             // 
             // searchBtn
             // 
@@ -470,6 +475,17 @@ namespace Forms_TechServ
             this.searchBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.searchBtn.UseVisualStyleBackColor = false;
             this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
+            // 
+            // checkBoxWithParents
+            // 
+            this.checkBoxWithParents.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.checkBoxWithParents.AutoSize = true;
+            this.checkBoxWithParents.Location = new System.Drawing.Point(288, 50);
+            this.checkBoxWithParents.Name = "checkBoxWithParents";
+            this.checkBoxWithParents.Size = new System.Drawing.Size(238, 17);
+            this.checkBoxWithParents.TabIndex = 155;
+            this.checkBoxWithParents.Text = "Показывать также услуги род. категорий";
+            this.checkBoxWithParents.UseVisualStyleBackColor = true;
             // 
             // FormServices
             // 
@@ -527,5 +543,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.ToolTip toolTipCurrentSort;
         private System.Windows.Forms.ToolTip toolTipPriceInfo;
         private FontAwesome.Sharp.IconButton btnSalaryInfo;
+        private System.Windows.Forms.CheckBox checkBoxWithParents;
     }
 }

@@ -55,12 +55,17 @@ namespace Forms_TechServ
             panelControl.Controls.Add(btnShow);
             btnShow.Click += BtnShow_Click;
 
+            checkBoxWithParents.Checked = false;
+
+
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
             mainBtn[0].Location = new Point(0, 0);
             for (int i = 1; i < mainBtn.Count(); i++)
             {
                 mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
             }
+
+            btnClean.Click += btnClean_Click;
         }
 
         public FormServices(Category category)
@@ -89,11 +94,15 @@ namespace Forms_TechServ
                 mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
             }
 
+            this.category = category;
             tbCat.Text = category.Name;
             tbCat.Tag = category;
 
             btnFindCat.Enabled = false;
             btnCleanCat.Enabled = false;
+
+            checkBoxWithParents.Checked = true;
+
 
             btnClean.Click += btnCleanInCat_Click;
         }
@@ -133,61 +142,14 @@ namespace Forms_TechServ
             btnFindCat.Enabled = false;
             btnCleanCat.Enabled = false;
 
+            checkBoxWithParents.Checked = false;
+
+
             btnClean.Click += btnCleanInCat_Click;
         }
 
         
 
-        /*public FormServices(string category, bool readOnly)
-        {
-            InitializeComponent();
-
-            this.readOnly = readOnly;
-
-            if (!readOnly)
-            {
-                ManageButton btnAdd = new ManageButton();
-                btnAdd.Text = "Добавить";
-                panelControl.Controls.Add(btnAdd);
-                btnAdd.Click += BtnAddNewService_Click;
-            }
-
-            ManageButton btnShow = new ManageButton();
-            btnShow.Text = "Просмотреть";
-            panelControl.Controls.Add(btnShow);
-            btnShow.Click += BtnShow_Click;
-
-            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
-            mainBtn[0].Location = new Point(0, 0);
-            for (int i = 1; i < mainBtn.Count(); i++)
-            {
-                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
-            }
-        }*/
-        /*public FormServices(string category, bool readOnly)
-        {
-            InitializeComponent();
-
-            if (!readOnly)
-            {
-                ManageButton btnAdd = new ManageButton();
-                btnAdd.Text = "Добавить";
-                panelControl.Controls.Add(btnAdd);
-                btnAdd.Click += BtnAddNewService_Click;
-            }
-
-            ManageButton btnShow = new ManageButton();
-            btnShow.Text = "Просмотреть";
-            panelControl.Controls.Add(btnShow);
-            btnShow.Click += BtnShow_Click;
-
-            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
-            mainBtn[0].Location = new Point(0, 0);
-            for (int i = 1; i < mainBtn.Count(); i++)
-            {
-                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
-            }
-        }*/
 
         private void FormServices_Load(object sender, EventArgs e)
         {
@@ -253,24 +215,69 @@ namespace Forms_TechServ
                 sortBy = "TimeSpanTicks";
             }
 
-            List<Service> services = ServicesList.GetService(
-                new Service() 
-                {
-                    Id = id,
-                    Name = tbName.Text,
-                    Price = numericPriceFrom.Value,
-                    Category = (Category)tbCat.Tag
-                },
-                new Service()
-                {
-                    Price = numericPriceUntil.Value
-                },
-                (bool)btnAskOrDesk.Tag,
-                sortBy,
-                (int)comboBoxShowRows.SelectedItem,
-                currentPage,
-                out rowsCount
-                );
+            List<Service> services = ServicesList.GetServices(
+                   new Service()
+                   {
+                       Id = id,
+                       Name = tbName.Text,
+                       Price = numericPriceFrom.Value,
+                       Category = (Category)tbCat.Tag
+                   },
+                   new Service()
+                   {
+                       Price = numericPriceUntil.Value
+                   },
+                   checkBoxWithParents.Checked,
+                   (bool)btnAskOrDesk.Tag,
+                   sortBy,
+                   (int)comboBoxShowRows.SelectedItem,
+                   currentPage,
+                   out rowsCount
+                   );
+
+            /*if (category == null || !checkBoxWithParents.Checked)
+            {
+                services = ServicesList.GetServices(
+                   new Service()
+                   {
+                       Id = id,
+                       Name = tbName.Text,
+                       Price = numericPriceFrom.Value,
+                       Category = (Category)tbCat.Tag
+                   },
+                   new Service()
+                   {
+                       Price = numericPriceUntil.Value
+                   },
+                   checkBoxWithParents.Checked,
+                   (bool)btnAskOrDesk.Tag,
+                   sortBy,
+                   (int)comboBoxShowRows.SelectedItem,
+                   currentPage,
+                   out rowsCount
+                   );
+            }
+            else
+            {
+                services = category.GetServices(
+                   new Service()
+                   {
+                       Id = id,
+                       Name = tbName.Text,
+                       Price = numericPriceFrom.Value,
+                       Category = (Category)tbCat.Tag
+                   },
+                   new Service()
+                   {
+                       Price = numericPriceUntil.Value
+                   },
+                   (bool)btnAskOrDesk.Tag,
+                   sortBy,
+                   (int)comboBoxShowRows.SelectedItem,
+                   currentPage,
+                   out rowsCount
+                   );
+            }*/
 
             dataServies.Rows.Clear();
             for (int i = 0; i < services.Count; i++)
@@ -375,8 +382,9 @@ namespace Forms_TechServ
             FormCategories formCategories = new FormCategories(true);
             formCategories.ShowDialog();
 
-            tbCat.Text = formCategories?.category?.Name;
             tbCat.Tag = formCategories?.category;
+            tbCat.Text = formCategories?.category?.Name;
+            
         }
 
         private void searchBtn_Click(object sender, EventArgs e)
@@ -434,8 +442,9 @@ namespace Forms_TechServ
 
         private void btnCleanCat_Click(object sender, EventArgs e)
         {
-            tbCat.Clear();
             tbCat.Tag = null;
+            tbCat.Clear();
+            
         }
 
         private void btnAskOrDesk_MouseHover(object sender, EventArgs e)
@@ -454,5 +463,7 @@ namespace Forms_TechServ
         {
             toolTipPriceInfo.SetToolTip(btnSalaryInfo, "Ноль - до скольки угодно");
         }
+
+        
     }
 }

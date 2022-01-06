@@ -104,7 +104,7 @@ namespace Forms_TechServ
             }
         }
 
-        public static List<Service> GetService(Service FilterA, Service FilterB, bool desk, string sortBy, int count, int page, out int rowsCount)
+        public static List<Service> GetServices(Service FilterA, Service FilterB, bool withParentsServices, bool desk, string sortBy, int count, int page, out int rowsCount)
         {
             using (TechContext db = new TechContext())
             {
@@ -135,10 +135,16 @@ namespace Forms_TechServ
                     services = services.Where(s => s.Price <= FilterB.Price);
                 }
 
-                if(FilterA.Category != null)
+                if(withParentsServices && FilterA.Category != null)
+                {
+                    List<Category> parents = FilterA.Category.GetParents();
+                    services = services.Where(s => parents.Any(p => p.Id == s.CategoryId));
+                }
+                else if(FilterA.Category != null)
                 {
                     services = services.Where(s => s.CategoryId == FilterA.Category.Id);
                 }
+
 
                 services = services.SortBy(sortBy, desk);
 

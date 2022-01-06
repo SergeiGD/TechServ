@@ -68,7 +68,30 @@ namespace Forms_TechServ
             }
         }
 
-       
+        public List<Category> GetParents()
+        {
+            using(TechContext db = new TechContext())
+            {
+                Category currentCat = db.Categories.Find(this.Id);
+                List<Category> parents = new List<Category>();
+
+
+                parents.Add(currentCat);
+
+
+                while (currentCat != null)
+                {
+
+                    if (currentCat.Id != this.Id && currentCat.DelTime == null)
+                        parents.Add(currentCat);
+                    currentCat = db.Categories.Find(currentCat.ParentCategoryId);
+                }
+
+                return parents;
+            }
+        }
+
+      
 
         // МЕТОД ДЛЯ ПОЛУЧЕНИЯ ПОЛНОЙ ВЕТКИ ВЫБРАННОЙ КАТЕГОРИИ
         public LinkedList<Category> GetWholeBranch()
@@ -170,7 +193,7 @@ namespace Forms_TechServ
              
         }
 
-        public static List<Category> GetEndCategories()
+        /*public static List<Category> GetEndCategories()
         {
             List<Category> categories = new List<Category>();
 
@@ -188,6 +211,6 @@ namespace Forms_TechServ
             }
 
             return categories;
-        }
+        }*/
     }
 }
