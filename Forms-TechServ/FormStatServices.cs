@@ -21,10 +21,7 @@ namespace Forms_TechServ
         {
             chartServices.Series[0].Points.Clear();
 
-            //chartProfit.ChartAreas[0].AxisX.Title = "Мастерская";
-            //chartProfit.ChartAreas[0].AxisY.Title = "Нагрузка";
 
-            //chartProfit.ChartAreas[0].AxisX.Interval = 1;
 
             List<Service> services = ServicesList.GetService();
             for (int i = 0; i < services.Count; i++)

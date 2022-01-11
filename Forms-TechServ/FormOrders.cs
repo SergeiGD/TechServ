@@ -367,6 +367,8 @@ namespace Forms_TechServ
             
             FormPickOrderType addOrder = new FormPickOrderType();         // когда добавлянем заказ по(из) клиенту, либо у формы конструктор с клиентом, который будет его ставить и лочить поле к выбором клиента, либо разные методы на добавление у класса order
             addOrder.ShowDialog();
+
+            FillGrid();
         }
 
 

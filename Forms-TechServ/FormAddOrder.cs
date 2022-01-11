@@ -40,58 +40,7 @@ namespace Forms_TechServ
 
         }
 
-        /*private void btnEditServices_Click(object sender, EventArgs e)
-        {
-
-        }*/
-
-        /*private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(ordersTab.SelectedTab.Equals(generalPage))
-            {
-                this.Size = new Size(713, 496); 
-            }
-            else if(ordersTab.SelectedTab.Equals(servicesPage))
-            {
-                this.Size = pickedSize;
-            }
-            else if(ordersTab.SelectedTab.Equals(sparePartsPage))
-            {
-                this.Size = pickedSize;
-            }
-        }
-
-        private void FormAddInOrder_ResizeEnd(object sender, EventArgs e)
-        {
-            if (!ordersTab.SelectedTab.Equals(generalPage))
-            {
-                pickedSize = this.Size;
-            }
-        }*/
-
-        /*private void btnAddService_Click(object sender, EventArgs e)
-        {
-            FormServices formServices = new FormServices(true);
-            formServices.ShowDialog();
-        }
-
-        private void btnShowService_Click(object sender, EventArgs e)
-        {
-            FormShowService showService = new FormShowService(true, null);
-            showService.ShowDialog();
-        }
-
-        private void manageButton5_Click(object sender, EventArgs e)
-        {
-            FormSpareParts formSpareParts = new FormSpareParts(true);
-            formSpareParts.ShowDialog();
-        }
-
-        private void manageButton6_Click(object sender, EventArgs e)
-        {
-            FormShowSparePart formShowSparePart = new FormShowSparePart(true, null);
-            formShowSparePart.ShowDialog();
-        }*/
+       
 
         private void FormAddOrder_Load(object sender, EventArgs e)
         {
@@ -154,10 +103,6 @@ namespace Forms_TechServ
 
         
 
-        /*private void FormAddInOrder_ResizeEnd(object sender, EventArgs e)
-        {
-            pickedSize = this.Size;
-        }*/
 
         private bool CheckFields()
         {

@@ -77,9 +77,10 @@ namespace Forms_TechServ
             }
         }
 
+        // ДЛЯ РАСЧЕТА СТАТИСТИКИ
         public int CountInOrders(DateTime from, DateTime until)
         {
-            //int count = 0;
+
             using (TechContext db = new TechContext())
             {
                 return db.OrdersServices.Include(s => s.Order).Where(s => s.ServiceId == this.Id && s.Order.Status != OrderStatus.Canceled).Count();

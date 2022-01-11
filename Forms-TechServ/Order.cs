@@ -37,7 +37,7 @@ namespace Forms_TechServ
         [Column("Id_Manager")]
         public int ManagerId { get; set; }
         [Column("Id_Manager")]
-        public Manager Manager { get; set; }
+        public Employee Manager { get; set; }
 
         [Column("Id_Master")]
         public int MasterId { get; set; }

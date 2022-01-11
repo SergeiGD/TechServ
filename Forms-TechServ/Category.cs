@@ -193,24 +193,6 @@ namespace Forms_TechServ
              
         }
 
-        /*public static List<Category> GetEndCategories()
-        {
-            List<Category> categories = new List<Category>();
-
-            using(TechContext db = new TechContext())
-            {
-                foreach (Category cat in db.Categories.Where(c => c.DelTime == null).ToList())
-                {
-                    Category child = db.Categories.Where(c => c.ParentCategoryId == cat.Id && c.DelTime == null).FirstOrDefault();
-
-                    if (child == null)
-                    {
-                        categories.Add(cat);
-                    }
-                }
-            }
-
-            return categories;
-        }*/
+        
     }
 }

@@ -50,7 +50,7 @@ namespace Forms_TechServ
                 return timetables.ToList();
             }
         }
-        // GETTIMETABLE
+
     }
 
     public static class EmployeesList
@@ -117,10 +117,7 @@ namespace Forms_TechServ
                     employees = employees.Where(m => m.RoleId == FilterA.Role.Id);
                 }
 
-                /*if (FilterA.Cat != null)
-                {
-                    
-                }*/
+                
 
                 employees = employees.SortBy(sortBy, desk);
 
@@ -169,7 +166,7 @@ namespace Forms_TechServ
             }
         }
 
-        //private DbContextTransaction transact;
+        
 
         public bool EditMaster()
         {
