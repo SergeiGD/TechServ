@@ -14,13 +14,24 @@ namespace Forms_TechServ
     public partial class FormFindEmpPosition : Form
     {
         public Role pickedRole;
+        Employee employee;
         //int pickedRowIndex;
         int currentPage = 1;
         int rowsCount;
 
+        public FormFindEmpPosition(Employee employee)
+        {
+            InitializeComponent();
+
+            this.employee = employee;
+            dataPosition.CellMouseDoubleClick += btnPick_Click;
+        }
+
         public FormFindEmpPosition()
         {
             InitializeComponent();
+
+            dataPosition.CellMouseDoubleClick += btnPick_Click;
         }
 
         private void btnPick_Click(object sender, EventArgs e)
@@ -62,10 +73,11 @@ namespace Forms_TechServ
             int.TryParse(tbID.Text, out id);                                // получаем введенное для сортировки id
 
             List<Role> positions = RolesList.GetRoles(new Role()                       // Загружаем роли, с указанными сортировками
-            {
-                Id = id,
-                Name = tbName.Text
-            },
+                {
+                    Id = id,
+                    Name = tbName.Text
+                },
+                employee,
                 (int)comboBoxShowRows.SelectedItem,
                 currentPage,
                 out rowsCount
@@ -138,6 +150,20 @@ namespace Forms_TechServ
         {
             pickedRole = RolesList.GetById(Convert.ToInt32(dataPosition.SelectedRows[0].Cells[0].Value));
             this.Close();
+        }
+
+        private void btnShow_Click(object sender, EventArgs e)
+        {
+            if(dataPosition.SelectedRows.Count > 0)
+            {
+                FormPermissions formPermissions = new FormPermissions(RolesList.GetById((int)dataPosition.SelectedRows[0].Cells[0].Value));
+                formPermissions.ShowDialog();
+
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите роль");
+            }
         }
     }
 }

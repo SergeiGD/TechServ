@@ -529,19 +529,36 @@ namespace Forms_TechServ
 
     public class Role
     {
-        //[Column("id")]
         public int Id { get; set; }
         public string Name { get; set; }
-        
+        public RoleType RoleType { get; set; }
 
-        public List<Permission> GetPermissions()
+        public List<Permission> GetPermissions(Permission FilterA, int count, int page, out int rowsCount)
         {
             using(TechContext db = new TechContext())
             {
-                List<Permission> permissions = (from p in db.RolesPermissions
-                                                where p.Role.Equals(this)
-                                                select p.Permission).ToList();
-                return permissions;
+                IEnumerable<Permission> permissions = (from p in db.RolesPermissions.Include(p => p.Permission)
+                                                where p.RoleId == this.Id
+                                                select p.Permission);
+
+                if(FilterA.Id != 0)
+                {
+                    permissions = permissions.Where(p => p.Id == FilterA.Id);
+                }
+
+                if (FilterA.Name != null && FilterA.Name != string.Empty)
+                {
+                    //query = query.Where(r => r.Name.Contains(FilterA.Name));
+                    permissions = permissions.Where(r => r.Name.IndexOf(FilterA.Name, StringComparison.OrdinalIgnoreCase) > -1);
+                }
+
+
+                rowsCount = permissions.Count();
+
+                permissions = permissions.Skip((page - 1) * count).Take(count);
+
+
+                return permissions.ToList();
             }
         }
     }
@@ -556,7 +573,7 @@ namespace Forms_TechServ
             }
         }
 
-        public static List<Role> GetRoles(Role FilterA/*, int count, int page*/, int count, int page, out int rowsCount)
+        public static List<Role> GetRoles(Role FilterA, Employee employee, int count, int page, out int rowsCount)
         {
             using (TechContext db = new TechContext())
             {
@@ -573,6 +590,18 @@ namespace Forms_TechServ
                     roles = roles.Where(r => r.Name.IndexOf(FilterA.Name, StringComparison.OrdinalIgnoreCase) > -1);
                 }
 
+                if(employee != null)
+                {
+                    if(employee.GetType() == typeof(Master))
+                    {
+                        roles = roles.Where(r => r.RoleType == RoleType.Master || r.RoleType == RoleType.Anyone);
+                    }
+                    if (employee.GetType() == typeof(Manager))
+                    {
+                        roles = roles.Where(r => r.RoleType == RoleType.Manager || r.RoleType == RoleType.Anyone);
+                    }
+                }
+
                 rowsCount = roles.Count();
 
                 roles = roles.Skip((page - 1) * count).Take(count);
@@ -582,6 +611,13 @@ namespace Forms_TechServ
 
             }
         }
+    }
+
+    public enum RoleType
+    {
+        Master,
+        Manager,
+        Anyone
     }
 
     public class Permission

@@ -236,6 +236,12 @@
     <Compile Include="FormOutOrders.Designer.cs">
       <DependentUpon>FormOutOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormPermissions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPermissions.Designer.cs">
+      <DependentUpon>FormPermissions.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormPickEmployeeType.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -519,6 +525,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormOutOrders.resx">
       <DependentUpon>FormOutOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPermissions.resx">
+      <DependentUpon>FormPermissions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPickEmployeeType.resx">
       <DependentUpon>FormPickEmployeeType.cs</DependentUpon>

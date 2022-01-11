@@ -205,3 +205,4 @@ D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormOrderServices.
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormStatWorkshopProfit.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormStatWorkshopsLoad.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormStatServices.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormPermissions.resources

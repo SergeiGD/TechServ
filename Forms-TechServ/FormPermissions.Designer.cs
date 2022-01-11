@@ -1,7 +1,7 @@
 ﻿
 namespace Forms_TechServ
 {
-    partial class FormFindEmpPosition
+    partial class FormPermissions
     {
         /// <summary>
         /// Required designer variable.
@@ -42,16 +42,14 @@ namespace Forms_TechServ
             this.label2 = new System.Windows.Forms.Label();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrev = new System.Windows.Forms.Button();
-            this.dataPosition = new System.Windows.Forms.DataGridView();
+            this.dataPermissions = new System.Windows.Forms.DataGridView();
             this.panelControl = new System.Windows.Forms.Panel();
-            this.btnPick = new Forms_TechServ.ManageButton();
             this.btnClear = new Forms_TechServ.ManageButton();
             this.btnFind = new Forms_TechServ.ManageButton();
-            this.btnShow = new Forms_TechServ.ManageButton();
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             this.panelFind.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataPosition)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataPermissions)).BeginInit();
             this.panelControl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,11 +66,11 @@ namespace Forms_TechServ
             this.panelContent.Controls.Add(this.panelFind);
             this.panelContent.Controls.Add(this.btnNext);
             this.panelContent.Controls.Add(this.btnPrev);
-            this.panelContent.Controls.Add(this.dataPosition);
+            this.panelContent.Controls.Add(this.dataPermissions);
             this.panelContent.Location = new System.Drawing.Point(0, 0);
             this.panelContent.Name = "panelContent";
             this.panelContent.Size = new System.Drawing.Size(597, 632);
-            this.panelContent.TabIndex = 9;
+            this.panelContent.TabIndex = 10;
             // 
             // comboBoxShowRows
             // 
@@ -220,51 +218,33 @@ namespace Forms_TechServ
             this.btnPrev.UseVisualStyleBackColor = false;
             this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
             // 
-            // dataPosition
+            // dataPermissions
             // 
-            this.dataPosition.AllowUserToAddRows = false;
-            this.dataPosition.AllowUserToDeleteRows = false;
-            this.dataPosition.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dataPermissions.AllowUserToAddRows = false;
+            this.dataPermissions.AllowUserToDeleteRows = false;
+            this.dataPermissions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataPosition.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataPosition.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataPosition.Location = new System.Drawing.Point(0, 53);
-            this.dataPosition.MultiSelect = false;
-            this.dataPosition.Name = "dataPosition";
-            this.dataPosition.ReadOnly = true;
-            this.dataPosition.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataPosition.Size = new System.Drawing.Size(597, 527);
-            this.dataPosition.TabIndex = 0;
-            this.dataPosition.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataPosition_CellMouseDoubleClick);
+            this.dataPermissions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataPermissions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataPermissions.Location = new System.Drawing.Point(0, 53);
+            this.dataPermissions.MultiSelect = false;
+            this.dataPermissions.Name = "dataPermissions";
+            this.dataPermissions.ReadOnly = true;
+            this.dataPermissions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataPermissions.Size = new System.Drawing.Size(597, 527);
+            this.dataPermissions.TabIndex = 0;
             // 
             // panelControl
             // 
             this.panelControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelControl.Controls.Add(this.btnShow);
-            this.panelControl.Controls.Add(this.btnPick);
             this.panelControl.Controls.Add(this.btnClear);
             this.panelControl.Controls.Add(this.btnFind);
             this.panelControl.Location = new System.Drawing.Point(597, 0);
             this.panelControl.Name = "panelControl";
             this.panelControl.Size = new System.Drawing.Size(172, 632);
-            this.panelControl.TabIndex = 10;
-            // 
-            // btnPick
-            // 
-            this.btnPick.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnPick.FlatAppearance.BorderSize = 0;
-            this.btnPick.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPick.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnPick.Location = new System.Drawing.Point(0, 120);
-            this.btnPick.Name = "btnPick";
-            this.btnPick.Size = new System.Drawing.Size(172, 40);
-            this.btnPick.TabIndex = 25;
-            this.btnPick.Text = "Выбрать";
-            this.btnPick.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPick.UseVisualStyleBackColor = false;
-            this.btnPick.Click += new System.EventHandler(this.btnPick_Click);
+            this.panelControl.TabIndex = 11;
             // 
             // btnClear
             // 
@@ -296,22 +276,7 @@ namespace Forms_TechServ
             this.btnFind.UseVisualStyleBackColor = false;
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
-            // btnShow
-            // 
-            this.btnShow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnShow.FlatAppearance.BorderSize = 0;
-            this.btnShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShow.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnShow.Location = new System.Drawing.Point(0, 80);
-            this.btnShow.Name = "btnShow";
-            this.btnShow.Size = new System.Drawing.Size(172, 40);
-            this.btnShow.TabIndex = 26;
-            this.btnShow.Text = "Просмотреть";
-            this.btnShow.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnShow.UseVisualStyleBackColor = false;
-            this.btnShow.Click += new System.EventHandler(this.btnShow_Click);
-            // 
-            // FormFindEmpPosition
+            // FormPermissions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -319,15 +284,15 @@ namespace Forms_TechServ
             this.ClientSize = new System.Drawing.Size(766, 632);
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panelContent);
-            this.Name = "FormFindEmpPosition";
-            this.Text = "FormFindEmpPosition";
-            this.Load += new System.EventHandler(this.FormFindEmpPosition_Load);
+            this.Name = "FormPermissions";
+            this.Text = "FormPermissions";
+            this.Load += new System.EventHandler(this.FormPermissions_Load);
             this.panelContent.ResumeLayout(false);
             this.panelContent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).EndInit();
             this.panelFind.ResumeLayout(false);
             this.panelFind.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataPosition)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataPermissions)).EndInit();
             this.panelControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -336,23 +301,21 @@ namespace Forms_TechServ
         #endregion
 
         private System.Windows.Forms.Panel panelContent;
+        private System.Windows.Forms.ComboBox comboBoxShowRows;
+        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label labelPageCount;
         private System.Windows.Forms.NumericUpDown numericCurrentPage;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panelFind;
+        private System.Windows.Forms.TextBox tbID;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPrev;
-        private System.Windows.Forms.DataGridView dataPosition;
-        private System.Windows.Forms.TextBox tbID;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dataPermissions;
         private System.Windows.Forms.Panel panelControl;
-        private ManageButton btnPick;
         private ManageButton btnClear;
         private ManageButton btnFind;
-        private System.Windows.Forms.ComboBox comboBoxShowRows;
-        private System.Windows.Forms.Label label7;
-        private ManageButton btnShow;
     }
 }

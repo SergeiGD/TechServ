@@ -218,7 +218,7 @@ namespace Forms_TechServ
 
         }
 
-        private void BtnManage_Click(object sender, EventArgs e)        // !!!!ВОТ ТУТ АДРЕС БУДЕТ ИЛИ НЕТ!!!!
+        private void BtnManage_Click(object sender, EventArgs e)        
         {
 
             FormAddOrder addOrder = new FormAddOrder(false);
@@ -227,7 +227,7 @@ namespace Forms_TechServ
             FillGrid();
         }
 
-        private void BtnShow_Click(object sender, EventArgs e)          // !!!!ВОТ ТУТ АДРЕС БУДЕТ ИЛИ НЕТ!!!!
+        private void BtnShow_Click(object sender, EventArgs e)          
         {
             if (dataOrders.SelectedRows.Count > 0)
             {
