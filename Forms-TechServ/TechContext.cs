@@ -19,6 +19,7 @@ namespace Forms_TechServ
         public DbSet<Visit> Visits { get; set; }
         public DbSet<VisitService> VisitsServices { get; set; }
 
+
         public DbSet<Client> Clients { get; set; }
         public DbSet<Product> Products { get; set; }
 
@@ -71,7 +72,7 @@ namespace Forms_TechServ
 
             modelBuilder.Entity<VisitService>()
                 .HasKey(c => new { c.VisitId, c.ServiceId });
-            //modelBuilder.Entity<Order>().Property(e => e.Status).conf
+
 
             modelBuilder.Configurations.Add(new Service.ServiceConfig());
 

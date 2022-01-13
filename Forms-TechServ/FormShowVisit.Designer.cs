@@ -55,6 +55,7 @@ namespace Forms_TechServ
             this.cancelBtn = new System.Windows.Forms.Button();
             this.servicesPage = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnShowService = new Forms_TechServ.ManageButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBoxShowServicesRows = new System.Windows.Forms.ComboBox();
             this.label47 = new System.Windows.Forms.Label();
@@ -68,7 +69,8 @@ namespace Forms_TechServ
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_sale = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnShowService = new Forms_TechServ.ManageButton();
+            this.labelMaster = new System.Windows.Forms.LinkLabel();
+            this.label4 = new System.Windows.Forms.Label();
             this.visitTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.panelEdit.SuspendLayout();
@@ -82,7 +84,7 @@ namespace Forms_TechServ
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(30, 224);
+            this.label3.Location = new System.Drawing.Point(30, 254);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 13);
             this.label3.TabIndex = 23;
@@ -131,7 +133,7 @@ namespace Forms_TechServ
             // labelDate
             // 
             this.labelDate.AutoSize = true;
-            this.labelDate.Location = new System.Drawing.Point(88, 224);
+            this.labelDate.Location = new System.Drawing.Point(88, 254);
             this.labelDate.Name = "labelDate";
             this.labelDate.Size = new System.Drawing.Size(35, 13);
             this.labelDate.TabIndex = 33;
@@ -158,7 +160,7 @@ namespace Forms_TechServ
             // labelAddress
             // 
             this.labelAddress.AutoSize = true;
-            this.labelAddress.Location = new System.Drawing.Point(88, 184);
+            this.labelAddress.Location = new System.Drawing.Point(88, 214);
             this.labelAddress.Name = "labelAddress";
             this.labelAddress.Size = new System.Drawing.Size(41, 13);
             this.labelAddress.TabIndex = 38;
@@ -167,7 +169,7 @@ namespace Forms_TechServ
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(30, 184);
+            this.label11.Location = new System.Drawing.Point(30, 214);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(41, 13);
             this.label11.TabIndex = 37;
@@ -176,7 +178,7 @@ namespace Forms_TechServ
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(30, 300);
+            this.label12.Location = new System.Drawing.Point(30, 330);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(61, 13);
             this.label12.TabIndex = 44;
@@ -185,7 +187,7 @@ namespace Forms_TechServ
             // labelDone
             // 
             this.labelDone.AutoSize = true;
-            this.labelDone.Location = new System.Drawing.Point(88, 300);
+            this.labelDone.Location = new System.Drawing.Point(88, 330);
             this.labelDone.Name = "labelDone";
             this.labelDone.Size = new System.Drawing.Size(19, 13);
             this.labelDone.TabIndex = 45;
@@ -238,12 +240,14 @@ namespace Forms_TechServ
             this.visitTabs.Location = new System.Drawing.Point(0, 0);
             this.visitTabs.Name = "visitTabs";
             this.visitTabs.SelectedIndex = 0;
-            this.visitTabs.Size = new System.Drawing.Size(806, 354);
+            this.visitTabs.Size = new System.Drawing.Size(806, 381);
             this.visitTabs.TabIndex = 51;
             // 
             // generalPage
             // 
             this.generalPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.generalPage.Controls.Add(this.labelMaster);
+            this.generalPage.Controls.Add(this.label4);
             this.generalPage.Controls.Add(this.labelEstimatedTime);
             this.generalPage.Controls.Add(this.label7);
             this.generalPage.Controls.Add(this.panelEdit);
@@ -266,14 +270,14 @@ namespace Forms_TechServ
             this.generalPage.Location = new System.Drawing.Point(4, 22);
             this.generalPage.Name = "generalPage";
             this.generalPage.Padding = new System.Windows.Forms.Padding(3);
-            this.generalPage.Size = new System.Drawing.Size(798, 328);
+            this.generalPage.Size = new System.Drawing.Size(798, 355);
             this.generalPage.TabIndex = 0;
             this.generalPage.Text = "Общая информация";
             // 
             // labelEstimatedTime
             // 
             this.labelEstimatedTime.AutoSize = true;
-            this.labelEstimatedTime.Location = new System.Drawing.Point(213, 261);
+            this.labelEstimatedTime.Location = new System.Drawing.Point(213, 291);
             this.labelEstimatedTime.Name = "labelEstimatedTime";
             this.labelEstimatedTime.Size = new System.Drawing.Size(38, 13);
             this.labelEstimatedTime.TabIndex = 53;
@@ -282,7 +286,7 @@ namespace Forms_TechServ
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(30, 261);
+            this.label7.Location = new System.Drawing.Point(30, 291);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(168, 13);
             this.label7.TabIndex = 52;
@@ -296,14 +300,14 @@ namespace Forms_TechServ
             this.panelEdit.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelEdit.Location = new System.Drawing.Point(625, 3);
             this.panelEdit.Name = "panelEdit";
-            this.panelEdit.Size = new System.Drawing.Size(170, 322);
+            this.panelEdit.Size = new System.Drawing.Size(170, 349);
             this.panelEdit.TabIndex = 51;
             // 
             // editBtn
             // 
             this.editBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
-            this.editBtn.Location = new System.Drawing.Point(36, 24);
+            this.editBtn.Location = new System.Drawing.Point(36, 39);
             this.editBtn.Name = "editBtn";
             this.editBtn.Size = new System.Drawing.Size(106, 43);
             this.editBtn.TabIndex = 41;
@@ -315,7 +319,7 @@ namespace Forms_TechServ
             // 
             this.deleteBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
-            this.deleteBtn.Location = new System.Drawing.Point(36, 97);
+            this.deleteBtn.Location = new System.Drawing.Point(36, 157);
             this.deleteBtn.Name = "deleteBtn";
             this.deleteBtn.Size = new System.Drawing.Size(106, 43);
             this.deleteBtn.TabIndex = 42;
@@ -327,7 +331,7 @@ namespace Forms_TechServ
             // 
             this.cancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
-            this.cancelBtn.Location = new System.Drawing.Point(36, 181);
+            this.cancelBtn.Location = new System.Drawing.Point(36, 267);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(106, 43);
             this.cancelBtn.TabIndex = 43;
@@ -356,6 +360,23 @@ namespace Forms_TechServ
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(158, 324);
             this.panel2.TabIndex = 3;
+            // 
+            // btnShowService
+            // 
+            this.btnShowService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnShowService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnShowService.FlatAppearance.BorderSize = 0;
+            this.btnShowService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShowService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnShowService.Location = new System.Drawing.Point(0, 0);
+            this.btnShowService.Name = "btnShowService";
+            this.btnShowService.Size = new System.Drawing.Size(158, 40);
+            this.btnShowService.TabIndex = 0;
+            this.btnShowService.Text = "Просмотреть";
+            this.btnShowService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnShowService.UseVisualStyleBackColor = false;
+            this.btnShowService.Click += new System.EventHandler(this.btnShowService_Click);
             // 
             // panel1
             // 
@@ -514,29 +535,32 @@ namespace Forms_TechServ
             this.column_sale.Name = "column_sale";
             this.column_sale.ReadOnly = true;
             // 
-            // btnShowService
+            // labelMaster
             // 
-            this.btnShowService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShowService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnShowService.FlatAppearance.BorderSize = 0;
-            this.btnShowService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnShowService.Location = new System.Drawing.Point(0, 0);
-            this.btnShowService.Name = "btnShowService";
-            this.btnShowService.Size = new System.Drawing.Size(158, 40);
-            this.btnShowService.TabIndex = 0;
-            this.btnShowService.Text = "Просмотреть";
-            this.btnShowService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnShowService.UseVisualStyleBackColor = false;
-            this.btnShowService.Click += new System.EventHandler(this.btnShowService_Click);
+            this.labelMaster.AutoSize = true;
+            this.labelMaster.Location = new System.Drawing.Point(88, 175);
+            this.labelMaster.Name = "labelMaster";
+            this.labelMaster.Size = new System.Drawing.Size(55, 13);
+            this.labelMaster.TabIndex = 55;
+            this.labelMaster.TabStop = true;
+            this.labelMaster.Text = "linkLabel3";
+            this.labelMaster.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.labelMaster_LinkClicked);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(30, 175);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(48, 13);
+            this.label4.TabIndex = 54;
+            this.label4.Text = "Мастер:";
             // 
             // FormShowVisit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.ClientSize = new System.Drawing.Size(806, 354);
+            this.ClientSize = new System.Drawing.Size(806, 381);
             this.Controls.Add(this.visitTabs);
             this.MaximizeBox = false;
             this.Name = "FormShowVisit";
@@ -597,5 +621,7 @@ namespace Forms_TechServ
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel2;
         private ManageButton btnShowService;
+        private System.Windows.Forms.LinkLabel labelMaster;
+        private System.Windows.Forms.Label label4;
     }
 }

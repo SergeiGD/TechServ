@@ -182,6 +182,7 @@ namespace Forms_TechServ
             // comboBoxSortBy
             // 
             this.comboBoxSortBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.comboBoxSortBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSortBy.FormattingEnabled = true;
             this.comboBoxSortBy.Location = new System.Drawing.Point(339, 88);
             this.comboBoxSortBy.Name = "comboBoxSortBy";
@@ -222,6 +223,7 @@ namespace Forms_TechServ
             this.btnCleanOrder.Size = new System.Drawing.Size(18, 18);
             this.btnCleanOrder.TabIndex = 125;
             this.btnCleanOrder.UseVisualStyleBackColor = true;
+            this.btnCleanOrder.Click += new System.EventHandler(this.btnCleanOrder_Click);
             // 
             // btnFindOrder
             // 
@@ -273,6 +275,7 @@ namespace Forms_TechServ
             this.btnCleanMaster.Size = new System.Drawing.Size(18, 18);
             this.btnCleanMaster.TabIndex = 121;
             this.btnCleanMaster.UseVisualStyleBackColor = true;
+            this.btnCleanMaster.Click += new System.EventHandler(this.btnCleanMaster_Click);
             // 
             // btnFindMaster
             // 

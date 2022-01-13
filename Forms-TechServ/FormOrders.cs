@@ -31,6 +31,8 @@ namespace Forms_TechServ
         Size filterBaseSize;
         bool readOnly;
 
+        public Order order;
+
         public FormOrders(bool forSearching)
         {
             InitializeComponent();

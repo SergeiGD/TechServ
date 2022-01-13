@@ -294,17 +294,7 @@ namespace Forms_TechServ
             FillGrid();
         }
 
-        /*private void BtnManage_Click(object sender, EventArgs e)
-        {
-            FormManageVisit manageVisit = new FormManageVisit();
-            manageVisit.ShowDialog();
-        }*/
 
-        /*private void BtnEdit_Click(object sender, EventArgs e)
-        {
-            FormEditVisit editVisit = new FormEditVisit();
-            editVisit.ShowDialog();
-        }*/
         private void BtnShow_Click(object sender, EventArgs e)
         {
             if(dataVisits.SelectedRows.Count > 0)
@@ -320,22 +310,23 @@ namespace Forms_TechServ
             }
         }
 
-        private void btnFindClient_Click(object sender, EventArgs e)
-        {
-            FormClients formClients = new FormClients(true);
-            formClients.ShowDialog();
-        }
 
         private void btnFindMaster_Click(object sender, EventArgs e)
         {
             FormMasters formMasters = new FormMasters(true);
             formMasters.ShowDialog();
+
+            tbMaster.Tag = formMasters?.master;
+            tbMaster.Text = formMasters?.master?.Name;
         }
 
         private void btnFindOrder_Click(object sender, EventArgs e)
         {
-            FormOrders formOrders = new FormOrders(true);
+            FormOutOrders formOrders = new FormOutOrders(true);
             formOrders.ShowDialog();
+
+            tbOrder.Tag = formOrders?.order;
+            tbOrder.Text = formOrders?.order?.Id.ToString();
         }
 
         private void searchBtn_Click(object sender, EventArgs e)
@@ -382,6 +373,18 @@ namespace Forms_TechServ
             datePickerUntil.Value = DateTime.Now.AddDays(14);
 
             FillGrid();
+        }
+
+        private void btnCleanMaster_Click(object sender, EventArgs e)
+        {
+            tbMaster.Tag = null;
+            tbMaster.Clear();
+        }
+
+        private void btnCleanOrder_Click(object sender, EventArgs e)
+        {
+            tbOrder.Tag = null;
+            tbOrder.Clear();
         }
 
         /*private void BtnShowInOrder_Click(object sender, EventArgs e)

@@ -61,6 +61,7 @@ namespace Forms_TechServ
             labelID.Text = visit.Id.ToString();
             labelOrder.Text = visit.Order.Id.ToString();
             labelClient.Text = visit.Order.Product.Client.Name;
+            labelMaster.Text = visit.Order.Master.Name;
             labelProduct.Text = visit.Order.Product.Name;
             labelAddress.Text = visit.Order.Address;
             labelDate.Text = visit.DateVisit.ToString();
@@ -187,6 +188,10 @@ namespace Forms_TechServ
             FillServices();
         }
 
-        
+        private void labelMaster_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FormShowMaster formShowMaster = new FormShowMaster(true, MastersList.GetById(visit.Order.MasterId, true));
+            formShowMaster.ShowDialog();
+        }
     }
 }

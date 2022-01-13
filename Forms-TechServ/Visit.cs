@@ -239,7 +239,7 @@ namespace Forms_TechServ
                         return false;
                     }
 
-                    //return true;
+
                 }
 
                 
@@ -313,10 +313,7 @@ namespace Forms_TechServ
             using(TechContext db = new TechContext())
             {
                 return db.Visits.Where(v => v.Id == id).Include(v => v.Order).Include(v => v.Order.Product).Include(v => v.Order.Product.Client).Include(o => o.Order.Master).FirstOrDefault();
-                /*if(visit != null)
-                {
-                    db.Entry(visit).Reference()
-                }*/
+
             }
         }
 
