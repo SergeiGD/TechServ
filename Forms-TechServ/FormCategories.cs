@@ -65,85 +65,25 @@ namespace Forms_TechServ
             }
         }
 
-        /*public FormCategories(bool forSearching)
-        {
-            InitializeComponent();
 
-
-
-            if (forSearching)
-            {
-                ManageButton btnPick = new ManageButton();
-                btnPick.Text = "Выбрать";
-                panelControl.Controls.Add(btnPick);
-                btnPick.Click += BtnPick_Click;
-                dataCategories.CellMouseDoubleClick += BtnPick_Click;
-
-                readOnly = true;
-            }
-            else
-            {
-                if (UserSession.Can("add_del_category"))
-                {
-                    ManageButton btnAdd = new ManageButton();
-                    btnAdd.Text = "Добавить";
-                    panelControl.Controls.Add(btnAdd);
-                    btnAdd.Click += BtnAddNewCat_Click;
-
-                    dataCategories.CellMouseDoubleClick += BtnShow_Click;
-                }
-
-                readOnly = false;
-
-
-            }
-
-            ManageButton btnShow = new ManageButton();
-            btnShow.Text = "Просмотреть";
-            panelControl.Controls.Add(btnShow);
-            btnShow.Click += BtnShow_Click;
-
-
-            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
-            mainBtn[0].Location = new Point(0, 0);
-            for (int i = 1; i < mainBtn.Count(); i++)
-            {
-                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
-            }
-        }*/
-
-        /*public FormCategories(Master master, bool readOnly)
-        {
-            InitializeComponent();
-
-            this.readOnly = readOnly;
-
-            if (!readOnly)
-            {
-                ManageButton btnAdd = new ManageButton();
-                btnAdd.Text = "Добавить";
-                panelControl.Controls.Add(btnAdd);
-                btnAdd.Click += BtnPick_Click/*BtnAddToMaster_Click;
-            }
-
-            ManageButton btnShow = new ManageButton();
-            btnShow.Text = "Просмотреть";
-            panelControl.Controls.Add(btnShow);
-            btnShow.Click += BtnShowInMaster_Click;
-
-            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
-            mainBtn[0].Location = new Point(0, 0);
-            for (int i = 1; i < mainBtn.Count(); i++)
-            {
-                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
-            }
-        }*/
 
         private void BtnPick_Click(object sender, EventArgs e)
         {
-            category = CategoriesList.GetById(Convert.ToInt32(dataCategories.SelectedRows[0].Cells[0].Value), true);
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
 
-            this.Close();                                               // и тут ретерн
+            if (dataCategories.SelectedRows.Count > 0)
+            {
+                category = CategoriesList.GetById(Convert.ToInt32(dataCategories.SelectedRows[0].Cells[0].Value), true);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите категорию");
+            }
+
         }
 
         private void BtnAddNewCat_Click(object sender, EventArgs e)
@@ -175,12 +115,21 @@ namespace Forms_TechServ
             dataCategories.Columns.Add(nameCol);
             dataCategories.Columns.Add(parentCol);
 
+            if (UserSession.Can("add_del_category") && !readOnly)
+            {
+                DataGridViewButtonColumn delCol = new DataGridViewButtonColumn();
+                delCol.FlatStyle = FlatStyle.Flat;
+                delCol.Name = "Удалить";
+                dataCategories.Columns.Add(delCol);
+
+                dataCategories.CellContentClick += DelCol_Click;
+            }
+
             btnAskOrDesk.Tag = true;
 
             comboBoxSortBy.Items.Add("id");
             comboBoxSortBy.Items.Add("Наименованию");
             comboBoxSortBy.Items.Add("Родительской категории");
-            //comboBoxSortBy.Items.Add("Номер телефона");
             comboBoxSortBy.SelectedIndex = 0;
 
             comboBoxShowRows.Items.Add(5);
@@ -238,6 +187,13 @@ namespace Forms_TechServ
                 dataCategories.Rows[i].Cells[0].Value = categories[i].Id;
                 dataCategories.Rows[i].Cells[1].Value = categories[i].Name;
                 dataCategories.Rows[i].Cells[2].Value = categories[i]?.ParentCategory?.Name;
+
+                if (dataCategories.Columns.Count > 3)
+                {
+                    dataCategories.Rows[i].Cells[3].Value = "Удалить";
+                    dataCategories.Rows[i].Cells[3].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataCategories.Rows[i].Cells[3].Style.ForeColor = Color.White;
+                }
             }
 
             //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
@@ -250,14 +206,36 @@ namespace Forms_TechServ
             labelPageCount.Text = $"из {maxPage}";
         }
 
-        /*private void BtnManage_Click(object sernder, EventArgs e)
+        private void DelCol_Click(object sender, DataGridViewCellEventArgs e)
         {
-            FormManageCategory manageCategory = new FormManageCategory();
-            manageCategory.ShowDialog();
-        }*/
+            var grid = (DataGridView)sender;
+
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                Category categoryToDel = CategoriesList.GetById((int)dataCategories.SelectedRows[0].Cells[0].Value, false);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить категорию с id {categoryToDel.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
+                {
+                    if (categoryToDel.DelCategory())
+                    {
+                        MessageBox.Show("Сотрудник успешно удалено", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FillGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("У данной категории есть дочерние элементы, пока ее нельзя удалить", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
 
         private void BtnShow_Click(object sender, EventArgs e)
         {
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
             if (dataCategories.SelectedRows.Count > 0)
             {
                 FormShowCategory showCategory = new FormShowCategory(readOnly, CategoriesList.GetById(Convert.ToInt32(dataCategories.SelectedRows[0].Cells[0].Value), true));

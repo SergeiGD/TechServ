@@ -215,8 +215,17 @@ namespace Forms_TechServ
         {
             this.Size = new Size(700, 565);
 
-            //comboBoxStatus.DataSource = Enum.GetValues(typeof(OrderStatus));
-            
+            DataGridViewButtonColumn delServiceCol = new DataGridViewButtonColumn();
+            delServiceCol.FlatStyle = FlatStyle.Flat;
+            delServiceCol.Name = "Удалить";
+            dataServies.Columns.Add(delServiceCol);
+            dataServies.CellContentClick += DelServiceCol_Click;
+
+            DataGridViewButtonColumn delSparePartCol = new DataGridViewButtonColumn();
+            delSparePartCol.FlatStyle = FlatStyle.Flat;
+            delSparePartCol.Name = "Удалить";
+            dataSpareParts.Columns.Add(delSparePartCol);
+            dataSpareParts.CellContentClick += DelSparePartCol_Click;
 
             comboBoxShowServicesRows.Items.Add(5);
             comboBoxShowServicesRows.Items.Add(20);
@@ -240,16 +249,12 @@ namespace Forms_TechServ
                 tbAddress.Text = ((OrderAtHome)order).Address;
             }
 
-            //tbProduct.Text = order.Product.Name;
-            //tbProduct.Tag = order.Product;
             tbMaster.Text = order.Master.Name;
             tbMaster.Tag = order.Master;
             //tbWorkshop.Text = order.Workshop.Location;
             //tbWorkshop.Tag = order.Workshop;
             tbComment.Text = order.ClientComment;
             labelSale.Text = order.ClientSale.ToString() + "%";
-            //labelPrepayment.Text = order.Prepayment.ToString();
-            //labelServicesCount.Text = order.CalcServicesCount().ToString(); 
             labelLeftToPay.Text = (order.FinalPrice - order.PrepaymentMade).ToString();
             numericPaid.Value = order.PrepaymentMade;
             labelProduct.Text = order.Product.Name;
@@ -324,33 +329,7 @@ namespace Forms_TechServ
 
         
 
-        /*private void ControlStatus()
-        {
-            
-            comboBoxStatus.Items.Add(OrderStatus.WaitingForDiagnostic.GetStatusString());
-            if (checkDiagnosted.Checked)
-            {
-                comboBoxStatus.Items.Add(OrderStatus.WaitingForAnswer.GetStatusString());
-            }
-            if (order.PrepaymentRequired > order.PrepaymentMade)
-            {
-                comboBoxStatus.Items.Add(OrderStatus.WaitingForPrepayment.GetStatusString());
-            }
-            comboBoxStatus.Items.Add(OrderStatus.WaitingForSpareParts.GetStatusString());
-            if (order.PrepaymentRequired == 0 || checkPrepaid.Checked)
-            {
-                comboBoxStatus.Items.Add(OrderStatus.WaitingForRepairing.GetStatusString());
-            }
-            if (order.PrepaymentMade > 0)
-            {
-                comboBoxStatus.Items.Add(OrderStatus.WaitingForRefund.GetStatusString());
-            }
-            if (checkPaid.Checked && checkRepaired.Checked)
-            {
-                comboBoxStatus.Items.Add(OrderStatus.Finished.GetStatusString());
-            }
-            comboBoxStatus.Items.Add(OrderStatus.Canceled.GetStatusString());
-        }*/
+
 
         private void btnFindClient_Click(object sender, EventArgs e)
         {
@@ -381,14 +360,7 @@ namespace Forms_TechServ
             
         }
 
-        /*private void btnFindWorkshop_Click(object sender, EventArgs e)
-        {
-            FormWorkshops formWorkshops = new FormWorkshops(true);
-            formWorkshops.ShowDialog();
 
-            tbWorkshop.Text = formWorkshops?.workshop?.Location;
-            tbWorkshop.Tag = formWorkshops?.workshop;
-        }*/
 
         private void btnAutoMaster_MouseHover(object sender, EventArgs e)
         {
@@ -416,6 +388,13 @@ namespace Forms_TechServ
                 dataServies.Rows[i].Cells[5].Value = services[i].Service.Price * services[i].Quantity - (services[i].Service.Price * services[i].Quantity * (services[i].Sale / 100));
                 dataServies.Rows[i].Cells[6].Value = services[i].Done ? "Да" : "Нет";
 
+                if (dataServies.Columns.Count > 7)
+                {
+                    dataServies.Rows[i].Cells[7].Value = "Удалить";
+                    dataServies.Rows[i].Cells[7].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataServies.Rows[i].Cells[7].Style.ForeColor = Color.White;
+
+                }
             }
 
             //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
@@ -449,6 +428,14 @@ namespace Forms_TechServ
                 dataSpareParts.Rows[i].Cells[3].Value = spareParts[i].CalcPrice();
                 dataSpareParts.Rows[i].Cells[4].Value = spareParts[i].CheckBatchesDelivered() ? "Да" : "Нет";
 
+                if (dataSpareParts.Columns.Count > 5)
+                {
+                    dataSpareParts.Rows[i].Cells[5].Value = "Удалить";
+                    dataSpareParts.Rows[i].Cells[5].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataSpareParts.Rows[i].Cells[5].Style.ForeColor = Color.White;
+
+                }
+
             }
 
             //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
@@ -466,27 +453,52 @@ namespace Forms_TechServ
         {
             if(dataServies.SelectedRows.Count > 0)
             {
-                DialogResult answer = MessageBox.Show($"Вы уверены что хотите убрать услугу с id {dataServies.SelectedRows[0].Cells[0].Value} из заказа?", "Подтвердите действие", MessageBoxButtons.YesNo);
+                DialogResult answer = MessageBox.Show($"Вы уверены что хотите убрать ВСЕ выделенные услуги из заказа?", "Подтвердите действие", MessageBoxButtons.YesNo);
                 if (answer == DialogResult.Yes)
                 {
-                    if (order.DelService(order.GetService(Convert.ToInt32(dataServies.SelectedRows[0].Cells[0].Value)))/*BatchesSparePartsList.GetById(batch.Id, Convert.ToInt32(dataSpareParts.SelectedRows[0].Cells[0].Value)).DelBatchSparePart()*/)
+                    foreach(DataGridViewRow row in dataServies.SelectedRows)
                     {
-                        FillServices();
-                        RecalcFields();
-                        MessageBox.Show("Услуга успешно удалена из заказа", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        OrderService anotherService = order.GetService(Convert.ToInt32(dataServies.Rows[row.Index].Cells[0].Value));
+                        order.DelService(anotherService);
                     }
+                    FillServices();
+                    RecalcFields();
 
                 }
             }
             else
             {
-                MessageBox.Show("Для начала выберите услугу");
+                MessageBox.Show("Для начала выберите хотя бы одну услугу");
+            }
+        }
+
+        private void DelServiceCol_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            var grid = (DataGridView)sender;
+
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                OrderService serviceToDel = order.GetService((int)dataServies.SelectedRows[0].Cells[0].Value);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить из заказа услугу с id {serviceToDel.ServiceId}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
+                {
+                    if (order.DelService(serviceToDel))
+                    {
+                        FillServices();
+                        RecalcFields();
+                        MessageBox.Show("Услуга успешно удалена из заказа", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка удаления", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
         }
 
         private void dataServies_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (lockedState)
+            if (lockedState || e.RowIndex == -1)
             {
                 return;
             }
@@ -565,7 +577,7 @@ namespace Forms_TechServ
 
         private void dataSpareParts_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (lockedState)
+            if (lockedState || e.RowIndex == -1)
             {
                 return;
             }
@@ -597,23 +609,54 @@ namespace Forms_TechServ
         {
             if(dataSpareParts.SelectedRows.Count > 0)
             {
-                DialogResult answer = MessageBox.Show("Вы уверен что хотите удалить эту деталь из заказа?", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                DialogResult answer = MessageBox.Show("Вы уверен что хотите удалить ВСЕ выделенные детали из заказа?", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if(answer == DialogResult.Yes)
                 {
-                    OrderSparePart sparePart = order.GetSparePart((int)dataSpareParts.SelectedRows[0].Cells[0].Value);
+                    foreach (DataGridViewRow row in dataSpareParts.SelectedRows)
+                    {
+                        OrderSparePart anotherSparePart = order.GetSparePart(Convert.ToInt32(dataSpareParts.Rows[row.Index].Cells[0].Value));
+                        anotherSparePart.DelSparePart();
+                    }
+                    FillSpareParts();
+                    RecalcFields();
+
+
+                    /*OrderSparePart sparePart = order.GetSparePart((int)dataSpareParts.SelectedRows[0].Cells[0].Value);
                     sparePart.DelSparePart();
                     MessageBox.Show("Деталь успешно удалена", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     FillSpareParts();
-                    RecalcFields();
+                    RecalcFields();*/
                 }
             }
             else
             {
-                MessageBox.Show("Для начала выберите деталь");
+                MessageBox.Show("Для начала выберите хотя бы одну деталь");
             }
         }
 
+        private void DelSparePartCol_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            var grid = (DataGridView)sender;
 
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                OrderSparePart sparePartToDel = order.GetSparePart((int)dataSpareParts.SelectedRows[0].Cells[0].Value);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить из заказа деталь с id {sparePartToDel.SparePart.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
+                {
+                    if (sparePartToDel.DelSparePart())
+                    {
+                        FillSpareParts();
+                        RecalcFields();
+                        MessageBox.Show("Деталь успешно удалена из заказа", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка удаления", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {

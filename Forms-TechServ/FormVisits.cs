@@ -164,6 +164,16 @@ namespace Forms_TechServ
             dataVisits.Columns.Add(dateCol);
             dataVisits.Columns.Add(timeCol);
 
+            if (UserSession.Can("add_del_visit") && !readOnly)
+            {
+                DataGridViewButtonColumn delCol = new DataGridViewButtonColumn();
+                delCol.FlatStyle = FlatStyle.Flat;
+                delCol.Name = "Удалить";
+                dataVisits.Columns.Add(delCol);
+
+                dataVisits.CellContentClick += DelCol_Click;
+            }
+
             btnAskOrDesk.Tag = true;
 
             comboBoxSortBy.Items.Add("id");
@@ -236,9 +246,40 @@ namespace Forms_TechServ
                 }
                 dataVisits.Rows[i].Cells[3].Value = visits[i].DateVisit;
                 dataVisits.Rows[i].Cells[4].Value = visits[i].CalcEstimatedTime();
+
+                if (dataVisits.Columns.Count > 5)
+                {
+                    dataVisits.Rows[i].Cells[5].Value = "Удалить";
+                    dataVisits.Rows[i].Cells[5].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataVisits.Rows[i].Cells[5].Style.ForeColor = Color.White;
+
+                }
             }
         }
 
+        private void DelCol_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            var grid = (DataGridView)sender;
+
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                Visit visitToDel = VisitsList.GetById((int)dataVisits.SelectedRows[0].Cells[0].Value);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить выезд с id {visitToDel.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
+                {
+                    if (visitToDel.DelVisit())
+                    {
+                        MessageBox.Show("Выезд был удален", "Успешно удалено", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FillGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка удаления", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+
+        }
         private void BtnAdd_Click(object sender, EventArgs e)       
         {
 
@@ -297,7 +338,12 @@ namespace Forms_TechServ
 
         private void BtnShow_Click(object sender, EventArgs e)
         {
-            if(dataVisits.SelectedRows.Count > 0)
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
+            if (dataVisits.SelectedRows.Count > 0)
             {
                 FormShowVisit showVisit = new FormShowVisit(readOnly, VisitsList.GetById((int)dataVisits.SelectedRows[0].Cells[0].Value));
                 showVisit.ShowDialog();

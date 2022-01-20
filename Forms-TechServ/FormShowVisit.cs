@@ -155,7 +155,12 @@ namespace Forms_TechServ
 
         private void btnShowService_Click(object sender, EventArgs e)
         {
-            if(dataServies.SelectedRows.Count > 0)
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
+            if (dataServies.SelectedRows.Count > 0)
             {
                 FormShowService formShowService = new FormShowService(true, ServicesList.GetById((int)dataServies.SelectedRows[0].Cells[0].Value, true));
                 formShowService.ShowDialog();

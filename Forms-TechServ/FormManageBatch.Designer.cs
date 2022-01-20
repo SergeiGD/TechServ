@@ -60,6 +60,7 @@ namespace Forms_TechServ
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.delCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.batchTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.sparePartsPage.SuspendLayout();
@@ -376,9 +377,9 @@ namespace Forms_TechServ
             this.Column2,
             this.Column3,
             this.Column4,
-            this.Column5});
+            this.Column5,
+            this.delCol});
             this.dataSpareParts.Location = new System.Drawing.Point(0, 0);
-            this.dataSpareParts.MultiSelect = false;
             this.dataSpareParts.Name = "dataSpareParts";
             this.dataSpareParts.ReadOnly = true;
             this.dataSpareParts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -419,6 +420,12 @@ namespace Forms_TechServ
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
+            // 
+            // delCol
+            // 
+            this.delCol.HeaderText = "Удалить";
+            this.delCol.Name = "delCol";
+            this.delCol.ReadOnly = true;
             // 
             // FormManageBatch
             // 
@@ -478,5 +485,6 @@ namespace Forms_TechServ
         private ManageButton btnShow;
         private ManageButton btnDel;
         private ManageButton btnAdd;
+        private System.Windows.Forms.DataGridViewButtonColumn delCol;
     }
 }

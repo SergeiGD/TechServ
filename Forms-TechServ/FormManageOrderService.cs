@@ -32,7 +32,10 @@ namespace Forms_TechServ
             InitializeComponent();
 
             this.orderService = orderService;
-            
+
+            tbComment.Text = orderService.MasterComment;
+            numericQuantity.Value = orderService.Quantity;
+            numericSale.Value = orderService.Sale;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

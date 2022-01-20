@@ -170,6 +170,16 @@ namespace Forms_TechServ
             dataServies.Columns.Add(timeCol);
             dataServies.Columns.Add(catCol);
 
+            if (UserSession.Can("add_del_service") && !readOnly)
+            {
+                DataGridViewButtonColumn delCol = new DataGridViewButtonColumn();
+                delCol.FlatStyle = FlatStyle.Flat;
+                delCol.Name = "Удалить";
+                dataServies.Columns.Add(delCol);
+
+                dataServies.CellContentClick += DelCol_Click;
+            }
+
             btnAskOrDesk.Tag = true;
 
             comboBoxSortBy.Items.Add("id");
@@ -235,49 +245,7 @@ namespace Forms_TechServ
                    out rowsCount
                    );
 
-            /*if (category == null || !checkBoxWithParents.Checked)
-            {
-                services = ServicesList.GetServices(
-                   new Service()
-                   {
-                       Id = id,
-                       Name = tbName.Text,
-                       Price = numericPriceFrom.Value,
-                       Category = (Category)tbCat.Tag
-                   },
-                   new Service()
-                   {
-                       Price = numericPriceUntil.Value
-                   },
-                   checkBoxWithParents.Checked,
-                   (bool)btnAskOrDesk.Tag,
-                   sortBy,
-                   (int)comboBoxShowRows.SelectedItem,
-                   currentPage,
-                   out rowsCount
-                   );
-            }
-            else
-            {
-                services = category.GetServices(
-                   new Service()
-                   {
-                       Id = id,
-                       Name = tbName.Text,
-                       Price = numericPriceFrom.Value,
-                       Category = (Category)tbCat.Tag
-                   },
-                   new Service()
-                   {
-                       Price = numericPriceUntil.Value
-                   },
-                   (bool)btnAskOrDesk.Tag,
-                   sortBy,
-                   (int)comboBoxShowRows.SelectedItem,
-                   currentPage,
-                   out rowsCount
-                   );
-            }*/
+            
 
             dataServies.Rows.Clear();
             for (int i = 0; i < services.Count; i++)
@@ -289,6 +257,14 @@ namespace Forms_TechServ
                 dataServies.Rows[i].Cells[2].Value = services[i].Price;
                 dataServies.Rows[i].Cells[3].Value = services[i].AvgServiceTime;
                 dataServies.Rows[i].Cells[4].Value = services[i].Category.Name;
+
+                if (dataServies.Columns.Count > 5)
+                {
+                    dataServies.Rows[i].Cells[5].Value = "Удалить";
+                    dataServies.Rows[i].Cells[5].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataServies.Rows[i].Cells[5].Style.ForeColor = Color.White;
+
+                }
             }
 
             //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
@@ -299,6 +275,29 @@ namespace Forms_TechServ
                 numericCurrentPage.Value = numericCurrentPage.Value == 0 ? 1 : numericCurrentPage.Value;
 
             labelPageCount.Text = $"из {maxPage}";
+        }
+
+        private void DelCol_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            var grid = (DataGridView)sender;
+
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                Service serviceToDel = ServicesList.GetById((int)dataServies.SelectedRows[0].Cells[0].Value, false);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить услугу с id {serviceToDel.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
+                {
+                    if (serviceToDel.DelService())
+                    {
+                        MessageBox.Show("Услуга успешно удалена", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FillGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка удаления", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
 
         private void btnCleanInCat_Click(object sender, EventArgs e)
@@ -322,7 +321,12 @@ namespace Forms_TechServ
 
         private void BtnPick_Click(object sender, EventArgs e)
         {
-            if(dataServies.SelectedRows.Count > 0)
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
+            if (dataServies.SelectedRows.Count > 0)
             {
                 service = ServicesList.GetById(Convert.ToInt32(dataServies.SelectedRows[0].Cells[0].Value), true);
 
@@ -358,7 +362,12 @@ namespace Forms_TechServ
 
         private void BtnShow_Click(object sender, EventArgs e)
         {
-            if(dataServies.SelectedRows.Count == 0)
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
+            if (dataServies.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Сначала выберите категорию");
             }

@@ -75,7 +75,16 @@ namespace Forms_TechServ
             dataWorkshops.Columns.Add(idCol);
             dataWorkshops.Columns.Add(locationCol);
             dataWorkshops.Columns.Add(phoneCol);
-            //PropertyInfo
+
+            if (UserSession.Can("add_del_branch") && !readOnly)
+            {
+                DataGridViewButtonColumn delCol = new DataGridViewButtonColumn();
+                delCol.FlatStyle = FlatStyle.Flat;
+                delCol.Name = "Удалить";
+                dataWorkshops.Columns.Add(delCol);
+
+                dataWorkshops.CellContentClick += DelCol_Click;
+            }
 
             btnAskOrDesk.Tag = true;
 
@@ -133,6 +142,14 @@ namespace Forms_TechServ
                 dataWorkshops.Rows[i].Cells[0].Value = workshops[i].Id;
                 dataWorkshops.Rows[i].Cells[1].Value = workshops[i].Location;
                 dataWorkshops.Rows[i].Cells[2].Value = workshops[i].PhoneNum;
+
+                if (dataWorkshops.Columns.Count > 3)
+                {
+                    dataWorkshops.Rows[i].Cells[3].Value = "Удалить";
+                    dataWorkshops.Rows[i].Cells[3].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataWorkshops.Rows[i].Cells[3].Style.ForeColor = Color.White;
+
+                }
             }
 
             int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);
@@ -144,10 +161,47 @@ namespace Forms_TechServ
             labelPageCount.Text = $"из {maxPage}";
         }
 
+        private void DelCol_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            var grid = (DataGridView)sender;
+
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                Workshop workshopToDel = WorkshopsList.GetById((int)dataWorkshops.SelectedRows[0].Cells[0].Value);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить филиал с id {workshopToDel.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
+                {
+                    if (workshopToDel.DelWorkshop())
+                    {
+                        MessageBox.Show("Филиал успешно удалено", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FillGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("В данном филиале еще числятся сотрудники/неизрасходованные детали/незавершенные заказы, пока его нельзя удалить", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
         private void BtnPick_Click(object sender, EventArgs e)
         {
-            workshop = WorkshopsList.GetById(Convert.ToInt32(dataWorkshops.SelectedRows[0].Cells[0].Value));
-            this.Close();                                               // и тут ретерн
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
+            if (dataWorkshops.SelectedRows.Count > 0)
+            {
+                workshop = WorkshopsList.GetById(Convert.ToInt32(dataWorkshops.SelectedRows[0].Cells[0].Value));
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите мастерскую");
+            }
+
+                                                         
         }
 
         private void BtnManage_Click(object sender, EventArgs e)
@@ -160,16 +214,27 @@ namespace Forms_TechServ
 
         private void BtnShow_Click(object sender, EventArgs e)
         {
-            FormShowWorkshop showWorkshop = new FormShowWorkshop(readOnly, WorkshopsList.GetById(Convert.ToInt32(dataWorkshops.SelectedRows[0].Cells[0].Value)));
-            showWorkshop.ShowDialog();
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
 
-            FillGrid();
+            if (dataWorkshops.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Сначала выберите мастерскую");
+            }
+            else
+            {
+
+                FormShowWorkshop showWorkshop = new FormShowWorkshop(readOnly, WorkshopsList.GetById(Convert.ToInt32(dataWorkshops.SelectedRows[0].Cells[0].Value)));
+                showWorkshop.ShowDialog();
+
+                FillGrid();
+            }
+
+            
         }
 
-        /*private void dataWorkshops_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //pickedRowIndex = e.RowIndex;
-        }*/
 
         private void searchBtn_Click(object sender, EventArgs e)
         {

@@ -17,6 +17,7 @@ namespace Forms_TechServ
         int currentPage = 1;
         Client client;                                                  // при работа с техникой из клиента
         public Product product;
+        
 
         public FormProducts(bool forSearching)
         {
@@ -118,10 +119,22 @@ namespace Forms_TechServ
             DataGridViewTextBoxColumn catCol = new DataGridViewTextBoxColumn();
             catCol.Name = "Категория";
 
+            
+
             dataProducts.Columns.Add(idCol);
             dataProducts.Columns.Add(nameCol);
             dataProducts.Columns.Add(clientCol);
             dataProducts.Columns.Add(catCol);
+
+            if (UserSession.Can("add_del_product") && !readOnly)
+            {
+                DataGridViewButtonColumn delCol = new DataGridViewButtonColumn();
+                delCol.FlatStyle = FlatStyle.Flat;
+                delCol.Name = "Удалить";
+                dataProducts.Columns.Add(delCol);
+
+                dataProducts.CellContentClick += DelCol_Click;
+            }
 
             btnAskOrDesk.Tag = true;
 
@@ -183,6 +196,14 @@ namespace Forms_TechServ
                 dataProducts.Rows[i].Cells[1].Value = products[i].Name;
                 dataProducts.Rows[i].Cells[2].Value = products[i].Client.Name;
                 dataProducts.Rows[i].Cells[3].Value = products[i].Category.Name;
+                if (dataProducts.Columns.Count > 4)
+                {
+                    dataProducts.Rows[i].Cells[4].Value = "Удалить";
+                    dataProducts.Rows[i].Cells[4].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataProducts.Rows[i].Cells[4].Style.ForeColor = Color.White;
+                    
+                }
+                
             }
 
             //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
@@ -211,9 +232,14 @@ namespace Forms_TechServ
             FillGrid();
         }
 
-        private void BtnPick_Click(object sender, EventArgs e)              // вот тут ретернить
+        private void BtnPick_Click(object sender, EventArgs e)              
         {
-            if(dataProducts.SelectedRows.Count > 0)
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
+            if (dataProducts.SelectedRows.Count > 0)
             {
                 product = ProductsList.GetById(Convert.ToInt32(dataProducts.SelectedRows[0].Cells[0].Value), true);
                 this.Close();
@@ -224,13 +250,36 @@ namespace Forms_TechServ
             }
         }
 
-        /*private void BtnEdit_Click(object sender, EventArgs e)
+        private void DelCol_Click(object sender, DataGridViewCellEventArgs e)
         {
-            FormEditProduct editProduct = new FormEditProduct();
-            editProduct.ShowDialog();
-        }*/
+            var grid = (DataGridView)sender;
+
+            if(grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                Product productToDel = ProductsList.GetById((int)dataProducts.SelectedRows[0].Cells[0].Value, false);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить технику с id {productToDel.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if(answer == DialogResult.Yes)
+                {
+                    if (productToDel.DelProduct())
+                    {
+                        MessageBox.Show("Техника была успешно удалена");
+                        FillGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("В данный момент техника ремонтируется, ее пока удалить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
         private void BtnShow_Click(object sender, EventArgs e)
         {
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
             if(dataProducts.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Сначала выберите технику");

@@ -39,10 +39,10 @@ namespace Forms_TechServ
             this.btnFindCat = new FontAwesome.Sharp.IconButton();
             this.productsTab = new System.Windows.Forms.TabControl();
             this.genralPage = new System.Windows.Forms.TabPage();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.tbClient = new System.Windows.Forms.TextBox();
             this.btnFindClient = new FontAwesome.Sharp.IconButton();
+            this.tbClient = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.productsTab.SuspendLayout();
             this.genralPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -150,28 +150,6 @@ namespace Forms_TechServ
             this.genralPage.TabIndex = 0;
             this.genralPage.Text = "Общая информация";
             // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 99);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 13);
-            this.label2.TabIndex = 148;
-            this.label2.Text = "Клиент:";
-            // 
-            // tbClient
-            // 
-            this.tbClient.Enabled = false;
-            this.tbClient.Location = new System.Drawing.Point(77, 95);
-            this.tbClient.Name = "tbClient";
-            this.tbClient.ReadOnly = true;
-            this.tbClient.Size = new System.Drawing.Size(127, 20);
-            this.tbClient.TabIndex = 149;
-            // 
             // btnFindClient
             // 
             this.btnFindClient.FlatAppearance.BorderSize = 0;
@@ -185,6 +163,29 @@ namespace Forms_TechServ
             this.btnFindClient.Size = new System.Drawing.Size(18, 23);
             this.btnFindClient.TabIndex = 150;
             this.btnFindClient.UseVisualStyleBackColor = true;
+            this.btnFindClient.Click += new System.EventHandler(this.btnFindClient_Click);
+            // 
+            // tbClient
+            // 
+            this.tbClient.Enabled = false;
+            this.tbClient.Location = new System.Drawing.Point(77, 95);
+            this.tbClient.Name = "tbClient";
+            this.tbClient.ReadOnly = true;
+            this.tbClient.Size = new System.Drawing.Size(127, 20);
+            this.tbClient.TabIndex = 149;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 99);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(46, 13);
+            this.label2.TabIndex = 148;
+            this.label2.Text = "Клиент:";
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // FormManageProduct
             // 

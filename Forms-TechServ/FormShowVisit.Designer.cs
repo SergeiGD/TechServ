@@ -47,6 +47,8 @@ namespace Forms_TechServ
             this.tbComment = new System.Windows.Forms.RichTextBox();
             this.visitTabs = new System.Windows.Forms.TabControl();
             this.generalPage = new System.Windows.Forms.TabPage();
+            this.labelMaster = new System.Windows.Forms.LinkLabel();
+            this.label4 = new System.Windows.Forms.Label();
             this.labelEstimatedTime = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panelEdit = new System.Windows.Forms.Panel();
@@ -69,8 +71,6 @@ namespace Forms_TechServ
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_sale = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.labelMaster = new System.Windows.Forms.LinkLabel();
-            this.label4 = new System.Windows.Forms.Label();
             this.visitTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.panelEdit.SuspendLayout();
@@ -274,6 +274,26 @@ namespace Forms_TechServ
             this.generalPage.TabIndex = 0;
             this.generalPage.Text = "Общая информация";
             // 
+            // labelMaster
+            // 
+            this.labelMaster.AutoSize = true;
+            this.labelMaster.Location = new System.Drawing.Point(88, 175);
+            this.labelMaster.Name = "labelMaster";
+            this.labelMaster.Size = new System.Drawing.Size(55, 13);
+            this.labelMaster.TabIndex = 55;
+            this.labelMaster.TabStop = true;
+            this.labelMaster.Text = "linkLabel3";
+            this.labelMaster.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.labelMaster_LinkClicked);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(30, 175);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(48, 13);
+            this.label4.TabIndex = 54;
+            this.label4.Text = "Мастер:";
+            // 
             // labelEstimatedTime
             // 
             this.labelEstimatedTime.AutoSize = true;
@@ -347,7 +367,7 @@ namespace Forms_TechServ
             this.servicesPage.Location = new System.Drawing.Point(4, 22);
             this.servicesPage.Name = "servicesPage";
             this.servicesPage.Padding = new System.Windows.Forms.Padding(3);
-            this.servicesPage.Size = new System.Drawing.Size(798, 328);
+            this.servicesPage.Size = new System.Drawing.Size(798, 355);
             this.servicesPage.TabIndex = 1;
             this.servicesPage.Text = "Заплнаированные услуги";
             // 
@@ -358,7 +378,7 @@ namespace Forms_TechServ
             this.panel2.Controls.Add(this.btnShowService);
             this.panel2.Location = new System.Drawing.Point(641, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(158, 324);
+            this.panel2.Size = new System.Drawing.Size(158, 352);
             this.panel2.TabIndex = 3;
             // 
             // btnShowService
@@ -393,7 +413,7 @@ namespace Forms_TechServ
             this.panel1.Controls.Add(this.dataServies);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(641, 324);
+            this.panel1.Size = new System.Drawing.Size(641, 352);
             this.panel1.TabIndex = 2;
             // 
             // comboBoxShowServicesRows
@@ -401,7 +421,7 @@ namespace Forms_TechServ
             this.comboBoxShowServicesRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.comboBoxShowServicesRows.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxShowServicesRows.FormattingEnabled = true;
-            this.comboBoxShowServicesRows.Location = new System.Drawing.Point(437, 295);
+            this.comboBoxShowServicesRows.Location = new System.Drawing.Point(437, 323);
             this.comboBoxShowServicesRows.Name = "comboBoxShowServicesRows";
             this.comboBoxShowServicesRows.Size = new System.Drawing.Size(62, 21);
             this.comboBoxShowServicesRows.TabIndex = 18;
@@ -412,7 +432,7 @@ namespace Forms_TechServ
             this.label47.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label47.AutoSize = true;
             this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label47.Location = new System.Drawing.Point(324, 296);
+            this.label47.Location = new System.Drawing.Point(324, 324);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(107, 17);
             this.label47.TabIndex = 17;
@@ -423,7 +443,7 @@ namespace Forms_TechServ
             this.labelServicesPageCout.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.labelServicesPageCout.AutoSize = true;
             this.labelServicesPageCout.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.labelServicesPageCout.Location = new System.Drawing.Point(265, 296);
+            this.labelServicesPageCout.Location = new System.Drawing.Point(265, 324);
             this.labelServicesPageCout.Name = "labelServicesPageCout";
             this.labelServicesPageCout.Size = new System.Drawing.Size(36, 17);
             this.labelServicesPageCout.TabIndex = 10;
@@ -432,7 +452,7 @@ namespace Forms_TechServ
             // numericCurrentServicePage
             // 
             this.numericCurrentServicePage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.numericCurrentServicePage.Location = new System.Drawing.Point(214, 297);
+            this.numericCurrentServicePage.Location = new System.Drawing.Point(214, 325);
             this.numericCurrentServicePage.Minimum = new decimal(new int[] {
             1,
             0,
@@ -453,7 +473,7 @@ namespace Forms_TechServ
             this.label28.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label28.Location = new System.Drawing.Point(136, 296);
+            this.label28.Location = new System.Drawing.Point(136, 324);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(72, 17);
             this.label28.TabIndex = 8;
@@ -466,7 +486,7 @@ namespace Forms_TechServ
             this.btnNextService.FlatAppearance.BorderSize = 0;
             this.btnNextService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNextService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.btnNextService.Location = new System.Drawing.Point(511, 284);
+            this.btnNextService.Location = new System.Drawing.Point(511, 312);
             this.btnNextService.Name = "btnNextService";
             this.btnNextService.Size = new System.Drawing.Size(130, 40);
             this.btnNextService.TabIndex = 4;
@@ -481,7 +501,7 @@ namespace Forms_TechServ
             this.btnPrevService.FlatAppearance.BorderSize = 0;
             this.btnPrevService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrevService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.btnPrevService.Location = new System.Drawing.Point(0, 284);
+            this.btnPrevService.Location = new System.Drawing.Point(0, 312);
             this.btnPrevService.Name = "btnPrevService";
             this.btnPrevService.Size = new System.Drawing.Size(130, 40);
             this.btnPrevService.TabIndex = 3;
@@ -508,7 +528,7 @@ namespace Forms_TechServ
             this.dataServies.Name = "dataServies";
             this.dataServies.ReadOnly = true;
             this.dataServies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataServies.Size = new System.Drawing.Size(641, 278);
+            this.dataServies.Size = new System.Drawing.Size(641, 306);
             this.dataServies.TabIndex = 1;
             // 
             // Column1
@@ -534,26 +554,6 @@ namespace Forms_TechServ
             this.column_sale.HeaderText = "Примерное время выполнения";
             this.column_sale.Name = "column_sale";
             this.column_sale.ReadOnly = true;
-            // 
-            // labelMaster
-            // 
-            this.labelMaster.AutoSize = true;
-            this.labelMaster.Location = new System.Drawing.Point(88, 175);
-            this.labelMaster.Name = "labelMaster";
-            this.labelMaster.Size = new System.Drawing.Size(55, 13);
-            this.labelMaster.TabIndex = 55;
-            this.labelMaster.TabStop = true;
-            this.labelMaster.Text = "linkLabel3";
-            this.labelMaster.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.labelMaster_LinkClicked);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(30, 175);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(48, 13);
-            this.label4.TabIndex = 54;
-            this.label4.Text = "Мастер:";
             // 
             // FormShowVisit
             // 

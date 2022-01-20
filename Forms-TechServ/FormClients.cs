@@ -85,13 +85,22 @@ namespace Forms_TechServ
             dataClients.Columns.Add(phoneCol);
             dataClients.Columns.Add(ordersCountCol);
 
+            if (UserSession.Can("add_del_client") && !readOnly)
+            {
+                DataGridViewButtonColumn delCol = new DataGridViewButtonColumn();
+                delCol.FlatStyle = FlatStyle.Flat;
+                delCol.Name = "Удалить";
+                dataClients.Columns.Add(delCol);
+
+                dataClients.CellContentClick += DelCol_Click;
+            }
+
 
             btnAskOrDesk.Tag = true;
 
             comboBoxSortBy.Items.Add("id");
             comboBoxSortBy.Items.Add("Имени");
             comboBoxSortBy.Items.Add("Кол-ву заказов");
-            //comboBoxSortBy.Items.Add("Номер телефона");
             comboBoxSortBy.SelectedIndex = 0;
 
             comboBoxShowRows.Items.Add(5);
@@ -148,8 +157,16 @@ namespace Forms_TechServ
                 dataClients.Rows[i].Cells[0].Value = clients[i].Id;
                 dataClients.Rows[i].Cells[1].Value = clients[i].Name;
                 dataClients.Rows[i].Cells[2].Value = clients[i].PhoneNum;
-                dataClients.Rows[i].Cells[3].Value = clients[i].CountClientOrders();                         // вот сюда кол-во заказов через GetOrder().Count наверное
-                
+                dataClients.Rows[i].Cells[3].Value = clients[i].CountClientOrders();
+
+                if (dataClients.Columns.Count > 4)
+                {
+                    dataClients.Rows[i].Cells[4].Value = "Удалить";
+                    dataClients.Rows[i].Cells[4].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataClients.Rows[i].Cells[4].Style.ForeColor = Color.White;
+
+                }
+
             }
 
             //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
@@ -171,15 +188,56 @@ namespace Forms_TechServ
             FillGrid();
         }
 
-        private void BtnPick_Click(object sender, EventArgs e)          // вот тут ретернить выбранного клиента
+        private void DelCol_Click(object sender, DataGridViewCellEventArgs e)
         {
-            client = ClientsList.GetById(Convert.ToInt32(dataClients.SelectedRows[0].Cells[0].Value));
-            this.Close();                                               // и тут ретерн
+            var grid = (DataGridView)sender;
+
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                Client clientToDel = ClientsList.GetById((int)dataClients.SelectedRows[0].Cells[0].Value);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить клиента с id {clientToDel.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
+                {
+                    if (clientToDel.DelClient())
+                    {
+                        MessageBox.Show("Клиент успешно удалено", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FillGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("У данного клиента есть активные заказы, пока его нельзя удалить", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void BtnPick_Click(object sender, EventArgs e)       
+        {
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
+            if (dataClients.SelectedRows.Count > 0)
+            {
+                client = ClientsList.GetById(Convert.ToInt32(dataClients.SelectedRows[0].Cells[0].Value));
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите клиента");
+            }
+                                                           
         }
 
         private void BtnShow_Click(object sender, EventArgs e)
         {
-            if(dataClients.SelectedRows.Count > 0)
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
+            if (dataClients.SelectedRows.Count > 0)
             {
                 FormShowClient showClient = new FormShowClient(readOnly, ClientsList.GetById(Convert.ToInt32(dataClients.SelectedRows[0].Cells[0].Value)));
                 showClient.ShowDialog();

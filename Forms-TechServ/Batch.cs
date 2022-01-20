@@ -186,6 +186,8 @@ namespace Forms_TechServ
             {
                 if(this.DateDelivered == null)
                 {
+
+
                     db.OrdersSpareParts.RemoveRange(db.OrdersSpareParts.Where(s => s.BatchId == this.Id && s.SparePartId == sparePart.SparePartId));
 
                     db.Entry(sparePart).State = EntityState.Deleted;
@@ -208,12 +210,18 @@ namespace Forms_TechServ
             }
         }
 
-        public bool EditSparePart(BatchSparePart sparePart)
+        public bool EditSparePart(BatchSparePart sparePart, bool delInOrders)
         {
             using (TechContext db = new TechContext())
             {
                 if (this.DateDelivered == null)
                 {
+                    if (delInOrders)
+                    {
+                        db.OrdersSpareParts.RemoveRange(db.OrdersSpareParts.Where(s => s.BatchId == this.Id && s.SparePartId == sparePart.SparePartId));
+                    }
+                    
+
                     db.Entry(sparePart).State = EntityState.Modified;
 
                     db.SaveChanges();

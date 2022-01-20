@@ -167,8 +167,6 @@ namespace Forms_TechServ
             workshopCol.Name = "Мастерская";
 
             DataGridViewTextBoxColumn infoCol = new DataGridViewTextBoxColumn();
-            
-
             if (sparePart != null)
             {
                 infoCol.Name = "Кол-во деталей";
@@ -181,6 +179,7 @@ namespace Forms_TechServ
             
             DataGridViewTextBoxColumn deliveredCol = new DataGridViewTextBoxColumn();
             deliveredCol.Name = "Дата прибытия";
+            deliveredCol.SortMode = DataGridViewColumnSortMode.NotSortable;             // сортируем только с помощью отдельного поля для сортировки, т.к. разные типы данных могут быть
 
             dataBatches.Columns.Add(idCol);
             dataBatches.Columns.Add(trackNumCol);
@@ -188,6 +187,15 @@ namespace Forms_TechServ
             dataBatches.Columns.Add(infoCol);
             dataBatches.Columns.Add(deliveredCol);
 
+            if (UserSession.Can("add_del_branch") && !readOnly)
+            {
+                DataGridViewButtonColumn delCol = new DataGridViewButtonColumn();
+                delCol.FlatStyle = FlatStyle.Flat;
+                delCol.Name = "Удалить";
+                dataBatches.Columns.Add(delCol);
+
+                dataBatches.CellContentClick += DelCol_Click;
+            }
 
             btnAskOrDesk.Tag = true;
 
@@ -211,6 +219,7 @@ namespace Forms_TechServ
 
             FillGrid();
         }
+
 
         private void FillGrid()
         {
@@ -328,6 +337,12 @@ namespace Forms_TechServ
                     dataBatches.Rows[i].Cells[4].Value = "В пути";
                 }
 
+                if (dataBatches.Columns.Count > 5)
+                {
+                    dataBatches.Rows[i].Cells[5].Value = "Удалить";
+                    dataBatches.Rows[i].Cells[5].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataBatches.Rows[i].Cells[5].Style.ForeColor = Color.White;
+                }
             }
 
             //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
@@ -341,9 +356,37 @@ namespace Forms_TechServ
 
         }
 
+        private void DelCol_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            var grid = (DataGridView)sender;
+
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                Batch batchToDel = BatchesList.GetById((int)dataBatches.SelectedRows[0].Cells[0].Value);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить поставку с id {batchToDel.Id}? Это также приведет к удалению деталей из этой поставки из заказов, где они уже зарезервированы", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
+                {
+                    if (batchToDel.DelBatch())
+                    {
+                        MessageBox.Show("Поставка успешно удалена", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FillGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Нельзя удалить уже прибывшую поставку", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
         private void BtnPick_Click(object sender, EventArgs e)          // вот тут ретернить выбранного клиента
         {
-            if(dataBatches.SelectedRows.Count > 0)
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
+            if (dataBatches.SelectedRows.Count > 0)
             {
                 batch = BatchesList.GetById((int)dataBatches.SelectedRows[0].Cells[0].Value);
                 this.Close();
@@ -394,7 +437,12 @@ namespace Forms_TechServ
 
         private void BtnShow_Click(object sender, EventArgs e)
         {
-            if(dataBatches.SelectedRows.Count > 0)
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
+            if (dataBatches.SelectedRows.Count > 0)
             {
                 FormShowBatch showBatch = new FormShowBatch(readOnly, BatchesList.GetById(Convert.ToInt32(dataBatches.SelectedRows[0].Cells[0].Value)));
                 showBatch.ShowDialog();

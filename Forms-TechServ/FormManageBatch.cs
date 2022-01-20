@@ -42,30 +42,7 @@ namespace Forms_TechServ
             }
 
             this.FormClosing += CheckSpareParts;
-            /*ManageButton btnAdd = new ManageButton();
-            btnAdd.Text = "Добавить";
-            panelControl.Controls.Add(btnAdd);
-            btnAdd.Click += btnAddSparePart_Click;
 
-            ManageButton btnDel = new ManageButton();
-            btnDel.Text = "Удалить";
-            panelControl.Controls.Add(btnDel);
-            btnDel.Click += btnDeleteSparePart_Click;
-
-
-            ManageButton btnShow = new ManageButton();
-            btnShow.Text = "Просмотреть";
-            panelControl.Controls.Add(btnShow);
-            btnShow.Click += btnShowSparePart_Click;
-
-            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
-            mainBtn[0].Location = new Point(0, 0);
-
-
-            for (int i = 1; i < mainBtn.Count(); i++)
-            {
-                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
-            }*/
         }
 
         public FormManageBatch(Workshop workshop)         // ЕСЛИ ИЗМЕНЕНИЯ ПРОИСХОДИТ ИЗ МАСТЕРСКОЙ  (formManageWorkshop)
@@ -103,6 +80,9 @@ namespace Forms_TechServ
                 {
                     checkDelivered.Checked = true;
                 }
+
+
+                dataSpareParts.CellContentClick += DelCol_Click;
 
                 comboBoxShowSparePartsRows.Items.Add(5);
                 comboBoxShowSparePartsRows.Items.Add(20);
@@ -253,6 +233,14 @@ namespace Forms_TechServ
                 dataSpareParts.Rows[i].Cells[3].Value = spareParts[i].Quantity;
                 dataSpareParts.Rows[i].Cells[4].Value = spareParts[i].Quantity * spareParts[i].UnitPrice;
 
+                if (dataSpareParts.Columns.Count > 5)
+                {
+                    dataSpareParts.Rows[i].Cells[5].Value = "Удалить";
+                    dataSpareParts.Rows[i].Cells[5].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataSpareParts.Rows[i].Cells[5].Style.ForeColor = Color.White;
+
+                }
+
             }
 
             //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
@@ -300,14 +288,17 @@ namespace Forms_TechServ
             }
         }
 
-        private void btnDeleteSparePart_Click(object sender, EventArgs e)
+        private void DelCol_Click(object sender, DataGridViewCellEventArgs e)
         {
-            if(dataSpareParts.SelectedRows.Count > 0)
+            var grid = (DataGridView)sender;
+
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                DialogResult answer = MessageBox.Show("Вы уверены что хотите убрать эту деталь из поставки?", "Подтвердите действие", MessageBoxButtons.YesNo);
+                BatchSparePart sparePartToDel = batch.GetSparePart((int)dataSpareParts.SelectedRows[0].Cells[0].Value);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите убрать из заказа деталь с id {sparePartToDel.SparePartId}? Это также приведет к удалению этих деталей из заказов, где они уже зарезервированы", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (answer == DialogResult.Yes)
                 {
-                    if (batch.DelSparePart(batch.GetSparePart(Convert.ToInt32(dataSpareParts.SelectedRows[0].Cells[0].Value)))/*BatchesSparePartsList.GetById(batch.Id, Convert.ToInt32(dataSpareParts.SelectedRows[0].Cells[0].Value)).DelBatchSparePart()*/)
+                    if (batch.DelSparePart(sparePartToDel))
                     {
                         FillSpareParts();
                         MessageBox.Show("Деталь успешно удалена из поставки", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -318,15 +309,46 @@ namespace Forms_TechServ
                     }
                 }
             }
+        }
+
+        private void btnDeleteSparePart_Click(object sender, EventArgs e)
+        {
+            if(dataSpareParts.SelectedRows.Count > 0)
+            {
+                DialogResult answer = MessageBox.Show("Вы уверены что хотите убрать эту ВСЕ выделенные детали из поставки? Это также приведет к удалению этих деталей из заказов, где они уже зарезервированы", "Подтвердите действие", MessageBoxButtons.YesNo);
+                if (answer == DialogResult.Yes)
+                {
+                    foreach (DataGridViewRow row in dataSpareParts.SelectedRows)
+                    {
+                        BatchSparePart anotherSparePart = batch.GetSparePart((int)dataSpareParts.Rows[row.Index].Cells[0].Value);
+                        if (!batch.DelSparePart(anotherSparePart))
+                        {
+                            MessageBox.Show("Эта поставку уже прибыла, ее изменить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
+                    FillSpareParts();
+                    MessageBox.Show("Детали успешно удалены из поставки", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
             else
             {
-                MessageBox.Show("Для начала выберите детали");
+                MessageBox.Show("Для начала выберите хотя бы одну детали");
             }
         }
 
         private void dataSpareParts_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
             BatchSparePart batchSparePart = batch.GetSparePart(Convert.ToInt32(dataSpareParts.SelectedRows[0].Cells[0].Value));
+
+            int prevQuantity = batchSparePart.Quantity;
+            bool delInOrder = false;
+
             FormManageBatchSparePart formManageBatchSparePart = new FormManageBatchSparePart(batchSparePart);//batchSparePart.Quantity, batchSparePart.UnitPrice);
             formManageBatchSparePart.ShowDialog();
 
@@ -335,7 +357,17 @@ namespace Forms_TechServ
                 return;
             }
 
-            if (batch.EditSparePart(formManageBatchSparePart.batchSparePart))
+            if(formManageBatchSparePart.batchSparePart.Quantity < prevQuantity)
+            {
+                DialogResult answer = MessageBox.Show("Произошло уменьшее кол-во деталей в поставке, сохранение этих действий приведет к удалению этой детали из заказов, где они уже зарезервированы", "Хотите продолжить?", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if(answer != DialogResult.Yes)
+                {
+                    return;
+                }
+                delInOrder = true;
+            }
+
+            if (batch.EditSparePart(formManageBatchSparePart.batchSparePart, delInOrder))
             {
                 FillSpareParts();
                 MessageBox.Show("Данные о детали успешно изменены", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);

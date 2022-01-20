@@ -20,8 +20,6 @@ namespace Forms_TechServ
         int rowsCount;
         Size pickedSize = new Size(1078, 481);
 
-        //TabPage ordersPage = new TabPage("Заказы");
-        //TabPage visitsPage = new TabPage("Выезды");
 
         public FormManageMaster()
         {
@@ -38,8 +36,6 @@ namespace Forms_TechServ
         {
             InitializeComponent();
 
-            //masterTabs.TabPages.Add(ordersPage);
-            //masterTabs.TabPages.Add(visitsPage);
 
             //this.master = master;
             btnAction.Text = "Сохранить";
@@ -76,14 +72,7 @@ namespace Forms_TechServ
             {
                 this.Size = pickedSize;
 
-                /*FormCategories formCategories = new FormCategories(3, false);
-
-                formCategories.TopLevel = false;
-                formCategories.FormBorderStyle = FormBorderStyle.None;
-                categoriesPage.Controls.Add(formCategories);
-                formCategories.Dock = DockStyle.Fill;
-                formCategories.BringToFront();
-                formCategories.Show();*/
+   
             }
             else if(masterTabs.SelectedTab.Equals(timetablePage))
             {
@@ -98,32 +87,7 @@ namespace Forms_TechServ
                 formTimetalbe.BringToFront();
                 formTimetalbe.Show();
             }
-            /*else if (masterTabs.SelectedTab.Equals(ordersPage))
-            {
-                this.Size = pickedSize;
 
-                FormOrders formOrders = new FormOrders("ad", false);
-
-                formOrders.TopLevel = false;
-                formOrders.FormBorderStyle = FormBorderStyle.None;
-                ordersPage.Controls.Add(formOrders);
-                formOrders.Dock = DockStyle.Fill;
-                formOrders.BringToFront();
-                formOrders.Show();
-            }
-            else if (masterTabs.SelectedTab.Equals(visitsPage))
-            {
-                this.Size = pickedSize;
-
-                FormVisits formVisits = new FormVisits("asd", false);
-
-                formVisits.TopLevel = false;
-                formVisits.FormBorderStyle = FormBorderStyle.None;
-                visitsPage.Controls.Add(formVisits);
-                formVisits.Dock = DockStyle.Fill;
-                formVisits.BringToFront();
-                formVisits.Show();
-            }*/
         }
 
         private void FormManageMaster_ResizeEnd(object sender, EventArgs e)
@@ -161,6 +125,11 @@ namespace Forms_TechServ
 
         private void showCategoryBtn_Click(object sender, EventArgs e)
         {
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
             if (dataCategories.SelectedRows.Count > 0)
             {
                 FormShowCategory formShowCategory = new FormShowCategory(true, CategoriesList.GetById(Convert.ToInt32(dataCategories.SelectedRows[0].Cells[0].Value), true));                       // вот тут просмотр
@@ -285,6 +254,13 @@ namespace Forms_TechServ
             dataCategories.Columns.Add(idCol);
             dataCategories.Columns.Add(nameCol);
 
+            DataGridViewButtonColumn delCol = new DataGridViewButtonColumn();
+            delCol.FlatStyle = FlatStyle.Flat;
+            delCol.Name = "Удалить";
+            dataCategories.Columns.Add(delCol);
+
+            dataCategories.CellContentClick += DelCol_Click;
+
             comboBoxShowCatRows.Items.Add(5);
             comboBoxShowCatRows.Items.Add(20);
             comboBoxShowCatRows.Items.Add(30);
@@ -321,6 +297,14 @@ namespace Forms_TechServ
 
                 dataCategories.Rows[i].Cells[0].Value = cats[i].Id;
                 dataCategories.Rows[i].Cells[1].Value = cats[i].Name;
+
+                if (dataCategories.Columns.Count > 2)
+                {
+                    dataCategories.Rows[i].Cells[2].Value = "Удалить";
+                    dataCategories.Rows[i].Cells[2].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataCategories.Rows[i].Cells[2].Style.ForeColor = Color.White;
+
+                }
             }
 
             int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowCatRows.SelectedItem);
@@ -332,32 +316,29 @@ namespace Forms_TechServ
             labelCatPagesCount.Text = $"из {maxPage}";
         }
 
-        private void deleteCategoryBtn_Click(object sender, EventArgs e)
+        private void DelCol_Click(object sender, DataGridViewCellEventArgs e)
         {
-            DialogResult answer = MessageBox.Show("Вы уверены что хотите убрать эту категорию у мастера?", "Подтвердите действие", MessageBoxButtons.YesNo);
-            if(answer == DialogResult.Yes)
+            var grid = (DataGridView)sender;
+
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                if (dataCategories.SelectedRows.Count > 0)
+                Category categoryToDel = CategoriesList.GetById((int)dataCategories.SelectedRows[0].Cells[0].Value, false);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить у мастера категорию с id {categoryToDel.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
                 {
-                    if (master.DelMasterCategory(CategoriesList.GetById(Convert.ToInt32(dataCategories.SelectedRows[0].Cells[0].Value), true)))
+                    if (master.DelMasterCategory(categoryToDel))
                     {
+                        MessageBox.Show("Категорию у мастера успешно удалена", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         FillCategories();
-                        MessageBox.Show("Категория успешно удалена");
                     }
                     else
                     {
-                        MessageBox.Show("У мастера нету такой категории", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Ошибка удаления", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Для начала выберите категорию");
-                }
-                
             }
-            
-            
         }
+
 
         private void comboBoxShowCatRows_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -105,6 +105,16 @@ namespace Forms_TechServ
             dataEmployees.Columns.Add(branchCol);
             dataEmployees.Columns.Add(roleCol);
 
+            if (UserSession.Can("add_del_employee") && !readOnly)
+            {
+                DataGridViewButtonColumn delCol = new DataGridViewButtonColumn();
+                delCol.FlatStyle = FlatStyle.Flat;
+                delCol.Name = "Удалить";
+                dataEmployees.Columns.Add(delCol);
+
+                dataEmployees.CellContentClick += DelCol_Click;
+            }
+
             btnAskOrDesk.Tag = true;
 
             comboBoxSortBy.Items.Add("id");
@@ -123,9 +133,7 @@ namespace Forms_TechServ
 
             FillGrid();
 
-            /*int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : rowsCount / (int)comboBoxShowRows.SelectedItem;   // устанавливаем начальное кол-во страниц
-            numericCurrentPage.Maximum = maxPage;
-            labelPageCount.Text = $"из {maxPage}";*/
+
 
         }
 
@@ -183,6 +191,14 @@ namespace Forms_TechServ
                 dataEmployees.Rows[i].Cells[3].Value = employees[i].Salary;
                 dataEmployees.Rows[i].Cells[4].Value = employees[i].Workshop.Location;
                 dataEmployees.Rows[i].Cells[5].Value = employees[i].Role.Name;
+
+                if (dataEmployees.Columns.Count > 6)
+                {
+                    dataEmployees.Rows[i].Cells[6].Value = "Удалить";
+                    dataEmployees.Rows[i].Cells[6].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataEmployees.Rows[i].Cells[6].Style.ForeColor = Color.White;
+
+                }
             }
 
             // Расчитываем кол-во страниц
@@ -195,6 +211,37 @@ namespace Forms_TechServ
 
             labelPageCount.Text = $"из {maxPage}";
         }
+
+
+        private void DelCol_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            var grid = (DataGridView)sender;
+
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                Employee employeeToDel = EmployeesList.GetById((int)dataEmployees.SelectedRows[0].Cells[0].Value, false);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить сотрудника с id {employeeToDel.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
+                {
+                    switch (employeeToDel)
+                    {
+                        case Master master when master.DelMaster():
+                            MessageBox.Show("Сотрудник успешно удалено", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            FillGrid();
+                            break;
+                        case Manager manager when manager.DelManager():
+                            MessageBox.Show("Сотрудник успешно удалено", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            FillGrid();
+                            break;
+                        default:
+                            MessageBox.Show("У сотрудника есть незавершенный заказ, пока его удалить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+
+                    }
+                }
+            }
+        }
+
 
         private void BtnManage_Click(object sender, EventArgs e)
         {
@@ -216,7 +263,12 @@ namespace Forms_TechServ
 
         private void BtnShow_Click(object sender, EventArgs e)
         {
-            if(dataEmployees.SelectedRows.Count > 0)
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
+            if (dataEmployees.SelectedRows.Count > 0)
             {
                 Employee employee = EmployeesList.GetById(Convert.ToInt32(dataEmployees.SelectedRows[0].Cells[0].Value), true);     // получаем выбранного сотрудника
 

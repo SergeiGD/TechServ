@@ -32,6 +32,7 @@ namespace Forms_TechServ
             this.components = new System.ComponentModel.Container();
             this.masterTabs = new System.Windows.Forms.TabControl();
             this.generalPage = new System.Windows.Forms.TabPage();
+            this.tbPhoneNum = new System.Windows.Forms.MaskedTextBox();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.btnAction = new System.Windows.Forms.Button();
@@ -52,7 +53,6 @@ namespace Forms_TechServ
             this.categoriesPage = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.showCategoryBtn = new Forms_TechServ.ManageButton();
-            this.deleteCategoryBtn = new Forms_TechServ.ManageButton();
             this.addCategoryBtn = new Forms_TechServ.ManageButton();
             this.panel3 = new System.Windows.Forms.Panel();
             this.comboBoxShowCatRows = new System.Windows.Forms.ComboBox();
@@ -65,7 +65,6 @@ namespace Forms_TechServ
             this.dataCategories = new System.Windows.Forms.DataGridView();
             this.timetablePage = new System.Windows.Forms.TabPage();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.tbPhoneNum = new System.Windows.Forms.MaskedTextBox();
             this.masterTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSalary)).BeginInit();
@@ -117,6 +116,14 @@ namespace Forms_TechServ
             this.generalPage.Size = new System.Drawing.Size(752, 260);
             this.generalPage.TabIndex = 0;
             this.generalPage.Text = "Общая информация";
+            // 
+            // tbPhoneNum
+            // 
+            this.tbPhoneNum.Location = new System.Drawing.Point(123, 64);
+            this.tbPhoneNum.Mask = "(+70)000000000";
+            this.tbPhoneNum.Name = "tbPhoneNum";
+            this.tbPhoneNum.Size = new System.Drawing.Size(113, 20);
+            this.tbPhoneNum.TabIndex = 174;
             // 
             // tbPassword
             // 
@@ -317,7 +324,6 @@ namespace Forms_TechServ
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
             this.panel4.Controls.Add(this.showCategoryBtn);
-            this.panel4.Controls.Add(this.deleteCategoryBtn);
             this.panel4.Controls.Add(this.addCategoryBtn);
             this.panel4.Location = new System.Drawing.Point(608, 0);
             this.panel4.Name = "panel4";
@@ -332,7 +338,7 @@ namespace Forms_TechServ
             this.showCategoryBtn.FlatAppearance.BorderSize = 0;
             this.showCategoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showCategoryBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.showCategoryBtn.Location = new System.Drawing.Point(0, 80);
+            this.showCategoryBtn.Location = new System.Drawing.Point(0, 40);
             this.showCategoryBtn.Name = "showCategoryBtn";
             this.showCategoryBtn.Size = new System.Drawing.Size(148, 40);
             this.showCategoryBtn.TabIndex = 3;
@@ -340,23 +346,6 @@ namespace Forms_TechServ
             this.showCategoryBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.showCategoryBtn.UseVisualStyleBackColor = false;
             this.showCategoryBtn.Click += new System.EventHandler(this.showCategoryBtn_Click);
-            // 
-            // deleteCategoryBtn
-            // 
-            this.deleteCategoryBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.deleteCategoryBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.deleteCategoryBtn.FlatAppearance.BorderSize = 0;
-            this.deleteCategoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.deleteCategoryBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.deleteCategoryBtn.Location = new System.Drawing.Point(0, 40);
-            this.deleteCategoryBtn.Name = "deleteCategoryBtn";
-            this.deleteCategoryBtn.Size = new System.Drawing.Size(148, 40);
-            this.deleteCategoryBtn.TabIndex = 2;
-            this.deleteCategoryBtn.Text = "Удалить";
-            this.deleteCategoryBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.deleteCategoryBtn.UseVisualStyleBackColor = false;
-            this.deleteCategoryBtn.Click += new System.EventHandler(this.deleteCategoryBtn_Click);
             // 
             // addCategoryBtn
             // 
@@ -518,14 +507,6 @@ namespace Forms_TechServ
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // tbPhoneNum
-            // 
-            this.tbPhoneNum.Location = new System.Drawing.Point(123, 64);
-            this.tbPhoneNum.Mask = "(+70)000000000";
-            this.tbPhoneNum.Name = "tbPhoneNum";
-            this.tbPhoneNum.Size = new System.Drawing.Size(113, 20);
-            this.tbPhoneNum.TabIndex = 174;
-            // 
             // FormManageMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -559,7 +540,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.TabPage generalPage;
         private System.Windows.Forms.TabPage categoriesPage;
         private System.Windows.Forms.Panel panel4;
-        private ManageButton deleteCategoryBtn;
         private ManageButton addCategoryBtn;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label labelCatPagesCount;

@@ -232,7 +232,20 @@ namespace Forms_TechServ
 
         private void BtnPick_Click(object sender, EventArgs e)          // вот тут ретернить выбранного клиента
         {
-            this.Close();
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
+            if (dataOrders.SelectedRows.Count > 0)
+            {
+                order = OrdersList.GetById(Convert.ToInt32(dataOrders.SelectedRows[0].Cells[0].Value));
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите заказ");
+            }
         }
 
         private void FormOrders_Load(object sender, EventArgs e)
@@ -364,6 +377,7 @@ namespace Forms_TechServ
 
         }
 
+
         private void BtnManage_Click(object sender, EventArgs e)        // !!!!ВОТ ТУТ АДРЕС БУДЕТ ИЛИ НЕТ!!!!
         {
             
@@ -376,6 +390,11 @@ namespace Forms_TechServ
 
         private void BtnShow_Click(object sender, EventArgs e)          // !!!!ВОТ ТУТ АДРЕС БУДЕТ ИЛИ НЕТ!!!!
         {
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
             if (dataOrders.SelectedRows.Count > 0)
             {
                 FormShowOrder showOrder = new FormShowOrder(readOnly, OrdersList.GetById((int)dataOrders.SelectedRows[0].Cells[0].Value));

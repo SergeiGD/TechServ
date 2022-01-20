@@ -24,10 +24,10 @@ namespace Forms_TechServ
             this.readOnly = readOnly;
             this.order = order;
 
-            if (!readOnly)
+            if (!readOnly && UserSession.Can("del_orderLog"))
             {
                 ManageButton btnDelete = new ManageButton();
-                btnDelete.Text = "Удалить";
+                btnDelete.Text = "Удалить выделенные";
                 panelControl.Controls.Add(btnDelete);
                 btnDelete.Click += BtnDelete_Click;
             }
@@ -53,7 +53,12 @@ namespace Forms_TechServ
 
         private void BtnShow_Click(object sender, EventArgs e)
         {
-            if(dataOrderLogs.SelectedRows.Count > 0)
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
+            if (dataOrderLogs.SelectedRows.Count > 0)
             {
                 FormShowOrderLog formShowOrderLog = new FormShowOrderLog(order.GetOrderLog((int)dataOrderLogs.SelectedRows[0].Cells[0].Value));
                 formShowOrderLog.ShowDialog();
@@ -103,6 +108,16 @@ namespace Forms_TechServ
             dataOrderLogs.Columns.Add(descripCol);
             dataOrderLogs.Columns.Add(dateCol);
 
+            if (UserSession.Can("del_orderLog") && !readOnly)
+            {
+                DataGridViewButtonColumn delCol = new DataGridViewButtonColumn();
+                delCol.FlatStyle = FlatStyle.Flat;
+                delCol.Name = "Удалить";
+                dataOrderLogs.Columns.Add(delCol);
+
+                dataOrderLogs.CellContentClick += DelCol_Click;
+            }
+
             comboBoxShowRows.Items.Add(5);
             comboBoxShowRows.Items.Add(20);
             comboBoxShowRows.Items.Add(30);
@@ -143,6 +158,14 @@ namespace Forms_TechServ
                 dataOrderLogs.Rows[i].Cells[0].Value = orderLogs[i].Id;
                 dataOrderLogs.Rows[i].Cells[1].Value = orderLogs[i].EventDescription;
                 dataOrderLogs.Rows[i].Cells[2].Value = orderLogs[i].EventDate;
+
+                if (dataOrderLogs.Columns.Count > 3)
+                {
+                    dataOrderLogs.Rows[i].Cells[3].Value = "Удалить";
+                    dataOrderLogs.Rows[i].Cells[3].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataOrderLogs.Rows[i].Cells[3].Style.ForeColor = Color.White;
+
+                }
             }
 
             //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
@@ -153,6 +176,29 @@ namespace Forms_TechServ
                 numericCurrentPage.Value = numericCurrentPage.Value == 0 ? 1 : numericCurrentPage.Value;
 
             labelPageCount.Text = $"из {maxPage}";
+        }
+
+        private void DelCol_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            var grid = (DataGridView)sender;
+
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                OrderLog orderLogToDel = order.GetOrderLog((int)dataOrderLogs.SelectedRows[0].Cells[0].Value);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить событие с id {orderLogToDel.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
+                {
+                    if (orderLogToDel.DelOrderLog())
+                    {
+                        MessageBox.Show("Событие успешно удалено", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FillGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка удаления", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
 
         private void btnNext_Click(object sender, EventArgs e)

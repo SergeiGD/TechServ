@@ -59,14 +59,28 @@ namespace Forms_TechServ
 
         private void BtnDel_Click(object sender, EventArgs e)
         {
-            DialogResult answer = MessageBox.Show("Вы действительно хотите удалить эту смену?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult answer = MessageBox.Show("Вы действительно хотите удалить ВСЕ выделенные смены?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (answer == DialogResult.Yes)
             {
-
-                EmployeesTimetablesList.GetById(Convert.ToInt32(dataTimetable.SelectedRows[0].Cells[0].Value)).DelTimetable();
-
+                int errorDays = 0;
+                foreach (DataGridViewRow row in dataTimetable.SelectedRows)
+                {
+                    EmployeeTimetable anotherTimetable = EmployeesTimetablesList.GetById(Convert.ToInt32(dataTimetable.Rows[row.Index].Cells[0].Value));
+                    if (!anotherTimetable.DelTimetable())
+                    {
+                        errorDays++;
+                    }
+                    
+                }
+                if(errorDays == 0)
+                {
+                    MessageBox.Show("Все смены успешно удалены");
+                }
+                else
+                {
+                    MessageBox.Show($"{errorDays} не были удаленны, т.к. на эти дни запланированы выезды");
+                }
                 
-                MessageBox.Show("Смена успешно удалена", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 FillGrid();
             }
@@ -92,6 +106,16 @@ namespace Forms_TechServ
             dataTimetable.Columns.Add(startCol);
             dataTimetable.Columns.Add(endCol);
 
+            if (!readOnly && UserSession.Can("edit_employee"))
+            {
+                DataGridViewButtonColumn delCol = new DataGridViewButtonColumn();
+                delCol.FlatStyle = FlatStyle.Flat;
+                delCol.Name = "Удалить";
+                dataTimetable.Columns.Add(delCol);
+
+                dataTimetable.CellContentClick += DelCol_Click;
+            }
+
             comboBoxShowRows.Items.Add(5);
             comboBoxShowRows.Items.Add(15);
             comboBoxShowRows.Items.Add(30);
@@ -110,15 +134,6 @@ namespace Forms_TechServ
         private void FillGrid()
         {
             
-
-            /*List<WorkshopTimetable> timetables = WorkshopsTimetablesList.GetWorkshopsTimetables(
-                new WorkshopTimetable() 
-                {
-                    Workshop = workshop
-                },
-                (int)comboBoxShowTimetableRows.SelectedItem,
-                currentPage, 
-                out rowsCount);*/
             int id;
             int.TryParse(tbID.Text, out id);                                // получаем введенное для сортировки id
 
@@ -144,6 +159,14 @@ namespace Forms_TechServ
                 dataTimetable.Rows[i].Cells[2].Value = timetables[i].ShiftStart.DayOfWeek;
                 dataTimetable.Rows[i].Cells[3].Value = timetables[i].ShiftStart.ToShortTimeString();
                 dataTimetable.Rows[i].Cells[4].Value = timetables[i].ShiftEnd.ToShortTimeString();
+
+                if (dataTimetable.Columns.Count > 5)
+                {
+                    dataTimetable.Rows[i].Cells[5].Value = "Удалить";
+                    dataTimetable.Rows[i].Cells[5].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataTimetable.Rows[i].Cells[5].Style.ForeColor = Color.White;
+
+                }
             }
 
             int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);
@@ -153,6 +176,29 @@ namespace Forms_TechServ
                 numericCurrentPage.Value = numericCurrentPage.Value == 0 ? 1 : numericCurrentPage.Value;
 
             labelPageCount.Text = $"из {maxPage}";
+        }
+
+        private void DelCol_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            var grid = (DataGridView)sender;
+
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                EmployeeTimetable timetableToDel = EmployeesTimetablesList.GetById((int)dataTimetable.SelectedRows[0].Cells[0].Value);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить смену с id {timetableToDel.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
+                {
+                    if (timetableToDel.DelTimetable())
+                    {
+                        MessageBox.Show("Смена успешно удалена", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FillGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("На этот день запланирован выезд, эту смену пока удалить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
 
         private void btnFind_Click(object sender, EventArgs e)
@@ -193,7 +239,11 @@ namespace Forms_TechServ
 
         private void dataTimetable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            //if(read)
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
             if (!readOnly && UserSession.Can("edit_employee"))
             {
                 FormAddEmployeeTimetable formAddEmployeeTimetable = new FormAddEmployeeTimetable(EmployeesTimetablesList.GetById(Convert.ToInt32(dataTimetable.SelectedRows[0].Cells[0].Value)));

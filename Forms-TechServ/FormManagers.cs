@@ -65,36 +65,23 @@ namespace Forms_TechServ
             }
         }
 
-        /*public FormManagers(bool readOnly, string workshop)
-        {
-            this.readOnly = readOnly;
-
-            if (!readOnly)
-            {
-                ManageButton btnAdd = new ManageButton();
-                btnAdd.Text = "Добавить";
-                panelControl.Controls.Add(btnAdd);
-                btnAdd.Click += BtnManage_Click;
-            }
-
-            ManageButton btnShow = new ManageButton();
-            btnShow.Text = "Просмотреть";
-            panelControl.Controls.Add(btnShow);
-            btnShow.Click += BtnShow_Click; //BtnShowInClient_Click;
-
-            dataManagers.CellMouseDoubleClick += BtnShow_Click;
-
-            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
-            mainBtn[0].Location = new Point(0, 0);
-            for (int i = 1; i < mainBtn.Count(); i++)
-            {
-                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
-            }
-        }*/
 
         private void BtnPick_Click(object sender, EventArgs e)
         {
-            this.Close();                                               // и тут ретерн
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
+            if (dataManagers.SelectedRows.Count > 0)
+            {
+                manager = ManagersList.GetById(Convert.ToInt32(dataManagers.SelectedRows[0].Cells[0].Value), true);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите сотрудника");
+            }
         }
 
         private void FormManagers_Load(object sender, EventArgs e)
@@ -121,6 +108,16 @@ namespace Forms_TechServ
             dataManagers.Columns.Add(branchCol);
             dataManagers.Columns.Add(remotelyCol);
             dataManagers.Columns.Add(roleCol);
+
+            if (UserSession.Can("add_del_employee") && !readOnly)
+            {
+                DataGridViewButtonColumn delCol = new DataGridViewButtonColumn();
+                delCol.FlatStyle = FlatStyle.Flat;
+                delCol.Name = "Удалить";
+                dataManagers.Columns.Add(delCol);
+
+                dataManagers.CellContentClick += DelCol_Click;
+            }
 
             btnAskOrDesk.Tag = true;
 
@@ -198,6 +195,14 @@ namespace Forms_TechServ
                 dataManagers.Rows[i].Cells[4].Value = managers[i].Workshop.Location;
                 dataManagers.Rows[i].Cells[5].Value = managers[i].Remotely ? "Да" : "Нет";
                 dataManagers.Rows[i].Cells[6].Value = managers[i].Role.Name;
+
+                if (dataManagers.Columns.Count > 7)
+                {
+                    dataManagers.Rows[i].Cells[7].Value = "Удалить";
+                    dataManagers.Rows[i].Cells[7].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataManagers.Rows[i].Cells[7].Style.ForeColor = Color.White;
+
+                }
             }
 
             int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);
@@ -209,16 +214,34 @@ namespace Forms_TechServ
             labelPageCount.Text = $"из {maxPage}";
         }
 
+        private void DelCol_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            var grid = (DataGridView)sender;
+
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                Manager managerToDel = ManagersList.GetById((int)dataManagers.SelectedRows[0].Cells[0].Value, false);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить сотрудника с id {managerToDel.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
+                {
+                    if (manager.DelManager())
+                    {
+                        MessageBox.Show("Сотрудник успешно удалено", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FillGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("У сотрудника есть незавершенный заказ, пока его удалить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
         private void BtnManage_Click(object sender, EventArgs e)
         {
             FormManageManager formManageManager = new FormManageManager();
             formManageManager.ShowDialog();
 
-            /*if (formManageManager.manager.Id != 0)
-            {
-                MessageBox.Show($"Новый сотрудник успешно добавлен", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                FillGrid();
-            }*/
 
             FillGrid();
 
@@ -226,10 +249,25 @@ namespace Forms_TechServ
 
         private void BtnShow_Click(object sender, EventArgs e)
         {
-            FormShowManager showManager = new FormShowManager(readOnly, ManagersList.GetById(Convert.ToInt32(dataManagers.SelectedRows[0].Cells[0].Value), true));
-            showManager.ShowDialog();
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
 
-            FillGrid();
+            if (dataManagers.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Сначала выберите сотрудника");
+            }
+            else
+            {
+
+                FormShowManager showManager = new FormShowManager(readOnly, ManagersList.GetById(Convert.ToInt32(dataManagers.SelectedRows[0].Cells[0].Value), true));
+                showManager.ShowDialog();
+
+                FillGrid();
+            }
+
+            
         }
 
         private void btnFindPosition_Click(object sender, EventArgs e)

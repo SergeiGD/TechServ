@@ -88,6 +88,13 @@ namespace Forms_TechServ
                 tbComment.Text = visit.MasterComment;
                 labelEstimatedTime.Text = visit.CalcEstimatedTime().ToString();
 
+                DataGridViewButtonColumn delCol = new DataGridViewButtonColumn();
+                delCol.FlatStyle = FlatStyle.Flat;
+                delCol.Name = "Удалить";
+                dataServies.Columns.Add(delCol);
+
+                dataServies.CellContentClick += DelCol_Click;
+
                 comboBoxShowServicesRows.Items.Add(5);
                 comboBoxShowServicesRows.Items.Add(10);
                 comboBoxShowServicesRows.Items.Add(20);
@@ -223,7 +230,13 @@ namespace Forms_TechServ
                 dataServies.Rows[i].Cells[2].Value = services[i].Quantity;
                 dataServies.Rows[i].Cells[3].Value = TimeSpan.FromTicks(services[i].Service.AvgServiceTime.Ticks * services[i].Quantity);
 
+                if (dataServies.Columns.Count > 4)
+                {
+                    dataServies.Rows[i].Cells[4].Value = "Удалить";
+                    dataServies.Rows[i].Cells[4].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataServies.Rows[i].Cells[4].Style.ForeColor = Color.White;
 
+                }
             }
 
             //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
@@ -234,6 +247,30 @@ namespace Forms_TechServ
                 numericCurrentServicePage.Value = numericCurrentServicePage.Value == 0 ? 1 : numericCurrentServicePage.Value;
 
             labelServicesPageCout.Text = $"из {maxPage}";
+        }
+
+        private void DelCol_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            var grid = (DataGridView)sender;
+
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                Service serviceToDel = ServicesList.GetById((int)dataServies.SelectedRows[0].Cells[0].Value, false);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить из выезда услугу с id {serviceToDel.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
+                {
+                    if (visit.DelService(serviceToDel))
+                    {
+                        MessageBox.Show("Услуга успешно удалена из выезда", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FillServices();
+                        labelEstimatedTime.Text = visit.CalcEstimatedTime().ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка удаления", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
 
         private void btnAddService_Click(object sender, EventArgs e)
@@ -277,7 +314,12 @@ namespace Forms_TechServ
 
         private void btnShowService_Click(object sender, EventArgs e)
         {
-            if(dataServies.SelectedRows.Count > 0)
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
+            if (dataServies.SelectedRows.Count > 0)
             {
                 FormShowService formShowService = new FormShowService(true, ServicesList.GetById((int)dataServies.SelectedRows[0].Cells[0].Value, true));
                 formShowService.ShowDialog();
@@ -292,11 +334,14 @@ namespace Forms_TechServ
         {
             if (dataServies.SelectedRows.Count > 0)
             {
-                DialogResult answer = MessageBox.Show("Вы уверены, что хотите удалить эту услугу из выезда?", "Подтверидте дейтсвие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                DialogResult answer = MessageBox.Show("Вы уверены, что хотите удалить ВСЕ выделенные услуги из выезда?", "Подтверидте действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if(answer == DialogResult.Yes)
                 {
-                    Service service = ServicesList.GetById((int)dataServies.SelectedRows[0].Cells[0].Value, false);
-                    visit.DelService(service);
+                    foreach (DataGridViewRow row in dataServies.SelectedRows)
+                    {
+                        Service anotherService = ServicesList.GetById((int)dataServies.Rows[row.Index].Cells[0].Value, false);
+                        visit.DelService(anotherService);
+                    }
 
                     FillServices();
                     labelEstimatedTime.Text = visit.CalcEstimatedTime().ToString();
@@ -305,7 +350,7 @@ namespace Forms_TechServ
             }
             else
             {
-                MessageBox.Show("Для начала выберите услугу");
+                MessageBox.Show("Для начала выберите хотя бы одну услугу");
             }
         }
 

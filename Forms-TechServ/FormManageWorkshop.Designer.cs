@@ -40,7 +40,6 @@ namespace Forms_TechServ
             this.tbAddress = new System.Windows.Forms.TextBox();
             this.timetablePage = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnDeleteTimetable = new Forms_TechServ.ManageButton();
             this.btnAddTimetable = new Forms_TechServ.ManageButton();
             this.panelContent = new System.Windows.Forms.Panel();
             this.comboBoxShowTimetableRows = new System.Windows.Forms.ComboBox();
@@ -164,29 +163,11 @@ namespace Forms_TechServ
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.panel1.Controls.Add(this.btnDeleteTimetable);
             this.panel1.Controls.Add(this.btnAddTimetable);
             this.panel1.Location = new System.Drawing.Point(613, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(170, 332);
             this.panel1.TabIndex = 2;
-            // 
-            // btnDeleteTimetable
-            // 
-            this.btnDeleteTimetable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteTimetable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnDeleteTimetable.FlatAppearance.BorderSize = 0;
-            this.btnDeleteTimetable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteTimetable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnDeleteTimetable.Location = new System.Drawing.Point(0, 40);
-            this.btnDeleteTimetable.Name = "btnDeleteTimetable";
-            this.btnDeleteTimetable.Size = new System.Drawing.Size(170, 40);
-            this.btnDeleteTimetable.TabIndex = 2;
-            this.btnDeleteTimetable.Text = "Удалить";
-            this.btnDeleteTimetable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDeleteTimetable.UseVisualStyleBackColor = false;
-            this.btnDeleteTimetable.Click += new System.EventHandler(this.btnDeleteTimetable_Click);
             // 
             // btnAddTimetable
             // 
@@ -327,7 +308,7 @@ namespace Forms_TechServ
             this.dataTimetable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataTimetable.Size = new System.Drawing.Size(613, 292);
             this.dataTimetable.TabIndex = 0;
-            this.dataTimetable.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTimetable_CellDoubleClick);
+            this.dataTimetable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataTimetable_CellMouseDoubleClick);
             // 
             // errorProvider
             // 
@@ -376,7 +357,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.DataGridView dataTimetable;
         private System.Windows.Forms.Panel panel1;
         private ManageButton btnAddTimetable;
-        private ManageButton btnDeleteTimetable;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnAction;
         private System.Windows.Forms.ComboBox comboBoxShowTimetableRows;

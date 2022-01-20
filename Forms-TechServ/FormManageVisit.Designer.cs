@@ -48,6 +48,10 @@ namespace Forms_TechServ
             this.labelEstimatedTime = new System.Windows.Forms.Label();
             this.labelTime = new System.Windows.Forms.Label();
             this.servicesPage = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnAddService = new Forms_TechServ.ManageButton();
+            this.btnDelService = new Forms_TechServ.ManageButton();
+            this.btnShowService = new Forms_TechServ.ManageButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBoxShowServicesRows = new System.Windows.Forms.ComboBox();
             this.label47 = new System.Windows.Forms.Label();
@@ -61,18 +65,14 @@ namespace Forms_TechServ
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.column_sale = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnShowService = new Forms_TechServ.ManageButton();
-            this.btnDelService = new Forms_TechServ.ManageButton();
-            this.btnAddService = new Forms_TechServ.ManageButton();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.visitTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.servicesPage.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentServicePage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataServies)).BeginInit();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -266,6 +266,67 @@ namespace Forms_TechServ
             this.servicesPage.TabIndex = 1;
             this.servicesPage.Text = "Запланированные услуги";
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.btnAddService);
+            this.panel2.Controls.Add(this.btnDelService);
+            this.panel2.Controls.Add(this.btnShowService);
+            this.panel2.Location = new System.Drawing.Point(632, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(158, 324);
+            this.panel2.TabIndex = 4;
+            // 
+            // btnAddService
+            // 
+            this.btnAddService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnAddService.FlatAppearance.BorderSize = 0;
+            this.btnAddService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnAddService.Location = new System.Drawing.Point(0, 0);
+            this.btnAddService.Name = "btnAddService";
+            this.btnAddService.Size = new System.Drawing.Size(158, 40);
+            this.btnAddService.TabIndex = 2;
+            this.btnAddService.Text = "Добавить";
+            this.btnAddService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddService.UseVisualStyleBackColor = false;
+            this.btnAddService.Click += new System.EventHandler(this.btnAddService_Click);
+            // 
+            // btnDelService
+            // 
+            this.btnDelService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnDelService.FlatAppearance.BorderSize = 0;
+            this.btnDelService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnDelService.Location = new System.Drawing.Point(0, 40);
+            this.btnDelService.Name = "btnDelService";
+            this.btnDelService.Size = new System.Drawing.Size(158, 40);
+            this.btnDelService.TabIndex = 1;
+            this.btnDelService.Text = "Удалить";
+            this.btnDelService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDelService.UseVisualStyleBackColor = false;
+            this.btnDelService.Click += new System.EventHandler(this.btnDelService_Click);
+            // 
+            // btnShowService
+            // 
+            this.btnShowService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnShowService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnShowService.FlatAppearance.BorderSize = 0;
+            this.btnShowService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShowService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnShowService.Location = new System.Drawing.Point(0, 80);
+            this.btnShowService.Name = "btnShowService";
+            this.btnShowService.Size = new System.Drawing.Size(158, 40);
+            this.btnShowService.TabIndex = 0;
+            this.btnShowService.Text = "Просмотреть";
+            this.btnShowService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnShowService.UseVisualStyleBackColor = false;
+            this.btnShowService.Click += new System.EventHandler(this.btnShowService_Click);
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.comboBoxShowServicesRows);
@@ -385,7 +446,6 @@ namespace Forms_TechServ
             this.Column4,
             this.column_sale});
             this.dataServies.Location = new System.Drawing.Point(0, 0);
-            this.dataServies.MultiSelect = false;
             this.dataServies.Name = "dataServies";
             this.dataServies.ReadOnly = true;
             this.dataServies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -416,67 +476,6 @@ namespace Forms_TechServ
             this.column_sale.Name = "column_sale";
             this.column_sale.ReadOnly = true;
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.btnAddService);
-            this.panel2.Controls.Add(this.btnDelService);
-            this.panel2.Controls.Add(this.btnShowService);
-            this.panel2.Location = new System.Drawing.Point(632, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(158, 324);
-            this.panel2.TabIndex = 4;
-            // 
-            // btnShowService
-            // 
-            this.btnShowService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShowService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnShowService.FlatAppearance.BorderSize = 0;
-            this.btnShowService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnShowService.Location = new System.Drawing.Point(0, 80);
-            this.btnShowService.Name = "btnShowService";
-            this.btnShowService.Size = new System.Drawing.Size(158, 40);
-            this.btnShowService.TabIndex = 0;
-            this.btnShowService.Text = "Просмотреть";
-            this.btnShowService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnShowService.UseVisualStyleBackColor = false;
-            this.btnShowService.Click += new System.EventHandler(this.btnShowService_Click);
-            // 
-            // btnDelService
-            // 
-            this.btnDelService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnDelService.FlatAppearance.BorderSize = 0;
-            this.btnDelService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnDelService.Location = new System.Drawing.Point(0, 40);
-            this.btnDelService.Name = "btnDelService";
-            this.btnDelService.Size = new System.Drawing.Size(158, 40);
-            this.btnDelService.TabIndex = 1;
-            this.btnDelService.Text = "Удалить";
-            this.btnDelService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelService.UseVisualStyleBackColor = false;
-            this.btnDelService.Click += new System.EventHandler(this.btnDelService_Click);
-            // 
-            // btnAddService
-            // 
-            this.btnAddService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnAddService.FlatAppearance.BorderSize = 0;
-            this.btnAddService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnAddService.Location = new System.Drawing.Point(0, 0);
-            this.btnAddService.Name = "btnAddService";
-            this.btnAddService.Size = new System.Drawing.Size(158, 40);
-            this.btnAddService.TabIndex = 2;
-            this.btnAddService.Text = "Добавить";
-            this.btnAddService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddService.UseVisualStyleBackColor = false;
-            this.btnAddService.Click += new System.EventHandler(this.btnAddService_Click);
-            // 
             // FormManageVisit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -488,17 +487,16 @@ namespace Forms_TechServ
             this.Name = "FormManageVisit";
             this.Text = "FormManageVisits";
             this.Load += new System.EventHandler(this.FormManageVisit_Load);
-            //this.ResizeEnd += new System.EventHandler(this.FormManageVisit_ResizeEnd);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.visitTabs.ResumeLayout(false);
             this.generalPage.ResumeLayout(false);
             this.generalPage.PerformLayout();
             this.servicesPage.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentServicePage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataServies)).EndInit();
-            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

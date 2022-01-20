@@ -130,7 +130,7 @@ namespace Forms_TechServ
             {
 
                 TimeRange timeRange = new TimeRange(this.ValidFrom, this.ValidUntil);
-                foreach (EmployeeTimetable timetable in db.EmployeesTimetables.Include(t => t.Employee).Where(t => t.Employee.WorkshopId == this.Id && t.DelTime == null && t.Employee.DelTime == null))
+                foreach (EmployeeTimetable timetable in db.EmployeesTimetables.Include(t => t.Employee).Where(t => t.Employee.WorkshopId == this.WorkshopId && t.DelTime == null && t.Employee.DelTime == null))
                 {
                     // ЕСЛИ НА ЭТО ВРЕМЯ ЕСТЬ РАСПИСАНИЯ СОТРУДНИКОВ, ТО УДАЛИТЬ НЕЛЬЗЯ
                     if (timeRange.HasInside(timetable.ShiftStart))

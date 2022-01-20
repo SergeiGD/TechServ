@@ -118,30 +118,6 @@ namespace Forms_TechServ
             clearBtn.Click += clearBtnWithoutWorkshop_Click;
         }
 
-        /*public FormMasters(bool readOnly, string workshop)
-        {
-            this.readOnly = readOnly;
-
-            if (!readOnly)
-            {
-                ManageButton btnAdd = new ManageButton();
-                btnAdd.Text = "Добавить";
-                panelControl.Controls.Add(btnAdd);
-                btnAdd.Click += BtnManage_Click;
-            }
-
-            ManageButton btnShow = new ManageButton();
-            btnShow.Text = "Просмотреть";
-            panelControl.Controls.Add(btnShow);
-            btnShow.Click += BtnShow_Click/*BtnShowInClient_Click;
-
-            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
-            mainBtn[0].Location = new Point(0, 0);
-            for (int i = 1; i < mainBtn.Count(); i++)
-            {
-                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
-            }
-        }*/
 
 
         private void BtnManage_Click(object sender, EventArgs e)
@@ -149,18 +125,18 @@ namespace Forms_TechServ
             FormManageMaster formManageMaster = new FormManageMaster();
             formManageMaster.ShowDialog();
 
-            /*if(formManageMaster.master.Id != 0)
-            {
-                MessageBox.Show($"Новый сотрудник успешно добавлен", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                FillGrid();
-            }*/
 
             FillGrid();
         }
 
         private void BtnPick_Click(object sender, EventArgs e)
         {
-            if(dataMasters.SelectedRows.Count > 0)
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+
+            }
+            if (dataMasters.SelectedRows.Count > 0)
             {
                 master = MastersList.GetById(Convert.ToInt32(dataMasters.SelectedRows[0].Cells[0].Value), false);
                 this.Close();
@@ -173,12 +149,24 @@ namespace Forms_TechServ
 
         private void BtnShow_Click(object sender, EventArgs e)
         {
-            
-            //int selectedRow = dataMasters.SelectedRows[0].Index;
-            FormShowMaster showMaster = new FormShowMaster(readOnly, MastersList.GetById(Convert.ToInt32(dataMasters.SelectedRows[0].Cells[0].Value), true));
-            showMaster.ShowDialog();
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
 
-            FillGrid();
+            if (dataMasters.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Сначала выберите сотрудника");
+            }
+            else
+            {
+                FormShowMaster showMaster = new FormShowMaster(readOnly, MastersList.GetById(Convert.ToInt32(dataMasters.SelectedRows[0].Cells[0].Value), true));
+                showMaster.ShowDialog();
+
+                FillGrid();
+            }
+
+            
         }
 
         private void btnFindPosition_Click(object sender, EventArgs e)
@@ -229,6 +217,16 @@ namespace Forms_TechServ
             dataMasters.Columns.Add(salaryCol);
             dataMasters.Columns.Add(branchCol);
             dataMasters.Columns.Add(roleCol);
+
+            if (UserSession.Can("add_del_employee") && !readOnly)
+            {
+                DataGridViewButtonColumn delCol = new DataGridViewButtonColumn();
+                delCol.FlatStyle = FlatStyle.Flat;
+                delCol.Name = "Удалить";
+                dataMasters.Columns.Add(delCol);
+
+                dataMasters.CellContentClick += DelCol_Click;
+            }
 
             btnAskOrDesk.Tag = true;
 
@@ -304,6 +302,14 @@ namespace Forms_TechServ
                 dataMasters.Rows[i].Cells[3].Value = masters[i].Salary;
                 dataMasters.Rows[i].Cells[4].Value = masters[i].Workshop.Location;
                 dataMasters.Rows[i].Cells[5].Value = masters[i].Role.Name;
+
+                if (dataMasters.Columns.Count > 6)
+                {
+                    dataMasters.Rows[i].Cells[6].Value = "Удалить";
+                    dataMasters.Rows[i].Cells[6].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataMasters.Rows[i].Cells[6].Style.ForeColor = Color.White;
+
+                }
             }
 
             //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
@@ -314,6 +320,29 @@ namespace Forms_TechServ
                 numericCurrentPage.Value = numericCurrentPage.Value == 0 ? 1 : numericCurrentPage.Value;
 
             labelPageCount.Text = $"из {maxPage}";
+        }
+
+        private void DelCol_Click(object sender, DataGridViewCellEventArgs e)
+        {
+            var grid = (DataGridView)sender;
+
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                Master masterToDel = MastersList.GetById((int)dataMasters.SelectedRows[0].Cells[0].Value, false);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить сотрудника с id {masterToDel.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
+                {
+                    if (masterToDel.DelMaster())
+                    {
+                        MessageBox.Show("Сотрудник успешно удалено", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FillGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("У сотрудника есть незавершенный заказ, пока его удалить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
 
         private void btnAskOrDesk_Click(object sender, EventArgs e)
