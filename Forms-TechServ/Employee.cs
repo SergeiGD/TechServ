@@ -531,6 +531,7 @@ namespace Forms_TechServ
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public DateTime? DelTime { get; set; }
         public RoleType RoleType { get; set; }
 
         public List<Permission> GetPermissions(Permission FilterA, int count, int page, out int rowsCount)
@@ -561,6 +562,106 @@ namespace Forms_TechServ
                 return permissions.ToList();
             }
         }
+
+        public bool AddRole()
+        {
+            using (TechContext db = new TechContext())
+            {
+                db.Roles.Add(this);
+                db.SaveChanges();
+                return true;
+            }
+        }
+
+        public bool DelRole()
+        {
+            using(TechContext db = new TechContext())
+            {
+                if(this.Id == 1)
+                {
+                    return false;                       // 1 - главный администратор (разработчик) - изменять нельзя
+                }
+
+                this.DelTime = DateTime.Now;
+                db.Entry(this).State = EntityState.Modified;
+                db.SaveChanges();
+                return true;
+            }
+            
+        }
+
+        public bool EditRole()
+        {
+            using (TechContext db = new TechContext())
+            {
+                if(this.Id == 1)
+                {
+                    return false;
+                }
+
+                db.Entry(this).State = EntityState.Modified;
+                db.SaveChanges();
+                return true;
+            }
+        }
+
+        public int CalcPermissionsCount()
+        {
+            using (TechContext db = new TechContext())
+            {
+                return db.RolesPermissions.Where(b => b.RoleId == this.Id).Count();
+            }
+        }
+
+        public bool AddPermission(Permission permission)
+        {
+            using (TechContext db = new TechContext())
+            {
+                RolesPermissions rolesPermission = new RolesPermissions()
+                {
+                    RoleId = this.Id,
+                    PermissionId = permission.Id
+                };
+
+                db.RolesPermissions.Add(rolesPermission);
+
+                db.SaveChanges();
+
+                return true;
+            }
+        }
+
+        public bool DelPermission(Permission permission)
+        {
+            using (TechContext db = new TechContext())
+            {
+                RolesPermissions rolesPermission = db.RolesPermissions.Find(this.Id, permission.Id);
+
+                db.RolesPermissions.Remove(rolesPermission);
+
+                db.SaveChanges();
+
+                return true;
+            }
+        }
+
+        public bool CheckPermission(Permission permission)
+        {
+            using (TechContext db = new TechContext())
+            {
+                RolesPermissions rolesPermission = db.RolesPermissions.Find(this.Id, permission.Id);
+
+                if (rolesPermission != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
     }
 
     public static class RolesList
@@ -577,7 +678,7 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                IEnumerable<Role> roles = db.Roles.Where(r => r.Id != 1);
+                IEnumerable<Role> roles = db.Roles.Where(r => r.Id != 1 && r.DelTime == null);
 
                 if (FilterA.Id != 0)
                 {
@@ -586,7 +687,6 @@ namespace Forms_TechServ
 
                 if (FilterA.Name != null && FilterA.Name != string.Empty)
                 {
-                    //query = query.Where(r => r.Name.Contains(FilterA.Name));
                     roles = roles.Where(r => r.Name.IndexOf(FilterA.Name, StringComparison.OrdinalIgnoreCase) > -1);
                 }
 
@@ -600,6 +700,11 @@ namespace Forms_TechServ
                     {
                         roles = roles.Where(r => r.RoleType == RoleType.Manager || r.RoleType == RoleType.Anyone);
                     }
+                }
+
+                if(FilterA.RoleType != RoleType.Undefined)
+                {
+                    roles = roles.Where(r => r.RoleType == FilterA.RoleType);
                 }
 
                 rowsCount = roles.Count();
@@ -617,7 +722,43 @@ namespace Forms_TechServ
     {
         Master,
         Manager,
-        Anyone
+        Anyone,
+        Undefined
+    }
+
+    public static class RoleStringExtensions
+    {
+        public static string GetRoleTypeString(this RoleType role)
+        {
+            switch (role)
+            {
+                case RoleType.Master:
+                    return "Мастер";
+                case RoleType.Manager:
+                    return "Менеджер";
+                case RoleType.Anyone:
+                    return "Все";
+
+                default:
+                    return "Не определенно";
+            }
+        }
+
+        public static RoleType GetRoleTypeEnum(string role)
+        {
+            switch (role)
+            {
+                case "Мастер":
+                    return RoleType.Master;
+                case "Менеджер":
+                    return RoleType.Manager;
+                case "Все":
+                    return RoleType.Anyone;
+
+                default:
+                    return RoleType.Undefined;
+            }
+        }
     }
 
     public class Permission
@@ -626,6 +767,44 @@ namespace Forms_TechServ
         public string Name { get; set; }
         public string Code { get; set; }
         //public DateTime DelTime { get; set; }
+    }
+
+    public static class PermissionsList
+    {
+        public static Permission GetById(int id)
+        {
+            using (TechContext db = new TechContext())
+            {
+                return db.Permissions.Find(id);
+            }
+        }
+
+        public static List<Permission> GetPermissions(Permission FilterA, int count, int page, out int rowsCount)
+        {
+            using (TechContext db = new TechContext())
+            {
+                IEnumerable<Permission> permissions = db.Permissions;
+
+                if (FilterA.Id != 0)
+                {
+                    permissions = permissions.Where(p => p.Id == FilterA.Id);
+                }
+
+                if (FilterA.Name != null && FilterA.Name != string.Empty)
+                {
+                    //query = query.Where(r => r.Name.Contains(FilterA.Name));
+                    permissions = permissions.Where(r => r.Name.IndexOf(FilterA.Name, StringComparison.OrdinalIgnoreCase) > -1);
+                }
+
+
+                rowsCount = permissions.Count();
+
+                permissions = permissions.Skip((page - 1) * count).Take(count);
+
+
+                return permissions.ToList();
+            }
+        }
     }
 
     [Table("RolesPermissions")]

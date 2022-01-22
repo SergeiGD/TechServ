@@ -1,7 +1,7 @@
 ﻿
 namespace Forms_TechServ
 {
-    partial class FormFindEmpPosition
+    partial class FormRoles
     {
         /// <summary>
         /// Required designer variable.
@@ -44,10 +44,10 @@ namespace Forms_TechServ
             this.btnPrev = new System.Windows.Forms.Button();
             this.dataPosition = new System.Windows.Forms.DataGridView();
             this.panelControl = new System.Windows.Forms.Panel();
-            this.btnPick = new Forms_TechServ.ManageButton();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboBoxRoleType = new System.Windows.Forms.ComboBox();
             this.btnClear = new Forms_TechServ.ManageButton();
             this.btnFind = new Forms_TechServ.ManageButton();
-            this.btnShow = new Forms_TechServ.ManageButton();
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             this.panelFind.SuspendLayout();
@@ -71,7 +71,7 @@ namespace Forms_TechServ
             this.panelContent.Controls.Add(this.dataPosition);
             this.panelContent.Location = new System.Drawing.Point(0, 0);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(597, 632);
+            this.panelContent.Size = new System.Drawing.Size(778, 632);
             this.panelContent.TabIndex = 9;
             // 
             // comboBoxShowRows
@@ -79,7 +79,7 @@ namespace Forms_TechServ
             this.comboBoxShowRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.comboBoxShowRows.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxShowRows.FormattingEnabled = true;
-            this.comboBoxShowRows.Location = new System.Drawing.Point(403, 596);
+            this.comboBoxShowRows.Location = new System.Drawing.Point(494, 596);
             this.comboBoxShowRows.Name = "comboBoxShowRows";
             this.comboBoxShowRows.Size = new System.Drawing.Size(62, 21);
             this.comboBoxShowRows.TabIndex = 16;
@@ -90,7 +90,7 @@ namespace Forms_TechServ
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label7.Location = new System.Drawing.Point(297, 597);
+            this.label7.Location = new System.Drawing.Point(388, 597);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(107, 17);
             this.label7.TabIndex = 15;
@@ -101,7 +101,7 @@ namespace Forms_TechServ
             this.labelPageCount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.labelPageCount.AutoSize = true;
             this.labelPageCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.labelPageCount.Location = new System.Drawing.Point(255, 597);
+            this.labelPageCount.Location = new System.Drawing.Point(346, 597);
             this.labelPageCount.Name = "labelPageCount";
             this.labelPageCount.Size = new System.Drawing.Size(36, 17);
             this.labelPageCount.TabIndex = 10;
@@ -110,7 +110,7 @@ namespace Forms_TechServ
             // numericCurrentPage
             // 
             this.numericCurrentPage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.numericCurrentPage.Location = new System.Drawing.Point(204, 597);
+            this.numericCurrentPage.Location = new System.Drawing.Point(295, 597);
             this.numericCurrentPage.Minimum = new decimal(new int[] {
             1,
             0,
@@ -131,7 +131,7 @@ namespace Forms_TechServ
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label8.Location = new System.Drawing.Point(136, 597);
+            this.label8.Location = new System.Drawing.Point(227, 597);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(72, 17);
             this.label8.TabIndex = 8;
@@ -141,13 +141,15 @@ namespace Forms_TechServ
             // 
             this.panelFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelFind.Controls.Add(this.comboBoxRoleType);
+            this.panelFind.Controls.Add(this.label3);
             this.panelFind.Controls.Add(this.tbID);
             this.panelFind.Controls.Add(this.label1);
             this.panelFind.Controls.Add(this.tbName);
             this.panelFind.Controls.Add(this.label2);
             this.panelFind.Location = new System.Drawing.Point(0, 0);
             this.panelFind.Name = "panelFind";
-            this.panelFind.Size = new System.Drawing.Size(597, 53);
+            this.panelFind.Size = new System.Drawing.Size(778, 53);
             this.panelFind.TabIndex = 4;
             // 
             // tbID
@@ -174,7 +176,7 @@ namespace Forms_TechServ
             // 
             this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbName.Location = new System.Drawing.Point(431, 18);
+            this.tbName.Location = new System.Drawing.Point(612, 18);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(144, 20);
             this.tbName.TabIndex = 16;
@@ -184,7 +186,7 @@ namespace Forms_TechServ
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(339, 21);
+            this.label2.Location = new System.Drawing.Point(520, 21);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 13);
             this.label2.TabIndex = 15;
@@ -197,7 +199,7 @@ namespace Forms_TechServ
             this.btnNext.FlatAppearance.BorderSize = 0;
             this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.btnNext.Location = new System.Drawing.Point(467, 580);
+            this.btnNext.Location = new System.Drawing.Point(648, 580);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(130, 50);
             this.btnNext.TabIndex = 3;
@@ -234,37 +236,40 @@ namespace Forms_TechServ
             this.dataPosition.Name = "dataPosition";
             this.dataPosition.ReadOnly = true;
             this.dataPosition.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataPosition.Size = new System.Drawing.Size(597, 527);
+            this.dataPosition.Size = new System.Drawing.Size(778, 527);
             this.dataPosition.TabIndex = 0;
-            this.dataPosition.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataPosition_CellMouseDoubleClick);
+            //this.dataPosition.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataPosition_CellMouseDoubleClick);
             // 
             // panelControl
             // 
             this.panelControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelControl.Controls.Add(this.btnShow);
-            this.panelControl.Controls.Add(this.btnPick);
             this.panelControl.Controls.Add(this.btnClear);
             this.panelControl.Controls.Add(this.btnFind);
-            this.panelControl.Location = new System.Drawing.Point(597, 0);
+            this.panelControl.Location = new System.Drawing.Point(778, 0);
             this.panelControl.Name = "panelControl";
-            this.panelControl.Size = new System.Drawing.Size(172, 632);
+            this.panelControl.Size = new System.Drawing.Size(190, 632);
             this.panelControl.TabIndex = 10;
             // 
-            // btnPick
+            // label3
             // 
-            this.btnPick.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnPick.FlatAppearance.BorderSize = 0;
-            this.btnPick.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPick.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnPick.Location = new System.Drawing.Point(0, 120);
-            this.btnPick.Name = "btnPick";
-            this.btnPick.Size = new System.Drawing.Size(172, 40);
-            this.btnPick.TabIndex = 25;
-            this.btnPick.Text = "Выбрать";
-            this.btnPick.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPick.UseVisualStyleBackColor = false;
-            this.btnPick.Click += new System.EventHandler(this.btnPick_Click);
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(219, 21);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(97, 13);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "Принадлежность:";
+            // 
+            // comboBoxRoleType
+            // 
+            this.comboBoxRoleType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.comboBoxRoleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRoleType.FormattingEnabled = true;
+            this.comboBoxRoleType.Location = new System.Drawing.Point(322, 17);
+            this.comboBoxRoleType.Name = "comboBoxRoleType";
+            this.comboBoxRoleType.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxRoleType.TabIndex = 20;
             // 
             // btnClear
             // 
@@ -296,30 +301,15 @@ namespace Forms_TechServ
             this.btnFind.UseVisualStyleBackColor = false;
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
-            // btnShow
-            // 
-            this.btnShow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnShow.FlatAppearance.BorderSize = 0;
-            this.btnShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShow.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnShow.Location = new System.Drawing.Point(0, 80);
-            this.btnShow.Name = "btnShow";
-            this.btnShow.Size = new System.Drawing.Size(172, 40);
-            this.btnShow.TabIndex = 26;
-            this.btnShow.Text = "Просмотреть";
-            this.btnShow.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnShow.UseVisualStyleBackColor = false;
-            this.btnShow.Click += new System.EventHandler(this.btnShow_Click);
-            // 
-            // FormFindEmpPosition
+            // FormRoles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.ClientSize = new System.Drawing.Size(766, 632);
+            this.ClientSize = new System.Drawing.Size(968, 632);
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panelContent);
-            this.Name = "FormFindEmpPosition";
+            this.Name = "FormRoles";
             this.Text = "FormFindEmpPosition";
             this.Load += new System.EventHandler(this.FormFindEmpPosition_Load);
             this.panelContent.ResumeLayout(false);
@@ -348,11 +338,11 @@ namespace Forms_TechServ
         private System.Windows.Forms.TextBox tbID;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelControl;
-        private ManageButton btnPick;
         private ManageButton btnClear;
         private ManageButton btnFind;
         private System.Windows.Forms.ComboBox comboBoxShowRows;
         private System.Windows.Forms.Label label7;
-        private ManageButton btnShow;
+        private System.Windows.Forms.ComboBox comboBoxRoleType;
+        private System.Windows.Forms.Label label3;
     }
 }

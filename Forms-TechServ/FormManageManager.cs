@@ -161,7 +161,7 @@ namespace Forms_TechServ
 
         private void btnFindPosition_Click(object sender, EventArgs e)
         {
-            FormFindEmpPosition formFindEmpPosition = new FormFindEmpPosition(manager);
+            FormRoles formFindEmpPosition = new FormRoles(manager);
             formFindEmpPosition.ShowDialog();
 
             tbPosition.Text = formFindEmpPosition?.pickedRole?.Name;

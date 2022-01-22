@@ -110,11 +110,17 @@
     <Compile Include="FormEmpTimetalbe.Designer.cs">
       <DependentUpon>FormEmpTimetalbe.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormFindEmpPosition.cs">
+    <Compile Include="FormManageRole.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormFindEmpPosition.Designer.cs">
-      <DependentUpon>FormFindEmpPosition.cs</DependentUpon>
+    <Compile Include="FormManageRole.Designer.cs">
+      <DependentUpon>FormManageRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRoles.Designer.cs">
+      <DependentUpon>FormRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="FormInOrders.cs">
       <SubType>Form</SubType>
@@ -302,6 +308,12 @@
     <Compile Include="FormShowProduct.Designer.cs">
       <DependentUpon>FormShowProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormShowRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShowRole.Designer.cs">
+      <DependentUpon>FormShowRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormShowService.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -463,8 +475,11 @@
     <EmbeddedResource Include="FormEmpTimetalbe.resx">
       <DependentUpon>FormEmpTimetalbe.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormFindEmpPosition.resx">
-      <DependentUpon>FormFindEmpPosition.cs</DependentUpon>
+    <EmbeddedResource Include="FormManageRole.resx">
+      <DependentUpon>FormManageRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRoles.resx">
+      <DependentUpon>FormRoles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormInOrders.resx">
       <DependentUpon>FormInOrders.cs</DependentUpon>
@@ -558,6 +573,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormShowProduct.resx">
       <DependentUpon>FormShowProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShowRole.resx">
+      <DependentUpon>FormShowRole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormShowService.resx">
       <DependentUpon>FormShowService.cs</DependentUpon>

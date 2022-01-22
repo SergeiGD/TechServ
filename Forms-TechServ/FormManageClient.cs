@@ -49,9 +49,7 @@ namespace Forms_TechServ
 
                 FormProducts formProducts = new FormProducts(false, client);
 
-                //formOrders.Controls.Remove(formOrders.Controls.OfType<Panel>().Where(p => p.Name == "panelControl").First());
-                //formOrders.Size = formOrders.Controls.OfType<Panel>().Where(p => p.Name == "panelContent").First().Size;
-                //formOrders.Controls.OfType<Panel>().Where(p => p.Name == "panelContent").First().Dock = DockStyle.Fill;
+                
                 formProducts.TopLevel = false;
                 formProducts.FormBorderStyle = FormBorderStyle.None;
                 productPage.Controls.Add(formProducts);
@@ -60,24 +58,7 @@ namespace Forms_TechServ
                 formProducts.BringToFront();
                 formProducts.Show();
             }
-            /*else if(clientsTab.SelectedTab.Equals(ordersPage))
-            {
-                this.Size = pickedSize;
-
-                FormOrders formOrders = new FormOrders("qwe", true);
-
-                //formOrders.Controls.Remove(formOrders.Controls.OfType<Panel>().Where(p => p.Name == "panelControl").First());
-                //formOrders.Size = formOrders.Controls.OfType<Panel>().Where(p => p.Name == "panelContent").First().Size;
-                //formOrders.Controls.OfType<Panel>().Where(p => p.Name == "panelContent").First().Dock = DockStyle.Fill;
-                formOrders.TopLevel = false;
-                formOrders.FormBorderStyle = FormBorderStyle.None;
-                clientsTab.TabPages[2].Controls.Add(formOrders);
-                //clientsPage.Controls.Add(formOrders);
-                //panelContent.Controls.Add(childForm);
-                formOrders.Dock = DockStyle.Fill;
-                formOrders.BringToFront();
-                formOrders.Show();
-            }*/
+            
 
         }
 

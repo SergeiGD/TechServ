@@ -219,17 +219,6 @@ namespace Forms_TechServ
             ordersInBtn.Click += OrdersInBtn_Click;
             childernTotalHeight += ordersInBtn.Size.Height;
 
-            /*NavButton ordersLogsBtn = new NavButton((NavButton)sender);
-            ordersLogsBtn.Text = "логи заказов";
-            panelMenu.Controls.Add(ordersLogsBtn);
-            ordersLogsBtn.Click += OrdersLogsBtn_Click;
-            childernTotalHeight += ordersLogsBtn.Size.Height;*/
-
-            /*NavButton ordersVisitsBtn = new NavButton((NavButton)sender);
-            ordersVisitsBtn.Text = "ВЫЕЗДЫ";
-            panelMenu.Controls.Add(ordersVisitsBtn);
-            ordersVisitsBtn.Click += OrdersVisitsBtn_Click;
-            childernTotalHeight += ordersVisitsBtn.Size.Height;*/
 
             // РАЗМЕЩЕНИЕ ДОЧЕРНИХ КНОПОК
             NavButton[] childBtns = panelMenu.Controls.OfType<NavButton>().Where(b => b.ParentButton != null && b.ParentButton.Equals((NavButton)sender)).ToArray();
@@ -471,6 +460,12 @@ namespace Forms_TechServ
             empsMastersBtn.Click += empsMastersBtn_Click;
             childernTotalHeight += empsMastersBtn.Size.Height;
 
+            NavButton rolesBtn = new NavButton((NavButton)sender);
+            rolesBtn.Text = "роли";
+            panelMenu.Controls.Add(rolesBtn);
+            rolesBtn.Click += rolesBtn_Click;
+            childernTotalHeight += rolesBtn.Size.Height;
+
 
 
             NavButton[] childBtns = panelMenu.Controls.OfType<NavButton>().Where(b => b.ParentButton != null && b.ParentButton.Equals((NavButton)sender)).ToArray();
@@ -500,6 +495,12 @@ namespace Forms_TechServ
         {
             FormMasters formMasters = new FormMasters(false);
             OpenChildForm(formMasters, (NavButton)sender);
+
+        }
+        private void rolesBtn_Click(object sender, EventArgs e)
+        {
+            FormRoles formRoles = new FormRoles(false);
+            OpenChildForm(formRoles, (NavButton)sender);
 
         }
 

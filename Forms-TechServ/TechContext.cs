@@ -59,7 +59,7 @@ namespace Forms_TechServ
                 .HasKey(c => new { c.MasterId, c.CategoryId });
 
             modelBuilder.Entity<RolesPermissions>()
-                .HasKey(c => new { c.PermissionId, c.RoleId });
+                .HasKey(c => new { c.RoleId, c.PermissionId});
 
             modelBuilder.Entity<BatchSparePart>()
                 .HasKey(c => new { c.BatchId, c.SparePartId });

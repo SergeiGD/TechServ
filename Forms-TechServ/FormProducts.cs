@@ -87,7 +87,7 @@ namespace Forms_TechServ
             ManageButton btnShow = new ManageButton();
             btnShow.Text = "Просмотреть";
             panelControl.Controls.Add(btnShow);
-            btnShow.Click += BtnShow_Click/*BtnShowInClient_Click*/;
+            btnShow.Click += BtnShow_Click;
 
             dataProducts.CellMouseDoubleClick += BtnShow_Click;
 

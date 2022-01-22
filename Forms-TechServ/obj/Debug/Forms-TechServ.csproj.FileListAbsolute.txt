@@ -144,7 +144,6 @@ D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms-TechServ.csproj.AssemblyRef
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormAddEmployeeTimetable.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageWorkshopTimetable.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormEditOrder.resources
-D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormFindEmpPosition.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormInOrders.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageBatch.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageCategory.resources
@@ -206,3 +205,6 @@ D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormStatWorkshopPr
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormStatWorkshopsLoad.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormStatServices.resources
 D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormPermissions.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormRoles.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormShowRole.resources
+D:\git_repos\TechServ\Forms-TechServ\obj\Debug\Forms_TechServ.FormManageRole.resources

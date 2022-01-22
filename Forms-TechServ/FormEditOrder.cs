@@ -298,29 +298,35 @@ namespace Forms_TechServ
             //checkPaid.CheckedChanged += checkPaid_CheckedChanged;
 
             comboBoxStatus.Items.Add(OrderStatus.WaitingForDiagnostic.GetStatusString());
+
             if (checkDiagnosted.Checked)
             {
                 comboBoxStatus.Items.Add(OrderStatus.WaitingForAnswer.GetStatusString());
             }
-            if(order.PrepaymentRequired > order.PrepaymentMade)
-            {
-                comboBoxStatus.Items.Add(OrderStatus.WaitingForPrepayment.GetStatusString());
-            }
+
+            comboBoxStatus.Items.Add(OrderStatus.WaitingForPrepayment.GetStatusString());
+
             comboBoxStatus.Items.Add(OrderStatus.WaitingForSpareParts.GetStatusString());
+
             if (order.PrepaymentRequired == 0 || checkPrepaid.Checked)
             {
                 comboBoxStatus.Items.Add(OrderStatus.WaitingForRepairing.GetStatusString());
             }
+
             if (numericPaid.Value > 0)
             {
                 comboBoxStatus.Items.Add(OrderStatus.WaitingForRefund.GetStatusString());
             }
+
             if (checkPaid.Checked && checkRepaired.Checked)
             {
                 comboBoxStatus.Items.Add(OrderStatus.Finished.GetStatusString());
             }
+
             comboBoxStatus.Items.Add(OrderStatus.WaitingForPayment.GetStatusString());
+
             comboBoxStatus.Items.Add(OrderStatus.Canceled.GetStatusString());
+
 
             comboBoxStatus.SelectedItem = order.Status.GetStatusString();
 
@@ -337,14 +343,6 @@ namespace Forms_TechServ
             formClients.ShowDialog();
         }
 
-        /*private void btnFindProduct_Click(object sender, EventArgs e)
-        {
-            FormProducts formProducts = new FormProducts(true);
-            formProducts.ShowDialog();
-
-            tbProduct.Text = formProducts?.product?.Name;
-            tbProduct.Tag = formProducts?.product;
-        }*/
 
         private void btnFindMaster_Click(object sender, EventArgs e)
         {
@@ -555,7 +553,29 @@ namespace Forms_TechServ
 
             labelFinalPrice.Text = order.FinalPrice.ToString();
             labelLeftToPay.Text = (order.FinalPrice - numericPaid.Value).ToString();
-            //labelSale.Text = order.ClientSale.ToString();
+
+            if ((order.PrepaymentRequired == 0 || checkPrepaid.Checked) && !comboBoxStatus.Items.Contains(OrderStatus.WaitingForRepairing.GetStatusString()))
+            {
+                comboBoxStatus.Items.Add(OrderStatus.WaitingForRepairing.GetStatusString());
+            }
+            else if ((order.PrepaymentRequired != 0 && !checkPrepaid.Checked) && comboBoxStatus.Items.Contains(OrderStatus.WaitingForRepairing.GetStatusString()))
+            {
+                if (comboBoxStatus.SelectedItem.ToString() == OrderStatus.WaitingForRepairing.GetStatusString())
+                {
+                    comboBoxStatus.SelectedItem = OrderStatus.WaitingForSpareParts.GetStatusString();
+                }
+                comboBoxStatus.Items.Remove(OrderStatus.WaitingForRepairing.GetStatusString());
+            }
+
+            if (!checkPrepaid.Checked && order.PrepaymentRequired > 0)
+            {
+                checkRepaired.Enabled = false;
+            }
+            else
+            {
+                checkRepaired.Enabled = true;
+            }
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -621,11 +641,7 @@ namespace Forms_TechServ
                     RecalcFields();
 
 
-                    /*OrderSparePart sparePart = order.GetSparePart((int)dataSpareParts.SelectedRows[0].Cells[0].Value);
-                    sparePart.DelSparePart();
-                    MessageBox.Show("Деталь успешно удалена", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    FillSpareParts();
-                    RecalcFields();*/
+
                 }
             }
             else
@@ -777,21 +793,7 @@ namespace Forms_TechServ
                     tbMaster.Tag = order.Master;
                 }
             }
-                /*DialogResult answer = MessageBox.Show("Подобрать мастера автоматически?", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            if(answer == DialogResult.Yes)
-            {
 
-                if (!order.FindMaster())
-                {
-                    MessageBox.Show("Не удается найти мастера с требуемой категорией", "Что-то пошло не так", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                else
-                {
-                    tbMaster.Text = order.Master.Name;
-                    tbMaster.Tag = order.Master;
-                }
-            }*/
         }
 
         private void checkPrepaid_CheckedChanged(object sender, EventArgs e)
@@ -805,12 +807,27 @@ namespace Forms_TechServ
                 }
             }
 
-            if (order.PrepaymentRequired == 0 || checkPrepaid.Checked && !comboBoxStatus.Items.Contains(OrderStatus.WaitingForRepairing.GetStatusString()))
+
+            if(!checkPrepaid.Checked && order.PrepaymentRequired > 0)
+            {
+                checkRepaired.Enabled = false;
+                checkRepaired.Checked = false;
+            }
+            else
+            {
+                checkRepaired.Enabled = true;
+            }
+
+            if ((order.PrepaymentRequired == 0 || checkPrepaid.Checked) && !comboBoxStatus.Items.Contains(OrderStatus.WaitingForRepairing.GetStatusString()))
             {
                 comboBoxStatus.Items.Add(OrderStatus.WaitingForRepairing.GetStatusString());
             }
-            else if (comboBoxStatus.Items.Contains(OrderStatus.WaitingForRepairing.GetStatusString()))
+            else if ((order.PrepaymentRequired != 0 && !checkPrepaid.Checked) && comboBoxStatus.Items.Contains(OrderStatus.WaitingForRepairing.GetStatusString()))
             {
+                if (comboBoxStatus.SelectedItem.ToString() == OrderStatus.WaitingForRepairing.GetStatusString())
+                {
+                    comboBoxStatus.SelectedItem = OrderStatus.WaitingForSpareParts.GetStatusString();
+                }
                 comboBoxStatus.Items.Remove(OrderStatus.WaitingForRepairing.GetStatusString());
             }
         }
@@ -822,8 +839,12 @@ namespace Forms_TechServ
             {
                 comboBoxStatus.Items.Add(OrderStatus.WaitingForRefund.GetStatusString());
             }
-            else if (comboBoxStatus.Items.Contains(OrderStatus.WaitingForRefund.GetStatusString()))
+            else if (numericPaid.Value == 0 && comboBoxStatus.Items.Contains(OrderStatus.WaitingForRefund.GetStatusString()))
             {
+                if(comboBoxStatus.SelectedItem.ToString() == OrderStatus.WaitingForRefund.GetStatusString())
+                {
+                    comboBoxStatus.SelectedItem = OrderStatus.WaitingForSpareParts.GetStatusString();
+                }
                 comboBoxStatus.Items.Remove(OrderStatus.WaitingForRefund.GetStatusString());
             }
         }
@@ -924,10 +945,19 @@ namespace Forms_TechServ
             {
                 checkAnswer.Enabled = unlock;
             }
-            
+
+            if (!checkPrepaid.Checked && order.PrepaymentRequired > 0)
+            {
+                checkRepaired.Enabled = false;
+            }
+            else
+            {
+                checkRepaired.Enabled = unlock;
+            }
+
             checkDiagnosted.Enabled = unlock;
             checkPrepaid.Enabled = unlock;
-            checkRepaired.Enabled = unlock;
+            //checkRepaired.Enabled = unlock;
             checkPaid.Enabled = unlock;
             tbComment.Enabled = unlock;
             btnAddService.Enabled = unlock;

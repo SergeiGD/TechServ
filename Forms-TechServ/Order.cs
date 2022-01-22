@@ -217,7 +217,22 @@ namespace Forms_TechServ
             }
         }
 
-        
+        public bool CheckSparePartsDelivered()
+        {
+            using(TechContext db = new TechContext())
+            {
+                foreach (OrderSparePart sparePart in this.GetSpareParts())
+                {
+                    if (!sparePart.CheckBatchesDelivered())
+                    {
+                        return false;                                           // если хоть одна деталь не прибыла, то false
+                    }
+                }
+
+                return true;
+            }
+            
+        }
 
         public OrderSparePart GetSparePart(int sparePartId)
         {

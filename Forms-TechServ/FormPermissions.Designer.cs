@@ -227,8 +227,7 @@ namespace Forms_TechServ
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataPermissions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataPermissions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataPermissions.Location = new System.Drawing.Point(0, 53);
-            this.dataPermissions.MultiSelect = false;
+            this.dataPermissions.Location = new System.Drawing.Point(3, 47);
             this.dataPermissions.Name = "dataPermissions";
             this.dataPermissions.ReadOnly = true;
             this.dataPermissions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
