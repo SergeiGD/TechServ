@@ -100,7 +100,7 @@ namespace Forms_TechServ
             this.workshopTabs.Location = new System.Drawing.Point(0, 0);
             this.workshopTabs.Name = "workshopTabs";
             this.workshopTabs.SelectedIndex = 0;
-            this.workshopTabs.Size = new System.Drawing.Size(622, 358);
+            this.workshopTabs.Size = new System.Drawing.Size(680, 358);
             this.workshopTabs.TabIndex = 8;
             this.workshopTabs.SelectedIndexChanged += new System.EventHandler(this.workshopTabs_SelectedIndexChanged);
             // 
@@ -121,7 +121,7 @@ namespace Forms_TechServ
             this.generalPage.Location = new System.Drawing.Point(4, 22);
             this.generalPage.Name = "generalPage";
             this.generalPage.Padding = new System.Windows.Forms.Padding(3);
-            this.generalPage.Size = new System.Drawing.Size(614, 332);
+            this.generalPage.Size = new System.Drawing.Size(672, 332);
             this.generalPage.TabIndex = 0;
             this.generalPage.Text = "Общая информация";
             // 
@@ -171,7 +171,7 @@ namespace Forms_TechServ
             this.panelEdit.Controls.Add(this.cancelBtn);
             this.panelEdit.Controls.Add(this.deleteBtn);
             this.panelEdit.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelEdit.Location = new System.Drawing.Point(410, 3);
+            this.panelEdit.Location = new System.Drawing.Point(468, 3);
             this.panelEdit.Name = "panelEdit";
             this.panelEdit.Size = new System.Drawing.Size(201, 326);
             this.panelEdit.TabIndex = 42;
@@ -427,7 +427,7 @@ namespace Forms_TechServ
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.ClientSize = new System.Drawing.Size(622, 358);
+            this.ClientSize = new System.Drawing.Size(680, 358);
             this.Controls.Add(this.workshopTabs);
             this.MaximizeBox = false;
             this.Name = "FormShowWorkshop";

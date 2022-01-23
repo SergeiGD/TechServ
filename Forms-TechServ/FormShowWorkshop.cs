@@ -31,7 +31,7 @@ namespace Forms_TechServ
 
         private void FormShowWorkshop_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(684, 302);
+            this.Size = new Size(700, 302);
             if (readOnly || (!UserSession.Can("edit_branch") && !UserSession.Can("add_del_branch")))      // если просто просмотр или нету прав на изменения
             {
                 panelEdit.Parent.Controls.Remove(panelEdit);
@@ -128,7 +128,7 @@ namespace Forms_TechServ
         {
             if (workshopTabs.SelectedTab.Equals(generalPage))
             {
-                this.Size = new Size(684, 302); 
+                this.Size = new Size(700, 302); 
             }
             else if (workshopTabs.SelectedTab.Equals(timetablePage))
             {

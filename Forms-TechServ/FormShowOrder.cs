@@ -340,5 +340,10 @@ namespace Forms_TechServ
         {
             numericCurrentSparePartPage.Value = numericCurrentSparePartPage.Value - 1 < numericCurrentSparePartPage.Minimum ? numericCurrentSparePartPage.Value : numericCurrentSparePartPage.Value - 1;
         }
+
+        private void btnPriceInfo_MouseHover(object sender, EventArgs e)
+        {
+            toolTipPriceInfo.SetToolTip(btnPriceInfo, "Если указанная цена не совпадает с суммой расчетных цен деталей и услуг, значит происходило изменение цена на детали/услуги уже после завершения/оплаты/отмены заказа");
+        }
     }
 }

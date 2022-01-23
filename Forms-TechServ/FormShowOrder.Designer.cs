@@ -29,6 +29,7 @@ namespace Forms_TechServ
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -87,6 +88,7 @@ namespace Forms_TechServ
             this.label34 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnShowService = new Forms_TechServ.ManageButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBoxShowServicesRows = new System.Windows.Forms.ComboBox();
             this.label47 = new System.Windows.Forms.Label();
@@ -96,8 +98,16 @@ namespace Forms_TechServ
             this.btnNextService = new System.Windows.Forms.Button();
             this.btnPrevService = new System.Windows.Forms.Button();
             this.dataServies = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column_sale = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnShowSparePart = new Forms_TechServ.ManageButton();
             this.panel3 = new System.Windows.Forms.Panel();
             this.comboBoxShowSparePartsRows = new System.Windows.Forms.ComboBox();
             this.label48 = new System.Windows.Forms.Label();
@@ -114,15 +124,8 @@ namespace Forms_TechServ
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.logsPage = new System.Windows.Forms.TabPage();
             this.visitsPage = new System.Windows.Forms.TabPage();
-            this.btnShowService = new Forms_TechServ.ManageButton();
-            this.btnShowSparePart = new Forms_TechServ.ManageButton();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column_sale = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnPriceInfo = new FontAwesome.Sharp.IconButton();
+            this.toolTipPriceInfo = new System.Windows.Forms.ToolTip(this.components);
             this.ordersTab.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.groupPrepayment.SuspendLayout();
@@ -438,6 +441,7 @@ namespace Forms_TechServ
             // generalPage
             // 
             this.generalPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.generalPage.Controls.Add(this.btnPriceInfo);
             this.generalPage.Controls.Add(this.labelLeftToPay);
             this.generalPage.Controls.Add(this.label3);
             this.generalPage.Controls.Add(this.groupPrepayment);
@@ -738,6 +742,23 @@ namespace Forms_TechServ
             this.panel2.Size = new System.Drawing.Size(185, 518);
             this.panel2.TabIndex = 1;
             // 
+            // btnShowService
+            // 
+            this.btnShowService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnShowService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnShowService.FlatAppearance.BorderSize = 0;
+            this.btnShowService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShowService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnShowService.Location = new System.Drawing.Point(0, 0);
+            this.btnShowService.Name = "btnShowService";
+            this.btnShowService.Size = new System.Drawing.Size(185, 40);
+            this.btnShowService.TabIndex = 0;
+            this.btnShowService.Text = "Просмотреть";
+            this.btnShowService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnShowService.UseVisualStyleBackColor = false;
+            this.btnShowService.Click += new System.EventHandler(this.btnShowSerivce_Click);
+            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -875,6 +896,48 @@ namespace Forms_TechServ
             this.dataServies.TabIndex = 1;
             this.dataServies.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataServies_CellMouseDoubleClick);
             // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "id";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Наименование";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Цена за одну";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Количество";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // column_sale
+            // 
+            this.column_sale.HeaderText = "Скидка";
+            this.column_sale.Name = "column_sale";
+            this.column_sale.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Общая цена";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "Сделано";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            // 
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
@@ -896,6 +959,23 @@ namespace Forms_TechServ
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(185, 518);
             this.panel4.TabIndex = 2;
+            // 
+            // btnShowSparePart
+            // 
+            this.btnShowSparePart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnShowSparePart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnShowSparePart.FlatAppearance.BorderSize = 0;
+            this.btnShowSparePart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShowSparePart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnShowSparePart.Location = new System.Drawing.Point(0, 0);
+            this.btnShowSparePart.Name = "btnShowSparePart";
+            this.btnShowSparePart.Size = new System.Drawing.Size(185, 40);
+            this.btnShowSparePart.TabIndex = 0;
+            this.btnShowSparePart.Text = "Просмотреть";
+            this.btnShowSparePart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnShowSparePart.UseVisualStyleBackColor = false;
+            this.btnShowSparePart.Click += new System.EventHandler(this.btnShowSparePart_Click);
             // 
             // panel3
             // 
@@ -1082,81 +1162,22 @@ namespace Forms_TechServ
             this.visitsPage.TabIndex = 4;
             this.visitsPage.Text = "Выезды";
             // 
-            // btnShowService
+            // btnPriceInfo
             // 
-            this.btnShowService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShowService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnShowService.FlatAppearance.BorderSize = 0;
-            this.btnShowService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnShowService.Location = new System.Drawing.Point(0, 0);
-            this.btnShowService.Name = "btnShowService";
-            this.btnShowService.Size = new System.Drawing.Size(185, 40);
-            this.btnShowService.TabIndex = 0;
-            this.btnShowService.Text = "Просмотреть";
-            this.btnShowService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnShowService.UseVisualStyleBackColor = false;
-            this.btnShowService.Click += new System.EventHandler(this.btnShowSerivce_Click);
-            // 
-            // btnShowSparePart
-            // 
-            this.btnShowSparePart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShowSparePart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnShowSparePart.FlatAppearance.BorderSize = 0;
-            this.btnShowSparePart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowSparePart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnShowSparePart.Location = new System.Drawing.Point(0, 0);
-            this.btnShowSparePart.Name = "btnShowSparePart";
-            this.btnShowSparePart.Size = new System.Drawing.Size(185, 40);
-            this.btnShowSparePart.TabIndex = 0;
-            this.btnShowSparePart.Text = "Просмотреть";
-            this.btnShowSparePart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnShowSparePart.UseVisualStyleBackColor = false;
-            this.btnShowSparePart.Click += new System.EventHandler(this.btnShowSparePart_Click);
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "id";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Наименование";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Цена за одну";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Количество";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // column_sale
-            // 
-            this.column_sale.HeaderText = "Скидка";
-            this.column_sale.Name = "column_sale";
-            this.column_sale.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Общая цена";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "Сделано";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
+            this.btnPriceInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnPriceInfo.FlatAppearance.BorderSize = 0;
+            this.btnPriceInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPriceInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
+            this.btnPriceInfo.IconColor = System.Drawing.Color.Black;
+            this.btnPriceInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnPriceInfo.IconSize = 20;
+            this.btnPriceInfo.Location = new System.Drawing.Point(163, 449);
+            this.btnPriceInfo.Name = "btnPriceInfo";
+            this.btnPriceInfo.Size = new System.Drawing.Size(27, 21);
+            this.btnPriceInfo.TabIndex = 191;
+            this.btnPriceInfo.UseVisualStyleBackColor = true;
+            this.btnPriceInfo.MouseHover += new System.EventHandler(this.btnPriceInfo_MouseHover);
             // 
             // FormShowOrder
             // 
@@ -1286,5 +1307,7 @@ namespace Forms_TechServ
         private System.Windows.Forms.DataGridViewTextBoxColumn column_sale;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private FontAwesome.Sharp.IconButton btnPriceInfo;
+        private System.Windows.Forms.ToolTip toolTipPriceInfo;
     }
 }

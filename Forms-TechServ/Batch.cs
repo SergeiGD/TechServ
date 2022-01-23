@@ -226,6 +226,12 @@ namespace Forms_TechServ
 
                     db.SaveChanges();
 
+                    foreach (Order order in db.OrdersSpareParts.Where(s => s.SparePartId == sparePart.SparePartId && s.BatchId == this.Id).Include(o => o.Order).Select(o => o.Order).Where(o => o.Status != OrderStatus.Finished && o.Status != OrderStatus.Canceled && o.DatePaid == null))
+                    {
+                        // ЕСЛИ ЗАКАЗ НЕ ЗАВЕРШЕН/ОТМЕНЕН И ЕЩЕ НЕ ОПЛАЧЕН, ТО ПЕРЕСЧИТЫВАЕМ ЦЕНУ
+                        order.FinalPrice = order.CalcFinalPrice();
+                    }
+
                     Batch batchToUpdate = db.Batches.Find(this.Id);
                     this.Price = CalcFinalPrice();
                     db.Entry(batchToUpdate).CurrentValues.SetValues(this);

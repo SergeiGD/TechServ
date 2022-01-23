@@ -115,8 +115,11 @@ namespace Forms_TechServ
             idCol.Name = "id";
             DataGridViewTextBoxColumn nameCol = new DataGridViewTextBoxColumn();
             nameCol.Name = "Наименование";
+            DataGridViewTextBoxColumn typeCol = new DataGridViewTextBoxColumn();
+            typeCol.Name = "Принадлежность";
             dataPosition.Columns.Add(idCol);
             dataPosition.Columns.Add(nameCol);
+            dataPosition.Columns.Add(typeCol);
 
             if (UserSession.Can("add_del_role") && !readOnly)
             {
@@ -171,12 +174,13 @@ namespace Forms_TechServ
 
                 dataPosition.Rows[i].Cells[0].Value = positions[i].Id;
                 dataPosition.Rows[i].Cells[1].Value = positions[i].Name;
+                dataPosition.Rows[i].Cells[2].Value = positions[i].RoleType.GetRoleTypeString();
 
-                if (dataPosition.Columns.Count > 2)
+                if (dataPosition.Columns.Count > 3)
                 {
-                    dataPosition.Rows[i].Cells[2].Value = "Удалить";
-                    dataPosition.Rows[i].Cells[2].Style.BackColor = Color.FromArgb(231, 57, 9);
-                    dataPosition.Rows[i].Cells[2].Style.ForeColor = Color.White;
+                    dataPosition.Rows[i].Cells[3].Value = "Удалить";
+                    dataPosition.Rows[i].Cells[3].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataPosition.Rows[i].Cells[3].Style.ForeColor = Color.White;
 
                 }
             }
@@ -224,8 +228,8 @@ namespace Forms_TechServ
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            //Form formManageService = new FormManageService(category);
-            //formManageService.ShowDialog();
+            FormManageRole formManageRole = new FormManageRole();
+            formManageRole.ShowDialog();
 
             FillGrid();
         }
