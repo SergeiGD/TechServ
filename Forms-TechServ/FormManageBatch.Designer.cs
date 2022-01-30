@@ -59,8 +59,8 @@ namespace Forms_TechServ
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.delCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.batchTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.sparePartsPage.SuspendLayout();
@@ -417,15 +417,15 @@ namespace Forms_TechServ
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
             // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            // 
             // delCol
             // 
             this.delCol.HeaderText = "Удалить";
             this.delCol.Name = "delCol";
             this.delCol.ReadOnly = true;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // FormManageBatch
             // 
@@ -436,7 +436,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.batchTabs);
             this.MaximizeBox = false;
             this.Name = "FormManageBatch";
-            this.Text = "FormManageBatch";
+            this.Text = "Формирование поставки";
             this.Load += new System.EventHandler(this.FormManageBatch_Load);
             this.ResizeEnd += new System.EventHandler(this.FormManageBatch_ResizeEnd);
             this.batchTabs.ResumeLayout(false);

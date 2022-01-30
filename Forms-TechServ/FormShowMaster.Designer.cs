@@ -516,7 +516,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.masterTabs);
             this.MaximizeBox = false;
             this.Name = "FormShowMaster";
-            this.Text = "FormShowMaster";
+            this.Text = "Просмотр сотрудника (мастер)";
             this.Load += new System.EventHandler(this.FormShowMaster_Load);
             this.ResizeEnd += new System.EventHandler(this.FormShowMaster_ResizeEnd);
             this.masterTabs.ResumeLayout(false);

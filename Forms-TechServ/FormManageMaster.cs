@@ -38,7 +38,7 @@ namespace Forms_TechServ
 
 
             //this.master = master;
-            btnAction.Text = "Сохранить";
+            btnAction.Text = "Сохранить общую информацию";
 
             this.master = master;
         }
@@ -46,9 +46,6 @@ namespace Forms_TechServ
         public FormManageMaster(Workshop workshop)                  // добавление к конкретной мастерской
         {
             InitializeComponent();
-
-            //masterTabs.TabPages.Add(ordersPage);
-            //masterTabs.TabPages.Add(visitsPage);
 
             //this.master = master;
             master = new Master();
@@ -141,11 +138,6 @@ namespace Forms_TechServ
             }
         }
 
-        private void addTimetableBtn_Click(object sender, EventArgs e)
-        {
-            //FormAddEmployeeTimetable formAddEmployeeTimetable = new FormAddEmployeeTimetable(master);
-            //formAddEmployeeTimetable.ShowDialog();
-        }
 
         private void btnFindPosition_Click(object sender, EventArgs e)
         {

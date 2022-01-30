@@ -76,13 +76,16 @@ namespace Forms_TechServ
                 DialogResult answer = MessageBox.Show("Вы уверены, что хотите удалить ВСЕ выбранные события?", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (answer == DialogResult.Yes)
                 {
+                    int deleted = 0;
                     foreach (DataGridViewRow row in dataOrderLogs.SelectedRows)
                     {
                         OrderLog orderLog = order.GetOrderLog((int)dataOrderLogs.Rows[row.Index].Cells[0].Value);
                         orderLog.DelOrderLog();
+                        deleted++;
                     }
 
                     FillGrid();
+                    MessageBox.Show($"{deleted} события были удалены");
                 }
             }
             else

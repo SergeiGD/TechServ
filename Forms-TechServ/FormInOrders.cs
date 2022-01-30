@@ -296,9 +296,11 @@ namespace Forms_TechServ
             datePickerStartUntil.Format = DateTimePickerFormat.Custom;
             datePickerStartUntil.CustomFormat = " ";
 
+            comboBoxSortBy.Items.Add("id");
             comboBoxSortBy.Items.Add("Дате начала");
             comboBoxSortBy.Items.Add("Требуемой предоплате");
             comboBoxSortBy.Items.Add("Внесенной предоплате");
+            comboBoxSortBy.Items.Add("Стоимосте");
             comboBoxSortBy.SelectedIndex = 0;
 
             comboBoxShowRows.Items.Add(5);
@@ -321,7 +323,10 @@ namespace Forms_TechServ
 
             string sortBy = "Id";
 
-            
+            if (comboBoxSortBy.SelectedItem.ToString() == "id")
+            {
+                sortBy = "Id";
+            }
             if (FilterSortBy.Value == "Дате начала")
             {
                 sortBy = "DateStart";
@@ -334,40 +339,15 @@ namespace Forms_TechServ
             {
                 sortBy = "PrepaymentMade";
             }
-
-            /*OrderStatus pickedStatus = OrderStatus.Unknown;
-            if (comboBoxStatus.SelectedItem != null)
+            if (FilterSortBy.Value == "Стоимосте")
             {
-                pickedStatus = StatusStringExtensions.GetStatusEnum(comboBoxStatus.SelectedItem.ToString());
+                sortBy = "FinalPrice";
             }
 
-            DateTime? dateStartFrom = null;
-            if (datePickerStartFrom.Format != DateTimePickerFormat.Custom)
-                dateStartFrom = datePickerStartFrom.Value;
 
-            DateTime? dateStartUntil = null;
-            if (datePickerStartUntil.Format != DateTimePickerFormat.Custom)
-                dateStartUntil = datePickerStartUntil.Value;*/
 
             List<Order> orders = OrdersList.GetInOrders(
-                /*new Order()
-                {
-                    Id = id,
-                    Workshop = (Workshop)tbWorkshop.Tag,
-                    Product = (Product)tbProduct.Tag,
-                    FinalPrice = numericPriceFrom.Value,
-                    Status = pickedStatus,
-                    DateStart = dateStartFrom
-                    
-                },
-                new Order()
-                {
-                    FinalPrice = numericPriceUntil.Value,
-                    DateStart = dateStartUntil
 
-                },
-                (Client)tbClient.Tag,
-                checkBoxActive.Checked,*/
                 FilterA,
                 FilterB,
                 FilterClient,

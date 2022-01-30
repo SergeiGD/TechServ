@@ -155,7 +155,7 @@ namespace Forms_TechServ
             this.ClientSize = new System.Drawing.Size(502, 215);
             this.Controls.Add(this.roleTabs);
             this.Name = "FormManageRole";
-            this.Text = "FormManageRole";
+            this.Text = "Управление ролью";
             this.Load += new System.EventHandler(this.FormManageRole_Load);
             this.roleTabs.ResumeLayout(false);
             this.generalPage.ResumeLayout(false);

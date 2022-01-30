@@ -39,6 +39,7 @@ namespace Forms_TechServ
             this.numericCurrentPage = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.panelFind = new System.Windows.Forms.Panel();
+            this.checkBoxWithParents = new System.Windows.Forms.CheckBox();
             this.btnSalaryInfo = new FontAwesome.Sharp.IconButton();
             this.btnAskOrDesk = new FontAwesome.Sharp.IconButton();
             this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
@@ -61,7 +62,6 @@ namespace Forms_TechServ
             this.searchBtn = new Forms_TechServ.ManageButton();
             this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipPriceInfo = new System.Windows.Forms.ToolTip(this.components);
-            this.checkBoxWithParents = new System.Windows.Forms.CheckBox();
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             this.panelFind.SuspendLayout();
@@ -199,6 +199,17 @@ namespace Forms_TechServ
             this.panelFind.Size = new System.Drawing.Size(778, 127);
             this.panelFind.TabIndex = 4;
             // 
+            // checkBoxWithParents
+            // 
+            this.checkBoxWithParents.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.checkBoxWithParents.AutoSize = true;
+            this.checkBoxWithParents.Location = new System.Drawing.Point(288, 50);
+            this.checkBoxWithParents.Name = "checkBoxWithParents";
+            this.checkBoxWithParents.Size = new System.Drawing.Size(238, 17);
+            this.checkBoxWithParents.TabIndex = 155;
+            this.checkBoxWithParents.Text = "Показывать также услуги род. категорий";
+            this.checkBoxWithParents.UseVisualStyleBackColor = true;
+            // 
             // btnSalaryInfo
             // 
             this.btnSalaryInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -285,7 +296,6 @@ namespace Forms_TechServ
             this.tbCat.ReadOnly = true;
             this.tbCat.Size = new System.Drawing.Size(129, 20);
             this.tbCat.TabIndex = 119;
-            //this.tbCat.TextChanged += new System.EventHandler(this.tbCat_TextChanged);
             // 
             // btnCleanCat
             // 
@@ -476,17 +486,6 @@ namespace Forms_TechServ
             this.searchBtn.UseVisualStyleBackColor = false;
             this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
             // 
-            // checkBoxWithParents
-            // 
-            this.checkBoxWithParents.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.checkBoxWithParents.AutoSize = true;
-            this.checkBoxWithParents.Location = new System.Drawing.Point(288, 50);
-            this.checkBoxWithParents.Name = "checkBoxWithParents";
-            this.checkBoxWithParents.Size = new System.Drawing.Size(238, 17);
-            this.checkBoxWithParents.TabIndex = 155;
-            this.checkBoxWithParents.Text = "Показывать также услуги род. категорий";
-            this.checkBoxWithParents.UseVisualStyleBackColor = true;
-            // 
             // FormServices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -496,7 +495,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.panelContent);
             this.Controls.Add(this.panelControl);
             this.Name = "FormServices";
-            this.Text = "FormServices";
+            this.Text = "Услуги";
             this.Load += new System.EventHandler(this.FormServices_Load);
             this.panelContent.ResumeLayout(false);
             this.panelContent.PerformLayout();

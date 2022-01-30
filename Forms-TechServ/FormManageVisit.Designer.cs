@@ -485,7 +485,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.visitTabs);
             this.MaximizeBox = false;
             this.Name = "FormManageVisit";
-            this.Text = "FormManageVisits";
+            this.Text = "Выезды";
             this.Load += new System.EventHandler(this.FormManageVisit_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.visitTabs.ResumeLayout(false);

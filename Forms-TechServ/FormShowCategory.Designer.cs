@@ -215,7 +215,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.categoriesTab);
             this.MaximizeBox = false;
             this.Name = "FormShowCategory";
-            this.Text = "FormShowCategory";
+            this.Text = "Просмотр категории";
             this.Load += new System.EventHandler(this.FormShowCategory_Load);
             this.ResizeEnd += new System.EventHandler(this.FormShowCategory_ResizeEnd);
             this.categoriesTab.ResumeLayout(false);

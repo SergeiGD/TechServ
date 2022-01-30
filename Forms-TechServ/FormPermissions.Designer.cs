@@ -284,7 +284,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panelContent);
             this.Name = "FormPermissions";
-            this.Text = "FormPermissions";
+            this.Text = "Права";
             this.Load += new System.EventHandler(this.FormPermissions_Load);
             this.panelContent.ResumeLayout(false);
             this.panelContent.PerformLayout();

@@ -30,6 +30,7 @@ namespace Forms_TechServ
             InitializeComponent();
 
             this.batchSparePart = batchSparePart;
+            this.sparePart = SparePartsList.GetById(batchSparePart.SparePartId);
             numericPrice.Value = batchSparePart.UnitPrice;
             numericQuantity.Value = batchSparePart.Quantity;
         }
@@ -45,12 +46,25 @@ namespace Forms_TechServ
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-            batchSparePart.Quantity = (int)numericQuantity.Value;
-            batchSparePart.UnitPrice = numericPrice.Value;
-            if(batchSparePart.SparePartId == 0)
+            if (numericPrice.Value < sparePart.ClientPrepayment)
+            {
+                DialogResult answer = MessageBox.Show($"Введенная цена меньше необходимой цены предоплаты детали ({sparePart.ClientPrepayment}). Вы точно хотите продолжить?", "Подтвердите корректность данных", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (answer != DialogResult.Yes)
+                {
+                    numericPrice.Value = numericPrice.Minimum;
+                    return;
+                }
+
+            }
+
+            if (batchSparePart.SparePartId == 0)
             {
                 batchSparePart.SparePartId = sparePart.Id;
+
             }
+            batchSparePart.Quantity = (int)numericQuantity.Value;
+            batchSparePart.UnitPrice = numericPrice.Value;
+            
 
             changed = true;
 

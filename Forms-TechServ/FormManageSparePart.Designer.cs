@@ -312,7 +312,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.sparePartTabs);
             this.MaximizeBox = false;
             this.Name = "FormManageSparePart";
-            this.Text = "FormManageSparePart";
+            this.Text = "Управление дателью";
             this.Load += new System.EventHandler(this.FormManageSparePart_Load);
             this.ResizeEnd += new System.EventHandler(this.FormManageSparePart_ResizeEnd);
             ((System.ComponentModel.ISupportInitialize)(this.numericPrepayment)).EndInit();

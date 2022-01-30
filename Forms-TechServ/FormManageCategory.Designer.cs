@@ -190,7 +190,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.categoriesTab);
             this.MaximizeBox = false;
             this.Name = "FormManageCategory";
-            this.Text = "FormManageCategory";
+            this.Text = "Управление категорией";
             this.Load += new System.EventHandler(this.FormManageCategory_Load);
             this.ResizeEnd += new System.EventHandler(this.FormManageCategory_ResizeEnd);
             this.categoriesTab.ResumeLayout(false);

@@ -323,7 +323,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.workshopTabs);
             this.MaximizeBox = false;
             this.Name = "FormManageWorkshop";
-            this.Text = "FormManageWorkshop";
+            this.Text = "Управление филиалом";
             this.Load += new System.EventHandler(this.FormManageWorkshop_Load);
             this.ResizeEnd += new System.EventHandler(this.FormManageWorkshop_ResizeEnd);
             this.workshopTabs.ResumeLayout(false);

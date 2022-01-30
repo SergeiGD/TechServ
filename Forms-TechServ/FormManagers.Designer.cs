@@ -37,6 +37,7 @@ namespace Forms_TechServ
             this.numericCurrentPage = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.panelFind = new System.Windows.Forms.Panel();
+            this.checkBoxRemotely = new System.Windows.Forms.CheckBox();
             this.btnSalaryInfo = new FontAwesome.Sharp.IconButton();
             this.btnAskOrDesk = new FontAwesome.Sharp.IconButton();
             this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
@@ -63,11 +64,10 @@ namespace Forms_TechServ
             this.btnPrev = new System.Windows.Forms.Button();
             this.dataManagers = new System.Windows.Forms.DataGridView();
             this.panelControl = new System.Windows.Forms.Panel();
-            this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTipSlalaryInfo = new System.Windows.Forms.ToolTip(this.components);
-            this.checkBoxRemotely = new System.Windows.Forms.CheckBox();
             this.clearBtn = new Forms_TechServ.ManageButton();
             this.searchBtn = new Forms_TechServ.ManageButton();
+            this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipSlalaryInfo = new System.Windows.Forms.ToolTip(this.components);
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             this.panelFind.SuspendLayout();
@@ -190,6 +190,17 @@ namespace Forms_TechServ
             this.panelFind.Name = "panelFind";
             this.panelFind.Size = new System.Drawing.Size(778, 120);
             this.panelFind.TabIndex = 4;
+            // 
+            // checkBoxRemotely
+            // 
+            this.checkBoxRemotely.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.checkBoxRemotely.AutoSize = true;
+            this.checkBoxRemotely.Location = new System.Drawing.Point(266, 90);
+            this.checkBoxRemotely.Name = "checkBoxRemotely";
+            this.checkBoxRemotely.Size = new System.Drawing.Size(123, 17);
+            this.checkBoxRemotely.TabIndex = 146;
+            this.checkBoxRemotely.Text = "Работает удаленно";
+            this.checkBoxRemotely.UseVisualStyleBackColor = true;
             // 
             // btnSalaryInfo
             // 
@@ -529,17 +540,6 @@ namespace Forms_TechServ
             this.panelControl.Size = new System.Drawing.Size(190, 632);
             this.panelControl.TabIndex = 4;
             // 
-            // checkBoxRemotely
-            // 
-            this.checkBoxRemotely.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.checkBoxRemotely.AutoSize = true;
-            this.checkBoxRemotely.Location = new System.Drawing.Point(266, 90);
-            this.checkBoxRemotely.Name = "checkBoxRemotely";
-            this.checkBoxRemotely.Size = new System.Drawing.Size(123, 17);
-            this.checkBoxRemotely.TabIndex = 146;
-            this.checkBoxRemotely.Text = "Работает удаленно";
-            this.checkBoxRemotely.UseVisualStyleBackColor = true;
-            // 
             // clearBtn
             // 
             this.clearBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
@@ -579,7 +579,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panelContent);
             this.Name = "FormManagers";
-            this.Text = "FormManagers";
+            this.Text = "Менеджеры";
             this.Load += new System.EventHandler(this.FormManagers_Load);
             this.panelContent.ResumeLayout(false);
             this.panelContent.PerformLayout();

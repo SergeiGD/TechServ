@@ -78,7 +78,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.btnMaster);
             this.Controls.Add(this.label1);
             this.Name = "FormPickEmployeeType";
-            this.Text = "FormPickEmployeeType";
+            this.Text = "Выбор типа сотрудника";
             this.ResumeLayout(false);
             this.PerformLayout();
 

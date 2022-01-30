@@ -118,11 +118,11 @@ namespace Forms_TechServ
             }
         }
 
-        public bool EditQuantity(Batch batch, int quantity) 
+        public bool EditQuantity(Batch batch, int quantityNew, int quantityOld) 
         {
             using (TechContext db = new TechContext())
             {
-                if(batch.GetCountLeft(this.SparePart) < quantity)
+                if(batch.GetCountLeft(this.SparePart) < quantityNew - quantityOld)
                 {
                     return false;
                 }
@@ -134,11 +134,11 @@ namespace Forms_TechServ
                     {
                         OrderId = this.Order.Id,
                         EventDate = DateTime.Now,
-                        EventDescription = $"Количества детали №{this.SparePart.Id} из поставки {batch.Id} изменено с {sparePartFromBatch.Quantity} на {quantity}"
+                        EventDescription = $"Количества детали №{this.SparePart.Id} из поставки {batch.Id} изменено с {sparePartFromBatch.Quantity} на {quantityNew}"
                     };
                     db.OrderLogs.Add(orderLog);
 
-                    sparePartFromBatch.Quantity = quantity;
+                    sparePartFromBatch.Quantity = quantityNew;
 
                     
 

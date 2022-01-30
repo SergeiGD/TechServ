@@ -37,6 +37,7 @@ namespace Forms_TechServ
             this.numericCurrentPage = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.panelFind = new System.Windows.Forms.Panel();
+            this.btnSalaryInfo = new FontAwesome.Sharp.IconButton();
             this.btnAskOrDesk = new FontAwesome.Sharp.IconButton();
             this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -70,7 +71,6 @@ namespace Forms_TechServ
             this.searchBtn = new Forms_TechServ.ManageButton();
             this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipSlalaryInfo = new System.Windows.Forms.ToolTip(this.components);
-            this.btnSalaryInfo = new FontAwesome.Sharp.IconButton();
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             this.panelFind.SuspendLayout();
@@ -196,6 +196,23 @@ namespace Forms_TechServ
             this.panelFind.Name = "panelFind";
             this.panelFind.Size = new System.Drawing.Size(778, 116);
             this.panelFind.TabIndex = 4;
+            // 
+            // btnSalaryInfo
+            // 
+            this.btnSalaryInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSalaryInfo.FlatAppearance.BorderSize = 0;
+            this.btnSalaryInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalaryInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
+            this.btnSalaryInfo.IconColor = System.Drawing.Color.Black;
+            this.btnSalaryInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnSalaryInfo.IconSize = 20;
+            this.btnSalaryInfo.Location = new System.Drawing.Point(745, 52);
+            this.btnSalaryInfo.Name = "btnSalaryInfo";
+            this.btnSalaryInfo.Size = new System.Drawing.Size(27, 21);
+            this.btnSalaryInfo.TabIndex = 23;
+            this.btnSalaryInfo.UseVisualStyleBackColor = true;
+            this.btnSalaryInfo.MouseHover += new System.EventHandler(this.btnSalaryInfo_MouseHover);
             // 
             // btnAskOrDesk
             // 
@@ -558,7 +575,6 @@ namespace Forms_TechServ
             this.dataMasters.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataMasters.Size = new System.Drawing.Size(778, 463);
             this.dataMasters.TabIndex = 0;
-            //this.dataMasters.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataMasters_CellClick);
             // 
             // panelControl
             // 
@@ -584,7 +600,6 @@ namespace Forms_TechServ
             this.clearBtn.Text = "Отчистить фильтры";
             this.clearBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.clearBtn.UseVisualStyleBackColor = false;
-            //this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
             // 
             // searchBtn
             // 
@@ -601,23 +616,6 @@ namespace Forms_TechServ
             this.searchBtn.UseVisualStyleBackColor = false;
             this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
             // 
-            // btnSalaryInfo
-            // 
-            this.btnSalaryInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSalaryInfo.FlatAppearance.BorderSize = 0;
-            this.btnSalaryInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalaryInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
-            this.btnSalaryInfo.IconColor = System.Drawing.Color.Black;
-            this.btnSalaryInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnSalaryInfo.IconSize = 20;
-            this.btnSalaryInfo.Location = new System.Drawing.Point(745, 52);
-            this.btnSalaryInfo.Name = "btnSalaryInfo";
-            this.btnSalaryInfo.Size = new System.Drawing.Size(27, 21);
-            this.btnSalaryInfo.TabIndex = 23;
-            this.btnSalaryInfo.UseVisualStyleBackColor = true;
-            this.btnSalaryInfo.MouseHover += new System.EventHandler(this.btnSalaryInfo_MouseHover);
-            // 
             // FormMasters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -627,7 +625,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panelContent);
             this.Name = "FormMasters";
-            this.Text = "FormMasters";
+            this.Text = "Мастера";
             this.Load += new System.EventHandler(this.FormMasters_Load);
             this.panelContent.ResumeLayout(false);
             this.panelContent.PerformLayout();

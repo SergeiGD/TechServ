@@ -40,6 +40,7 @@ namespace Forms_TechServ
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnDelBatch = new Forms_TechServ.ManageButton();
             this.btnAddBatch = new Forms_TechServ.ManageButton();
+            this.btnShowBatch = new Forms_TechServ.ManageButton();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataBatches)).BeginInit();
             this.panel4.SuspendLayout();
@@ -79,8 +80,7 @@ namespace Forms_TechServ
             this.dataBatches.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataBatches.Size = new System.Drawing.Size(782, 439);
             this.dataBatches.TabIndex = 1;
-            this.dataBatches.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataBatches_CellContentDoubleClick);
-            this.dataBatches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataBatches_CellDoubleClick);
+            this.dataBatches.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataBatches_CellMouseDoubleClick);
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -122,6 +122,7 @@ namespace Forms_TechServ
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.Controls.Add(this.btnShowBatch);
             this.panel4.Controls.Add(this.btnDelBatch);
             this.panel4.Controls.Add(this.btnAddBatch);
             this.panel4.Location = new System.Drawing.Point(782, 0);
@@ -159,6 +160,21 @@ namespace Forms_TechServ
             this.btnAddBatch.UseVisualStyleBackColor = false;
             this.btnAddBatch.Click += new System.EventHandler(this.btnAddBatch_Click);
             // 
+            // btnShowBatch
+            // 
+            this.btnShowBatch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnShowBatch.FlatAppearance.BorderSize = 0;
+            this.btnShowBatch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShowBatch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnShowBatch.Location = new System.Drawing.Point(0, 80);
+            this.btnShowBatch.Name = "btnShowBatch";
+            this.btnShowBatch.Size = new System.Drawing.Size(185, 40);
+            this.btnShowBatch.TabIndex = 3;
+            this.btnShowBatch.Text = "Просмотреть поставку";
+            this.btnShowBatch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnShowBatch.UseVisualStyleBackColor = false;
+            this.btnShowBatch.Click += new System.EventHandler(this.btnShowBatch_Click);
+            // 
             // FormOrderBatches
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -168,7 +184,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Name = "FormOrderBatches";
-            this.Text = "FormOrderBatches";
+            this.Text = "Используемые в заказе поставки";
             this.Load += new System.EventHandler(this.FormOrderBatches_Load);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataBatches)).EndInit();
@@ -190,5 +206,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private ManageButton btnShowBatch;
     }
 }

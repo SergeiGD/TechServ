@@ -223,7 +223,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.Name = "FormShowService";
-            this.Text = "FormShowService";
+            this.Text = "Просмотр усоуги";
             this.Load += new System.EventHandler(this.FormShowService_Load);
             this.panelEdit.ResumeLayout(false);
             this.ResumeLayout(false);

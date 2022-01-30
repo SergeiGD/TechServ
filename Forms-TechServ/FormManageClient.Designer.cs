@@ -149,7 +149,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.clientsTab);
             this.MaximizeBox = false;
             this.Name = "FormManageClient";
-            this.Text = "FormManageClient";
+            this.Text = "Управление клиентом";
             this.Load += new System.EventHandler(this.FormManageClient_Load);
             this.ResizeEnd += new System.EventHandler(this.FormManageClient_ResizeEnd);
             this.clientsTab.ResumeLayout(false);

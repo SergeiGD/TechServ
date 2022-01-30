@@ -143,7 +143,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormManageOrderService";
-            this.Text = "FormManagerOrderService";
+            this.Text = "Управление услугой в заказе";
             ((System.ComponentModel.ISupportInitialize)(this.numericQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSale)).EndInit();
             this.ResumeLayout(false);

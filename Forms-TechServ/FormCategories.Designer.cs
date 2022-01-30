@@ -304,7 +304,6 @@ namespace Forms_TechServ
             this.dataCategories.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataCategories.Size = new System.Drawing.Size(778, 500);
             this.dataCategories.TabIndex = 0;
-            //this.dataCategories.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataCategories_CellMouseDoubleClick);
             // 
             // panelContent
             // 
@@ -397,7 +396,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panelContent);
             this.Name = "FormCategories";
-            this.Text = "FormCategories";
+            this.Text = "Категории";
             this.Load += new System.EventHandler(this.FormCategories_Load);
             this.panelControl.ResumeLayout(false);
             this.panelFind.ResumeLayout(false);

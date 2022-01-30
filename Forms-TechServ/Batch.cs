@@ -73,7 +73,7 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Where(s => s.BatchId == this.Id).Include(s => s.SparePart);
+                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Where(s => s.BatchId == this.Id).Include(s => s.SparePart).Include(s => s.Batch);
 
                 rowsCount = spareParts.Count();                                  // общее кол-во строк для постраничного вывода
 

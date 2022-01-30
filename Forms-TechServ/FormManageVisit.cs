@@ -334,17 +334,21 @@ namespace Forms_TechServ
         {
             if (dataServies.SelectedRows.Count > 0)
             {
+                
                 DialogResult answer = MessageBox.Show("Вы уверены, что хотите удалить ВСЕ выделенные услуги из выезда?", "Подтверидте действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if(answer == DialogResult.Yes)
                 {
+                    int deleted = 0;
                     foreach (DataGridViewRow row in dataServies.SelectedRows)
                     {
                         Service anotherService = ServicesList.GetById((int)dataServies.Rows[row.Index].Cells[0].Value, false);
                         visit.DelService(anotherService);
+                        deleted++;
                     }
 
                     FillServices();
                     labelEstimatedTime.Text = visit.CalcEstimatedTime().ToString();
+                    MessageBox.Show($"{deleted} услуг были удалены");
                 }
                 
             }

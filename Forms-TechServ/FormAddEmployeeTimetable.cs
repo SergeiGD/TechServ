@@ -124,12 +124,21 @@ namespace Forms_TechServ
                     timetable.EmployeeId = employee.Id;
 
                     //bool success = true;
-                    int errors = 0;
+                    int errorsFormed = 0;
+                    int errorsBranch = 0;
 
-                    if (!timetable.AddTimetalbe())
+                    switch (timetable.AddTimetalbe())
                     {
-                        errors++;
+                        case 1:
+                            errorsFormed++;
+                            break;
+                        case 2:
+                            errorsBranch++;
+                            break;
                     }
+
+                    //errorsFormed += timetable.AddTimetalbe() == 1 ? 1 : 0;
+                    
 
                     if (checkBoxRepeat.Checked)
                     {
@@ -164,12 +173,20 @@ namespace Forms_TechServ
                                         EmployeeId = employee.Id
                                     };
 
-                                    if (!anotherDay.AddTimetalbe())
+                                    /*if (!anotherDay.AddTimetalbe())
                                     {
                                         errors++;
-                                    }
-                                    
+                                    }*/
 
+                                    switch (anotherDay.AddTimetalbe())
+                                    {
+                                        case 1:
+                                            errorsFormed++;
+                                            break;
+                                        case 2:
+                                            errorsBranch++;
+                                            break;
+                                    }
 
                                 }
                                 currentDay = currentDay.AddDays(1);
@@ -190,11 +207,19 @@ namespace Forms_TechServ
                                         EmployeeId = employee.Id
                                     };
 
-                                    if (!anotherDay.AddTimetalbe())
+                                    /*if (!anotherDay.AddTimetalbe())
                                     {
                                         errors++;
+                                    }*/
+                                    switch (anotherDay.AddTimetalbe())
+                                    {
+                                        case 1:
+                                            errorsFormed++;
+                                            break;
+                                        case 2:
+                                            errorsBranch++;
+                                            break;
                                     }
-
 
                                 }
                                 currentDay = currentDay.AddDays(1);
@@ -204,13 +229,13 @@ namespace Forms_TechServ
 
                     this.Close();
 
-                    if (errors == 0)
+                    if (errorsFormed == 0 && errorsBranch == 0)
                     {
                         MessageBox.Show("Все дни расписания успешно сформированы", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MessageBox.Show($"{errors} дней не были добавлены из-за конфликтов расписаний", "Что-то пошло не так", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show($"{errorsFormed + errorsBranch} дней не были добавлены из-за конфликтов расписаний: {Environment.NewLine} {errorsFormed} - расписание уже сформировано; {Environment.NewLine} {errorsBranch} - расписание для филиала не сформированно или филиал не работает в это время", "Что-то пошло не так", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else

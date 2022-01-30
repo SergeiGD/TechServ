@@ -30,9 +30,14 @@ namespace Forms_TechServ
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBoxShowRows = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.tbWorkshop = new System.Windows.Forms.TextBox();
+            this.checkBoxDelivered = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.tbBatch = new System.Windows.Forms.TextBox();
+            this.tbWorkshop = new System.Windows.Forms.TextBox();
             this.btnCleanWorkshop = new FontAwesome.Sharp.IconButton();
             this.btnFindWorkshop = new FontAwesome.Sharp.IconButton();
             this.labelPageCount = new System.Windows.Forms.Label();
@@ -41,19 +46,14 @@ namespace Forms_TechServ
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrev = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.pickBtn = new Forms_TechServ.ManageButton();
-            this.findBtn = new Forms_TechServ.ManageButton();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.checkBoxDelivered = new System.Windows.Forms.CheckBox();
-            this.comboBoxShowRows = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.pickBtn = new Forms_TechServ.ManageButton();
+            this.findBtn = new Forms_TechServ.ManageButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
@@ -77,6 +77,27 @@ namespace Forms_TechServ
             this.panel1.Size = new System.Drawing.Size(699, 438);
             this.panel1.TabIndex = 0;
             // 
+            // comboBoxShowRows
+            // 
+            this.comboBoxShowRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.comboBoxShowRows.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxShowRows.FormattingEnabled = true;
+            this.comboBoxShowRows.Location = new System.Drawing.Point(476, 408);
+            this.comboBoxShowRows.Name = "comboBoxShowRows";
+            this.comboBoxShowRows.Size = new System.Drawing.Size(62, 21);
+            this.comboBoxShowRows.TabIndex = 156;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label8.Location = new System.Drawing.Point(363, 409);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(107, 17);
+            this.label8.TabIndex = 155;
+            this.label8.Text = "Показывать по";
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.checkBoxDelivered);
@@ -91,6 +112,43 @@ namespace Forms_TechServ
             this.panel2.Size = new System.Drawing.Size(699, 72);
             this.panel2.TabIndex = 154;
             // 
+            // checkBoxDelivered
+            // 
+            this.checkBoxDelivered.AutoSize = true;
+            this.checkBoxDelivered.Location = new System.Drawing.Point(254, 26);
+            this.checkBoxDelivered.Name = "checkBoxDelivered";
+            this.checkBoxDelivered.Size = new System.Drawing.Size(124, 17);
+            this.checkBoxDelivered.TabIndex = 147;
+            this.checkBoxDelivered.Text = "Только прибывшие";
+            this.checkBoxDelivered.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(64, 13);
+            this.label2.TabIndex = 148;
+            this.label2.Text = "Трэкномер";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(445, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(69, 13);
+            this.label1.TabIndex = 147;
+            this.label1.Text = "Мастерская";
+            // 
+            // tbBatch
+            // 
+            this.tbBatch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbBatch.Location = new System.Drawing.Point(79, 24);
+            this.tbBatch.Name = "tbBatch";
+            this.tbBatch.Size = new System.Drawing.Size(100, 20);
+            this.tbBatch.TabIndex = 142;
+            // 
             // tbWorkshop
             // 
             this.tbWorkshop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -101,15 +159,6 @@ namespace Forms_TechServ
             this.tbWorkshop.ReadOnly = true;
             this.tbWorkshop.Size = new System.Drawing.Size(102, 20);
             this.tbWorkshop.TabIndex = 146;
-            // 
-            // tbBatch
-            // 
-            this.tbBatch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbBatch.Location = new System.Drawing.Point(79, 24);
-            this.tbBatch.Name = "tbBatch";
-            this.tbBatch.Size = new System.Drawing.Size(100, 20);
-            this.tbBatch.TabIndex = 142;
             // 
             // btnCleanWorkshop
             // 
@@ -235,6 +284,36 @@ namespace Forms_TechServ
             this.dataGridView1.Size = new System.Drawing.Size(697, 321);
             this.dataGridView1.TabIndex = 148;
             // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "id поставки";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "трэкномер";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "адрес мастерской";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Прибыла";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "кол-во доступных деталей";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
             // panel4
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -280,85 +359,6 @@ namespace Forms_TechServ
             this.findBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.findBtn.UseVisualStyleBackColor = false;
             // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "id поставки";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "трэкномер";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "адрес мастерской";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Прибыла";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "кол-во доступных деталей";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // checkBoxDelivered
-            // 
-            this.checkBoxDelivered.AutoSize = true;
-            this.checkBoxDelivered.Location = new System.Drawing.Point(254, 26);
-            this.checkBoxDelivered.Name = "checkBoxDelivered";
-            this.checkBoxDelivered.Size = new System.Drawing.Size(124, 17);
-            this.checkBoxDelivered.TabIndex = 147;
-            this.checkBoxDelivered.Text = "Только прибывшие";
-            this.checkBoxDelivered.UseVisualStyleBackColor = true;
-            // 
-            // comboBoxShowRows
-            // 
-            this.comboBoxShowRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.comboBoxShowRows.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxShowRows.FormattingEnabled = true;
-            this.comboBoxShowRows.Location = new System.Drawing.Point(476, 408);
-            this.comboBoxShowRows.Name = "comboBoxShowRows";
-            this.comboBoxShowRows.Size = new System.Drawing.Size(62, 21);
-            this.comboBoxShowRows.TabIndex = 156;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label8.Location = new System.Drawing.Point(363, 409);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(107, 17);
-            this.label8.TabIndex = 155;
-            this.label8.Text = "Показывать по";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(445, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 13);
-            this.label1.TabIndex = 147;
-            this.label1.Text = "Мастерская";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 13);
-            this.label2.TabIndex = 148;
-            this.label2.Text = "Трэкномер";
-            // 
             // FormPickSparePartFormBatch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -368,7 +368,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel1);
             this.Name = "FormPickSparePartFormBatch";
-            this.Text = "FormPickSparePartFormBatch";
+            this.Text = "Поставки с деталью";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

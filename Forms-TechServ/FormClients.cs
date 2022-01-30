@@ -130,7 +130,7 @@ namespace Forms_TechServ
             }
             else if (comboBoxSortBy.SelectedItem.ToString() == "Кол-ву заказов")
             {
-                sortBy = ".CountClientOrders()";
+                sortBy = "CountClientOrders()";
             }
 
             List<Client> clients = ClientsList.GetClients(

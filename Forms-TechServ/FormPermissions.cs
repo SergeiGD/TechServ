@@ -195,13 +195,15 @@ namespace Forms_TechServ
                 DialogResult answer = MessageBox.Show($"Вы уверены что хотите убрать ВСЕ выделенные права из роли?", "Подтвердите действие", MessageBoxButtons.YesNo);
                 if (answer == DialogResult.Yes)
                 {
+                    int deleted = 0;
                     foreach (DataGridViewRow row in dataPermissions.SelectedRows)
                     {
                         Permission anotherPermission = PermissionsList.GetById(Convert.ToInt32(dataPermissions.Rows[row.Index].Cells[0].Value));
                         role.DelPermission(anotherPermission);
+                        deleted++;
                     }
                     FillGrid();
-
+                    MessageBox.Show($"{deleted} прав были удалены");
                 }
             }
             else

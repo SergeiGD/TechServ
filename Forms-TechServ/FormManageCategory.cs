@@ -30,7 +30,7 @@ namespace Forms_TechServ
             InitializeComponent();
 
             this.category = category;
-            actionBtn.Text = "Сохранить";
+            actionBtn.Text = "Сохранить общую информацию";
         }
 
         private void categoriesTab_SelectedIndexChanged(object sender, EventArgs e)
@@ -45,9 +45,7 @@ namespace Forms_TechServ
 
                 FormServices formServices = new FormServices(false, category);
 
-                //formOrders.Controls.Remove(formOrders.Controls.OfType<Panel>().Where(p => p.Name == "panelControl").First());
-                //formOrders.Size = formOrders.Controls.OfType<Panel>().Where(p => p.Name == "panelContent").First().Size;
-                //formOrders.Controls.OfType<Panel>().Where(p => p.Name == "panelContent").First().Dock = DockStyle.Fill;
+
                 formServices.TopLevel = false;
                 formServices.FormBorderStyle = FormBorderStyle.None;
                 servicesPage.Controls.Add(formServices);

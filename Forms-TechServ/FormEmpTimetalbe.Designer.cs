@@ -257,7 +257,6 @@ namespace Forms_TechServ
             this.dataTimetable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataTimetable.Size = new System.Drawing.Size(778, 523);
             this.dataTimetable.TabIndex = 0;
-            //this.dataTimetable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataTimetable_CellMouseDoubleClick);
             // 
             // panelControl
             // 
@@ -309,7 +308,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.panelContent);
             this.Controls.Add(this.panelControl);
             this.Name = "FormEmpTimetalbe";
-            this.Text = "FormEmpTimetalbe";
+            this.Text = "Расписания сотрудников";
             this.Load += new System.EventHandler(this.FormEmpTimetalbe_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).EndInit();
             this.panelContent.ResumeLayout(false);

@@ -32,6 +32,7 @@ namespace Forms_TechServ
             this.components = new System.ComponentModel.Container();
             this.managerTabs = new System.Windows.Forms.TabControl();
             this.generalPage = new System.Windows.Forms.TabPage();
+            this.tbPhoneNum = new System.Windows.Forms.MaskedTextBox();
             this.checkBoxRemotely = new System.Windows.Forms.CheckBox();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -52,7 +53,6 @@ namespace Forms_TechServ
             this.label6 = new System.Windows.Forms.Label();
             this.timetablePage = new System.Windows.Forms.TabPage();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.tbPhoneNum = new System.Windows.Forms.MaskedTextBox();
             this.managerTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSalary)).BeginInit();
@@ -99,6 +99,14 @@ namespace Forms_TechServ
             this.generalPage.Size = new System.Drawing.Size(752, 277);
             this.generalPage.TabIndex = 0;
             this.generalPage.Text = "Общая информация";
+            // 
+            // tbPhoneNum
+            // 
+            this.tbPhoneNum.Location = new System.Drawing.Point(121, 64);
+            this.tbPhoneNum.Mask = "(+70)000000000";
+            this.tbPhoneNum.Name = "tbPhoneNum";
+            this.tbPhoneNum.Size = new System.Drawing.Size(113, 20);
+            this.tbPhoneNum.TabIndex = 157;
             // 
             // checkBoxRemotely
             // 
@@ -305,14 +313,6 @@ namespace Forms_TechServ
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // tbPhoneNum
-            // 
-            this.tbPhoneNum.Location = new System.Drawing.Point(121, 64);
-            this.tbPhoneNum.Mask = "(+70)000000000";
-            this.tbPhoneNum.Name = "tbPhoneNum";
-            this.tbPhoneNum.Size = new System.Drawing.Size(113, 20);
-            this.tbPhoneNum.TabIndex = 157;
-            // 
             // FormManageManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -321,7 +321,7 @@ namespace Forms_TechServ
             this.ClientSize = new System.Drawing.Size(760, 303);
             this.Controls.Add(this.managerTabs);
             this.Name = "FormManageManager";
-            this.Text = "FormManageManager";
+            this.Text = "Управление сотрудником (менеджер)";
             this.Load += new System.EventHandler(this.FormManageManager_Load);
             this.ResizeEnd += new System.EventHandler(this.FormManageManager_ResizeEnd);
             this.managerTabs.ResumeLayout(false);

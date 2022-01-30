@@ -78,7 +78,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.btnInOrder);
             this.Controls.Add(this.label1);
             this.Name = "FormPickOrderType";
-            this.Text = "FormPickOrderType";
+            this.Text = "Выбор типа заказа";
             this.ResumeLayout(false);
             this.PerformLayout();
 

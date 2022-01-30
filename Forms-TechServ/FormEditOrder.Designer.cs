@@ -1116,7 +1116,7 @@ namespace Forms_TechServ
             this.ClientSize = new System.Drawing.Size(975, 525);
             this.Controls.Add(this.ordersTab);
             this.Name = "FormEditOrder";
-            this.Text = "FormEditOrder";
+            this.Text = "Изменение заказа";
             this.Load += new System.EventHandler(this.FormEditOrder_Load);
             this.ResizeEnd += new System.EventHandler(this.FormEditOrder_ResizeEnd);
             this.ordersTab.ResumeLayout(false);

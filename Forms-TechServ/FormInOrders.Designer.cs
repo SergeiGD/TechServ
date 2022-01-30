@@ -760,7 +760,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panelContent);
             this.Name = "FormInOrders";
-            this.Text = "FormInOrders";
+            this.Text = "Заказы в мастерской";
             this.Load += new System.EventHandler(this.FormInOrders_Load);
             this.panelContent.ResumeLayout(false);
             this.panelContent.PerformLayout();

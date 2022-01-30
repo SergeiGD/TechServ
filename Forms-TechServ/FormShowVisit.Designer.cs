@@ -564,7 +564,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.visitTabs);
             this.MaximizeBox = false;
             this.Name = "FormShowVisit";
-            this.Text = "FormShowVisit";
+            this.Text = "Просмотр выезда";
             this.Load += new System.EventHandler(this.FormShowVisit_Load);
             this.visitTabs.ResumeLayout(false);
             this.generalPage.ResumeLayout(false);

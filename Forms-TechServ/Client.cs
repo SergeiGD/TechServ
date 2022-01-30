@@ -130,7 +130,8 @@ namespace Forms_TechServ
                     clients = clients.Where(c => c.CountClientOrders() >= ordersFrom && c.CountClientOrders() <= ordersUntil);
                 }
 
-                
+                //clients = clients.OrderBy(c => c.CountClientOrders());
+
                 clients = clients.SortBy(sortBy, desk);
 
                 rowsCount = clients.Count();

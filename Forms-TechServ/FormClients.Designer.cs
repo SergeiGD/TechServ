@@ -347,7 +347,6 @@ namespace Forms_TechServ
             this.dataClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataClients.Size = new System.Drawing.Size(778, 489);
             this.dataClients.TabIndex = 0;
-            //this.dataClients.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataClients_CellMouseDoubleClick);
             // 
             // panelControl
             // 
@@ -399,7 +398,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.panelContent);
             this.Controls.Add(this.panelControl);
             this.Name = "FormClients";
-            this.Text = "FormClients";
+            this.Text = "Клиенты";
             this.Load += new System.EventHandler(this.FormClients_Load);
             this.panelContent.ResumeLayout(false);
             this.panelContent.PerformLayout();

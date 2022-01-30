@@ -198,8 +198,8 @@ namespace Forms_TechServ
             comboBoxSortBy.Items.Add("id");
             comboBoxSortBy.Items.Add("Наименованию");
             comboBoxSortBy.Items.Add("Предоплате");
-            //comboBoxSortBy.Items.Add("Наличию");
-            //comboBoxSortBy.Items.Add("Номер телефона");
+            comboBoxSortBy.Items.Add("Кол-ву в наличии");
+            comboBoxSortBy.Items.Add("Кол-ву в заказанных");
             comboBoxSortBy.SelectedIndex = 0;
 
             comboBoxShowRows.Items.Add(5);
@@ -231,6 +231,14 @@ namespace Forms_TechServ
             {
                 sortBy = "ClientPrepayment";
             }
+            else if (comboBoxSortBy.SelectedItem.ToString() == "Кол-ву в наличии")
+            {
+                sortBy = "GetCountInStock()";
+            }
+            else if (comboBoxSortBy.SelectedItem.ToString() == "Кол-ву в заказанных")
+            {
+                sortBy = "GetCountInTransit()";
+            }
 
             List<SparePart> spareParts = SparePartsList.GetSpareParts(
                 new SparePart() 
@@ -261,8 +269,17 @@ namespace Forms_TechServ
                 dataSpareParts.Rows[i].Cells[0].Value = spareParts[i].Id;
                 dataSpareParts.Rows[i].Cells[1].Value = spareParts[i].Name;
                 dataSpareParts.Rows[i].Cells[2].Value = spareParts[i].ClientPrepayment;
-                dataSpareParts.Rows[i].Cells[3].Value = spareParts[i].GetCountInStock((Workshop)tbWorkshop.Tag);                         // вот сюда кол-во в наличие
-                dataSpareParts.Rows[i].Cells[4].Value = spareParts[i].GetCountInTransit((Workshop)tbWorkshop.Tag);                         // вот сюда кол-во в пути
+                if(tbWorkshop.Tag == null)
+                {
+                    dataSpareParts.Rows[i].Cells[3].Value = spareParts[i].GetCountInStock();
+                    dataSpareParts.Rows[i].Cells[4].Value = spareParts[i].GetCountInTransit();
+                }
+                else
+                {
+                    dataSpareParts.Rows[i].Cells[3].Value = spareParts[i].GetCountInStock((Workshop)tbWorkshop.Tag);                        
+                    dataSpareParts.Rows[i].Cells[4].Value = spareParts[i].GetCountInTransit((Workshop)tbWorkshop.Tag);                      
+                }
+                
 
                 if (dataSpareParts.Columns.Count > 5)
                 {

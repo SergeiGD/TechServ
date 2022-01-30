@@ -141,9 +141,11 @@ namespace Forms_TechServ
             datePickerStartUntil.Format = DateTimePickerFormat.Custom;
             datePickerStartUntil.CustomFormat = " ";
 
+            comboBoxSortBy.Items.Add("id");
             comboBoxSortBy.Items.Add("Дате начала");
             comboBoxSortBy.Items.Add("Требуемой предоплате");
             comboBoxSortBy.Items.Add("Внесенной предоплате");
+            comboBoxSortBy.Items.Add("Стоимосте");
             comboBoxSortBy.SelectedIndex = 0;
 
             comboBoxShowRows.Items.Add(5);
@@ -166,6 +168,10 @@ namespace Forms_TechServ
 
             string sortBy = "Id";
 
+            if (comboBoxSortBy.SelectedItem.ToString() == "id")
+            {
+                sortBy = "Id";
+            }
             if (FilterSortBy.Value == "Дате начала")
             {
                 sortBy = "DateStart";
@@ -177,6 +183,10 @@ namespace Forms_TechServ
             if (FilterSortBy.Value == "Внесенной предоплате")
             {
                 sortBy = "PrepaymentMade";
+            }
+            if (FilterSortBy.Value == "Стоимосте")
+            {
+                sortBy = "FinalPrice";
             }
 
             List<OrderAtHome> orders = OrderAtHomeList.GetOrders(

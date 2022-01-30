@@ -40,12 +40,10 @@ namespace Forms_TechServ
 
             this.Size = new Size(494, 187);
 
-            //workshopTabs.TabPages.Add(empsPage);
-            //workshopTabs.TabPages.Add(batchesPage);
 
             this.workshop = workshop;
 
-            btnAction.Text = "Сохранить";
+            btnAction.Text = "Сохранить общую информацию";
 
         }
 
@@ -116,7 +114,12 @@ namespace Forms_TechServ
                 {
                     workshop.AddWorkshop();
 
-                    MessageBox.Show($"Новый филиал успешно добавлен", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    DialogResult answer = MessageBox.Show($"Новый филиал успешно добавлен. Желаете сразу же сформировать расписание?", "Успех", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if(answer == DialogResult.Yes)
+                    {
+                        FormManageWorkshop formManageWorkshop = new FormManageWorkshop(workshop);
+                        formManageWorkshop.ShowDialog();
+                    }
 
                     this.Close();
                 }

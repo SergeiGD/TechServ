@@ -178,6 +178,7 @@ namespace Forms_TechServ
 
             comboBoxSortBy.Items.Add("id");
             comboBoxSortBy.Items.Add("Дате");
+            comboBoxSortBy.Items.Add("Требуемому времени");
             comboBoxSortBy.SelectedIndex = 0;
 
             comboBoxShowRows.Items.Add(5);
@@ -206,6 +207,10 @@ namespace Forms_TechServ
             else if (comboBoxSortBy.SelectedItem.ToString() == "Дате")
             {
                 sortBy = "DateVisit";
+            }
+            else if (comboBoxSortBy.SelectedItem.ToString() == "Требуемому времени")
+            {
+                sortBy = "CalcEstimatedTime()";
             }
 
             List<Visit> visits = VisitsList.GetVisits(
@@ -433,10 +438,30 @@ namespace Forms_TechServ
             tbOrder.Clear();
         }
 
-        /*private void BtnShowInOrder_Click(object sender, EventArgs e)
+        private void btnAskOrDesk_Click(object sender, EventArgs e)
         {
-            FormShowVisit showVisit = new FormShowVisit(readOnly);
-            showVisit.ShowDialog();
-        }*/
+            if ((bool)btnAskOrDesk.Tag)
+            {
+                btnAskOrDesk.Tag = false;
+            }
+            else
+            {
+                btnAskOrDesk.Tag = true;
+            }
+        }
+
+        private void btnAskOrDesk_MouseHover(object sender, EventArgs e)
+        {
+            if ((bool)btnAskOrDesk.Tag)
+            {
+                toolTipCurrentSort.SetToolTip(btnAskOrDesk, "По возрастанию");
+            }
+            else
+            {
+                toolTipCurrentSort.SetToolTip(btnAskOrDesk, "По убыванию");
+            }
+        }
+
+      
     }
 }

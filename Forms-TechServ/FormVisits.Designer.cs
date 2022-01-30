@@ -29,6 +29,7 @@ namespace Forms_TechServ
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnNext = new System.Windows.Forms.Button();
             this.dataVisits = new System.Windows.Forms.DataGridView();
             this.datePickerUntil = new System.Windows.Forms.DateTimePicker();
@@ -62,6 +63,7 @@ namespace Forms_TechServ
             this.panelControl = new System.Windows.Forms.Panel();
             this.btnClean = new Forms_TechServ.ManageButton();
             this.btnFind = new Forms_TechServ.ManageButton();
+            this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataVisits)).BeginInit();
             this.panelFind.SuspendLayout();
             this.panelContent.SuspendLayout();
@@ -178,6 +180,8 @@ namespace Forms_TechServ
             this.btnAskOrDesk.Size = new System.Drawing.Size(27, 21);
             this.btnAskOrDesk.TabIndex = 156;
             this.btnAskOrDesk.UseVisualStyleBackColor = true;
+            this.btnAskOrDesk.Click += new System.EventHandler(this.btnAskOrDesk_Click);
+            this.btnAskOrDesk.MouseHover += new System.EventHandler(this.btnAskOrDesk_MouseHover);
             // 
             // comboBoxSortBy
             // 
@@ -506,7 +510,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.panelContent);
             this.Controls.Add(this.panelControl);
             this.Name = "FormVisits";
-            this.Text = "FormVisits";
+            this.Text = "Выезды";
             this.Load += new System.EventHandler(this.FormVisits_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataVisits)).EndInit();
             this.panelFind.ResumeLayout(false);
@@ -554,5 +558,6 @@ namespace Forms_TechServ
         private FontAwesome.Sharp.IconButton btnAskOrDesk;
         private System.Windows.Forms.ComboBox comboBoxSortBy;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ToolTip toolTipCurrentSort;
     }
 }

@@ -113,7 +113,7 @@ namespace Forms_TechServ
             this.MaximumSize = new System.Drawing.Size(430, 320);
             this.MinimumSize = new System.Drawing.Size(430, 320);
             this.Name = "FormLogIn";
-            this.Text = "FormLogIn";
+            this.Text = "Авторизация";
             this.Load += new System.EventHandler(this.FormLogIn_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

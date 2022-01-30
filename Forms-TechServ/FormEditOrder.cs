@@ -454,13 +454,15 @@ namespace Forms_TechServ
                 DialogResult answer = MessageBox.Show($"Вы уверены что хотите убрать ВСЕ выделенные услуги из заказа?", "Подтвердите действие", MessageBoxButtons.YesNo);
                 if (answer == DialogResult.Yes)
                 {
-                    foreach(DataGridViewRow row in dataServies.SelectedRows)
+                    int deletedCount = 0;
+                    foreach (DataGridViewRow row in dataServies.SelectedRows)
                     {
                         OrderService anotherService = order.GetService(Convert.ToInt32(dataServies.Rows[row.Index].Cells[0].Value));
                         order.DelService(anotherService);
                     }
                     FillServices();
                     RecalcFields();
+                    MessageBox.Show($"{deletedCount} услуг были удалены");
 
                 }
             }
@@ -632,14 +634,16 @@ namespace Forms_TechServ
                 DialogResult answer = MessageBox.Show("Вы уверен что хотите удалить ВСЕ выделенные детали из заказа?", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if(answer == DialogResult.Yes)
                 {
+                    int deletedCount = 0;
                     foreach (DataGridViewRow row in dataSpareParts.SelectedRows)
                     {
                         OrderSparePart anotherSparePart = order.GetSparePart(Convert.ToInt32(dataSpareParts.Rows[row.Index].Cells[0].Value));
                         anotherSparePart.DelSparePart();
+                        deletedCount++;
                     }
                     FillSpareParts();
                     RecalcFields();
-
+                    MessageBox.Show($"{deletedCount} деталей были удалены");
 
 
                 }

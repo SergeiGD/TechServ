@@ -62,6 +62,7 @@ namespace Forms_TechServ
             this.editBtn = new System.Windows.Forms.Button();
             this.ordersTab = new System.Windows.Forms.TabControl();
             this.generalPage = new System.Windows.Forms.TabPage();
+            this.btnPriceInfo = new FontAwesome.Sharp.IconButton();
             this.labelLeftToPay = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupPrepayment = new System.Windows.Forms.GroupBox();
@@ -124,7 +125,6 @@ namespace Forms_TechServ
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.logsPage = new System.Windows.Forms.TabPage();
             this.visitsPage = new System.Windows.Forms.TabPage();
-            this.btnPriceInfo = new FontAwesome.Sharp.IconButton();
             this.toolTipPriceInfo = new System.Windows.Forms.ToolTip(this.components);
             this.ordersTab.SuspendLayout();
             this.generalPage.SuspendLayout();
@@ -496,6 +496,23 @@ namespace Forms_TechServ
             this.generalPage.Size = new System.Drawing.Size(967, 514);
             this.generalPage.TabIndex = 0;
             this.generalPage.Text = "Общая информация";
+            // 
+            // btnPriceInfo
+            // 
+            this.btnPriceInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnPriceInfo.FlatAppearance.BorderSize = 0;
+            this.btnPriceInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPriceInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
+            this.btnPriceInfo.IconColor = System.Drawing.Color.Black;
+            this.btnPriceInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnPriceInfo.IconSize = 20;
+            this.btnPriceInfo.Location = new System.Drawing.Point(163, 449);
+            this.btnPriceInfo.Name = "btnPriceInfo";
+            this.btnPriceInfo.Size = new System.Drawing.Size(27, 21);
+            this.btnPriceInfo.TabIndex = 191;
+            this.btnPriceInfo.UseVisualStyleBackColor = true;
+            this.btnPriceInfo.MouseHover += new System.EventHandler(this.btnPriceInfo_MouseHover);
             // 
             // labelLeftToPay
             // 
@@ -1162,23 +1179,6 @@ namespace Forms_TechServ
             this.visitsPage.TabIndex = 4;
             this.visitsPage.Text = "Выезды";
             // 
-            // btnPriceInfo
-            // 
-            this.btnPriceInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnPriceInfo.FlatAppearance.BorderSize = 0;
-            this.btnPriceInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPriceInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
-            this.btnPriceInfo.IconColor = System.Drawing.Color.Black;
-            this.btnPriceInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnPriceInfo.IconSize = 20;
-            this.btnPriceInfo.Location = new System.Drawing.Point(163, 449);
-            this.btnPriceInfo.Name = "btnPriceInfo";
-            this.btnPriceInfo.Size = new System.Drawing.Size(27, 21);
-            this.btnPriceInfo.TabIndex = 191;
-            this.btnPriceInfo.UseVisualStyleBackColor = true;
-            this.btnPriceInfo.MouseHover += new System.EventHandler(this.btnPriceInfo_MouseHover);
-            // 
             // FormShowOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1188,7 +1188,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.ordersTab);
             this.MaximizeBox = false;
             this.Name = "FormShowOrder";
-            this.Text = "FormShowOrder";
+            this.Text = "Просмотр заказа";
             this.Load += new System.EventHandler(this.FormEditWorkshopOrder_Load);
             this.ordersTab.ResumeLayout(false);
             this.generalPage.ResumeLayout(false);

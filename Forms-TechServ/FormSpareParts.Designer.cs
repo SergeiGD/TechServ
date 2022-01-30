@@ -560,7 +560,6 @@ namespace Forms_TechServ
             this.clearBtn.Text = "Отчистить фильтры";
             this.clearBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.clearBtn.UseVisualStyleBackColor = false;
-            //this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
             // 
             // searchBtn
             // 
@@ -586,7 +585,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.panelContent);
             this.Controls.Add(this.panelControl);
             this.Name = "FormSpareParts";
-            this.Text = "FormSpareParts";
+            this.Text = "Детали";
             this.Load += new System.EventHandler(this.FormSpareParts_Load);
             this.panelContent.ResumeLayout(false);
             this.panelContent.PerformLayout();

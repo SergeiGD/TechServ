@@ -45,7 +45,6 @@ namespace Forms_TechServ
             this.label1 = new System.Windows.Forms.Label();
             this.sparePartsPage = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnShowSparePart = new Forms_TechServ.ManageButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBoxShowSparePartsRows = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -55,10 +54,12 @@ namespace Forms_TechServ
             this.numericCurrentPage = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.dataSpareParts = new System.Windows.Forms.DataGridView();
+            this.btnShowSparePart = new Forms_TechServ.ManageButton();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.batchTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
@@ -243,21 +244,6 @@ namespace Forms_TechServ
             this.panel2.Size = new System.Drawing.Size(143, 328);
             this.panel2.TabIndex = 2;
             // 
-            // btnShowSparePart
-            // 
-            this.btnShowSparePart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnShowSparePart.FlatAppearance.BorderSize = 0;
-            this.btnShowSparePart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowSparePart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnShowSparePart.Location = new System.Drawing.Point(0, 0);
-            this.btnShowSparePart.Name = "btnShowSparePart";
-            this.btnShowSparePart.Size = new System.Drawing.Size(143, 33);
-            this.btnShowSparePart.TabIndex = 4;
-            this.btnShowSparePart.Text = "Просмотреть";
-            this.btnShowSparePart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnShowSparePart.UseVisualStyleBackColor = false;
-            this.btnShowSparePart.Click += new System.EventHandler(this.btnShowSparePart_Click);
-            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -379,6 +365,7 @@ namespace Forms_TechServ
             this.Column2,
             this.Column3,
             this.Column4,
+            this.Column6,
             this.Column5});
             this.dataSpareParts.Location = new System.Drawing.Point(0, 0);
             this.dataSpareParts.MultiSelect = false;
@@ -388,6 +375,21 @@ namespace Forms_TechServ
             this.dataSpareParts.Size = new System.Drawing.Size(631, 288);
             this.dataSpareParts.TabIndex = 0;
             this.dataSpareParts.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataSpareParts_CellMouseDoubleClick);
+            // 
+            // btnShowSparePart
+            // 
+            this.btnShowSparePart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnShowSparePart.FlatAppearance.BorderSize = 0;
+            this.btnShowSparePart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShowSparePart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnShowSparePart.Location = new System.Drawing.Point(0, 0);
+            this.btnShowSparePart.Name = "btnShowSparePart";
+            this.btnShowSparePart.Size = new System.Drawing.Size(143, 33);
+            this.btnShowSparePart.TabIndex = 4;
+            this.btnShowSparePart.Text = "Просмотреть";
+            this.btnShowSparePart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnShowSparePart.UseVisualStyleBackColor = false;
+            this.btnShowSparePart.Click += new System.EventHandler(this.btnShowSparePart_Click);
             // 
             // Column1
             // 
@@ -409,9 +411,15 @@ namespace Forms_TechServ
             // 
             // Column4
             // 
-            this.Column4.HeaderText = "кол-во деталей";
+            this.Column4.HeaderText = "кол-во заказынных";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "кол-во осталось";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
             // 
             // Column5
             // 
@@ -428,7 +436,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.batchTabs);
             this.MaximizeBox = false;
             this.Name = "FormShowBatch";
-            this.Text = "FormShowBatch";
+            this.Text = "Просмотр поставки";
             this.Load += new System.EventHandler(this.FormShowBatch_Load);
             this.ResizeEnd += new System.EventHandler(this.FormShowBatch_ResizeEnd);
             this.batchTabs.ResumeLayout(false);
@@ -468,14 +476,15 @@ namespace Forms_TechServ
         private System.Windows.Forms.NumericUpDown numericCurrentPage;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridView dataSpareParts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.Panel panel2;
         private ManageButton btnShowSparePart;
         private System.Windows.Forms.ComboBox comboBoxShowSparePartsRows;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
     }
 }

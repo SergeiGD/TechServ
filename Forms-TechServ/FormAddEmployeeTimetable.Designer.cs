@@ -35,6 +35,7 @@ namespace Forms_TechServ
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupDays = new System.Windows.Forms.GroupBox();
+            this.checkBoxThu = new System.Windows.Forms.CheckBox();
             this.checkBoxSun = new System.Windows.Forms.CheckBox();
             this.checkBoxSat = new System.Windows.Forms.CheckBox();
             this.checkBoxFri = new System.Windows.Forms.CheckBox();
@@ -53,7 +54,6 @@ namespace Forms_TechServ
             this.tbEnd = new System.Windows.Forms.MaskedTextBox();
             this.tbStart = new System.Windows.Forms.MaskedTextBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.checkBoxThu = new System.Windows.Forms.CheckBox();
             this.groupDays.SuspendLayout();
             this.groupEnd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericRepeat)).BeginInit();
@@ -109,6 +109,16 @@ namespace Forms_TechServ
             this.groupDays.TabIndex = 18;
             this.groupDays.TabStop = false;
             this.groupDays.Text = "Дни повторения";
+            // 
+            // checkBoxThu
+            // 
+            this.checkBoxThu.AutoSize = true;
+            this.checkBoxThu.Location = new System.Drawing.Point(141, 33);
+            this.checkBoxThu.Name = "checkBoxThu";
+            this.checkBoxThu.Size = new System.Drawing.Size(39, 17);
+            this.checkBoxThu.TabIndex = 6;
+            this.checkBoxThu.Text = "Чт";
+            this.checkBoxThu.UseVisualStyleBackColor = true;
             // 
             // checkBoxSun
             // 
@@ -303,16 +313,6 @@ namespace Forms_TechServ
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // checkBoxThu
-            // 
-            this.checkBoxThu.AutoSize = true;
-            this.checkBoxThu.Location = new System.Drawing.Point(141, 33);
-            this.checkBoxThu.Name = "checkBoxThu";
-            this.checkBoxThu.Size = new System.Drawing.Size(39, 17);
-            this.checkBoxThu.TabIndex = 6;
-            this.checkBoxThu.Text = "Чт";
-            this.checkBoxThu.UseVisualStyleBackColor = true;
-            // 
             // FormAddEmployeeTimetable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -331,7 +331,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.datePickerBegin);
             this.Controls.Add(this.label1);
             this.Name = "FormAddEmployeeTimetable";
-            this.Text = "FormAddEmployeeTimetable";
+            this.Text = "Формирование смены сотрудника";
             this.Load += new System.EventHandler(this.FormAddEmployeeTimetable_Load);
             this.groupDays.ResumeLayout(false);
             this.groupDays.PerformLayout();

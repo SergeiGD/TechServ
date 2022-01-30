@@ -234,7 +234,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.label1);
             this.Name = "FormManageService";
-            this.Text = "FormAddService";
+            this.Text = "Управление услугой";
             this.Load += new System.EventHandler(this.FormManageService_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numeriсPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAvgTime)).EndInit();

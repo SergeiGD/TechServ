@@ -276,7 +276,7 @@ namespace Forms_TechServ
             this.btnAskOrDesk.IconColor = System.Drawing.Color.Black;
             this.btnAskOrDesk.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnAskOrDesk.IconSize = 20;
-            this.btnAskOrDesk.Location = new System.Drawing.Point(763, 92);
+            this.btnAskOrDesk.Location = new System.Drawing.Point(806, 92);
             this.btnAskOrDesk.Name = "btnAskOrDesk";
             this.btnAskOrDesk.Size = new System.Drawing.Size(27, 21);
             this.btnAskOrDesk.TabIndex = 191;
@@ -314,7 +314,7 @@ namespace Forms_TechServ
             this.comboBoxSortBy.FormattingEnabled = true;
             this.comboBoxSortBy.Location = new System.Drawing.Point(658, 92);
             this.comboBoxSortBy.Name = "comboBoxSortBy";
-            this.comboBoxSortBy.Size = new System.Drawing.Size(99, 21);
+            this.comboBoxSortBy.Size = new System.Drawing.Size(142, 21);
             this.comboBoxSortBy.TabIndex = 190;
             this.comboBoxSortBy.SelectedIndexChanged += new System.EventHandler(this.comboBoxSortBy_SelectedIndexChanged);
             // 
@@ -785,7 +785,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panelContent);
             this.Name = "FormOutOrders";
-            this.Text = "FormOutOrders";
+            this.Text = "Заказы на выезд";
             this.Load += new System.EventHandler(this.FormOutOrders_Load);
             this.panelContent.ResumeLayout(false);
             this.panelContent.PerformLayout();

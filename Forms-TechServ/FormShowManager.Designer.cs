@@ -31,6 +31,8 @@ namespace Forms_TechServ
         {
             this.managerTabs = new System.Windows.Forms.TabControl();
             this.generalPage = new System.Windows.Forms.TabPage();
+            this.labelRemotely = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.labelPassword = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.labelPosition = new System.Windows.Forms.Label();
@@ -53,8 +55,6 @@ namespace Forms_TechServ
             this.label6 = new System.Windows.Forms.Label();
             this.timetablePage = new System.Windows.Forms.TabPage();
             this.ordersPage = new System.Windows.Forms.TabPage();
-            this.labelRemotely = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.managerTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.panelEdit.SuspendLayout();
@@ -101,6 +101,24 @@ namespace Forms_TechServ
             this.generalPage.Size = new System.Drawing.Size(795, 292);
             this.generalPage.TabIndex = 0;
             this.generalPage.Text = "Общая информация";
+            // 
+            // labelRemotely
+            // 
+            this.labelRemotely.AutoSize = true;
+            this.labelRemotely.Location = new System.Drawing.Point(120, 262);
+            this.labelRemotely.Name = "labelRemotely";
+            this.labelRemotely.Size = new System.Drawing.Size(35, 13);
+            this.labelRemotely.TabIndex = 58;
+            this.labelRemotely.Text = "label4";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(18, 262);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(96, 13);
+            this.label8.TabIndex = 57;
+            this.label8.Text = "Работа удаленно:";
             // 
             // labelPassword
             // 
@@ -299,7 +317,7 @@ namespace Forms_TechServ
             this.timetablePage.Location = new System.Drawing.Point(4, 22);
             this.timetablePage.Name = "timetablePage";
             this.timetablePage.Padding = new System.Windows.Forms.Padding(3);
-            this.timetablePage.Size = new System.Drawing.Size(795, 265);
+            this.timetablePage.Size = new System.Drawing.Size(795, 292);
             this.timetablePage.TabIndex = 2;
             this.timetablePage.Text = "Расписание";
             // 
@@ -309,27 +327,9 @@ namespace Forms_TechServ
             this.ordersPage.Location = new System.Drawing.Point(4, 22);
             this.ordersPage.Name = "ordersPage";
             this.ordersPage.Padding = new System.Windows.Forms.Padding(3);
-            this.ordersPage.Size = new System.Drawing.Size(795, 265);
+            this.ordersPage.Size = new System.Drawing.Size(795, 292);
             this.ordersPage.TabIndex = 3;
             this.ordersPage.Text = "Заказы";
-            // 
-            // labelRemotely
-            // 
-            this.labelRemotely.AutoSize = true;
-            this.labelRemotely.Location = new System.Drawing.Point(120, 262);
-            this.labelRemotely.Name = "labelRemotely";
-            this.labelRemotely.Size = new System.Drawing.Size(35, 13);
-            this.labelRemotely.TabIndex = 58;
-            this.labelRemotely.Text = "label4";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(18, 262);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(96, 13);
-            this.label8.TabIndex = 57;
-            this.label8.Text = "Работа удаленно:";
             // 
             // FormShowManager
             // 
@@ -339,7 +339,7 @@ namespace Forms_TechServ
             this.ClientSize = new System.Drawing.Size(803, 318);
             this.Controls.Add(this.managerTabs);
             this.Name = "FormShowManager";
-            this.Text = "FormShowManager";
+            this.Text = "Просмотр сотрудника (менеджер)";
             this.Load += new System.EventHandler(this.FormShowManager_Load);
             this.ResizeEnd += new System.EventHandler(this.FormShowManager_ResizeEnd);
             this.managerTabs.ResumeLayout(false);

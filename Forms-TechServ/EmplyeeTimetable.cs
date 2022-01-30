@@ -23,7 +23,7 @@ namespace Forms_TechServ
 
         public DateTime? DelTime { get; set; }
 
-        public bool AddTimetalbe()
+        public int AddTimetalbe()
         {
             using (TechContext db = new TechContext())
             {
@@ -34,7 +34,7 @@ namespace Forms_TechServ
                     if (new DateTime(timetable.ShiftStart.Year, timetable.ShiftStart.Month, timetable.ShiftStart.Day) == new DateTime(this.ShiftStart.Year, this.ShiftStart.Month, this.ShiftStart.Day))
                     {
 
-                        return false;
+                        return 1;
                     }
                 }
 
@@ -48,11 +48,11 @@ namespace Forms_TechServ
                     {
                         db.EmployeesTimetables.Add(this);
                         db.SaveChanges();
-                        return true;
+                        return 0;               // 0 - успешно добавлено
                     }
                 }
 
-                return false;
+                return 2;
                 
             }
         }
@@ -114,8 +114,7 @@ namespace Forms_TechServ
                         {
                             return false;   // ЕСЛИ НА ЭТОТ ДЕНЬ ЗАПЛАНИРОВАН ВЫЕЗД, ТО УДАЛИТЬ НЕЛЬЗЯ
 
-                            //TimeRange visitRange = new TimeRange(visit.DateVisit, visit.DateVisit + visit.CalcEstimatedTime());
-                            //TimeRange timeRange = new TimeRange(this.ShiftStart, this.ShiftEnd);
+                            
                         }
                         
                     }

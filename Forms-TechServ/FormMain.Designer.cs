@@ -32,9 +32,9 @@ namespace Forms_TechServ
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.panelMenu = new System.Windows.Forms.Panel();
             this.panelLogo = new System.Windows.Forms.Panel();
+            this.logoText = new System.Windows.Forms.Label();
             this.panelTheme = new System.Windows.Forms.Panel();
             this.panelContent = new System.Windows.Forms.Panel();
-            this.logoText = new System.Windows.Forms.Label();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +58,20 @@ namespace Forms_TechServ
             this.panelLogo.Size = new System.Drawing.Size(200, 90);
             this.panelLogo.TabIndex = 0;
             // 
+            // logoText
+            // 
+            this.logoText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.logoText.AutoSize = true;
+            this.logoText.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.logoText.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.logoText.Location = new System.Drawing.Point(47, 32);
+            this.logoText.Name = "logoText";
+            this.logoText.Size = new System.Drawing.Size(98, 25);
+            this.logoText.TabIndex = 0;
+            this.logoText.Text = "TechServ";
+            // 
             // panelTheme
             // 
             this.panelTheme.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(99)))), ((int)(((byte)(123)))));
@@ -78,20 +92,6 @@ namespace Forms_TechServ
             this.panelContent.Size = new System.Drawing.Size(1081, 821);
             this.panelContent.TabIndex = 2;
             // 
-            // logoText
-            // 
-            this.logoText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.logoText.AutoSize = true;
-            this.logoText.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.logoText.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.logoText.Location = new System.Drawing.Point(47, 32);
-            this.logoText.Name = "logoText";
-            this.logoText.Size = new System.Drawing.Size(98, 25);
-            this.logoText.TabIndex = 0;
-            this.logoText.Text = "TechServ";
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -102,7 +102,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.panelMenu);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormMain";
+            this.Text = "TechServ";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.panelMenu.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);

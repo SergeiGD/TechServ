@@ -248,7 +248,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.clientTabs);
             this.MaximizeBox = false;
             this.Name = "FormShowClient";
-            this.Text = "FormShowClient";
+            this.Text = "Просмотр клиента";
             this.Load += new System.EventHandler(this.FormShowClient_Load);
             this.ResizeEnd += new System.EventHandler(this.FormShowClient_ResizeEnd);
             this.clientTabs.ResumeLayout(false);

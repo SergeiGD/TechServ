@@ -219,7 +219,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.productTabs);
             this.MaximizeBox = false;
             this.Name = "FormShowProduct";
-            this.Text = "FormShowProduct";
+            this.Text = "Просмотр техники";
             this.Load += new System.EventHandler(this.FormShowProduct_Load);
             this.ResizeEnd += new System.EventHandler(this.FormShowProduct_ResizeEnd);
             this.productTabs.ResumeLayout(false);

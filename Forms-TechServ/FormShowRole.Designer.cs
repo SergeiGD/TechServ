@@ -31,17 +31,17 @@ namespace Forms_TechServ
         {
             this.roleTabs = new System.Windows.Forms.TabControl();
             this.generalPage = new System.Windows.Forms.TabPage();
-            this.permissionsPage = new System.Windows.Forms.TabPage();
+            this.labelType = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
+            this.labelID = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelEdit = new System.Windows.Forms.Panel();
             this.editBtn = new System.Windows.Forms.Button();
             this.cancelBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.labelID = new System.Windows.Forms.Label();
-            this.labelName = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.labelType = new System.Windows.Forms.Label();
+            this.permissionsPage = new System.Windows.Forms.TabPage();
             this.roleTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.panelEdit.SuspendLayout();
@@ -76,15 +76,65 @@ namespace Forms_TechServ
             this.generalPage.TabIndex = 0;
             this.generalPage.Text = "Общая информация";
             // 
-            // permissionsPage
+            // labelType
             // 
-            this.permissionsPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.permissionsPage.Location = new System.Drawing.Point(4, 22);
-            this.permissionsPage.Name = "permissionsPage";
-            this.permissionsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.permissionsPage.Size = new System.Drawing.Size(562, 181);
-            this.permissionsPage.TabIndex = 1;
-            this.permissionsPage.Text = "Права";
+            this.labelType.AutoSize = true;
+            this.labelType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.labelType.Location = new System.Drawing.Point(153, 146);
+            this.labelType.Name = "labelType";
+            this.labelType.Size = new System.Drawing.Size(46, 17);
+            this.labelType.TabIndex = 48;
+            this.labelType.Text = "label1";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label3.Location = new System.Drawing.Point(23, 146);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(124, 17);
+            this.label3.TabIndex = 47;
+            this.label3.Text = "Принадлежность:";
+            // 
+            // labelName
+            // 
+            this.labelName.AutoSize = true;
+            this.labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.labelName.Location = new System.Drawing.Point(153, 83);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(46, 17);
+            this.labelName.TabIndex = 46;
+            this.labelName.Text = "label1";
+            // 
+            // labelID
+            // 
+            this.labelID.AutoSize = true;
+            this.labelID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.labelID.Location = new System.Drawing.Point(153, 18);
+            this.labelID.Name = "labelID";
+            this.labelID.Size = new System.Drawing.Size(46, 17);
+            this.labelID.TabIndex = 45;
+            this.labelID.Text = "label1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label2.Location = new System.Drawing.Point(23, 83);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(110, 17);
+            this.label2.TabIndex = 44;
+            this.label2.Text = "Наименование:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.label1.Location = new System.Drawing.Point(23, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 17);
+            this.label1.TabIndex = 43;
+            this.label1.Text = "ID роли:";
             // 
             // panelEdit
             // 
@@ -129,65 +179,15 @@ namespace Forms_TechServ
             this.deleteBtn.UseVisualStyleBackColor = true;
             this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
-            // label1
+            // permissionsPage
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label1.Location = new System.Drawing.Point(23, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 17);
-            this.label1.TabIndex = 43;
-            this.label1.Text = "ID роли:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label2.Location = new System.Drawing.Point(23, 83);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(110, 17);
-            this.label2.TabIndex = 44;
-            this.label2.Text = "Наименование:";
-            // 
-            // labelID
-            // 
-            this.labelID.AutoSize = true;
-            this.labelID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.labelID.Location = new System.Drawing.Point(153, 18);
-            this.labelID.Name = "labelID";
-            this.labelID.Size = new System.Drawing.Size(46, 17);
-            this.labelID.TabIndex = 45;
-            this.labelID.Text = "label1";
-            // 
-            // labelName
-            // 
-            this.labelName.AutoSize = true;
-            this.labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.labelName.Location = new System.Drawing.Point(153, 83);
-            this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(46, 17);
-            this.labelName.TabIndex = 46;
-            this.labelName.Text = "label1";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label3.Location = new System.Drawing.Point(23, 146);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(124, 17);
-            this.label3.TabIndex = 47;
-            this.label3.Text = "Принадлежность:";
-            // 
-            // labelType
-            // 
-            this.labelType.AutoSize = true;
-            this.labelType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.labelType.Location = new System.Drawing.Point(153, 146);
-            this.labelType.Name = "labelType";
-            this.labelType.Size = new System.Drawing.Size(46, 17);
-            this.labelType.TabIndex = 48;
-            this.labelType.Text = "label1";
+            this.permissionsPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.permissionsPage.Location = new System.Drawing.Point(4, 22);
+            this.permissionsPage.Name = "permissionsPage";
+            this.permissionsPage.Padding = new System.Windows.Forms.Padding(3);
+            this.permissionsPage.Size = new System.Drawing.Size(562, 181);
+            this.permissionsPage.TabIndex = 1;
+            this.permissionsPage.Text = "Права";
             // 
             // FormShowRole
             // 
@@ -197,7 +197,7 @@ namespace Forms_TechServ
             this.ClientSize = new System.Drawing.Size(570, 207);
             this.Controls.Add(this.roleTabs);
             this.Name = "FormShowRole";
-            this.Text = "FormShowRole";
+            this.Text = "Просмотр роли";
             this.Load += new System.EventHandler(this.FormShowRole_Load);
             this.roleTabs.ResumeLayout(false);
             this.generalPage.ResumeLayout(false);

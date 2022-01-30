@@ -256,7 +256,7 @@ namespace Forms_TechServ
             this.timetablePage.Location = new System.Drawing.Point(4, 22);
             this.timetablePage.Name = "timetablePage";
             this.timetablePage.Padding = new System.Windows.Forms.Padding(3);
-            this.timetablePage.Size = new System.Drawing.Size(614, 332);
+            this.timetablePage.Size = new System.Drawing.Size(672, 332);
             this.timetablePage.TabIndex = 1;
             this.timetablePage.Text = "Расписание";
             // 
@@ -273,7 +273,7 @@ namespace Forms_TechServ
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContent.Location = new System.Drawing.Point(3, 3);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(608, 326);
+            this.panelContent.Size = new System.Drawing.Size(666, 326);
             this.panelContent.TabIndex = 0;
             // 
             // comboBoxShowTimetableRows
@@ -281,7 +281,7 @@ namespace Forms_TechServ
             this.comboBoxShowTimetableRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.comboBoxShowTimetableRows.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxShowTimetableRows.FormattingEnabled = true;
-            this.comboBoxShowTimetableRows.Location = new System.Drawing.Point(418, 297);
+            this.comboBoxShowTimetableRows.Location = new System.Drawing.Point(447, 297);
             this.comboBoxShowTimetableRows.Name = "comboBoxShowTimetableRows";
             this.comboBoxShowTimetableRows.Size = new System.Drawing.Size(62, 21);
             this.comboBoxShowTimetableRows.TabIndex = 18;
@@ -291,7 +291,7 @@ namespace Forms_TechServ
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label9.Location = new System.Drawing.Point(305, 298);
+            this.label9.Location = new System.Drawing.Point(334, 298);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(107, 17);
             this.label9.TabIndex = 17;
@@ -302,7 +302,7 @@ namespace Forms_TechServ
             this.labelTimetablePageCount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.labelTimetablePageCount.AutoSize = true;
             this.labelTimetablePageCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.labelTimetablePageCount.Location = new System.Drawing.Point(263, 298);
+            this.labelTimetablePageCount.Location = new System.Drawing.Point(292, 298);
             this.labelTimetablePageCount.Name = "labelTimetablePageCount";
             this.labelTimetablePageCount.Size = new System.Drawing.Size(36, 17);
             this.labelTimetablePageCount.TabIndex = 13;
@@ -311,7 +311,7 @@ namespace Forms_TechServ
             // numericCurrentTImetablePage
             // 
             this.numericCurrentTImetablePage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.numericCurrentTImetablePage.Location = new System.Drawing.Point(212, 299);
+            this.numericCurrentTImetablePage.Location = new System.Drawing.Point(241, 299);
             this.numericCurrentTImetablePage.Minimum = new decimal(new int[] {
             1,
             0,
@@ -331,7 +331,7 @@ namespace Forms_TechServ
             this.label28.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.label28.Location = new System.Drawing.Point(134, 298);
+            this.label28.Location = new System.Drawing.Point(163, 298);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(72, 17);
             this.label28.TabIndex = 11;
@@ -344,7 +344,7 @@ namespace Forms_TechServ
             this.btnNextTimetable.FlatAppearance.BorderSize = 0;
             this.btnNextTimetable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNextTimetable.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.btnNextTimetable.Location = new System.Drawing.Point(478, 286);
+            this.btnNextTimetable.Location = new System.Drawing.Point(536, 286);
             this.btnNextTimetable.Name = "btnNextTimetable";
             this.btnNextTimetable.Size = new System.Drawing.Size(130, 40);
             this.btnNextTimetable.TabIndex = 5;
@@ -379,7 +379,7 @@ namespace Forms_TechServ
             this.dataTimetable.Name = "dataTimetable";
             this.dataTimetable.ReadOnly = true;
             this.dataTimetable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataTimetable.Size = new System.Drawing.Size(608, 286);
+            this.dataTimetable.Size = new System.Drawing.Size(666, 286);
             this.dataTimetable.TabIndex = 0;
             // 
             // employeesPage
@@ -388,7 +388,7 @@ namespace Forms_TechServ
             this.employeesPage.Location = new System.Drawing.Point(4, 22);
             this.employeesPage.Name = "employeesPage";
             this.employeesPage.Padding = new System.Windows.Forms.Padding(3);
-            this.employeesPage.Size = new System.Drawing.Size(614, 332);
+            this.employeesPage.Size = new System.Drawing.Size(672, 332);
             this.employeesPage.TabIndex = 2;
             this.employeesPage.Text = "Сотрудники";
             // 
@@ -398,7 +398,7 @@ namespace Forms_TechServ
             this.batchesPage.Location = new System.Drawing.Point(4, 22);
             this.batchesPage.Name = "batchesPage";
             this.batchesPage.Padding = new System.Windows.Forms.Padding(3);
-            this.batchesPage.Size = new System.Drawing.Size(614, 332);
+            this.batchesPage.Size = new System.Drawing.Size(672, 332);
             this.batchesPage.TabIndex = 3;
             this.batchesPage.Text = "Поставки";
             // 
@@ -408,7 +408,7 @@ namespace Forms_TechServ
             this.sparePartsPage.Location = new System.Drawing.Point(4, 22);
             this.sparePartsPage.Name = "sparePartsPage";
             this.sparePartsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.sparePartsPage.Size = new System.Drawing.Size(614, 332);
+            this.sparePartsPage.Size = new System.Drawing.Size(672, 332);
             this.sparePartsPage.TabIndex = 4;
             this.sparePartsPage.Text = "Детали в наличии";
             // 
@@ -418,7 +418,7 @@ namespace Forms_TechServ
             this.ordersPage.Location = new System.Drawing.Point(4, 22);
             this.ordersPage.Name = "ordersPage";
             this.ordersPage.Padding = new System.Windows.Forms.Padding(3);
-            this.ordersPage.Size = new System.Drawing.Size(614, 332);
+            this.ordersPage.Size = new System.Drawing.Size(672, 332);
             this.ordersPage.TabIndex = 5;
             this.ordersPage.Text = "Заказы";
             // 
@@ -431,7 +431,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.workshopTabs);
             this.MaximizeBox = false;
             this.Name = "FormShowWorkshop";
-            this.Text = "FormShowWorkshop";
+            this.Text = "Просмотр филиала";
             this.Load += new System.EventHandler(this.FormShowWorkshop_Load);
             this.ResizeEnd += new System.EventHandler(this.FormShowWorkshop_ResizeEnd);
             this.workshopTabs.ResumeLayout(false);

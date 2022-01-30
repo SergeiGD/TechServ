@@ -163,7 +163,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormManageWorkshopTimetable";
-            this.Text = "FormAddWorkshopTimetable";
+            this.Text = "Формирование расписания филиала";
             this.Load += new System.EventHandler(this.FormManageWorkshopTimetable_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);

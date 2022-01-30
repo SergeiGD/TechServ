@@ -86,7 +86,8 @@ namespace Forms_TechServ
                 dataSpareParts.Rows[i].Cells[1].Value = spareParts[i].SparePart.Name;
                 dataSpareParts.Rows[i].Cells[2].Value = spareParts[i].UnitPrice;
                 dataSpareParts.Rows[i].Cells[3].Value = spareParts[i].Quantity;
-                dataSpareParts.Rows[i].Cells[4].Value = spareParts[i].Quantity * spareParts[i].UnitPrice;
+                dataSpareParts.Rows[i].Cells[4].Value = spareParts[i].Batch.GetCountLeft(spareParts[i].SparePart);
+                dataSpareParts.Rows[i].Cells[5].Value = spareParts[i].Quantity * spareParts[i].UnitPrice;
 
             }
 

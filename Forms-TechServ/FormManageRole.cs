@@ -32,7 +32,7 @@ namespace Forms_TechServ
         {
             InitializeComponent();
 
-            btnAction.Text = "Сохранить";
+            btnAction.Text = "Сохранить общую информацию";
             this.role = role;
 
             this.FormClosing += CheckPermissions;

@@ -108,8 +108,15 @@ namespace Forms_TechServ
             
         }
 
-        private void dataBatches_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        
+
+        private void dataBatches_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+
             FormManageOrderSparePart formManageOrderSparePart = new FormManageOrderSparePart((int)dataBatches.SelectedRows[0].Cells[2].Value);
             formManageOrderSparePart.ShowDialog();
 
@@ -118,7 +125,7 @@ namespace Forms_TechServ
                 return;
             }
 
-            if (orderSparePart.EditQuantity(BatchesList.GetById((int)dataBatches.SelectedRows[0].Cells[1].Value), formManageOrderSparePart.quantity))
+            if (orderSparePart.EditQuantity(BatchesList.GetById((int)dataBatches.SelectedRows[0].Cells[1].Value), formManageOrderSparePart.quantity, orderSparePart.CalcSparePartsQuanity()))
             {
                 MessageBox.Show("Количетсво деталей успешно изменено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 FillBatches();
@@ -130,10 +137,17 @@ namespace Forms_TechServ
             //orderSparePart.EditQuantity(BatchesList.GetById((int)dataBatches.SelectedRows[0].Cells[1].Value), formManageOrderSparePart.quantity);
         }
 
-        private void dataBatches_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void btnShowBatch_Click(object sender, EventArgs e)
         {
-            FormShowBatch formShowBatch = new FormShowBatch(true, BatchesList.GetById((int)dataBatches.SelectedRows[0].Cells[1].Value));
-            formShowBatch.Show();
+            if(dataBatches.SelectedRows.Count > 0)
+            {
+                FormShowBatch formShowBatch = new FormShowBatch(true, BatchesList.GetById((int)dataBatches.SelectedRows[0].Cells[1].Value));
+                formShowBatch.Show();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите поставку");
+            }
         }
     }
 }

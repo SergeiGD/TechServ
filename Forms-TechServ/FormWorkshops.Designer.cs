@@ -223,7 +223,6 @@ namespace Forms_TechServ
             this.dataWorkshops.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataWorkshops.Size = new System.Drawing.Size(778, 500);
             this.dataWorkshops.TabIndex = 0;
-            //this.dataWorkshops.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataWorkshops_CellClick);
             // 
             // panelContent
             // 
@@ -357,7 +356,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.panelContent);
             this.Controls.Add(this.panelControl);
             this.Name = "FormWorkshops";
-            this.Text = "FormWorkshops";
+            this.Text = "Филиалы";
             this.Load += new System.EventHandler(this.FormWorkshops_Load);
             this.panelFind.ResumeLayout(false);
             this.panelFind.PerformLayout();

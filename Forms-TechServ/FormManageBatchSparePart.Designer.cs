@@ -114,7 +114,7 @@ namespace Forms_TechServ
             0,
             0});
             // 
-            // FormChooseQuantity
+            // FormManageBatchSparePart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -125,8 +125,8 @@ namespace Forms_TechServ
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.numericQuantity);
             this.Controls.Add(this.label1);
-            this.Name = "FormChooseQuantity";
-            this.Text = "FormChooseQuantity";
+            this.Name = "FormManageBatchSparePart";
+            this.Text = "Настройка деталей в поставке";
             ((System.ComponentModel.ISupportInitialize)(this.numericQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericPrice)).EndInit();
             this.ResumeLayout(false);

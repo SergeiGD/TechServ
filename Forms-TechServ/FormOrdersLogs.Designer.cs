@@ -310,7 +310,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panelContent);
             this.Name = "FormOrdersLogs";
-            this.Text = "FormOrdersLogs";
+            this.Text = "История заказа";
             this.Load += new System.EventHandler(this.FormOrdersLogs_Load);
             this.panelContent.ResumeLayout(false);
             this.panelContent.PerformLayout();

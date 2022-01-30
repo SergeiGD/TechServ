@@ -371,7 +371,7 @@ namespace Forms_TechServ
             this.ClientSize = new System.Drawing.Size(756, 353);
             this.Controls.Add(this.sparePartTabs);
             this.Name = "FormShowSparePart";
-            this.Text = "FormShowSparePart";
+            this.Text = "Просмотр детали";
             this.Load += new System.EventHandler(this.FormShowSparePart_Load);
             this.ResizeEnd += new System.EventHandler(this.FormShowSparePart_ResizeEnd);
             this.sparePartTabs.ResumeLayout(false);

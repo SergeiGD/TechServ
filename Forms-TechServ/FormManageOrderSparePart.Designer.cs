@@ -83,7 +83,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.numericQuantity);
             this.Controls.Add(this.label1);
             this.Name = "FormManageOrderSparePart";
-            this.Text = "FormManageOrderSparePart";
+            this.Text = "Управление деталью в заказе";
             ((System.ComponentModel.ISupportInitialize)(this.numericQuantity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

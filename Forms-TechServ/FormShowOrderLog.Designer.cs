@@ -142,7 +142,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormShowOrderLog";
-            this.Text = "FormShowOrderLog";
+            this.Text = "Просмотр события";
             this.Load += new System.EventHandler(this.FormShowOrderLog_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

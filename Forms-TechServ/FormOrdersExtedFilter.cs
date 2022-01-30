@@ -47,9 +47,11 @@ namespace Forms_TechServ
 
             btnAskOrDesk.Tag = true;
 
+            comboBoxSortBy.Items.Add("id");
             comboBoxSortBy.Items.Add("Дате начала");
             comboBoxSortBy.Items.Add("Требуемой предоплате");
             comboBoxSortBy.Items.Add("Внесенной предоплате");
+            comboBoxSortBy.Items.Add("Стоимосте");
             FilterSortBy = new ValueWrapper<string>(comboBoxSortBy.Items[0].ToString());
             comboBoxSortBy.SelectedIndex = 0;
 

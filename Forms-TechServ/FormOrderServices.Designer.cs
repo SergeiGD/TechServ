@@ -218,7 +218,7 @@ namespace Forms_TechServ
             this.ClientSize = new System.Drawing.Size(792, 382);
             this.Controls.Add(this.panel1);
             this.Name = "FormOrderServices";
-            this.Text = "FormOrderServices";
+            this.Text = "Услуги в заказе";
             this.Load += new System.EventHandler(this.FormOrderServices_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

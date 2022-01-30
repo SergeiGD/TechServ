@@ -35,7 +35,7 @@ namespace Forms_TechServ
 
             this.manager = manager;
 
-            btnAction.Text = "Сохранить";
+            btnAction.Text = "Сохранить общую информацию";
 
             //managerTabs.TabPages.Add(ordersPage);
         }

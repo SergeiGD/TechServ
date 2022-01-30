@@ -54,14 +54,46 @@ namespace Forms_TechServ
             {
                 int count = 0;
 
-                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.DelTime == null && s.Batch.DateDelivered.HasValue).Include(s => s.SparePart);
+                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.WorkshopId == workshop.Id && s.Batch.DelTime == null && s.Batch.DateDelivered.HasValue).Include(s => s.SparePart);
 
-                if(workshop != null)
+                foreach (BatchSparePart sparePart in spareParts)
                 {
-                    spareParts = spareParts.Where(s => s.Batch.WorkshopId == workshop.Id);
+                    count += sparePart.Batch.GetCountLeft(sparePart.SparePart);
                 }
 
                 
+
+                return count;
+            }
+        }
+
+        public int GetCountInStock()
+        {
+            using (TechContext db = new TechContext())
+            {
+                int count = 0;
+
+                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.DelTime == null && s.Batch.DateDelivered.HasValue).Include(s => s.SparePart);
+
+
+                foreach (BatchSparePart sparePart in spareParts)
+                {
+                    count += sparePart.Batch.GetCountLeft(sparePart.SparePart);
+                }
+
+
+
+                return count;
+            }
+        }
+
+        public int GetCountInTransit(Workshop workshop)
+        {
+            using (TechContext db = new TechContext())
+            {
+                int count = 0;
+
+                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.WorkshopId == workshop.Id && s.Batch.DelTime == null && !s.Batch.DateDelivered.HasValue).Include(s => s.SparePart);
 
                 foreach (BatchSparePart sparePart in spareParts)
                 {
@@ -76,7 +108,7 @@ namespace Forms_TechServ
             }
         }
 
-        public int GetCountInTransit(Workshop workshop)
+        public int GetCountInTransit()
         {
             using (TechContext db = new TechContext())
             {
@@ -84,21 +116,10 @@ namespace Forms_TechServ
 
                 IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.DelTime == null && !s.Batch.DateDelivered.HasValue).Include(s => s.SparePart);
 
-                if (workshop != null)
-                {
-                    spareParts = spareParts.Where(s => s.Batch.WorkshopId == workshop.Id);
-                }
-
-
-
                 foreach (BatchSparePart sparePart in spareParts)
                 {
-                    //count += sparePart.Quantity;
-
                     count += sparePart.Batch.GetCountLeft(sparePart.SparePart);
                 }
-
-                
 
                 return count;
             }
@@ -170,8 +191,15 @@ namespace Forms_TechServ
 
 
 
-
-                spareParts = spareParts.SortBy(sortBy, desk);
+                if(workshop != null)
+                {
+                    spareParts = spareParts.SortBy(sortBy, desk, workshop);
+                }
+                else
+                {
+                    spareParts = spareParts.SortBy(sortBy, desk);
+                }
+                
 
                 rowsCount = spareParts.Count();
 

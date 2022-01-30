@@ -281,7 +281,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.ordersTab);
             this.MaximizeBox = false;
             this.Name = "FormAddOrder";
-            this.Text = "FormAddOrder";
+            this.Text = "Добавление заказа";
             this.Load += new System.EventHandler(this.FormAddOrder_Load);
             this.ordersTab.ResumeLayout(false);
             this.generalPage.ResumeLayout(false);

@@ -24,6 +24,9 @@ namespace Forms_TechServ
 
 
             List<Service> services = ServicesList.GetService();
+
+            int point = 0;
+
             for (int i = 0; i < services.Count; i++)
             {
                 int count = services[i].CountInOrders(dateTimePickerFrom.Value, dateTimePickerUntil.Value);
@@ -32,7 +35,8 @@ namespace Forms_TechServ
                     continue;
                 }
                 chartServices.Series[0].Points.AddXY(services[i].Name, count);
-                chartServices.Series[0].Points[i].Label = services[i].Name;
+                chartServices.Series[0].Points[point].Label = services[i].Name;
+                point++;
             }
         }
 

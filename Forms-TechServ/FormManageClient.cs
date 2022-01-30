@@ -34,7 +34,7 @@ namespace Forms_TechServ
 
             this.client = client;
 
-            btnAction.Text = "Сохранить";
+            btnAction.Text = "Сохранить общую информацию";
         }
 
         private void clientsTab_SelectedIndexChanged(object sender, EventArgs e)
