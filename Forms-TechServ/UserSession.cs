@@ -15,7 +15,7 @@ namespace Forms_TechServ
         {
             using(TechContext db = new TechContext())
             {
-                employee = db.Employees.Where(e => e.PhoneNum == phoneNum && e.Password == password).FirstOrDefault();
+                employee = db.Employees.Where(e => e.PhoneNum == phoneNum && e.Password == password && e.DelTime == null).FirstOrDefault();
 
                 return employee;
             }

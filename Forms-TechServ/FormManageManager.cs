@@ -129,27 +129,39 @@ namespace Forms_TechServ
 
                 if(manager.Id == 0)
                 {
-                    manager.AddManager();
-
-                    DialogResult answer = MessageBox.Show($"Новый сотрудник успешно добавлен. ID - {manager.Id}. Желаете добавить расписание?", "Успех", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                    this.Hide();
-                    if (answer == DialogResult.Yes)
+                    if(manager.AddManager())
                     {
-                        FormManageManager formManageManager = new FormManageManager(ManagersList.GetById(manager.Id, true));
-                        formManageManager.ShowDialog();
+                        DialogResult answer = MessageBox.Show($"Новый сотрудник успешно добавлен. ID - {manager.Id}. Желаете добавить расписание?", "Успех", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        this.Hide();
+                        if (answer == DialogResult.Yes)
+                        {
+                            FormManageManager formManageManager = new FormManageManager(ManagersList.GetById(manager.Id, true));
+                            formManageManager.ShowDialog();
+                        }
+                        this.Close();
                     }
-                    this.Close();
+                    else
+                    {
+                        MessageBox.Show($"Сотрудник с таким номером телефона уже есть в базе", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    
                 }
                 else
                 {
                     manager.Role = (Role)tbPosition.Tag;                // чтоб не было конфликта нав. свойств при изменение, вручную полностью сменим их
                     manager.Workshop = (Workshop)tbWorkshop.Tag;        // чтоб не было конфликта нав. свойств при изменение, вручную полностью сменим их
 
-                    manager.EditManager();
+                    if(manager.EditManager())
+                    {
+                        MessageBox.Show($"Данные о сотруднике успешно изменены", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    MessageBox.Show($"Данные о сотруднике успешно изменены", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    this.Close();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Сотрудник с таким номером телефона уже есть в базе", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    
                 }
 
             }

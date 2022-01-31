@@ -254,6 +254,11 @@ namespace Forms_TechServ
         {
             using(TechContext db = new TechContext())
             {
+                if(service.Quantity < 1 || service.Sale < 0)
+                {
+                    return false;
+                }
+
                 service.OrderId = this.Id;
 
                 db.OrdersServices.Add(service);
@@ -308,6 +313,11 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
+                if(service.Quantity < 1 || service.Sale < 0)
+                {
+                    return false;
+                }
+
                 db.Entry(service).State = EntityState.Modified;
 
                 OrderLog orderLog = new OrderLog()

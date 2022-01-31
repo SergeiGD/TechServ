@@ -132,7 +132,7 @@ namespace Forms_TechServ
             }
             else
             {
-                MessageBox.Show("В выбранной поставке недостаточно деталей", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("В выбранной поставке недостаточно деталей или получено недопустипое значние (меньше 1)", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             //orderSparePart.EditQuantity(BatchesList.GetById((int)dataBatches.SelectedRows[0].Cells[1].Value), formManageOrderSparePart.quantity);
         }

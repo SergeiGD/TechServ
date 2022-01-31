@@ -138,7 +138,11 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                
+                if (db.Employees.Where(e => e.DelTime == null && e.PhoneNum == this.PhoneNum && e.Id != this.Id).Count() != 0)
+                {
+                    return false;
+                }
+
                 db.Masters.Add(this);
                 db.SaveChanges();
                 return true;
@@ -172,6 +176,11 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
+                if (db.Employees.Where(e => e.DelTime == null && e.PhoneNum == this.PhoneNum && e.Id != this.Id).Count() != 0)
+                {
+                    return false;
+                }
+
                 db.Entry(this).State = EntityState.Modified;
                 
                 db.SaveChanges();
@@ -397,6 +406,11 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
+                if(db.Employees.Where(e => e.DelTime == null && e.PhoneNum == this.PhoneNum).Count() != 0)
+                {
+                    return false;
+                }
+
                 db.Managers.Add(this);
                 db.SaveChanges();
                 return true;
@@ -428,6 +442,10 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
+                if (db.Employees.Where(e => e.DelTime == null && e.PhoneNum == this.PhoneNum && e.Id != this.Id).Count() != 0)
+                {
+                    return false;
+                }
 
                 db.Entry(this).State = EntityState.Modified;
                 db.SaveChanges();

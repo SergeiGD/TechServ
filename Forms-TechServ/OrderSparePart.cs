@@ -122,6 +122,10 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
+                if (quantityNew < 1)
+                {
+                    return false;
+                }
                 if(batch.GetCountLeft(this.SparePart) < quantityNew - quantityOld)
                 {
                     return false;

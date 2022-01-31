@@ -100,7 +100,6 @@ namespace Forms_TechServ
                 return;
             }
 
-            //OrderService orderService = null;
 
             if (order.CheckService(formServices.service))
             {
@@ -122,6 +121,10 @@ namespace Forms_TechServ
                     RecalcFields();
                     MessageBox.Show($"Услуга успешно добавлена в заказ", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     
+                }
+                else
+                {
+                    MessageBox.Show($"Получены недопустимые значения", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
@@ -516,6 +519,10 @@ namespace Forms_TechServ
                 FillServices();
                 RecalcFields();
                 MessageBox.Show("Данные об услуге успешно изменены", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show($"Получены недопустимые значения", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
         }
