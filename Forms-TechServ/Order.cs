@@ -124,7 +124,8 @@ namespace Forms_TechServ
 
                 foreach(OrderService service in db.OrdersServices.Where(s => s.OrderId == this.Id).Include(s => s.Service))
                 {
-                    price += service.Service.Price * service.Quantity - (service.Service.Price * service.Quantity * (service.Sale / 100));
+                    //price += service.Service.Price * service.Quantity - (service.Service.Price * service.Quantity * (service.Sale / 100));
+                    price += service.Price * service.Quantity - (service.Price * service.Quantity * (service.Sale / 100));
                 }
 
                 foreach (OrderSparePart sparePart in this.GetSpareParts())
@@ -264,20 +265,15 @@ namespace Forms_TechServ
                 OrderLog orderLog = new OrderLog(this.Id, UserSession.GetLoggedInUser().Id)
                 {
                     EventDate = DateTime.Now,
-                    EventDescription = $"Услуга №{service.ServiceId} в количестве {service.Quantity} добавлена к заказу. Доп. скидка на услугу {service.Sale}%"
+                    EventDescription = $"Услуга №{service.ServiceId} в количестве {service.Quantity} добавлена к заказу. Цена за 1 услугу - {service.Price}, доп. скидка на услугу - {service.Sale}%"
                 };
                 db.OrderLogs.Add(orderLog);
                 db.SaveChanges();
 
-                
-
-
-                //Order orderToUpdate = db.Orders.Find(this.Id);
 
                 this.FinalPrice = CalcFinalPrice();
                 this.EditOrder();
-                //db.Entry(orderToUpdate).CurrentValues.SetValues(this);
-                //db.SaveChanges();
+
 
                 return true;
             }
@@ -374,7 +370,8 @@ namespace Forms_TechServ
 
                 foreach (OrderService service in db.OrdersServices.Where(s => s.OrderId == this.Id).Include(s => s.Service))
                 {
-                    price += service.Service.Price * service.Quantity - (service.Service.Price * service.Quantity * (service.Sale / 100));
+                    price += service.Price * service.Quantity - (service.Price * service.Quantity * (service.Sale / 100));
+                    //price += service.Service.Price * service.Quantity - (service.Service.Price * service.Quantity * (service.Sale / 100));
                 }
 
                 // ПОТОМ ДЕТАЛИ

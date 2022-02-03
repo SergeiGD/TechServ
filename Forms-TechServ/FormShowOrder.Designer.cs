@@ -507,7 +507,7 @@ namespace Forms_TechServ
             this.btnPriceInfo.IconColor = System.Drawing.Color.Black;
             this.btnPriceInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnPriceInfo.IconSize = 20;
-            this.btnPriceInfo.Location = new System.Drawing.Point(163, 449);
+            this.btnPriceInfo.Location = new System.Drawing.Point(185, 449);
             this.btnPriceInfo.Name = "btnPriceInfo";
             this.btnPriceInfo.Size = new System.Drawing.Size(27, 21);
             this.btnPriceInfo.TabIndex = 191;

@@ -16,18 +16,18 @@ namespace Forms_TechServ
         Service pickedService;
         public bool changed;
 
-        public FormManageOrderService(Service pickedService/*, Order order*/)
+        public FormManageOrderService(Service pickedService)       // ЕСЛИ ДОБАВЛЯЕМ НОВУЮ УСЛУГУ
         {
             InitializeComponent();
 
             orderService = new OrderService();
             this.pickedService = pickedService;
-            //this.order = order;
+            orderService.Price = this.pickedService.Price;
 
-            //btnAction.Text = "Добавить";
+            labelPrice.Text = pickedService.Price.ToString();
         }
 
-        public FormManageOrderService(OrderService orderService/*, Order order*/)
+        public FormManageOrderService(OrderService orderService)   // ЕСЛИ ИЗМЕЯЕМ ДОБАВЛЕННУЮ РАНЕЕ
         {
             InitializeComponent();
 
@@ -36,6 +36,8 @@ namespace Forms_TechServ
             tbComment.Text = orderService.MasterComment;
             numericQuantity.Value = orderService.Quantity;
             numericSale.Value = orderService.Sale;
+
+            labelPrice.Text = orderService.Price.ToString();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -62,6 +64,11 @@ namespace Forms_TechServ
         private void numericQuantity_ValueChanged(object sender, EventArgs e)
         {
             numericQuantity.Value = (int)numericQuantity.Value; // если ввели дробью, переделываем в обычное число
+        }
+
+        private void btnPriceInfo_MouseHover(object sender, EventArgs e)
+        {
+            toolTipPriceInfo.SetToolTip(btnPriceInfo, "Цена формируется в момент добавления услуги в заказ, поэтому она может не совпадать с текущей ценой услуги");
         }
     }
 }

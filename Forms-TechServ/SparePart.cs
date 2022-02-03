@@ -29,8 +29,10 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
+
                 db.Entry(this).State = EntityState.Modified;
                 db.SaveChanges();
+
                 return true;
             }
         }
