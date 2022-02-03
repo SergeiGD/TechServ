@@ -55,20 +55,21 @@ namespace Forms_TechServ
             FilterSortBy = new ValueWrapper<string>(comboBoxSortBy.Items[0].ToString());
             comboBoxSortBy.SelectedIndex = 0;
 
-            datePickerStartFrom.ValueChanged += dateTimePicker_ValueChanged;
-            datePickerStartUntil.ValueChanged += dateTimePicker_ValueChanged;
-            datePickerDiagnoseFrom.ValueChanged += dateTimePicker_ValueChanged;
-            datePickerDiagnoseUntil.ValueChanged += dateTimePicker_ValueChanged;
-            datePickerAnswerFrom.ValueChanged += dateTimePicker_ValueChanged;
-            datePickerAnswerUntil.ValueChanged += dateTimePicker_ValueChanged;
-            datePickerCanceledFrom.ValueChanged += dateTimePicker_ValueChanged;
-            datePickerCanceledUntil.ValueChanged += dateTimePicker_ValueChanged;
-            datePickerRepaiedFrom.ValueChanged += dateTimePicker_ValueChanged;
-            datePickerRepaiedUntil.ValueChanged += dateTimePicker_ValueChanged;
-            datePickerPaidFrom.ValueChanged += dateTimePicker_ValueChanged;
-            datePickerPaidUntil.ValueChanged += dateTimePicker_ValueChanged;
-            datePickerFinishFrom.ValueChanged += dateTimePicker_ValueChanged;
-            datePickerFinishUntil.ValueChanged += dateTimePicker_ValueChanged;
+            datePickerStartFrom.CloseUp += dateTimePicker_ValuePicked;
+            datePickerStartUntil.CloseUp += dateTimePicker_ValuePicked;
+            datePickerDiagnoseFrom.CloseUp += dateTimePicker_ValuePicked;
+            datePickerDiagnoseUntil.CloseUp += dateTimePicker_ValuePicked;
+            datePickerAnswerFrom.CloseUp += dateTimePicker_ValuePicked;
+            datePickerAnswerUntil.CloseUp += dateTimePicker_ValuePicked;
+            datePickerCanceledFrom.CloseUp += dateTimePicker_ValuePicked;
+            datePickerCanceledUntil.CloseUp += dateTimePicker_ValuePicked;
+            datePickerRepaiedFrom.CloseUp += dateTimePicker_ValuePicked;
+            datePickerRepaiedUntil.CloseUp += dateTimePicker_ValuePicked;
+            datePickerPaidFrom.CloseUp += dateTimePicker_ValuePicked;
+            datePickerPaidUntil.CloseUp += dateTimePicker_ValuePicked;
+            datePickerFinishFrom.CloseUp += dateTimePicker_ValuePicked;
+            //datePickerFinishUntil.ValueChanged += dateTimePicker_ValueChanged;
+            datePickerFinishUntil.CloseUp += dateTimePicker_ValuePicked;
         }
 
         public void LoadData(Order FilterA, Order FilterB, Client FilterClient, ValueWrapper<bool> FilterActive, ValueWrapper<string> FilterSortBy, ValueWrapper<bool> FilterAksOrDesk)
@@ -329,7 +330,7 @@ namespace Forms_TechServ
             comboBoxStatus.SelectedItem = null;*/
         }
 
-        private void dateTimePicker_ValueChanged(object sender, EventArgs e)
+        private void dateTimePicker_ValuePicked(object sender, EventArgs e)
         {
             DateTimePicker dateTimePicker = (DateTimePicker)sender;
             dateTimePicker.Value = new DateTime(dateTimePicker.Value.Year, dateTimePicker.Value.Month, dateTimePicker.Value.Day, 0, 0, 0);

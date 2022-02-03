@@ -18,9 +18,8 @@ namespace Forms_TechServ
             {
                 db.OrdersAtHome.Add(this);
 
-                OrderLog orderLog = new OrderLog()
+                OrderLog orderLog = new OrderLog(this.Id, UserSession.GetLoggedInUser().Id)
                 {
-                    OrderId = this.Id,
                     EventDate = DateTime.Now,
                     EventDescription = "Заказ создан"
                 };
@@ -59,9 +58,8 @@ namespace Forms_TechServ
                         {
                             stateBefore = property.GetValue(orderAtHome).ToString();
                         }
-                        OrderLog orderLog = new OrderLog()
+                        OrderLog orderLog = new OrderLog(this.Id, UserSession.GetLoggedInUser().Id)
                         {
-                            OrderId = this.Id,
                             EventDate = DateTime.Now,
                             EventDescription = $"{property.Name} изменен(а) с {stateBefore} на {stateCurrent}"
                         };

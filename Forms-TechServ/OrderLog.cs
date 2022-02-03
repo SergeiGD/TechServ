@@ -19,6 +19,19 @@ namespace Forms_TechServ
         [Column("Id_Order")]
         public Order Order { get; set; }
 
+        [Column("Id_Employee")]
+        public int EmployeeId { get; set; }
+        [Column("Id_Employee")]
+        public Employee Employee { get; set; }
+
+        public OrderLog(int orderId, int employeeId)    // конструктор с параметрами для создания нового экземляра
+        {
+            this.OrderId = orderId;
+            this.EmployeeId = employeeId;
+        }
+
+        public OrderLog() { }                           // пустой конструктор для создание фильтров сортировки
+
         public bool AddOrderLog()
         {
             using (TechContext db = new TechContext())

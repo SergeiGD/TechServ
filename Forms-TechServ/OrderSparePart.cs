@@ -59,9 +59,8 @@ namespace Forms_TechServ
 
                     db.OrdersSpareParts.Add(sparePartFromBatch);
 
-                    OrderLog orderLog = new OrderLog()
+                    OrderLog orderLog = new OrderLog(this.Order.Id, UserSession.GetLoggedInUser().Id)
                     {
-                        OrderId = this.Order.Id,
                         EventDate = DateTime.Now,
                         EventDescription = $"Деталь №{this.SparePart.Id} из поставки {batch.Id} в количестве {quantity} добавлена к заказу"
                     };
@@ -96,9 +95,8 @@ namespace Forms_TechServ
 
                 db.OrdersSpareParts.Remove(sparePartFromBatch);
 
-                OrderLog orderLog = new OrderLog()
+                OrderLog orderLog = new OrderLog(this.Order.Id, UserSession.GetLoggedInUser().Id)
                 {
-                    OrderId = this.Order.Id,
                     EventDate = DateTime.Now,
                     EventDescription = $"Деталь №{this.SparePart.Id} из поставки {batch.Id} в количестве {sparePartFromBatch.Quantity} удалена из заказа"
                 };
@@ -118,7 +116,7 @@ namespace Forms_TechServ
             }
         }
 
-        public bool EditQuantity(Batch batch, int quantityNew, int quantityOld) 
+        public bool EditQuantity(Batch batch, int quantityNew) 
         {
             using (TechContext db = new TechContext())
             {
@@ -126,36 +124,32 @@ namespace Forms_TechServ
                 {
                     return false;
                 }
-                if(batch.GetCountLeft(this.SparePart) < quantityNew - quantityOld)
+                
+                SparePartFromBatch sparePartFromBatch = db.OrdersSpareParts.Find(this.Order.Id, this.SparePart.Id, batch.Id);
+
+                if (batch.GetCountLeft(this.SparePart) < quantityNew - sparePartFromBatch.Quantity)
                 {
                     return false;
                 }
-                else
+
+                OrderLog orderLog = new OrderLog(this.Order.Id, UserSession.GetLoggedInUser().Id)
                 {
-                    SparePartFromBatch sparePartFromBatch = db.OrdersSpareParts.Find(this.Order.Id, this.SparePart.Id, batch.Id);
+                    EventDate = DateTime.Now,
+                    EventDescription = $"Количества детали №{this.SparePart.Id} из поставки {batch.Id} изменено с {sparePartFromBatch.Quantity} на {quantityNew}"
+                };
+                db.OrderLogs.Add(orderLog);
 
-                    OrderLog orderLog = new OrderLog()
-                    {
-                        OrderId = this.Order.Id,
-                        EventDate = DateTime.Now,
-                        EventDescription = $"Количества детали №{this.SparePart.Id} из поставки {batch.Id} изменено с {sparePartFromBatch.Quantity} на {quantityNew}"
-                    };
-                    db.OrderLogs.Add(orderLog);
+                sparePartFromBatch.Quantity = quantityNew;
 
-                    sparePartFromBatch.Quantity = quantityNew;
 
-                    
 
-                    db.SaveChanges();
+                db.SaveChanges();
 
-                    this.Order.FinalPrice = this.Order.CalcFinalPrice();
-                    this.Order.PrepaymentRequired = this.Order.CalcClientPrepayment();
-                    this.Order.EditOrder();
-                    /*db.Entry(this.Order).State = EntityState.Modified;
-                    db.SaveChanges();*/
-                    return true;
-                }
-                
+                this.Order.FinalPrice = this.Order.CalcFinalPrice();
+                this.Order.PrepaymentRequired = this.Order.CalcClientPrepayment();
+                this.Order.EditOrder();
+                return true;
+
             }
         }
 
@@ -235,9 +229,8 @@ namespace Forms_TechServ
                     
                 }
 
-                OrderLog orderLog = new OrderLog()
+                OrderLog orderLog = new OrderLog(this.Order.Id, UserSession.GetLoggedInUser().Id)
                 {
-                    OrderId = this.Order.Id,
                     EventDate = DateTime.Now,
                     EventDescription = $"Деталь №{this.SparePart.Id} удалена из заказа"
                 };
@@ -281,9 +274,8 @@ namespace Forms_TechServ
                                 Quantity = quantity
                             });
 
-                            OrderLog orderLog = new OrderLog()
+                            OrderLog orderLog = new OrderLog(this.Order.Id, UserSession.GetLoggedInUser().Id)
                             {
-                                OrderId = this.Order.Id,
                                 EventDate = DateTime.Now,
                                 EventDescription = $"Деталь №{this.SparePart.Id} из поставки {batch.Id} в количестве {quantity} добавлена к заказу"
                             };
@@ -306,9 +298,8 @@ namespace Forms_TechServ
                                 Quantity = batch.GetCountLeft(SparePart)
                             });
 
-                            OrderLog orderLog = new OrderLog()
+                            OrderLog orderLog = new OrderLog(this.Order.Id, UserSession.GetLoggedInUser().Id)
                             {
-                                OrderId = this.Order.Id,
                                 EventDate = DateTime.Now,
                                 EventDescription = $"Деталь №{this.SparePart.Id} из поставки {batch.Id} в количестве {batch.GetCountLeft(SparePart)} добавлена к заказу"
                             };
@@ -335,9 +326,8 @@ namespace Forms_TechServ
                                     Quantity = quantity
                                 });
 
-                                OrderLog orderLog = new OrderLog()
+                                OrderLog orderLog = new OrderLog(this.Order.Id, UserSession.GetLoggedInUser().Id)
                                 {
-                                    OrderId = this.Order.Id,
                                     EventDate = DateTime.Now,
                                     EventDescription = $"Деталь №{this.SparePart.Id} из поставки {batch.Id} в количестве {quantity} добавлена к заказу"
                                 };
@@ -360,9 +350,8 @@ namespace Forms_TechServ
                                     Quantity = batch.GetCountLeft(SparePart)
                                 });
 
-                                OrderLog orderLog = new OrderLog()
+                                OrderLog orderLog = new OrderLog(this.Order.Id, UserSession.GetLoggedInUser().Id)
                                 {
-                                    OrderId = this.Order.Id,
                                     EventDate = DateTime.Now,
                                     EventDescription = $"Деталь №{this.SparePart.Id} из поставки {batch.Id} в количестве {batch.GetCountLeft(SparePart)} добавлена к заказу"
                                 };

@@ -57,9 +57,8 @@ namespace Forms_TechServ
             {
                 db.Orders.Add(this);
 
-                OrderLog orderLog = new OrderLog()
+                OrderLog orderLog = new OrderLog(this.Id, UserSession.GetLoggedInUser().Id)
                 {
-                    OrderId = this.Id,
                     EventDate = DateTime.Now,
                     EventDescription = "Заказ создан"
                 };
@@ -100,9 +99,8 @@ namespace Forms_TechServ
                         {
                             stateBefore = property.GetValue(order).ToString();
                         }
-                        OrderLog orderLog = new OrderLog() 
+                        OrderLog orderLog = new OrderLog(this.Id, UserSession.GetLoggedInUser().Id) 
                         {
-                            OrderId = this.Id,
                             EventDate = DateTime.Now,
                             EventDescription = $"{property.Name} изменен(а) с {stateBefore} на {stateCurrent}"
                         };
@@ -263,9 +261,8 @@ namespace Forms_TechServ
 
                 db.OrdersServices.Add(service);
 
-                OrderLog orderLog = new OrderLog()
+                OrderLog orderLog = new OrderLog(this.Id, UserSession.GetLoggedInUser().Id)
                 {
-                    OrderId = this.Id,
                     EventDate = DateTime.Now,
                     EventDescription = $"Услуга №{service.ServiceId} в количестве {service.Quantity} добавлена к заказу. Доп. скидка на услугу {service.Sale}%"
                 };
@@ -292,9 +289,8 @@ namespace Forms_TechServ
             {
                 db.Entry(service).State = EntityState.Deleted;
 
-                OrderLog orderLog = new OrderLog()
+                OrderLog orderLog = new OrderLog(this.Id, UserSession.GetLoggedInUser().Id)
                 {
-                    OrderId = this.Id,
                     EventDate = DateTime.Now,
                     EventDescription = $"Услуга №{service.ServiceId} удалена из заказа"
                 };
@@ -320,9 +316,8 @@ namespace Forms_TechServ
 
                 db.Entry(service).State = EntityState.Modified;
 
-                OrderLog orderLog = new OrderLog()
+                OrderLog orderLog = new OrderLog(this.Id, UserSession.GetLoggedInUser().Id)
                 {
-                    OrderId = this.Id,
                     EventDate = DateTime.Now,
                     EventDescription = $"Услуга №{service.ServiceId} изменена в заказе. Текущее количество - {service.Quantity}, доп. скидка на услугу - {service.Sale}%, оказана - {service.Done}"
                 };
@@ -473,14 +468,21 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                IEnumerable<OrderLog> orderLogs = db.OrderLogs.Where(o => o.OrderId == this.Id);
+                IEnumerable<OrderLog> orderLogs = db.OrderLogs.Where(o => o.OrderId == this.Id).Include(o => o.Employee);
 
                 if(FilterA.Id != 0)
                 {
                     orderLogs = orderLogs.Where(o => o.Id == FilterA.Id);
                 }
 
+                if(FilterA.Employee != null)
+                {
+                    orderLogs = orderLogs.Where(o => o.EmployeeId == FilterA.Employee.Id);
+                }
+
                 orderLogs = orderLogs.Where(o => o.EventDate >= FilterA.EventDate && o.EventDate <= FilterB.EventDate);
+
+                orderLogs = orderLogs.SortBy("Id", true);
 
                 rowsCount = orderLogs.Count();                                  // общее кол-во строк для постраничного вывода
 
@@ -490,11 +492,20 @@ namespace Forms_TechServ
             }
         }
 
-        public OrderLog GetOrderLog(int id)
+        public OrderLog GetOrderLog(int id, bool withNavProp)
         {
             using(TechContext db = new TechContext())
             {
-                return db.OrderLogs.Where(o => o.OrderId == this.Id && o.Id == id).FirstOrDefault();
+                if (withNavProp)
+                {
+                    OrderLog orderLog = db.OrderLogs.Find(id);
+                    db.Entry(orderLog).Reference(o => o.Employee).Load();
+                    return orderLog;
+                }
+                else
+                {
+                    return db.OrderLogs.Find(id);
+                }
             }
         }
 

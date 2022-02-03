@@ -60,7 +60,7 @@ namespace Forms_TechServ
 
             if (dataOrderLogs.SelectedRows.Count > 0)
             {
-                FormShowOrderLog formShowOrderLog = new FormShowOrderLog(order.GetOrderLog((int)dataOrderLogs.SelectedRows[0].Cells[0].Value));
+                FormShowOrderLog formShowOrderLog = new FormShowOrderLog(order.GetOrderLog((int)dataOrderLogs.SelectedRows[0].Cells[0].Value, true));
                 formShowOrderLog.ShowDialog();
             }
             else
@@ -79,7 +79,7 @@ namespace Forms_TechServ
                     int deleted = 0;
                     foreach (DataGridViewRow row in dataOrderLogs.SelectedRows)
                     {
-                        OrderLog orderLog = order.GetOrderLog((int)dataOrderLogs.Rows[row.Index].Cells[0].Value);
+                        OrderLog orderLog = order.GetOrderLog((int)dataOrderLogs.Rows[row.Index].Cells[0].Value, false);
                         orderLog.DelOrderLog();
                         deleted++;
                     }
@@ -98,16 +98,19 @@ namespace Forms_TechServ
         {
             DataGridViewTextBoxColumn idCol = new DataGridViewTextBoxColumn();
             idCol.Name = "id";
-            idCol.Width = (int)(dataOrderLogs.Width * 0.2);
+            idCol.Width = (int)(dataOrderLogs.Width * 0.08);
+            DataGridViewTextBoxColumn empCol = new DataGridViewTextBoxColumn();
+            empCol.Name = "Инициатор";
             DataGridViewTextBoxColumn descripCol = new DataGridViewTextBoxColumn();
             descripCol.Name = "Описание события";
-            descripCol.Width = (int)(dataOrderLogs.Width * 0.5);
+            descripCol.Width = (int)(dataOrderLogs.Width * 0.4);
             DataGridViewTextBoxColumn dateCol = new DataGridViewTextBoxColumn();
             dateCol.Name = "Дата события";
-            dateCol.Width = dataOrderLogs.Width - idCol.Width - descripCol.Width;
+            dateCol.Width = dataOrderLogs.Width - idCol.Width - descripCol.Width - empCol.Width;
             dateCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             dataOrderLogs.Columns.Add(idCol);
+            dataOrderLogs.Columns.Add(empCol);
             dataOrderLogs.Columns.Add(descripCol);
             dataOrderLogs.Columns.Add(dateCol);
 
@@ -142,6 +145,7 @@ namespace Forms_TechServ
                 new OrderLog()
                 {
                     Id = id,
+                    Employee = (Employee)tbEmployee.Tag,
                     EventDate = datePickerFrom.Value
                 },
                 new OrderLog()
@@ -159,19 +163,19 @@ namespace Forms_TechServ
                 dataOrderLogs.Rows.Add(new DataGridViewRow());
 
                 dataOrderLogs.Rows[i].Cells[0].Value = orderLogs[i].Id;
-                dataOrderLogs.Rows[i].Cells[1].Value = orderLogs[i].EventDescription;
-                dataOrderLogs.Rows[i].Cells[2].Value = orderLogs[i].EventDate;
+                dataOrderLogs.Rows[i].Cells[1].Value = orderLogs[i].Employee.Name;
+                dataOrderLogs.Rows[i].Cells[2].Value = orderLogs[i].EventDescription;
+                dataOrderLogs.Rows[i].Cells[3].Value = orderLogs[i].EventDate;
 
-                if (dataOrderLogs.Columns.Count > 3)
+                if (dataOrderLogs.Columns.Count > 4)
                 {
-                    dataOrderLogs.Rows[i].Cells[3].Value = "Удалить";
-                    dataOrderLogs.Rows[i].Cells[3].Style.BackColor = Color.FromArgb(231, 57, 9);
-                    dataOrderLogs.Rows[i].Cells[3].Style.ForeColor = Color.White;
+                    dataOrderLogs.Rows[i].Cells[4].Value = "Удалить";
+                    dataOrderLogs.Rows[i].Cells[4].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataOrderLogs.Rows[i].Cells[4].Style.ForeColor = Color.White;
 
                 }
             }
 
-            //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
             int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);
             numericCurrentPage.Maximum = maxPage;
 
@@ -187,7 +191,7 @@ namespace Forms_TechServ
 
             if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                OrderLog orderLogToDel = order.GetOrderLog((int)dataOrderLogs.SelectedRows[0].Cells[0].Value);
+                OrderLog orderLogToDel = order.GetOrderLog((int)dataOrderLogs.SelectedRows[0].Cells[0].Value, false);
                 DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить событие с id {orderLogToDel.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (answer == DialogResult.Yes)
                 {
@@ -234,10 +238,27 @@ namespace Forms_TechServ
         private void clearBtn_Click(object sender, EventArgs e)
         {
             tbID.Clear();
+            tbEmployee.Tag = null;
+            tbEmployee.Clear();
             datePickerFrom.Value = order.DateStart.Value;
             datePickerUnti.Value = order.DateStart.Value.AddMonths(6);
 
             FillGrid();
+        }
+
+        private void btnFindEmployee_Click(object sender, EventArgs e)
+        {
+            FormEmployees formEmployees = new FormEmployees(true);
+            formEmployees.ShowDialog();
+
+            tbEmployee.Tag = formEmployees?.employee;
+            tbEmployee.Text = formEmployees?.employee?.Name;
+        }
+
+        private void btnCleanEmployee_Click(object sender, EventArgs e)
+        {
+            tbEmployee.Tag = null;
+            tbEmployee.Clear();
         }
     }
 }

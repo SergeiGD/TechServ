@@ -482,7 +482,7 @@ namespace Forms_TechServ
 
         private void empsAllBtn_Click(object sender, EventArgs e)
         {
-            FormEmployees formEmployees = new FormEmployees();
+            FormEmployees formEmployees = new FormEmployees(false);
             OpenChildForm(formEmployees, (NavButton)sender);
         }
         private void empsManagersBtn_Click(object sender, EventArgs e)

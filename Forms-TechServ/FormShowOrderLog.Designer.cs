@@ -38,6 +38,8 @@ namespace Forms_TechServ
             this.label6 = new System.Windows.Forms.Label();
             this.tbLogText = new System.Windows.Forms.RichTextBox();
             this.cancelBtn = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.labelEmployee = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // label1
@@ -45,14 +47,14 @@ namespace Forms_TechServ
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(21, 13);
+            this.label1.Size = new System.Drawing.Size(67, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "ID:";
+            this.label1.Text = "ID события:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 68);
+            this.label2.Location = new System.Drawing.Point(12, 56);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 13);
             this.label2.TabIndex = 1;
@@ -61,7 +63,7 @@ namespace Forms_TechServ
             // labelOrder
             // 
             this.labelOrder.AutoSize = true;
-            this.labelOrder.Location = new System.Drawing.Point(57, 68);
+            this.labelOrder.Location = new System.Drawing.Point(83, 56);
             this.labelOrder.Name = "labelOrder";
             this.labelOrder.Size = new System.Drawing.Size(55, 13);
             this.labelOrder.TabIndex = 2;
@@ -72,7 +74,7 @@ namespace Forms_TechServ
             // labelID
             // 
             this.labelID.AutoSize = true;
-            this.labelID.Location = new System.Drawing.Point(57, 25);
+            this.labelID.Location = new System.Drawing.Point(83, 25);
             this.labelID.Name = "labelID";
             this.labelID.Size = new System.Drawing.Size(35, 13);
             this.labelID.TabIndex = 3;
@@ -81,7 +83,7 @@ namespace Forms_TechServ
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 114);
+            this.label4.Location = new System.Drawing.Point(12, 127);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(36, 13);
             this.label4.TabIndex = 4;
@@ -90,7 +92,7 @@ namespace Forms_TechServ
             // labelDate
             // 
             this.labelDate.AutoSize = true;
-            this.labelDate.Location = new System.Drawing.Point(57, 114);
+            this.labelDate.Location = new System.Drawing.Point(83, 127);
             this.labelDate.Name = "labelDate";
             this.labelDate.Size = new System.Drawing.Size(35, 13);
             this.labelDate.TabIndex = 5;
@@ -126,12 +128,34 @@ namespace Forms_TechServ
             this.cancelBtn.UseVisualStyleBackColor = true;
             this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 93);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 13);
+            this.label3.TabIndex = 145;
+            this.label3.Text = "Инициатор:";
+            // 
+            // labelEmployee
+            // 
+            this.labelEmployee.AutoSize = true;
+            this.labelEmployee.Location = new System.Drawing.Point(83, 93);
+            this.labelEmployee.Name = "labelEmployee";
+            this.labelEmployee.Size = new System.Drawing.Size(55, 13);
+            this.labelEmployee.TabIndex = 146;
+            this.labelEmployee.TabStop = true;
+            this.labelEmployee.Text = "linkLabel1";
+            this.labelEmployee.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.labelEmployee_LinkClicked);
+            // 
             // FormShowOrderLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
             this.ClientSize = new System.Drawing.Size(577, 165);
+            this.Controls.Add(this.labelEmployee);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.tbLogText);
             this.Controls.Add(this.label6);
@@ -160,5 +184,7 @@ namespace Forms_TechServ
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.RichTextBox tbLogText;
         private System.Windows.Forms.Button cancelBtn;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.LinkLabel labelEmployee;
     }
 }

@@ -16,19 +16,37 @@ namespace Forms_TechServ
         int rowsCount;
         bool readOnly;
         Workshop workshop;
+        public Employee employee;
 
-        public FormEmployees()
+        public FormEmployees(bool forSearching)
         {
             InitializeComponent();
 
-            readOnly = false;
-
-            if (UserSession.Can("add_del_employee"))
+            if (forSearching)
             {
-                ManageButton btnAdd = new ManageButton();
-                btnAdd.Text = "Добавить";
-                panelControl.Controls.Add(btnAdd);
-                btnAdd.Click += BtnManage_Click;
+                ManageButton btnPick = new ManageButton();
+                btnPick.Text = "Выбрать";
+                panelControl.Controls.Add(btnPick);
+                btnPick.Click += BtnPick_Click;
+
+                dataEmployees.CellMouseDoubleClick += BtnPick_Click;
+
+                readOnly = true;
+            }
+            else
+            {
+                if (UserSession.Can("add_del_employee"))
+                {
+                    ManageButton btnAdd = new ManageButton();
+                    btnAdd.Text = "Добавить";
+                    panelControl.Controls.Add(btnAdd);
+                    btnAdd.Click += BtnManage_Click;
+                }
+
+                dataEmployees.CellMouseDoubleClick += BtnShow_Click;
+
+                readOnly = false;
+
             }
                 
 
@@ -212,6 +230,23 @@ namespace Forms_TechServ
             labelPageCount.Text = $"из {maxPage}";
         }
 
+        private void BtnPick_Click(object sender, EventArgs e)
+        {
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+
+            }
+            if (dataEmployees.SelectedRows.Count > 0)
+            {
+                employee = EmployeesList.GetById(Convert.ToInt32(dataEmployees.SelectedRows[0].Cells[0].Value), false);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите сотрудника");
+            }
+        }
 
         private void DelCol_Click(object sender, DataGridViewCellEventArgs e)
         {
@@ -409,22 +444,6 @@ namespace Forms_TechServ
             toolTipSlalaryInfo.SetToolTip(btnSalaryInfo, "Ноль - до скольки угодно");
         }
 
-        private void dataEmployees_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            Employee employee = EmployeesList.GetById(Convert.ToInt32(dataEmployees.SelectedRows[0].Cells[0].Value), true);     // получаем выбранного сотрудника
-
-            if (employee.GetType() == typeof(Manager))                                                                           // ищем на какой тип ссылка
-            {                                                                                                                   // и в зависимости от этого
-                FormShowManager formShowManager = new FormShowManager(readOnly, (Manager)employee);                             // отображаем соотвествующую форму
-                formShowManager.ShowDialog();
-            }
-            else if (employee.GetType() == typeof(Master))
-            {
-                FormShowMaster showMaster = new FormShowMaster(readOnly, (Master)employee);
-                showMaster.ShowDialog();
-            }
-
-            FillGrid();
-        }
+        
     }
 }

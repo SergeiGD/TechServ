@@ -30,6 +30,7 @@ namespace Forms_TechServ
         {
             labelID.Text = orderLog.Id.ToString();
             labelOrder.Text = orderLog.OrderId.ToString();
+            labelEmployee.Text = orderLog.Employee.Name;
             labelDate.Text = orderLog.EventDate.ToString();
             tbLogText.Text = orderLog.EventDescription;
         }
@@ -37,6 +38,21 @@ namespace Forms_TechServ
         private void cancelBtn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void labelEmployee_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Employee employee = EmployeesList.GetById(orderLog.EmployeeId, true);
+            if(employee is Master)
+            {
+                FormShowMaster formShowMaster = new FormShowMaster(true, (Master)employee);
+                formShowMaster.ShowDialog();
+            }
+            else if(employee is Manager)
+            {
+                FormShowManager formShowManager = new FormShowManager(true, (Manager)employee);
+                formShowManager.ShowDialog();
+            }
         }
     }
 }

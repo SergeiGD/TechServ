@@ -33,9 +33,8 @@ namespace Forms_TechServ
                 {
                     db.Visits.Add(this);
 
-                    OrderLog orderLog = new OrderLog()
+                    OrderLog orderLog = new OrderLog(this.OrderId, UserSession.GetLoggedInUser().Id)
                     {
-                        OrderId = this.OrderId,
                         EventDate = DateTime.Now,
                         EventDescription = $"Выезд №{this.Id} на время {this.DateVisit} добавлен к заказу"
                     };
@@ -63,9 +62,8 @@ namespace Forms_TechServ
                 {
                     db.Entry(this).State = EntityState.Modified;
 
-                    OrderLog orderLog = new OrderLog()
+                    OrderLog orderLog = new OrderLog(this.OrderId, UserSession.GetLoggedInUser().Id)
                     {
-                        OrderId = this.OrderId,
                         EventDate = DateTime.Now,
                         EventDescription = $"Выезд №{this.Id} изменен. Запланированное время - {this.DateVisit}, выполнен - {this.Done}"
                     };
@@ -136,9 +134,8 @@ namespace Forms_TechServ
                 this.DelTime = DateTime.Now;
                 db.Entry(this).State = EntityState.Modified;
 
-                OrderLog orderLog = new OrderLog()
+                OrderLog orderLog = new OrderLog(this.OrderId, UserSession.GetLoggedInUser().Id)
                 {
-                    OrderId = this.OrderId,
                     EventDate = DateTime.Now,
                     EventDescription = $"Выезд №{this.Id} был удален"
                 };
@@ -217,9 +214,8 @@ namespace Forms_TechServ
                         VisitId = this.Id
                     });
 
-                    OrderLog orderLog = new OrderLog()
+                    OrderLog orderLog = new OrderLog(this.OrderId, UserSession.GetLoggedInUser().Id)
                     {
-                        OrderId = this.OrderId,
                         EventDate = DateTime.Now,
                         EventDescription = $"Выезд №{this.Id} был изменен. Добавлена запланированная услуга №{service.Id}"
                     };
@@ -252,9 +248,8 @@ namespace Forms_TechServ
             {
                 db.VisitsServices.Remove(db.VisitsServices.Find(this.Id, service.Id));
 
-                OrderLog orderLog = new OrderLog()
+                OrderLog orderLog = new OrderLog(this.OrderId, UserSession.GetLoggedInUser().Id)
                 {
-                    OrderId = this.OrderId,
                     EventDate = DateTime.Now,
                     EventDescription = $"Выезд №{this.Id} был изменен. Удалена запланированная услуга №{service.Id}"
                 };
