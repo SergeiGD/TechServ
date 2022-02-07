@@ -141,13 +141,6 @@ namespace Forms_TechServ
                     if (sparePart.AddSparePart())
                     {
                         MessageBox.Show($"Новая запчасть успешно добавлен. ID - {sparePart.Id}.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        /*this.Hide();
-                        if(answer == DialogResult.Yes)
-                        {
-                            FormManageSparePart formManageSpare = new FormManageSparePart(SparePartsList.GetById(sparePart.Id));
-                            //formManageSpare.sparePartTabs.SelectedTab = formManageSpare.stockPage;
-                            formManageSpare.ShowDialog();
-                        }*/
                         this.Close();
                     }
                     else
