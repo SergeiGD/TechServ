@@ -13,14 +13,40 @@ namespace Forms_TechServ
     public partial class FormOrderBatches : Form
     {
         OrderSparePart orderSparePart;
-
+        bool readOnly;
         
 
-        public FormOrderBatches(OrderSparePart orderSparePart)
+        public FormOrderBatches(bool readOnly, OrderSparePart orderSparePart)
         {
             InitializeComponent();
 
             this.orderSparePart = orderSparePart;
+            this.readOnly = readOnly;
+
+            if (!readOnly)
+            {
+                ManageButton btnAddBatch = new ManageButton();
+                btnAddBatch.Text = "Добавить";
+                panelControl.Controls.Add(btnAddBatch);
+                btnAddBatch.Click += btnAddBatch_Click;
+
+                ManageButton btnDelBatch = new ManageButton();
+                btnDelBatch.Text = "Удалить";
+                panelControl.Controls.Add(btnDelBatch);
+                btnDelBatch.Click += btnDelBatch_Click;
+            }
+
+            ManageButton btnShowBatch = new ManageButton();
+            btnShowBatch.Text = "Просмотреть поставку";
+            panelControl.Controls.Add(btnShowBatch);
+            btnShowBatch.Click += btnShowBatch_Click;
+
+            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
+            mainBtn[0].Location = new Point(0, 0);
+            for (int i = 1; i < mainBtn.Count(); i++)
+            {
+                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
+            }
         }
 
         private void FormOrderBatches_Load(object sender, EventArgs e)
@@ -115,6 +141,11 @@ namespace Forms_TechServ
             if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
             {
                 return;             // если кликнули по хеадеру грида
+            }
+
+            if (readOnly)
+            {
+                return;
             }
 
             FormManageOrderSparePart formManageOrderSparePart = new FormManageOrderSparePart((int)dataBatches.SelectedRows[0].Cells[2].Value);

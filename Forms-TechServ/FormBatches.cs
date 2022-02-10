@@ -165,6 +165,8 @@ namespace Forms_TechServ
             trackNumCol.Name = "Трэкномер";
             DataGridViewTextBoxColumn workshopCol = new DataGridViewTextBoxColumn();
             workshopCol.Name = "Мастерская";
+            DataGridViewTextBoxColumn statusCol = new DataGridViewTextBoxColumn();
+            statusCol.Name = "Статус";
 
             DataGridViewTextBoxColumn infoCol = new DataGridViewTextBoxColumn();
             if (sparePart != null)
@@ -185,6 +187,7 @@ namespace Forms_TechServ
             dataBatches.Columns.Add(trackNumCol);
             dataBatches.Columns.Add(workshopCol);
             dataBatches.Columns.Add(infoCol);
+            dataBatches.Columns.Add(statusCol);
             dataBatches.Columns.Add(deliveredCol);
 
             if (UserSession.Can("add_del_branch") && !readOnly)
@@ -203,8 +206,15 @@ namespace Forms_TechServ
             comboBoxSortBy.Items.Add("Трэкномеру");
             comboBoxSortBy.Items.Add("Цене");
             comboBoxSortBy.Items.Add("Дате прибытия");
-            //comboBoxSortBy.Items.Add("Номер телефона");
+            comboBoxSortBy.Items.Add("Статусу");
             comboBoxSortBy.SelectedIndex = 0;
+
+            foreach (BatchStatus status in Enum.GetValues(typeof(BatchStatus)))
+            {
+                if (status == BatchStatus.Неопределенный) continue;
+                comboBoxStatus.Items.Add(status);
+            }
+            comboBoxStatus.SelectedItem = null;
 
             comboBoxShowRows.Items.Add(5);
             comboBoxShowRows.Items.Add(20);
@@ -241,6 +251,10 @@ namespace Forms_TechServ
             {
                 sortBy = "DateDelivered";
             }
+            else if (comboBoxSortBy.SelectedItem.ToString() == "Статусу1")
+            {
+                sortBy = "Status";
+            }
 
             DateTime? dateFrom;
             if(datePickerFrom.Format == DateTimePickerFormat.Custom)
@@ -262,7 +276,7 @@ namespace Forms_TechServ
             }
 
             List<Batch> batches;
-            if (sparePart != null) 
+            if (sparePart != null)                                                      // ЕСЛИ ВЫЗВАЛИ ИЗ ДЕТАЛИ
             {
                 batches = BatchesList.GetBatchesWithSparePart(
                     new Batch()
@@ -271,7 +285,8 @@ namespace Forms_TechServ
                         TrackNumber = tbTrackNum.Text,
                         DateDelivered = dateFrom,
                         Price = numericPriceFrom.Value,
-                        Workshop = (Workshop)tbWorkshop.Tag
+                        Workshop = (Workshop)tbWorkshop.Tag,
+                        Status = comboBoxStatus.SelectedItem == null ? BatchStatus.Неопределенный : (BatchStatus)comboBoxStatus.SelectedItem
                     },
                     new Batch()
                     {
@@ -295,7 +310,8 @@ namespace Forms_TechServ
                         TrackNumber = tbTrackNum.Text,
                         DateDelivered = dateFrom,
                         Price = numericPriceFrom.Value,
-                        Workshop = (Workshop)tbWorkshop.Tag
+                        Workshop = (Workshop)tbWorkshop.Tag,
+                        Status = comboBoxStatus.SelectedItem == null ? BatchStatus.Неопределенный : (BatchStatus)comboBoxStatus.SelectedItem
                     },
                     new Batch()
                     {
@@ -319,7 +335,7 @@ namespace Forms_TechServ
                 dataBatches.Rows[i].Cells[0].Value = batches[i].Id;
                 dataBatches.Rows[i].Cells[1].Value = batches[i].TrackNumber;
                 dataBatches.Rows[i].Cells[2].Value = batches[i].Workshop.Location;
-                if (sparePart != null)
+                if (sparePart != null)                                              // ЕСЛИ ВЫЗВАЛИ ИЗ ДЕТАЛИ, ТО КОЛОНКА ОТВЕЧАЕТ ЗА КОЛ-ВО ОСТАВШИХСЯ, ИНАЧЕ ЗА ЦЕНУ
                 {
                     dataBatches.Rows[i].Cells[3].Value = batches[i].GetCountLeft(sparePart);
                 }
@@ -328,20 +344,22 @@ namespace Forms_TechServ
                     dataBatches.Rows[i].Cells[3].Value = batches[i].Price;
                 }
 
+                dataBatches.Rows[i].Cells[4].Value = batches[i].Status;
+
                 if (batches[i].DateDelivered.HasValue)
                 {
-                    dataBatches.Rows[i].Cells[4].Value = batches[i].DateDelivered;
+                    dataBatches.Rows[i].Cells[5].Value = batches[i].DateDelivered;
                 }
                 else
                 {
-                    dataBatches.Rows[i].Cells[4].Value = "В пути";
+                    dataBatches.Rows[i].Cells[5].Value = "Нет";
                 }
 
-                if (dataBatches.Columns.Count > 5)
+                if (dataBatches.Columns.Count > 6)
                 {
-                    dataBatches.Rows[i].Cells[5].Value = "Удалить";
-                    dataBatches.Rows[i].Cells[5].Style.BackColor = Color.FromArgb(231, 57, 9);
-                    dataBatches.Rows[i].Cells[5].Style.ForeColor = Color.White;
+                    dataBatches.Rows[i].Cells[6].Value = "Удалить";
+                    dataBatches.Rows[i].Cells[6].Style.BackColor = Color.FromArgb(231, 57, 9);
+                    dataBatches.Rows[i].Cells[6].Style.ForeColor = Color.White;
                 }
             }
 
@@ -363,17 +381,18 @@ namespace Forms_TechServ
             if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
                 Batch batchToDel = BatchesList.GetById((int)dataBatches.SelectedRows[0].Cells[0].Value);
-                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить поставку с id {batchToDel.Id}? Это также приведет к удалению деталей из этой поставки из заказов, где они уже зарезервированы", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить поставку с id {batchToDel.Id}?", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (answer == DialogResult.Yes)
                 {
-                    if (batchToDel.DelBatch())
+                    List<string> ordersInUse;
+                    if (batchToDel.DelBatch(out ordersInUse))
                     {
                         MessageBox.Show("Поставка успешно удалена", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         FillGrid();
                     }
                     else
                     {
-                        MessageBox.Show("Нельзя удалить уже прибывшую поставку", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Детали из этой поставки уже используются в заказах {String.Join(" ", ordersInUse)}, ее удалить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -411,14 +430,36 @@ namespace Forms_TechServ
 
             if(answer == DialogResult.Yes)
             {
+                int errorDelivered = 0;
+                int errorNotConfirmed = 0;
                 foreach (DataGridViewRow row in dataBatches.SelectedRows)
                 {
                     Batch anotherBatch = BatchesList.GetById(Convert.ToInt32(dataBatches.Rows[row.Index].Cells[0].Value));
-                    if (!anotherBatch.DateDelivered.HasValue)
+
+                    if(anotherBatch.Status == BatchStatus.Прибыла)
                     {
-                        anotherBatch.DateDelivered = DateTime.Now;
-                        anotherBatch.EditBatch();
+                        errorDelivered++;
+                        continue;
                     }
+
+                    if(anotherBatch.Status == BatchStatus.Создана)
+                    {
+                        errorNotConfirmed++;
+                        continue;
+                    }
+
+                    anotherBatch.DateDelivered = DateTime.Now;
+                    anotherBatch.Status = BatchStatus.Прибыла;
+                    anotherBatch.EditBatch();
+                }
+
+                if (errorDelivered == 0 && errorNotConfirmed == 0) 
+                {
+                    MessageBox.Show("Все поставки упешно отмечены как доставленные", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else 
+                {
+                    MessageBox.Show($"{errorDelivered + errorNotConfirmed} не могут быть отмечены как доставленные: {Environment.NewLine} {errorDelivered} - уже отмечены как доставленные; {Environment.NewLine} {errorNotConfirmed} - не подтверждены;", "Что-то пошло не так", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 FillGrid();
@@ -493,6 +534,7 @@ namespace Forms_TechServ
             numericPriceUntil.Value = 0;
             tbWorkshop.Clear();
             tbWorkshop.Tag = null;
+            comboBoxStatus.SelectedItem = null;
 
             FillGrid();
         }
@@ -507,6 +549,7 @@ namespace Forms_TechServ
             datePickerUntil.CustomFormat = " ";
             numericPriceFrom.Value = 0;
             numericPriceUntil.Value = 0;
+            comboBoxStatus.SelectedItem = null;
 
             FillGrid();
         }
@@ -580,14 +623,10 @@ namespace Forms_TechServ
             datePickerUntil.Format = DateTimePickerFormat.Short;
         }
 
-        
-
-        /*private void dataBatches_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void btnCleanStatus_Click(object sender, EventArgs e)
         {
-            FormShowBatch showBatch = new FormShowBatch(readOnly, BatchesList.GetById(Convert.ToInt32(dataBatches.SelectedRows[0].Cells[0].Value)));
-            showBatch.ShowDialog();
+            comboBoxStatus.SelectedItem = null;
+        }
 
-            FillGrid();
-        }*/
     }
 }

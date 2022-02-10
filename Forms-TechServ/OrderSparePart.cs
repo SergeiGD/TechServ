@@ -261,7 +261,7 @@ namespace Forms_TechServ
                 {
 
                     // ДЛЯ НАЧАЛА ПЫТАЕМСЯ НАЙТИ В УЖЕ ПРИБЫВШИХ ПОСТАВКАХ
-                    foreach (Batch batch in db.Batches.Where(b => b.WorkshopId == Order.WorkshopId && b.DateDelivered.HasValue).ToList().Where(b => b.CheckSparePart(this.SparePart) && b.GetCountLeft(this.SparePart) > 0))//.OrderBy(b => b.DateDelivered))
+                    foreach (Batch batch in db.Batches.Where(b => b.WorkshopId == Order.WorkshopId && b.Status == BatchStatus.Прибыла).ToList().Where(b => b.CheckSparePart(this.SparePart) && b.GetCountLeft(this.SparePart) > 0))//.OrderBy(b => b.DateDelivered))
                     {
 
                         if (batch.GetCountLeft(this.SparePart) >= quantity)
@@ -313,7 +313,7 @@ namespace Forms_TechServ
                     // ЕСЛИ НЕ НАШЛИ/НАШЛИ НЕ ДОСТАТОЧНО, ТО В ПОСТАВКАХ В ПУТИ
                     if(quantity > 0)
                     {
-                        foreach (Batch batch in db.Batches.Where(b => b.WorkshopId == Order.WorkshopId && !b.DateDelivered.HasValue).ToList().Where(b => b.CheckSparePart(this.SparePart) && b.GetCountLeft(this.SparePart) > 0))//.OrderBy(b => b.DateDelivered))
+                        foreach (Batch batch in db.Batches.Where(b => b.WorkshopId == Order.WorkshopId && b.Status == BatchStatus.Подтверждена).ToList().Where(b => b.CheckSparePart(this.SparePart) && b.GetCountLeft(this.SparePart) > 0))//.OrderBy(b => b.DateDelivered))
                         {
 
                             if (batch.GetCountLeft(this.SparePart) >= quantity)

@@ -54,7 +54,7 @@ namespace Forms_TechServ
             {
                 int count = 0;
 
-                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.WorkshopId == workshop.Id && s.Batch.DelTime == null && s.Batch.DateDelivered.HasValue).Include(s => s.SparePart);
+                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.WorkshopId == workshop.Id && s.Batch.DelTime == null && s.Batch.Status == BatchStatus.Прибыла).Include(s => s.SparePart);
 
                 foreach (BatchSparePart sparePart in spareParts)
                 {
@@ -73,7 +73,7 @@ namespace Forms_TechServ
             {
                 int count = 0;
 
-                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.DelTime == null && s.Batch.DateDelivered.HasValue).Include(s => s.SparePart);
+                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.DelTime == null && s.Batch.Status == BatchStatus.Прибыла).Include(s => s.SparePart);
 
 
                 foreach (BatchSparePart sparePart in spareParts)
@@ -93,7 +93,7 @@ namespace Forms_TechServ
             {
                 int count = 0;
 
-                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.WorkshopId == workshop.Id && s.Batch.DelTime == null && !s.Batch.DateDelivered.HasValue).Include(s => s.SparePart);
+                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.WorkshopId == workshop.Id && s.Batch.DelTime == null && s.Batch.Status == BatchStatus.Подтверждена).Include(s => s.SparePart);
 
                 foreach (BatchSparePart sparePart in spareParts)
                 {
@@ -114,7 +114,7 @@ namespace Forms_TechServ
             {
                 int count = 0;
 
-                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.DelTime == null && !s.Batch.DateDelivered.HasValue).Include(s => s.SparePart);
+                IEnumerable<BatchSparePart> spareParts = db.BatchesSpareParts.Include(s => s.Batch).Where(s => s.SparePartId == this.Id && s.Batch.DelTime == null && s.Batch.Status == BatchStatus.Подтверждена).Include(s => s.SparePart);
 
                 foreach (BatchSparePart sparePart in spareParts)
                 {

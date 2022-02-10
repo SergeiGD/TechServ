@@ -67,6 +67,9 @@ namespace Forms_TechServ
             this.label9 = new System.Windows.Forms.Label();
             this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipPriceInfo = new System.Windows.Forms.ToolTip(this.components);
+            this.label11 = new System.Windows.Forms.Label();
+            this.comboBoxStatus = new System.Windows.Forms.ComboBox();
+            this.btnCleanStatus = new FontAwesome.Sharp.IconButton();
             this.panelControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataBatches)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericPriceUntil)).BeginInit();
@@ -181,14 +184,14 @@ namespace Forms_TechServ
             0,
             0,
             0});
-            this.numericPriceUntil.Location = new System.Drawing.Point(647, 42);
+            this.numericPriceUntil.Location = new System.Drawing.Point(648, 42);
             this.numericPriceUntil.Maximum = new decimal(new int[] {
             500000,
             0,
             0,
             0});
             this.numericPriceUntil.Name = "numericPriceUntil";
-            this.numericPriceUntil.Size = new System.Drawing.Size(101, 20);
+            this.numericPriceUntil.Size = new System.Drawing.Size(100, 20);
             this.numericPriceUntil.TabIndex = 14;
             // 
             // numericPriceFrom
@@ -200,20 +203,23 @@ namespace Forms_TechServ
             0,
             0,
             0});
-            this.numericPriceFrom.Location = new System.Drawing.Point(647, 13);
+            this.numericPriceFrom.Location = new System.Drawing.Point(648, 13);
             this.numericPriceFrom.Maximum = new decimal(new int[] {
             200000,
             0,
             0,
             0});
             this.numericPriceFrom.Name = "numericPriceFrom";
-            this.numericPriceFrom.Size = new System.Drawing.Size(101, 20);
+            this.numericPriceFrom.Size = new System.Drawing.Size(100, 20);
             this.numericPriceFrom.TabIndex = 13;
             // 
             // panelFind
             // 
             this.panelFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelFind.Controls.Add(this.btnCleanStatus);
+            this.panelFind.Controls.Add(this.comboBoxStatus);
+            this.panelFind.Controls.Add(this.label11);
             this.panelFind.Controls.Add(this.btnPriceInfo);
             this.panelFind.Controls.Add(this.btnCleanFrom);
             this.panelFind.Controls.Add(this.btnCleanUntil);
@@ -555,6 +561,45 @@ namespace Forms_TechServ
             this.label9.TabIndex = 11;
             this.label9.Text = "Страница";
             // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(584, 77);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(44, 13);
+            this.label11.TabIndex = 131;
+            this.label11.Text = "Статус:";
+            // 
+            // comboBoxStatus
+            // 
+            this.comboBoxStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxStatus.FormattingEnabled = true;
+            this.comboBoxStatus.Location = new System.Drawing.Point(648, 74);
+            this.comboBoxStatus.Name = "comboBoxStatus";
+            this.comboBoxStatus.Size = new System.Drawing.Size(100, 21);
+            this.comboBoxStatus.TabIndex = 132;
+            // 
+            // btnCleanStatus
+            // 
+            this.btnCleanStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCleanStatus.FlatAppearance.BorderSize = 0;
+            this.btnCleanStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCleanStatus.IconChar = FontAwesome.Sharp.IconChar.Times;
+            this.btnCleanStatus.IconColor = System.Drawing.SystemColors.ControlText;
+            this.btnCleanStatus.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnCleanStatus.IconSize = 17;
+            this.btnCleanStatus.Location = new System.Drawing.Point(753, 76);
+            this.btnCleanStatus.Name = "btnCleanStatus";
+            this.btnCleanStatus.Size = new System.Drawing.Size(18, 18);
+            this.btnCleanStatus.TabIndex = 133;
+            this.btnCleanStatus.UseVisualStyleBackColor = true;
+            this.btnCleanStatus.Click += new System.EventHandler(this.btnCleanStatus_Click);
+            // 
             // FormBatches
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -618,5 +663,8 @@ namespace Forms_TechServ
         private System.Windows.Forms.ToolTip toolTipCurrentSort;
         private System.Windows.Forms.ToolTip toolTipPriceInfo;
         private FontAwesome.Sharp.IconButton btnPriceInfo;
+        private System.Windows.Forms.ComboBox comboBoxStatus;
+        private System.Windows.Forms.Label label11;
+        private FontAwesome.Sharp.IconButton btnCleanStatus;
     }
 }

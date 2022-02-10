@@ -126,6 +126,7 @@ namespace Forms_TechServ
             this.logsPage = new System.Windows.Forms.TabPage();
             this.visitsPage = new System.Windows.Forms.TabPage();
             this.toolTipPriceInfo = new System.Windows.Forms.ToolTip(this.components);
+            this.btnEditSparePartBatches = new Forms_TechServ.ManageButton();
             this.ordersTab.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.groupPrepayment.SuspendLayout();
@@ -971,6 +972,7 @@ namespace Forms_TechServ
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.Controls.Add(this.btnEditSparePartBatches);
             this.panel4.Controls.Add(this.btnShowSparePart);
             this.panel4.Location = new System.Drawing.Point(782, 0);
             this.panel4.Name = "panel4";
@@ -989,7 +991,7 @@ namespace Forms_TechServ
             this.btnShowSparePart.Name = "btnShowSparePart";
             this.btnShowSparePart.Size = new System.Drawing.Size(185, 40);
             this.btnShowSparePart.TabIndex = 0;
-            this.btnShowSparePart.Text = "Просмотреть";
+            this.btnShowSparePart.Text = "Просмотреть деталь";
             this.btnShowSparePart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnShowSparePart.UseVisualStyleBackColor = false;
             this.btnShowSparePart.Click += new System.EventHandler(this.btnShowSparePart_Click);
@@ -1179,6 +1181,23 @@ namespace Forms_TechServ
             this.visitsPage.TabIndex = 4;
             this.visitsPage.Text = "Выезды";
             // 
+            // btnEditSparePartBatches
+            // 
+            this.btnEditSparePartBatches.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditSparePartBatches.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnEditSparePartBatches.FlatAppearance.BorderSize = 0;
+            this.btnEditSparePartBatches.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditSparePartBatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnEditSparePartBatches.Location = new System.Drawing.Point(0, 40);
+            this.btnEditSparePartBatches.Name = "btnEditSparePartBatches";
+            this.btnEditSparePartBatches.Size = new System.Drawing.Size(185, 40);
+            this.btnEditSparePartBatches.TabIndex = 1;
+            this.btnEditSparePartBatches.Text = "Просмотреть поставки";
+            this.btnEditSparePartBatches.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEditSparePartBatches.UseVisualStyleBackColor = false;
+            this.btnEditSparePartBatches.Click += new System.EventHandler(this.btnShowSparePartBatches_Click);
+            // 
             // FormShowOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1309,5 +1328,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private FontAwesome.Sharp.IconButton btnPriceInfo;
         private System.Windows.Forms.ToolTip toolTipPriceInfo;
+        private ManageButton btnEditSparePartBatches;
     }
 }

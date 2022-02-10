@@ -16,6 +16,7 @@ namespace Forms_TechServ
         Size pickedSize = new Size(804, 397);
         int rowsCount;
         int currentPage = 1;
+        bool locked;
 
         public FormManageBatch()
         {
@@ -23,7 +24,6 @@ namespace Forms_TechServ
 
             batchTabs.TabPages.Remove(sparePartsPage);
             btnAction.Text = "Сохранить и добавить детали";
-            checkDelivered.Visible = false;
             batch = new Batch();
         }
 
@@ -33,13 +33,6 @@ namespace Forms_TechServ
 
             btnAction.Text = "Сохранить";
             this.batch = batch;
-
-            // ЕСЛИ ПРИБЫЛА БОЛЬШЕ, ЧЕМ ДВА ДНЯ НАЗАД, ИЗМЕНИТЬ СОСТОЯНИЯ ПРИБЫТИЯ НЕЛЬЗЯ
-            if(batch.DateDelivered.HasValue && batch.DateDelivered.Value.AddDays(2) <= DateTime.Now)
-            {
-                checkDelivered.Enabled = false;
-                //btnFindWorkshop.Enabled = false;
-            }
 
             this.FormClosing += CheckSpareParts;
 
@@ -59,26 +52,48 @@ namespace Forms_TechServ
             batch = new Batch();
         }
 
-        public FormManageBatch(Workshop workshop, SparePart sparePart)         // ЕСЛИ ИЗМЕНЕНИЯ ПРОИСХОДИТ ИЗ МАСТЕРСКОЙ  (formManageWorkshop)
-        {
-            InitializeComponent();
-
-            checkDelivered.Visible = false;          
-            btnFindWorkshop.Enabled = false;
-        }
 
         private void FormManageBatch_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(456, 216);
+            this.Size = new Size(456, 260);
 
-            if(batch.Id != 0)
+            if (batch.Id != 0)
             {
                 tbTrackNum.Text = batch.TrackNumber;
                 tbWorkshop.Text = batch.Workshop.Location;
                 tbWorkshop.Tag = batch.Workshop;
-                if (batch.DateDelivered.HasValue)
+
+
+                if(batch.Status == BatchStatus.Прибыла)
                 {
+                    checkConfirmed.Checked = true;
                     checkDelivered.Checked = true;
+
+                    checkConfirmed.Enabled = false;
+                    checkDelivered.Enabled = false;
+                }
+                else if (batch.Status == BatchStatus.Подтверждена)
+                {
+                    checkConfirmed.Checked = true;
+                    checkDelivered.Checked = false;
+
+                    checkConfirmed.Enabled = false;
+                    checkDelivered.Enabled = true;
+                }
+                else
+                {
+                    checkConfirmed.Checked = false;
+                    checkDelivered.Checked = false;
+
+                    if (UserSession.Can("confirm_batch"))
+                    {
+                        checkConfirmed.Enabled = true;
+                    }
+                    else
+                    {
+                        checkConfirmed.Enabled = false;
+                    }
+                    checkDelivered.Enabled = false;
                 }
 
 
@@ -92,6 +107,15 @@ namespace Forms_TechServ
 
                 FillSpareParts();
             }
+            else
+            {
+                checkConfirmed.Checked = false;
+                checkDelivered.Checked = false;
+                checkConfirmed.Enabled = false;
+                checkDelivered.Enabled = false;
+            }
+
+            LockFields();
         }
 
         private void CheckSpareParts(object sender, CancelEventArgs e)
@@ -103,8 +127,6 @@ namespace Forms_TechServ
                 {
                     batch.DelBatch();
 
-                    //MessageBox.Show(this.Owner.Name);
-                    //this.Owner.Close();
                 }
                 else
                 {
@@ -178,7 +200,7 @@ namespace Forms_TechServ
                 }
                 else
                 {
-                    MessageBox.Show("Эта поставку уже прибыла, ее изменить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Эта поставку уже подтверждена/прибыла, ее изменить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 
             }
@@ -196,7 +218,7 @@ namespace Forms_TechServ
         {
             if (batchTabs.SelectedTab.Equals(generalPage))
             {
-                this.Size = new Size(456, 216);
+                this.Size = new Size(456, 260);
             }
             else if (batchTabs.SelectedTab.Equals(sparePartsPage))
             {
@@ -259,9 +281,26 @@ namespace Forms_TechServ
             {
                 batch.TrackNumber = tbTrackNum.Text;
                 batch.WorkshopId = ((Workshop)tbWorkshop.Tag).Id;
-
-                if(batch.Id == 0)
+                if (checkDelivered.Checked && batch.Status != BatchStatus.Прибыла)
                 {
+                    DialogResult answer = MessageBox.Show("Вы изменили статус поставки на \"Прибыла\", после сохранения изменений его уже нельзя будет изменить, Вы точно хотите продолжить?", "Подтвердите действие", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (answer != DialogResult.Yes) return;
+                    batch.Status = BatchStatus.Прибыла;
+                }
+                else if (checkConfirmed.Checked && batch.Status != BatchStatus.Подтверждена)
+                {
+                    DialogResult answer = MessageBox.Show("Вы изменили статус поставки на \"Подтверждена\", после сохранения изменений его уже нельзя будет изменить, Вы точно хотите продолжить?", "Подтвердите действие", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (answer != DialogResult.Yes) return;
+                    batch.Status = BatchStatus.Подтверждена;
+                }
+                else
+                {
+                    batch.Status = BatchStatus.Создана;
+                }
+
+                if (batch.Id == 0)
+                {
+                    
 
                     batch.AddBatch();
                     this.Hide();
@@ -270,13 +309,10 @@ namespace Forms_TechServ
                 }
                 else
                 {
+
                     if(checkDelivered.Checked && !batch.DateDelivered.HasValue)
                     {
                         batch.DateDelivered = DateTime.Now;
-                    }
-                    if (!checkDelivered.Checked && batch.DateDelivered.HasValue)
-                    {
-                        batch.DateDelivered = null;
                     }
 
                     batch.Workshop = (Workshop)tbWorkshop.Tag;
@@ -290,12 +326,17 @@ namespace Forms_TechServ
 
         private void DelCol_Click(object sender, DataGridViewCellEventArgs e)
         {
+            if (locked)
+            {
+                return;
+            }
+
             var grid = (DataGridView)sender;
 
             if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
                 BatchSparePart sparePartToDel = batch.GetSparePart((int)dataSpareParts.SelectedRows[0].Cells[0].Value);
-                DialogResult answer = MessageBox.Show($"Вы действительно хотите убрать из заказа деталь с id {sparePartToDel.SparePartId}? Это также приведет к удалению этих деталей из заказов, где они уже зарезервированы", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите убрать из заказа деталь с id {sparePartToDel.SparePartId}?", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (answer == DialogResult.Yes)
                 {
                     if (batch.DelSparePart(sparePartToDel))
@@ -305,7 +346,7 @@ namespace Forms_TechServ
                     }
                     else
                     {
-                        MessageBox.Show("Эта поставку уже прибыла, ее изменить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Эта поставку уже подтверждена/прибыла, ее изменить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -315,7 +356,7 @@ namespace Forms_TechServ
         {
             if(dataSpareParts.SelectedRows.Count > 0)
             {
-                DialogResult answer = MessageBox.Show("Вы уверены что хотите убрать эту ВСЕ выделенные детали из поставки? Это также приведет к удалению этих деталей из заказов, где они уже зарезервированы", "Подтвердите действие", MessageBoxButtons.YesNo);
+                DialogResult answer = MessageBox.Show("Вы уверены что хотите убрать эту ВСЕ выделенные детали из поставки?", "Подтвердите действие", MessageBoxButtons.YesNo);
                 if (answer == DialogResult.Yes)
                 {
                     foreach (DataGridViewRow row in dataSpareParts.SelectedRows)
@@ -323,7 +364,7 @@ namespace Forms_TechServ
                         BatchSparePart anotherSparePart = batch.GetSparePart((int)dataSpareParts.Rows[row.Index].Cells[0].Value);
                         if (!batch.DelSparePart(anotherSparePart))
                         {
-                            MessageBox.Show("Эта поставку уже прибыла, ее изменить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Эта поставку уже подтверждена/прибыла, ее изменить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
                     }
@@ -344,10 +385,13 @@ namespace Forms_TechServ
                 return;             // если кликнули по хеадеру грида
             }
 
+            if (locked)
+            {
+                return;
+            }
+
             BatchSparePart batchSparePart = batch.GetSparePart(Convert.ToInt32(dataSpareParts.SelectedRows[0].Cells[0].Value));
 
-            int prevQuantity = batchSparePart.Quantity;
-            bool delInOrder = false;
 
             FormManageBatchSparePart formManageBatchSparePart = new FormManageBatchSparePart(batchSparePart);//batchSparePart.Quantity, batchSparePart.UnitPrice);
             formManageBatchSparePart.ShowDialog();
@@ -357,7 +401,7 @@ namespace Forms_TechServ
                 return;
             }
 
-            if(formManageBatchSparePart.batchSparePart.Quantity < prevQuantity)
+            /*if(formManageBatchSparePart.batchSparePart.Quantity < prevQuantity)
             {
                 DialogResult answer = MessageBox.Show("Произошло уменьшее кол-во деталей в поставке, сохранение этих действий приведет к удалению этой детали из заказов, где они уже зарезервированы", "Хотите продолжить?", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if(answer != DialogResult.Yes)
@@ -365,16 +409,16 @@ namespace Forms_TechServ
                     return;
                 }
                 delInOrder = true;
-            }
+            }*/
 
-            if (batch.EditSparePart(formManageBatchSparePart.batchSparePart, delInOrder))
+            if (batch.EditSparePart(formManageBatchSparePart.batchSparePart))
             {
                 FillSpareParts();
                 MessageBox.Show("Данные о детали успешно изменены", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("Эта поставку уже прибыла, ее изменить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Эта поставку уже подтверждена/прибыла, ее изменить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -398,6 +442,49 @@ namespace Forms_TechServ
         private void comboBoxShowSparePartsRows_SelectedIndexChanged(object sender, EventArgs e)
         {
             FillSpareParts();
+        }
+
+        private void LockFields()
+        {
+            if(checkConfirmed.Checked || checkDelivered.Checked)
+            {
+                btnAdd.Enabled = false;
+                btnDel.Enabled = false;
+                btnFindWorkshop.Enabled = false;
+                locked = true;
+            }
+            else
+            {
+                btnAdd.Enabled = true;
+                btnDel.Enabled = true;
+                btnFindWorkshop.Enabled = true;
+                locked = false;
+            }
+        }
+
+        /*private void comboBoxStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LockFields();
+        }*/
+
+        private void checkConfirmed_CheckedChanged(object sender, EventArgs e)
+        {
+            LockFields();
+
+            if (checkConfirmed.Checked && batch.Status != BatchStatus.Прибыла)
+            {
+                checkDelivered.Enabled = true;
+            }
+            else
+            {
+                checkDelivered.Checked = false;
+                checkDelivered.Enabled = false;
+            }
+        }
+
+        private void checkDelivered_CheckedChanged(object sender, EventArgs e)
+        {
+            LockFields();
         }
     }
 }

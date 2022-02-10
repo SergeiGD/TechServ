@@ -449,9 +449,9 @@ namespace Forms_TechServ
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(560, 92);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(96, 13);
+            this.label11.Size = new System.Drawing.Size(70, 13);
             this.label11.TabIndex = 151;
-            this.label11.Text = "Доп. сортировка:";
+            this.label11.Text = "Сортировка:";
             // 
             // btnFindWorkshop
             // 

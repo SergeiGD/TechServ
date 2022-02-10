@@ -176,7 +176,7 @@ namespace Forms_TechServ
                 }
                 else
                 {
-                    FormOrderBatches formOrderBatches = new FormOrderBatches(sparePart);
+                    FormOrderBatches formOrderBatches = new FormOrderBatches(false, sparePart);
                     formOrderBatches.ShowDialog();
 
                     FillSpareParts();
@@ -332,6 +332,8 @@ namespace Forms_TechServ
 
 
             comboBoxStatus.SelectedItem = order.Status.GetStatusString();
+
+            dataSpareParts.CellMouseDoubleClick += btnEditSparePartBatches_Click;
 
             RecalcFields();
         }
@@ -604,7 +606,7 @@ namespace Forms_TechServ
             FillSpareParts();
         }
 
-        private void dataSpareParts_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        /*private void dataSpareParts_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (lockedState || e.RowIndex == -1)
             {
@@ -612,7 +614,7 @@ namespace Forms_TechServ
             }
             if (dataSpareParts.SelectedRows.Count > 0)
             {
-                FormOrderBatches formOrderBatches = new FormOrderBatches(order.GetSparePart((int)dataSpareParts.SelectedRows[0].Cells[0].Value));
+                FormOrderBatches formOrderBatches = new FormOrderBatches(false, order.GetSparePart((int)dataSpareParts.SelectedRows[0].Cells[0].Value));
                 formOrderBatches.ShowDialog();
 
                 FillSpareParts();
@@ -622,7 +624,7 @@ namespace Forms_TechServ
             {
                 MessageBox.Show("Для начала выберите деталь");
             }
-        }
+        }*/
 
         private void btnNextSparePart_Click(object sender, EventArgs e)
         {
@@ -769,6 +771,15 @@ namespace Forms_TechServ
             if (!order.DateCancel.HasValue && comboBoxStatus.SelectedItem.ToString() == OrderStatus.Canceled.GetStatusString())
             {
                 order.DateCancel = DateTime.Now;
+                DialogResult answer = MessageBox.Show("Желаете также автоматически удалить все запчасти из заказа, чтоб освободить их для других заказов?", "Выберите действие", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if(answer == DialogResult.Yes)
+                {
+                    foreach (OrderSparePart sparePart in order.GetSpareParts())
+                    {
+                        sparePart.DelSparePart();
+                    }
+                }
+
             }
             else if (order.DateCancel.HasValue && comboBoxStatus.SelectedItem.ToString() != OrderStatus.Canceled.GetStatusString())
             {
@@ -975,6 +986,7 @@ namespace Forms_TechServ
             btnDeleteService.Enabled = unlock;
             btnAddSparePart.Enabled = unlock;
             btnDelSparePart.Enabled = unlock;
+            
 
             if (unlock)
             {
@@ -1028,6 +1040,27 @@ namespace Forms_TechServ
 
                     FillServices();
                 }
+            }
+        }
+
+        private void btnEditSparePartBatches_Click(object sender, EventArgs e)
+        {
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
+            {
+                return;             // если кликнули по хеадеру грида
+            }
+            if (dataSpareParts.SelectedRows.Count > 0)
+            {
+                // ЕСЛИ ФОРМА ЗАБЛОКИРОВАНА (ЗАКАЗ ЗАВЕРШЕН/ОТМЕНЕН), ТО ОТКРЫВАЕМ ТОЛЬКО ПРОСМОТР БЕЗ РЕДАКТИВАРОНИЯ ЗА СЧЕТ lockedState
+                FormOrderBatches formOrderBatches = new FormOrderBatches(lockedState, order.GetSparePart((int)dataSpareParts.SelectedRows[0].Cells[0].Value));
+                formOrderBatches.ShowDialog();
+
+                FillSpareParts();
+                RecalcFields();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите деталь");
             }
         }
     }

@@ -29,7 +29,7 @@ namespace Forms_TechServ
 
         private void FormShowBatch_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(438, 258);
+            this.Size = new Size(438, 305);
 
             if (readOnly || (!UserSession.Can("edit_batch") && !UserSession.Can("add_del_batch")))
             {
@@ -57,6 +57,7 @@ namespace Forms_TechServ
             labelID.Text = batch.Id.ToString();
             labelTrackNum.Text = batch.TrackNumber;
             labelWorkshop.Text = batch.Workshop.Location;
+            labelStatus.Text = batch.Status.ToString();
             if (batch.DateDelivered.HasValue)
             {
                 labelDelivered.Text = batch.DateDelivered.Value.ToShortDateString();
@@ -141,7 +142,7 @@ namespace Forms_TechServ
         {
             if (batchTabs.SelectedTab.Equals(generalPage))
             {
-                this.Size = new Size(438, 258);
+                this.Size = new Size(438, 305);
             }
             else if (batchTabs.SelectedTab.Equals(sparePartsPage))
             {
@@ -159,10 +160,11 @@ namespace Forms_TechServ
 
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-            DialogResult answer = MessageBox.Show("Вы действительно хотите удалить эту поставку?  Это также приведет к удалению деталей из этой поставки из заказов, где они уже зарезервированы", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult answer = MessageBox.Show("Вы действительно хотите удалить эту поставку?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (answer == DialogResult.Yes)
             {
-                if (batch.DelBatch())
+                List<string> ordersInUse;
+                if (batch.DelBatch(out ordersInUse))
                 {
                     MessageBox.Show("Поставка успешно удалена", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -170,9 +172,9 @@ namespace Forms_TechServ
                 }
                 else
                 {
-                    MessageBox.Show("Нельзя удалить уже прибывшую поставку", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Детали из этой поставки уже используются в заказах {String.Join(" ", ordersInUse)}, ее удалить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
+
             }
             else
             {

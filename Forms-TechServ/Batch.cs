@@ -15,7 +15,7 @@ namespace Forms_TechServ
         public string TrackNumber { get; set; }
         public DateTime? DateDelivered { get; set; }
 
-        //private decimal price;
+        public BatchStatus Status { get; set; }
 
         public decimal Price { get; set; }
 
@@ -46,26 +46,40 @@ namespace Forms_TechServ
             }
         }
 
+        public bool DelBatch(out List<string> ordersInUse)
+        {
+            ordersInUse = new List<string>();
+            using (TechContext db = new TechContext())
+            {
+                if (db.OrdersSpareParts.Where(s => s.BatchId == this.Id).Count() > 0)        // нельзя удалить поставку, если ее детали уже используются
+                {
+                    foreach (SparePartFromBatch order in db.OrdersSpareParts.Where(s => s.BatchId == this.Id))
+                    {
+                        ordersInUse.Add("№" + order.OrderId.ToString());
+                    }
+                    return false;
+                }
+
+                this.DelTime = DateTime.Now;
+                db.Entry(this).State = EntityState.Modified;
+                db.SaveChanges();
+                return true;
+            }
+        }
+
         public bool DelBatch()
         {
             using (TechContext db = new TechContext())
             {
-                this.DelTime = DateTime.Now;
-
-                if (DateDelivered == null)                           // нельзя удалить уже прибывшую поставку
-                {
-                    
-                    // УДАЛЯЕМ ДЕТАЛИ ИЗ ЗАКАЗОВ
-                    db.OrdersSpareParts.RemoveRange(db.OrdersSpareParts.Where(s => s.BatchId == this.Id));
-
-                    db.Entry(this).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return true;
-                }
-                else
+                if (db.OrdersSpareParts.Where(s => s.BatchId == this.Id).Count() > 0)        // нельзя удалить поставку, если ее детали уже используются
                 {
                     return false;
                 }
+
+                this.DelTime = DateTime.Now;
+                db.Entry(this).State = EntityState.Modified;
+                db.SaveChanges();
+                return true;
             }
         }
 
@@ -95,7 +109,7 @@ namespace Forms_TechServ
                     quantity -= orderSparePart.Quantity;
                 }
 
-                return quantity;//batchSparePart.Quantity; // минус OrderSparePart....
+                return quantity;
             }
         }
 
@@ -155,7 +169,7 @@ namespace Forms_TechServ
             using (TechContext db = new TechContext())
             {
 
-                if(this.DateDelivered == null)
+                if(this.Status != BatchStatus.Подтверждена && this.Status != BatchStatus.Прибыла)
                 {
                     sparePart.BatchId = this.Id;
 
@@ -184,11 +198,8 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                if(this.DateDelivered == null)
+                if(this.Status != BatchStatus.Подтверждена && this.Status != BatchStatus.Прибыла)
                 {
-
-
-                    db.OrdersSpareParts.RemoveRange(db.OrdersSpareParts.Where(s => s.BatchId == this.Id && s.SparePartId == sparePart.SparePartId));
 
                     db.Entry(sparePart).State = EntityState.Deleted;
 
@@ -203,34 +214,23 @@ namespace Forms_TechServ
                 }
                 else
                 {
-                    return false;
+                    return false;           // нельзя изменять уже прибывшую поставку
                 }
-                // нельзя изменять уже прибывшую поставку
+                
 
             }
         }
 
-        public bool EditSparePart(BatchSparePart sparePart, bool delInOrders)
+        public bool EditSparePart(BatchSparePart sparePart)
         {
             using (TechContext db = new TechContext())
             {
-                if (this.DateDelivered == null)
-                {
-                    if (delInOrders)
-                    {
-                        db.OrdersSpareParts.RemoveRange(db.OrdersSpareParts.Where(s => s.BatchId == this.Id && s.SparePartId == sparePart.SparePartId));
-                    }
-                    
+                if (this.Status != BatchStatus.Подтверждена && this.Status != BatchStatus.Прибыла)
+                {                 
 
                     db.Entry(sparePart).State = EntityState.Modified;
 
                     db.SaveChanges();
-
-                    foreach (Order order in db.OrdersSpareParts.Where(s => s.SparePartId == sparePart.SparePartId && s.BatchId == this.Id).Include(o => o.Order).Select(o => o.Order).Where(o => o.Status != OrderStatus.Finished && o.Status != OrderStatus.Canceled && o.DatePaid == null))
-                    {
-                        // ЕСЛИ ЗАКАЗ НЕ ЗАВЕРШЕН/ОТМЕНЕН И ЕЩЕ НЕ ОПЛАЧЕН, ТО ПЕРЕСЧИТЫВАЕМ ЦЕНУ
-                        order.FinalPrice = order.CalcFinalPrice();
-                    }
 
                     Batch batchToUpdate = db.Batches.Find(this.Id);
                     this.Price = CalcFinalPrice();
@@ -275,6 +275,14 @@ namespace Forms_TechServ
 
     }
 
+    public enum BatchStatus
+    {
+        Создана,
+        Подтверждена,
+        Прибыла,
+        Неопределенный
+    }
+
     public static class BatchesList
     {
         public static Batch GetById(int id)
@@ -301,6 +309,11 @@ namespace Forms_TechServ
                 if (FilterA.TrackNumber != null && FilterA.TrackNumber != string.Empty)
                 {
                     batches = batches.Where(b => b.TrackNumber.IndexOf(FilterA.TrackNumber, StringComparison.OrdinalIgnoreCase) > -1);
+                }
+
+                if(FilterA.Status != BatchStatus.Неопределенный)
+                {
+                    batches = batches.Where(b => b.Status == FilterA.Status);
                 }
 
                 if (FilterA.DateDelivered.HasValue && !FilterB.DateDelivered.HasValue)
@@ -366,6 +379,9 @@ namespace Forms_TechServ
                 {
                     batches = batches.Where(b => b.TrackNumber.IndexOf(FilterA.TrackNumber, StringComparison.OrdinalIgnoreCase) > -1);
                 }
+
+                // В ЗАКАЗ МОЖЕМ ДОБАВИТЬ ТОЛЬКО ПОДТВЕРЖДЕННУЮ / ПРИБЫВШУЮ
+                batches = batches.Where(b => b.Status == BatchStatus.Подтверждена || b.Status == BatchStatus.Прибыла);
 
                 if (FilterA.Workshop != null)
                 {

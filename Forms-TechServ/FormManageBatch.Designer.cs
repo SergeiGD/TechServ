@@ -61,6 +61,7 @@ namespace Forms_TechServ
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.delCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.checkConfirmed = new System.Windows.Forms.CheckBox();
             this.batchTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.sparePartsPage.SuspendLayout();
@@ -86,6 +87,7 @@ namespace Forms_TechServ
             // generalPage
             // 
             this.generalPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.generalPage.Controls.Add(this.checkConfirmed);
             this.generalPage.Controls.Add(this.btnCancel);
             this.generalPage.Controls.Add(this.btnAction);
             this.generalPage.Controls.Add(this.checkDelivered);
@@ -104,7 +106,7 @@ namespace Forms_TechServ
             // btnCancel
             // 
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(302, 83);
+            this.btnCancel.Location = new System.Drawing.Point(302, 112);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(116, 45);
             this.btnCancel.TabIndex = 134;
@@ -114,7 +116,7 @@ namespace Forms_TechServ
             // btnAction
             // 
             this.btnAction.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAction.Location = new System.Drawing.Point(302, 21);
+            this.btnAction.Location = new System.Drawing.Point(302, 30);
             this.btnAction.Name = "btnAction";
             this.btnAction.Size = new System.Drawing.Size(116, 45);
             this.btnAction.TabIndex = 133;
@@ -125,12 +127,13 @@ namespace Forms_TechServ
             // checkDelivered
             // 
             this.checkDelivered.AutoSize = true;
-            this.checkDelivered.Location = new System.Drawing.Point(26, 111);
+            this.checkDelivered.Location = new System.Drawing.Point(26, 153);
             this.checkDelivered.Name = "checkDelivered";
             this.checkDelivered.Size = new System.Drawing.Size(72, 17);
             this.checkDelivered.TabIndex = 132;
             this.checkDelivered.Text = "Прибыла";
             this.checkDelivered.UseVisualStyleBackColor = true;
+            this.checkDelivered.CheckedChanged += new System.EventHandler(this.checkDelivered_CheckedChanged);
             // 
             // tbWorkshop
             // 
@@ -427,6 +430,17 @@ namespace Forms_TechServ
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // checkConfirmed
+            // 
+            this.checkConfirmed.AutoSize = true;
+            this.checkConfirmed.Location = new System.Drawing.Point(26, 112);
+            this.checkConfirmed.Name = "checkConfirmed";
+            this.checkConfirmed.Size = new System.Drawing.Size(101, 17);
+            this.checkConfirmed.TabIndex = 135;
+            this.checkConfirmed.Text = "Подтверждена";
+            this.checkConfirmed.UseVisualStyleBackColor = true;
+            this.checkConfirmed.CheckedChanged += new System.EventHandler(this.checkConfirmed_CheckedChanged);
+            // 
             // FormManageBatch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -486,5 +500,6 @@ namespace Forms_TechServ
         private ManageButton btnDel;
         private ManageButton btnAdd;
         private System.Windows.Forms.DataGridViewButtonColumn delCol;
+        private System.Windows.Forms.CheckBox checkConfirmed;
     }
 }

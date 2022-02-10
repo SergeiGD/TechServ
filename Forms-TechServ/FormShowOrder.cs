@@ -345,5 +345,18 @@ namespace Forms_TechServ
         {
             toolTipPriceInfo.SetToolTip(btnPriceInfo, "Если указанная цена не совпадает с суммой расчетных цен деталей и услуг, значит происходило изменение цена на детали/услуги уже после завершения/оплаты/отмены заказа");
         }
+
+        private void btnShowSparePartBatches_Click(object sender, EventArgs e)
+        {
+            if (dataSpareParts.SelectedRows.Count > 0)
+            {
+                FormOrderBatches formOrderBatches = new FormOrderBatches(true, order.GetSparePart((int)dataSpareParts.SelectedRows[0].Cells[0].Value));
+                formOrderBatches.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Для начала выберите деталь");
+            }
+        }
     }
 }

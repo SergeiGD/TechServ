@@ -957,9 +957,9 @@ namespace Forms_TechServ
             this.label26.AutoSize = true;
             this.label26.Location = new System.Drawing.Point(572, 96);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(93, 13);
+            this.label26.Size = new System.Drawing.Size(70, 13);
             this.label26.TabIndex = 198;
-            this.label26.Text = "Доп сортировка:";
+            this.label26.Text = "Сортировка:";
             // 
             // numericPrepaymentFrom
             // 

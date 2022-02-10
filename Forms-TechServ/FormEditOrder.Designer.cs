@@ -115,6 +115,7 @@ namespace Forms_TechServ
             this.logsPage = new System.Windows.Forms.TabPage();
             this.visitsPage = new System.Windows.Forms.TabPage();
             this.toolTipFindAuto = new System.Windows.Forms.ToolTip(this.components);
+            this.btnEditSparePartBatches = new Forms_TechServ.ManageButton();
             this.ordersTab.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.groupPrepayment.SuspendLayout();
@@ -997,7 +998,7 @@ namespace Forms_TechServ
             this.dataSpareParts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataSpareParts.Size = new System.Drawing.Size(782, 459);
             this.dataSpareParts.TabIndex = 1;
-            this.dataSpareParts.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataSpareParts_CellMouseDoubleClick);
+            //this.dataSpareParts.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataSpareParts_CellMouseDoubleClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -1033,6 +1034,7 @@ namespace Forms_TechServ
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.Controls.Add(this.btnEditSparePartBatches);
             this.panel4.Controls.Add(this.btnDelSparePart);
             this.panel4.Controls.Add(this.btnAddSparePart);
             this.panel4.Controls.Add(this.btnShowSparePart);
@@ -1083,7 +1085,7 @@ namespace Forms_TechServ
             this.btnShowSparePart.Name = "btnShowSparePart";
             this.btnShowSparePart.Size = new System.Drawing.Size(185, 40);
             this.btnShowSparePart.TabIndex = 0;
-            this.btnShowSparePart.Text = "Просмотреть";
+            this.btnShowSparePart.Text = "Просмотреть деталь";
             this.btnShowSparePart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnShowSparePart.UseVisualStyleBackColor = false;
             this.btnShowSparePart.Click += new System.EventHandler(this.btnShowBatch_Click);
@@ -1107,6 +1109,23 @@ namespace Forms_TechServ
             this.visitsPage.Size = new System.Drawing.Size(967, 499);
             this.visitsPage.TabIndex = 4;
             this.visitsPage.Text = "Выезды";
+            // 
+            // btnEditSparePartBatches
+            // 
+            this.btnEditSparePartBatches.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditSparePartBatches.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnEditSparePartBatches.FlatAppearance.BorderSize = 0;
+            this.btnEditSparePartBatches.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditSparePartBatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnEditSparePartBatches.Location = new System.Drawing.Point(0, 120);
+            this.btnEditSparePartBatches.Name = "btnEditSparePartBatches";
+            this.btnEditSparePartBatches.Size = new System.Drawing.Size(185, 40);
+            this.btnEditSparePartBatches.TabIndex = 3;
+            this.btnEditSparePartBatches.Text = "Редактировать поставки";
+            this.btnEditSparePartBatches.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEditSparePartBatches.UseVisualStyleBackColor = false;
+            this.btnEditSparePartBatches.Click += new System.EventHandler(this.btnEditSparePartBatches_Click);
             // 
             // FormEditOrder
             // 
@@ -1228,5 +1247,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private ManageButton btnDoneService;
         private ManageButton manageButton1;
+        private ManageButton btnEditSparePartBatches;
     }
 }
