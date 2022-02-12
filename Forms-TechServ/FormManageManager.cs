@@ -16,7 +16,6 @@ namespace Forms_TechServ
         Manager manager;
         Size pickedSize = new Size(1078, 481);
 
-        //TabPage ordersPage = new TabPage("Заказы");
 
         public FormManageManager()
         {
@@ -37,17 +36,12 @@ namespace Forms_TechServ
 
             btnAction.Text = "Сохранить общую информацию";
 
-            //managerTabs.TabPages.Add(ordersPage);
         }
 
         public FormManageManager(Workshop workshop)                  // добавление к конкретной мастерской
         {
             InitializeComponent();
 
-            //masterTabs.TabPages.Add(ordersPage);
-            //masterTabs.TabPages.Add(visitsPage);
-
-            //this.master = master;
             manager = new Manager();
             btnAction.Text = "Сохранить";
 
@@ -76,31 +70,12 @@ namespace Forms_TechServ
                 formTimetalbe.BringToFront();
                 formTimetalbe.Show();
             }
-            /*else if (managerTabs.SelectedTab.Equals(ordersPage))
-            {
-                this.Size = pickedSize;
-
-                FormOrders formOrders = new FormOrders("ad", false);
-
-                formOrders.TopLevel = false;
-                formOrders.FormBorderStyle = FormBorderStyle.None;
-                ordersPage.Controls.Add(formOrders);
-                formOrders.Dock = DockStyle.Fill;
-                formOrders.BringToFront();
-                formOrders.Show();
-            }*/
         }
 
         private void FormManageManager_ResizeEnd(object sender, EventArgs e)
         {
             if(!managerTabs.SelectedTab.Equals(generalPage))
                 pickedSize = this.Size;
-        }
-
-        private void addTimetableBtn_Click(object sender, EventArgs e)
-        {
-            //FormAddEmployeeTimetable formAddEmployeeTimetable = new FormAddEmployeeTimetable(manager);
-            //formAddEmployeeTimetable.ShowDialog();
         }
 
         private void btnAction_Click(object sender, EventArgs e)
@@ -113,17 +88,8 @@ namespace Forms_TechServ
                 manager.Salary = numericSalary.Value;
                 manager.Remotely = checkBoxRemotely.Checked;
 
-                //manager.Role = null;                                    // чтоб не было конфликта свойств при изменение, сбрасываем свойство Role и ставим выбранное id
-
                 manager.RoleId = ((Role)tbPosition.Tag).Id;
-
-                //manager.Role = (Role)tbPosition.Tag;
-
-                //manager.Workshop = null;                                // чтоб не было конфликта свойств при изменение, сбрасываем свойство Workshop и ставим выбранное id
-
                 manager.WorkshopId = ((Workshop)tbWorkshop.Tag).Id;
-
-                //manager.Workshop = (Workshop)tbWorkshop.Tag;
                 
                 manager.AdditionalInfo = tbInfo.Text;
 
@@ -203,11 +169,6 @@ namespace Forms_TechServ
                 return false;
             }
 
-            /*if (tbPassword.Text == "")
-            {
-                errorProvider.SetError(tbPassword, "Введите пароль");
-                return false;
-            }*/
 
             if (tbPosition.Tag == null)
             {
@@ -238,6 +199,11 @@ namespace Forms_TechServ
                 tbInfo.Text = manager.AdditionalInfo;
                 checkBoxRemotely.Checked = manager.Remotely;
             }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

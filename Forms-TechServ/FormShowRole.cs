@@ -67,7 +67,7 @@ namespace Forms_TechServ
         {
             labelID.Text = role.Id.ToString();
             labelName.Text = role.Name;
-            labelType.Text = role.RoleType.GetRoleTypeString();
+            labelType.Text = role.RoleType.ToString();
         }
 
         private void deleteBtn_Click(object sender, EventArgs e)
@@ -99,6 +99,11 @@ namespace Forms_TechServ
             formManageRole.ShowDialog();
 
             FillForm();
+        }
+
+        private void cancelBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -13,16 +13,14 @@ namespace Forms_TechServ
     public partial class FormCategories : Form
     {
         bool readOnly;
-        //bool onlyEndPoints;
         public Category category;
         int rowsCount;
         int currentPage = 1;
 
-        public FormCategories(bool forSearching/*, bool onlyEndPoints*/)
+        public FormCategories(bool forSearching)
         {
             InitializeComponent();
 
-            //this.onlyEndPoints = onlyEndPoints;
 
             if (forSearching)
             {
@@ -196,8 +194,7 @@ namespace Forms_TechServ
                 }
             }
 
-            //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
-            int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);
+           int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);
             numericCurrentPage.Maximum = maxPage;
 
             if (numericCurrentPage.Maximum > 0)
@@ -338,12 +335,5 @@ namespace Forms_TechServ
             }
         }
 
-        /*private void dataCategories_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            FormShowCategory showCategory = new FormShowCategory(readOnly, CategoriesList.GetById(Convert.ToInt32(dataCategories.SelectedRows[0].Cells[0].Value), true));
-            showCategory.ShowDialog();
-
-            FillGrid();
-        }*/
     }
 }

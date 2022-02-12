@@ -84,6 +84,7 @@ namespace Forms_TechServ
             this.btnCancel.TabIndex = 18;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnAction
             // 

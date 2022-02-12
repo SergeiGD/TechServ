@@ -16,7 +16,6 @@ namespace Forms_TechServ
 
         int servicesRowsCount;
         int servicesCurrentPage = 1;
-        //670; 292
         Size pickedSize = new Size(810, 390);
 
         public FormManageVisit()
@@ -239,7 +238,6 @@ namespace Forms_TechServ
                 }
             }
 
-            //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
             int maxPage = (int)Math.Ceiling((double)servicesRowsCount / (int)comboBoxShowServicesRows.SelectedItem);
             numericCurrentServicePage.Maximum = maxPage;
 
@@ -370,10 +368,9 @@ namespace Forms_TechServ
             }
         }
 
-        /*private void FormManageVisit_ResizeEnd(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-            if (!visitTabs.SelectedTab.Equals(generalPage))
-                pickedSize = this.Size;
-        }*/
+            this.Close();
+        }
     }
 }

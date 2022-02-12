@@ -128,7 +128,7 @@ namespace Forms_TechServ
             this.productsTab.SelectedIndex = 0;
             this.productsTab.Size = new System.Drawing.Size(413, 154);
             this.productsTab.TabIndex = 148;
-            this.productsTab.SelectedIndexChanged += new System.EventHandler(this.productsTab_SelectedIndexChanged);
+            //this.productsTab.SelectedIndexChanged += new System.EventHandler(this.productsTab_SelectedIndexChanged);
             // 
             // genralPage
             // 
@@ -198,7 +198,7 @@ namespace Forms_TechServ
             this.Name = "FormManageProduct";
             this.Text = "Управление техникой клиента";
             this.Load += new System.EventHandler(this.FormManageProduct_Load);
-            this.ResizeEnd += new System.EventHandler(this.FormManageProduct_ResizeEnd);
+            //this.ResizeEnd += new System.EventHandler(this.FormManageProduct_ResizeEnd);
             this.productsTab.ResumeLayout(false);
             this.genralPage.ResumeLayout(false);
             this.genralPage.PerformLayout();

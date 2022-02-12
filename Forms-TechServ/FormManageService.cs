@@ -107,5 +107,15 @@ namespace Forms_TechServ
                 tbDescription.Text = service.Description;
             }
         }
+
+        private void btnPriceInfo_MouseHover(object sender, EventArgs e)
+        {
+            toolTipPriceInfo.SetToolTip(btnPriceInfo, "Цена на услугу в заказе формируется в момент добавления услуги в заказ, поэтому цена в заказах может не совпадать с указанной ценой");
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

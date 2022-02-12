@@ -48,6 +48,7 @@ namespace Forms_TechServ
             this.panelControl = new System.Windows.Forms.Panel();
             this.btnClear = new Forms_TechServ.ManageButton();
             this.btnFind = new Forms_TechServ.ManageButton();
+            this.btnCleanRoleType = new FontAwesome.Sharp.IconButton();
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             this.panelFind.SuspendLayout();
@@ -141,6 +142,7 @@ namespace Forms_TechServ
             // 
             this.panelFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelFind.Controls.Add(this.btnCleanRoleType);
             this.panelFind.Controls.Add(this.comboBoxRoleType);
             this.panelFind.Controls.Add(this.label3);
             this.panelFind.Controls.Add(this.tbID);
@@ -300,6 +302,22 @@ namespace Forms_TechServ
             this.btnFind.UseVisualStyleBackColor = false;
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
+            // btnCleanRoleType
+            // 
+            this.btnCleanRoleType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btnCleanRoleType.FlatAppearance.BorderSize = 0;
+            this.btnCleanRoleType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCleanRoleType.IconChar = FontAwesome.Sharp.IconChar.Times;
+            this.btnCleanRoleType.IconColor = System.Drawing.SystemColors.ControlText;
+            this.btnCleanRoleType.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnCleanRoleType.IconSize = 17;
+            this.btnCleanRoleType.Location = new System.Drawing.Point(449, 20);
+            this.btnCleanRoleType.Name = "btnCleanRoleType";
+            this.btnCleanRoleType.Size = new System.Drawing.Size(18, 18);
+            this.btnCleanRoleType.TabIndex = 134;
+            this.btnCleanRoleType.UseVisualStyleBackColor = true;
+            this.btnCleanRoleType.Click += new System.EventHandler(this.btnCleanRoleType_Click);
+            // 
             // FormRoles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -309,7 +327,7 @@ namespace Forms_TechServ
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panelContent);
             this.Name = "FormRoles";
-            this.Text = "Роли";
+            this.Text = "Должности";
             this.Load += new System.EventHandler(this.FormFindEmpPosition_Load);
             this.panelContent.ResumeLayout(false);
             this.panelContent.PerformLayout();
@@ -343,5 +361,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboBoxRoleType;
         private System.Windows.Forms.Label label3;
+        private FontAwesome.Sharp.IconButton btnCleanRoleType;
     }
 }

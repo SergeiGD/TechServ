@@ -44,6 +44,8 @@ namespace Forms_TechServ
             this.btnFindCat = new FontAwesome.Sharp.IconButton();
             this.tbCat = new System.Windows.Forms.TextBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnPriceInfo = new FontAwesome.Sharp.IconButton();
+            this.toolTipPriceInfo = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numeriсPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAvgTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -102,7 +104,7 @@ namespace Forms_TechServ
             0,
             0});
             this.numeriсPrice.Name = "numeriсPrice";
-            this.numeriсPrice.Size = new System.Drawing.Size(112, 20);
+            this.numeriсPrice.Size = new System.Drawing.Size(88, 20);
             this.numeriсPrice.TabIndex = 7;
             this.numeriсPrice.Value = new decimal(new int[] {
             300,
@@ -172,6 +174,7 @@ namespace Forms_TechServ
             this.btnCancel.TabIndex = 41;
             this.btnCancel.Text = "ОТМЕНИТЬ";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnAction
             // 
@@ -186,7 +189,6 @@ namespace Forms_TechServ
             // 
             // btnFindCat
             // 
-            this.btnFindCat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.btnFindCat.FlatAppearance.BorderSize = 0;
             this.btnFindCat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFindCat.IconChar = FontAwesome.Sharp.IconChar.Search;
@@ -202,7 +204,6 @@ namespace Forms_TechServ
             // 
             // tbCat
             // 
-            this.tbCat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.tbCat.Enabled = false;
             this.tbCat.Location = new System.Drawing.Point(99, 48);
             this.tbCat.Name = "tbCat";
@@ -214,12 +215,28 @@ namespace Forms_TechServ
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // btnPriceInfo
+            // 
+            this.btnPriceInfo.FlatAppearance.BorderSize = 0;
+            this.btnPriceInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPriceInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
+            this.btnPriceInfo.IconColor = System.Drawing.Color.Black;
+            this.btnPriceInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnPriceInfo.IconSize = 20;
+            this.btnPriceInfo.Location = new System.Drawing.Point(224, 84);
+            this.btnPriceInfo.Name = "btnPriceInfo";
+            this.btnPriceInfo.Size = new System.Drawing.Size(27, 21);
+            this.btnPriceInfo.TabIndex = 145;
+            this.btnPriceInfo.UseVisualStyleBackColor = true;
+            this.btnPriceInfo.MouseHover += new System.EventHandler(this.btnPriceInfo_MouseHover);
+            // 
             // FormManageService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
             this.ClientSize = new System.Drawing.Size(684, 167);
+            this.Controls.Add(this.btnPriceInfo);
             this.Controls.Add(this.btnFindCat);
             this.Controls.Add(this.tbCat);
             this.Controls.Add(this.btnCancel);
@@ -260,5 +277,7 @@ namespace Forms_TechServ
         private FontAwesome.Sharp.IconButton btnFindCat;
         private System.Windows.Forms.TextBox tbCat;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private FontAwesome.Sharp.IconButton btnPriceInfo;
+        private System.Windows.Forms.ToolTip toolTipPriceInfo;
     }
 }

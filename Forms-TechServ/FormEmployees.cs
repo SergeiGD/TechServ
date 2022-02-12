@@ -82,7 +82,7 @@ namespace Forms_TechServ
             ManageButton btnShow = new ManageButton();
             btnShow.Text = "Просмотреть";
             panelControl.Controls.Add(btnShow);
-            btnShow.Click += BtnShow_Click/*BtnShowInClient_Click*/;
+            btnShow.Click += BtnShow_Click;
 
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
             mainBtn[0].Location = new Point(0, 0);
@@ -138,7 +138,6 @@ namespace Forms_TechServ
             comboBoxSortBy.Items.Add("id");
             comboBoxSortBy.Items.Add("Имени");
             comboBoxSortBy.Items.Add("Зарплате");
-            //comboBoxSortBy.Items.Add("Номер телефона");
             comboBoxSortBy.SelectedIndex = 0;
 
             comboBoxShowRows.Items.Add(5);
@@ -220,7 +219,6 @@ namespace Forms_TechServ
             }
 
             // Расчитываем кол-во страниц
-            //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : rowsCount / (int)comboBoxShowRows.SelectedItem;
             int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);
             numericCurrentPage.Maximum = maxPage;
 

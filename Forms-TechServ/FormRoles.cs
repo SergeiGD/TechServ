@@ -133,11 +133,11 @@ namespace Forms_TechServ
 
             foreach (RoleType role in Enum.GetValues(typeof(RoleType)))
             {
-
-                comboBoxRoleType.Items.Add(role.GetRoleTypeString());
+                if (role == RoleType.Неопределенно) continue;
+                comboBoxRoleType.Items.Add(role);
 
             }
-            comboBoxRoleType.SelectedItem = RoleType.Undefined.GetRoleTypeString();
+            comboBoxRoleType.SelectedItem = null;
 
             comboBoxShowRows.Items.Add(5);
             comboBoxShowRows.Items.Add(20);
@@ -158,7 +158,7 @@ namespace Forms_TechServ
                 {
                     Id = id,
                     Name = tbName.Text,
-                    RoleType = RoleStringExtensions.GetRoleTypeEnum(comboBoxRoleType.SelectedItem.ToString())
+                    RoleType = comboBoxRoleType.SelectedItem == null ? RoleType.Неопределенно : (RoleType)comboBoxRoleType.SelectedItem
                 },
                 employee,
                 (int)comboBoxShowRows.SelectedItem,
@@ -174,7 +174,7 @@ namespace Forms_TechServ
 
                 dataPosition.Rows[i].Cells[0].Value = positions[i].Id;
                 dataPosition.Rows[i].Cells[1].Value = positions[i].Name;
-                dataPosition.Rows[i].Cells[2].Value = positions[i].RoleType.GetRoleTypeString();
+                dataPosition.Rows[i].Cells[2].Value = positions[i].RoleType;
 
                 if (dataPosition.Columns.Count > 3)
                 {
@@ -239,6 +239,7 @@ namespace Forms_TechServ
             // ОЧИЩАЕМ ПОЛЯ ДЛЯ СОРТИРОВКИ И ПЕРЕЗАПОЛНЯЕМ ГРИД
             tbID.Clear();
             tbName.Clear();
+            comboBoxRoleType.SelectedItem = null;
 
             FillGrid();
         }
@@ -279,14 +280,18 @@ namespace Forms_TechServ
                 formShowRole.ShowDialog();
 
                 FillGrid();
-                //FormPermissions formPermissions = new FormPermissions(RolesList.GetById((int)dataPosition.SelectedRows[0].Cells[0].Value));
-                //formPermissions.ShowDialog();
+
 
             }
             else
             {
                 MessageBox.Show("Для начала выберите роль");
             }
+        }
+
+        private void btnCleanRoleType_Click(object sender, EventArgs e)
+        {
+            comboBoxRoleType.SelectedItem = null;
         }
     }
 }

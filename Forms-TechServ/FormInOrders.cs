@@ -46,7 +46,6 @@ namespace Forms_TechServ
                 if (UserSession.Can("add_order"))
                 {
                     ManageButton btnAdd = new ManageButton();
-                    //btnAdd.Location = new Point(0, 120);
                     btnAdd.Text = "Добавить";
                     panelControl.Controls.Add(btnAdd);
                     btnAdd.Click += BtnManage_Click;
@@ -72,60 +71,6 @@ namespace Forms_TechServ
             }
         }
 
-        public FormInOrders(string Client, bool readOnly)
-        {
-            InitializeComponent();
-
-            this.readOnly = readOnly;
-
-            if (!readOnly)
-            {
-                ManageButton btnAdd = new ManageButton();
-                btnAdd.Text = "Добавить";
-                panelControl.Controls.Add(btnAdd);
-                btnAdd.Click += BtnManage_Click;
-            }
-
-
-            ManageButton btnShow = new ManageButton();
-            btnShow.Text = "Просмотреть";
-            panelControl.Controls.Add(btnShow);
-            btnShow.Click += BtnShow_Click;
-
-            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
-            mainBtn[0].Location = new Point(0, 0);
-            for (int i = 1; i < mainBtn.Count(); i++)
-            {
-                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
-            }
-        }
-
-        public FormInOrders(int product, bool readOnly)
-        {
-            InitializeComponent();
-
-            if (!readOnly)
-            {
-                ManageButton btnAdd = new ManageButton();
-                btnAdd.Text = "Добавить";
-                panelControl.Controls.Add(btnAdd);
-                btnAdd.Click += BtnManage_Click;
-            }
-
-
-            ManageButton btnShow = new ManageButton();
-            btnShow.Location = new Point(0, 160);
-            btnShow.Text = "Просмотреть";
-            panelControl.Controls.Add(btnShow);
-            btnShow.Click += BtnShow_Click;
-
-            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
-            mainBtn[0].Location = new Point(0, 0);
-            for (int i = 1; i < mainBtn.Count(); i++)
-            {
-                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
-            }
-        }
 
         private void BtnManage_Click(object sender, EventArgs e)
         {
@@ -459,7 +404,6 @@ namespace Forms_TechServ
             datePickerStartUntil.CustomFormat = " ";
             numericPriceFrom.Value = 0;
             numericPriceUntil.Value = 0;
-            //comboBoxStatus.SelectedItem = numericPriceUntil;
             checkBoxActive.Checked = false;
 
             FilterA = new Order();
@@ -467,7 +411,6 @@ namespace Forms_TechServ
             FilterClient = null;
             FilterActive.Value = false;
 
-            //comboBoxStatus.SelectedItem = null;
             comboBoxStatus.SelectedItem = null;
             FilterA.Status = OrderStatus.Unknown;
 
@@ -529,10 +472,6 @@ namespace Forms_TechServ
                 comboBoxStatus.SelectedItem = null;
             }
             FilterActive.Value = checkBoxActive.Checked;
-            /*if(checkBoxActive.Checked && comboBoxStatus.SelectedItem != null && (StatusStringExtensions.GetStatusEnum(comboBoxStatus.SelectedItem.ToString()) == OrderStatus.Finished || StatusStringExtensions.GetStatusEnum(comboBoxStatus.SelectedItem.ToString()) == OrderStatus.Canceled))
-            {
-                comboBoxStatus.SelectedItem = null;
-            }*/
         }
 
         private void btnFindProduct_Click(object sender, EventArgs e)

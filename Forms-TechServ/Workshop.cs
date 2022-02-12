@@ -179,7 +179,6 @@ namespace Forms_TechServ
             using (TechContext db = new TechContext())
             {
 
-
                 return db.Workshops.Where(m => m.DelTime == null).OrderBy(w => w.Id).ToList();
 
             }

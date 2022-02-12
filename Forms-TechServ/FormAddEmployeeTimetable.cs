@@ -23,7 +23,6 @@ namespace Forms_TechServ
             timetable = new EmployeeTimetable();
             this.employee = employee;
 
-            //checkBoxRepeat.Checked = false;
         }
 
         public FormAddEmployeeTimetable(EmployeeTimetable timetable)
@@ -137,8 +136,6 @@ namespace Forms_TechServ
                             break;
                     }
 
-                    //errorsFormed += timetable.AddTimetalbe() == 1 ? 1 : 0;
-                    
 
                     if (checkBoxRepeat.Checked)
                     {
@@ -173,10 +170,6 @@ namespace Forms_TechServ
                                         EmployeeId = employee.Id
                                     };
 
-                                    /*if (!anotherDay.AddTimetalbe())
-                                    {
-                                        errors++;
-                                    }*/
 
                                     switch (anotherDay.AddTimetalbe())
                                     {
@@ -207,10 +200,7 @@ namespace Forms_TechServ
                                         EmployeeId = employee.Id
                                     };
 
-                                    /*if (!anotherDay.AddTimetalbe())
-                                    {
-                                        errors++;
-                                    }*/
+
                                     switch (anotherDay.AddTimetalbe())
                                     {
                                         case 1:
@@ -240,7 +230,7 @@ namespace Forms_TechServ
                 }
                 else
                 {
-                    //timetable.Employee = employee;
+
 
                     if (timetable.EditTimetable())
                     {

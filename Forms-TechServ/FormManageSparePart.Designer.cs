@@ -126,7 +126,7 @@ namespace Forms_TechServ
             this.sparePartTabs.SelectedIndex = 0;
             this.sparePartTabs.Size = new System.Drawing.Size(408, 149);
             this.sparePartTabs.TabIndex = 44;
-            this.sparePartTabs.SelectedIndexChanged += new System.EventHandler(this.sparePartTabs_SelectedIndexChanged);
+            //this.sparePartTabs.SelectedIndexChanged += new System.EventHandler(this.sparePartTabs_SelectedIndexChanged);
             // 
             // generalPage
             // 
@@ -314,7 +314,7 @@ namespace Forms_TechServ
             this.Name = "FormManageSparePart";
             this.Text = "Управление дателью";
             this.Load += new System.EventHandler(this.FormManageSparePart_Load);
-            this.ResizeEnd += new System.EventHandler(this.FormManageSparePart_ResizeEnd);
+            //this.ResizeEnd += new System.EventHandler(this.FormManageSparePart_ResizeEnd);
             ((System.ComponentModel.ISupportInitialize)(this.numericPrepayment)).EndInit();
             this.sparePartTabs.ResumeLayout(false);
             this.generalPage.ResumeLayout(false);

@@ -11,9 +11,6 @@ namespace Forms_TechServ
 
     public class OrderSparePart
     {
-
-
-
         public Order Order { get; set; }
 
       
@@ -72,10 +69,7 @@ namespace Forms_TechServ
                     this.Order.PrepaymentRequired = this.Order.CalcClientPrepayment();
 
                     this.Order.EditOrder();
-                    /*this.FinalPrice = CalcFinalPrice();
-                    this.EditOrder();
-                    db.Entry(this.Order).State = EntityState.Modified;
-                    db.SaveChanges();*/
+
 
                     return true;
                 }
@@ -109,8 +103,6 @@ namespace Forms_TechServ
 
                 this.Order.EditOrder();
 
-                /*db.Entry(this.Order).State = EntityState.Modified;
-                db.SaveChanges();*/
 
                 return true;
             }
@@ -178,19 +170,16 @@ namespace Forms_TechServ
 
         public bool CheckBatchesDelivered()
         {
-            //using (TechContext db = new TechContext())
-            //{
-                
-                foreach(Batch batch in GetBatchesInfo().Keys)
-                {
-                    if (!batch.DateDelivered.HasValue)
-                    {
-                        return false;
-                    }
-                }
 
-                return true;
-            //}
+            foreach (Batch batch in GetBatchesInfo().Keys)
+            {
+                if (!batch.DateDelivered.HasValue)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public int CalcSparePartsQuanity()
@@ -244,8 +233,7 @@ namespace Forms_TechServ
                 this.Order.PrepaymentRequired = this.Order.CalcClientPrepayment();
 
                 this.Order.EditOrder();
-                /*db.Entry(this.Order).State = EntityState.Modified;
-                db.SaveChanges();*/
+
                 return true;
             }
                 
@@ -370,8 +358,6 @@ namespace Forms_TechServ
                         this.Order.FinalPrice = this.Order.CalcFinalPrice();
                         this.Order.PrepaymentRequired = this.Order.CalcClientPrepayment();
                         this.Order.EditOrder();
-                        /*db.Entry(this.Order).State = EntityState.Modified;
-                        db.SaveChanges();*/
                         return true;
                     }
                     else

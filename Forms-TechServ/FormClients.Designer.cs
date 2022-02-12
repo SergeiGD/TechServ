@@ -57,6 +57,8 @@ namespace Forms_TechServ
             this.BtnClean = new Forms_TechServ.ManageButton();
             this.btnFind = new Forms_TechServ.ManageButton();
             this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
+            this.btnOrdersInfo = new FontAwesome.Sharp.IconButton();
+            this.toolTipOrdersInfo = new System.Windows.Forms.ToolTip(this.components);
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             this.panelFind.SuspendLayout();
@@ -172,6 +174,7 @@ namespace Forms_TechServ
             // 
             this.panelFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelFind.Controls.Add(this.btnOrdersInfo);
             this.panelFind.Controls.Add(this.btnAskOrDesk);
             this.panelFind.Controls.Add(this.comboBoxSortBy);
             this.panelFind.Controls.Add(this.label10);
@@ -229,15 +232,17 @@ namespace Forms_TechServ
             // 
             // numericOrdersUntil
             // 
-            this.numericOrdersUntil.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.numericOrdersUntil.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.numericOrdersUntil.Location = new System.Drawing.Point(674, 55);
             this.numericOrdersUntil.Name = "numericOrdersUntil";
-            this.numericOrdersUntil.Size = new System.Drawing.Size(83, 20);
+            this.numericOrdersUntil.Size = new System.Drawing.Size(68, 20);
             this.numericOrdersUntil.TabIndex = 29;
             // 
             // label5
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(568, 58);
             this.label5.Name = "label5";
@@ -267,15 +272,17 @@ namespace Forms_TechServ
             // 
             // numericOrdersFrom
             // 
-            this.numericOrdersFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.numericOrdersFrom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.numericOrdersFrom.Location = new System.Drawing.Point(675, 20);
             this.numericOrdersFrom.Name = "numericOrdersFrom";
-            this.numericOrdersFrom.Size = new System.Drawing.Size(83, 20);
+            this.numericOrdersFrom.Size = new System.Drawing.Size(68, 20);
             this.numericOrdersFrom.TabIndex = 20;
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(569, 23);
             this.label3.Name = "label3";
@@ -389,6 +396,23 @@ namespace Forms_TechServ
             this.btnFind.UseVisualStyleBackColor = false;
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
+            // btnOrdersInfo
+            // 
+            this.btnOrdersInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOrdersInfo.FlatAppearance.BorderSize = 0;
+            this.btnOrdersInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOrdersInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
+            this.btnOrdersInfo.IconColor = System.Drawing.Color.Black;
+            this.btnOrdersInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnOrdersInfo.IconSize = 20;
+            this.btnOrdersInfo.Location = new System.Drawing.Point(745, 55);
+            this.btnOrdersInfo.Name = "btnOrdersInfo";
+            this.btnOrdersInfo.Size = new System.Drawing.Size(27, 21);
+            this.btnOrdersInfo.TabIndex = 146;
+            this.btnOrdersInfo.UseVisualStyleBackColor = true;
+            this.btnOrdersInfo.MouseHover += new System.EventHandler(this.btnOrdersInfo_MouseHover);
+            // 
             // FormClients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -441,5 +465,7 @@ namespace Forms_TechServ
         private System.Windows.Forms.ComboBox comboBoxSortBy;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ToolTip toolTipCurrentSort;
+        private FontAwesome.Sharp.IconButton btnOrdersInfo;
+        private System.Windows.Forms.ToolTip toolTipOrdersInfo;
     }
 }

@@ -177,7 +177,6 @@ namespace Forms_TechServ
 
                     db.SaveChanges();
 
-                    //CalcFinalPrice();
 
                     Batch batchToUpdate = db.Batches.Find(this.Id);
                     this.Price = CalcFinalPrice();
@@ -214,7 +213,7 @@ namespace Forms_TechServ
                 }
                 else
                 {
-                    return false;           // нельзя изменять уже прибывшую поставку
+                    return false;           // нельзя изменять уже прибывшую/подтвержденную поставку
                 }
                 
 
@@ -387,11 +386,6 @@ namespace Forms_TechServ
                 {
                     batches = batches.Where(b => b.WorkshopId == FilterA.Workshop.Id);
                 }
-
-
-
-                
-
 
 
                 if (FilterA.DateDelivered.HasValue && !FilterB.DateDelivered.HasValue)

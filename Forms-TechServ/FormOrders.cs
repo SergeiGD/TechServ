@@ -102,6 +102,8 @@ namespace Forms_TechServ
             panelControl.Controls.Add(btnShow);
             btnShow.Click += BtnShow_Click;
 
+            dataOrders.CellMouseDoubleClick += BtnShow_Click;
+
             clearBtn.Click += clearInClientBtn_Click;
 
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
@@ -132,6 +134,8 @@ namespace Forms_TechServ
             btnShow.Text = "Просмотреть";
             panelControl.Controls.Add(btnShow);
             btnShow.Click += BtnShow_Click;
+
+            dataOrders.CellMouseDoubleClick += BtnShow_Click;
 
             clearBtn.Click += clearInProductBtn_Click;
 
@@ -164,6 +168,8 @@ namespace Forms_TechServ
             panelControl.Controls.Add(btnShow);
             btnShow.Click += BtnShow_Click;
 
+            dataOrders.CellMouseDoubleClick += BtnShow_Click;
+
             clearBtn.Click += clearInWorkshopBtn_Click;
 
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
@@ -190,6 +196,8 @@ namespace Forms_TechServ
             btnShow.Text = "Просмотреть";
             panelControl.Controls.Add(btnShow);
             btnShow.Click += BtnShow_Click;
+
+            dataOrders.CellMouseDoubleClick += BtnShow_Click;
 
             clearBtn.Click += clearInMasterBtn_Click;
 

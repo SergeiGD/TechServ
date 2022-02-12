@@ -224,7 +224,7 @@ namespace Forms_TechServ
                 DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить сотрудника с id {managerToDel.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (answer == DialogResult.Yes)
                 {
-                    if (manager.DelManager())
+                    if (managerToDel.DelManager())
                     {
                         MessageBox.Show("Сотрудник успешно удалено", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         FillGrid();
@@ -357,10 +357,6 @@ namespace Forms_TechServ
             numericCurrentPage.Value = numericCurrentPage.Value + 1 > numericCurrentPage.Maximum ? numericCurrentPage.Value : numericCurrentPage.Value + 1;
         }
 
-        /*private void dataManagers_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //pickedRowIndex = e.RowIndex;
-        }*/
 
         private void btnAskOrDesk_MouseHover(object sender, EventArgs e)
         {

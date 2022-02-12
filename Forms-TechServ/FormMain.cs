@@ -97,14 +97,6 @@ namespace Forms_TechServ
             panelMenu.Controls.Add(visitsBtn);
             visitsBtn.Click += VisitsBtn_Click;
 
-            /*if (UserSession.Can("edit_branch"))
-            {
-                NavButton clientsBtn = new NavButton();
-                clientsBtn.Text = "КЛИЕНТЫ";
-                panelMenu.Controls.Add(clientsBtn);
-                clientsBtn.Click += ClientsBtn_Click;
-            }*/
-
             NavButton clientsBtn = new NavButton();
             clientsBtn.Text = "КЛИЕНТЫ";
             panelMenu.Controls.Add(clientsBtn);
@@ -137,7 +129,7 @@ namespace Forms_TechServ
 
             NavButton statisticBtn = new NavButton();
             statisticBtn.Text = "СТАТИСТИКА";
-            panelMenu.Controls.Add(statisticBtn);                         // СТАТИСТИКА ПОКА НЕ РЕАЛИЗОВАНА, ПОТОМ ВЕРНУТЬ
+            panelMenu.Controls.Add(statisticBtn);                         
             statisticBtn.Click += StatisticBtn_Click;
 
             
@@ -254,11 +246,7 @@ namespace Forms_TechServ
             FormInOrders formInOrders = new FormInOrders(false);
             OpenChildForm(formInOrders, (NavButton)sender);
         }
-        /*private void OrdersLogsBtn_Click(object sender, EventArgs e)
-        {
-            FormOrdersLogs formOrdersLogs = new FormOrdersLogs();
-            OpenChildForm(formOrdersLogs, (NavButton)sender);
-        }*/
+
         private void VisitsBtn_Click(object sender, EventArgs e)
         {
             CleanChilderBtns();
@@ -461,7 +449,7 @@ namespace Forms_TechServ
             childernTotalHeight += empsMastersBtn.Size.Height;
 
             NavButton rolesBtn = new NavButton((NavButton)sender);
-            rolesBtn.Text = "роли";
+            rolesBtn.Text = "должности";
             panelMenu.Controls.Add(rolesBtn);
             rolesBtn.Click += rolesBtn_Click;
             childernTotalHeight += rolesBtn.Size.Height;

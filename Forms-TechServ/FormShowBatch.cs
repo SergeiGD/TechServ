@@ -160,7 +160,8 @@ namespace Forms_TechServ
 
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-            DialogResult answer = MessageBox.Show("Вы действительно хотите удалить эту поставку?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            string isSpent = batch.IsSpent() ? "нету" : "есть";
+            DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить эту поставку? Неизрасходованные детали - {isSpent}", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (answer == DialogResult.Yes)
             {
                 List<string> ordersInUse;

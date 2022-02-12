@@ -17,7 +17,6 @@ namespace Forms_TechServ
         int rowsCount;
         int currentPage = 1;
         public Master master;
-        //int pickedRowIndex;
 
         public FormMasters(bool forSearching)
         {
@@ -312,7 +311,6 @@ namespace Forms_TechServ
                 }
             }
 
-            //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
             int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);
             numericCurrentPage.Maximum = maxPage;
 
@@ -410,10 +408,7 @@ namespace Forms_TechServ
 
         private void comboBoxShowRows_SelectedIndexChanged(object sender, EventArgs e)
         {
-            /*if(masters != null)
-            {
-                FillGrid();
-            }*/
+
             FillGrid();
         }
 
@@ -433,11 +428,6 @@ namespace Forms_TechServ
         {
             numericCurrentPage.Value = numericCurrentPage.Value + 1 > numericCurrentPage.Maximum ? numericCurrentPage.Value : numericCurrentPage.Value + 1;
         }
-
-        /*private void dataMasters_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //pickedRowIndex = e.RowIndex;
-        }*/
 
         private void btnCleanCat_Click(object sender, EventArgs e)
         {

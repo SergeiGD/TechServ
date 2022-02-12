@@ -88,11 +88,6 @@ namespace Forms_TechServ
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.manageButton1 = new Forms_TechServ.ManageButton();
-            this.btnDoneService = new Forms_TechServ.ManageButton();
-            this.btnDeleteService = new Forms_TechServ.ManageButton();
-            this.btnAddService = new Forms_TechServ.ManageButton();
-            this.btnShowService = new Forms_TechServ.ManageButton();
             this.sparePartsPage = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
             this.comboBoxShowSparePartsRows = new System.Windows.Forms.ComboBox();
@@ -109,13 +104,18 @@ namespace Forms_TechServ
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.btnDelSparePart = new Forms_TechServ.ManageButton();
-            this.btnAddSparePart = new Forms_TechServ.ManageButton();
-            this.btnShowSparePart = new Forms_TechServ.ManageButton();
             this.logsPage = new System.Windows.Forms.TabPage();
             this.visitsPage = new System.Windows.Forms.TabPage();
             this.toolTipFindAuto = new System.Windows.Forms.ToolTip(this.components);
+            this.manageButton1 = new Forms_TechServ.ManageButton();
+            this.btnDoneService = new Forms_TechServ.ManageButton();
+            this.btnDeleteService = new Forms_TechServ.ManageButton();
+            this.btnAddService = new Forms_TechServ.ManageButton();
+            this.btnShowService = new Forms_TechServ.ManageButton();
             this.btnEditSparePartBatches = new Forms_TechServ.ManageButton();
+            this.btnDelSparePart = new Forms_TechServ.ManageButton();
+            this.btnAddSparePart = new Forms_TechServ.ManageButton();
+            this.btnShowSparePart = new Forms_TechServ.ManageButton();
             this.ordersTab.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.groupPrepayment.SuspendLayout();
@@ -472,7 +472,7 @@ namespace Forms_TechServ
             // 
             this.tbAddress.Location = new System.Drawing.Point(95, 17);
             this.tbAddress.Name = "tbAddress";
-            this.tbAddress.Size = new System.Drawing.Size(105, 20);
+            this.tbAddress.Size = new System.Drawing.Size(120, 20);
             this.tbAddress.TabIndex = 152;
             // 
             // label3
@@ -773,87 +773,6 @@ namespace Forms_TechServ
             this.panel2.Size = new System.Drawing.Size(185, 503);
             this.panel2.TabIndex = 5;
             // 
-            // manageButton1
-            // 
-            this.manageButton1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.manageButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.manageButton1.FlatAppearance.BorderSize = 0;
-            this.manageButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.manageButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.manageButton1.Location = new System.Drawing.Point(0, 160);
-            this.manageButton1.Name = "manageButton1";
-            this.manageButton1.Size = new System.Drawing.Size(185, 45);
-            this.manageButton1.TabIndex = 4;
-            this.manageButton1.Text = "Отметить как \'не сделано\'";
-            this.manageButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.manageButton1.UseVisualStyleBackColor = false;
-            this.manageButton1.Click += new System.EventHandler(this.manageButton1_Click);
-            // 
-            // btnDoneService
-            // 
-            this.btnDoneService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDoneService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnDoneService.FlatAppearance.BorderSize = 0;
-            this.btnDoneService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDoneService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnDoneService.Location = new System.Drawing.Point(0, 120);
-            this.btnDoneService.Name = "btnDoneService";
-            this.btnDoneService.Size = new System.Drawing.Size(185, 40);
-            this.btnDoneService.TabIndex = 3;
-            this.btnDoneService.Text = "Отметить как \'сделано\'";
-            this.btnDoneService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDoneService.UseVisualStyleBackColor = false;
-            this.btnDoneService.Click += new System.EventHandler(this.btnDoneService_Click);
-            // 
-            // btnDeleteService
-            // 
-            this.btnDeleteService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnDeleteService.FlatAppearance.BorderSize = 0;
-            this.btnDeleteService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnDeleteService.Location = new System.Drawing.Point(0, 40);
-            this.btnDeleteService.Name = "btnDeleteService";
-            this.btnDeleteService.Size = new System.Drawing.Size(185, 40);
-            this.btnDeleteService.TabIndex = 2;
-            this.btnDeleteService.Text = "Удалить выделенные";
-            this.btnDeleteService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDeleteService.UseVisualStyleBackColor = false;
-            this.btnDeleteService.Click += new System.EventHandler(this.btnDeleteService_Click);
-            // 
-            // btnAddService
-            // 
-            this.btnAddService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnAddService.FlatAppearance.BorderSize = 0;
-            this.btnAddService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnAddService.Location = new System.Drawing.Point(0, 0);
-            this.btnAddService.Name = "btnAddService";
-            this.btnAddService.Size = new System.Drawing.Size(185, 40);
-            this.btnAddService.TabIndex = 1;
-            this.btnAddService.Text = "Добавить";
-            this.btnAddService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddService.UseVisualStyleBackColor = false;
-            this.btnAddService.Click += new System.EventHandler(this.btnAddService_Click);
-            // 
-            // btnShowService
-            // 
-            this.btnShowService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShowService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnShowService.FlatAppearance.BorderSize = 0;
-            this.btnShowService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnShowService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnShowService.Location = new System.Drawing.Point(0, 80);
-            this.btnShowService.Name = "btnShowService";
-            this.btnShowService.Size = new System.Drawing.Size(185, 40);
-            this.btnShowService.TabIndex = 0;
-            this.btnShowService.Text = "Просмотреть";
-            this.btnShowService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnShowService.UseVisualStyleBackColor = false;
-            this.btnShowService.Click += new System.EventHandler(this.btnShowService_Click);
-            // 
             // sparePartsPage
             // 
             this.sparePartsPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
@@ -998,7 +917,6 @@ namespace Forms_TechServ
             this.dataSpareParts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataSpareParts.Size = new System.Drawing.Size(782, 459);
             this.dataSpareParts.TabIndex = 1;
-            //this.dataSpareParts.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataSpareParts_CellMouseDoubleClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -1042,6 +960,124 @@ namespace Forms_TechServ
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(185, 499);
             this.panel4.TabIndex = 6;
+            // 
+            // logsPage
+            // 
+            this.logsPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.logsPage.Location = new System.Drawing.Point(4, 22);
+            this.logsPage.Name = "logsPage";
+            this.logsPage.Padding = new System.Windows.Forms.Padding(3);
+            this.logsPage.Size = new System.Drawing.Size(967, 499);
+            this.logsPage.TabIndex = 3;
+            this.logsPage.Text = "История";
+            // 
+            // visitsPage
+            // 
+            this.visitsPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.visitsPage.Location = new System.Drawing.Point(4, 22);
+            this.visitsPage.Name = "visitsPage";
+            this.visitsPage.Padding = new System.Windows.Forms.Padding(3);
+            this.visitsPage.Size = new System.Drawing.Size(967, 499);
+            this.visitsPage.TabIndex = 4;
+            this.visitsPage.Text = "Выезды";
+            // 
+            // manageButton1
+            // 
+            this.manageButton1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.manageButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.manageButton1.FlatAppearance.BorderSize = 0;
+            this.manageButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.manageButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.manageButton1.Location = new System.Drawing.Point(0, 160);
+            this.manageButton1.Name = "manageButton1";
+            this.manageButton1.Size = new System.Drawing.Size(185, 45);
+            this.manageButton1.TabIndex = 4;
+            this.manageButton1.Text = "Отметить как \'не сделано\'";
+            this.manageButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.manageButton1.UseVisualStyleBackColor = false;
+            this.manageButton1.Click += new System.EventHandler(this.manageButton1_Click);
+            // 
+            // btnDoneService
+            // 
+            this.btnDoneService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDoneService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnDoneService.FlatAppearance.BorderSize = 0;
+            this.btnDoneService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDoneService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnDoneService.Location = new System.Drawing.Point(0, 120);
+            this.btnDoneService.Name = "btnDoneService";
+            this.btnDoneService.Size = new System.Drawing.Size(185, 40);
+            this.btnDoneService.TabIndex = 3;
+            this.btnDoneService.Text = "Отметить как \'сделано\'";
+            this.btnDoneService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDoneService.UseVisualStyleBackColor = false;
+            this.btnDoneService.Click += new System.EventHandler(this.btnDoneService_Click);
+            // 
+            // btnDeleteService
+            // 
+            this.btnDeleteService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnDeleteService.FlatAppearance.BorderSize = 0;
+            this.btnDeleteService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnDeleteService.Location = new System.Drawing.Point(0, 40);
+            this.btnDeleteService.Name = "btnDeleteService";
+            this.btnDeleteService.Size = new System.Drawing.Size(185, 40);
+            this.btnDeleteService.TabIndex = 2;
+            this.btnDeleteService.Text = "Удалить выделенные";
+            this.btnDeleteService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDeleteService.UseVisualStyleBackColor = false;
+            this.btnDeleteService.Click += new System.EventHandler(this.btnDeleteService_Click);
+            // 
+            // btnAddService
+            // 
+            this.btnAddService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnAddService.FlatAppearance.BorderSize = 0;
+            this.btnAddService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnAddService.Location = new System.Drawing.Point(0, 0);
+            this.btnAddService.Name = "btnAddService";
+            this.btnAddService.Size = new System.Drawing.Size(185, 40);
+            this.btnAddService.TabIndex = 1;
+            this.btnAddService.Text = "Добавить";
+            this.btnAddService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddService.UseVisualStyleBackColor = false;
+            this.btnAddService.Click += new System.EventHandler(this.btnAddService_Click);
+            // 
+            // btnShowService
+            // 
+            this.btnShowService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnShowService.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnShowService.FlatAppearance.BorderSize = 0;
+            this.btnShowService.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShowService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnShowService.Location = new System.Drawing.Point(0, 80);
+            this.btnShowService.Name = "btnShowService";
+            this.btnShowService.Size = new System.Drawing.Size(185, 40);
+            this.btnShowService.TabIndex = 0;
+            this.btnShowService.Text = "Просмотреть";
+            this.btnShowService.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnShowService.UseVisualStyleBackColor = false;
+            this.btnShowService.Click += new System.EventHandler(this.btnShowService_Click);
+            // 
+            // btnEditSparePartBatches
+            // 
+            this.btnEditSparePartBatches.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditSparePartBatches.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.btnEditSparePartBatches.FlatAppearance.BorderSize = 0;
+            this.btnEditSparePartBatches.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditSparePartBatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnEditSparePartBatches.Location = new System.Drawing.Point(0, 120);
+            this.btnEditSparePartBatches.Name = "btnEditSparePartBatches";
+            this.btnEditSparePartBatches.Size = new System.Drawing.Size(185, 40);
+            this.btnEditSparePartBatches.TabIndex = 3;
+            this.btnEditSparePartBatches.Text = "Редактировать поставки";
+            this.btnEditSparePartBatches.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEditSparePartBatches.UseVisualStyleBackColor = false;
+            this.btnEditSparePartBatches.Click += new System.EventHandler(this.btnEditSparePartBatches_Click);
             // 
             // btnDelSparePart
             // 
@@ -1089,43 +1125,6 @@ namespace Forms_TechServ
             this.btnShowSparePart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnShowSparePart.UseVisualStyleBackColor = false;
             this.btnShowSparePart.Click += new System.EventHandler(this.btnShowBatch_Click);
-            // 
-            // logsPage
-            // 
-            this.logsPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.logsPage.Location = new System.Drawing.Point(4, 22);
-            this.logsPage.Name = "logsPage";
-            this.logsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.logsPage.Size = new System.Drawing.Size(967, 499);
-            this.logsPage.TabIndex = 3;
-            this.logsPage.Text = "История";
-            // 
-            // visitsPage
-            // 
-            this.visitsPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.visitsPage.Location = new System.Drawing.Point(4, 22);
-            this.visitsPage.Name = "visitsPage";
-            this.visitsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.visitsPage.Size = new System.Drawing.Size(967, 499);
-            this.visitsPage.TabIndex = 4;
-            this.visitsPage.Text = "Выезды";
-            // 
-            // btnEditSparePartBatches
-            // 
-            this.btnEditSparePartBatches.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEditSparePartBatches.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.btnEditSparePartBatches.FlatAppearance.BorderSize = 0;
-            this.btnEditSparePartBatches.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditSparePartBatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnEditSparePartBatches.Location = new System.Drawing.Point(0, 120);
-            this.btnEditSparePartBatches.Name = "btnEditSparePartBatches";
-            this.btnEditSparePartBatches.Size = new System.Drawing.Size(185, 40);
-            this.btnEditSparePartBatches.TabIndex = 3;
-            this.btnEditSparePartBatches.Text = "Редактировать поставки";
-            this.btnEditSparePartBatches.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEditSparePartBatches.UseVisualStyleBackColor = false;
-            this.btnEditSparePartBatches.Click += new System.EventHandler(this.btnEditSparePartBatches_Click);
             // 
             // FormEditOrder
             // 

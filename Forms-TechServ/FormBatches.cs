@@ -44,7 +44,6 @@ namespace Forms_TechServ
                 btnDelivered.Click += btnDelivered_Click;
             }
 
-            //btnDelivered.Click += BtnManage_Click;
             dataBatches.CellMouseDoubleClick += BtnShow_Click;
 
             ManageButton btnShow = new ManageButton();
@@ -363,7 +362,6 @@ namespace Forms_TechServ
                 }
             }
 
-            //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
             int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);
             numericCurrentPage.Maximum = maxPage;
 
@@ -381,7 +379,8 @@ namespace Forms_TechServ
             if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
                 Batch batchToDel = BatchesList.GetById((int)dataBatches.SelectedRows[0].Cells[0].Value);
-                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить поставку с id {batchToDel.Id}?", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                string isSpent = batchToDel.IsSpent() ? "нету" : "есть";
+                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить поставку с id {batchToDel.Id}? Неизрасходованные детали - {isSpent}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (answer == DialogResult.Yes)
                 {
                     List<string> ordersInUse;

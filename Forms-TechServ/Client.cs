@@ -58,7 +58,6 @@ namespace Forms_TechServ
             using (TechContext db = new TechContext())
             {
                 int ordersCount = this.CountClientOrders();
-                //int sale = db.Orders.Include(o => o.Product).Where(o => o.Product.ClientId == this.Id && o.Status != OrderStatus.Canceled).Count();
                 if(ordersCount > 10)
                 {
                     return 10;
@@ -79,6 +78,22 @@ namespace Forms_TechServ
                 return db.Orders.Include(o => o.Product).Where(o => o.Product.ClientId == this.Id && o.Status == OrderStatus.Finished).Count();
             }
                 
+        }
+
+        public string GetLastAddress()
+        {
+            using (TechContext db = new TechContext())
+            {
+                OrderAtHome order = db.OrdersAtHome.Include(o => o.Product).Where(o => o.Product.ClientId == this.Id).OrderBy(o => o.DateStart).FirstOrDefault();
+                if(order != null)
+                {
+                    return order.Address;
+                }
+                else
+                {
+                    return "Не найден";
+                }
+            }
         }
     }
 
@@ -130,7 +145,6 @@ namespace Forms_TechServ
                     clients = clients.Where(c => c.CountClientOrders() >= ordersFrom && c.CountClientOrders() <= ordersUntil);
                 }
 
-                //clients = clients.OrderBy(c => c.CountClientOrders());
 
                 clients = clients.SortBy(sortBy, desk);
 

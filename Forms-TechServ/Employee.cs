@@ -35,7 +35,6 @@ namespace Forms_TechServ
                 if (FilterA.Id != 0)
                 {
                     timetables = timetables.Where(t => t.Id == FilterA.Id);
-                    //timetables = timetables.Where(t => t.ShiftStart >= from);
                 }
 
                 timetables = timetables.Where(t => t.ShiftStart >= FilterA.ShiftStart && t.ShiftEnd <= FilterA.ShiftEnd);
@@ -153,8 +152,7 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                // ПРОВЕРЯТЬ ЕСТЬ ЛИ АКТИВНЫЕ ЗАКАЗЫ
-
+                // ЕСТЬ ЛИ АКТИВНЫЕ ЗАКАЗЫ
                 Order order = db.Orders.Where(o => o.MasterId == this.Id && o.Status != OrderStatus.Canceled && o.Status != OrderStatus.Finished).FirstOrDefault();
 
                 if(order != null)
@@ -252,7 +250,7 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                MastersCategories catToDelete = db.MastersCategories.Find(this.Id, category.Id);//db.MastersCategories.Where(mc => mc.CategoryId == category.Id && mc.MasterId == this.Id).FirstOrDefault();
+                MastersCategories catToDelete = db.MastersCategories.Find(this.Id, category.Id);
                 if(catToDelete != null)
                 {
                     db.MastersCategories.Remove(catToDelete);
@@ -288,8 +286,8 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                MastersCategories masterCat = null;// = db.MastersCategories.Find(this.Id, category.Id);
-                Category pickedCat = category;//new Category() { Id = category.Id, ParentCategoryId = category.ParentCategoryId};
+                MastersCategories masterCat = null;
+                Category pickedCat = category;
 
                 
                 while (pickedCat != null && masterCat == null)
@@ -307,12 +305,10 @@ namespace Forms_TechServ
                 {
                     return false;
                 }
-                //foreach(MastersCategories cat in db.MastersCategories.Where(m))
                 
             }
         }
 
-        // ORDERS
     }
 
     public static class MastersList
@@ -527,10 +523,6 @@ namespace Forms_TechServ
                     managers = managers.Where(m => m.RoleId == FilterA.Role.Id);
                 }
 
-                /*if (FilterA.Cat != null)
-                {
-                    
-                }*/
 
                 managers = managers.SortBy(sortBy, desk);
 
@@ -712,15 +704,15 @@ namespace Forms_TechServ
                 {
                     if(employee.GetType() == typeof(Master))
                     {
-                        roles = roles.Where(r => r.RoleType == RoleType.Master || r.RoleType == RoleType.Anyone);
+                        roles = roles.Where(r => r.RoleType == RoleType.Мастер || r.RoleType == RoleType.Все);
                     }
                     if (employee.GetType() == typeof(Manager))
                     {
-                        roles = roles.Where(r => r.RoleType == RoleType.Manager || r.RoleType == RoleType.Anyone);
+                        roles = roles.Where(r => r.RoleType == RoleType.Менеджер || r.RoleType == RoleType.Все);
                     }
                 }
 
-                if(FilterA.RoleType != RoleType.Undefined)
+                if(FilterA.RoleType != RoleType.Неопределенно)
                 {
                     roles = roles.Where(r => r.RoleType == FilterA.RoleType);
                 }
@@ -738,13 +730,13 @@ namespace Forms_TechServ
 
     public enum RoleType
     {
-        Master,
-        Manager,
-        Anyone,
-        Undefined
+        Мастер,
+        Менеджер,
+        Все,
+        Неопределенно
     }
 
-    public static class RoleStringExtensions
+    /*public static class RoleStringExtensions
     {
         public static string GetRoleTypeString(this RoleType role)
         {
@@ -777,14 +769,13 @@ namespace Forms_TechServ
                     return RoleType.Undefined;
             }
         }
-    }
+    }*/
 
     public class Permission
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
-        //public DateTime DelTime { get; set; }
     }
 
     public static class PermissionsList
@@ -810,7 +801,6 @@ namespace Forms_TechServ
 
                 if (FilterA.Name != null && FilterA.Name != string.Empty)
                 {
-                    //query = query.Where(r => r.Name.Contains(FilterA.Name));
                     permissions = permissions.Where(r => r.Name.IndexOf(FilterA.Name, StringComparison.OrdinalIgnoreCase) > -1);
                 }
 

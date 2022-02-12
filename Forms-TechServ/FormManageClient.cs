@@ -21,7 +21,6 @@ namespace Forms_TechServ
             InitializeComponent();
 
             clientsTab.TabPages.Remove(productPage);
-            //clientsTab.TabPages.Remove(ordersPage);
 
             client = new Client();
 
@@ -53,7 +52,6 @@ namespace Forms_TechServ
                 formProducts.TopLevel = false;
                 formProducts.FormBorderStyle = FormBorderStyle.None;
                 productPage.Controls.Add(formProducts);
-                //panelContent.Controls.Add(childForm);
                 formProducts.Dock = DockStyle.Fill;
                 formProducts.BringToFront();
                 formProducts.Show();
@@ -123,6 +121,11 @@ namespace Forms_TechServ
                 tbName.Text = client.Name;
                 tbPhoneNum.Text = client.PhoneNum;
             }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

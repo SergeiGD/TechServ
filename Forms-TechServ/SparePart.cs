@@ -97,7 +97,6 @@ namespace Forms_TechServ
 
                 foreach (BatchSparePart sparePart in spareParts)
                 {
-                    //count += sparePart.Quantity;
 
                     count += sparePart.Batch.GetCountLeft(sparePart.SparePart);
                 }
@@ -174,30 +173,39 @@ namespace Forms_TechServ
                     spareParts = spareParts.Where(s => s.ClientPrepayment == 0);
                 }
 
-                
-
-                if (quantityFrom > 0 && quantityUntil == 0)
-                {
-                    spareParts = spareParts.Where(s => s.GetCountInStock(workshop) >= quantityFrom);
-                }
-                if (quantityFrom == 0 && quantityUntil > 0)
-                {
-                    spareParts = spareParts.Where(s => s.GetCountInStock(workshop) <= quantityUntil);
-                }
-                if (quantityFrom > 0 && quantityUntil > 0)
-                {
-                    spareParts = spareParts.Where(s => s.GetCountInStock(workshop) >= quantityFrom && s.GetCountInStock(workshop) <= quantityUntil);
-                }
-
-
-
                 if(workshop != null)
                 {
                     spareParts = spareParts.SortBy(sortBy, desk, workshop);
+
+                    if (quantityFrom > 0 && quantityUntil == 0)
+                    {
+                        spareParts = spareParts.Where(s => s.GetCountInStock(workshop) >= quantityFrom);
+                    }
+                    if (quantityFrom == 0 && quantityUntil > 0)
+                    {
+                        spareParts = spareParts.Where(s => s.GetCountInStock(workshop) <= quantityUntil);
+                    }
+                    if (quantityFrom > 0 && quantityUntil > 0)
+                    {
+                        spareParts = spareParts.Where(s => s.GetCountInStock(workshop) >= quantityFrom && s.GetCountInStock(workshop) <= quantityUntil);
+                    }
                 }
                 else
                 {
                     spareParts = spareParts.SortBy(sortBy, desk);
+
+                    if (quantityFrom > 0 && quantityUntil == 0)
+                    {
+                        spareParts = spareParts.Where(s => s.GetCountInStock() >= quantityFrom);
+                    }
+                    if (quantityFrom == 0 && quantityUntil > 0)
+                    {
+                        spareParts = spareParts.Where(s => s.GetCountInStock() <= quantityUntil);
+                    }
+                    if (quantityFrom > 0 && quantityUntil > 0)
+                    {
+                        spareParts = spareParts.Where(s => s.GetCountInStock() >= quantityFrom && s.GetCountInStock(workshop) <= quantityUntil);
+                    }
                 }
                 
 

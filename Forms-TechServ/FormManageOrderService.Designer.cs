@@ -29,6 +29,7 @@ namespace Forms_TechServ
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.numericQuantity = new System.Windows.Forms.NumericUpDown();
@@ -37,6 +38,10 @@ namespace Forms_TechServ
             this.tbComment = new System.Windows.Forms.RichTextBox();
             this.btnAction = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.labelPrice = new System.Windows.Forms.Label();
+            this.btnPriceInfo = new FontAwesome.Sharp.IconButton();
+            this.toolTipPriceInfo = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numericQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSale)).BeginInit();
             this.SuspendLayout();
@@ -92,7 +97,7 @@ namespace Forms_TechServ
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(116, 92);
+            this.label3.Location = new System.Drawing.Point(115, 108);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(123, 13);
             this.label3.TabIndex = 4;
@@ -100,7 +105,7 @@ namespace Forms_TechServ
             // 
             // tbComment
             // 
-            this.tbComment.Location = new System.Drawing.Point(40, 108);
+            this.tbComment.Location = new System.Drawing.Point(39, 124);
             this.tbComment.Name = "tbComment";
             this.tbComment.Size = new System.Drawing.Size(269, 96);
             this.tbComment.TabIndex = 5;
@@ -109,7 +114,7 @@ namespace Forms_TechServ
             // btnAction
             // 
             this.btnAction.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAction.Location = new System.Drawing.Point(40, 227);
+            this.btnAction.Location = new System.Drawing.Point(39, 243);
             this.btnAction.Name = "btnAction";
             this.btnAction.Size = new System.Drawing.Size(91, 36);
             this.btnAction.TabIndex = 6;
@@ -120,7 +125,7 @@ namespace Forms_TechServ
             // btnCancel
             // 
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(218, 227);
+            this.btnCancel.Location = new System.Drawing.Point(217, 243);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(91, 36);
             this.btnCancel.TabIndex = 7;
@@ -128,12 +133,48 @@ namespace Forms_TechServ
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(36, 76);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(60, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Цена за 1:";
+            // 
+            // labelPrice
+            // 
+            this.labelPrice.AutoSize = true;
+            this.labelPrice.Location = new System.Drawing.Point(106, 76);
+            this.labelPrice.Name = "labelPrice";
+            this.labelPrice.Size = new System.Drawing.Size(35, 13);
+            this.labelPrice.TabIndex = 9;
+            this.labelPrice.Text = "label5";
+            // 
+            // btnPriceInfo
+            // 
+            this.btnPriceInfo.FlatAppearance.BorderSize = 0;
+            this.btnPriceInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPriceInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
+            this.btnPriceInfo.IconColor = System.Drawing.Color.Black;
+            this.btnPriceInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnPriceInfo.IconSize = 20;
+            this.btnPriceInfo.Location = new System.Drawing.Point(171, 72);
+            this.btnPriceInfo.Name = "btnPriceInfo";
+            this.btnPriceInfo.Size = new System.Drawing.Size(27, 21);
+            this.btnPriceInfo.TabIndex = 146;
+            this.btnPriceInfo.UseVisualStyleBackColor = true;
+            this.btnPriceInfo.MouseHover += new System.EventHandler(this.btnPriceInfo_MouseHover);
+            // 
             // FormManageOrderService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
-            this.ClientSize = new System.Drawing.Size(355, 278);
+            this.ClientSize = new System.Drawing.Size(355, 293);
+            this.Controls.Add(this.btnPriceInfo);
+            this.Controls.Add(this.labelPrice);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAction);
             this.Controls.Add(this.tbComment);
@@ -161,5 +202,9 @@ namespace Forms_TechServ
         private System.Windows.Forms.RichTextBox tbComment;
         private System.Windows.Forms.Button btnAction;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelPrice;
+        private FontAwesome.Sharp.IconButton btnPriceInfo;
+        private System.Windows.Forms.ToolTip toolTipPriceInfo;
     }
 }

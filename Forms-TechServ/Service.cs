@@ -63,12 +63,6 @@ namespace Forms_TechServ
                 db.Entry(this).State = EntityState.Modified;
                 db.SaveChanges();
 
-                foreach (Order order in db.OrdersServices.Where(s => s.ServiceId == this.Id).Include(o => o.Order).Select(o => o.Order).Where(o => o.Status != OrderStatus.Finished && o.Status != OrderStatus.Canceled && o.DatePaid == null))
-                {
-                    // ЕСЛИ ЗАКАЗ НЕ ЗАВЕРШЕН/ОТМЕНЕН И ЕЩЕ НЕ ОПЛАЧЕН, ТО ПЕРЕСЧИТЫВАЕМ ЦЕНУ
-                    order.FinalPrice = order.CalcFinalPrice();
-                }
-
                 db.SaveChanges();
                 return true;
             }

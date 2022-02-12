@@ -92,19 +92,20 @@ namespace Forms_TechServ
             // btnCancel
             // 
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(353, 66);
+            this.btnCancel.Location = new System.Drawing.Point(338, 64);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(90, 40);
+            this.btnCancel.Size = new System.Drawing.Size(100, 52);
             this.btnCancel.TabIndex = 20;
             this.btnCancel.Text = "ОТМЕНИТЬ";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnAction
             // 
             this.btnAction.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAction.Location = new System.Drawing.Point(353, 13);
+            this.btnAction.Location = new System.Drawing.Point(338, 6);
             this.btnAction.Name = "btnAction";
-            this.btnAction.Size = new System.Drawing.Size(90, 40);
+            this.btnAction.Size = new System.Drawing.Size(100, 52);
             this.btnAction.TabIndex = 19;
             this.btnAction.Text = "Action";
             this.btnAction.UseVisualStyleBackColor = true;

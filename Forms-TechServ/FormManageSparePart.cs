@@ -12,22 +12,17 @@ namespace Forms_TechServ
 {
     public partial class FormManageSparePart : Form
     {
-        Size pickedSize = new Size(989, 408);
         SparePart sparePart;
-        /*int rowsCount;
-        int currentPage = 1;*/
 
-        public FormManageSparePart()                                                // ЕСЛИ ДОБАВИЛИ НОВУЮ ДЕТАЛИ, ТО ПОСЛЕ ДОБАВЛЕНИЯ ПРЕДЛАГАТЬ ЗАКАЗАТЬ СРАЗУ
+
+        public FormManageSparePart()                                                
         {
             InitializeComponent();
 
-            //sparePartTabs.TabPages.Remove(stockPage);
 
             sparePart = new SparePart();
             btnAction.Text = "Добавить";
-            //sparePartTabs.TabPages.Remove(stockPage);
 
-            //checkPrepayment.Checked = false;
         }
 
         public FormManageSparePart(SparePart sparePart)
@@ -40,65 +35,16 @@ namespace Forms_TechServ
 
         private void FormManageSparePart_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(437, 183);
-
-            
+         
 
             if (sparePart.Id != 0)
             {
                 tbName.Text = sparePart.Name;
                 numericPrepayment.Value = sparePart.ClientPrepayment;
 
-                /*comboBoxShowRows.Items.Add(5);
-                comboBoxShowRows.Items.Add(20);
-                comboBoxShowRows.Items.Add(30);
-                comboBoxShowRows.Items.Add(40);
-                comboBoxShowRows.SelectedIndex = 2;*/
-
-                //FillInStock();
             }
         }
 
-        /*private void FillInStock()
-        {
-            List<Workshop> workshops = WorkshopsList.GetWorkshops(new Workshop(), true, "Id", (int)comboBoxShowRows.SelectedItem, currentPage, out rowsCount);
-
-            dataInStock.Rows.Clear();
-
-            for (int i = 0; i < workshops.Count; i++)
-            {
-                dataInStock.Rows.Add(new DataGridViewRow());
-
-                dataInStock.Rows[i].Cells[0].Value = workshops[i].Id;
-                dataInStock.Rows[i].Cells[1].Value = workshops[i].Location;
-                dataInStock.Rows[i].Cells[2].Value = workshops[i].PhoneNum;
-                //dataInStock.Rows[i].Cells[3].Value = workshops[i].GetCountInStock((Workshop)tbWorkshop.Tag);                         // вот сюда кол-во в наличие
-                dataInStock.Rows[i].Cells[3].Value = sparePart.GetCountInStock(workshops[i]);
-            }
-
-            int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);
-            numericCurrentPage.Maximum = maxPage;
-            labelPageCount.Text = $"из {maxPage}";
-        }*/
-
-        private void FormManageSparePart_ResizeEnd(object sender, EventArgs e)
-        {
-            if(!sparePartTabs.SelectedTab.Equals(generalPage))
-                pickedSize = this.Size;
-        }
-
-        private void sparePartTabs_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            /*if (sparePartTabs.SelectedTab.Equals(generalPage))
-            {
-                this.Size = new Size(437, 183);
-            }
-            else if (sparePartTabs.SelectedTab.Equals(stockPage))
-            {
-                this.Size = pickedSize;
-
-            }*/
-        }
 
         private void btnAddToBatch_Click(object sender, EventArgs e)
         {
@@ -141,13 +87,6 @@ namespace Forms_TechServ
                     if (sparePart.AddSparePart())
                     {
                         MessageBox.Show($"Новая запчасть успешно добавлен. ID - {sparePart.Id}.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        /*this.Hide();
-                        if(answer == DialogResult.Yes)
-                        {
-                            FormManageSparePart formManageSpare = new FormManageSparePart(SparePartsList.GetById(sparePart.Id));
-                            //formManageSpare.sparePartTabs.SelectedTab = formManageSpare.stockPage;
-                            formManageSpare.ShowDialog();
-                        }*/
                         this.Close();
                     }
                     else

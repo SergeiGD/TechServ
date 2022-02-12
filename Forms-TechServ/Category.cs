@@ -45,8 +45,7 @@ namespace Forms_TechServ
         {
             using (TechContext db = new TechContext())
             {
-                //Category category = db.Categories.Where(c => c.ParentCategoryId == this.Id && c.DelTime == null).FirstOrDefault();
-                if (db.Categories.Where(c => c.ParentCategoryId == this.Id && c.DelTime == null).Count() == 0)   //category == null)
+                if (db.Categories.Where(c => c.ParentCategoryId == this.Id && c.DelTime == null).Count() == 0)   
                 {
                     this.DelTime = DateTime.Now;
                     db.Entry(this).State = EntityState.Modified;
@@ -157,7 +156,7 @@ namespace Forms_TechServ
                 return category;
             }
         }
-        public static List<Category> GetCategories(Category FilterA,/* bool onlyEndPoint, */bool desk, string sortBy, int count, int page, out int rowsCount)
+        public static List<Category> GetCategories(Category FilterA, bool desk, string sortBy, int count, int page, out int rowsCount)
         {
             using(TechContext db = new TechContext())
             {

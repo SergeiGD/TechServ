@@ -140,10 +140,10 @@ namespace Forms_TechServ
 
                 dataServies.Rows[i].Cells[0].Value = services[i].ServiceId;
                 dataServies.Rows[i].Cells[1].Value = services[i].Service.Name;
-                dataServies.Rows[i].Cells[2].Value = services[i].Service.Price;
+                dataServies.Rows[i].Cells[2].Value = services[i].Price;
                 dataServies.Rows[i].Cells[3].Value = services[i].Quantity;
                 dataServies.Rows[i].Cells[4].Value = services[i].Sale;
-                dataServies.Rows[i].Cells[5].Value = services[i].Service.Price * services[i].Quantity - (services[i].Service.Price * services[i].Quantity * (services[i].Sale / 100));
+                dataServies.Rows[i].Cells[5].Value = services[i].CalcFullPrice(); 
                 dataServies.Rows[i].Cells[6].Value = services[i].Done ? "Да" : "Нет";
 
             }
@@ -339,11 +339,6 @@ namespace Forms_TechServ
         private void btnPrevSparePart_Click(object sender, EventArgs e)
         {
             numericCurrentSparePartPage.Value = numericCurrentSparePartPage.Value - 1 < numericCurrentSparePartPage.Minimum ? numericCurrentSparePartPage.Value : numericCurrentSparePartPage.Value - 1;
-        }
-
-        private void btnPriceInfo_MouseHover(object sender, EventArgs e)
-        {
-            toolTipPriceInfo.SetToolTip(btnPriceInfo, "Если указанная цена не совпадает с суммой расчетных цен деталей и услуг, значит происходило изменение цена на детали/услуги уже после завершения/оплаты/отмены заказа");
         }
 
         private void btnShowSparePartBatches_Click(object sender, EventArgs e)

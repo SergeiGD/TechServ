@@ -144,7 +144,7 @@ namespace Forms_TechServ
             }
         }
 
-        public static List<OrderAtHome> GetOrders(OrderAtHome FilterA, OrderAtHome FilterB, Client client, bool activeOnly,/*List<OrderStatus> pickedStatuses,*/ bool desk, string sortBy, int count, int page, out int rowsCount)
+        public static List<OrderAtHome> GetOrders(OrderAtHome FilterA, OrderAtHome FilterB, Client client, bool activeOnly, bool desk, string sortBy, int count, int page, out int rowsCount)
         {
             using (TechContext db = new TechContext())
             {

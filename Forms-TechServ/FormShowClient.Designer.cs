@@ -180,6 +180,7 @@ namespace Forms_TechServ
             this.cancelBtn.TabIndex = 40;
             this.cancelBtn.Text = "ЗАКРЫТЬ";
             this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // deleteBtn
             // 

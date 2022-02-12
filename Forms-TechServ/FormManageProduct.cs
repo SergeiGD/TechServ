@@ -47,32 +47,6 @@ namespace Forms_TechServ
             btnFindClient.Enabled = false;
         }
 
-        private void productsTab_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            /*if(productsTab.SelectedTab.Equals(genralPage))
-            {
-                this.Size = new Size(429, 204);
-            }*/
-            /*else if (productsTab.SelectedTab.Equals(ordersPage))
-            {
-                this.Size = pickedSize;
-
-                FormOrders formOrders = new FormOrders(32, false);
-                formOrders.TopLevel = false;
-                formOrders.FormBorderStyle = FormBorderStyle.None;
-                ordersPage.Controls.Add(formOrders);
-                //panelContent.Controls.Add(childForm);
-                formOrders.Dock = DockStyle.Fill;
-                formOrders.BringToFront();
-                formOrders.Show();
-            }*/
-        }
-
-        private void FormManageProduct_ResizeEnd(object sender, EventArgs e)
-        {
-            //if(!productsTab.SelectedTab.Equals(genralPage))
-                //pickedSize = this.Size;
-        }
 
         private void btnFindCat_Click(object sender, EventArgs e)
         {
@@ -151,6 +125,7 @@ namespace Forms_TechServ
                 tbCat.Tag = product.Category;
                 tbClient.Text = product.Client.Name;
                 tbClient.Tag = product.Client;
+                btnFindClient.Enabled = false;
             }
         }
 

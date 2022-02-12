@@ -13,9 +13,7 @@ namespace Forms_TechServ
 {
     public partial class FormManageMaster : Form
     {
-        //Workshop workshop;
         Master master;
-        //List<Category> catsToBeAdded = new List<Category>();
         int currentPage = 1;
         int rowsCount;
         Size pickedSize = new Size(1078, 481);
@@ -36,8 +34,6 @@ namespace Forms_TechServ
         {
             InitializeComponent();
 
-
-            //this.master = master;
             btnAction.Text = "Сохранить общую информацию";
 
             this.master = master;
@@ -47,7 +43,6 @@ namespace Forms_TechServ
         {
             InitializeComponent();
 
-            //this.master = master;
             master = new Master();
             btnAction.Text = "Сохранить";
 
@@ -99,10 +94,8 @@ namespace Forms_TechServ
             FormCategories formCategories = new FormCategories(true);
             formCategories.ShowDialog();
 
-            //Category cat = formCategories.category;
             if(formCategories.category != null)
             {
-                //catsToBeAdded.Add(formCategories.category);
                 
                 if (master.CheckMasterCategory(formCategories.category))
                 {
@@ -227,12 +220,6 @@ namespace Forms_TechServ
                 errorProvider.SetError(tbPhoneNum, "Введите номер полностью");
                 return false;
             }
-
-            /*if (tbPassword.Text == "")
-            {
-                errorProvider.SetError(tbPassword, "Введите пароль");
-                return false;
-            }*/
 
             if (tbPosition.Tag == null)
             {
@@ -366,15 +353,16 @@ namespace Forms_TechServ
             numericCurrentCatPage.Value = numericCurrentCatPage.Value + 1 > numericCurrentCatPage.Maximum ? numericCurrentCatPage.Value : numericCurrentCatPage.Value + 1;
         }
 
-        /*private void deleteTimetableBtn_Click(object sender, EventArgs e)
-        {
-
-        }*/
 
         private void dataCategories_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             FormShowCategory formShowCategory = new FormShowCategory(true, CategoriesList.GetById(Convert.ToInt32(dataCategories.SelectedRows[0].Cells[0].Value), true));                       // вот тут просмотр
             formShowCategory.ShowDialog();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

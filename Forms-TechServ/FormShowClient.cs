@@ -123,6 +123,13 @@ namespace Forms_TechServ
             labelID.Text = client.Id.ToString();
             labelName.Text = client.Name;
             labelPhoneNum.Text = client.PhoneNum;
+            labelLastAddress.Text = client.GetLastAddress();
+            labelOrdersCount.Text = client.CountClientOrders().ToString();
+        }
+
+        private void cancelBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

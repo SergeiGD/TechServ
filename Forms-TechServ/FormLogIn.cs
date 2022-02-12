@@ -33,7 +33,6 @@ namespace Forms_TechServ
             }
 
             
-            //this.Close();
         }
 
         private void FormLogIn_Load(object sender, EventArgs e)

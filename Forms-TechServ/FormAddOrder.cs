@@ -13,15 +13,8 @@ namespace Forms_TechServ
     public partial class FormAddOrder : Form
     {
         Order order;
-        //Size pickedSize = new Size(991, 525);
         bool inOrder;
 
-        /*public FormAddInOrder()
-        {
-            InitializeComponent();
-
-            this.Size = new Size(713, 313);
-        }*/
 
         public FormAddOrder(bool inOrder)
         {
@@ -44,7 +37,6 @@ namespace Forms_TechServ
 
         private void FormAddOrder_Load(object sender, EventArgs e)
         {
-            //this.Size = new Size(713, 496);
 
 
             if (inOrder)
@@ -56,11 +48,6 @@ namespace Forms_TechServ
             radioAuto.Checked = true;
         }
 
-        /*private void btnFindClient_Click(object sender, EventArgs e)
-        {
-            FormClients formClients = new FormClients(true);
-            formClients.ShowDialog();
-        }*/
 
         private void btnFindProduct_Click(object sender, EventArgs e)
         {
@@ -69,6 +56,12 @@ namespace Forms_TechServ
 
             tbProduct.Text = formProducts?.product?.Name;
             tbProduct.Tag = formProducts?.product;
+
+            if(formProducts.product != null && String.IsNullOrEmpty(tbAddress.Text))
+            {
+                string lastAddress = formProducts.product.Client.GetLastAddress();
+                tbAddress.Text = lastAddress != "Не найден" ? lastAddress : "";
+            }
         }
 
         private void btnFindMaster_Click(object sender, EventArgs e)
@@ -153,12 +146,10 @@ namespace Forms_TechServ
                 tbMaster.Clear();
                 tbMaster.Tag = null;
                 btnFindMaster.Enabled = false;
-                //btnCleanMaster.Enabled = false;
             }
             else
             {
                 btnFindMaster.Enabled = true;
-                //btnCleanMaster.Enabled = true;
             }
         }
 
@@ -199,6 +190,11 @@ namespace Forms_TechServ
 
                 this.Close();
             }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

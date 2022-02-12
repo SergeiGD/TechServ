@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Forms_TechServ
 {
-    public abstract class Person //: IComparable<Person>
+    public abstract class Person 
     {
         [Column("Id")]
         public int Id { get; set; }

@@ -104,6 +104,7 @@ namespace Forms_TechServ
             btnCleanMaster.Enabled = false;
             btnFindMaster.Enabled = false;
 
+
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
             mainBtn[0].Location = new Point(0, 0);
             for (int i = 1; i < mainBtn.Count(); i++)
@@ -187,8 +188,8 @@ namespace Forms_TechServ
             comboBoxShowRows.Items.Add(40);
             comboBoxShowRows.SelectedIndex = 2;
 
-            datePickerFrom.Value = DateTime.Now.AddDays(-7);
-            datePickerUntil.Value = DateTime.Now.AddDays(14);
+            SetDefDates();
+            
 
             FillGrid();
         }
@@ -385,6 +386,22 @@ namespace Forms_TechServ
             FillGrid();
         }
 
+        private void SetDefDates()
+        {
+            if (order == null)
+            {
+                datePickerFrom.Value = DateTime.Now;
+                datePickerUntil.Value = DateTime.Now.AddDays(30);
+            }
+            else
+            {
+                datePickerFrom.Value = order.DateStart.Value;
+                if (order.DateFinish.HasValue) datePickerUntil.Value = order.DateFinish.Value;
+                if (order.DateCancel.HasValue) datePickerUntil.Value = order.DateCancel.Value;
+                if (!order.DateFinish.HasValue && !order.DateCancel.HasValue) datePickerUntil.Value = order.DateStart.Value.AddDays(30);
+            }
+        }
+
         private void cleanAll_Click(object sender, EventArgs e)
         {
             tbID.Clear();
@@ -394,8 +411,7 @@ namespace Forms_TechServ
             tbMaster.Tag = null;
             tbOrder.Clear();
             tbOrder.Tag = null;
-            datePickerFrom.Value = DateTime.Now.AddDays(-7);
-            datePickerUntil.Value = DateTime.Now.AddDays(14);
+            SetDefDates();
 
             FillGrid();
         }
@@ -407,8 +423,7 @@ namespace Forms_TechServ
             checkNotFinished.Checked = false;
             tbMaster.Clear();
             tbMaster.Tag = null;
-            datePickerFrom.Value = DateTime.Now.AddDays(-7);
-            datePickerUntil.Value = DateTime.Now.AddDays(14);
+            SetDefDates();
 
             FillGrid();
         }
@@ -420,8 +435,7 @@ namespace Forms_TechServ
             checkNotFinished.Checked = false;
             tbOrder.Clear();
             tbOrder.Tag = null;
-            datePickerFrom.Value = DateTime.Now.AddDays(-7);
-            datePickerUntil.Value = DateTime.Now.AddDays(14);
+            SetDefDates(); 
 
             FillGrid();
         }

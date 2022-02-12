@@ -29,6 +29,7 @@ namespace Forms_TechServ
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tbDescription = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -45,6 +46,8 @@ namespace Forms_TechServ
             this.cancelBtn = new System.Windows.Forms.Button();
             this.labelID = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.btnPriceInfo = new FontAwesome.Sharp.IconButton();
+            this.toolTipPriceInfo = new System.Windows.Forms.ToolTip(this.components);
             this.panelEdit.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -183,6 +186,7 @@ namespace Forms_TechServ
             this.cancelBtn.TabIndex = 59;
             this.cancelBtn.Text = "ЗАКРЫТЬ";
             this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // labelID
             // 
@@ -202,12 +206,28 @@ namespace Forms_TechServ
             this.label9.TabIndex = 27;
             this.label9.Text = "ID услуги:";
             // 
+            // btnPriceInfo
+            // 
+            this.btnPriceInfo.FlatAppearance.BorderSize = 0;
+            this.btnPriceInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPriceInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
+            this.btnPriceInfo.IconColor = System.Drawing.Color.Black;
+            this.btnPriceInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnPriceInfo.IconSize = 20;
+            this.btnPriceInfo.Location = new System.Drawing.Point(163, 127);
+            this.btnPriceInfo.Name = "btnPriceInfo";
+            this.btnPriceInfo.Size = new System.Drawing.Size(27, 21);
+            this.btnPriceInfo.TabIndex = 146;
+            this.btnPriceInfo.UseVisualStyleBackColor = true;
+            this.btnPriceInfo.MouseHover += new System.EventHandler(this.btnPriceInfo_MouseHover);
+            // 
             // FormShowService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
             this.ClientSize = new System.Drawing.Size(645, 193);
+            this.Controls.Add(this.btnPriceInfo);
             this.Controls.Add(this.labelID);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.panelEdit);
@@ -249,5 +269,7 @@ namespace Forms_TechServ
         private System.Windows.Forms.Button editBtn;
         private System.Windows.Forms.Label labelID;
         private System.Windows.Forms.Label label9;
+        private FontAwesome.Sharp.IconButton btnPriceInfo;
+        private System.Windows.Forms.ToolTip toolTipPriceInfo;
     }
 }

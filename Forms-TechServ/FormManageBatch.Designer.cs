@@ -32,6 +32,7 @@ namespace Forms_TechServ
             this.components = new System.ComponentModel.Container();
             this.batchTabs = new System.Windows.Forms.TabControl();
             this.generalPage = new System.Windows.Forms.TabPage();
+            this.checkConfirmed = new System.Windows.Forms.CheckBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAction = new System.Windows.Forms.Button();
             this.checkDelivered = new System.Windows.Forms.CheckBox();
@@ -61,7 +62,6 @@ namespace Forms_TechServ
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.delCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.checkConfirmed = new System.Windows.Forms.CheckBox();
             this.batchTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.sparePartsPage.SuspendLayout();
@@ -103,6 +103,17 @@ namespace Forms_TechServ
             this.generalPage.TabIndex = 0;
             this.generalPage.Text = "Общая информация";
             // 
+            // checkConfirmed
+            // 
+            this.checkConfirmed.AutoSize = true;
+            this.checkConfirmed.Location = new System.Drawing.Point(26, 112);
+            this.checkConfirmed.Name = "checkConfirmed";
+            this.checkConfirmed.Size = new System.Drawing.Size(101, 17);
+            this.checkConfirmed.TabIndex = 135;
+            this.checkConfirmed.Text = "Подтверждена";
+            this.checkConfirmed.UseVisualStyleBackColor = true;
+            this.checkConfirmed.CheckedChanged += new System.EventHandler(this.checkConfirmed_CheckedChanged);
+            // 
             // btnCancel
             // 
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -112,6 +123,7 @@ namespace Forms_TechServ
             this.btnCancel.TabIndex = 134;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnAction
             // 
@@ -429,17 +441,6 @@ namespace Forms_TechServ
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
-            // 
-            // checkConfirmed
-            // 
-            this.checkConfirmed.AutoSize = true;
-            this.checkConfirmed.Location = new System.Drawing.Point(26, 112);
-            this.checkConfirmed.Name = "checkConfirmed";
-            this.checkConfirmed.Size = new System.Drawing.Size(101, 17);
-            this.checkConfirmed.TabIndex = 135;
-            this.checkConfirmed.Text = "Подтверждена";
-            this.checkConfirmed.UseVisualStyleBackColor = true;
-            this.checkConfirmed.CheckedChanged += new System.EventHandler(this.checkConfirmed_CheckedChanged);
             // 
             // FormManageBatch
             // 

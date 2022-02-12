@@ -176,7 +176,6 @@ namespace Forms_TechServ
                 return;
             }
 
-            //BatchSparePart batchSpare = null;
 
             if (batch.CheckSparePart(formSpareParts.sparePart))
             {
@@ -265,7 +264,6 @@ namespace Forms_TechServ
 
             }
 
-            //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
             int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowSparePartsRows.SelectedItem);
             numericCurrentPage.Maximum = maxPage;
 
@@ -401,16 +399,6 @@ namespace Forms_TechServ
                 return;
             }
 
-            /*if(formManageBatchSparePart.batchSparePart.Quantity < prevQuantity)
-            {
-                DialogResult answer = MessageBox.Show("Произошло уменьшее кол-во деталей в поставке, сохранение этих действий приведет к удалению этой детали из заказов, где они уже зарезервированы", "Хотите продолжить?", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if(answer != DialogResult.Yes)
-                {
-                    return;
-                }
-                delInOrder = true;
-            }*/
-
             if (batch.EditSparePart(formManageBatchSparePart.batchSparePart))
             {
                 FillSpareParts();
@@ -462,10 +450,6 @@ namespace Forms_TechServ
             }
         }
 
-        /*private void comboBoxStatus_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LockFields();
-        }*/
 
         private void checkConfirmed_CheckedChanged(object sender, EventArgs e)
         {
@@ -485,6 +469,11 @@ namespace Forms_TechServ
         private void checkDelivered_CheckedChanged(object sender, EventArgs e)
         {
             LockFields();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

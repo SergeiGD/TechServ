@@ -169,7 +169,6 @@ namespace Forms_TechServ
 
             }
 
-            //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
             int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);
             numericCurrentPage.Maximum = maxPage;
 
@@ -319,6 +318,11 @@ namespace Forms_TechServ
             showClient.ShowDialog();
 
             FillGrid();
+        }
+
+        private void btnOrdersInfo_MouseHover(object sender, EventArgs e)
+        {
+            toolTipOrdersInfo.SetToolTip(btnOrdersInfo, "Ноль - до скольки угодно");
         }
     }
 }

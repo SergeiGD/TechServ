@@ -122,7 +122,6 @@ namespace Forms_TechServ
             comboBoxShowRows.Items.Add(40);
             comboBoxShowRows.SelectedIndex = 1;
 
-            //datePickerFrom.Va = null;
 
             // По умолчанию показываем ближайшие две недели
             datePickerFrom.Value = DateTime.Now;

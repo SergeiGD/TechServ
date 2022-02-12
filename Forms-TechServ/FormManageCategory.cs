@@ -49,7 +49,6 @@ namespace Forms_TechServ
                 formServices.TopLevel = false;
                 formServices.FormBorderStyle = FormBorderStyle.None;
                 servicesPage.Controls.Add(formServices);
-                //panelContent.Controls.Add(childForm);
                 formServices.Dock = DockStyle.Fill;
                 formServices.BringToFront();
                 formServices.Show();

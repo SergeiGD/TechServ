@@ -32,7 +32,6 @@ namespace Forms_TechServ
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
-            this.tbPhoneNum = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.clientsTab = new System.Windows.Forms.TabControl();
             this.generalPage = new System.Windows.Forms.TabPage();
@@ -40,6 +39,7 @@ namespace Forms_TechServ
             this.btnAction = new System.Windows.Forms.Button();
             this.productPage = new System.Windows.Forms.TabPage();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.tbPhoneNum = new System.Windows.Forms.MaskedTextBox();
             this.clientsTab.SuspendLayout();
             this.generalPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -60,13 +60,6 @@ namespace Forms_TechServ
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(123, 20);
             this.tbName.TabIndex = 1;
-            // 
-            // tbPhoneNum
-            // 
-            this.tbPhoneNum.Location = new System.Drawing.Point(116, 97);
-            this.tbPhoneNum.Name = "tbPhoneNum";
-            this.tbPhoneNum.Size = new System.Drawing.Size(123, 20);
-            this.tbPhoneNum.TabIndex = 3;
             // 
             // label2
             // 
@@ -92,12 +85,12 @@ namespace Forms_TechServ
             // generalPage
             // 
             this.generalPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.generalPage.Controls.Add(this.tbPhoneNum);
             this.generalPage.Controls.Add(this.btnCancel);
             this.generalPage.Controls.Add(this.btnAction);
             this.generalPage.Controls.Add(this.label2);
             this.generalPage.Controls.Add(this.label1);
             this.generalPage.Controls.Add(this.tbName);
-            this.generalPage.Controls.Add(this.tbPhoneNum);
             this.generalPage.Location = new System.Drawing.Point(4, 22);
             this.generalPage.Name = "generalPage";
             this.generalPage.Padding = new System.Windows.Forms.Padding(3);
@@ -114,6 +107,7 @@ namespace Forms_TechServ
             this.btnCancel.TabIndex = 45;
             this.btnCancel.Text = "ОТМЕНИТЬ";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnAction
             // 
@@ -140,6 +134,14 @@ namespace Forms_TechServ
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // tbPhoneNum
+            // 
+            this.tbPhoneNum.Location = new System.Drawing.Point(116, 97);
+            this.tbPhoneNum.Mask = "(+70)000000000";
+            this.tbPhoneNum.Name = "tbPhoneNum";
+            this.tbPhoneNum.Size = new System.Drawing.Size(123, 20);
+            this.tbPhoneNum.TabIndex = 175;
+            // 
             // FormManageClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -164,7 +166,6 @@ namespace Forms_TechServ
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbName;
-        private System.Windows.Forms.TextBox tbPhoneNum;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabControl clientsTab;
         private System.Windows.Forms.TabPage generalPage;
@@ -172,5 +173,6 @@ namespace Forms_TechServ
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnAction;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.MaskedTextBox tbPhoneNum;
     }
 }

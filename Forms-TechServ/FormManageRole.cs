@@ -44,11 +44,8 @@ namespace Forms_TechServ
 
             foreach (RoleType role in Enum.GetValues(typeof(RoleType)))
             {
-                if(role == RoleType.Undefined)
-                {
-                    continue;
-                }
-                comboBoxRoleType.Items.Add(role.GetRoleTypeString());
+                if (role == RoleType.Неопределенно) continue;
+                comboBoxRoleType.Items.Add(role);
 
             }
             comboBoxRoleType.SelectedItem = null;
@@ -56,7 +53,7 @@ namespace Forms_TechServ
             if (role.Id != 0)
             {
                 tbName.Text = role.Name;
-                comboBoxRoleType.SelectedItem = role.RoleType.GetRoleTypeString();
+                comboBoxRoleType.SelectedItem = role.RoleType;
             }
         }
 
@@ -88,7 +85,7 @@ namespace Forms_TechServ
             if (CheckFields())
             {
                 role.Name = tbName.Text;
-                role.RoleType = RoleStringExtensions.GetRoleTypeEnum(comboBoxRoleType.SelectedItem.ToString());
+                role.RoleType = (RoleType)comboBoxRoleType.SelectedItem;
 
                 if(role.Id == 0)
                 {
