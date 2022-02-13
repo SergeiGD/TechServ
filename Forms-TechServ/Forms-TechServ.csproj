@@ -72,572 +72,606 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Batch.cs" />
-    <Compile Include="Category.cs" />
-    <Compile Include="Client.cs" />
-    <Compile Include="CustomControls.cs">
+    <Compile Include="classes\batches\Batch.cs" />
+    <Compile Include="classes\batches\BatchesList.cs" />
+    <Compile Include="classes\batches\BatchSparePart.cs" />
+    <Compile Include="classes\batches\BatchStatus.cs" />
+    <Compile Include="classes\categories\CategoriesList.cs" />
+    <Compile Include="classes\categories\Category.cs" />
+    <Compile Include="classes\clients\Client.cs" />
+    <Compile Include="classes\clients\ClientsList.cs" />
+    <Compile Include="classes\employees\Employee.cs" />
+    <Compile Include="classes\employees\EmployeesList.cs" />
+    <Compile Include="classes\employees\Manager.cs" />
+    <Compile Include="classes\employees\ManagersList.cs" />
+    <Compile Include="classes\employees\Master.cs" />
+    <Compile Include="classes\employees\MastersCategories.cs" />
+    <Compile Include="classes\employees\MastersList.cs" />
+    <Compile Include="classes\employees\Permission.cs" />
+    <Compile Include="classes\employees\PermissionsList.cs" />
+    <Compile Include="classes\employees\Role.cs" />
+    <Compile Include="classes\employees\RolesList.cs" />
+    <Compile Include="classes\employees\RolesPermissions.cs" />
+    <Compile Include="classes\employees\RoleType.cs" />
+    <Compile Include="classes\employees\timetables\EmployeesTimetablesList.cs" />
+    <Compile Include="classes\employees\timetables\EmployeeTimetable.cs" />
+    <Compile Include="classes\helpers\CustomSorting.cs" />
+    <Compile Include="classes\ordersLog\OrderLog.cs" />
+    <Compile Include="classes\orders\OrderAtHome.cs" />
+    <Compile Include="classes\orders\OrderAtHomeList.cs" />
+    <Compile Include="classes\orders\Order.cs" />
+    <Compile Include="classes\orders\OrdersList.cs" />
+    <Compile Include="classes\orders\OrderStatus.cs" />
+    <Compile Include="classes\orders\StatusStringExtensions.cs" />
+    <Compile Include="classes\products\Product.cs" />
+    <Compile Include="classes\products\ProductsList.cs" />
+    <Compile Include="classes\services\Service.cs" />
+    <Compile Include="classes\services\ServicesList.cs" />
+    <Compile Include="classes\spareParts\SparePart.cs" />
+    <Compile Include="classes\spareParts\SparePartsList.cs" />
+    <Compile Include="classes\visits\Visit.cs" />
+    <Compile Include="classes\visits\VisitsList.cs" />
+    <Compile Include="classes\workshops\timetables\WorkshopsTimetablesList.cs" />
+    <Compile Include="classes\workshops\timetables\WorkshopTimetable.cs" />
+    <Compile Include="classes\workshops\Workshop.cs" />
+    <Compile Include="classes\workshops\WorkshopsList.cs" />
+    <Compile Include="forms\customControls\EditButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CustomSorting.cs" />
-    <Compile Include="EmplyeeTimetable.cs" />
-    <Compile Include="FormAddEmployeeTimetable.cs">
+    <Compile Include="forms\customControls\ManageButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="forms\customControls\NavButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="forms\employees\timetables\FormAddEmployeeTimetable.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAddEmployeeTimetable.Designer.cs">
+    <Compile Include="forms\employees\timetables\FormAddEmployeeTimetable.Designer.cs">
       <DependentUpon>FormAddEmployeeTimetable.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormAddWorkshopTimetable.cs">
+    <Compile Include="forms\workshops\timetables\FormAddWorkshopTimetable.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAddWorkshopTimetable.Designer.cs">
+    <Compile Include="forms\workshops\timetables\FormAddWorkshopTimetable.Designer.cs">
       <DependentUpon>FormAddWorkshopTimetable.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormManageBatchSparePart.cs">
+    <Compile Include="forms\batches\FormManageBatchSparePart.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormManageBatchSparePart.Designer.cs">
+    <Compile Include="forms\batches\FormManageBatchSparePart.Designer.cs">
       <DependentUpon>FormManageBatchSparePart.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormEditOrder.cs">
+    <Compile Include="forms\orders\FormEditOrder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormEditOrder.Designer.cs">
+    <Compile Include="forms\orders\FormEditOrder.Designer.cs">
       <DependentUpon>FormEditOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormEmpTimetalbe.cs">
+    <Compile Include="forms\employees\timetables\FormEmpTimetalbe.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormEmpTimetalbe.Designer.cs">
+    <Compile Include="forms\employees\timetables\FormEmpTimetalbe.Designer.cs">
       <DependentUpon>FormEmpTimetalbe.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormManageRole.cs">
+    <Compile Include="forms\employees\roles\FormManageRole.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormManageRole.Designer.cs">
+    <Compile Include="forms\employees\roles\FormManageRole.Designer.cs">
       <DependentUpon>FormManageRole.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormRoles.cs">
+    <Compile Include="forms\employees\roles\FormRoles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormRoles.Designer.cs">
+    <Compile Include="forms\employees\roles\FormRoles.Designer.cs">
       <DependentUpon>FormRoles.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormInOrders.cs">
+    <Compile Include="forms\orders\FormInOrders.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormInOrders.Designer.cs">
+    <Compile Include="forms\orders\FormInOrders.Designer.cs">
       <DependentUpon>FormInOrders.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormManageBatch.cs">
+    <Compile Include="forms\batches\FormManageBatch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormManageBatch.Designer.cs">
+    <Compile Include="forms\batches\FormManageBatch.Designer.cs">
       <DependentUpon>FormManageBatch.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormManageCategory.cs">
+    <Compile Include="forms\categories\FormManageCategory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormManageCategory.Designer.cs">
+    <Compile Include="forms\categories\FormManageCategory.Designer.cs">
       <DependentUpon>FormManageCategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormManageClient.cs">
+    <Compile Include="forms\clients\FormManageClient.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormManageClient.Designer.cs">
+    <Compile Include="forms\clients\FormManageClient.Designer.cs">
       <DependentUpon>FormManageClient.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormManageManager.cs">
+    <Compile Include="forms\employees\FormManageManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormManageManager.Designer.cs">
+    <Compile Include="forms\employees\FormManageManager.Designer.cs">
       <DependentUpon>FormManageManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormManageMaster.cs">
+    <Compile Include="forms\employees\FormManageMaster.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormManageMaster.Designer.cs">
+    <Compile Include="forms\employees\FormManageMaster.Designer.cs">
       <DependentUpon>FormManageMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormManageOrderSparePart.cs">
+    <Compile Include="forms\orders\FormManageOrderSparePart.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormManageOrderSparePart.Designer.cs">
+    <Compile Include="forms\orders\FormManageOrderSparePart.Designer.cs">
       <DependentUpon>FormManageOrderSparePart.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormManageProduct.cs">
+    <Compile Include="forms\products\FormManageProduct.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormManageProduct.Designer.cs">
+    <Compile Include="forms\products\FormManageProduct.Designer.cs">
       <DependentUpon>FormManageProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormManageOrderService.cs">
+    <Compile Include="forms\orders\FormManageOrderService.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormManageOrderService.Designer.cs">
+    <Compile Include="forms\orders\FormManageOrderService.Designer.cs">
       <DependentUpon>FormManageOrderService.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormManagers.cs">
+    <Compile Include="forms\employees\FormManagers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormManagers.Designer.cs">
+    <Compile Include="forms\employees\FormManagers.Designer.cs">
       <DependentUpon>FormManagers.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormManageService.cs">
+    <Compile Include="forms\services\FormManageService.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormManageService.Designer.cs">
+    <Compile Include="forms\services\FormManageService.Designer.cs">
       <DependentUpon>FormManageService.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormBatches.cs">
+    <Compile Include="forms\batches\FormBatches.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormBatches.Designer.cs">
+    <Compile Include="forms\batches\FormBatches.Designer.cs">
       <DependentUpon>FormBatches.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormCategories.cs">
+    <Compile Include="forms\categories\FormCategories.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormCategories.Designer.cs">
+    <Compile Include="forms\categories\FormCategories.Designer.cs">
       <DependentUpon>FormCategories.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormClients.cs">
+    <Compile Include="forms\clients\FormClients.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormClients.Designer.cs">
+    <Compile Include="forms\clients\FormClients.Designer.cs">
       <DependentUpon>FormClients.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMasters.cs">
+    <Compile Include="forms\employees\FormMasters.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMasters.Designer.cs">
+    <Compile Include="forms\employees\FormMasters.Designer.cs">
       <DependentUpon>FormMasters.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormOrderBatches.cs">
+    <Compile Include="forms\orders\FormOrderBatches.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormOrderBatches.Designer.cs">
+    <Compile Include="forms\orders\FormOrderBatches.Designer.cs">
       <DependentUpon>FormOrderBatches.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormOrderServices.cs">
+    <Compile Include="forms\visits\FormOrderServices.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormOrderServices.Designer.cs">
+    <Compile Include="forms\visits\FormOrderServices.Designer.cs">
       <DependentUpon>FormOrderServices.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormOrdersExtedFilter.cs">
+    <Compile Include="forms\orders\FormOrdersExtedFilter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormOrdersExtedFilter.Designer.cs">
+    <Compile Include="forms\orders\FormOrdersExtedFilter.Designer.cs">
       <DependentUpon>FormOrdersExtedFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormOrdersLogs.cs">
+    <Compile Include="forms\ordersLogs\FormOrdersLogs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormOrdersLogs.Designer.cs">
+    <Compile Include="forms\ordersLogs\FormOrdersLogs.Designer.cs">
       <DependentUpon>FormOrdersLogs.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormOutOrders.cs">
+    <Compile Include="forms\orders\FormOutOrders.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormOutOrders.Designer.cs">
+    <Compile Include="forms\orders\FormOutOrders.Designer.cs">
       <DependentUpon>FormOutOrders.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormPermissions.cs">
+    <Compile Include="forms\employees\permissions\FormPermissions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPermissions.Designer.cs">
+    <Compile Include="forms\employees\permissions\FormPermissions.Designer.cs">
       <DependentUpon>FormPermissions.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormPickEmployeeType.cs">
+    <Compile Include="forms\employees\FormPickEmployeeType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPickEmployeeType.Designer.cs">
+    <Compile Include="forms\employees\FormPickEmployeeType.Designer.cs">
       <DependentUpon>FormPickEmployeeType.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormPickOrderType.cs">
+    <Compile Include="forms\orders\FormPickOrderType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPickOrderType.Designer.cs">
+    <Compile Include="forms\orders\FormPickOrderType.Designer.cs">
       <DependentUpon>FormPickOrderType.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormPickSparePartFormBatch.cs">
+    <Compile Include="forms\orders\FormPickSparePartFormBatch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPickSparePartFormBatch.Designer.cs">
+    <Compile Include="forms\orders\FormPickSparePartFormBatch.Designer.cs">
       <DependentUpon>FormPickSparePartFormBatch.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormShowBatch.cs">
+    <Compile Include="forms\batches\FormShowBatch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormShowBatch.Designer.cs">
+    <Compile Include="forms\batches\FormShowBatch.Designer.cs">
       <DependentUpon>FormShowBatch.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormShowCategory.cs">
+    <Compile Include="forms\categories\FormShowCategory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormShowCategory.Designer.cs">
+    <Compile Include="forms\categories\FormShowCategory.Designer.cs">
       <DependentUpon>FormShowCategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormShowClient.cs">
+    <Compile Include="forms\clients\FormShowClient.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormShowClient.Designer.cs">
+    <Compile Include="forms\clients\FormShowClient.Designer.cs">
       <DependentUpon>FormShowClient.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormShowManager.cs">
+    <Compile Include="forms\employees\FormShowManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormShowManager.Designer.cs">
+    <Compile Include="forms\employees\FormShowManager.Designer.cs">
       <DependentUpon>FormShowManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormShowMaster.cs">
+    <Compile Include="forms\employees\FormShowMaster.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormShowMaster.Designer.cs">
+    <Compile Include="forms\employees\FormShowMaster.Designer.cs">
       <DependentUpon>FormShowMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormShowOrderLog.cs">
+    <Compile Include="forms\ordersLogs\FormShowOrderLog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormShowOrderLog.Designer.cs">
+    <Compile Include="forms\ordersLogs\FormShowOrderLog.Designer.cs">
       <DependentUpon>FormShowOrderLog.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormShowProduct.cs">
+    <Compile Include="forms\products\FormShowProduct.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormShowProduct.Designer.cs">
+    <Compile Include="forms\products\FormShowProduct.Designer.cs">
       <DependentUpon>FormShowProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormShowRole.cs">
+    <Compile Include="forms\employees\roles\FormShowRole.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormShowRole.Designer.cs">
+    <Compile Include="forms\employees\roles\FormShowRole.Designer.cs">
       <DependentUpon>FormShowRole.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormShowService.cs">
+    <Compile Include="forms\services\FormShowService.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormShowService.Designer.cs">
+    <Compile Include="forms\services\FormShowService.Designer.cs">
       <DependentUpon>FormShowService.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormShowSparePart.cs">
+    <Compile Include="forms\spareParts\FormShowSparePart.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormShowSparePart.Designer.cs">
+    <Compile Include="forms\spareParts\FormShowSparePart.Designer.cs">
       <DependentUpon>FormShowSparePart.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormShowVisit.cs">
+    <Compile Include="forms\visits\FormShowVisit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormShowVisit.Designer.cs">
+    <Compile Include="forms\visits\FormShowVisit.Designer.cs">
       <DependentUpon>FormShowVisit.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormShowOrder.cs">
+    <Compile Include="forms\orders\FormShowOrder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormShowOrder.Designer.cs">
+    <Compile Include="forms\orders\FormShowOrder.Designer.cs">
       <DependentUpon>FormShowOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormEmployees.cs">
+    <Compile Include="forms\employees\FormEmployees.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormEmployees.Designer.cs">
+    <Compile Include="forms\employees\FormEmployees.Designer.cs">
       <DependentUpon>FormEmployees.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormLogIn.cs">
+    <Compile Include="forms\login\FormLogIn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormLogIn.Designer.cs">
+    <Compile Include="forms\login\FormLogIn.Designer.cs">
       <DependentUpon>FormLogIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMain.cs">
+    <Compile Include="forms\mainForm\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMain.Designer.cs">
+    <Compile Include="forms\mainForm\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormAddOrder.cs">
+    <Compile Include="forms\orders\FormAddOrder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAddOrder.Designer.cs">
+    <Compile Include="forms\orders\FormAddOrder.Designer.cs">
       <DependentUpon>FormAddOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormManageSparePart.cs">
+    <Compile Include="forms\spareParts\FormManageSparePart.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormManageSparePart.Designer.cs">
+    <Compile Include="forms\spareParts\FormManageSparePart.Designer.cs">
       <DependentUpon>FormManageSparePart.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormManageVisit.cs">
+    <Compile Include="forms\visits\FormManageVisit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormManageVisit.Designer.cs">
+    <Compile Include="forms\visits\FormManageVisit.Designer.cs">
       <DependentUpon>FormManageVisit.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormManageWorkshop.cs">
+    <Compile Include="forms\workshops\FormManageWorkshop.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormManageWorkshop.Designer.cs">
+    <Compile Include="forms\workshops\FormManageWorkshop.Designer.cs">
       <DependentUpon>FormManageWorkshop.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormOrders.cs">
+    <Compile Include="forms\orders\FormOrders.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormOrders.Designer.cs">
+    <Compile Include="forms\orders\FormOrders.Designer.cs">
       <DependentUpon>FormOrders.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormProducts.cs">
+    <Compile Include="forms\products\FormProducts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormProducts.Designer.cs">
+    <Compile Include="forms\products\FormProducts.Designer.cs">
       <DependentUpon>FormProducts.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormServices.cs">
+    <Compile Include="forms\services\FormServices.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormServices.Designer.cs">
+    <Compile Include="forms\services\FormServices.Designer.cs">
       <DependentUpon>FormServices.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormShowWorkshop.cs">
+    <Compile Include="forms\workshops\FormShowWorkshop.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormShowWorkshop.Designer.cs">
+    <Compile Include="forms\workshops\FormShowWorkshop.Designer.cs">
       <DependentUpon>FormShowWorkshop.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormSpareParts.cs">
+    <Compile Include="forms\spareParts\FormSpareParts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormSpareParts.Designer.cs">
+    <Compile Include="forms\spareParts\FormSpareParts.Designer.cs">
       <DependentUpon>FormSpareParts.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormStatServices.cs">
+    <Compile Include="forms\statistics\FormStatServices.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormStatServices.Designer.cs">
+    <Compile Include="forms\statistics\FormStatServices.Designer.cs">
       <DependentUpon>FormStatServices.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormStatWorkshopProfit.cs">
+    <Compile Include="forms\statistics\FormStatWorkshopProfit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormStatWorkshopProfit.Designer.cs">
+    <Compile Include="forms\statistics\FormStatWorkshopProfit.Designer.cs">
       <DependentUpon>FormStatWorkshopProfit.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormStatWorkshopsLoad.cs">
+    <Compile Include="forms\statistics\FormStatWorkshopsLoad.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormStatWorkshopsLoad.Designer.cs">
+    <Compile Include="forms\statistics\FormStatWorkshopsLoad.Designer.cs">
       <DependentUpon>FormStatWorkshopsLoad.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormVisits.cs">
+    <Compile Include="forms\visits\FormVisits.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormVisits.Designer.cs">
+    <Compile Include="forms\visits\FormVisits.Designer.cs">
       <DependentUpon>FormVisits.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormWorkshops.cs">
+    <Compile Include="forms\workshops\FormWorkshops.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormWorkshops.Designer.cs">
+    <Compile Include="forms\workshops\FormWorkshops.Designer.cs">
       <DependentUpon>FormWorkshops.cs</DependentUpon>
     </Compile>
-    <Compile Include="Employee.cs" />
-    <Compile Include="Order.cs" />
-    <Compile Include="OrderAtHome.cs" />
-    <Compile Include="OrderLog.cs" />
-    <Compile Include="OrderService.cs" />
-    <Compile Include="OrderSparePart.cs" />
-    <Compile Include="Person.cs" />
-    <Compile Include="Product.cs" />
+    <Compile Include="classes\orders\OrderService.cs" />
+    <Compile Include="classes\orders\OrderSparePart.cs" />
+    <Compile Include="classes\person\Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service.cs" />
-    <Compile Include="SparePart.cs" />
-    <Compile Include="SparePartFromBatch.cs" />
-    <Compile Include="TechContext.cs" />
-    <Compile Include="UserSession.cs" />
-    <Compile Include="ValueWrapper.cs" />
-    <Compile Include="Visit.cs" />
-    <Compile Include="VisitService.cs" />
-    <Compile Include="Workshop.cs" />
-    <Compile Include="WorkshopTimetable.cs" />
-    <EmbeddedResource Include="FormAddEmployeeTimetable.resx">
+    <Compile Include="classes\orders\SparePartFromBatch.cs" />
+    <Compile Include="classes\databaseContext\TechContext.cs" />
+    <Compile Include="classes\UserSession\UserSession.cs" />
+    <Compile Include="classes\helpers\ValueWrapper.cs" />
+    <Compile Include="classes\visits\VisitService.cs" />
+    <EmbeddedResource Include="forms\employees\timetables\FormAddEmployeeTimetable.resx">
       <DependentUpon>FormAddEmployeeTimetable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormAddWorkshopTimetable.resx">
+    <EmbeddedResource Include="forms\workshops\timetables\FormAddWorkshopTimetable.resx">
       <DependentUpon>FormAddWorkshopTimetable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormManageBatchSparePart.resx">
+    <EmbeddedResource Include="forms\batches\FormManageBatchSparePart.resx">
       <DependentUpon>FormManageBatchSparePart.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormEditOrder.resx">
+    <EmbeddedResource Include="forms\orders\FormEditOrder.resx">
       <DependentUpon>FormEditOrder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormEmpTimetalbe.resx">
+    <EmbeddedResource Include="forms\employees\timetables\FormEmpTimetalbe.resx">
       <DependentUpon>FormEmpTimetalbe.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormManageRole.resx">
+    <EmbeddedResource Include="forms\employees\roles\FormManageRole.resx">
       <DependentUpon>FormManageRole.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormRoles.resx">
+    <EmbeddedResource Include="forms\employees\roles\FormRoles.resx">
       <DependentUpon>FormRoles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormInOrders.resx">
+    <EmbeddedResource Include="forms\orders\FormInOrders.resx">
       <DependentUpon>FormInOrders.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormManageBatch.resx">
+    <EmbeddedResource Include="forms\batches\FormManageBatch.resx">
       <DependentUpon>FormManageBatch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormManageCategory.resx">
+    <EmbeddedResource Include="forms\categories\FormManageCategory.resx">
       <DependentUpon>FormManageCategory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormManageClient.resx">
+    <EmbeddedResource Include="forms\clients\FormManageClient.resx">
       <DependentUpon>FormManageClient.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormManageManager.resx">
+    <EmbeddedResource Include="forms\employees\FormManageManager.resx">
       <DependentUpon>FormManageManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormManageMaster.resx">
+    <EmbeddedResource Include="forms\employees\FormManageMaster.resx">
       <DependentUpon>FormManageMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormManageOrderSparePart.resx">
+    <EmbeddedResource Include="forms\orders\FormManageOrderSparePart.resx">
       <DependentUpon>FormManageOrderSparePart.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormManageProduct.resx">
+    <EmbeddedResource Include="forms\products\FormManageProduct.resx">
       <DependentUpon>FormManageProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormManageOrderService.resx">
+    <EmbeddedResource Include="forms\orders\FormManageOrderService.resx">
       <DependentUpon>FormManageOrderService.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormManagers.resx">
+    <EmbeddedResource Include="forms\employees\FormManagers.resx">
       <DependentUpon>FormManagers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormManageService.resx">
+    <EmbeddedResource Include="forms\services\FormManageService.resx">
       <DependentUpon>FormManageService.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormBatches.resx">
+    <EmbeddedResource Include="forms\batches\FormBatches.resx">
       <DependentUpon>FormBatches.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormCategories.resx">
+    <EmbeddedResource Include="forms\categories\FormCategories.resx">
       <DependentUpon>FormCategories.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormClients.resx">
+    <EmbeddedResource Include="forms\clients\FormClients.resx">
       <DependentUpon>FormClients.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormMasters.resx">
+    <EmbeddedResource Include="forms\employees\FormMasters.resx">
       <DependentUpon>FormMasters.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormOrderBatches.resx">
+    <EmbeddedResource Include="forms\orders\FormOrderBatches.resx">
       <DependentUpon>FormOrderBatches.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormOrderServices.resx">
+    <EmbeddedResource Include="forms\visits\FormOrderServices.resx">
       <DependentUpon>FormOrderServices.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormOrdersExtedFilter.resx">
+    <EmbeddedResource Include="forms\orders\FormOrdersExtedFilter.resx">
       <DependentUpon>FormOrdersExtedFilter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormOrdersLogs.resx">
+    <EmbeddedResource Include="forms\ordersLogs\FormOrdersLogs.resx">
       <DependentUpon>FormOrdersLogs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormOutOrders.resx">
+    <EmbeddedResource Include="forms\orders\FormOutOrders.resx">
       <DependentUpon>FormOutOrders.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormPermissions.resx">
+    <EmbeddedResource Include="forms\employees\permissions\FormPermissions.resx">
       <DependentUpon>FormPermissions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormPickEmployeeType.resx">
+    <EmbeddedResource Include="forms\employees\FormPickEmployeeType.resx">
       <DependentUpon>FormPickEmployeeType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormPickOrderType.resx">
+    <EmbeddedResource Include="forms\orders\FormPickOrderType.resx">
       <DependentUpon>FormPickOrderType.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormPickSparePartFormBatch.resx">
+    <EmbeddedResource Include="forms\orders\FormPickSparePartFormBatch.resx">
       <DependentUpon>FormPickSparePartFormBatch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormShowBatch.resx">
+    <EmbeddedResource Include="forms\batches\FormShowBatch.resx">
       <DependentUpon>FormShowBatch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormShowCategory.resx">
+    <EmbeddedResource Include="forms\categories\FormShowCategory.resx">
       <DependentUpon>FormShowCategory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormShowClient.resx">
+    <EmbeddedResource Include="forms\clients\FormShowClient.resx">
       <DependentUpon>FormShowClient.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormShowManager.resx">
+    <EmbeddedResource Include="forms\employees\FormShowManager.resx">
       <DependentUpon>FormShowManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormShowMaster.resx">
+    <EmbeddedResource Include="forms\employees\FormShowMaster.resx">
       <DependentUpon>FormShowMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormShowOrderLog.resx">
+    <EmbeddedResource Include="forms\ordersLogs\FormShowOrderLog.resx">
       <DependentUpon>FormShowOrderLog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormShowProduct.resx">
+    <EmbeddedResource Include="forms\products\FormShowProduct.resx">
       <DependentUpon>FormShowProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormShowRole.resx">
+    <EmbeddedResource Include="forms\employees\roles\FormShowRole.resx">
       <DependentUpon>FormShowRole.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormShowService.resx">
+    <EmbeddedResource Include="forms\services\FormShowService.resx">
       <DependentUpon>FormShowService.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormShowSparePart.resx">
+    <EmbeddedResource Include="forms\spareParts\FormShowSparePart.resx">
       <DependentUpon>FormShowSparePart.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormShowVisit.resx">
+    <EmbeddedResource Include="forms\visits\FormShowVisit.resx">
       <DependentUpon>FormShowVisit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormShowOrder.resx">
+    <EmbeddedResource Include="forms\orders\FormShowOrder.resx">
       <DependentUpon>FormShowOrder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormEmployees.resx">
+    <EmbeddedResource Include="forms\employees\FormEmployees.resx">
       <DependentUpon>FormEmployees.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormLogIn.resx">
+    <EmbeddedResource Include="forms\login\FormLogIn.resx">
       <DependentUpon>FormLogIn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormMain.resx">
+    <EmbeddedResource Include="forms\mainForm\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormAddOrder.resx">
+    <EmbeddedResource Include="forms\orders\FormAddOrder.resx">
       <DependentUpon>FormAddOrder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormManageSparePart.resx">
+    <EmbeddedResource Include="forms\spareParts\FormManageSparePart.resx">
       <DependentUpon>FormManageSparePart.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormManageVisit.resx">
+    <EmbeddedResource Include="forms\visits\FormManageVisit.resx">
       <DependentUpon>FormManageVisit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormManageWorkshop.resx">
+    <EmbeddedResource Include="forms\workshops\FormManageWorkshop.resx">
       <DependentUpon>FormManageWorkshop.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormOrders.resx">
+    <EmbeddedResource Include="forms\orders\FormOrders.resx">
       <DependentUpon>FormOrders.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormProducts.resx">
+    <EmbeddedResource Include="forms\products\FormProducts.resx">
       <DependentUpon>FormProducts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormServices.resx">
+    <EmbeddedResource Include="forms\services\FormServices.resx">
       <DependentUpon>FormServices.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormShowWorkshop.resx">
+    <EmbeddedResource Include="forms\workshops\FormShowWorkshop.resx">
       <DependentUpon>FormShowWorkshop.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormSpareParts.resx">
+    <EmbeddedResource Include="forms\spareParts\FormSpareParts.resx">
       <DependentUpon>FormSpareParts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormStatServices.resx">
+    <EmbeddedResource Include="forms\statistics\FormStatServices.resx">
       <DependentUpon>FormStatServices.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormStatWorkshopProfit.resx">
+    <EmbeddedResource Include="forms\statistics\FormStatWorkshopProfit.resx">
       <DependentUpon>FormStatWorkshopProfit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormStatWorkshopsLoad.resx">
+    <EmbeddedResource Include="forms\statistics\FormStatWorkshopsLoad.resx">
       <DependentUpon>FormStatWorkshopsLoad.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormVisits.resx">
+    <EmbeddedResource Include="forms\visits\FormVisits.resx">
       <DependentUpon>FormVisits.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormWorkshops.resx">
+    <EmbeddedResource Include="forms\workshops\FormWorkshops.resx">
       <DependentUpon>FormWorkshops.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -663,6 +697,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
