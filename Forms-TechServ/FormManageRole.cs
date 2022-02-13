@@ -1,21 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Forms_TechServ
 {
     public partial class FormManageRole : Form
     {
+        private readonly Size pickedSize = new Size(1078, 600);
 
-        Role role;
-        Size pickedSize = new Size(1078, 600);
-
+        private readonly Role role;
 
 
         public FormManageRole()
@@ -25,7 +19,6 @@ namespace Forms_TechServ
             roleTabs.TabPages.Remove(permissionsPage);
             btnAction.Text = "Сохранить и добавить права";
             role = new Role();
-
         }
 
         public FormManageRole(Role role)
@@ -35,19 +28,19 @@ namespace Forms_TechServ
             btnAction.Text = "Сохранить общую информацию";
             this.role = role;
 
-            this.FormClosing += CheckPermissions;
+            FormClosing += CheckPermissions;
         }
 
         private void FormManageRole_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(518, 254);
+            Size = new Size(518, 254);
 
             foreach (RoleType role in Enum.GetValues(typeof(RoleType)))
             {
                 if (role == RoleType.Неопределенно) continue;
                 comboBoxRoleType.Items.Add(role);
-
             }
+
             comboBoxRoleType.SelectedItem = null;
 
             if (role.Id != 0)
@@ -77,7 +70,7 @@ namespace Forms_TechServ
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnAction_Click(object sender, EventArgs e)
@@ -85,23 +78,23 @@ namespace Forms_TechServ
             if (CheckFields())
             {
                 role.Name = tbName.Text;
-                role.RoleType = (RoleType)comboBoxRoleType.SelectedItem;
+                role.RoleType = (RoleType) comboBoxRoleType.SelectedItem;
 
-                if(role.Id == 0)
+                if (role.Id == 0)
                 {
                     role.AddRole();
-                    this.Hide();
-                    FormManageRole formManageRole = new FormManageRole(RolesList.GetById(role.Id));
+                    Hide();
+                    var formManageRole = new FormManageRole(RolesList.GetById(role.Id));
                     formManageRole.ShowDialog();
                 }
                 else
                 {
                     role.EditRole();
-                    MessageBox.Show($"Данные о роли успешно изменены", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Данные о роли успешно изменены", "Успех", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
 
-                    this.Close();
+                    Close();
                 }
-
             }
         }
 
@@ -109,16 +102,14 @@ namespace Forms_TechServ
         {
             if (role.CalcPermissionsCount() == 0)
             {
-                DialogResult answer = MessageBox.Show("Вы не добавили никаких прав для роли, если Вы ее сейчас закроете, то данная роль автоматически удалится. Продолжить в любом случае?", "ВНИМАНИЕ!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                var answer =
+                    MessageBox.Show(
+                        "Вы не добавили никаких прав для роли, если Вы ее сейчас закроете, то данная роль автоматически удалится. Продолжить в любом случае?",
+                        "ВНИМАНИЕ!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                 if (answer == DialogResult.Yes)
-                {
                     role.DelRole();
-
-                }
                 else
-                {
                     e.Cancel = true;
-                }
             }
         }
 
@@ -126,13 +117,13 @@ namespace Forms_TechServ
         {
             if (roleTabs.SelectedTab.Equals(generalPage))
             {
-                this.Size = new Size(518, 254);
+                Size = new Size(518, 254);
             }
             else if (roleTabs.SelectedTab.Equals(permissionsPage))
             {
-                this.Size = pickedSize;
+                Size = pickedSize;
 
-                FormPermissions formPermissions = new FormPermissions(false, role);
+                var formPermissions = new FormPermissions(false, role);
 
 
                 formPermissions.TopLevel = false;

@@ -1,25 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Forms_TechServ
 {
     public partial class FormEditOrder : Form
     {
-        Size pickedSize = new Size(991, 531);
-        Order order;
-        bool inOrder;
-        int servicesRowsCount;
-        int servicesCurrentPage = 1;
-        int sparePartsRowsCount;
-        int sparePartsCurrentPage = 1;
-        bool lockedState;
+        private readonly bool inOrder;
+        private bool lockedState;
+        private readonly Order order;
+        private Size pickedSize = new Size(991, 531);
+        private int servicesCurrentPage = 1;
+        private int servicesRowsCount;
+        private int sparePartsCurrentPage = 1;
+        private int sparePartsRowsCount;
 
         public FormEditOrder(Order order)
         {
@@ -28,37 +22,34 @@ namespace Forms_TechServ
             this.order = order;
             if (order.GetType() != typeof(OrderAtHome))
             {
-                this.inOrder = true;
+                inOrder = true;
                 ordersTab.TabPages.Remove(visitsPage);
             }
-
-            
-
         }
 
         private void OrdersTab_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(ordersTab.SelectedTab.Equals(generalPage))
+            if (ordersTab.SelectedTab.Equals(generalPage))
             {
-                this.Size = new Size(700, 565);
+                Size = new Size(700, 565);
             }
-            else if(ordersTab.SelectedTab.Equals(servicesPage))
+            else if (ordersTab.SelectedTab.Equals(servicesPage))
             {
-                this.Size = pickedSize;
+                Size = pickedSize;
 
                 FillServices();
             }
             else if (ordersTab.SelectedTab.Equals(sparePartsPage))
             {
-                this.Size = pickedSize;
+                Size = pickedSize;
 
                 FillSpareParts();
             }
             else if (ordersTab.SelectedTab.Equals(logsPage))
             {
-                this.Size = pickedSize;
+                Size = pickedSize;
 
-                FormOrdersLogs formOrdersLogs = new FormOrdersLogs(false, order);
+                var formOrdersLogs = new FormOrdersLogs(false, order);
                 formOrdersLogs.TopLevel = false;
                 formOrdersLogs.FormBorderStyle = FormBorderStyle.None;
                 logsPage.Controls.Add(formOrdersLogs);
@@ -69,9 +60,9 @@ namespace Forms_TechServ
             }
             else if (ordersTab.SelectedTab.Equals(visitsPage))
             {
-                this.Size = pickedSize;
+                Size = pickedSize;
 
-                FormVisits formVisits = new FormVisits(false, (OrderAtHome)order);
+                var formVisits = new FormVisits(false, (OrderAtHome) order);
                 formVisits.TopLevel = false;
                 formVisits.FormBorderStyle = FormBorderStyle.None;
                 visitsPage.Controls.Add(formVisits);
@@ -83,22 +74,15 @@ namespace Forms_TechServ
 
         private void FormEditOrder_ResizeEnd(object sender, EventArgs e)
         {
-            if (!ordersTab.SelectedTab.Equals(generalPage))
-            {
-                pickedSize = this.Size;
-            }
-            
+            if (!ordersTab.SelectedTab.Equals(generalPage)) pickedSize = Size;
         }
 
         private void btnAddService_Click(object sender, EventArgs e)
         {
-            FormServices formServices = new FormServices(CategoriesList.GetById(order.Product.CategoryId, false));
+            var formServices = new FormServices(CategoriesList.GetById(order.Product.CategoryId, false));
             formServices.ShowDialog();
 
-            if(formServices.service == null)
-            {
-                return;
-            }
+            if (formServices.service == null) return;
 
 
             if (order.CheckService(formServices.service))
@@ -107,38 +91,32 @@ namespace Forms_TechServ
             }
             else
             {
-                FormManageOrderService formManageOrderService = new FormManageOrderService(formServices.service);
+                var formManageOrderService = new FormManageOrderService(formServices.service);
                 formManageOrderService.ShowDialog();
 
-                if (!formManageOrderService.changed)
-                {
-                    return;
-                }
+                if (!formManageOrderService.changed) return;
 
                 if (order.AddService(formManageOrderService.orderService))
                 {
                     FillServices();
                     RecalcFields();
-                    MessageBox.Show($"Услуга успешно добавлена в заказ", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
+                    MessageBox.Show("Услуга успешно добавлена в заказ", "Успех", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show($"Получены недопустимые значения", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Получены недопустимые значения", "Ошибка", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
-
             }
         }
 
         private void btnAddSparePart_Click(object sender, EventArgs e)
         {
-            FormSpareParts formSpareParts = new FormSpareParts(true, order.Workshop);
+            var formSpareParts = new FormSpareParts(true, order.Workshop);
             formSpareParts.ShowDialog();
 
-            if(formSpareParts.sparePart == null)
-            {
-                return;
-            }
+            if (formSpareParts.sparePart == null) return;
 
             if (order.CheckSparePart(formSpareParts.sparePart))
             {
@@ -146,51 +124,51 @@ namespace Forms_TechServ
             }
             else
             {
-                OrderSparePart sparePart = new OrderSparePart()
+                var sparePart = new OrderSparePart
                 {
                     Order = order,
                     SparePart = formSpareParts.sparePart
                 };
 
-                DialogResult dialogResult = MessageBox.Show("Желаете подобрать поставки автоматически (только из Вашей мастерской)?", "Выберите способ добавления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if(dialogResult == DialogResult.Yes)
+                var dialogResult =
+                    MessageBox.Show("Желаете подобрать поставки автоматически (только из Вашей мастерской)?",
+                        "Выберите способ добавления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.Yes)
                 {
-                    FormManageOrderSparePart formManageOrderSparePart = new FormManageOrderSparePart();
+                    var formManageOrderSparePart = new FormManageOrderSparePart();
                     formManageOrderSparePart.ShowDialog();
 
-                    if(!formManageOrderSparePart.changed)
-                    {
-                        return;
-                    }
+                    if (!formManageOrderSparePart.changed) return;
 
                     if (sparePart.FindBatchesAuto(formManageOrderSparePart.quantity))
                     {
-                        MessageBox.Show("Деталь успешно добавлена", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Деталь успешно добавлена", "Успех", MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
                         FillSpareParts();
                         RecalcFields();
                     }
                     else
                     {
-                        MessageBox.Show("В этой мастеркой нету выбранного количества этой детали", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("В этой мастеркой нету выбранного количества этой детали", "Ошибка",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    FormOrderBatches formOrderBatches = new FormOrderBatches(false, sparePart);
+                    var formOrderBatches = new FormOrderBatches(false, sparePart);
                     formOrderBatches.ShowDialog();
 
                     FillSpareParts();
                 }
-
             }
-
         }
 
         private void btnShowService_Click(object sender, EventArgs e)
         {
-            if(dataServies.SelectedRows.Count > 0)
+            if (dataServies.SelectedRows.Count > 0)
             {
-                FormShowService formShowService = new FormShowService(true, ServicesList.GetById(Convert.ToInt32(dataServies.SelectedRows[0].Cells[0].Value), true));
+                var formShowService = new FormShowService(true,
+                    ServicesList.GetById(Convert.ToInt32(dataServies.SelectedRows[0].Cells[0].Value), true));
                 formShowService.ShowDialog();
             }
             else
@@ -199,13 +177,13 @@ namespace Forms_TechServ
             }
         }
 
-        
 
         private void btnShowBatch_Click(object sender, EventArgs e)
         {
-            if(dataSpareParts.SelectedRows.Count > 0)
+            if (dataSpareParts.SelectedRows.Count > 0)
             {
-                FormShowSparePart formShowSparePart = new FormShowSparePart(true, SparePartsList.GetById((int)dataSpareParts.SelectedRows[0].Cells[0].Value));
+                var formShowSparePart = new FormShowSparePart(true,
+                    SparePartsList.GetById((int) dataSpareParts.SelectedRows[0].Cells[0].Value));
                 formShowSparePart.ShowDialog();
             }
             else
@@ -216,15 +194,15 @@ namespace Forms_TechServ
 
         private void FormEditOrder_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(700, 565);
+            Size = new Size(700, 565);
 
-            DataGridViewButtonColumn delServiceCol = new DataGridViewButtonColumn();
+            var delServiceCol = new DataGridViewButtonColumn();
             delServiceCol.FlatStyle = FlatStyle.Flat;
             delServiceCol.Name = "Удалить";
             dataServies.Columns.Add(delServiceCol);
             dataServies.CellContentClick += DelServiceCol_Click;
 
-            DataGridViewButtonColumn delSparePartCol = new DataGridViewButtonColumn();
+            var delSparePartCol = new DataGridViewButtonColumn();
             delSparePartCol.FlatStyle = FlatStyle.Flat;
             delSparePartCol.Name = "Удалить";
             dataSpareParts.Columns.Add(delSparePartCol);
@@ -249,13 +227,13 @@ namespace Forms_TechServ
             }
             else
             {
-                tbAddress.Text = ((OrderAtHome)order).Address;
+                tbAddress.Text = ((OrderAtHome) order).Address;
             }
 
             tbMaster.Text = order.Master.Name;
             tbMaster.Tag = order.Master;
             tbComment.Text = order.ClientComment;
-            labelSale.Text = order.ClientSale.ToString() + "%";
+            labelSale.Text = order.ClientSale + "%";
             labelLeftToPay.Text = (order.FinalPrice - order.PrepaymentMade).ToString();
             numericPaid.Value = order.PrepaymentMade;
             labelProduct.Text = order.Product.Name;
@@ -270,26 +248,13 @@ namespace Forms_TechServ
                 checkAnswer.Enabled = false;
             }
 
-            if (order.DatePrepayment.HasValue)
-            {
-                checkPrepaid.Checked = true;
-            }
-            
+            if (order.DatePrepayment.HasValue) checkPrepaid.Checked = true;
 
-            if (order.DateClientAnswer.HasValue)
-            {
-                checkAnswer.Checked = true;
-            }
-            if (order.DateRepaired.HasValue)
-            {
-                checkRepaired.Checked = true;
-            }
-            if (order.DatePaid.HasValue)
-            {
-                checkPaid.Checked = true;
-            }
 
-            
+            if (order.DateClientAnswer.HasValue) checkAnswer.Checked = true;
+            if (order.DateRepaired.HasValue) checkRepaired.Checked = true;
+            if (order.DatePaid.HasValue) checkPaid.Checked = true;
+
 
             // БИНЬДИМ СОБЫТИЯ ВРУЧНУЮ, ЧТО ОНИ НЕ СРАБОТАЛИ ПРИ НАЧАЛЬНОЙ ЗАГРУЗКЕ ДАННЫХ В ФОРМУ
             checkDiagnosted.CheckedChanged += checkDiagnosted_CheckedChanged;
@@ -298,29 +263,19 @@ namespace Forms_TechServ
 
             comboBoxStatus.Items.Add(OrderStatus.WaitingForDiagnostic.GetStatusString());
 
-            if (checkDiagnosted.Checked)
-            {
-                comboBoxStatus.Items.Add(OrderStatus.WaitingForAnswer.GetStatusString());
-            }
+            if (checkDiagnosted.Checked) comboBoxStatus.Items.Add(OrderStatus.WaitingForAnswer.GetStatusString());
 
             comboBoxStatus.Items.Add(OrderStatus.WaitingForPrepayment.GetStatusString());
 
             comboBoxStatus.Items.Add(OrderStatus.WaitingForSpareParts.GetStatusString());
 
             if (order.PrepaymentRequired == 0 || checkPrepaid.Checked)
-            {
                 comboBoxStatus.Items.Add(OrderStatus.WaitingForRepairing.GetStatusString());
-            }
 
-            if (numericPaid.Value > 0)
-            {
-                comboBoxStatus.Items.Add(OrderStatus.WaitingForRefund.GetStatusString());
-            }
+            if (numericPaid.Value > 0) comboBoxStatus.Items.Add(OrderStatus.WaitingForRefund.GetStatusString());
 
             if (checkPaid.Checked && checkRepaired.Checked)
-            {
                 comboBoxStatus.Items.Add(OrderStatus.Finished.GetStatusString());
-            }
 
             comboBoxStatus.Items.Add(OrderStatus.WaitingForPayment.GetStatusString());
 
@@ -334,13 +289,10 @@ namespace Forms_TechServ
             RecalcFields();
         }
 
-        
-
-
 
         private void btnFindClient_Click(object sender, EventArgs e)
         {
-            FormClients formClients = new FormClients(true);
+            var formClients = new FormClients(true);
             formClients.ShowDialog();
         }
 
@@ -349,20 +301,17 @@ namespace Forms_TechServ
         {
             DialogResult answer;
             if (order is OrderAtHome)
-            {
-                answer = MessageBox.Show("Смена мастера в заказе приведет с удалению ВСЕХ выездов, связанных с этим закаом, хотите продолжить?", "ВНИМАНИЕ!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-            }
+                answer = MessageBox.Show(
+                    "Смена мастера в заказе приведет с удалению ВСЕХ выездов, связанных с этим закаом, хотите продолжить?",
+                    "ВНИМАНИЕ!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
             else
-            {
                 answer = DialogResult.Yes;
-            }
             if (answer == DialogResult.Yes)
             {
-
-                FormMasters formMasters = new FormMasters(true, order.Workshop);
+                var formMasters = new FormMasters(true, order.Workshop);
                 formMasters.ShowDialog();
 
-                Master newMaster = formMasters?.master;
+                var newMaster = formMasters?.master;
 
                 if (newMaster == null) return;
 
@@ -376,9 +325,7 @@ namespace Forms_TechServ
                     MessageBox.Show("Данный мастер не обслуживает категорию выбранной техники");
                 }
             }
-            
         }
-
 
 
         private void btnAutoMaster_MouseHover(object sender, EventArgs e)
@@ -388,14 +335,14 @@ namespace Forms_TechServ
 
         private void FillServices()
         {
-            List<OrderService> services = order.GetServices(
+            var services = order.GetServices(
                 false,
-                (int)comboBoxShowServicesRows.SelectedItem,
+                (int) comboBoxShowServicesRows.SelectedItem,
                 servicesCurrentPage,
                 out servicesRowsCount);
 
             dataServies.Rows.Clear();
-            for (int i = 0; i < services.Count; i++)
+            for (var i = 0; i < services.Count; i++)
             {
                 dataServies.Rows.Add(new DataGridViewRow());
 
@@ -412,31 +359,29 @@ namespace Forms_TechServ
                     dataServies.Rows[i].Cells[7].Value = "Удалить";
                     dataServies.Rows[i].Cells[7].Style.BackColor = Color.FromArgb(231, 57, 9);
                     dataServies.Rows[i].Cells[7].Style.ForeColor = Color.White;
-
                 }
             }
 
-            int maxPage = (int)Math.Ceiling((double)servicesRowsCount / (int)comboBoxShowServicesRows.SelectedItem);
+            var maxPage = (int) Math.Ceiling((double) servicesRowsCount / (int) comboBoxShowServicesRows.SelectedItem);
             numericCurrentServicePage.Maximum = maxPage;
 
             if (numericCurrentServicePage.Maximum > 0)
-                numericCurrentServicePage.Value = numericCurrentServicePage.Value == 0 ? 1 : numericCurrentServicePage.Value;
+                numericCurrentServicePage.Value =
+                    numericCurrentServicePage.Value == 0 ? 1 : numericCurrentServicePage.Value;
 
             labelServicesPageCout.Text = $"из {maxPage}";
         }
 
         private void FillSpareParts()
         {
-            List<OrderSparePart> spareParts = order.GetSpareParts(
-                (int)comboBoxShowSparePartsRows.SelectedItem,
+            var spareParts = order.GetSpareParts(
+                (int) comboBoxShowSparePartsRows.SelectedItem,
                 sparePartsCurrentPage,
                 out sparePartsRowsCount);
 
             dataSpareParts.Rows.Clear();
-            for (int i = 0; i < spareParts.Count; i++)
+            for (var i = 0; i < spareParts.Count; i++)
             {
-                
-
                 dataSpareParts.Rows.Add(new DataGridViewRow());
 
                 dataSpareParts.Rows[i].Cells[0].Value = spareParts[i].SparePart.Id;
@@ -450,16 +395,16 @@ namespace Forms_TechServ
                     dataSpareParts.Rows[i].Cells[5].Value = "Удалить";
                     dataSpareParts.Rows[i].Cells[5].Style.BackColor = Color.FromArgb(231, 57, 9);
                     dataSpareParts.Rows[i].Cells[5].Style.ForeColor = Color.White;
-
                 }
-
             }
 
-            int maxPage = (int)Math.Ceiling((double)sparePartsRowsCount / (int)comboBoxShowSparePartsRows.SelectedItem);
+            var maxPage =
+                (int) Math.Ceiling((double) sparePartsRowsCount / (int) comboBoxShowSparePartsRows.SelectedItem);
             numericCurrentSparePartPage.Maximum = maxPage;
 
             if (numericCurrentSparePartPage.Maximum > 0)
-                numericCurrentSparePartPage.Value = numericCurrentSparePartPage.Value == 0 ? 1 : numericCurrentSparePartPage.Value;
+                numericCurrentSparePartPage.Value =
+                    numericCurrentSparePartPage.Value == 0 ? 1 : numericCurrentSparePartPage.Value;
 
             labelSparePartsPageCount.Text = $"из {maxPage}";
         }
@@ -467,22 +412,24 @@ namespace Forms_TechServ
 
         private void btnDeleteService_Click(object sender, EventArgs e)
         {
-            if(dataServies.SelectedRows.Count > 0)
+            if (dataServies.SelectedRows.Count > 0)
             {
-                DialogResult answer = MessageBox.Show($"Вы уверены что хотите убрать ВСЕ выделенные услуги из заказа?", "Подтвердите действие", MessageBoxButtons.YesNo);
+                var answer = MessageBox.Show("Вы уверены что хотите убрать ВСЕ выделенные услуги из заказа?",
+                    "Подтвердите действие", MessageBoxButtons.YesNo);
                 if (answer == DialogResult.Yes)
                 {
-                    int deletedCount = 0;
+                    var deletedCount = 0;
                     foreach (DataGridViewRow row in dataServies.SelectedRows)
                     {
-                        OrderService anotherService = order.GetService(Convert.ToInt32(dataServies.Rows[row.Index].Cells[0].Value));
+                        var anotherService =
+                            order.GetService(Convert.ToInt32(dataServies.Rows[row.Index].Cells[0].Value));
                         order.DelService(anotherService);
                         deletedCount++;
                     }
+
                     FillServices();
                     RecalcFields();
                     MessageBox.Show($"{deletedCount} услуг были удалены");
-
                 }
             }
             else
@@ -495,19 +442,22 @@ namespace Forms_TechServ
         {
             if (lockedState) return;
 
-            var grid = (DataGridView)sender;
+            var grid = (DataGridView) sender;
 
             if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                OrderService serviceToDel = order.GetService((int)dataServies.SelectedRows[0].Cells[0].Value);
-                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить из заказа услугу с id {serviceToDel.ServiceId}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                var serviceToDel = order.GetService((int) dataServies.SelectedRows[0].Cells[0].Value);
+                var answer =
+                    MessageBox.Show($"Вы действительно хотите удалить из заказа услугу с id {serviceToDel.ServiceId}",
+                        "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (answer == DialogResult.Yes)
                 {
                     if (order.DelService(serviceToDel))
                     {
                         FillServices();
                         RecalcFields();
-                        MessageBox.Show("Услуга успешно удалена из заказа", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Услуга успешно удалена из заказа", "Готово", MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
                     }
                     else
                     {
@@ -519,40 +469,39 @@ namespace Forms_TechServ
 
         private void dataServies_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (lockedState || e.RowIndex == -1)
-            {
-                return;
-            }
-            OrderService orderService = order.GetService(Convert.ToInt32(dataServies.SelectedRows[0].Cells[0].Value));
-            FormManageOrderService formManageOrderService = new FormManageOrderService(orderService);//batchSparePart.Quantity, batchSparePart.UnitPrice);
+            if (lockedState || e.RowIndex == -1) return;
+            var orderService = order.GetService(Convert.ToInt32(dataServies.SelectedRows[0].Cells[0].Value));
+            var formManageOrderService =
+                new FormManageOrderService(orderService); //batchSparePart.Quantity, batchSparePart.UnitPrice);
             formManageOrderService.ShowDialog();
 
-            if (!formManageOrderService.changed)
-            {
-                return;
-            }
+            if (!formManageOrderService.changed) return;
 
             if (order.EditService(formManageOrderService.orderService))
             {
                 FillServices();
                 RecalcFields();
-                MessageBox.Show("Данные об услуге успешно изменены", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Данные об услуге успешно изменены", "Успех", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show($"Получены недопустимые значения", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Получены недопустимые значения", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
         }
 
         private void btnNextServ_Click(object sender, EventArgs e)
         {
-            numericCurrentServicePage.Value = numericCurrentServicePage.Value + 1 > numericCurrentServicePage.Maximum ? numericCurrentServicePage.Value : numericCurrentServicePage.Value + 1;
+            numericCurrentServicePage.Value = numericCurrentServicePage.Value + 1 > numericCurrentServicePage.Maximum
+                ? numericCurrentServicePage.Value
+                : numericCurrentServicePage.Value + 1;
         }
 
         private void btnPrevServ_Click(object sender, EventArgs e)
         {
-            numericCurrentServicePage.Value = numericCurrentServicePage.Value - 1 < numericCurrentServicePage.Minimum ? numericCurrentServicePage.Value : numericCurrentServicePage.Value - 1;
+            numericCurrentServicePage.Value = numericCurrentServicePage.Value - 1 < numericCurrentServicePage.Minimum
+                ? numericCurrentServicePage.Value
+                : numericCurrentServicePage.Value - 1;
         }
 
         private void comboBoxShowServicesRows_SelectedIndexChanged(object sender, EventArgs e)
@@ -562,8 +511,9 @@ namespace Forms_TechServ
 
         private void numericCurrentServicePage_ValueChanged(object sender, EventArgs e)
         {
-            numericCurrentServicePage.Value = (int)numericCurrentServicePage.Value;           // если ввели дробное число, оно автоматически округлится
-            servicesCurrentPage = (int)numericCurrentServicePage.Value;
+            numericCurrentServicePage.Value =
+                (int) numericCurrentServicePage.Value; // если ввели дробное число, оно автоматически округлится
+            servicesCurrentPage = (int) numericCurrentServicePage.Value;
             FillServices();
         }
 
@@ -584,23 +534,20 @@ namespace Forms_TechServ
             ChangeStatus();
 
             if (!checkPrepaid.Checked && order.PrepaymentRequired > 0)
-            {
                 checkRepaired.Enabled = false;
-            }
             else
-            {
                 checkRepaired.Enabled = true;
-            }
-
         }
 
         private void ChangeStatus()
         {
-            if ((order.PrepaymentRequired == 0 || checkPrepaid.Checked) && !comboBoxStatus.Items.Contains(OrderStatus.WaitingForRepairing.GetStatusString()))
+            if ((order.PrepaymentRequired == 0 || checkPrepaid.Checked) &&
+                !comboBoxStatus.Items.Contains(OrderStatus.WaitingForRepairing.GetStatusString()))
             {
                 comboBoxStatus.Items.Add(OrderStatus.WaitingForRepairing.GetStatusString());
             }
-            else if ((order.PrepaymentRequired != 0 && !checkPrepaid.Checked) && comboBoxStatus.Items.Contains(OrderStatus.WaitingForRepairing.GetStatusString()))
+            else if (order.PrepaymentRequired != 0 && !checkPrepaid.Checked &&
+                     comboBoxStatus.Items.Contains(OrderStatus.WaitingForRepairing.GetStatusString()))
             {
                 if (comboBoxStatus.SelectedItem.ToString() == OrderStatus.WaitingForRepairing.GetStatusString())
                 {
@@ -608,13 +555,14 @@ namespace Forms_TechServ
                     order.EditOrder();
                     comboBoxStatus.SelectedItem = OrderStatus.WaitingForSpareParts.GetStatusString();
                 }
+
                 comboBoxStatus.Items.Remove(OrderStatus.WaitingForRepairing.GetStatusString());
             }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void comboBoxShowSparePartsRows_SelectedIndexChanged(object sender, EventArgs e)
@@ -624,41 +572,49 @@ namespace Forms_TechServ
 
         private void numericCurrentSparePartPage_ValueChanged(object sender, EventArgs e)
         {
-            numericCurrentSparePartPage.Value = (int)numericCurrentSparePartPage.Value;           // если ввели дробное число, оно автоматически округлится
-            sparePartsCurrentPage = (int)numericCurrentSparePartPage.Value;
+            numericCurrentSparePartPage.Value =
+                (int) numericCurrentSparePartPage.Value; // если ввели дробное число, оно автоматически округлится
+            sparePartsCurrentPage = (int) numericCurrentSparePartPage.Value;
             FillSpareParts();
         }
 
 
         private void btnNextSparePart_Click(object sender, EventArgs e)
         {
-            numericCurrentSparePartPage.Value = numericCurrentSparePartPage.Value + 1 > numericCurrentSparePartPage.Maximum ? numericCurrentSparePartPage.Value : numericCurrentSparePartPage.Value + 1;
+            numericCurrentSparePartPage.Value =
+                numericCurrentSparePartPage.Value + 1 > numericCurrentSparePartPage.Maximum
+                    ? numericCurrentSparePartPage.Value
+                    : numericCurrentSparePartPage.Value + 1;
         }
 
         private void btnPrevSparePart_Click(object sender, EventArgs e)
         {
-            numericCurrentSparePartPage.Value = numericCurrentSparePartPage.Value - 1 < numericCurrentSparePartPage.Minimum ? numericCurrentSparePartPage.Value : numericCurrentSparePartPage.Value - 1;
+            numericCurrentSparePartPage.Value =
+                numericCurrentSparePartPage.Value - 1 < numericCurrentSparePartPage.Minimum
+                    ? numericCurrentSparePartPage.Value
+                    : numericCurrentSparePartPage.Value - 1;
         }
 
         private void btnDelSparePart_Click(object sender, EventArgs e)
         {
-            if(dataSpareParts.SelectedRows.Count > 0)
+            if (dataSpareParts.SelectedRows.Count > 0)
             {
-                DialogResult answer = MessageBox.Show("Вы уверен что хотите удалить ВСЕ выделенные детали из заказа?", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if(answer == DialogResult.Yes)
+                var answer = MessageBox.Show("Вы уверен что хотите удалить ВСЕ выделенные детали из заказа?",
+                    "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
                 {
-                    int deletedCount = 0;
+                    var deletedCount = 0;
                     foreach (DataGridViewRow row in dataSpareParts.SelectedRows)
                     {
-                        OrderSparePart anotherSparePart = order.GetSparePart(Convert.ToInt32(dataSpareParts.Rows[row.Index].Cells[0].Value));
+                        var anotherSparePart =
+                            order.GetSparePart(Convert.ToInt32(dataSpareParts.Rows[row.Index].Cells[0].Value));
                         anotherSparePart.DelSparePart();
                         deletedCount++;
                     }
+
                     FillSpareParts();
                     RecalcFields();
                     MessageBox.Show($"{deletedCount} деталей были удалены");
-
-
                 }
             }
             else
@@ -669,19 +625,23 @@ namespace Forms_TechServ
 
         private void DelSparePartCol_Click(object sender, DataGridViewCellEventArgs e)
         {
-            var grid = (DataGridView)sender;
+            var grid = (DataGridView) sender;
 
             if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
             {
-                OrderSparePart sparePartToDel = order.GetSparePart((int)dataSpareParts.SelectedRows[0].Cells[0].Value);
-                DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить из заказа деталь с id {sparePartToDel.SparePart.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                var sparePartToDel = order.GetSparePart((int) dataSpareParts.SelectedRows[0].Cells[0].Value);
+                var answer =
+                    MessageBox.Show(
+                        $"Вы действительно хотите удалить из заказа деталь с id {sparePartToDel.SparePart.Id}",
+                        "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (answer == DialogResult.Yes)
                 {
                     if (sparePartToDel.DelSparePart())
                     {
                         FillSpareParts();
                         RecalcFields();
-                        MessageBox.Show("Деталь успешно удалена из заказа", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Деталь успешно удалена из заказа", "Готово", MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
                     }
                     else
                     {
@@ -693,120 +653,81 @@ namespace Forms_TechServ
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if(!inOrder && (tbAddress.Text == null || tbAddress.Text == string.Empty))
-            {
+            if (!inOrder && (tbAddress.Text == null || tbAddress.Text == string.Empty))
                 MessageBox.Show("Адрес не может быть не указанным");
-            }
-            else if(!inOrder)
-            {
-                ((OrderAtHome)order).Address = tbAddress.Text;
-            }
+            else if (!inOrder) ((OrderAtHome) order).Address = tbAddress.Text;
 
-            if(order.MasterId != ((Master)tbMaster.Tag).Id)
-            {
+            if (order.MasterId != ((Master) tbMaster.Tag).Id)
                 if (!inOrder)
-                {
-                    foreach(Visit visit in ((OrderAtHome)order).GetVisits())
-                    {
+                    foreach (var visit in ((OrderAtHome) order).GetVisits())
                         visit.DelVisit();
-                    }
-                }
-            }
 
-            order.MasterId = ((Master)tbMaster.Tag).Id;
-            order.Master = (Master)tbMaster.Tag;
+            order.MasterId = ((Master) tbMaster.Tag).Id;
+            order.Master = (Master) tbMaster.Tag;
             order.ClientComment = tbComment.Text;
             order.PrepaymentMade = numericPaid.Value;
 
             if (!order.DateDiagnostic.HasValue && checkDiagnosted.Checked)
-            {
                 order.DateDiagnostic = DateTime.Now;
-            }
-            else if (order.DateDiagnostic.HasValue && !checkDiagnosted.Checked)
-            {
-                order.DateDiagnostic = null;
-            }
+            else if (order.DateDiagnostic.HasValue && !checkDiagnosted.Checked) order.DateDiagnostic = null;
 
             if (!order.DateClientAnswer.HasValue && checkAnswer.Checked)
-            {
                 order.DateClientAnswer = DateTime.Now;
-            }
-            else if (order.DateClientAnswer.HasValue && !checkAnswer.Checked)
-            {
-                order.DateClientAnswer = null;
-            }
+            else if (order.DateClientAnswer.HasValue && !checkAnswer.Checked) order.DateClientAnswer = null;
 
             if (!order.DatePrepayment.HasValue && checkPrepaid.Checked)
-            {
                 order.DatePrepayment = DateTime.Now;
-            }
-            else if (order.DatePrepayment.HasValue && !checkPrepaid.Checked)
-            {
-                order.DatePrepayment = null;
-            }
+            else if (order.DatePrepayment.HasValue && !checkPrepaid.Checked) order.DatePrepayment = null;
 
             if (!order.DatePaid.HasValue && checkPaid.Checked)
-            {
                 order.DatePaid = DateTime.Now;
-            }
-            else if (order.DatePaid.HasValue && !checkPaid.Checked)
-            {
-                order.DatePaid = null;
-            }
+            else if (order.DatePaid.HasValue && !checkPaid.Checked) order.DatePaid = null;
 
             if (!order.DateRepaired.HasValue && checkRepaired.Checked)
-            {
                 order.DateRepaired = DateTime.Now;
-            }
-            else if (order.DateRepaired.HasValue && !checkRepaired.Checked)
-            {
-                order.DateRepaired = null;
-            }
+            else if (order.DateRepaired.HasValue && !checkRepaired.Checked) order.DateRepaired = null;
 
-            if (!order.DateFinish.HasValue && comboBoxStatus.SelectedItem.ToString() == OrderStatus.Finished.GetStatusString()) 
+            if (!order.DateFinish.HasValue &&
+                comboBoxStatus.SelectedItem.ToString() == OrderStatus.Finished.GetStatusString())
             {
-                
-
                 if (!order.CheckServicesDone())
                 {
-                    DialogResult answer = MessageBox.Show("В заказе есть услуги, не помеченные как выполенные, желатете автоматически отметить все услуги в заказе, как выполненные?", "Выберите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    var answer = MessageBox.Show(
+                        "В заказе есть услуги, не помеченные как выполенные, желатете автоматически отметить все услуги в заказе, как выполненные?",
+                        "Выберите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                     if (answer == DialogResult.Yes)
-                    {
-                        foreach (OrderService service in order.GetServices(true))
+                        foreach (var service in order.GetServices(true))
                         {
                             service.Done = true;
                             order.EditService(service);
                         }
-                    }
 
                     if (answer == DialogResult.Cancel) return;
 
                     order.DateFinish = DateTime.Now;
                 }
-
-                
             }
-            else if (order.DateFinish.HasValue && comboBoxStatus.SelectedItem.ToString() != OrderStatus.Finished.GetStatusString())
+            else if (order.DateFinish.HasValue &&
+                     comboBoxStatus.SelectedItem.ToString() != OrderStatus.Finished.GetStatusString())
             {
                 order.DateFinish = null;
             }
 
-            if (!order.DateCancel.HasValue && comboBoxStatus.SelectedItem.ToString() == OrderStatus.Canceled.GetStatusString())
+            if (!order.DateCancel.HasValue &&
+                comboBoxStatus.SelectedItem.ToString() == OrderStatus.Canceled.GetStatusString())
             {
-                
-                DialogResult answer = MessageBox.Show("Желаете также автоматически удалить все запчасти из заказа, чтоб освободить их для других заказов?", "Выберите действие", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if(answer == DialogResult.Yes)
-                {
-                    foreach (OrderSparePart sparePart in order.GetSpareParts())
-                    {
+                var answer =
+                    MessageBox.Show(
+                        "Желаете также автоматически удалить все запчасти из заказа, чтоб освободить их для других заказов?",
+                        "Выберите действие", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
+                    foreach (var sparePart in order.GetSpareParts())
                         sparePart.DelSparePart();
-                    }
-                }
 
                 order.DateCancel = DateTime.Now;
-
             }
-            else if (order.DateCancel.HasValue && comboBoxStatus.SelectedItem.ToString() != OrderStatus.Canceled.GetStatusString())
+            else if (order.DateCancel.HasValue &&
+                     comboBoxStatus.SelectedItem.ToString() != OrderStatus.Canceled.GetStatusString())
             {
                 order.DateCancel = null;
             }
@@ -815,12 +736,14 @@ namespace Forms_TechServ
 
             if (order.EditOrder())
             {
-                MessageBox.Show("Информация о заказе успешно изменена", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                MessageBox.Show("Информация о заказе успешно изменена", "Успех", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                Close();
             }
             else
             {
-                MessageBox.Show("Ошибка сохранения данных", "Что-то пошло не так ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ошибка сохранения данных", "Что-то пошло не так ", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -828,43 +751,39 @@ namespace Forms_TechServ
         {
             DialogResult answer;
             if (order is OrderAtHome)
-            {
-                answer = MessageBox.Show("Смена мастера в заказе приведет с удалению ВСЕХ выездов, связанных с этим закаом, хотите продолжить?", "ВНИМАНИЕ!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-            }
+                answer = MessageBox.Show(
+                    "Смена мастера в заказе приведет с удалению ВСЕХ выездов, связанных с этим закаом, хотите продолжить?",
+                    "ВНИМАНИЕ!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
             else
-            {
                 answer = DialogResult.Yes;
-            }
             if (answer == DialogResult.Yes)
             {
                 if (!order.FindMaster())
                 {
-                    MessageBox.Show("Не удается найти мастера с требуемой категорией", "Что-то пошло не так", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Не удается найти мастера с требуемой категорией", "Что-то пошло не так",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                else
-                {
-                    Master newMaster = MastersList.GetById(order.MasterId, false);
-                    tbMaster.Text = newMaster.Name;
-                    tbMaster.Tag = newMaster;
-                }
-            }
 
+                var newMaster = MastersList.GetById(order.MasterId, false);
+                tbMaster.Text = newMaster.Name;
+                tbMaster.Tag = newMaster;
+            }
         }
 
         private void checkPrepaid_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkPrepaid.Checked && numericPaid.Value < order.PrepaymentRequired)
+            if (checkPrepaid.Checked && numericPaid.Value < order.PrepaymentRequired)
             {
-                DialogResult answer = MessageBox.Show("Указанная сумма внесенной предоплаты меньше расчитываемой суммы необходимой предоплаты, Вы уверены, что хотите продолжить?", "подтвердите дейтсвие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                if(answer != DialogResult.Yes)
-                {
-                    checkPrepaid.Checked = false;
-                }
+                var answer =
+                    MessageBox.Show(
+                        "Указанная сумма внесенной предоплаты меньше расчитываемой суммы необходимой предоплаты, Вы уверены, что хотите продолжить?",
+                        "подтвердите дейтсвие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                if (answer != DialogResult.Yes) checkPrepaid.Checked = false;
             }
 
 
-            if(!checkPrepaid.Checked && order.PrepaymentRequired > 0)
+            if (!checkPrepaid.Checked && order.PrepaymentRequired > 0)
             {
                 checkRepaired.Enabled = false;
                 checkRepaired.Checked = false;
@@ -874,16 +793,16 @@ namespace Forms_TechServ
                 checkRepaired.Enabled = true;
             }
 
-            if ((order.PrepaymentRequired == 0 || checkPrepaid.Checked) && !comboBoxStatus.Items.Contains(OrderStatus.WaitingForRepairing.GetStatusString()))
+            if ((order.PrepaymentRequired == 0 || checkPrepaid.Checked) &&
+                !comboBoxStatus.Items.Contains(OrderStatus.WaitingForRepairing.GetStatusString()))
             {
                 comboBoxStatus.Items.Add(OrderStatus.WaitingForRepairing.GetStatusString());
             }
-            else if ((order.PrepaymentRequired != 0 && !checkPrepaid.Checked) && comboBoxStatus.Items.Contains(OrderStatus.WaitingForRepairing.GetStatusString()))
+            else if (order.PrepaymentRequired != 0 && !checkPrepaid.Checked &&
+                     comboBoxStatus.Items.Contains(OrderStatus.WaitingForRepairing.GetStatusString()))
             {
                 if (comboBoxStatus.SelectedItem.ToString() == OrderStatus.WaitingForRepairing.GetStatusString())
-                {
                     comboBoxStatus.SelectedItem = OrderStatus.WaitingForSpareParts.GetStatusString();
-                }
                 comboBoxStatus.Items.Remove(OrderStatus.WaitingForRepairing.GetStatusString());
             }
         }
@@ -891,16 +810,15 @@ namespace Forms_TechServ
         private void numericPaid_ValueChanged(object sender, EventArgs e)
         {
             labelLeftToPay.Text = (order.FinalPrice - numericPaid.Value).ToString();
-            if(numericPaid.Value > 0 && !comboBoxStatus.Items.Contains(OrderStatus.WaitingForRefund.GetStatusString()))
+            if (numericPaid.Value > 0 && !comboBoxStatus.Items.Contains(OrderStatus.WaitingForRefund.GetStatusString()))
             {
                 comboBoxStatus.Items.Add(OrderStatus.WaitingForRefund.GetStatusString());
             }
-            else if (numericPaid.Value == 0 && comboBoxStatus.Items.Contains(OrderStatus.WaitingForRefund.GetStatusString()))
+            else if (numericPaid.Value == 0 &&
+                     comboBoxStatus.Items.Contains(OrderStatus.WaitingForRefund.GetStatusString()))
             {
-                if(comboBoxStatus.SelectedItem.ToString() == OrderStatus.WaitingForRefund.GetStatusString())
-                {
+                if (comboBoxStatus.SelectedItem.ToString() == OrderStatus.WaitingForRefund.GetStatusString())
                     comboBoxStatus.SelectedItem = OrderStatus.WaitingForSpareParts.GetStatusString();
-                }
                 comboBoxStatus.Items.Remove(OrderStatus.WaitingForRefund.GetStatusString());
             }
         }
@@ -916,98 +834,74 @@ namespace Forms_TechServ
                 checkAnswer.Checked = false;
                 checkAnswer.Enabled = false;
             }
-            if (checkDiagnosted.Checked && !comboBoxStatus.Items.Contains(OrderStatus.WaitingForAnswer.GetStatusString()))
-            {
+
+            if (checkDiagnosted.Checked &&
+                !comboBoxStatus.Items.Contains(OrderStatus.WaitingForAnswer.GetStatusString()))
                 comboBoxStatus.Items.Add(OrderStatus.WaitingForAnswer.GetStatusString());
-            }
             else if (comboBoxStatus.Items.Contains(OrderStatus.WaitingForAnswer.GetStatusString()))
-            {
                 comboBoxStatus.Items.Remove(OrderStatus.WaitingForAnswer.GetStatusString());
-            }
         }
 
         private void checkRepaired_CheckedChanged(object sender, EventArgs e)
         {
             if (checkRepaired.Checked)
-            {
-                foreach(OrderSparePart sparePart in order.GetSpareParts())
-                {
+                foreach (var sparePart in order.GetSpareParts())
                     if (!sparePart.CheckBatchesDelivered())
                     {
-                        MessageBox.Show("Еще не все указанные для ремонта детали прибыли, пока это действие сделать навозможно", "Невозможная операция", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(
+                            "Еще не все указанные для ремонта детали прибыли, пока это действие сделать навозможно",
+                            "Невозможная операция", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         checkRepaired.Checked = false;
                         break;
                     }
-                }
-            }
 
-            if (checkPaid.Checked && checkRepaired.Checked && !comboBoxStatus.Items.Contains(OrderStatus.Finished.GetStatusString()))
-            {
+            if (checkPaid.Checked && checkRepaired.Checked &&
+                !comboBoxStatus.Items.Contains(OrderStatus.Finished.GetStatusString()))
                 comboBoxStatus.Items.Add(OrderStatus.Finished.GetStatusString());
-            }
             else if (comboBoxStatus.Items.Contains(OrderStatus.Finished.GetStatusString()))
-            {
                 comboBoxStatus.Items.Remove(OrderStatus.Finished.GetStatusString());
-            }
         }
 
         private void checkPaid_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkPaid.Checked && checkRepaired.Checked && !comboBoxStatus.Items.Contains(OrderStatus.Finished.GetStatusString()))
-            {
+            if (checkPaid.Checked && checkRepaired.Checked &&
+                !comboBoxStatus.Items.Contains(OrderStatus.Finished.GetStatusString()))
                 comboBoxStatus.Items.Add(OrderStatus.Finished.GetStatusString());
-            }
             else if (comboBoxStatus.Items.Contains(OrderStatus.Finished.GetStatusString()))
-            {
                 comboBoxStatus.Items.Remove(OrderStatus.Finished.GetStatusString());
-            }
-
-            
         }
 
         private void labelProduct_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FormShowProduct formShowProduct = new FormShowProduct(true, ProductsList.GetById(order.ProductId, true));
+            var formShowProduct = new FormShowProduct(true, ProductsList.GetById(order.ProductId, true));
             formShowProduct.ShowDialog();
         }
 
         private void comboBoxStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(comboBoxStatus.SelectedItem.ToString() == OrderStatus.Finished.GetStatusString() || comboBoxStatus.SelectedItem.ToString() == OrderStatus.Canceled.GetStatusString())
-            {
+            if (comboBoxStatus.SelectedItem.ToString() == OrderStatus.Finished.GetStatusString() ||
+                comboBoxStatus.SelectedItem.ToString() == OrderStatus.Canceled.GetStatusString())
                 LockUnlockFields(false);
-            }
             else
-            {
                 LockUnlockFields(true);
-            }
         }
 
         private void LockUnlockFields(bool unlock)
         {
-            
             tbAddress.Enabled = unlock;
             btnFindMaster.Enabled = unlock;
             btnAutoMaster.Enabled = unlock;
             numericPaid.Enabled = unlock;
 
             if (!checkDiagnosted.Checked)
-            {
                 checkAnswer.Enabled = false;
-            }
             else
-            {
                 checkAnswer.Enabled = unlock;
-            }
 
             if (!checkPrepaid.Checked && order.PrepaymentRequired > 0)
-            {
                 checkRepaired.Enabled = false;
-            }
             else
-            {
                 checkRepaired.Enabled = unlock;
-            }
 
             checkDiagnosted.Enabled = unlock;
             checkPrepaid.Enabled = unlock;
@@ -1017,28 +911,26 @@ namespace Forms_TechServ
             btnDeleteService.Enabled = unlock;
             btnAddSparePart.Enabled = unlock;
             btnDelSparePart.Enabled = unlock;
-            
+
 
             if (unlock)
-            {
                 lockedState = false;
-            }
             else
-            {
                 lockedState = true;
-            }
         }
 
         private void btnDoneService_Click(object sender, EventArgs e)
         {
-            if(dataServies.SelectedRows.Count > 0)
+            if (dataServies.SelectedRows.Count > 0)
             {
-                DialogResult answer = MessageBox.Show("Вы уверены, что хотите отметить ВСЕ выбранные услуги, как оказанные?", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if(answer == DialogResult.Yes)
+                var answer = MessageBox.Show("Вы уверены, что хотите отметить ВСЕ выбранные услуги, как оказанные?",
+                    "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (answer == DialogResult.Yes)
                 {
                     foreach (DataGridViewRow row in dataServies.SelectedRows)
                     {
-                        OrderService anotherService = order.GetService(Convert.ToInt32(dataServies.Rows[row.Index].Cells[0].Value));
+                        var anotherService =
+                            order.GetService(Convert.ToInt32(dataServies.Rows[row.Index].Cells[0].Value));
                         if (!anotherService.Done)
                         {
                             anotherService.Done = true;
@@ -1055,12 +947,14 @@ namespace Forms_TechServ
         {
             if (dataServies.SelectedRows.Count > 0)
             {
-                DialogResult answer = MessageBox.Show("Вы уверены, что хотите отметить ВСЕ выбранные услуги, как не оказанные?", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                var answer = MessageBox.Show("Вы уверены, что хотите отметить ВСЕ выбранные услуги, как не оказанные?",
+                    "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (answer == DialogResult.Yes)
                 {
                     foreach (DataGridViewRow row in dataServies.SelectedRows)
                     {
-                        OrderService anotherService = order.GetService(Convert.ToInt32(dataServies.Rows[row.Index].Cells[0].Value));
+                        var anotherService =
+                            order.GetService(Convert.ToInt32(dataServies.Rows[row.Index].Cells[0].Value));
                         if (anotherService.Done)
                         {
                             anotherService.Done = false;
@@ -1075,14 +969,13 @@ namespace Forms_TechServ
 
         private void btnEditSparePartBatches_Click(object sender, EventArgs e)
         {
-            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs)e).RowIndex == -1)
-            {
-                return;             // если кликнули по хеадеру грида
-            }
+            if (e is DataGridViewCellMouseEventArgs && ((DataGridViewCellMouseEventArgs) e).RowIndex == -1)
+                return; // если кликнули по хеадеру грида
             if (dataSpareParts.SelectedRows.Count > 0)
             {
                 // ЕСЛИ ФОРМА ЗАБЛОКИРОВАНА (ЗАКАЗ ЗАВЕРШЕН/ОТМЕНЕН), ТО ОТКРЫВАЕМ ТОЛЬКО ПРОСМОТР БЕЗ РЕДАКТИВАРОНИЯ ЗА СЧЕТ lockedState
-                FormOrderBatches formOrderBatches = new FormOrderBatches(lockedState, order.GetSparePart((int)dataSpareParts.SelectedRows[0].Cells[0].Value));
+                var formOrderBatches = new FormOrderBatches(lockedState,
+                    order.GetSparePart((int) dataSpareParts.SelectedRows[0].Cells[0].Value));
                 formOrderBatches.ShowDialog();
 
                 FillSpareParts();

@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Forms_TechServ
 {
     public partial class FormShowRole : Form
     {
-        Role role;
-        Size pickedSize = new Size(1078, 600);
-        bool readOnly;
+        private readonly Size pickedSize = new Size(1078, 600);
+        private readonly bool readOnly;
+        private readonly Role role;
 
         public FormShowRole(bool readOnly, Role role)
         {
@@ -29,13 +23,13 @@ namespace Forms_TechServ
         {
             if (roleTabs.SelectedTab.Equals(generalPage))
             {
-                this.Size = new Size(586, 246);
+                Size = new Size(586, 246);
             }
             else if (roleTabs.SelectedTab.Equals(permissionsPage))
             {
-                this.Size = pickedSize;
+                Size = pickedSize;
 
-                FormPermissions formPermissions = new FormPermissions(true, role);
+                var formPermissions = new FormPermissions(true, role);
 
 
                 formPermissions.TopLevel = false;
@@ -49,10 +43,10 @@ namespace Forms_TechServ
 
         private void FormShowRole_Load(object sender, EventArgs e)
         {
-            if (readOnly || (!UserSession.Can("edit_role") && !UserSession.Can("add_del_role")))
+            if (readOnly || !UserSession.Can("edit_role") && !UserSession.Can("add_del_role"))
             {
                 panelEdit.Parent.Controls.Remove(panelEdit);
-                this.Width = this.Width - panelEdit.Width;
+                Width = Width - panelEdit.Width;
             }
             else
             {
@@ -72,30 +66,28 @@ namespace Forms_TechServ
 
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-            DialogResult answer = MessageBox.Show("Вы действительно хотите удалить эту роль?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            var answer = MessageBox.Show("Вы действительно хотите удалить эту роль?", "Подтверждение удаления",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (answer == DialogResult.Yes)
             {
-
                 if (role.DelRole())
                 {
                     MessageBox.Show("Роль успешно удалена", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close();
+                    Close();
                 }
                 else
                 {
                     MessageBox.Show("Данную роль удалить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
             }
             else
             {
-                return;
             }
         }
 
         private void editBtn_Click(object sender, EventArgs e)
         {
-            FormManageRole formManageRole = new FormManageRole(role);
+            var formManageRole = new FormManageRole(role);
             formManageRole.ShowDialog();
 
             FillForm();
@@ -103,7 +95,7 @@ namespace Forms_TechServ
 
         private void cancelBtn_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }
