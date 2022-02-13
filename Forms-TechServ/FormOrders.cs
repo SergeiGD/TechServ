@@ -331,7 +331,7 @@ namespace Forms_TechServ
         {
             // ЕСЛИ ФИЛЬТРЫ ПУСТЫЕ, ТО ПОЛУЧАЕМ ВСЕ ЗНАЧЕНИЯ
             int id;
-            int.TryParse(tbID.Text, out id);                                // получаем введенное для сортировки id
+            if (!int.TryParse(tbID.Text, out id) || id < 0) id = 0;                                // получаем введенное для сортировки id
 
             string sortBy = "Id";
 
@@ -443,6 +443,10 @@ namespace Forms_TechServ
                 if (FilterA.Id != 0)
                 {
                     tbID.Text = FilterA.Id.ToString();
+                }
+                else
+                {
+                    tbID.Clear();
                 }
 
                 tbWorkshop.Tag = FilterA?.Workshop;
@@ -910,7 +914,7 @@ namespace Forms_TechServ
         private void tbID_TextChanged(object sender, EventArgs e)
         {
             int id;
-            int.TryParse(tbID.Text, out id);
+            if (!int.TryParse(tbID.Text, out id) || id < 0) id = 0;
 
             FilterA.Id = id;
         }
@@ -956,7 +960,10 @@ namespace Forms_TechServ
             FilterB.FinalPrice = numericPriceUntil.Value;
         }
 
-        
+        private void btnIdInfo_MouseHover(object sender, EventArgs e)
+        {
+            toolTipIdInfo.SetToolTip(btnIdInfo, "id может быть только целом положительным числом");
+        }
     }
     
 }

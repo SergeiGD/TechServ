@@ -215,7 +215,7 @@ namespace Forms_TechServ
         {
             // ЕСЛИ ФИЛЬТРЫ ПУСТЫЕ, ТО ПОЛУЧАЕМ ВСЕ ЗНАЧЕНИЯ
             int id;
-            int.TryParse(tbID.Text, out id);                                // получаем введенное для сортировки id
+            if (!int.TryParse(tbID.Text, out id) || id < 0) id = 0;                                // получаем введенное для сортировки id
 
             string sortBy = "Id";
 
@@ -462,6 +462,9 @@ namespace Forms_TechServ
             tbWorkshop.Tag = null;
         }
 
-        
+        private void btnIdInfo_MouseHover(object sender, EventArgs e)
+        {
+            toolTipIdInfo.SetToolTip(btnIdInfo, "id может быть только целом положительным числом");
+        }
     }
 }

@@ -347,14 +347,34 @@ namespace Forms_TechServ
 
         private void btnFindMaster_Click(object sender, EventArgs e)
         {
-            DialogResult answer = MessageBox.Show("Смена мастера в заказе приведет с удалению ВСЕХ выездов и задач, связанных с этим закаом, хотите продолжить?", "ВНИМАНИЕ!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-            if(answer == DialogResult.Yes)
+            DialogResult answer;
+            if (order is OrderAtHome)
             {
+                answer = MessageBox.Show("Смена мастера в заказе приведет с удалению ВСЕХ выездов, связанных с этим закаом, хотите продолжить?", "ВНИМАНИЕ!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                answer = DialogResult.Yes;
+            }
+            if (answer == DialogResult.Yes)
+            {
+
                 FormMasters formMasters = new FormMasters(true, order.Workshop);
                 formMasters.ShowDialog();
 
-                tbMaster.Text = formMasters?.master.Name;
-                tbMaster.Tag = formMasters?.master;
+                Master newMaster = formMasters?.master;
+
+                if (newMaster == null) return;
+
+                if (newMaster.CheckMasterCategory(CategoriesList.GetById(order.Product.CategoryId, false)))
+                {
+                    tbMaster.Text = formMasters?.master?.Name;
+                    tbMaster.Tag = formMasters?.master;
+                }
+                else
+                {
+                    MessageBox.Show("Данный мастер не обслуживает категорию выбранной техники");
+                }
             }
             
         }
@@ -806,7 +826,15 @@ namespace Forms_TechServ
 
         private void btnAutoMaster_Click(object sender, EventArgs e)
         {
-            DialogResult answer = MessageBox.Show("Смена мастера в заказе приведет с удалению ВСЕХ выездов и задач, связанных с этим закаом, хотите продолжить?", "ВНИМАНИЕ!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            DialogResult answer;
+            if (order is OrderAtHome)
+            {
+                answer = MessageBox.Show("Смена мастера в заказе приведет с удалению ВСЕХ выездов, связанных с этим закаом, хотите продолжить?", "ВНИМАНИЕ!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                answer = DialogResult.Yes;
+            }
             if (answer == DialogResult.Yes)
             {
                 if (!order.FindMaster())
@@ -816,8 +844,9 @@ namespace Forms_TechServ
                 }
                 else
                 {
-                    tbMaster.Text = order.Master.Name;
-                    tbMaster.Tag = order.Master;
+                    Master newMaster = MastersList.GetById(order.MasterId, false);
+                    tbMaster.Text = newMaster.Name;
+                    tbMaster.Tag = newMaster;
                 }
             }
 

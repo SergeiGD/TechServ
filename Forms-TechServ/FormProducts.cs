@@ -158,7 +158,7 @@ namespace Forms_TechServ
         private void FillGrid()
         {
             int id;
-            int.TryParse(tbID.Text, out id);                                // получаем введенное для сортировки id
+            if (!int.TryParse(tbID.Text, out id) || id < 0) id = 0;                                // получаем введенное для сортировки id
 
             string sortBy = "Id";
 
@@ -398,10 +398,10 @@ namespace Forms_TechServ
             //t.SetToolTip(btnAskOrDesk, "");
         }
 
-        /*private void BtnShowInClient_Click(object sender, EventArgs e)
+        private void btnIdInfo_MouseHover(object sender, EventArgs e)
         {
-            FormShowProduct showProduct = new FormShowProduct(readOnly);
-            showProduct.ShowDialog();
-        }*/
+            toolTipIdInfo.SetToolTip(btnIdInfo, "id может быть только целом положительным числом");
+        }
+
     }
 }

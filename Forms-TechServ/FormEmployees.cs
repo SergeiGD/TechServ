@@ -83,6 +83,7 @@ namespace Forms_TechServ
             btnShow.Text = "Просмотреть";
             panelControl.Controls.Add(btnShow);
             btnShow.Click += BtnShow_Click;
+            dataEmployees.CellMouseDoubleClick += BtnShow_Click;
 
             ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
             mainBtn[0].Location = new Point(0, 0);
@@ -158,7 +159,7 @@ namespace Forms_TechServ
         {
             // ЕСЛИ ФИЛЬТРЫ ПУСТЫЕ, ТО ПОЛУЧАЕМ ВСЕ ЗНАЧЕНИЯ
             int id;
-            int.TryParse(tbID.Text, out id);                                // получаем введенное для сортировки id
+            if (!int.TryParse(tbID.Text, out id) || id < 0) id = 0;                                // получаем введенное для сортировки id
 
             string sortBy = "Id";
 
@@ -442,6 +443,9 @@ namespace Forms_TechServ
             toolTipSlalaryInfo.SetToolTip(btnSalaryInfo, "Ноль - до скольки угодно");
         }
 
-        
+        private void btnIdInfo_MouseHover(object sender, EventArgs e)
+        {
+            toolTipIdInfo.SetToolTip(btnIdInfo, "id может быть только целом положительным числом");
+        }
     }
 }

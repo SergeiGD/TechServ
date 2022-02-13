@@ -131,7 +131,9 @@ namespace Forms_TechServ
             comboBoxShowRows.SelectedIndex = 2;
 
             datePickerFrom.Value = order.DateStart.Value;
-            datePickerUnti.Value = order.DateStart.Value.AddMonths(6);
+            if (order.DateFinish.HasValue) datePickerUnti.Value = order.DateFinish.Value;
+            if (order.DateCancel.HasValue) datePickerUnti.Value = order.DateCancel.Value;
+            if (!order.DateFinish.HasValue && !order.DateCancel.HasValue) datePickerUnti.Value = order.DateStart.Value.AddMonths(3);
 
             FillGrid();
         }
@@ -139,7 +141,7 @@ namespace Forms_TechServ
         private void FillGrid()
         {
             int id;
-            int.TryParse(tbID.Text, out id);                                // получаем введенное для сортировки id
+            if (!int.TryParse(tbID.Text, out id) || id < 0) id = 0;                                // получаем введенное для сортировки id
 
             List<OrderLog> orderLogs = order.GetOrderLogs(
                 new OrderLog()
@@ -259,6 +261,11 @@ namespace Forms_TechServ
         {
             tbEmployee.Tag = null;
             tbEmployee.Clear();
+        }
+
+        private void btnIdInfo_MouseHover(object sender, EventArgs e)
+        {
+            toolTipIdInfo.SetToolTip(btnIdInfo, "id может быть только целом положительным числом");
         }
     }
 }

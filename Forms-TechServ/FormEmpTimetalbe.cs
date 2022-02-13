@@ -134,7 +134,7 @@ namespace Forms_TechServ
         {
             
             int id;
-            int.TryParse(tbID.Text, out id);                                // получаем введенное для сортировки id
+            if (!int.TryParse(tbID.Text, out id) || id < 0) id = 0;                                // получаем введенное для сортировки id
 
             List<EmployeeTimetable> timetables = employee.GetTimetables(
                 new EmployeeTimetable()
@@ -147,6 +147,7 @@ namespace Forms_TechServ
                 currentPage,
                 out rowsCount);
 
+            var culture = new System.Globalization.CultureInfo("ru-RU");
 
             dataTimetable.Rows.Clear();
             for (int i = 0; i < timetables.Count; i++)
@@ -155,7 +156,8 @@ namespace Forms_TechServ
 
                 dataTimetable.Rows[i].Cells[0].Value = timetables[i].Id;
                 dataTimetable.Rows[i].Cells[1].Value = timetables[i].ShiftStart.ToShortDateString();
-                dataTimetable.Rows[i].Cells[2].Value = timetables[i].ShiftStart.DayOfWeek;
+                //dataTimetable.Rows[i].Cells[2].Value = timetables[i].ShiftStart.DayOfWeek;
+                dataTimetable.Rows[i].Cells[2].Value = culture.DateTimeFormat.GetDayName(timetables[i].ShiftStart.DayOfWeek);
                 dataTimetable.Rows[i].Cells[3].Value = timetables[i].ShiftStart.ToShortTimeString();
                 dataTimetable.Rows[i].Cells[4].Value = timetables[i].ShiftEnd.ToShortTimeString();
 
@@ -251,6 +253,11 @@ namespace Forms_TechServ
                 FillGrid();
             }
             
+        }
+
+        private void btnIdInfo_MouseHover(object sender, EventArgs e)
+        {
+            toolTipIdInfo.SetToolTip(btnIdInfo, "id может быть только целом положительным числом");
         }
     }
 }

@@ -204,7 +204,7 @@ namespace Forms_TechServ
         private void FillGrid()
         {
             int id;
-            int.TryParse(tbID.Text, out id);                                // получаем введенное для сортировки id
+            if (!int.TryParse(tbID.Text, out id) || id < 0) id = 0;                                // получаем введенное для сортировки id
 
             string sortBy = "Id";
 
@@ -473,6 +473,9 @@ namespace Forms_TechServ
             toolTipPriceInfo.SetToolTip(btnSalaryInfo, "Ноль - до скольки угодно");
         }
 
-        
+        private void btnIdInfo_MouseHover(object sender, EventArgs e)
+        {
+            toolTipIdInfo.SetToolTip(btnIdInfo, "id может быть только целом положительным числом");
+        }
     }
 }

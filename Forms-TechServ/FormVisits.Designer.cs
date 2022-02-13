@@ -64,6 +64,8 @@ namespace Forms_TechServ
             this.btnClean = new Forms_TechServ.ManageButton();
             this.btnFind = new Forms_TechServ.ManageButton();
             this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
+            this.btnIdInfo = new FontAwesome.Sharp.IconButton();
+            this.toolTipIdInfo = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataVisits)).BeginInit();
             this.panelFind.SuspendLayout();
             this.panelContent.SuspendLayout();
@@ -141,6 +143,7 @@ namespace Forms_TechServ
             // 
             this.panelFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelFind.Controls.Add(this.btnIdInfo);
             this.panelFind.Controls.Add(this.btnAskOrDesk);
             this.panelFind.Controls.Add(this.comboBoxSortBy);
             this.panelFind.Controls.Add(this.label10);
@@ -313,7 +316,7 @@ namespace Forms_TechServ
             | System.Windows.Forms.AnchorStyles.Left)));
             this.tbID.Location = new System.Drawing.Point(71, 11);
             this.tbID.Name = "tbID";
-            this.tbID.Size = new System.Drawing.Size(117, 20);
+            this.tbID.Size = new System.Drawing.Size(84, 20);
             this.tbID.TabIndex = 25;
             // 
             // label4
@@ -501,6 +504,23 @@ namespace Forms_TechServ
             this.btnFind.UseVisualStyleBackColor = false;
             this.btnFind.Click += new System.EventHandler(this.searchBtn_Click);
             // 
+            // btnIdInfo
+            // 
+            this.btnIdInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnIdInfo.FlatAppearance.BorderSize = 0;
+            this.btnIdInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIdInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
+            this.btnIdInfo.IconColor = System.Drawing.Color.Black;
+            this.btnIdInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnIdInfo.IconSize = 20;
+            this.btnIdInfo.Location = new System.Drawing.Point(161, 10);
+            this.btnIdInfo.Name = "btnIdInfo";
+            this.btnIdInfo.Size = new System.Drawing.Size(27, 21);
+            this.btnIdInfo.TabIndex = 232;
+            this.btnIdInfo.UseVisualStyleBackColor = true;
+            this.btnIdInfo.MouseHover += new System.EventHandler(this.btnIdInfo_MouseHover);
+            // 
             // FormVisits
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -559,5 +579,7 @@ namespace Forms_TechServ
         private System.Windows.Forms.ComboBox comboBoxSortBy;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ToolTip toolTipCurrentSort;
+        private FontAwesome.Sharp.IconButton btnIdInfo;
+        private System.Windows.Forms.ToolTip toolTipIdInfo;
     }
 }

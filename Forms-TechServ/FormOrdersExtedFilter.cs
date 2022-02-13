@@ -348,7 +348,7 @@ namespace Forms_TechServ
         private void tbID_TextChanged(object sender, EventArgs e)
         {
             int id;
-            int.TryParse(tbID.Text, out id);
+            if (!int.TryParse(tbID.Text, out id) || id < 0) id = 0;
 
             FilterA.Id = id;
         }
@@ -695,6 +695,11 @@ namespace Forms_TechServ
         private void tbAddress_TextChanged(object sender, EventArgs e)
         {
             ((OrderAtHome)FilterA).Address = tbAddress.Text;
+        }
+
+        private void btnIdInfo_MouseHover(object sender, EventArgs e)
+        {
+            toolTipIdInfo.SetToolTip(btnIdInfo, "id может быть только целом положительным числом");
         }
     }
 }

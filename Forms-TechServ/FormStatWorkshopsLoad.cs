@@ -19,6 +19,12 @@ namespace Forms_TechServ
 
         private void btnBuild_Click(object sender, EventArgs e)
         {
+            if (dateTimePickerFrom.Value > dateTimePickerUntil.Value)
+            {
+                MessageBox.Show("Дата начала периода не может быть меньше даты конца", "Неверные данные", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             chartLoad.Series[0].Points.Clear();
 
             chartLoad.ChartAreas[0].AxisX.Title = "Мастерская";

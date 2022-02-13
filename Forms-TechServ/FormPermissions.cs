@@ -99,7 +99,7 @@ namespace Forms_TechServ
         private void FillGrid()
         {
             int id;
-            int.TryParse(tbID.Text, out id);
+            if (!int.TryParse(tbID.Text, out id) || id < 0) id = 0;
 
             List<Permission> permissions;
 
@@ -286,6 +286,11 @@ namespace Forms_TechServ
         private void btnPrev_Click(object sender, EventArgs e)
         {
             numericCurrentPage.Value = numericCurrentPage.Value - 1 < numericCurrentPage.Minimum ? numericCurrentPage.Value : numericCurrentPage.Value - 1;
+        }
+
+        private void btnIdInfo_MouseHover(object sender, EventArgs e)
+        {
+            toolTipIdInfo.SetToolTip(btnIdInfo, "id может быть только целом положительным числом");
         }
     }
 }

@@ -40,6 +40,9 @@ namespace Forms_TechServ
             this.numericPriceUntil = new System.Windows.Forms.NumericUpDown();
             this.numericPriceFrom = new System.Windows.Forms.NumericUpDown();
             this.panelFind = new System.Windows.Forms.Panel();
+            this.btnCleanStatus = new FontAwesome.Sharp.IconButton();
+            this.comboBoxStatus = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.btnPriceInfo = new FontAwesome.Sharp.IconButton();
             this.btnCleanFrom = new FontAwesome.Sharp.IconButton();
             this.btnCleanUntil = new FontAwesome.Sharp.IconButton();
@@ -67,9 +70,8 @@ namespace Forms_TechServ
             this.label9 = new System.Windows.Forms.Label();
             this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipPriceInfo = new System.Windows.Forms.ToolTip(this.components);
-            this.label11 = new System.Windows.Forms.Label();
-            this.comboBoxStatus = new System.Windows.Forms.ComboBox();
-            this.btnCleanStatus = new FontAwesome.Sharp.IconButton();
+            this.btnIdInfo = new FontAwesome.Sharp.IconButton();
+            this.toolTipIdInfo = new System.Windows.Forms.ToolTip(this.components);
             this.panelControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataBatches)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericPriceUntil)).BeginInit();
@@ -217,6 +219,7 @@ namespace Forms_TechServ
             // 
             this.panelFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelFind.Controls.Add(this.btnIdInfo);
             this.panelFind.Controls.Add(this.btnCleanStatus);
             this.panelFind.Controls.Add(this.comboBoxStatus);
             this.panelFind.Controls.Add(this.label11);
@@ -246,6 +249,45 @@ namespace Forms_TechServ
             this.panelFind.Name = "panelFind";
             this.panelFind.Size = new System.Drawing.Size(778, 107);
             this.panelFind.TabIndex = 4;
+            // 
+            // btnCleanStatus
+            // 
+            this.btnCleanStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCleanStatus.FlatAppearance.BorderSize = 0;
+            this.btnCleanStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCleanStatus.IconChar = FontAwesome.Sharp.IconChar.Times;
+            this.btnCleanStatus.IconColor = System.Drawing.SystemColors.ControlText;
+            this.btnCleanStatus.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnCleanStatus.IconSize = 17;
+            this.btnCleanStatus.Location = new System.Drawing.Point(753, 76);
+            this.btnCleanStatus.Name = "btnCleanStatus";
+            this.btnCleanStatus.Size = new System.Drawing.Size(18, 18);
+            this.btnCleanStatus.TabIndex = 133;
+            this.btnCleanStatus.UseVisualStyleBackColor = true;
+            this.btnCleanStatus.Click += new System.EventHandler(this.btnCleanStatus_Click);
+            // 
+            // comboBoxStatus
+            // 
+            this.comboBoxStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxStatus.FormattingEnabled = true;
+            this.comboBoxStatus.Location = new System.Drawing.Point(648, 74);
+            this.comboBoxStatus.Name = "comboBoxStatus";
+            this.comboBoxStatus.Size = new System.Drawing.Size(100, 21);
+            this.comboBoxStatus.TabIndex = 132;
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(584, 77);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(44, 13);
+            this.label11.TabIndex = 131;
+            this.label11.Text = "Статус:";
             // 
             // btnPriceInfo
             // 
@@ -403,7 +445,7 @@ namespace Forms_TechServ
             | System.Windows.Forms.AnchorStyles.Left)));
             this.tbID.Location = new System.Drawing.Point(94, 13);
             this.tbID.Name = "tbID";
-            this.tbID.Size = new System.Drawing.Size(121, 20);
+            this.tbID.Size = new System.Drawing.Size(91, 20);
             this.tbID.TabIndex = 23;
             // 
             // label2
@@ -561,44 +603,22 @@ namespace Forms_TechServ
             this.label9.TabIndex = 11;
             this.label9.Text = "Страница";
             // 
-            // label11
+            // btnIdInfo
             // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(584, 77);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(44, 13);
-            this.label11.TabIndex = 131;
-            this.label11.Text = "Статус:";
-            // 
-            // comboBoxStatus
-            // 
-            this.comboBoxStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxStatus.FormattingEnabled = true;
-            this.comboBoxStatus.Location = new System.Drawing.Point(648, 74);
-            this.comboBoxStatus.Name = "comboBoxStatus";
-            this.comboBoxStatus.Size = new System.Drawing.Size(100, 21);
-            this.comboBoxStatus.TabIndex = 132;
-            // 
-            // btnCleanStatus
-            // 
-            this.btnCleanStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCleanStatus.FlatAppearance.BorderSize = 0;
-            this.btnCleanStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCleanStatus.IconChar = FontAwesome.Sharp.IconChar.Times;
-            this.btnCleanStatus.IconColor = System.Drawing.SystemColors.ControlText;
-            this.btnCleanStatus.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnCleanStatus.IconSize = 17;
-            this.btnCleanStatus.Location = new System.Drawing.Point(753, 76);
-            this.btnCleanStatus.Name = "btnCleanStatus";
-            this.btnCleanStatus.Size = new System.Drawing.Size(18, 18);
-            this.btnCleanStatus.TabIndex = 133;
-            this.btnCleanStatus.UseVisualStyleBackColor = true;
-            this.btnCleanStatus.Click += new System.EventHandler(this.btnCleanStatus_Click);
+            this.btnIdInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnIdInfo.FlatAppearance.BorderSize = 0;
+            this.btnIdInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIdInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
+            this.btnIdInfo.IconColor = System.Drawing.Color.Black;
+            this.btnIdInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnIdInfo.IconSize = 20;
+            this.btnIdInfo.Location = new System.Drawing.Point(188, 13);
+            this.btnIdInfo.Name = "btnIdInfo";
+            this.btnIdInfo.Size = new System.Drawing.Size(27, 21);
+            this.btnIdInfo.TabIndex = 148;
+            this.btnIdInfo.UseVisualStyleBackColor = true;
+            this.btnIdInfo.MouseHover += new System.EventHandler(this.btnIdInfo_MouseHover);
             // 
             // FormBatches
             // 
@@ -666,5 +686,7 @@ namespace Forms_TechServ
         private System.Windows.Forms.ComboBox comboBoxStatus;
         private System.Windows.Forms.Label label11;
         private FontAwesome.Sharp.IconButton btnCleanStatus;
+        private FontAwesome.Sharp.IconButton btnIdInfo;
+        private System.Windows.Forms.ToolTip toolTipIdInfo;
     }
 }

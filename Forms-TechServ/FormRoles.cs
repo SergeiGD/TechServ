@@ -152,7 +152,7 @@ namespace Forms_TechServ
         {
             // ЕСЛИ ФИЛЬТРЫ ПУСТЫЕ, ТО ПОЛУЧАЕМ ВСЕ ЗНАЧЕНИЯ
             int id;
-            int.TryParse(tbID.Text, out id);                                            // получаем введенное для сортировки id
+            if (!int.TryParse(tbID.Text, out id) || id < 0) id = 0;                                            // получаем введенное для сортировки id
 
             List<Role> positions = RolesList.GetRoles(new Role()                       // Загружаем роли, с указанными сортировками
                 {
@@ -292,6 +292,11 @@ namespace Forms_TechServ
         private void btnCleanRoleType_Click(object sender, EventArgs e)
         {
             comboBoxRoleType.SelectedItem = null;
+        }
+
+        private void btnIdInfo_MouseHover(object sender, EventArgs e)
+        {
+            toolTipIdInfo.SetToolTip(btnIdInfo, "id может быть только целом положительным числом");
         }
     }
 }

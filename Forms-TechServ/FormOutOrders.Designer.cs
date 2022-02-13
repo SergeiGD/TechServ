@@ -80,6 +80,8 @@ namespace Forms_TechServ
             this.searchBtn = new Forms_TechServ.ManageButton();
             this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipPriceInfo = new System.Windows.Forms.ToolTip(this.components);
+            this.btnIdInfo = new FontAwesome.Sharp.IconButton();
+            this.toolTipIdInfo = new System.Windows.Forms.ToolTip(this.components);
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             this.panelFind.SuspendLayout();
@@ -175,6 +177,7 @@ namespace Forms_TechServ
             // 
             this.panelFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelFind.Controls.Add(this.btnIdInfo);
             this.panelFind.Controls.Add(this.checkBoxActive);
             this.panelFind.Controls.Add(this.btnCleanStatus);
             this.panelFind.Controls.Add(this.comboBoxStatus);
@@ -657,7 +660,7 @@ namespace Forms_TechServ
             | System.Windows.Forms.AnchorStyles.Left)));
             this.tbID.Location = new System.Drawing.Point(94, 10);
             this.tbID.Name = "tbID";
-            this.tbID.Size = new System.Drawing.Size(71, 20);
+            this.tbID.Size = new System.Drawing.Size(80, 20);
             this.tbID.TabIndex = 135;
             this.tbID.TextChanged += new System.EventHandler(this.tbID_TextChanged);
             // 
@@ -776,6 +779,23 @@ namespace Forms_TechServ
             this.searchBtn.UseVisualStyleBackColor = false;
             this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
             // 
+            // btnIdInfo
+            // 
+            this.btnIdInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnIdInfo.FlatAppearance.BorderSize = 0;
+            this.btnIdInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIdInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
+            this.btnIdInfo.IconColor = System.Drawing.Color.Black;
+            this.btnIdInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnIdInfo.IconSize = 20;
+            this.btnIdInfo.Location = new System.Drawing.Point(180, 11);
+            this.btnIdInfo.Name = "btnIdInfo";
+            this.btnIdInfo.Size = new System.Drawing.Size(27, 21);
+            this.btnIdInfo.TabIndex = 226;
+            this.btnIdInfo.UseVisualStyleBackColor = true;
+            this.btnIdInfo.MouseHover += new System.EventHandler(this.btnIdInfo_MouseHover);
+            // 
             // FormOutOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -852,5 +872,7 @@ namespace Forms_TechServ
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ToolTip toolTipCurrentSort;
         private System.Windows.Forms.ToolTip toolTipPriceInfo;
+        private FontAwesome.Sharp.IconButton btnIdInfo;
+        private System.Windows.Forms.ToolTip toolTipIdInfo;
     }
 }

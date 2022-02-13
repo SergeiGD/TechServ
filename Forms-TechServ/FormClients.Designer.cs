@@ -39,6 +39,7 @@ namespace Forms_TechServ
             this.numericCurrentPage = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.panelFind = new System.Windows.Forms.Panel();
+            this.btnOrdersInfo = new FontAwesome.Sharp.IconButton();
             this.btnAskOrDesk = new FontAwesome.Sharp.IconButton();
             this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -57,8 +58,9 @@ namespace Forms_TechServ
             this.BtnClean = new Forms_TechServ.ManageButton();
             this.btnFind = new Forms_TechServ.ManageButton();
             this.toolTipCurrentSort = new System.Windows.Forms.ToolTip(this.components);
-            this.btnOrdersInfo = new FontAwesome.Sharp.IconButton();
             this.toolTipOrdersInfo = new System.Windows.Forms.ToolTip(this.components);
+            this.btnIdInfo = new FontAwesome.Sharp.IconButton();
+            this.toolTipIdInfo = new System.Windows.Forms.ToolTip(this.components);
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericCurrentPage)).BeginInit();
             this.panelFind.SuspendLayout();
@@ -174,6 +176,7 @@ namespace Forms_TechServ
             // 
             this.panelFind.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelFind.Controls.Add(this.btnIdInfo);
             this.panelFind.Controls.Add(this.btnOrdersInfo);
             this.panelFind.Controls.Add(this.btnAskOrDesk);
             this.panelFind.Controls.Add(this.comboBoxSortBy);
@@ -192,6 +195,23 @@ namespace Forms_TechServ
             this.panelFind.Name = "panelFind";
             this.panelFind.Size = new System.Drawing.Size(778, 91);
             this.panelFind.TabIndex = 4;
+            // 
+            // btnOrdersInfo
+            // 
+            this.btnOrdersInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOrdersInfo.FlatAppearance.BorderSize = 0;
+            this.btnOrdersInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOrdersInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
+            this.btnOrdersInfo.IconColor = System.Drawing.Color.Black;
+            this.btnOrdersInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnOrdersInfo.IconSize = 20;
+            this.btnOrdersInfo.Location = new System.Drawing.Point(745, 55);
+            this.btnOrdersInfo.Name = "btnOrdersInfo";
+            this.btnOrdersInfo.Size = new System.Drawing.Size(27, 21);
+            this.btnOrdersInfo.TabIndex = 146;
+            this.btnOrdersInfo.UseVisualStyleBackColor = true;
+            this.btnOrdersInfo.MouseHover += new System.EventHandler(this.btnOrdersInfo_MouseHover);
             // 
             // btnAskOrDesk
             // 
@@ -256,7 +276,7 @@ namespace Forms_TechServ
             | System.Windows.Forms.AnchorStyles.Left)));
             this.tbID.Location = new System.Drawing.Point(83, 20);
             this.tbID.Name = "tbID";
-            this.tbID.Size = new System.Drawing.Size(117, 20);
+            this.tbID.Size = new System.Drawing.Size(88, 20);
             this.tbID.TabIndex = 27;
             // 
             // label4
@@ -396,22 +416,22 @@ namespace Forms_TechServ
             this.btnFind.UseVisualStyleBackColor = false;
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
-            // btnOrdersInfo
+            // btnIdInfo
             // 
-            this.btnOrdersInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOrdersInfo.FlatAppearance.BorderSize = 0;
-            this.btnOrdersInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOrdersInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
-            this.btnOrdersInfo.IconColor = System.Drawing.Color.Black;
-            this.btnOrdersInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnOrdersInfo.IconSize = 20;
-            this.btnOrdersInfo.Location = new System.Drawing.Point(745, 55);
-            this.btnOrdersInfo.Name = "btnOrdersInfo";
-            this.btnOrdersInfo.Size = new System.Drawing.Size(27, 21);
-            this.btnOrdersInfo.TabIndex = 146;
-            this.btnOrdersInfo.UseVisualStyleBackColor = true;
-            this.btnOrdersInfo.MouseHover += new System.EventHandler(this.btnOrdersInfo_MouseHover);
+            this.btnIdInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnIdInfo.FlatAppearance.BorderSize = 0;
+            this.btnIdInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIdInfo.IconChar = FontAwesome.Sharp.IconChar.Info;
+            this.btnIdInfo.IconColor = System.Drawing.Color.Black;
+            this.btnIdInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnIdInfo.IconSize = 20;
+            this.btnIdInfo.Location = new System.Drawing.Point(173, 19);
+            this.btnIdInfo.Name = "btnIdInfo";
+            this.btnIdInfo.Size = new System.Drawing.Size(27, 21);
+            this.btnIdInfo.TabIndex = 149;
+            this.btnIdInfo.UseVisualStyleBackColor = true;
+            this.btnIdInfo.MouseHover += new System.EventHandler(this.btnIdInfo_MouseHover);
             // 
             // FormClients
             // 
@@ -467,5 +487,7 @@ namespace Forms_TechServ
         private System.Windows.Forms.ToolTip toolTipCurrentSort;
         private FontAwesome.Sharp.IconButton btnOrdersInfo;
         private System.Windows.Forms.ToolTip toolTipOrdersInfo;
+        private FontAwesome.Sharp.IconButton btnIdInfo;
+        private System.Windows.Forms.ToolTip toolTipIdInfo;
     }
 }
