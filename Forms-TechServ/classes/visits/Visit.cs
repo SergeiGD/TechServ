@@ -41,7 +41,7 @@ namespace Forms_TechServ.classes.visits
                         EventDate = DateTime.Now,
                         EventDescription = $"Выезд №{this.Id} на время {this.DateVisit} добавлен к заказу"
                     };
-                    db.OrderLogs.Add(orderLog);
+                    orderLog.AddOrderLog();
 
 
                     db.SaveChanges();
@@ -70,7 +70,7 @@ namespace Forms_TechServ.classes.visits
                         EventDate = DateTime.Now,
                         EventDescription = $"Выезд №{this.Id} изменен. Запланированное время - {this.DateVisit}, выполнен - {this.Done}"
                     };
-                    db.OrderLogs.Add(orderLog);
+                    orderLog.AddOrderLog();
 
 
                     db.SaveChanges();
@@ -98,6 +98,7 @@ namespace Forms_TechServ.classes.visits
                 {
                     return false;
                 }
+
 
                 // ПОТОМ СМОТРИМ НЕ ЗАКОНЧИЛАСЬ ЛИ ЕГО СМЕНА К ВЫБРАННОМУ ВРЕМЕНИ
                 TimeRange shiftRange = new TimeRange(timetable.ShiftStart, timetable.ShiftEnd);
@@ -142,7 +143,7 @@ namespace Forms_TechServ.classes.visits
                     EventDate = DateTime.Now,
                     EventDescription = $"Выезд №{this.Id} был удален"
                 };
-                db.OrderLogs.Add(orderLog);
+                orderLog.AddOrderLog();
 
                 db.SaveChanges();
                 return true;
@@ -167,7 +168,6 @@ namespace Forms_TechServ.classes.visits
             {
 
                 IEnumerable<OrderService> services = from vs in this.GetVisitServices()
-                    //join v in db.Visits.Include(v => v.Order).Where(v => v.Order.MasterId == this.Order.MasterId) on vs.VisitId equals v.Id
                     join s in db.OrdersServices.Include(s => s.Service) on
                         new { ServiceId = vs.ServiceId, OrderId = this.OrderId }
                         equals
@@ -222,7 +222,7 @@ namespace Forms_TechServ.classes.visits
                         EventDate = DateTime.Now,
                         EventDescription = $"Выезд №{this.Id} был изменен. Добавлена запланированная услуга №{service.Id}"
                     };
-                    db.OrderLogs.Add(orderLog);
+                    orderLog.AddOrderLog();
 
 
                     db.SaveChanges();
@@ -256,7 +256,7 @@ namespace Forms_TechServ.classes.visits
                     EventDate = DateTime.Now,
                     EventDescription = $"Выезд №{this.Id} был изменен. Удалена запланированная услуга №{service.Id}"
                 };
-                db.OrderLogs.Add(orderLog);
+                orderLog.AddOrderLog();
 
                 db.SaveChanges();
                 return true;
@@ -284,7 +284,6 @@ namespace Forms_TechServ.classes.visits
             {
                 TimeSpan timeTaken = new TimeSpan(0);
                 var services = (from vs in this.GetVisitServices()
-                        //join v in db.Visits.Include(v => v.Order).Where(v => v.Order.MasterId == this.Order.MasterId) on vs.VisitId equals v.Id
                         join s in db.OrdersServices.Include(s => s.Service) on
                             new { ServiceId = vs.ServiceId, OrderId = this.OrderId }
                             equals

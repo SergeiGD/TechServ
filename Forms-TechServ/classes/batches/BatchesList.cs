@@ -81,9 +81,15 @@ namespace Forms_TechServ.classes.batches
                         b.TrackNumber.IndexOf(FilterA.TrackNumber, StringComparison.OrdinalIgnoreCase) > -1);
 
                 // В ЗАКАЗ МОЖЕМ ДОБАВИТЬ ТОЛЬКО ПОДТВЕРЖДЕННУЮ / ПРИБЫВШУЮ
-                batches = batches.Where(b => b.Status == BatchStatus.Подтверждена || b.Status == BatchStatus.Прибыла);
+                if (FilterA.Status != BatchStatus.Неопределенный)
+                    batches = batches.Where(b => b.Status == FilterA.Status);
+                else
+                {
+                    batches = batches.Where(b => b.Status == BatchStatus.Подтверждена || b.Status == BatchStatus.Прибыла);
+                }
 
-                if (FilterA.Workshop != null) batches = batches.Where(b => b.WorkshopId == FilterA.Workshop.Id);
+                if (FilterA.Workshop != null) 
+                    batches = batches.Where(b => b.WorkshopId == FilterA.Workshop.Id);
 
 
                 if (FilterA.DateDelivered.HasValue && !FilterB.DateDelivered.HasValue)
@@ -104,7 +110,7 @@ namespace Forms_TechServ.classes.batches
                     batches = batches.Where(b => b.Price >= FilterA.Price && b.Price <= FilterB.Price);
 
                 batches = batches.Where(b => b.CheckSparePart(sparePart));
-                batches = batches.Where(b => b.GetCountLeft(sparePart) > 0);
+                batches = batches.Where(b => b.GetCountLeft(sparePart) > 0);                                // НЕ ОТОБРАЖАЕМ ТЕ, ЧТО ЗАКОНЧИЛИСЬ
 
                 batches = batches.SortBy(sortBy, desk);
 

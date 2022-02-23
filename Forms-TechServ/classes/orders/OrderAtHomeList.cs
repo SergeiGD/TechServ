@@ -19,7 +19,7 @@ namespace Forms_TechServ.classes.orders
                 if (order != null)
                 {
                     db.Entry(order).Reference(o => o.Product).Load();
-                    //db.Entry(order).Reference(o => o.Product.Client).Load();
+
                     db.Entry(order).Reference(o => o.Workshop).Load();
   
                     db.Entry(order).Reference(o => o.Manager).Load();

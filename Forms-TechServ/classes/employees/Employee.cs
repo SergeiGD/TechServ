@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
@@ -15,7 +16,6 @@ namespace Forms_TechServ.classes.employees
         public string AdditionalInfo { get; set; }
         public string Password { get; set; }
         public decimal Salary { get; set; }
-        // WORKSHOP
         [Column("Id_Role")]
         public int RoleId { get; set; }
         [Column("Id_Role")]
@@ -26,6 +26,9 @@ namespace Forms_TechServ.classes.employees
         [Column("Id_Workshop")]
         public Workshop Workshop { get; set; }
 
+        public abstract bool AddEmployee();
+        public abstract bool DelEmployee();
+        public abstract bool EditEmployee();
 
         public List<EmployeeTimetable> GetTimetables(EmployeeTimetable FilterA, int count, int page, out int rowsCount)
         {

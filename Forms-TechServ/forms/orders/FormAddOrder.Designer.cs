@@ -106,6 +106,7 @@ namespace Forms_TechServ.forms.orders
             // 
             // tbWorkshop
             // 
+            this.tbWorkshop.Enabled = false;
             this.tbWorkshop.Location = new System.Drawing.Point(96, 81);
             this.tbWorkshop.Name = "tbWorkshop";
             this.tbWorkshop.ReadOnly = true;
@@ -237,6 +238,7 @@ namespace Forms_TechServ.forms.orders
             // 
             // tbProduct
             // 
+            this.tbProduct.Enabled = false;
             this.tbProduct.Location = new System.Drawing.Point(96, 48);
             this.tbProduct.Name = "tbProduct";
             this.tbProduct.ReadOnly = true;

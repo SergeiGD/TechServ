@@ -69,7 +69,7 @@ namespace Forms_TechServ.classes.orders
                     EventDate = DateTime.Now,
                     EventDescription = "Заказ создан"
                 };
-                db.OrderLogs.Add(orderLog);
+                orderLog.AddOrderLog();
 
                 db.SaveChanges();
                 return true;
@@ -111,13 +111,12 @@ namespace Forms_TechServ.classes.orders
                             EventDate = DateTime.Now,
                             EventDescription = $"{property.Name} изменен(а) с {stateBefore} на {stateCurrent}"
                         };
-                        db.OrderLogs.Add(orderLog);
+                        orderLog.AddOrderLog();
                     }
                     
                 }
 
                 db.Entry(order).CurrentValues.SetValues(this);
-                //db.Entry(this).State = EntityState.Modified;
                 db.SaveChanges();
                 return true;
             }
@@ -184,7 +183,7 @@ namespace Forms_TechServ.classes.orders
         {
             using (TechContext db = new TechContext())
             {
-                if (db.OrdersServices.Where(s => s.OrderId == this.Id && s.Done == false).Count() > 0) return false;
+                if (db.OrdersServices.Any(s => s.OrderId == this.Id && s.Done == false)) return false;
 
                 return true;
             }
@@ -300,7 +299,7 @@ namespace Forms_TechServ.classes.orders
                     EventDate = DateTime.Now,
                     EventDescription = $"Услуга №{service.ServiceId} в количестве {service.Quantity} добавлена к заказу. Цена за 1 услугу - {service.Price}, доп. скидка на услугу - {service.Sale}%"
                 };
-                db.OrderLogs.Add(orderLog);
+                orderLog.AddOrderLog();
                 db.SaveChanges();
 
 
@@ -323,7 +322,7 @@ namespace Forms_TechServ.classes.orders
                     EventDate = DateTime.Now,
                     EventDescription = $"Услуга №{service.ServiceId} удалена из заказа"
                 };
-                db.OrderLogs.Add(orderLog);
+                orderLog.AddOrderLog();
 
                 db.SaveChanges();
 
@@ -350,7 +349,7 @@ namespace Forms_TechServ.classes.orders
                     EventDate = DateTime.Now,
                     EventDescription = $"Услуга №{service.ServiceId} изменена в заказе. Текущее количество - {service.Quantity}, доп. скидка на услугу - {service.Sale}%, оказана - {service.Done}"
                 };
-                db.OrderLogs.Add(orderLog);
+                orderLog.AddOrderLog();
 
                 db.SaveChanges();
 
@@ -370,8 +369,8 @@ namespace Forms_TechServ.classes.orders
 
                 
 
-                foreach(Master master in from m in db.MastersCategories.Include(m => m.Master)//.Include(m => m.Category)
-                        where m.Master.WorkshopId == this.WorkshopId && m.Master.DelTime == null// && m.ch == product.CategoryId//this.Product.CategoryId
+                foreach(Master master in from m in db.MastersCategories.Include(m => m.Master)
+                        where m.Master.WorkshopId == this.WorkshopId && m.Master.DelTime == null
                         select m.Master)
                 {
                     if (master.CheckMasterCategory(category))
@@ -439,9 +438,7 @@ namespace Forms_TechServ.classes.orders
         {
             using (TechContext db = new TechContext())
             {
-                SparePartFromBatch sparePartFromBatch = db.OrdersSpareParts.Where(s => s.OrderId == this.Id && s.SparePartId == sparePart.Id).FirstOrDefault();
-
-                if (sparePartFromBatch != null)
+                if (db.OrdersSpareParts.Any(s => s.OrderId == this.Id && s.SparePartId == sparePart.Id))
                 {
                     return true;
                 }
@@ -449,6 +446,7 @@ namespace Forms_TechServ.classes.orders
                 {
                     return false;
                 }
+
             }
         }
 

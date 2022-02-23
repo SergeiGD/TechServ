@@ -42,7 +42,7 @@ namespace Forms_TechServ.classes.categories
         {
             using (var db = new TechContext())
             {
-                if (db.Categories.Where(c => c.ParentCategoryId == Id && c.DelTime == null).Count() == 0)
+                if (!db.Categories.Any(c => c.ParentCategoryId == Id && c.DelTime == null))
                 {
                     DelTime = DateTime.Now;
                     db.Entry(this).State = EntityState.Modified;

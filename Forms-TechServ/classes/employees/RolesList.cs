@@ -19,7 +19,7 @@ namespace Forms_TechServ.classes.employees
         {
             using (TechContext db = new TechContext())
             {
-                IEnumerable<Role> roles = db.Roles.Where(r => r.Id != 1 && r.DelTime == null);
+                IEnumerable<Role> roles = db.Roles.Where(r => r.Id != 1 && r.DelTime == null);              // 1 - гл. администратор и недоступен для просмотра
 
                 if (FilterA.Id != 0)
                 {

@@ -11,11 +11,12 @@ namespace Forms_TechServ.classes.employees
 {
     public class Master : Employee
     {
-        public bool AddMaster()
+        public override bool AddEmployee()
         {
             using (TechContext db = new TechContext())
             {
-                if (db.Employees.Where(e => e.DelTime == null && e.PhoneNum == this.PhoneNum && e.Id != this.Id).Count() != 0)
+                if (db.Employees.Any(e => 
+                        e.DelTime == null && e.PhoneNum == this.PhoneNum && e.Id != this.Id))
                 {
                     return false;
                 }
@@ -26,14 +27,13 @@ namespace Forms_TechServ.classes.employees
             }
         }
 
-        public bool DelMaster()
+        public override bool DelEmployee()
         {
             using (TechContext db = new TechContext())
             {
                 // ЕСТЬ ЛИ АКТИВНЫЕ ЗАКАЗЫ
-                Order order = db.Orders.Where(o => o.MasterId == this.Id && o.Status != OrderStatus.Canceled && o.Status != OrderStatus.Finished).FirstOrDefault();
-
-                if(order != null)
+                if (db.Orders.Any(o =>
+                        o.MasterId == this.Id && o.Status != OrderStatus.Canceled && o.Status != OrderStatus.Finished))
                 {
                     return false;
                 }
@@ -42,17 +42,15 @@ namespace Forms_TechServ.classes.employees
                 db.Entry(this).State = EntityState.Modified;
                 db.SaveChanges();
                 return true;
-               
+
             }
         }
 
-        
-
-        public bool EditMaster()
+        public override bool EditEmployee()
         {
             using (TechContext db = new TechContext())
             {
-                if (db.Employees.Where(e => e.DelTime == null && e.PhoneNum == this.PhoneNum && e.Id != this.Id).Count() != 0)
+                if (db.Employees.Any(e => e.DelTime == null && e.PhoneNum == this.PhoneNum && e.Id != this.Id))
                 {
                     return false;
                 }
@@ -155,7 +153,6 @@ namespace Forms_TechServ.classes.employees
                 rowsCount = categories.Count();
 
                 categories = categories.Skip((page - 1) * count).Take(count);
-                //categories = 
                 return categories.ToList();
             }
         }

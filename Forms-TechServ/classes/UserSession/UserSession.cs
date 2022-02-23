@@ -34,16 +34,15 @@ namespace Forms_TechServ.classes.UserSession
                     return false;
                 }
 
-                if(employee.RoleId == 1)                // 1 - главный администратор системы, доступны все права
+                if (employee.RoleId == 1) // 1 - главный администратор системы, доступны все права
                 {
                     return true;
                 }
 
-                if(db.RolesPermissions.Where(rp => rp.RoleId == employee.RoleId && rp.Permission.Code == code).FirstOrDefault() != null)
+                if (db.RolesPermissions.Any(rp => rp.RoleId == employee.RoleId && rp.Permission.Code == code))
                 {
                     return true;
                 }
-
 
                 return false;
             }

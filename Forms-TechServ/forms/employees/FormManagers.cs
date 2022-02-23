@@ -227,7 +227,7 @@ namespace Forms_TechServ.forms.employees
                 DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить сотрудника с id {managerToDel.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (answer == DialogResult.Yes)
                 {
-                    if (managerToDel.DelManager())
+                    if (managerToDel.DelEmployee())
                     {
                         MessageBox.Show("Сотрудник успешно удалено", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         FillGrid();

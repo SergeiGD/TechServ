@@ -28,7 +28,6 @@ namespace Forms_TechServ.classes.employees
 
                 if (FilterA.Name != null && FilterA.Name != string.Empty)
                 {
-                    //query = query.Where(r => r.Name.Contains(FilterA.Name));
                     permissions = permissions.Where(r => r.Name.IndexOf(FilterA.Name, StringComparison.OrdinalIgnoreCase) > -1);
                 }
 

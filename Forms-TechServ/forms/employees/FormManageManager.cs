@@ -95,7 +95,7 @@ namespace Forms_TechServ.forms.employees
 
                 if(manager.Id == 0)
                 {
-                    if(manager.AddManager())
+                    if(manager.AddEmployee())
                     {
                         DialogResult answer = MessageBox.Show($"Новый сотрудник успешно добавлен. ID - {manager.Id}. Желаете добавить расписание?", "Успех", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                         this.Hide();
@@ -117,7 +117,7 @@ namespace Forms_TechServ.forms.employees
                     manager.Role = (Role)tbPosition.Tag;                // чтоб не было конфликта нав. свойств при изменение, вручную полностью сменим их
                     manager.Workshop = (Workshop)tbWorkshop.Tag;        // чтоб не было конфликта нав. свойств при изменение, вручную полностью сменим их
 
-                    if(manager.EditManager())
+                    if(manager.EditEmployee())
                     {
                         MessageBox.Show($"Данные о сотруднике успешно изменены", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

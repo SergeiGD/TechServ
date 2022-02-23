@@ -52,9 +52,8 @@ namespace Forms_TechServ.classes.products
         {
             using (TechContext db = new TechContext())
             {
-                Order order = db.Orders.Where(o => o.ProductId == this.Id && o.Status != OrderStatus.Canceled && o.Status != OrderStatus.Finished).FirstOrDefault();
 
-                if (order != null)
+                if (db.Orders.Any(o => o.ProductId == this.Id && o.Status != OrderStatus.Canceled && o.Status != OrderStatus.Finished))
                 {
                     return false;
                 }

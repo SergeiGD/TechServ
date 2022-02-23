@@ -26,7 +26,7 @@ namespace Forms_TechServ.classes.orders
                     EventDate = DateTime.Now,
                     EventDescription = "Заказ создан"
                 };
-                db.OrderLogs.Add(orderLog);
+                orderLog.AddOrderLog();
 
                 db.SaveChanges();
                 return true;
@@ -66,7 +66,7 @@ namespace Forms_TechServ.classes.orders
                             EventDate = DateTime.Now,
                             EventDescription = $"{property.Name} изменен(а) с {stateBefore} на {stateCurrent}"
                         };
-                        db.OrderLogs.Add(orderLog);
+                        orderLog.AddOrderLog();
                     }
 
                 }

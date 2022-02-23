@@ -33,12 +33,13 @@ namespace Forms_TechServ.classes.clients
         {
             using (var db = new TechContext())
             {
-                var order = db.Orders.Include(o => o.Product).Where(o =>
-                        o.Product.ClientId == Id && o.Status != OrderStatus.Canceled &&
-                        o.Status != OrderStatus.Finished)
-                    .FirstOrDefault();
 
-                if (order != null) return false;
+                if(db.Orders.Include(o => o.Product).Any(o =>
+                    o.Product.ClientId == Id && o.Status != OrderStatus.Canceled &&
+                    o.Status != OrderStatus.Finished))
+                {
+                    return false;
+                }
 
                 foreach (var product in db.Products.Where(p => p.ClientId == Id))
                 {

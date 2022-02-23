@@ -95,10 +95,14 @@ namespace Forms_TechServ.forms.batches
                 mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
             }
 
-            btnClean.Click += btnCleanAll_Click;
+            btnClean.Click += btnOrder_Click;
 
             tbWorkshop.Text = workshop.Location;
             tbWorkshop.Tag = workshop;
+
+            tbWorkshop.Enabled = false;
+            btnCleanWorkshop.Enabled = false;
+            btnFindWorkshop.Enabled = false;
         }
 
         public FormBatches(Workshop workshop, bool readOnly)
@@ -214,6 +218,7 @@ namespace Forms_TechServ.forms.batches
             foreach (BatchStatus status in Enum.GetValues(typeof(BatchStatus)))
             {
                 if (status == BatchStatus.Неопределенный) continue;
+                if(sparePart != null && status == BatchStatus.Создана) continue;
                 comboBoxStatus.Items.Add(status);
             }
             comboBoxStatus.SelectedItem = null;
@@ -253,7 +258,7 @@ namespace Forms_TechServ.forms.batches
             {
                 sortBy = "DateDelivered";
             }
-            else if (comboBoxSortBy.SelectedItem.ToString() == "Статусу1")
+            else if (comboBoxSortBy.SelectedItem.ToString() == "Статусу")
             {
                 sortBy = "Status";
             }
@@ -542,6 +547,21 @@ namespace Forms_TechServ.forms.batches
         }
 
         private void btnCleanInWorkshop_Click(object sender, EventArgs e)
+        {
+            tbID.Clear();
+            tbTrackNum.Clear();
+            datePickerFrom.Format = DateTimePickerFormat.Custom;
+            datePickerFrom.CustomFormat = " ";
+            datePickerUntil.Format = DateTimePickerFormat.Custom;
+            datePickerUntil.CustomFormat = " ";
+            numericPriceFrom.Value = 0;
+            numericPriceUntil.Value = 0;
+            comboBoxStatus.SelectedItem = null;
+
+            FillGrid();
+        }
+
+        private void btnOrder_Click(object sender, EventArgs e)
         {
             tbID.Clear();
             tbTrackNum.Clear();

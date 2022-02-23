@@ -258,20 +258,14 @@ namespace Forms_TechServ.classes.employees
                 DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить сотрудника с id {employeeToDel.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (answer == DialogResult.Yes)
                 {
-                    switch (employeeToDel)
+                    if (employeeToDel.DelEmployee())
                     {
-                        case Master master when master.DelMaster():
-                            MessageBox.Show("Сотрудник успешно удалено", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            FillGrid();
-                            break;
-                        case Manager manager when manager.DelManager():
-                            MessageBox.Show("Сотрудник успешно удалено", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            FillGrid();
-                            break;
-                        default:
-                            MessageBox.Show("У сотрудника есть незавершенный заказ, пока его удалить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-
+                        MessageBox.Show("Сотрудник успешно удалено", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FillGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("У сотрудника есть незавершенный заказ, пока его удалить нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

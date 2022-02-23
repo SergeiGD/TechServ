@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Forms_TechServ.classes;
+using Forms_TechServ.classes.categories;
 using Forms_TechServ.classes.employees;
 using Forms_TechServ.classes.orders;
 using Forms_TechServ.classes.products;
@@ -59,6 +60,15 @@ namespace Forms_TechServ.forms.orders
             tbProduct.Text = formProducts?.product?.Name;
             tbProduct.Tag = formProducts?.product;
 
+            Product pickedProduct = formProducts.product;
+
+            if (pickedProduct != null && tbMaster.Tag != null &&
+                !((Master) tbMaster.Tag).CheckMasterCategory(CategoriesList.GetById(pickedProduct.CategoryId, false)))
+            {
+                tbMaster.Tag = null;
+                tbMaster.Clear();
+            }
+
             if(formProducts.product != null && String.IsNullOrEmpty(tbAddress.Text))
             {
                 string lastAddress = formProducts.product.Client.GetLastAddress();
@@ -70,12 +80,21 @@ namespace Forms_TechServ.forms.orders
         {
             if(tbWorkshop.Tag != null)
             {
-                FormMasters formMasters = new FormMasters(true, (Workshop)tbWorkshop.Tag);
-                formMasters.ShowDialog();
+                FormMasters formMasters;
+                if (tbProduct.Tag != null)
+                {
+                    formMasters = new FormMasters(CategoriesList.GetById(((Product)tbProduct.Tag).CategoryId, false), (Workshop)tbWorkshop.Tag);
+                    formMasters.ShowDialog();
+                }
+                else
+                {
+                    formMasters = new FormMasters(true, (Workshop)tbWorkshop.Tag);
+                    formMasters.ShowDialog();
+                }
 
                 Master master = formMasters?.master;
 
-                if (master != null)
+                if (master != null && tbProduct.Tag != null)
                 {
                     if (master.CheckMasterCategory(((Product)tbProduct.Tag).Category))
                     {
@@ -87,7 +106,11 @@ namespace Forms_TechServ.forms.orders
                         MessageBox.Show("Данный мастер не обслуживает категорию выбранной техники");
                     }
                 }
-
+                else if (master != null)
+                {
+                    tbMaster.Text = formMasters?.master?.Name;
+                    tbMaster.Tag = formMasters?.master;
+                }
                 
             }
             else
@@ -139,6 +162,13 @@ namespace Forms_TechServ.forms.orders
 
             tbWorkshop.Text = formWorkshops?.workshop?.Location;
             tbWorkshop.Tag = formWorkshops?.workshop;
+
+            if (formWorkshops.workshop != null && tbMaster.Tag != null &&
+                (formWorkshops.workshop).Id != ((Master) tbMaster.Tag).WorkshopId)
+            {
+                tbMaster.Tag = null;
+                tbMaster.Clear();
+            }
         }
 
         private void radioMaster_CheckedChanged(object sender, EventArgs e)

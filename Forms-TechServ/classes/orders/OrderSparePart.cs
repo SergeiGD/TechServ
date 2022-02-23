@@ -63,7 +63,7 @@ namespace Forms_TechServ.classes.orders
                         EventDate = DateTime.Now,
                         EventDescription = $"Деталь №{this.SparePart.Id} из поставки {batch.Id} в количестве {quantity} добавлена к заказу"
                     };
-                    db.OrderLogs.Add(orderLog);
+                    orderLog.AddOrderLog();
 
                     db.SaveChanges();
 
@@ -96,7 +96,7 @@ namespace Forms_TechServ.classes.orders
                     EventDate = DateTime.Now,
                     EventDescription = $"Деталь №{this.SparePart.Id} из поставки {batch.Id} в количестве {sparePartFromBatch.Quantity} удалена из заказа"
                 };
-                db.OrderLogs.Add(orderLog);
+                orderLog.AddOrderLog();
 
                 db.SaveChanges();
 
@@ -131,7 +131,7 @@ namespace Forms_TechServ.classes.orders
                     EventDate = DateTime.Now,
                     EventDescription = $"Количества детали №{this.SparePart.Id} из поставки {batch.Id} изменено с {sparePartFromBatch.Quantity} на {quantityNew}"
                 };
-                db.OrderLogs.Add(orderLog);
+                orderLog.AddOrderLog();
 
                 sparePartFromBatch.Quantity = quantityNew;
 
@@ -225,7 +225,7 @@ namespace Forms_TechServ.classes.orders
                     EventDate = DateTime.Now,
                     EventDescription = $"Деталь №{this.SparePart.Id} удалена из заказа"
                 };
-                db.OrderLogs.Add(orderLog);
+                orderLog.AddOrderLog();
 
                 db.SaveChanges();
 
@@ -269,7 +269,7 @@ namespace Forms_TechServ.classes.orders
                                 EventDate = DateTime.Now,
                                 EventDescription = $"Деталь №{this.SparePart.Id} из поставки {batch.Id} в количестве {quantity} добавлена к заказу"
                             };
-                            db.OrderLogs.Add(orderLog);
+                            orderLog.AddOrderLog();
 
                             quantity = 0;
                             db.SaveChanges();
@@ -293,7 +293,7 @@ namespace Forms_TechServ.classes.orders
                                 EventDate = DateTime.Now,
                                 EventDescription = $"Деталь №{this.SparePart.Id} из поставки {batch.Id} в количестве {batch.GetCountLeft(SparePart)} добавлена к заказу"
                             };
-                            db.OrderLogs.Add(orderLog);
+                            orderLog.AddOrderLog();
 
                             db.SaveChanges();
 
@@ -321,7 +321,7 @@ namespace Forms_TechServ.classes.orders
                                     EventDate = DateTime.Now,
                                     EventDescription = $"Деталь №{this.SparePart.Id} из поставки {batch.Id} в количестве {quantity} добавлена к заказу"
                                 };
-                                db.OrderLogs.Add(orderLog);
+                                orderLog.AddOrderLog();
 
                                 quantity = 0;
                                 db.SaveChanges();
@@ -345,7 +345,7 @@ namespace Forms_TechServ.classes.orders
                                     EventDate = DateTime.Now,
                                     EventDescription = $"Деталь №{this.SparePart.Id} из поставки {batch.Id} в количестве {batch.GetCountLeft(SparePart)} добавлена к заказу"
                                 };
-                                db.OrderLogs.Add(orderLog);
+                                orderLog.AddOrderLog();
 
                                 db.SaveChanges();
 

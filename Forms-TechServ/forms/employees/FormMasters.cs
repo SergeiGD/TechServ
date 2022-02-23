@@ -119,10 +119,46 @@ namespace Forms_TechServ.forms.employees
             btnFindWorkshop.Enabled = false;
             btnCleanWorkshop.Enabled = false;
 
-            clearBtn.Click += clearBtnWithoutWorkshop_Click;
+            clearBtn.Click += clearInWorkshop_Click;
         }
 
+        public FormMasters(Category category, Workshop workshop)
+        {
+            InitializeComponent();
 
+            readOnly = true;
+
+            ManageButton btnPick = new ManageButton();
+            btnPick.Text = "Выбрать";
+            panelControl.Controls.Add(btnPick);
+            btnPick.Click += BtnPick_Click;
+
+            dataMasters.CellMouseDoubleClick += BtnPick_Click;
+
+            ManageButton btnShow = new ManageButton();
+            btnShow.Text = "Просмотреть";
+            panelControl.Controls.Add(btnShow);
+            btnShow.Click += BtnShow_Click;
+
+            ManageButton[] mainBtn = panelControl.Controls.OfType<ManageButton>().ToArray();
+            mainBtn[0].Location = new Point(0, 0);
+            for (int i = 1; i < mainBtn.Count(); i++)
+            {
+                mainBtn[i].Location = new Point(0, mainBtn[i - 1].Location.Y + mainBtn[i - 1].Size.Height);
+            }
+
+            tbCat.Text = category.Name;
+            tbCat.Tag = category;
+            btnFindCat.Enabled = false;
+            btnCleanCat.Enabled = false;
+
+            tbWorkshop.Text = workshop.Location;
+            tbWorkshop.Tag = workshop;
+            btnFindWorkshop.Enabled = false;
+            btnCleanWorkshop.Enabled = false;
+
+            clearBtn.Click += clearInOrder_Click;
+        }
 
         private void BtnManage_Click(object sender, EventArgs e)
         {
@@ -335,7 +371,7 @@ namespace Forms_TechServ.forms.employees
                 DialogResult answer = MessageBox.Show($"Вы действительно хотите удалить сотрудника с id {masterToDel.Id}", "Подтвердите действие", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (answer == DialogResult.Yes)
                 {
-                    if (masterToDel.DelMaster())
+                    if (masterToDel.DelEmployee())
                     {
                         MessageBox.Show("Сотрудник успешно удалено", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         FillGrid();
@@ -395,7 +431,7 @@ namespace Forms_TechServ.forms.employees
             FillGrid();
         }
 
-        private void clearBtnWithoutWorkshop_Click(object sender, EventArgs e)
+        private void clearInWorkshop_Click(object sender, EventArgs e)
         {
             tbID.Clear();
             tbName.Clear();
@@ -407,6 +443,20 @@ namespace Forms_TechServ.forms.employees
             tbPosition.Tag = null;
             tbCat.Clear();
             tbCat.Tag = null;
+
+            FillGrid();
+        }
+
+        private void clearInOrder_Click(object sender, EventArgs e)
+        {
+            tbID.Clear();
+            tbName.Clear();
+            tbPhoneNum.Clear();
+            tbPosition.Clear();
+            numericSalaryFrom.Value = 0;
+            numericSalaryUntil.Value = 0;
+            tbPosition.Clear();
+            tbPosition.Tag = null;
 
             FillGrid();
         }

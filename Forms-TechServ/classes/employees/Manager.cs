@@ -10,11 +10,11 @@ namespace Forms_TechServ.classes.employees
     {
         public bool Remotely { get; set; }
 
-        public bool AddManager()
+        public override bool AddEmployee()
         {
             using (TechContext db = new TechContext())
             {
-                if(db.Employees.Where(e => e.DelTime == null && e.PhoneNum == this.PhoneNum).Count() != 0)
+                if(db.Employees.Any(e => e.DelTime == null && e.PhoneNum == this.PhoneNum))
                 {
                     return false;
                 }
@@ -26,13 +26,12 @@ namespace Forms_TechServ.classes.employees
             }
         }
 
-        public bool DelManager()
+        public override bool DelEmployee()
         {
             using (TechContext db = new TechContext())
             {
-                Order order = db.Orders.Where(o => o.ManagerId == this.Id && o.Status != OrderStatus.Canceled && o.Status != OrderStatus.Finished).FirstOrDefault();
-
-                if (order != null)
+                // ЕСТЬ ЛИ НЕЗАВЕРШЕННЫЕ ЗАКАЗЫ
+                if (db.Orders.Any(o => o.ManagerId == this.Id && o.Status != OrderStatus.Canceled && o.Status != OrderStatus.Finished))
                 {
                     return false;
                 }
@@ -46,11 +45,11 @@ namespace Forms_TechServ.classes.employees
             }
         }
 
-        public bool EditManager()
+        public override bool EditEmployee()
         {
             using (TechContext db = new TechContext())
             {
-                if (db.Employees.Where(e => e.DelTime == null && e.PhoneNum == this.PhoneNum && e.Id != this.Id).Count() != 0)
+                if (db.Employees.Any(e => e.DelTime == null && e.PhoneNum == this.PhoneNum && e.Id != this.Id))
                 {
                     return false;
                 }

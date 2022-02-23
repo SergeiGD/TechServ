@@ -37,7 +37,7 @@ namespace Forms_TechServ.classes.workshops
             using (TechContext db = new TechContext())
             {
                 Employee employee = db.Employees.Where(emp => emp.WorkshopId == this.Id && emp.DelTime == null).FirstOrDefault();      // если есть хоть один сотрудник в филиале, то удалить нельзя
-                Order order = db.Orders.Where(o => o.WorkshopId == this.Id && (o.Status != OrderStatus.Finished || o.Status != OrderStatus.Canceled)).FirstOrDefault();
+                Order order = db.Orders.Where(o => o.WorkshopId == this.Id && (o.Status != OrderStatus.Finished || o.Status != OrderStatus.Canceled)).FirstOrDefault(); // если есть хоть один заказ в филиале, то удалить нельзя
                 foreach (Batch batch in db.Batches.Where(b => b.WorkshopId == this.Id && b.DelTime == null))
                 {
                     if (!batch.IsSpent())
@@ -118,7 +118,6 @@ namespace Forms_TechServ.classes.workshops
         {
             using (TechContext db = new TechContext())
             {
-                //int masters = db.Masters.Where(m => m.WorkshopId == this.Id && m.DelTime == null).Count();
                 List<Order> orders = db.Orders.Where(o => o.WorkshopId == this.Id && o.Status == OrderStatus.Finished && o.DateStart >= from && o.DateStart <= until).ToList();
                 decimal profit = 0;
                 foreach(Order order in orders)

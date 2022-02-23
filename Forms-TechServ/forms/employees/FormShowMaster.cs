@@ -220,7 +220,7 @@ namespace Forms_TechServ.forms.employees
             DialogResult answer = MessageBox.Show("Вы действительно хотите удалить этого сотрудника?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (answer == DialogResult.Yes)
             {
-                if (master.DelMaster())
+                if (master.DelEmployee())
                 {
                     MessageBox.Show("Сотрудник успешно удалено", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

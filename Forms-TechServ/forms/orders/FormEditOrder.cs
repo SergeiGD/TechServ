@@ -8,6 +8,7 @@ using Forms_TechServ.classes.orders;
 using Forms_TechServ.classes.products;
 using Forms_TechServ.classes.services;
 using Forms_TechServ.classes.spareParts;
+using Forms_TechServ.classes.UserSession;
 using Forms_TechServ.forms.clients;
 using Forms_TechServ.forms.employees;
 using Forms_TechServ.forms.ordersLogs;
@@ -314,15 +315,22 @@ namespace Forms_TechServ.forms.orders
         private void btnFindMaster_Click(object sender, EventArgs e)
         {
             DialogResult answer;
-            if (order is OrderAtHome)
+            if (order is OrderAtHome orderAtHome && orderAtHome.GetVisits().Count > 0)
+            {
                 answer = MessageBox.Show(
-                    "Смена мастера в заказе приведет с удалению ВСЕХ выездов, связанных с этим закаом, хотите продолжить?",
+                    "Смена мастера в заказе приведет с удалению ВСЕХ выездов, связанных с этим заказом, хотите продолжить?",
                     "ВНИМАНИЕ!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-            else
-                answer = DialogResult.Yes;
+                if (answer == DialogResult.Yes && !UserSession.Can("add_del_visit"))
+                {
+                    MessageBox.Show("У Вас нету права для удаления выездов", "Недостаточно прав", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else answer = DialogResult.Yes;
+
             if (answer == DialogResult.Yes)
             {
-                var formMasters = new FormMasters(true, order.Workshop);
+                var formMasters = new FormMasters(CategoriesList.GetById(order.Product.CategoryId, false), order.Workshop);
                 formMasters.ShowDialog();
 
                 var newMaster = formMasters?.master;
@@ -671,7 +679,7 @@ namespace Forms_TechServ.forms.orders
                 MessageBox.Show("Адрес не может быть не указанным");
             else if (!inOrder) ((OrderAtHome) order).Address = tbAddress.Text;
 
-            if (order.MasterId != ((Master) tbMaster.Tag).Id)
+            if (order.MasterId != ((Master) tbMaster.Tag).Id)                                                   // если сменими мастера, то удаляем все выезды на заказ
                 if (!inOrder)
                     foreach (var visit in ((OrderAtHome) order).GetVisits())
                         visit.DelVisit();
@@ -764,12 +772,19 @@ namespace Forms_TechServ.forms.orders
         private void btnAutoMaster_Click(object sender, EventArgs e)
         {
             DialogResult answer;
-            if (order is OrderAtHome)
+            if (order is OrderAtHome orderAtHome && orderAtHome.GetVisits().Count > 0)
+            {
                 answer = MessageBox.Show(
-                    "Смена мастера в заказе приведет с удалению ВСЕХ выездов, связанных с этим закаом, хотите продолжить?",
+                    "Смена мастера в заказе приведет с удалению ВСЕХ выездов, связанных с этим заказом, хотите продолжить?",
                     "ВНИМАНИЕ!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-            else
-                answer = DialogResult.Yes;
+                if (answer == DialogResult.Yes && !UserSession.Can("add_del_visit"))
+                {
+                    MessageBox.Show("У Вас нету права для удаления выездов", "Недостаточно прав", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else answer = DialogResult.Yes;
+
             if (answer == DialogResult.Yes)
             {
                 if (!order.FindMaster())

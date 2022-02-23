@@ -215,7 +215,7 @@ namespace Forms_TechServ.forms.categories
                 {
                     if (categoryToDel.DelCategory())
                     {
-                        MessageBox.Show("Сотрудник успешно удалено", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Категория успешно удалена", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         FillGrid();
                     }
                     else

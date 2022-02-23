@@ -50,8 +50,7 @@ namespace Forms_TechServ.classes.batches
             ordersInUse = new List<string>();
             using (var db = new TechContext())
             {
-                if (db.OrdersSpareParts.Where(s => s.BatchId == Id).Count() >
-                    0) // нельзя удалить поставку, если ее детали уже используются
+                if (db.OrdersSpareParts.Any(s => s.BatchId == Id)) // нельзя удалить поставку, если ее детали уже используются
                 {
                     foreach (var order in db.OrdersSpareParts.Where(s => s.BatchId == Id))
                         ordersInUse.Add("№" + order.OrderId);
@@ -69,8 +68,7 @@ namespace Forms_TechServ.classes.batches
         {
             using (var db = new TechContext())
             {
-                if (db.OrdersSpareParts.Where(s => s.BatchId == Id).Count() >
-                    0) // нельзя удалить поставку, если ее детали уже используются
+                if (db.OrdersSpareParts.Any(s => s.BatchId == Id)) // нельзя удалить поставку, если ее детали уже используются
                     return false;
 
                 DelTime = DateTime.Now;
