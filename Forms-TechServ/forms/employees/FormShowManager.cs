@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Forms_TechServ.classes;
 using Forms_TechServ.classes.employees;
 using Forms_TechServ.classes.UserSession;
+using Forms_TechServ.forms.employees.roles;
 using Forms_TechServ.forms.employees.timetables;
 using Forms_TechServ.forms.orders;
 using Forms_TechServ.forms.workshops;
@@ -152,6 +153,13 @@ namespace Forms_TechServ.forms.employees
             {
                 return;
             }
+        }
+
+        private void labelPosition_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FormShowRole formShowRole = new FormShowRole(true, manager.Role);
+            formShowRole.ShowDialog();
+
         }
     }
 }

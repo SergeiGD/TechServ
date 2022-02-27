@@ -22,8 +22,10 @@ namespace Forms_TechServ.forms.employees.permissions
         {
             InitializeComponent();
 
+            
             this.readOnly = readOnly;
             this.role = role;
+            if (role.Id == 1) this.readOnly = true;
 
             if (!readOnly && UserSession.Can("edit_role"))
             {
@@ -147,7 +149,6 @@ namespace Forms_TechServ.forms.employees.permissions
                 }
             }
 
-            //int maxPage = (rowsCount / (int)comboBoxShowRows.SelectedItem) == 0 ? 1 : (int)Math.Ceiling(Convert.ToDouble( (double)rowsCount / (int)comboBoxShowRows.SelectedItem));
             int maxPage = (int)Math.Ceiling((double)rowsCount / (int)comboBoxShowRows.SelectedItem);
             numericCurrentPage.Maximum = maxPage;
 

@@ -35,7 +35,6 @@ namespace Forms_TechServ.forms.employees
             this.label8 = new System.Windows.Forms.Label();
             this.labelPassword = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.labelPosition = new System.Windows.Forms.Label();
             this.labelWorkshop = new System.Windows.Forms.LinkLabel();
             this.label13 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -55,6 +54,7 @@ namespace Forms_TechServ.forms.employees
             this.label6 = new System.Windows.Forms.Label();
             this.timetablePage = new System.Windows.Forms.TabPage();
             this.ordersPage = new System.Windows.Forms.TabPage();
+            this.labelPosition = new System.Windows.Forms.LinkLabel();
             this.managerTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.panelEdit.SuspendLayout();
@@ -76,11 +76,11 @@ namespace Forms_TechServ.forms.employees
             // generalPage
             // 
             this.generalPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.generalPage.Controls.Add(this.labelPosition);
             this.generalPage.Controls.Add(this.labelRemotely);
             this.generalPage.Controls.Add(this.label8);
             this.generalPage.Controls.Add(this.labelPassword);
             this.generalPage.Controls.Add(this.label9);
-            this.generalPage.Controls.Add(this.labelPosition);
             this.generalPage.Controls.Add(this.labelWorkshop);
             this.generalPage.Controls.Add(this.label13);
             this.generalPage.Controls.Add(this.label7);
@@ -137,15 +137,6 @@ namespace Forms_TechServ.forms.employees
             this.label9.Size = new System.Drawing.Size(48, 13);
             this.label9.TabIndex = 55;
             this.label9.Text = "Пароль:";
-            // 
-            // labelPosition
-            // 
-            this.labelPosition.AutoSize = true;
-            this.labelPosition.Location = new System.Drawing.Point(117, 202);
-            this.labelPosition.Name = "labelPosition";
-            this.labelPosition.Size = new System.Drawing.Size(66, 13);
-            this.labelPosition.TabIndex = 54;
-            this.labelPosition.Text = "labelPosition";
             // 
             // labelWorkshop
             // 
@@ -331,6 +322,17 @@ namespace Forms_TechServ.forms.employees
             this.ordersPage.TabIndex = 3;
             this.ordersPage.Text = "Заказы";
             // 
+            // labelPosition
+            // 
+            this.labelPosition.AutoSize = true;
+            this.labelPosition.Location = new System.Drawing.Point(117, 202);
+            this.labelPosition.Name = "labelPosition";
+            this.labelPosition.Size = new System.Drawing.Size(55, 13);
+            this.labelPosition.TabIndex = 59;
+            this.labelPosition.TabStop = true;
+            this.labelPosition.Text = "linkLabel1";
+            this.labelPosition.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.labelPosition_LinkClicked);
+            // 
             // FormShowManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -373,10 +375,10 @@ namespace Forms_TechServ.forms.employees
         private System.Windows.Forms.TabPage ordersPage;
         private System.Windows.Forms.LinkLabel labelWorkshop;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label labelPosition;
         private System.Windows.Forms.Label labelPassword;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label labelRemotely;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.LinkLabel labelPosition;
     }
 }

@@ -72,8 +72,8 @@ namespace Forms_TechServ.forms.workshops.timetables
         {
             if (CheckFields())
             {
-                timetable.ValidFrom = new DateTime(datePickerFrom.Value.Year, datePickerFrom.Value.Month, datePickerFrom.Value.Day);
-                timetable.ValidUntil = new DateTime(datePickerUntil.Value.Year, datePickerUntil.Value.Month, datePickerUntil.Value.Day);
+                timetable.ValidFrom = new DateTime(datePickerFrom.Value.Year, datePickerFrom.Value.Month, datePickerFrom.Value.Day, 0, 0, 0);
+                timetable.ValidUntil = new DateTime(datePickerUntil.Value.Year, datePickerUntil.Value.Month, datePickerUntil.Value.Day, 23,  59, 59);
                 timetable.Opening = new TimeSpan(Convert.ToInt32(tbStart.Text.Substring(0, 2)), Convert.ToInt32(tbStart.Text.Substring(tbStart.Text.Length - 2)), 0);
                 timetable.Closing = new TimeSpan(Convert.ToInt32(tbEnd.Text.Substring(0, 2)), Convert.ToInt32(tbEnd.Text.Substring(tbStart.Text.Length - 2)), 0);
                 

@@ -44,7 +44,6 @@ namespace Forms_TechServ.forms.employees
             this.generalPage = new System.Windows.Forms.TabPage();
             this.label26 = new System.Windows.Forms.Label();
             this.labelPassword = new System.Windows.Forms.Label();
-            this.labelPosition = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.labelID = new System.Windows.Forms.Label();
             this.labelWorkshop = new System.Windows.Forms.LinkLabel();
@@ -55,7 +54,7 @@ namespace Forms_TechServ.forms.employees
             this.deleteBtn = new System.Windows.Forms.Button();
             this.categoriesPage = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnShowCat = new ManageButton();
+            this.btnShowCat = new Forms_TechServ.forms.customControls.ManageButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.comboBoxShowCatRows = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -68,6 +67,7 @@ namespace Forms_TechServ.forms.employees
             this.timetablePage = new System.Windows.Forms.TabPage();
             this.ordersPage = new System.Windows.Forms.TabPage();
             this.visitsPage = new System.Windows.Forms.TabPage();
+            this.labelPosition = new System.Windows.Forms.LinkLabel();
             this.masterTabs.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.panelEdit.SuspendLayout();
@@ -178,9 +178,9 @@ namespace Forms_TechServ.forms.employees
             // generalPage
             // 
             this.generalPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(225)))), ((int)(((byte)(231)))));
+            this.generalPage.Controls.Add(this.labelPosition);
             this.generalPage.Controls.Add(this.label26);
             this.generalPage.Controls.Add(this.labelPassword);
-            this.generalPage.Controls.Add(this.labelPosition);
             this.generalPage.Controls.Add(this.label7);
             this.generalPage.Controls.Add(this.labelID);
             this.generalPage.Controls.Add(this.labelWorkshop);
@@ -219,15 +219,6 @@ namespace Forms_TechServ.forms.employees
             this.labelPassword.Size = new System.Drawing.Size(35, 13);
             this.labelPassword.TabIndex = 54;
             this.labelPassword.Text = "label9";
-            // 
-            // labelPosition
-            // 
-            this.labelPosition.AutoSize = true;
-            this.labelPosition.Location = new System.Drawing.Point(117, 190);
-            this.labelPosition.Name = "labelPosition";
-            this.labelPosition.Size = new System.Drawing.Size(41, 13);
-            this.labelPosition.TabIndex = 52;
-            this.labelPosition.Text = "label16";
             // 
             // label7
             // 
@@ -509,6 +500,17 @@ namespace Forms_TechServ.forms.employees
             this.visitsPage.TabIndex = 4;
             this.visitsPage.Text = "Выезды";
             // 
+            // labelPosition
+            // 
+            this.labelPosition.AutoSize = true;
+            this.labelPosition.Location = new System.Drawing.Point(117, 190);
+            this.labelPosition.Name = "labelPosition";
+            this.labelPosition.Size = new System.Drawing.Size(55, 13);
+            this.labelPosition.TabIndex = 55;
+            this.labelPosition.TabStop = true;
+            this.labelPosition.Text = "linkLabel1";
+            this.labelPosition.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.labelPosition_LinkClicked);
+            // 
             // FormShowMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -568,10 +570,10 @@ namespace Forms_TechServ.forms.employees
         private System.Windows.Forms.DataGridView dataCategories;
         private System.Windows.Forms.Panel panel3;
         private ManageButton btnShowCat;
-        private System.Windows.Forms.Label labelPosition;
         private System.Windows.Forms.ComboBox comboBoxShowCatRows;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label labelPassword;
+        private System.Windows.Forms.LinkLabel labelPosition;
     }
 }

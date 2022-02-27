@@ -94,7 +94,6 @@ namespace Forms_TechServ.forms.employees.roles
 
         private void btnPick_Click(object sender, EventArgs e)
         {
-            //var row = dataPosition.SelectedRows;
             if(dataPosition.SelectedRows.Count > 0)
             {
                 pickedRole = RolesList.GetById(Convert.ToInt32(dataPosition.SelectedRows[0].Cells[0].Value));

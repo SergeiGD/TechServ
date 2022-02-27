@@ -19,8 +19,8 @@ namespace Forms_TechServ.forms.employees.roles
             InitializeComponent();
 
             this.readOnly = readOnly;
-
             this.role = role;
+            if (role.Id == 1) this.readOnly = true;
         }
 
         private void roleTabs_SelectedIndexChanged(object sender, EventArgs e)

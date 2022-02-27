@@ -217,19 +217,18 @@ namespace Forms_TechServ.classes.visits
                         VisitId = this.Id
                     });
 
-                    OrderLog orderLog = new OrderLog(this.OrderId, UserSession.UserSession.GetLoggedInUser().Id)
-                    {
-                        EventDate = DateTime.Now,
-                        EventDescription = $"Выезд №{this.Id} был изменен. Добавлена запланированная услуга №{service.Id}"
-                    };
-                    orderLog.AddOrderLog();
-
 
                     db.SaveChanges();
 
                     if (CheckTimeAvailable())
                     {
                         transaction.Commit();
+                        OrderLog orderLog = new OrderLog(this.OrderId, UserSession.UserSession.GetLoggedInUser().Id)
+                        {
+                            EventDate = DateTime.Now,
+                            EventDescription = $"Выезд №{this.Id} был изменен. Добавлена запланированная услуга №{service.Id}"
+                        };
+                        orderLog.AddOrderLog();
                         return true;
                     }
                     else

@@ -19,6 +19,7 @@ namespace Forms_TechServ.forms.batches
 
             batchSparePart = new BatchSparePart();
             this.sparePart = sparePart;
+            numericPrice.Value = sparePart.ClientPrepayment == 0 ? 100 : sparePart.ClientPrepayment;
         }
 
         public FormManageBatchSparePart(BatchSparePart batchSparePart)

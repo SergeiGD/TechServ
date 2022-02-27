@@ -7,6 +7,7 @@ using Forms_TechServ.classes.categories;
 using Forms_TechServ.classes.employees;
 using Forms_TechServ.classes.UserSession;
 using Forms_TechServ.forms.categories;
+using Forms_TechServ.forms.employees.roles;
 using Forms_TechServ.forms.employees.timetables;
 using Forms_TechServ.forms.orders;
 using Forms_TechServ.forms.visits;
@@ -61,24 +62,6 @@ namespace Forms_TechServ.forms.employees
             comboBoxShowCatRows.Items.Add(40);
             comboBoxShowCatRows.SelectedIndex = 2;
 
-            /*if (UserSession.Can("edit_employee"))
-            {
-                editBtn.Enabled = true;
-            }
-            else
-            {
-                editBtn.Visible = false;
-            }
-
-            if (UserSession.Can("add_del_employee"))
-            {
-                deleteBtn.Visible = true;
-            }
-            else
-            {
-                deleteBtn.Visible = false;
-            }*/
-
             FillForm();
         }
 
@@ -114,14 +97,6 @@ namespace Forms_TechServ.forms.employees
             {
                 this.Size = pickedSize;
 
-                /*FormCategories formCategories = new FormCategories(3, true);
-
-                formCategories.TopLevel = false;
-                formCategories.FormBorderStyle = FormBorderStyle.None;
-                categoriesPage.Controls.Add(formCategories);
-                formCategories.Dock = DockStyle.Fill;
-                formCategories.BringToFront();
-                formCategories.Show();*/
 
             }
             else if (masterTabs.SelectedTab.Equals(timetablePage))
@@ -137,14 +112,6 @@ namespace Forms_TechServ.forms.employees
                 formTimetalbe.BringToFront();
                 formTimetalbe.Show();
 
-                /*FormCategories formCategories = new FormCategories(3, true);
-
-                formCategories.TopLevel = false;
-                formCategories.FormBorderStyle = FormBorderStyle.None;
-                categoriesPage.Controls.Add(formCategories);
-                formCategories.Dock = DockStyle.Fill;
-                formCategories.BringToFront();
-                formCategories.Show();*/
             }
             else if (masterTabs.SelectedTab.Equals(ordersPage))
             {
@@ -288,6 +255,12 @@ namespace Forms_TechServ.forms.employees
         {
             FormShowCategory formShowCategory = new FormShowCategory(true, CategoriesList.GetById(Convert.ToInt32(dataCategories.SelectedRows[0].Cells[0].Value), true));                       // вот тут просмотр
             formShowCategory.ShowDialog();
+        }
+
+        private void labelPosition_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FormShowRole formShowRole = new FormShowRole(true, master.Role);
+            formShowRole.ShowDialog();
         }
     }
 }
